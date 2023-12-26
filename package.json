@@ -1,0 +1,30 @@
+{
+    "name": "iit-backend-v2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "build": "tsc",
+      "run_etl_local": "npm run build && node --env-file=.env-local ./build/etl/index.js",
+      "run_etl_production": "npm run build && node --env-file=.env-production ./build/etl/index.js",
+      "start": "npm run build && node ./build/index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Sean Kenny",
+    "type": "module",
+    "dependencies": {
+      "date-fns": "^3.0.6",
+      "airtable": "^0.12.2",
+      "mongodb": "^6.1.0",
+      "undici": "^6.2.1",
+      "@apollo/server": "^4.9.5",
+      "@graphql-tools/schema": "^10.0.2",
+      "@graphql-tools/merge": "^9.0.1",
+      "graphql": "^16.8.1"
+    },
+    "devDependencies": {
+      "@types/node": "^20.5.9",
+      "prettier": "^3.0.3",
+      "typescript": "^5.3.3"
+    }
+  }

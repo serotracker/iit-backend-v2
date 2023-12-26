@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+dist
+
+# Files containing secret information
+.env
+.env-local
+.env-production
