@@ -1,4 +1,4 @@
-import { AirtableEstimateFieldsAfterLatLngGenerationStep, AirtableSourceFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step";
+import { AirtableEstimateFieldsAfterLatLngGenerationStep, AirtableSourceFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type AirtableEstimateFieldsAfterJitteringPinLatLngStep = AirtableEstimateFieldsAfterLatLngGenerationStep;
 

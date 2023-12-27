@@ -1,9 +1,9 @@
-import { getLatitude, getLongitude } from "../geocoding-api/coordinate-helpers";
-import { getCityLatLng } from "../geocoding-api/geocoding-functions";
+import { getLatitude, getLongitude } from "../geocoding-api/coordinate-helpers.js";
+import { getCityLatLng } from "../geocoding-api/geocoding-functions.js";
 import {
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
-} from "./merge-estimates-and-sources-step";
+} from "./merge-estimates-and-sources-step.js";
 
 export type AirtableEstimateFieldsAfterLatLngGenerationStep =
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep & {

@@ -2,7 +2,7 @@ import { parse } from "date-fns";
 import {
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
-} from "./clean-single-element-array-fields-step";
+} from "./clean-single-element-array-fields-step.js";
 
 export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,

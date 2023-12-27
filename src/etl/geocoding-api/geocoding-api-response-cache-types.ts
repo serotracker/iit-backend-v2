@@ -1,5 +1,5 @@
-import { TwoLetterIsoCountryCode } from "./country-codes";
-import { GeocoderDataType, GeocodingApiFailureResponse, GeocodingApiRequestParameters, GeocodingApiSuccessResponse } from "./geocoding-api-client-types";
+import { TwoLetterIsoCountryCode } from "./country-codes.js";
+import { GeocoderDataType, GeocodingApiFailureResponse, GeocodingApiRequestParameters, GeocodingApiSuccessResponse } from "./geocoding-api-client-types.js";
 
 export interface LookupInGeocodingApiResponseCacheInput {
   geocodingApiRequestParams: GeocodingApiRequestParameters;

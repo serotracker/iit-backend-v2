@@ -1,8 +1,7 @@
 import { Dispatcher } from "undici"
-import { BoundingBox, GeocodingApiResponse, Point } from "./geocoding-api-client-types"
-import { isArrayOfUnknownType } from "../../lib/lib";
-import { features } from "process";
-import { isBoundingBox, isPoint } from "./coordinate-helpers";
+import { BoundingBox, GeocodingApiResponse, Point } from "./geocoding-api-client-types.js"
+import { isArrayOfUnknownType } from "../../lib/lib.js";
+import { isBoundingBox, isPoint } from "./coordinate-helpers.js";
 
 const parseCenterCoordinatesFromFeature = (feature: object): Point | undefined => {
   if(!('center' in feature)) {

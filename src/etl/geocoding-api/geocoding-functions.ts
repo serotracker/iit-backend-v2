@@ -1,8 +1,8 @@
-import { makeGeocodingApiRequest } from "./geocoding-api-client";
+import { makeGeocodingApiRequest } from "./geocoding-api-client.js";
 import {
   Point,
   isGeocodingApiFailureResponse,
-} from "./geocoding-api-client-types";
+} from "./geocoding-api-client-types.js";
 
 export const getCityLatLng = async (
   input: GetCityLatLngInput

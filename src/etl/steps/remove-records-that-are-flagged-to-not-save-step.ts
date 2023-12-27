@@ -1,7 +1,7 @@
 import {
   AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep,
   AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep,
-} from "./remove-estimates-with-low-sample-size-step";
+} from "./remove-estimates-with-low-sample-size-step.js";
 
 export type AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep =
   Omit<AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep, "includeInEtl"> & {

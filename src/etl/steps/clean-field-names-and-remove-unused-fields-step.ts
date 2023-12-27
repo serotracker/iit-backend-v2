@@ -1,4 +1,4 @@
-import { AirtableEstimateFields, AirtableSourceFields } from "../types";
+import { AirtableEstimateFields, AirtableSourceFields } from "../types.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
   sourceSheetId: string[];

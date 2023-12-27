@@ -1,4 +1,4 @@
-import { BoundingBox, Point } from "./geocoding-api-client-types";
+import { BoundingBox, Point } from "./geocoding-api-client-types.js";
 
 interface isPointInBoundingBoxInput {
   point: Point;

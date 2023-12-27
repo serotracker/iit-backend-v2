@@ -7,7 +7,8 @@
       "build": "tsc",
       "run_etl_local": "npm run build && node --env-file=.env-local ./build/etl/index.js",
       "run_etl_production": "npm run build && node --env-file=.env-production ./build/etl/index.js",
-      "start": "npm run build && node ./build/index.js",
+      "start": "npm run build && node --env-file=.env-local ./build/src/index.js",
+      "codegen": "graphql-codegen --config ./codegen.ts",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Sean Kenny",
@@ -25,6 +26,10 @@
     "devDependencies": {
       "@types/node": "^20.5.9",
       "prettier": "^3.0.3",
-      "typescript": "^5.3.3"
+      "typescript": "^5.3.3",
+      "@graphql-codegen/cli": "5.0.0",
+      "@graphql-codegen/typescript": "4.0.1",
+      "@graphql-codegen/typescript-resolvers": "4.0.1",
+      "@graphql-codegen/introspection": "4.0.0"
     }
   }

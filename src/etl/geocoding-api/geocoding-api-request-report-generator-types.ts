@@ -1,4 +1,4 @@
-import { GeocodingApiRequestUrl, GeocodingApiResponse } from "./geocoding-api-client-types";
+import { GeocodingApiRequestUrl, GeocodingApiResponse } from "./geocoding-api-client-types.js";
 
 export enum GeocodingApiRequestLogLevel {
   INFO = "INFO",

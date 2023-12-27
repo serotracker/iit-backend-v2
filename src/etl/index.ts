@@ -1,15 +1,15 @@
 import Airtable from "airtable";
 import { MongoClient } from "mongodb";
-import { AirtableEstimateFields, AirtableSourceFields } from "./types";
-import { cleanFieldNamesAndRemoveUnusedFieldsStep } from "./steps/clean-field-names-and-remove-unused-fields-step";
-import { cleanSingleElementArrayFieldsStep } from "./steps/clean-single-element-array-fields-step";
-import { parseDatesStep } from "./steps/parse-dates-step";
-import { removeEstimatesWithLowSampleSizeStep } from "./steps/remove-estimates-with-low-sample-size-step";
-import { mergeEstimatesAndSourcesStep } from "./steps/merge-estimates-and-sources-step";
-import { latLngGenerationStep } from "./steps/lat-lng-generation-step";
-import { removeRecordsThatAreFlaggedToNotSaveStep } from "./steps/remove-records-that-are-flagged-to-not-save-step";
-import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step";
-import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step";
+import { AirtableEstimateFields, AirtableSourceFields } from "./types.js";
+import { cleanFieldNamesAndRemoveUnusedFieldsStep } from "./steps/clean-field-names-and-remove-unused-fields-step.js";
+import { cleanSingleElementArrayFieldsStep } from "./steps/clean-single-element-array-fields-step.js";
+import { parseDatesStep } from "./steps/parse-dates-step.js";
+import { removeEstimatesWithLowSampleSizeStep } from "./steps/remove-estimates-with-low-sample-size-step.js";
+import { mergeEstimatesAndSourcesStep } from "./steps/merge-estimates-and-sources-step.js";
+import { latLngGenerationStep } from "./steps/lat-lng-generation-step.js";
+import { removeRecordsThatAreFlaggedToNotSaveStep } from "./steps/remove-records-that-are-flagged-to-not-save-step.js";
+import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
+import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 
 const runEtlMain = async () => {
   console.log("Running ETL");

@@ -1,9 +1,9 @@
 import { ObjectId } from "mongodb";
-import { EstimateDocument } from "../../storage/types";
+import { EstimateDocument } from "../../storage/types.js";
 import {
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
   AirtableSourceFieldsAfterJitteringPinLatLngStep,
-} from "./jitter-pin-lat-lng-step";
+} from "./jitter-pin-lat-lng-step.js";
 
 export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep = AirtableEstimateFieldsAfterJitteringPinLatLngStep;
 

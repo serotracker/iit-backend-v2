@@ -1,7 +1,7 @@
 import {
   AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep,
-} from "./clean-field-names-and-remove-unused-fields-step";
+} from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep = Omit<
   AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,

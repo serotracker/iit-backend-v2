@@ -1,4 +1,4 @@
-import { AirtableEstimateFieldsAfterParsingDatesStep, AirtableSourceFieldsAfterParsingDatesStep } from "./parse-dates-step";
+import { AirtableEstimateFieldsAfterParsingDatesStep, AirtableSourceFieldsAfterParsingDatesStep } from "./parse-dates-step.js";
 
 export type AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep = AirtableEstimateFieldsAfterParsingDatesStep;
 

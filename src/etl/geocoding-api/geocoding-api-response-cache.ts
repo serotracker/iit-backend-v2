@@ -5,7 +5,7 @@ import {
   GeocodingApiResponseCacheValue,
   LookupInGeocodingApiResponseCacheInput,
   SaveInGeocodingApiResponseCacheInput,
-} from "./geocoding-api-response-cache-types";
+} from "./geocoding-api-response-cache-types.js";
 
 let geocodingApiResponseCache: GeocodingApiResponseCache = {};
 

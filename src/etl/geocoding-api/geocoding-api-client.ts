@@ -1,5 +1,5 @@
 import Undici from "undici";
-import { countryNameToTwoLetterIsoCountryCode } from "./country-codes";
+import { countryNameToTwoLetterIsoCountryCode } from "./country-codes.js";
 import {
   GenerateGeocodingApiRequestParametersInput,
   GeocoderDataType,
@@ -10,13 +10,13 @@ import {
   MakeGeocodingApiRequestInput,
   isGeocodingApiFailureResponse,
   isGeocodingApiSuccessResponse,
-} from "./geocoding-api-client-types";
+} from "./geocoding-api-client-types.js";
 import {
   lookupInGeocodingApiResponseCache,
   saveInGeocodingApiResponseCache,
-} from "./geocoding-api-response-cache";
-import { parseGeocodingApiResponse } from "./geocoding-api-response-parser";
-import { recordGeocodingApiRequestInGeocodingReport } from "./geocoding-api-request-report-generator";
+} from "./geocoding-api-response-cache.js";
+import { parseGeocodingApiResponse } from "./geocoding-api-response-parser.js";
+import { recordGeocodingApiRequestInGeocodingReport } from "./geocoding-api-request-report-generator.js";
 
 const shouldSaveInGeocodingApiRequestReport = (input: MakeGeocodingApiRequestInput): input is MakeGeocodingApiRequestAndSaveRequestInput => {
   return input.shouldSaveInGeocodingApiRequestReport;

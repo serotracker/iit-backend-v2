@@ -1,12 +1,12 @@
 import { writeFileSync } from "fs";
-import { makeGeocodingApiRequest } from "./geocoding-api-client";
+import { makeGeocodingApiRequest } from "./geocoding-api-client.js";
 import {
     GeocoderDataType,
   GeocodingApiRequestUrl,
   GeocodingApiResponse,
   isGeocodingApiFailureResponse,
   isGeocodingApiSuccessResponse,
-} from "./geocoding-api-client-types";
+} from "./geocoding-api-client-types.js";
 import {
   FormatTextAndMatchingTextForDisplayInput,
   GenerateGeocodingApiRequestLogPrefixInput,
@@ -17,9 +17,9 @@ import {
   GenerateLineForTextConsistencyCheckInput,
   GeocodingApiRequestLogLevel,
   RecordGeocodingApiRequestInGeocodingReportInput,
-} from "./geocoding-api-request-report-generator-types";
-import { countryNameToTwoLetterIsoCountryCode } from "./country-codes"
-import { isPointInBoundingBox } from "./coordinate-helpers";
+} from "./geocoding-api-request-report-generator-types.js";
+import { countryNameToTwoLetterIsoCountryCode } from "./country-codes.js"
+import { isPointInBoundingBox } from "./coordinate-helpers.js";
 
 const redactMapboxApiKeyFromGeocodingApiQueryUrl = (
   url: GeocodingApiRequestUrl

@@ -1,4 +1,4 @@
-import { AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep, AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep } from "./remove-records-that-are-flagged-to-not-save-step";
+import { AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep, AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep } from "./remove-records-that-are-flagged-to-not-save-step.js";
 
 export type AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep =
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep & {

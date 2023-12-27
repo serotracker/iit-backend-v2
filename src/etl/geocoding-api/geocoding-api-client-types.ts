@@ -1,4 +1,4 @@
-import { TwoLetterIsoCountryCode } from "./country-codes";
+import { TwoLetterIsoCountryCode } from "./country-codes.js";
 
 export interface MakeGeocodingApiRequestAndSaveRequestInput {
   city: string | undefined;
