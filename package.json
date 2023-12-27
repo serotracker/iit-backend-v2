@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
       "build": "tsc",
-      "run_etl_local": "npm run build && node --env-file=.env-local ./build/etl/index.js",
-      "run_etl_production": "npm run build && node --env-file=.env-production ./build/etl/index.js",
+      "run_etl_local": "npm run build && node --env-file=.env-local ./build/src/etl/index.js",
+      "run_etl_production": "npm run build && node --env-file=.env-production ./build/src/etl/index.js",
       "start": "npm run build && node --env-file=.env-local ./build/src/index.js",
       "codegen": "graphql-codegen --config ./codegen.ts",
       "test": "echo \"Error: no test specified\" && exit 1"

@@ -10,12 +10,15 @@ import { latLngGenerationStep } from "./steps/lat-lng-generation-step.js";
 import { removeRecordsThatAreFlaggedToNotSaveStep } from "./steps/remove-records-that-are-flagged-to-not-save-step.js";
 import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
+import { assertMandatoryFieldsArePresentStep } from "./steps/assert-mandatory-fields-are-present-step.js";
+import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
 
 const runEtlMain = async () => {
   console.log("Running ETL");
   const airtableApiKey = process.env.AIRTABLE_API_KEY;
   const airtableArboBaseId = process.env.AIRTABLE_ARBO_BASE_ID;
   const mongoUrl = process.env.MONGO_URL;
+  const databaseName = process.env.DATABASE_NAME;
 
   if (!airtableApiKey) {
     console.log(
@@ -28,6 +31,14 @@ const runEtlMain = async () => {
   if (!mongoUrl) {
     console.log(
       "Unable to find value for MONGO_URL. Please make sure you have specified one in your .env file."
+    );
+    console.log("Exiting early, database was not modified.");
+    return;
+  }
+
+  if (!databaseName) {
+    console.log(
+      "Unable to find value for DATABASE_NAME. Please make sure you have specified one in your .env file."
     );
     console.log("Exiting early, database was not modified.");
     return;
@@ -72,18 +83,22 @@ const runEtlMain = async () => {
       )
     );
 
-  const { allEstimates, allSources } = transformIntoFormatForDatabaseStep(
+  const { allEstimates, allSources: _ } = transformIntoFormatForDatabaseStep(
     jitterPinLatLngStep(
       await latLngGenerationStep(
         mergeEstimatesAndSourcesStep(
           removeRecordsThatAreFlaggedToNotSaveStep(
             removeEstimatesWithLowSampleSizeStep(
               parseDatesStep(
-                cleanSingleElementArrayFieldsStep(
-                  cleanFieldNamesAndRemoveUnusedFieldsStep({
-                    allEstimates: allEstimatesUnformatted,
-                    allSources: allSourcesUnformatted,
-                  })
+                assertMandatoryFieldsArePresentStep(
+                  transformNotReportedValuesToUndefinedStep(
+                    cleanSingleElementArrayFieldsStep(
+                      cleanFieldNamesAndRemoveUnusedFieldsStep({
+                        allEstimates: allEstimatesUnformatted,
+                        allSources: allSourcesUnformatted,
+                      })
+                    )
+                  )
                 )
               )
             )
@@ -93,25 +108,34 @@ const runEtlMain = async () => {
     )
   );
 
-  if (allEstimates.length > 0) {
+  if (allEstimates.length === 0) {
     console.log("Unable to find any estimates to insert.");
     console.log("Exiting early, database was not modified.");
     return;
   }
 
-  await mongoClient
-    .db("serotracker")
+  const { insertedCount } = await mongoClient
+    .db(databaseName)
     .collection("arbovirusEstimates")
     .insertMany(allEstimates);
 
-  console.log("Inserted data into database.");
+  console.log(`Inserted ${insertedCount} records into the database.`);
 
-  await mongoClient
-    .db("serotracker")
+  if(insertedCount === 0) {
+    console.log("Not deleting data because no records were inserted. Please investigate.")
+    console.log("Exiting early.");
+    return;
+  }
+
+  const { deletedCount } = await mongoClient
+    .db(databaseName)
     .collection("arbovirusEstimates")
     .deleteMany({ createdAt: { $ne: allEstimates[0].createdAt } });
 
-  console.log("Cleared old data from database.");
+  console.log(`Cleared ${deletedCount} records from the database.`);
+
+  console.log("Exiting")
+  process.exit(1)
 };
 
-runEtlMain().catch((error) => console.error(error));
+await runEtlMain().catch((error) => console.error(error));

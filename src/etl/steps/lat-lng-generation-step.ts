@@ -1,4 +1,5 @@
 import { getLatitude, getLongitude } from "../geocoding-api/coordinate-helpers.js";
+import { Point } from "../geocoding-api/geocoding-api-client-types.js";
 import { getCityLatLng } from "../geocoding-api/geocoding-functions.js";
 import {
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
@@ -29,19 +30,21 @@ export const latLngGenerationStep = async(
 ): Promise<LatLngGenerationStepOutput> => {
   const geocodingApiRequestReportFileName = './lat-lng-generation-report.txt';
 
-  console.log("Running step: latLngGenerationStep");
+  console.log(`Running step: latLngGenerationStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const { allEstimates, allSources } = input;
 
   const estimatesWithLatitudesAndLongitudes: AirtableEstimateFieldsAfterLatLngGenerationStep[] = [];
   
   for(const estimate of allEstimates) {
-    const cityLatLng = await getCityLatLng({
-      city: estimate.city,
-      state: estimate.state,
-      country: estimate.country,
-      geocodingApiRequestReportFileName
-    })
+    //const cityLatLng = await getCityLatLng({
+    //  city: estimate.city,
+    //  state: estimate.state,
+    //  country: estimate.country,
+    //  geocodingApiRequestReportFileName
+    //})
+
+    const cityLatLng:Point = [0, 0];
 
     if(cityLatLng) {
       estimatesWithLatitudesAndLongitudes.push({

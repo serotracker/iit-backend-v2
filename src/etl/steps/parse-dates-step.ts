@@ -1,23 +1,20 @@
 import { parse } from "date-fns";
-import {
-  AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
-  AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
-} from "./clean-single-element-array-fields-step.js";
+import { AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep, AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep } from "./assert-mandatory-fields-are-present-step.js";
 
 export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
-  AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
+  AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
   "sampleStartDate" | "sampleEndDate"
 > & {
-  sampleStartDate: Date;
-  sampleEndDate: Date;
+  sampleStartDate: Date | undefined;
+  sampleEndDate: Date | undefined;
 };
 
 export type AirtableSourceFieldsAfterParsingDatesStep =
-  AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep;
+  AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep;
 
 interface ParseDatesStepInput {
-  allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
-  allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
+  allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
+  allSources: AirtableSourceFieldsAfterParsingDatesStep[];
 }
 
 interface ParseDatesStepOutput {
@@ -28,7 +25,7 @@ interface ParseDatesStepOutput {
 export const parseDatesStep = (
   input: ParseDatesStepInput
 ): ParseDatesStepOutput => {
-  console.log("Running step: parseDatesStep");
+  console.log(`Running step: parseDatesStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const { allEstimates, allSources } = input;
 
@@ -36,8 +33,8 @@ export const parseDatesStep = (
     allEstimates: allEstimates.map((estimate) => {
       return {
         ...estimate,
-        sampleStartDate: parse("yyyy-MM-dd", estimate.sampleStartDate, new Date()),
-        sampleEndDate: parse("yyyy-MM-dd", estimate.sampleEndDate, new Date()),
+        sampleStartDate: estimate.sampleStartDate ? parse("yyyy-MM-dd", estimate.sampleStartDate, new Date()) : undefined,
+        sampleEndDate: estimate.sampleEndDate ? parse("yyyy-MM-dd", estimate.sampleEndDate, new Date()) : undefined,
       };
     }),
     allSources: allSources,

@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { EstimateDocument } from "../../storage/types.js";
+import { ArbovirusEstimateDocument } from "../../storage/types.js";
 import {
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
   AirtableSourceFieldsAfterJitteringPinLatLngStep,
@@ -15,7 +15,7 @@ interface TransformIntoFormatForDatabaseStepInput {
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
-  allEstimates: EstimateDocument[];
+  allEstimates: ArbovirusEstimateDocument[];
   allSources: AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep[];
 }
 
@@ -24,12 +24,16 @@ export const transformIntoFormatForDatabaseStep = (
 ): TransformIntoFormatForDatabaseStepOutput => {
   const { allEstimates, allSources } = input;
 
-  console.log("Running step: transformIntoFormatForDatabaseStep");
+  console.log(`Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`);
+
+  const createdAtForAllRecords = new Date();
+  const updatedAtForAllRecords = createdAtForAllRecords;
 
   return {
     allEstimates: allEstimates.map((estimate) => ({
       _id: new ObjectId(),
       sex: estimate.sex,
+      antibodies: estimate.antibodies,
       ageMinimum: estimate.ageMinimum,
       ageMaximum: estimate.ageMaximum,
       ageGroup: estimate.ageGroup,
@@ -57,8 +61,8 @@ export const transformIntoFormatForDatabaseStep = (
       whoRegion: estimate.whoRegion,
       sourceSheetName: estimate.sourceSheetName,
       estimateId: estimate.estimateId,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      createdAt: createdAtForAllRecords,
+      updatedAt: updatedAtForAllRecords
     })),
     allSources: allSources,
   };

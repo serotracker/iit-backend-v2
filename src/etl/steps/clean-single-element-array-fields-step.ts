@@ -5,11 +5,11 @@ import {
 
 export type AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep = Omit<
   AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
-  "antibody" | "sourceSheetId" | "whoRegion"
+  "url" | "sourceSheetId" | "whoRegion"
 > & {
-  antibody: string;
-  sourceSheetId: string;
-  whoRegion: string;
+  url: string | undefined;
+  sourceSheetId: string | undefined;
+  whoRegion: string | undefined;
 };
 
 export type AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep =
@@ -28,7 +28,7 @@ interface CleanSingleElementArrayFieldsStepOutput {
 export const cleanSingleElementArrayFieldsStep = (
   input: CleanSingleElementArrayFieldsStepInput
 ): CleanSingleElementArrayFieldsStepOutput => {
-  console.log("Running step: cleanSingleElementArrayFieldsStep");
+  console.log(`Running step: cleanSingleElementArrayFieldsStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const { allEstimates, allSources } = input;
 
@@ -36,9 +36,9 @@ export const cleanSingleElementArrayFieldsStep = (
     allEstimates: allEstimates.map((estimate) => {
       return {
         ...estimate,
-        antibody: estimate.antibody[0],
-        sourceSheetId: estimate.sourceSheetId[0],
-        whoRegion: estimate.whoRegion[0],
+        url: estimate.url?.[0],
+        sourceSheetId: estimate.sourceSheetId?.[0],
+        whoRegion: estimate.whoRegion?.[0],
       };
     }),
     allSources: allSources,

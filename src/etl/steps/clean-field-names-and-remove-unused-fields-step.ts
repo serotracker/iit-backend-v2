@@ -1,38 +1,38 @@
 import { AirtableEstimateFields, AirtableSourceFields } from "../types.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
-  sourceSheetId: string[];
-  estimateId: string;
-  inclusionCriteria: string;
-  sampleStartDate: `${number}-${number}-${number}`;
-  sampleEndDate: `${number}-${number}-${number}`;
-  sex: string;
-  pathogen: string;
-  antibody: string[];
-  antigen: string;
-  assay: string;
-  assayOther: string;
-  sampleSize: number;
-  sampleNumerator: number;
-  sampleFrame: string;
-  sampleFrameTargetGroup: string;
-  seroprevalence: number;
-  country: string;
-  state: string;
-  city: string;
-  url: string;
-  ageGroup: string;
-  ageMinimum: number;
-  ageMaximum: number;
-  includeInEtl: 0 | 1;
-  producer: string;
-  producerOther: string;
-  whoRegion: string[];
+  sourceSheetId: string[] | undefined;
+  estimateId: string | undefined;
+  inclusionCriteria: string | undefined;
+  sampleStartDate: `${number}-${number}-${number}` | undefined;
+  sampleEndDate: `${number}-${number}-${number}` | undefined;
+  sex: string | undefined;
+  pathogen: string | undefined;
+  antibodies: string[] | undefined;
+  antigen: string | undefined;
+  assay: string | undefined;
+  assayOther: string | undefined;
+  sampleSize: number | undefined;
+  sampleNumerator: number | undefined;
+  sampleFrame: string | undefined;
+  sampleFrameTargetGroup: string | undefined;
+  seroprevalence: number | undefined;
+  country: string | undefined;
+  state: string | undefined;
+  city: string | undefined;
+  url: string[] | undefined;
+  ageGroup: string | undefined;
+  ageMinimum: number | undefined;
+  ageMaximum: number | undefined;
+  includeInEtl: 0 | 1 | undefined;
+  producer: string | undefined;
+  producerOther: string | undefined;
+  whoRegion: string[] | undefined;
 }
 
 export interface AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep {
   id: string;
-  sourceSheetName: string;
+  sourceSheetName: string | undefined;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
@@ -48,7 +48,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
   input: CleanFieldNamesAndRemoveUnusedFieldsStepInput
 ): CleanFieldNamesAndRemoveUnusedFieldsStepOutput => {
-  console.log("Running step: cleanFieldNamesAndRemoveUnusedFields");
+  console.log(`Running step: cleanFieldNamesAndRemoveUnusedFields. Remaining estimates: ${input.allEstimates.length}`);
 
   const { allEstimates, allSources } = input;
 
@@ -61,7 +61,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       sampleEndDate: estimate["Sample End Date"],
       sex: estimate["Sex"],
       pathogen: estimate["Pathogen"],
-      antibody: estimate["Antibody"],
+      antibodies: estimate["Antibody"],
       antigen: estimate["Antigen"],
       assay: estimate["Assay"],
       assayOther: estimate["Assay - Other"],
@@ -73,7 +73,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       country: estimate["Country"],
       state: estimate["State"],
       city: estimate["City"],
-      url: estimate["Url"],
+      url: estimate["URL"],
       ageGroup: estimate["Age group"],
       ageMaximum: estimate["Age Maximum"],
       ageMinimum: estimate["Age Minimum"],

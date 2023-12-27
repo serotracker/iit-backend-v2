@@ -11,7 +11,7 @@ export const arboTypedefs = `
     state: String
     country: String!
     createdAt: String!
-    estimateId: String!
+    estimateId: String
     id: String!
     inclusionCriteria: String
     latitude: Float!

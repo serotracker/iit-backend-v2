@@ -26,7 +26,7 @@ export const removeRecordsThatAreFlaggedToNotSaveStep = (
 ): RemoveRecordsThatAreFlaggedToNotSaveStepOutput => {
   const { allEstimates, allSources } = input;
 
-  console.log("Running step: removeRecordsThatAreFlaggedToNotSaveStep");
+  console.log(`Running step: removeRecordsThatAreFlaggedToNotSaveStep. Remaining estimates: ${input.allEstimates.length}`);
 
   return {
     allEstimates: allEstimates.filter((estimate): estimate is AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep =>

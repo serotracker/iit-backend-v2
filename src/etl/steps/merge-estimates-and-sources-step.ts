@@ -21,7 +21,7 @@ interface MergeEstimatesAndSourcesStepOutput {
 export const mergeEstimatesAndSourcesStep = (
   input: MergeEstimatesAndSourcesStepInput
 ): MergeEstimatesAndSourcesStepOutput => {
-  console.log("Running step: mergeEstimatesAndSourcesStep");
+  console.log(`Running step: mergeEstimatesAndSourcesStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const { allEstimates, allSources } = input;
 

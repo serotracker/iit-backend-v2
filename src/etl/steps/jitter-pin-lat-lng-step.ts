@@ -34,7 +34,7 @@ export const jitterPinLatLngStep = (
   const { allEstimates, allSources } = input;
   const maximumPinJitterMagnitude = 0.1;
 
-  console.log("Running step: jitterPinLatLngStep");
+  console.log(`Running step: jitterPinLatLngStep. Remaining estimates: ${input.allEstimates.length}`);
 
   return {
     allEstimates: allEstimates.map((estimate) => ({
