@@ -14,16 +14,37 @@ const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => arr
 
 const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDocument): ArbovirusEstimate => {
   return {
-    id: document._id.toHexString(),
+    ageGroup: document.ageGroup,
+    ageMaximum: document.ageMaximum,
+    ageMinimum: document.ageMaximum,
     antibodies: document.antibodies ?? [],
     antigen: document.antigen,
+    assay: document.assay,
+    assayOther: document.assayOther,
+    city: document.city,
+    state: document.state,
     country: document.country,
-    latitude: document.latitude,
-    longitude: document.longitude,
     createdAt: document.createdAt.toISOString(),
     estimateId: document.estimateId,
+    id: document._id.toHexString(),
+    inclusionCriteria: document.inclusionCriteria,
+    latitude: document.latitude,
+    longitude: document.longitude,
     pathogen: document.pathogen,
+    producer: document.producer,
+    producerOther: document.producerOther,
+    sameFrameTargetGroup: document.sameFrameTargetGroup,
+    sampleEndDate: document.sampleEndDate?.toISOString(),
+    sampleFrame: document.sampleFrame,
+    sampleNumerator: document.sampleNumerator,
     sampleSize: document.sampleSize,
+    sampleStartDate: document.sampleStartDate?.toISOString(),
+    seroprevalence: document.seroprevalence,
+    sex: document.sex,
+    sourceSheetId: document.sourceSheetId,
+    sourceSheetName: document.sourceSheetName,
+    url: document.url,
+    whoRegion: document.whoRegion
   }
 }
 

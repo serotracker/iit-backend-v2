@@ -29,22 +29,25 @@ export const latLngGenerationStep = async(
   input: LatLngGenerationStepInput
 ): Promise<LatLngGenerationStepOutput> => {
   const geocodingApiRequestReportFileName = './lat-lng-generation-report.txt';
+  const geocodingApiEnabled = process.env.GEOCODING_API_ENABLED === 'true';
 
-  console.log(`Running step: latLngGenerationStep. Remaining estimates: ${input.allEstimates.length}`);
+  console.log(`Running step: latLngGenerationStep. Remaining estimates: ${input.allEstimates.length}. GEOCODING_API_ENABLED=${geocodingApiEnabled}`);
 
   const { allEstimates, allSources } = input;
 
   const estimatesWithLatitudesAndLongitudes: AirtableEstimateFieldsAfterLatLngGenerationStep[] = [];
   
   for(const estimate of allEstimates) {
-    //const cityLatLng = await getCityLatLng({
-    //  city: estimate.city,
-    //  state: estimate.state,
-    //  country: estimate.country,
-    //  geocodingApiRequestReportFileName
-    //})
+    let cityLatLng: Point | undefined = [0, 0];
 
-    const cityLatLng:Point = [0, 0];
+    if(geocodingApiEnabled) {
+      cityLatLng = await getCityLatLng({
+        city: estimate.city,
+        state: estimate.state,
+        country: estimate.country,
+        geocodingApiRequestReportFileName
+      })
+    }
 
     if(cityLatLng) {
       estimatesWithLatitudesAndLongitudes.push({
