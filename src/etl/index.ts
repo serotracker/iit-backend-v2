@@ -25,7 +25,7 @@ const runEtlMain = async () => {
       "Unable to find value for AIRTABLE_API_KEY. Please make sure you have specified one in your .env file."
     );
     console.log("Exiting early, database was not modified.");
-    return;
+    process.exit(1);
   }
 
   if (!mongoUrl) {
@@ -33,7 +33,7 @@ const runEtlMain = async () => {
       "Unable to find value for MONGODB_URI. Please make sure you have specified one in your .env file."
     );
     console.log("Exiting early, database was not modified.");
-    return;
+    process.exit(1);
   }
 
   if (!databaseName) {
@@ -41,7 +41,7 @@ const runEtlMain = async () => {
       "Unable to find value for DATABASE_NAME. Please make sure you have specified one in your .env file."
     );
     console.log("Exiting early, database was not modified.");
-    return;
+    process.exit(1);
   }
 
   if (!airtableArboBaseId) {
@@ -49,7 +49,7 @@ const runEtlMain = async () => {
       "Unable to find value for AIRTABLE_ARBO_BASE_ID. Please make sure you have specified one in your .env file."
     );
     console.log("Exiting early, database was not modified.");
-    return;
+    process.exit(1);
   }
 
   const mongoClient = new MongoClient(mongoUrl);
@@ -111,7 +111,7 @@ const runEtlMain = async () => {
   if (allEstimates.length === 0) {
     console.log("Unable to find any estimates to insert.");
     console.log("Exiting early, database was not modified.");
-    return;
+    process.exit(1);
   }
 
   const { insertedCount } = await mongoClient
@@ -124,7 +124,7 @@ const runEtlMain = async () => {
   if(insertedCount === 0) {
     console.log("Not deleting data because no records were inserted. Please investigate.")
     console.log("Exiting early.");
-    return;
+    process.exit(1);
   }
 
   const { deletedCount } = await mongoClient

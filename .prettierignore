@@ -4,10 +4,11 @@ public/dist
 coverage
 node_modules
 dist
+lat-lng-generation-report.txt
 
 # Files containing secret information
 .env
-.env-local
-.env-production
-
+.env-local-etl
+.env-production-etl
 .vercel
+.env*.local

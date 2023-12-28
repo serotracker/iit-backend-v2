@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { appendFileSync } from "fs";
 import { makeGeocodingApiRequest } from "./geocoding-api-client.js";
 import {
     GeocoderDataType,
@@ -64,7 +64,7 @@ const formatGeocodingApiResponseAsString = (
   const matchingTextAsString = input.matchingText ?? "N/A";
   const regionNameAsString = input.regionName ?? "N/A";
 
-  return `[centerCoordinates: ${centerCoordinatesAsString},boundingBox: ${boundingBoxAsString}, text: ${textAsString}, matchingText: ${matchingTextAsString}, regionName: ${regionNameAsString}`
+  return `[centerCoordinates: ${centerCoordinatesAsString},boundingBox: ${boundingBoxAsString}, text: ${textAsString}, matchingText: ${matchingTextAsString}, regionName: ${regionNameAsString}]`
 };
 
 const generateLineForResponseAndRequest = (input: GenerateLineForRequestAndResponseInput): string => {
@@ -211,7 +211,7 @@ export const recordGeocodingApiRequestInGeocodingReport = async(input: RecordGeo
 
   linesToWrite.forEach((line) => {
     if(!!line) {
-      writeFileSync(geocodingApiRequestReportFileName, line);
+      appendFileSync(geocodingApiRequestReportFileName, `${line}\n`);
     }
   })
 }

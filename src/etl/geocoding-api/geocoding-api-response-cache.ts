@@ -33,5 +33,5 @@ export const saveInGeocodingApiResponseCache = (
   const { geocodingApiRequestParams } = input.key
   const key = generateGeocodingApiResponseCacheKey({ geocodingApiRequestParams });
 
-  geocodingApiResponseCache = { ...geocodingApiResponseCache, key: cacheValue };
+  geocodingApiResponseCache = { ...geocodingApiResponseCache, [key]: cacheValue };
 };
