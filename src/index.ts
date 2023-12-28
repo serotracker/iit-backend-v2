@@ -1,47 +1,32 @@
-import { ApolloServer, gql } from 'apollo-server-micro';
+import { ApolloServer } from "apollo-server-micro";
+import { MongoClient } from "mongodb";
+import { arboTypedefs } from "./api/arbo-typedefs.js";
+import { generateArboResolvers } from "./api/arbo-resolvers.js";
 
-// This data will be returned by our test endpoint
-const products = [
-  {
-    id: 1,
-    name: 'Cookie',
-    price: 300,
-  },
-  {
-    id: 2,
-    name: 'Brownie',
-    price: 350,
-  },
-];
+const mongoUrl = process.env.MONGO_URL;
 
-// Construct a schema using GraphQL schema language
-const typeDefs = gql`
-  type Product {
-    id: Int
-    name: String
-    price: Int
-  }
+if (!mongoUrl) {
+  console.log(
+    "Unable to find value for MONGO_URL. Please make sure you have specified one in your .env file."
+  );
+  console.log("Exiting early.");
+  process.exit(1);
+}
 
-  type Query {
-    products: [Product]
-  }
-`;
+const mongoClient = new MongoClient(mongoUrl);
 
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    products: () => {
-      return products;
-    },
-  },
-};
+await mongoClient.connect();
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs: arboTypedefs,
+  resolvers: generateArboResolvers({ mongoClient }).arboResolvers,
+  introspection: true,
+});
 
 await server.start();
 
 export default server.createHandler({
-  path: '/api/graphql',
+  path: "/api/graphql",
 });
 
 export const config = {
