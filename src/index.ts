@@ -3,11 +3,11 @@ import { MongoClient } from "mongodb";
 import { arboTypedefs } from "./api/arbo-typedefs.js";
 import { generateArboResolvers } from "./api/arbo-resolvers.js";
 
-const mongoUrl = process.env.MONGO_URL;
+const mongoUrl = process.env.MONGODB_URI;
 
 if (!mongoUrl) {
   console.log(
-    "Unable to find value for MONGO_URL. Please make sure you have specified one in your .env file."
+    "Unable to find value for MONGODB_URI. Please make sure you have specified one in your .env file."
   );
   console.log("Exiting early.");
   process.exit(1);

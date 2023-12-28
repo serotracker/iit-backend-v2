@@ -17,7 +17,7 @@ const runEtlMain = async () => {
   console.log("Running ETL");
   const airtableApiKey = process.env.AIRTABLE_API_KEY;
   const airtableArboBaseId = process.env.AIRTABLE_ARBO_BASE_ID;
-  const mongoUrl = process.env.MONGO_URL;
+  const mongoUrl = process.env.MONGODB_URI;
   const databaseName = process.env.DATABASE_NAME;
 
   if (!airtableApiKey) {
@@ -30,7 +30,7 @@ const runEtlMain = async () => {
 
   if (!mongoUrl) {
     console.log(
-      "Unable to find value for MONGO_URL. Please make sure you have specified one in your .env file."
+      "Unable to find value for MONGODB_URI. Please make sure you have specified one in your .env file."
     );
     console.log("Exiting early, database was not modified.");
     return;
