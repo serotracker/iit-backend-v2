@@ -1,5 +1,7 @@
+import cors from "micro-cors";
 import { ApolloServer } from "apollo-server-micro";
 import { MongoClient } from "mongodb";
+import { send } from 'micro';
 import { arboTypedefs } from "../public/dist/src/api/arbo-typedefs.js";
 import { generateArboResolvers } from "../public/dist/src/api/arbo-resolvers.js";
 
@@ -21,9 +23,13 @@ const server = new ApolloServer({
 });
 
 await server.start();
-export default server.createHandler({
+const handler = server.createHandler({
     path: "/api/graphql",
 });
+
+const corsHandler = cors()((req, res) => req.method === 'OPTIONS' ? send(res, 200, 'ok') : handler(req, res))
+
+export default corsHandler;
 
 export const config = {
     api: {
