@@ -33,8 +33,8 @@ export const parseDatesStep = (
     allEstimates: allEstimates.map((estimate) => {
       return {
         ...estimate,
-        sampleStartDate: estimate.sampleStartDate ? parse("yyyy-MM-dd", estimate.sampleStartDate, new Date()) : undefined,
-        sampleEndDate: estimate.sampleEndDate ? parse("yyyy-MM-dd", estimate.sampleEndDate, new Date()) : undefined,
+        sampleStartDate: estimate.sampleStartDate ? parse(estimate.sampleStartDate, "yyyy-MM-dd", new Date()) : undefined,
+        sampleEndDate: estimate.sampleEndDate ? parse(estimate.sampleEndDate, "yyyy-MM-dd", new Date()) : undefined,
       };
     }),
     allSources: allSources,
