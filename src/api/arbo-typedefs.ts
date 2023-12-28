@@ -39,6 +39,7 @@ export const arboTypedefs = `
     assay: [String!]!
     country: [String!]!
     pathogen: [String!]!
+    producer: [String!]!
     sampleFrame: [String!]!
     sex: [String!]!
     whoRegion: [String!]!
