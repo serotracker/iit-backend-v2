@@ -57,6 +57,7 @@ export type ArbovirusFilterOptions = {
   assay: Array<Scalars['String']['output']>;
   country: Array<Scalars['String']['output']>;
   pathogen: Array<Scalars['String']['output']>;
+  producer: Array<Scalars['String']['output']>;
   sampleFrame: Array<Scalars['String']['output']>;
   sex: Array<Scalars['String']['output']>;
   whoRegion: Array<Scalars['String']['output']>;
@@ -200,6 +201,7 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   pathogen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  producer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   whoRegion?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
