@@ -1,37 +1,37 @@
 {
-    "name": "iit-backend-v2",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "build": "tsc",
-        "run_etl_local": "npm run build && node --env-file=.env-local ./public/dist/src/etl/index.js",
-        "run_etl_production": "npm run build && node --env-file=.env-production ./public/dist/src/etl/index.js",
-        "start": "npm run build && node --env-file=.env-local ./public/dist/src/index.js",
-        "start_no_env_file": "npm run build && node ./public/dist/src/index.js",
-        "codegen": "graphql-codegen --config ./codegen.ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "Sean Kenny",
-    "type": "module",
-    "dependencies": {
-        "@apollo/server": "^4.9.5",
-        "@graphql-tools/merge": "^9.0.1",
-        "@graphql-tools/schema": "^10.0.2",
-        "airtable": "^0.12.2",
-        "apollo-server-micro": "^3.13.0",
-        "date-fns": "^3.0.6",
-        "graphql": "^16.8.1",
-        "mongodb": "^6.1.0",
-        "undici": "^6.2.1"
-    },
-    "devDependencies": {
-        "@graphql-codegen/cli": "5.0.0",
-        "@graphql-codegen/introspection": "4.0.0",
-        "@graphql-codegen/typescript": "4.0.1",
-        "@graphql-codegen/typescript-resolvers": "4.0.1",
-        "@types/node": "^20.5.9",
-        "prettier": "^3.0.3",
-        "typescript": "^5.3.3"
-    }
+  "name": "iit-backend-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "run_etl_local": "npm run build && node --env-file=.env-local ./public/dist/src/etl/index.js",
+    "run_etl_production": "npm run build && node --env-file=.env-production ./public/dist/src/etl/index.js",
+    "start": "npm run build && node --env-file=.env-local ./public/dist/src/index.js",
+    "start_no_env_file": "npm run build && node ./public/dist/src/index.js",
+    "codegen": "graphql-codegen --config ./codegen.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean Kenny",
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^4.9.5",
+    "@graphql-tools/merge": "^9.0.1",
+    "@graphql-tools/schema": "^10.0.2",
+    "airtable": "^0.12.2",
+    "apollo-server-micro": "^3.13.0",
+    "date-fns": "^3.0.6",
+    "graphql": "^16.8.1",
+    "mongodb": "^6.1.0",
+    "undici": "^6.2.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/introspection": "4.0.0",
+    "@graphql-codegen/typescript": "4.0.1",
+    "@graphql-codegen/typescript-resolvers": "4.0.1",
+    "@types/node": "^20.5.9",
+    "prettier": "^3.0.3",
+    "typescript": "^5.3.3"
+  }
 }
