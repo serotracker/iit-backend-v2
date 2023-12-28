@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
       "rootDirs": ["src"],
-      "outDir": "build",
+      "outDir": "public/dist",
       "lib": ["es2022"],
       "strict": true,
       "target": "es2022",
