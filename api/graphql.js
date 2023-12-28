@@ -27,7 +27,7 @@ const handler = server.createHandler({
     path: "/api/graphql",
 });
 
-const corsHandler = cors()((req, res) => req.method === 'OPTIONS' ? send(res, 200, 'ok') : handler(req, res))
+const corsHandler = cors({allowMethods: ['POST']})((req, res) => req.method === 'OPTIONS' ? send(res, 200, 'ok') : handler(req, res))
 
 export default corsHandler;
 
