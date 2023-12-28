@@ -40,8 +40,6 @@ export const latLngGenerationStep = async(
 
   const intervalsToPrintProgressMessages = Array.from({length: 20}, (_, index) => Math.floor((allEstimates.length * (index + 1)) / 20));
 
-  console.log(intervalsToPrintProgressMessages);
-
   const estimatesWithLatitudesAndLongitudes: AirtableEstimateFieldsAfterLatLngGenerationStep[] = [];
   
   for(const estimate of allEstimates) {
