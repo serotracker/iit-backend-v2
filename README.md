@@ -1,5 +1,7 @@
 # iit-backend-v2
 
+In this README, the words "Legacy API/Application" and "New API/Application" refer to the following:
+
 - Legacy API: https://iit-backend.com/, Source Code: https://github.com/serotracker/iit-backend
 - Legacy Application: https://serotracker.com, Source Code: https://github.com/serotracker/sero-can-webapp
 - New API: https://iit-backend-v2.vercel.app/api/graphql, Source Code: https://github.com/SeanKennyNF/iit-backend-v2
