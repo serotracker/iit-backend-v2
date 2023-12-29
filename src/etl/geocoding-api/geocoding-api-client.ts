@@ -117,7 +117,7 @@ export const makeGeocodingApiRequest = async (
 
   const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN;
 
-  if(!mapboxAccessToken) {
+  if(!mapboxAccessToken || mapboxAccessToken === "PLEASE_SPECIFY") {
     console.error('Unable to make request to mapbox API, access token not present.');
 
     return "FAILED_RESPONSE";

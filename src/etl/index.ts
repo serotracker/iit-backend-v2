@@ -20,7 +20,7 @@ const runEtlMain = async () => {
   const mongoUrl = process.env.MONGODB_URI;
   const databaseName = process.env.DATABASE_NAME;
 
-  if (!airtableApiKey) {
+  if (!airtableApiKey || airtableApiKey === "PLEASE_SPECIFY") {
     console.log(
       "Unable to find value for AIRTABLE_API_KEY. Please make sure you have specified one in your .env file."
     );
@@ -28,7 +28,7 @@ const runEtlMain = async () => {
     process.exit(1);
   }
 
-  if (!mongoUrl) {
+  if (!mongoUrl || mongoUrl === "PLEASE_SPECIFY") {
     console.log(
       "Unable to find value for MONGODB_URI. Please make sure you have specified one in your .env file."
     );
@@ -36,7 +36,7 @@ const runEtlMain = async () => {
     process.exit(1);
   }
 
-  if (!databaseName) {
+  if (!databaseName || databaseName === "PLEASE_SPECIFY") {
     console.log(
       "Unable to find value for DATABASE_NAME. Please make sure you have specified one in your .env file."
     );
@@ -44,7 +44,7 @@ const runEtlMain = async () => {
     process.exit(1);
   }
 
-  if (!airtableArboBaseId) {
+  if (!airtableArboBaseId || airtableArboBaseId === "PLEASE_SPECIFY") {
     console.log(
       "Unable to find value for AIRTABLE_ARBO_BASE_ID. Please make sure you have specified one in your .env file."
     );

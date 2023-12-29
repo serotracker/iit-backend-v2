@@ -23,7 +23,7 @@ This is a replacement for the legacy API which used to supply data to both the l
 
 The ETL script reads data from Airtable and populates the MongoDB database using that data. The ETL script also makes use of the Mapbox geocoding API to transform city, state, and country names to latitude and longitude values to show on the map of the application.
 
-1. Specify `AIRTABLE_API_KEY`, `AIRTABLE_ARBO_BASE_ID`, `GEOCODING_API_ENABLED`, `MONGODB_URI`, `MAPBOX_ACCESS_TOKEN`, and `DATABASE_NAME` in the `.env-local-etl` or `.env-production-etl` depending on whether you are running this on the production database or a database that you are using to test. Please reach out to a member of the development team in Basecamp if you are unsure what values to specify here.
+1. Specify `AIRTABLE_API_KEY`, `AIRTABLE_ARBO_BASE_ID`, `MONGODB_URI`, `MAPBOX_ACCESS_TOKEN`, and `DATABASE_NAME` in the `.env-local-etl` or `.env-production-etl` depending on whether you are running this on the production database or a database that you are using to test. Please reach out to a member of the development team in Basecamp if you are unsure what values to specify here.
 2. Run `npm i`
 3. Run `npm run run_etl_local` if you're running this on a non-production database. Run `npm run run_etl_production` if you're running this on the production database
 
