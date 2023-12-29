@@ -1,9 +1,9 @@
 # iit-backend-v2
 
-Legacy API: https://iit-backend.com/, Source Code: https://github.com/serotracker/iit-backend
-Legacy Application: https://serotracker.com, Source Code: https://github.com/serotracker/sero-can-webapp
-New API: https://iit-backend-v2.vercel.app/api/graphql, Source Code: https://github.com/SeanKennyNF/iit-backend-v2
-New Application: https://pathotracker.vercel.app/, Source Code: https://github.com/PathoTracker/Pathotracker/
+- Legacy API: https://iit-backend.com/, Source Code: https://github.com/serotracker/iit-backend
+- Legacy Application: https://serotracker.com, Source Code: https://github.com/serotracker/sero-can-webapp
+- New API: https://iit-backend-v2.vercel.app/api/graphql, Source Code: https://github.com/SeanKennyNF/iit-backend-v2
+- New Application: https://pathotracker.vercel.app/, Source Code: https://github.com/PathoTracker/Pathotracker/
 
 This is a replacement for the legacy API which used to supply data to both the legacy serotracker application and the new serotracker application. This new API comes with the following features:
 
