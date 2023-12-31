@@ -23,18 +23,20 @@ This is a replacement for the legacy API which used to supply data to both the l
 
 The ETL script reads data from Airtable and populates the MongoDB database using that data. The ETL script also makes use of the Mapbox geocoding API to transform city, state, and country names to latitude and longitude values to show on the map of the application.
 
-1. Specify `AIRTABLE_API_KEY`, `AIRTABLE_ARBO_BASE_ID`, `MONGODB_URI`, `MAPBOX_ACCESS_TOKEN`, and `DATABASE_NAME` in the `.env-local-etl` or `.env-production-etl` depending on whether you are running this on the production database or a database that you are using to test. Please reach out to a member of the development team in Basecamp if you are unsure what values to specify here.
-2. Run `npm i`
-3. Run `npm run run_etl_local` if you're running this on a non-production database. Run `npm run run_etl_production` if you're running this on the production database
+1. Run `bash generate-env-files.sh` if you have not already. You can create the environment files manually using the values in the bash script if you don't have access to the `bash` command.
+2. Specify `AIRTABLE_API_KEY`, `AIRTABLE_ARBO_BASE_ID`, `MONGODB_URI`, `MAPBOX_ACCESS_TOKEN`, and `DATABASE_NAME` in the `.env-local-etl` or `.env-production-etl` depending on whether you are running this on the production database or a database that you are using to test. Please reach out to a member of the development team in Basecamp if you are unsure what values to specify here.
+3. Run `npm i`
+4. Run `npm run run_etl_local` if you're running this on a non-production database. Run `npm run run_etl_production` if you're running this on the production database
 
 ## Starting the API
 
 The API runs on the `/api/graphql` path.
 
-1. If you're a member of the vercel organization, please run `vercel env pull` to populate the `.env.local` file with the production values. This will run the API against the production database so be careful! If you want to run it against a non-production database, simply fill in `MONGODB_URI` and `DATABASE_NAME` in `.env.local` with the values of the database you'd like to run your application against.
-2. Run `npm i`
-3. Run `vercel dev`
-4. Making a POST GraphQL request to `http://localhost:3000/api/graphql` should give you data.
+1. Run `bash generate-env-files.sh` if you have not already. You can create the environment files manually using the values in the bash script if you don't have access to the `bash` command.
+2. If you're a member of the vercel organization, please run `vercel env pull` to populate the `.env.local` file with the production values. This will run the API against the production database so be careful! If you want to run it against a non-production database, simply fill in `MONGODB_URI` and `DATABASE_NAME` in `.env.local` with the values of the database you'd like to run your application against.
+3. Run `npm i`
+4. Run `vercel dev`
+5. Making a POST GraphQL request to `http://localhost:3000/api/graphql` should give you data.
 
 ## Regenerating the API types
 
