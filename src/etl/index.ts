@@ -22,7 +22,7 @@ const runEtlMain = async () => {
 
   if (!airtableApiKey || airtableApiKey === "PLEASE_SPECIFY") {
     console.log(
-      "Unable to find value for AIRTABLE_API_KEY. Please make sure you have specified one in your .env file."
+      "Unable to find value for AIRTABLE_API_KEY. Please make sure you have run generate-env-files.sh and have specified a value for AIRTABLE_API_KEY in the appropriate environment file."
     );
     console.log("Exiting early, database was not modified.");
     process.exit(1);
@@ -30,7 +30,7 @@ const runEtlMain = async () => {
 
   if (!mongoUrl || mongoUrl === "PLEASE_SPECIFY") {
     console.log(
-      "Unable to find value for MONGODB_URI. Please make sure you have specified one in your .env file."
+      "Unable to find value for MONGODB_URI. Please make sure you have run generate-env-files.sh and have specified a value for MONGODB_URI in the appropriate environment file."
     );
     console.log("Exiting early, database was not modified.");
     process.exit(1);
@@ -38,7 +38,7 @@ const runEtlMain = async () => {
 
   if (!databaseName || databaseName === "PLEASE_SPECIFY") {
     console.log(
-      "Unable to find value for DATABASE_NAME. Please make sure you have specified one in your .env file."
+      "Unable to find value for DATABASE_NAME. Please make sure you have run generate-env-files.sh and have specified a value for DATABASE_NAME in the appropriate environment file."
     );
     console.log("Exiting early, database was not modified.");
     process.exit(1);
@@ -46,7 +46,7 @@ const runEtlMain = async () => {
 
   if (!airtableArboBaseId || airtableArboBaseId === "PLEASE_SPECIFY") {
     console.log(
-      "Unable to find value for AIRTABLE_ARBO_BASE_ID. Please make sure you have specified one in your .env file."
+      "Unable to find value for AIRTABLE_ARBO_BASE_ID. Please make sure you have run generate-env-files.sh and have specified a value for AIRTABLE_ARBO_BASE_ID in the appropriate environment file."
     );
     console.log("Exiting early, database was not modified.");
     process.exit(1);

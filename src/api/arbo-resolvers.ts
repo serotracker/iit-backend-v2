@@ -54,7 +54,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
   const databaseName = process.env.DATABASE_NAME;
 
   if(!databaseName) {
-    throw new Error("Unable to find value for DATABASE_NAME. Please make sure you have specified one in your .env file")
+    throw new Error("Unable to find value for DATABASE_NAME. Please make sure you have run generate-env-files.sh and have specified one in the appropriate environment file.")
   }
 
   const arbovirusEstimates = async () => {
