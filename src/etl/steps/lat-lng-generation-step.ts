@@ -6,6 +6,7 @@ import {
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
 } from "./merge-estimates-and-sources-step.js";
+import { TaskOption } from 'fp-ts/lib/TaskOption.js';
 
 export type AirtableEstimateFieldsAfterLatLngGenerationStep =
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep & {

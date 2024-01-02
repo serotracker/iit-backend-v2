@@ -12,6 +12,25 @@ import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 import { assertMandatoryFieldsArePresentStep } from "./steps/assert-mandatory-fields-are-present-step.js";
 import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
+import { pipe } from "fp-ts/lib/function.js";
+
+const asyncEtlStep = <TFunctionInput, TFunctionOutput>(stepFunction: (input: TFunctionInput) => Promise<TFunctionOutput>) => {
+  const returnFunction: (inputPromise: Promise<TFunctionInput> | TFunctionInput) => Promise<TFunctionOutput> = async (inputPromise) => {
+    const input = await Promise.resolve(inputPromise);
+    return stepFunction(input);
+  }
+
+  return returnFunction;
+}
+
+const etlStep = <TFunctionInput, TFunctionOutput>(stepFunction: (input: TFunctionInput) => TFunctionOutput) => {
+  const returnFunction: (inputPromise: Promise<TFunctionInput> | TFunctionInput) => Promise<TFunctionOutput> = async (inputPromise) => {
+    const input = await Promise.resolve(inputPromise);
+    return stepFunction(input);
+  }
+
+  return returnFunction;
+}
 
 const runEtlMain = async () => {
   console.log("Running ETL");
@@ -83,28 +102,23 @@ const runEtlMain = async () => {
       )
     );
 
-  const { allEstimates, allSources: _ } = transformIntoFormatForDatabaseStep(
-    jitterPinLatLngStep(
-      await latLngGenerationStep(
-        mergeEstimatesAndSourcesStep(
-          removeRecordsThatAreFlaggedToNotSaveStep(
-            removeEstimatesWithLowSampleSizeStep(
-              parseDatesStep(
-                assertMandatoryFieldsArePresentStep(
-                  transformNotReportedValuesToUndefinedStep(
-                    cleanSingleElementArrayFieldsStep(
-                      cleanFieldNamesAndRemoveUnusedFieldsStep({
-                        allEstimates: allEstimatesUnformatted,
-                        allSources: allSourcesUnformatted,
-                      })
-                    )
-                  )
-                )
-              )
-            )
-          )
-        )
-      )
+  const { allEstimates, allSources: _ } = await (
+    pipe(
+      {
+        allEstimates: allEstimatesUnformatted,
+        allSources: allSourcesUnformatted,
+      },
+      etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
+      etlStep(cleanSingleElementArrayFieldsStep),
+      etlStep(transformNotReportedValuesToUndefinedStep),
+      etlStep(assertMandatoryFieldsArePresentStep),
+      etlStep(parseDatesStep),
+      etlStep(removeEstimatesWithLowSampleSizeStep),
+      etlStep(removeRecordsThatAreFlaggedToNotSaveStep),
+      etlStep(mergeEstimatesAndSourcesStep),
+      asyncEtlStep(latLngGenerationStep),
+      etlStep(jitterPinLatLngStep),
+      etlStep(transformIntoFormatForDatabaseStep)
     )
   );
 
