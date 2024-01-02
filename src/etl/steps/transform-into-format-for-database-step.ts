@@ -44,6 +44,7 @@ export const transformIntoFormatForDatabaseStep = (
       sameFrameTargetGroup: estimate.sampleFrameTargetGroup,
       sampleSize: estimate.sampleSize,
       sampleNumerator: estimate.sampleNumerator,
+      serotype: estimate.serotype ?? [],
       inclusionCriteria: estimate.inclusionCriteria,
       pathogen: estimate.pathogen,
       seroprevalence: estimate.seroprevalence,

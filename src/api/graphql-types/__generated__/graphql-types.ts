@@ -42,6 +42,7 @@ export type ArbovirusEstimate = {
   sampleSize: Scalars['Int']['output'];
   sampleStartDate?: Maybe<Scalars['String']['output']>;
   seroprevalence?: Maybe<Scalars['Float']['output']>;
+  serotype: Array<Scalars['String']['output']>;
   sex?: Maybe<Scalars['String']['output']>;
   sourceSheetId?: Maybe<Scalars['String']['output']>;
   sourceSheetName?: Maybe<Scalars['String']['output']>;
@@ -59,6 +60,7 @@ export type ArbovirusFilterOptions = {
   pathogen: Array<Scalars['String']['output']>;
   producer: Array<Scalars['String']['output']>;
   sampleFrame: Array<Scalars['String']['output']>;
+  serotype: Array<Scalars['String']['output']>;
   sex: Array<Scalars['String']['output']>;
   whoRegion: Array<Scalars['String']['output']>;
 };
@@ -186,6 +188,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sampleSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sampleStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   seroprevalence?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -203,6 +206,7 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
   pathogen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   producer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   whoRegion?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

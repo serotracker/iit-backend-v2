@@ -12,6 +12,7 @@ export interface ArbovirusEstimateDocument {
   sampleFrame: string | undefined;
   sameFrameTargetGroup: string | undefined;
   sampleSize: number;
+  serotype: string[];
   sampleNumerator: number | undefined;
   inclusionCriteria: string | undefined;
   pathogen: string;

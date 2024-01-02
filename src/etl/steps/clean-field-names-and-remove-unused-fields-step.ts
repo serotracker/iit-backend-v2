@@ -13,6 +13,7 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   assay: string | undefined;
   assayOther: string | undefined;
   sampleSize: number | undefined;
+  serotype: string[] | undefined;
   sampleNumerator: number | undefined;
   sampleFrame: string | undefined;
   sampleFrameTargetGroup: string | undefined;
@@ -59,6 +60,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       inclusionCriteria: estimate["Inclusion Criteria"],
       sampleStartDate: estimate["Sample Start Date"],
       sampleEndDate: estimate["Sample End Date"],
+      serotype: estimate["Serotype"],
       sex: estimate["Sex"],
       pathogen: estimate["Pathogen"],
       antibodies: estimate["Antibody"],

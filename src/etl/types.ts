@@ -22,6 +22,7 @@ export type AirtableEstimateFields = {
   "Sample Start Date": `${number}-${number}-${number}` | undefined;
   "Sample End Date": `${number}-${number}-${number}` | undefined;
   "Sample Size": number | undefined;
+  "Serotype": string[] | undefined;
   Seroprevalence: number | undefined;
   "Subgroups Available": string[] | undefined;
   Continent: string | undefined;
