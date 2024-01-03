@@ -1,3 +1,4 @@
+import { isArrayOfUnknownType } from "../../lib/lib.js";
 import {
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
@@ -19,6 +20,21 @@ interface TransformNotReportedValuesToUndefinedStepOutput {
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
 }
 
+enum NotReportedValue {
+  NR = "NR",
+  nr = "nr",
+  NA = "NA",
+  nan = "nan",
+  "N/A" = "N/A",
+  "Not Reported" = "Not Reported",
+  "Not reported" = "Not reported",
+  "Not available" = "Not available",
+}
+
+const isNotReportedValue = (value: unknown): value is NotReportedValue => {
+  return typeof value === 'string' && Object.values(NotReportedValue).some((notReportedValue) => notReportedValue === value);
+}
+
 export const transformNotReportedValuesToUndefinedStep = (
   input: TransformNotReportedValuesToUndefinedStepInput
 ): TransformNotReportedValuesToUndefinedStepOutput => {
@@ -31,21 +47,12 @@ export const transformNotReportedValuesToUndefinedStep = (
       (estimate) =>
         Object.fromEntries(
           Object.entries(estimate).map(([key, value]) => {
-            if (
-              !!value &&
-              typeof value === "string" &&
-              [
-                "NR",
-                "nr",
-                "Not Reported",
-                "Not reported",
-                "Not available",
-                "NA",
-                "N/A",
-                "nan",
-              ].includes(value)
-            ) {
+            if (isNotReportedValue(value)) {
               return [key, undefined];
+            }
+
+            if(isArrayOfUnknownType(value)) {
+              return [key, value.filter((element) => !isNotReportedValue(element))]
             }
 
             return [key, value];

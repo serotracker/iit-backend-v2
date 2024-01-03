@@ -26,6 +26,7 @@ export const arboTypedefs = `
     sampleSize: Int!
     sampleStartDate: String
     seroprevalence: Float
+    serotype: [String!]!
     sex: String
     sourceSheetId: String
     sourceSheetName: String
@@ -41,6 +42,7 @@ export const arboTypedefs = `
     pathogen: [String!]!
     producer: [String!]!
     sampleFrame: [String!]!
+    serotype: [String!]!
     sex: [String!]!
     whoRegion: [String!]!
   }
