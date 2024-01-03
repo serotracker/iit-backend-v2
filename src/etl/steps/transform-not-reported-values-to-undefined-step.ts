@@ -32,7 +32,7 @@ enum NotReportedValue {
 }
 
 const isNotReportedValue = (value: unknown): value is NotReportedValue => {
-  return !!value && typeof value === 'string' && Object.values(NotReportedValue).some((notReportedValue) => notReportedValue === value);
+  return typeof value === 'string' && Object.values(NotReportedValue).some((notReportedValue) => notReportedValue === value);
 }
 
 export const transformNotReportedValuesToUndefinedStep = (
@@ -51,7 +51,7 @@ export const transformNotReportedValuesToUndefinedStep = (
               return [key, undefined];
             }
 
-            if(!!value && isArrayOfUnknownType(value)) {
+            if(isArrayOfUnknownType(value)) {
               return [key, value.filter((element) => !isNotReportedValue(element))]
             }
 
