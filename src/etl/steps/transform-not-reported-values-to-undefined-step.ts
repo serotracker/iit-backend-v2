@@ -23,12 +23,12 @@ interface TransformNotReportedValuesToUndefinedStepOutput {
 enum NotReportedValue {
   NR = "NR",
   nr = "nr",
+  NA = "NA",
+  nan = "nan",
+  "N/A" = "N/A",
   "Not Reported" = "Not Reported",
   "Not reported" = "Not reported",
   "Not available" = "Not available",
-  "NA" = "NA",
-  "N/A" = "N/A",
-  "nan" = "nan",
 }
 
 const isNotReportedValue = (value: unknown): value is NotReportedValue => {
