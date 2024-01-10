@@ -9,6 +9,7 @@ export const arboTypedefs = `
     assayOther: String
     city: String
     state: String
+    countryDeprecated: String! @deprecated(reason: "use country instead.")
     country: String!
     createdAt: String!
     estimateId: String
@@ -31,6 +32,7 @@ export const arboTypedefs = `
     sourceSheetId: String
     sourceSheetName: String
     url: String
+    whoRegionDeprecated: String @deprecated(reason: "use whoRegion instead.")
     whoRegion: String
   }
 
@@ -38,12 +40,14 @@ export const arboTypedefs = `
     ageGroup: [String!]!
     antibody: [String!]!
     assay: [String!]!
+    countryDeprecated: [String!]! @deprecated(reason: "use country instead.")
     country: [String!]!
     pathogen: [String!]!
     producer: [String!]!
     sampleFrame: [String!]!
     serotype: [String!]!
     sex: [String!]!
+    whoRegionDeprecated: [String!]! @deprecated(reason: "use whoRegion instead.")
     whoRegion: [String!]!
   }
 

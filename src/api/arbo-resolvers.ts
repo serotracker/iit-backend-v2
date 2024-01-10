@@ -23,6 +23,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     assayOther: document.assayOther,
     city: document.city,
     state: document.state,
+    countryDeprecated: document.country,
     country: document.country,
     createdAt: document.createdAt.toISOString(),
     estimateId: document.estimateId,
@@ -45,6 +46,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     sourceSheetId: document.sourceSheetId,
     sourceSheetName: document.sourceSheetName,
     url: document.url,
+    whoRegionDeprecated: document.whoRegion,
     whoRegion: document.whoRegion
   }
 }
@@ -70,22 +72,26 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       antibody,
       assay,
       country,
+      countryDeprecated,
       pathogen,
       producer,
       sampleFrame,
       serotype,
       sex,
-      whoRegion
+      whoRegion,
+      whoRegionDeprecated
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('assay').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('pathogen').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('producer').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('serotype').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
@@ -94,12 +100,14 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       antibody,
       assay,
       country,
+      countryDeprecated,
       pathogen,
       producer,
       sampleFrame,
       serotype,
       sex,
       whoRegion,
+      whoRegionDeprecated
     }
   }
 
