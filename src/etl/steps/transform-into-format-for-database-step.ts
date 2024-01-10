@@ -49,6 +49,7 @@ export const transformIntoFormatForDatabaseStep = (
       pathogen: estimate.pathogen,
       seroprevalence: estimate.seroprevalence,
       country: estimate.country,
+      countryAlphaTwoCode: estimate.countryAlphaTwoCode,
       state: estimate.state,
       city: estimate.city,
       latitude: estimate.latitude,

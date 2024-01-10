@@ -17,6 +17,7 @@ export interface ArbovirusEstimateDocument {
   inclusionCriteria: string | undefined;
   pathogen: string;
   seroprevalence: number | undefined;
+  countryAlphaTwoCode: string;
   country: string;
   state: string | undefined;
   city: string | undefined;
