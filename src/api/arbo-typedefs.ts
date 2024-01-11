@@ -10,6 +10,7 @@ export const arboTypedefs = `
     city: String
     state: String
     country: String!
+    countryAlphaTwoCode: String!
     createdAt: String!
     estimateId: String
     id: String!
@@ -30,6 +31,7 @@ export const arboTypedefs = `
     sex: String
     sourceSheetId: String
     sourceSheetName: String
+    unRegion: String
     url: String
     whoRegion: String
   }
@@ -39,6 +41,7 @@ export const arboTypedefs = `
     antibody: [String!]!
     assay: [String!]!
     country: [String!]!
+    unRegion: [String!]!
     pathogen: [String!]!
     producer: [String!]!
     sampleFrame: [String!]!

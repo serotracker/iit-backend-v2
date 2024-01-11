@@ -1,5 +1,6 @@
 import Airtable from "airtable";
 import { MongoClient } from "mongodb";
+import { pipe } from "fp-ts/lib/function.js";
 import { AirtableEstimateFields, AirtableSourceFields } from "./types.js";
 import { cleanFieldNamesAndRemoveUnusedFieldsStep } from "./steps/clean-field-names-and-remove-unused-fields-step.js";
 import { cleanSingleElementArrayFieldsStep } from "./steps/clean-single-element-array-fields-step.js";
@@ -12,7 +13,7 @@ import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 import { assertMandatoryFieldsArePresentStep } from "./steps/assert-mandatory-fields-are-present-step.js";
 import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
-import { pipe } from "fp-ts/lib/function.js";
+import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
 
 const asyncEtlStep = <TFunctionInput, TFunctionOutput>(stepFunction: (input: TFunctionInput) => Promise<TFunctionOutput>) => {
   const returnFunction: (inputPromise: Promise<TFunctionInput> | TFunctionInput) => Promise<TFunctionOutput> = async (inputPromise) => {
@@ -115,6 +116,7 @@ const runEtlMain = async () => {
       etlStep(parseDatesStep),
       etlStep(removeEstimatesWithLowSampleSizeStep),
       etlStep(removeRecordsThatAreFlaggedToNotSaveStep),
+      etlStep(addCountryAndRegionInformationStep),
       etlStep(mergeEstimatesAndSourcesStep),
       asyncEtlStep(latLngGenerationStep),
       etlStep(jitterPinLatLngStep),
