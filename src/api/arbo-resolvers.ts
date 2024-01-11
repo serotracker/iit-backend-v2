@@ -1,18 +1,54 @@
 import { MongoClient } from "mongodb";
-import { ArbovirusEstimate, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
+import {
+  ArbovirusEstimate,
+  ArbovirusEstimateResolvers,
+  ArbovirusFilterOptions,
+  ArbovirusFilterOptionsResolvers,
+  Country,
+  CountryResolvers,
+  QueryResolvers,
+  Resolver,
+  UnRegion,
+  UnRegionResolvers,
+  WhoRegion,
+  WhoRegionResolvers
+} from "./graphql-types/__generated__/graphql-types";
 import { ArbovirusEstimateDocument } from "../storage/types";
+import { countryNameToTwoLetterIsoCountryCode } from "../etl/geocoding-api/country-codes.js";
 
 interface GenerateArboResolversInput {
   mongoClient: MongoClient;
 }
 
+type UndecoratedCountry = Omit<Country, 'unRegions'|'whoRegions'>;
+type UndecoratedUnRegion = Omit<UnRegion, 'countries'|'whoRegions'>;
+type UndecoratedWhoRegion = Omit<WhoRegion, 'countries'|'unRegions'>;
+type UndecoratedArbovirusEstimate = Omit<ArbovirusEstimate, 'country'|'whoRegion'|'unRegion'> & {
+  country: UndecoratedCountry,
+  unRegion: UndecoratedUnRegion,
+  whoRegion: UndecoratedWhoRegion | undefined,
+}
+type UndecoratedArbovirusFilterOptions = Omit<ArbovirusFilterOptions, 'country'|'whoRegion'|'unRegion'> & {
+  country: UndecoratedCountry[],
+  unRegion: UndecoratedUnRegion[],
+  whoRegion: UndecoratedWhoRegion[]
+}
+
 interface GenerateArboResolversOutput {
-  arboResolvers: { Query: QueryResolvers }
+  arboResolvers: {
+    Query: {
+      arbovirusEstimates: Resolver<UndecoratedArbovirusEstimate[]>,
+      arbovirusFilterOptions: Resolver<UndecoratedArbovirusFilterOptions>
+    }
+    Country: CountryResolvers,
+    UNRegion: UnRegionResolvers,
+    WHORegion: WhoRegionResolvers
+  }
 }
 
 const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
 
-const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDocument): ArbovirusEstimate => {
+const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDocument): UndecoratedArbovirusEstimate => {
   return {
     ageGroup: document.ageGroup,
     ageMaximum: document.ageMaximum,
@@ -24,7 +60,10 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     city: document.city,
     state: document.state,
     countryDeprecated: document.country,
-    country: document.country,
+    country: {
+      name: document.country,
+      alphaTwoCode: document.countryAlphaTwoCode
+    },
     createdAt: document.createdAt.toISOString(),
     estimateId: document.estimateId,
     id: document._id.toHexString(),
@@ -45,9 +84,14 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     sex: document.sex,
     sourceSheetId: document.sourceSheetId,
     sourceSheetName: document.sourceSheetName,
+    unRegion: {
+      name: 'abc'
+    },
     url: document.url,
     whoRegionDeprecated: document.whoRegion,
-    whoRegion: document.whoRegion
+    whoRegion: document.whoRegion ? {
+      name: document.whoRegion
+    } : undefined
   }
 }
 
@@ -71,14 +115,14 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       ageGroup,
       antibody,
       assay,
-      country,
+      countryNames,
       countryDeprecated,
       pathogen,
       producer,
       sampleFrame,
       serotype,
       sex,
-      whoRegion,
+      whoRegionNames,
       whoRegionDeprecated
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -95,27 +139,64 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
+    const unRegion: UndecoratedUnRegion[] = [];
+
     return {
       ageGroup,
       antibody,
       assay,
-      country,
+      country: countryNames.map((countryName) => {
+        const alphaTwoCode = countryNameToTwoLetterIsoCountryCode(countryName);
+
+        if(!alphaTwoCode) {
+          return undefined;
+        }
+
+        return {
+          name: countryName,
+          alphaTwoCode
+        }
+      }).filter(<T>(country: T | undefined): country is T => !!country),
       countryDeprecated,
       pathogen,
       producer,
       sampleFrame,
       serotype,
       sex,
-      whoRegion,
+      unRegion,
+      whoRegion: whoRegionNames.map((whoRegionName) => ({
+        name: whoRegionName
+      })),
       whoRegionDeprecated
     }
   }
+  
+  const countryUNRegionsResolver = () => []
+  const countryWhoRegionsResolver = () => []
+
+  const unRegionCountriesResolver = () => []
+  const unRegionWHORegionsResolver = () => []
+
+  const whoRegionUNRegionsResolver = () => []
+  const whoRegionCountriesResolver = () => []
 
   return {
     arboResolvers: {
       Query: {
         arbovirusEstimates,
         arbovirusFilterOptions
+      },
+      Country: {
+        unRegions: countryUNRegionsResolver,
+        whoRegions: countryWhoRegionsResolver,
+      },
+      UNRegion: {
+        countries: unRegionCountriesResolver,
+        whoRegions: unRegionWHORegionsResolver,
+      },
+      WHORegion: {
+        countries: whoRegionCountriesResolver,
+        unRegions: whoRegionUNRegionsResolver,
       }
     }
   }

@@ -10,7 +10,7 @@ export const arboTypedefs = `
     city: String
     state: String
     countryDeprecated: String! @deprecated(reason: "use country instead.")
-    country: String!
+    country: Country!
     createdAt: String!
     estimateId: String
     id: String!
@@ -31,9 +31,10 @@ export const arboTypedefs = `
     sex: String
     sourceSheetId: String
     sourceSheetName: String
+    unRegion: UNRegion!
     url: String
     whoRegionDeprecated: String @deprecated(reason: "use whoRegion instead.")
-    whoRegion: String
+    whoRegion: WHORegion
   }
 
   type ArbovirusFilterOptions {
@@ -41,14 +42,34 @@ export const arboTypedefs = `
     antibody: [String!]!
     assay: [String!]!
     countryDeprecated: [String!]! @deprecated(reason: "use country instead.")
-    country: [String!]!
+    country: [Country!]!
     pathogen: [String!]!
     producer: [String!]!
     sampleFrame: [String!]!
     serotype: [String!]!
     sex: [String!]!
+    unRegion: [UNRegion!]!
     whoRegionDeprecated: [String!]! @deprecated(reason: "use whoRegion instead.")
-    whoRegion: [String!]!
+    whoRegion: [WHORegion!]!
+  }
+
+  type UNRegion {
+    name: String!
+    countries: [Country!]!
+    whoRegions: [WHORegion!]!
+  }
+
+  type WHORegion {
+    name: String!
+    countries: [Country!]!
+    unRegions: [UNRegion!]!
+  }
+
+  type Country {
+    alphaTwoCode: String!
+    name: String!
+    unRegions: [UNRegion!]!
+    whoRegions: [WHORegion!]!
   }
 
   type Query {
