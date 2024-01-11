@@ -25,10 +25,19 @@ enum UNRegion {
   POLYNESIA = "POLYNESIA",
 }
 
+enum WHORegion {
+  AFR = "AFR",
+  AMR = "AMR",
+  SEAR = "SEAR",
+  EUR = "EUR",
+  EMR = "EMR",
+  WPR = "WPR"
+}
+
 const countryAlphaTwoCodeToAllRegionsMap: Partial<
   Record<
     TwoLetterIsoCountryCode,
-    { name: string; unRegionNames: string[]; whoRegionNames: [] }
+    { name: string; unRegionNames: UNRegion[]; whoRegionNames: WHORegion[] }
   >
 > = {
   AF: {
@@ -44,7 +53,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   DZ: {
     name: "Algeria",
     unRegionNames: [UNRegion.NORTHERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   AS: {
     name: "American Samoa",
@@ -59,7 +68,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   AO: {
     name: "Angola",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   AI: {
     name: "Anguilla",
@@ -139,7 +148,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   BJ: {
     name: "Benin",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   BM: {
     name: "Bermuda",
@@ -169,7 +178,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   BW: {
     name: "Botswana",
     unRegionNames: [UNRegion.SOUTHERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   BR: {
     name: "Brazil",
@@ -194,17 +203,17 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   BF: {
     name: "Burkina Faso",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   BI: {
     name: "Burundi",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   CV: {
     name: "Cabo Verde",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   KH: {
     name: "Cambodia",
@@ -214,7 +223,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   CM: {
     name: "Cameroon",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   CA: {
     name: "Canada",
@@ -229,12 +238,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   CF: {
     name: "Central African Republic",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   TD: {
     name: "Chad",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   CL: {
     name: "Chile",
@@ -264,12 +273,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   KM: {
     name: "Comoros",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   CG: {
     name: "Congo",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   CK: {
     name: "Cook Islands",
@@ -309,7 +318,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   CI: {
     name: "Côte d'Ivoire",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   KP: {
     name: "Democratic People's Republic of Korea",
@@ -319,7 +328,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   CD: {
     name: "Democratic Republic of the Congo",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   DK: {
     name: "Denmark",
@@ -359,12 +368,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   GQ: {
     name: "Equatorial Guinea",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   ER: {
     name: "Eritrea",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   EE: {
     name: "Estonia",
@@ -374,12 +383,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   SZ: {
     name: "Eswatini",
     unRegionNames: [UNRegion.SOUTHERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   ET: {
     name: "Ethiopia",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   FK: {
     name: "Falkland Islands (Malvinas)",
@@ -419,12 +428,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   GA: {
     name: "Gabon",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   GM: {
     name: "Gambia",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   GE: {
     name: "Georgia",
@@ -439,7 +448,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   GH: {
     name: "Ghana",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   GI: {
     name: "Gibraltar",
@@ -484,12 +493,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   GN: {
     name: "Guinea",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   GW: {
     name: "Guinea-Bissau",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   GY: {
     name: "Guyana",
@@ -589,7 +598,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   KE: {
     name: "Kenya",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   KI: {
     name: "Kiribati",
@@ -629,12 +638,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   LS: {
     name: "Lesotho",
     unRegionNames: [UNRegion.SOUTHERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   LR: {
     name: "Liberia",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   LY: {
     name: "Libya",
@@ -659,12 +668,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   MG: {
     name: "Madagascar",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   MW: {
     name: "Malawi",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   MY: {
     name: "Malaysia",
@@ -679,7 +688,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   ML: {
     name: "Mali",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   MT: {
     name: "Malta",
@@ -699,12 +708,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   MR: {
     name: "Mauritania",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   MU: {
     name: "Mauritius",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   YT: {
     name: "Mayotte",
@@ -749,7 +758,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   MZ: {
     name: "Mozambique",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   MM: {
     name: "Myanmar",
@@ -759,7 +768,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   NA: {
     name: "Namibia",
     unRegionNames: [UNRegion.SOUTHERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   NR: {
     name: "Nauru",
@@ -794,12 +803,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   NE: {
     name: "Niger",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   NG: {
     name: "Nigeria",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   NU: {
     name: "Niue",
@@ -919,7 +928,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   RW: {
     name: "Rwanda",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   RE: {
     name: "R\u00e9union",
@@ -974,7 +983,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   ST: {
     name: "Sao Tome and Principe",
     unRegionNames: [UNRegion.MIDDLE_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   SA: {
     name: "Saudi Arabia",
@@ -984,7 +993,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   SN: {
     name: "Senegal",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   RS: {
     name: "Serbia",
@@ -994,12 +1003,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   SC: {
     name: "Seychelles",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   SL: {
     name: "Sierra Leone",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   SG: {
     name: "Singapore",
@@ -1034,12 +1043,12 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   ZA: {
     name: "South Africa",
     unRegionNames: [UNRegion.SOUTHERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   SS: {
     name: "South Sudan",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   ES: {
     name: "Spain",
@@ -1109,7 +1118,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   TG: {
     name: "Togo",
     unRegionNames: [UNRegion.WESTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   TK: {
     name: "Tokelau",
@@ -1154,7 +1163,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   UG: {
     name: "Uganda",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   UA: {
     name: "Ukraine",
@@ -1169,7 +1178,7 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   TZ: {
     name: "United Republic of Tanzania",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   VI: {
     name: "United States Virgin Islands",
@@ -1224,11 +1233,11 @@ const countryAlphaTwoCodeToAllRegionsMap: Partial<
   ZM: {
     name: "Zambia",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
   ZW: {
     name: "Zimbabwe",
     unRegionNames: [UNRegion.EASTERN_AFRICA],
-    whoRegionNames: [],
+    whoRegionNames: [WHORegion.AFR],
   },
 };
