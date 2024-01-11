@@ -2,8 +2,8 @@ import {
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step";
-import { countryNameToTwoLetterIsoCountryCode } from "../geocoding-api/country-codes";
-import { getUNRegionFromAlphaTwoCode } from "../../lib/un-regions";
+import { countryNameToTwoLetterIsoCountryCode } from "../geocoding-api/country-codes.js";
+import { getUNRegionFromAlphaTwoCode } from "../../lib/un-regions.js";
 
 export type AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep =
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep & {
