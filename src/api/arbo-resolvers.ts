@@ -24,6 +24,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     city: document.city,
     state: document.state,
     country: document.country,
+    countryAlphaTwoCode: document.countryAlphaTwoCode,
     createdAt: document.createdAt.toISOString(),
     estimateId: document.estimateId,
     id: document._id.toHexString(),
@@ -44,6 +45,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     sex: document.sex,
     sourceSheetId: document.sourceSheetId,
     sourceSheetName: document.sourceSheetName,
+    unRegion: document.unRegion,
     url: document.url,
     whoRegion: document.whoRegion
   }
@@ -75,6 +77,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       sampleFrame,
       serotype,
       sex,
+      unRegion,
       whoRegion
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -86,6 +89,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('serotype').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
@@ -99,6 +103,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       sampleFrame,
       serotype,
       sex,
+      unRegion,
       whoRegion,
     }
   }

@@ -1,16 +1,19 @@
-import { AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep, AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep } from "./remove-records-that-are-flagged-to-not-save-step.js";
+import {
+  AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep,
+  AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep
+} from "./add-country-and-region-information-step.js";
 
 export type AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep =
-  AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep & {
+  AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep & {
     sourceSheetName: string | undefined;
   };
 
 export type AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep =
-  AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
+  AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep;
 
 interface MergeEstimatesAndSourcesStepInput {
-  allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
-  allSources: AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
+  allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
 }
 
 interface MergeEstimatesAndSourcesStepOutput {

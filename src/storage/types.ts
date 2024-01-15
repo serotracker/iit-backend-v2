@@ -18,6 +18,7 @@ export interface ArbovirusEstimateDocument {
   pathogen: string;
   seroprevalence: number | undefined;
   country: string;
+  countryAlphaTwoCode: string;
   state: string | undefined;
   city: string | undefined;
   antibodies: string[] | undefined;
@@ -26,6 +27,7 @@ export interface ArbovirusEstimateDocument {
   sampleStartDate: Date | undefined;
   sampleEndDate: Date | undefined;
   assay: string | undefined;
+  unRegion: string | undefined;
   url: string | undefined;
   sourceSheetId: string | undefined;
   antigen: string | undefined;

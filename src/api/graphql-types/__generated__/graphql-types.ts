@@ -26,6 +26,7 @@ export type ArbovirusEstimate = {
   assayOther?: Maybe<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
   estimateId?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
@@ -47,6 +48,7 @@ export type ArbovirusEstimate = {
   sourceSheetId?: Maybe<Scalars['String']['output']>;
   sourceSheetName?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  unRegion?: Maybe<Scalars['String']['output']>;
   url?: Maybe<Scalars['String']['output']>;
   whoRegion?: Maybe<Scalars['String']['output']>;
 };
@@ -62,6 +64,7 @@ export type ArbovirusFilterOptions = {
   sampleFrame: Array<Scalars['String']['output']>;
   serotype: Array<Scalars['String']['output']>;
   sex: Array<Scalars['String']['output']>;
+  unRegion: Array<Scalars['String']['output']>;
   whoRegion: Array<Scalars['String']['output']>;
 };
 
@@ -172,6 +175,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   assayOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -193,6 +197,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -208,6 +213,7 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
   sampleFrame?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   whoRegion?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
