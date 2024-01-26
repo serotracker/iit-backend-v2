@@ -32,6 +32,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     latitude: document.latitude,
     longitude: document.longitude,
     pathogen: document.pathogen,
+    pediatricAgeGroup: document.pediatricAgeGroup,
     producer: document.producer,
     producerOther: document.producerOther,
     sameFrameTargetGroup: document.sameFrameTargetGroup,
