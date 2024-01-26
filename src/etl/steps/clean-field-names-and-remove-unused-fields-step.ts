@@ -8,6 +8,7 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   sampleEndDate: `${number}-${number}-${number}` | undefined;
   sex: string | undefined;
   pathogen: string | undefined;
+  pediatricAgeGroup: string | undefined;
   antibodies: string[] | undefined;
   antigen: string | undefined;
   assay: string | undefined;
@@ -63,6 +64,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       serotype: estimate["Serotype"],
       sex: estimate["Sex"],
       pathogen: estimate["Pathogen"],
+      pediatricAgeGroup: estimate["Pediatric age group"],
       antibodies: estimate["Antibody"],
       antigen: estimate["Antigen"],
       assay: estimate["Assay"],

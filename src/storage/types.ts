@@ -16,6 +16,7 @@ export interface ArbovirusEstimateDocument {
   sampleNumerator: number | undefined;
   inclusionCriteria: string | undefined;
   pathogen: string;
+  pediatricAgeGroup: string | undefined;
   seroprevalence: number | undefined;
   country: string;
   countryAlphaTwoCode: string;

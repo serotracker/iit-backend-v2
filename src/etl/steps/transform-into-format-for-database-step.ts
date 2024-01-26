@@ -47,6 +47,7 @@ export const transformIntoFormatForDatabaseStep = (
       serotype: estimate.serotype ?? [],
       inclusionCriteria: estimate.inclusionCriteria,
       pathogen: estimate.pathogen,
+      pediatricAgeGroup: estimate.pediatricAgeGroup,
       seroprevalence: estimate.seroprevalence,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
