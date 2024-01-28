@@ -18,10 +18,7 @@ export const filterInvalidTeamMembers = (
     `Running step: filterInvalidTeamMembers. Remaining team members: ${input.allTeamMembers.length}`
   );
 
-  const allTeamMembers = input.allTeamMembers.filter(
-    (teamMember) =>
-      teamMember.teams.length > 0 && !teamMember.teams.includes("NOT_SPECIFIED")
-  );
+  const allTeamMembers = input.allTeamMembers.filter((teamMember) => teamMember.teams.length > 0);
 
   return { allTeamMembers };
 };
