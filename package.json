@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "run_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/index.js",
-    "run_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/index.js",
+    "run_arbo_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/arbo/index.js",
+    "run_arbo_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/arbo/index.js",
+    "run_team_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/team/index.js",
+    "run_team_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/team/index.js",
     "codegen": "graphql-codegen --config ./codegen.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

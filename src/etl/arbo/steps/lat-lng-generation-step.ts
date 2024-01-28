@@ -1,7 +1,7 @@
 import { writeFileSync } from 'fs';
-import { getLatitude, getLongitude } from "../geocoding-api/coordinate-helpers.js";
-import { Point } from "../geocoding-api/geocoding-api-client-types.js";
-import { getCityLatLng } from "../geocoding-api/geocoding-functions.js";
+import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
+import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
+import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
 import {
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
