@@ -39,6 +39,7 @@ export type ArbovirusEstimate = {
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
   pathogen: Scalars['String']['output'];
+  pediatricAgeGroup?: Maybe<Scalars['String']['output']>;
   producer?: Maybe<Scalars['String']['output']>;
   producerOther?: Maybe<Scalars['String']['output']>;
   sameFrameTargetGroup?: Maybe<Scalars['String']['output']>;
@@ -65,6 +66,7 @@ export type ArbovirusFilterOptions = {
   assay: Array<Scalars['String']['output']>;
   country: Array<Scalars['String']['output']>;
   pathogen: Array<Scalars['String']['output']>;
+  pediatricAgeGroup: Array<Scalars['String']['output']>;
   producer: Array<Scalars['String']['output']>;
   sampleFrame: Array<Scalars['String']['output']>;
   serotype: Array<Scalars['String']['output']>;
@@ -216,6 +218,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   pathogen?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  pediatricAgeGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   producer?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   producerOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sameFrameTargetGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -242,6 +245,7 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   pathogen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  pediatricAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   producer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;

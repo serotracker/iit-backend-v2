@@ -18,6 +18,7 @@ export const arboTypedefs = `
     latitude: Float!
     longitude: Float!
     pathogen: String!
+    pediatricAgeGroup: String
     producer: String
     producerOther: String
     sameFrameTargetGroup: String
@@ -43,6 +44,7 @@ export const arboTypedefs = `
     country: [String!]!
     unRegion: [String!]!
     pathogen: [String!]!
+    pediatricAgeGroup: [String!]!
     producer: [String!]!
     sampleFrame: [String!]!
     serotype: [String!]!
