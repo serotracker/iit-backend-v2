@@ -24,6 +24,10 @@ interface ConsolidateIntoArrayFieldsStepOutput {
 export const consolidateIntoArrayFields = (
   input: ConsolidateIntoArrayFieldsStepInput
 ): ConsolidateIntoArrayFieldsStepOutput => {
+  console.log(
+    `Running step: consolidateIntoArrayFields. Remaining team members: ${input.allTeamMembers.length}`
+  );
+
   const allTeamMembers = input.allTeamMembers.map((fullTeamMember) => {
     const {
       teamIdOne,

@@ -14,6 +14,10 @@ interface FilterInvalidTeamMembersStepOutput {
 export const filterInvalidTeamMembers = (
   input: FilterInvalidTeamMembersStepInput
 ): FilterInvalidTeamMembersStepOutput => {
+  console.log(
+    `Running step: filterInvalidTeamMembers. Remaining team members: ${input.allTeamMembers.length}`
+  );
+
   const allTeamMembers = input.allTeamMembers.filter(
     (teamMember) =>
       teamMember.teams.length > 0 && !teamMember.teams.includes("NOT_SPECIFIED")

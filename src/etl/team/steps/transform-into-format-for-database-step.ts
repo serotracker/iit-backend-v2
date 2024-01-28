@@ -13,6 +13,10 @@ interface TransformIntoFormatForDatabaseStepOutput {
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
+  console.log(
+    `Running step: transformIntoFormatForDatabaseStep. Remaining team members: ${input.allTeamMembers.length}`
+  );
+
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
 
@@ -20,9 +24,9 @@ export const transformIntoFormatForDatabaseStep = (
     _id: new ObjectId(),
     firstName: teamMember.firstName,
     lastName: teamMember.lastName,
-    email: teamMember.email,
-    twitterUrl: teamMember.twitterUrl,
-    linkedinUrl: teamMember.linkedinUrl,
+    email: !!teamMember.email ? teamMember.email : undefined,
+    twitterUrl: teamMember.twitterUrl ? teamMember.twitterUrl : undefined,
+    linkedinUrl: teamMember.linkedinUrl ? teamMember.linkedinUrl : undefined,
     teams: teamMember.teams.map((team) => ({ label: team })),
     affiliations: teamMember.affiliations.map((affiliation) => ({
       label: affiliation,

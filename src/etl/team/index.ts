@@ -1,4 +1,5 @@
 import { pipe } from "fp-ts/lib/function.js";
+import csvtojson from "csvtojson";
 import { etlStep, getEnvironmentVariableOrThrow, getMongoClient, writeDataToMongoEtlStep } from "../helpers.js";
 import { CsvTeamMemberFields } from "./types.js";
 import { cleanFieldNamesAndRemoveUnusedFieldsStep } from "./steps/clean-field-names-and-remove-unused-fields-step.js";
@@ -8,13 +9,13 @@ import { filterInvalidTeamMembers } from "./steps/filter-invalid-team-members-st
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 
 const runEtlMain = async () => {
-  console.log("Running arbo ETL");
+  console.log("Running team member ETL");
   const mongoUri = getEnvironmentVariableOrThrow({ key: "MONGODB_URI" });
   const databaseName = getEnvironmentVariableOrThrow({ key: "DATABASE_NAME" });
 
   const mongoClient = await getMongoClient({ mongoUri });
 
-  const allTeamMembersUnformatted: CsvTeamMemberFields[] = [];
+  const allTeamMembersUnformatted: CsvTeamMemberFields[] = await csvtojson().fromFile("./src/etl/team/team-members.csv");
   
   const { allTeamMembers } = await (
     pipe(

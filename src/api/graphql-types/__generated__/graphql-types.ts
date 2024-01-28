@@ -15,6 +15,11 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Affiliation = {
+  __typename?: 'Affiliation';
+  label: Scalars['String']['output'];
+};
+
 export type ArbovirusEstimate = {
   __typename?: 'ArbovirusEstimate';
   ageGroup?: Maybe<Scalars['String']['output']>;
@@ -72,6 +77,23 @@ export type Query = {
   __typename?: 'Query';
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions?: Maybe<ArbovirusFilterOptions>;
+  groupedTeamMembers: Array<TeamMemberGroup>;
+};
+
+export type TeamMember = {
+  __typename?: 'TeamMember';
+  affiliations: Array<Affiliation>;
+  email?: Maybe<Scalars['String']['output']>;
+  firstName: Scalars['String']['output'];
+  lastName: Scalars['String']['output'];
+  linkedinUrl?: Maybe<Scalars['String']['output']>;
+  twitterUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type TeamMemberGroup = {
+  __typename?: 'TeamMemberGroup';
+  label: Scalars['String']['output'];
+  teamMembers: Array<TeamMember>;
 };
 
 
@@ -145,6 +167,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Affiliation: ResolverTypeWrapper<Affiliation>;
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -152,10 +175,13 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  TeamMember: ResolverTypeWrapper<TeamMember>;
+  TeamMemberGroup: ResolverTypeWrapper<TeamMemberGroup>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Affiliation: Affiliation;
   ArbovirusEstimate: ArbovirusEstimate;
   ArbovirusFilterOptions: ArbovirusFilterOptions;
   Boolean: Scalars['Boolean']['output'];
@@ -163,6 +189,13 @@ export type ResolversParentTypes = {
   Int: Scalars['Int']['output'];
   Query: {};
   String: Scalars['String']['output'];
+  TeamMember: TeamMember;
+  TeamMemberGroup: TeamMemberGroup;
+};
+
+export type AffiliationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliation'] = ResolversParentTypes['Affiliation']> = {
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArbovirusEstimate'] = ResolversParentTypes['ArbovirusEstimate']> = {
@@ -221,11 +254,31 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<Maybe<ResolversTypes['ArbovirusFilterOptions']>, ParentType, ContextType>;
+  groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
+};
+
+export type TeamMemberResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamMember'] = ResolversParentTypes['TeamMember']> = {
+  affiliations?: Resolver<Array<ResolversTypes['Affiliation']>, ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  lastName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  linkedinUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  twitterUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TeamMemberGroupResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamMemberGroup'] = ResolversParentTypes['TeamMemberGroup']> = {
+  label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  teamMembers?: Resolver<Array<ResolversTypes['TeamMember']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  Affiliation?: AffiliationResolvers<ContextType>;
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  TeamMember?: TeamMemberResolvers<ContextType>;
+  TeamMemberGroup?: TeamMemberGroupResolvers<ContextType>;
 };
 

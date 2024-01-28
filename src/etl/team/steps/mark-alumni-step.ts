@@ -13,6 +13,10 @@ interface MarkAlumniStepOutput {
 export const markAlumniStep = (
   input: MarkAlumniStepInput
 ): MarkAlumniStepOutput => {
+  console.log(
+    `Running step: markAlumniStep. Remaining team members: ${input.allTeamMembers.length}`
+  );
+
   const allTeamMembers = input.allTeamMembers.map((teamMember) => {
     if(teamMember.active) {
       return teamMember;

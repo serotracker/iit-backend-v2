@@ -25,6 +25,10 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
 }
 
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (input: CleanFieldNamesAndRemoveUnusedFieldsStepInput): CleanFieldNamesAndRemoveUnusedFieldsStepOutput => {
+  console.log(
+    `Running step: cleanFieldNamesAndRemoveUnusedFieldsStep. Remaining team members: ${input.allTeamMembers.length}`
+  );
+
   const allTeamMembers = input.allTeamMembers.map((teamMember) => ({
     firstName: teamMember["First Name"],
     lastName: teamMember["Last Name"],

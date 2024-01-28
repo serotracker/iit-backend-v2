@@ -9,7 +9,7 @@ export const teamTypedefs = `
     email: String
     twitterUrl: String
     linkedinUrl: String
-    affiliation: [Affiliation!]!
+    affiliations: [Affiliation!]!
   }
 
   type TeamMemberGroup {
