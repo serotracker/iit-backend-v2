@@ -29,7 +29,7 @@ export const writeDataToMongoEtlStep = async<TData extends {_id: ObjectId, creat
   input: WriteDataToMongoInput<TData>
 ): Promise<void> => {
   if (input.data.length === 0) {
-    console.log("Unable to find any estimates to insert.");
+    console.log("Unable to find any records to insert.");
     console.log("Database was not modified.");
     return;
   }
