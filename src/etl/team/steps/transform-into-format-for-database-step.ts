@@ -1,13 +1,20 @@
 import { ObjectId } from "mongodb";
 import { TeamMemberDocument } from "../../../storage/types.js";
-import { CsvTeamMemberFieldsAfterFilteringInvalidTeamMembersStep } from "./filter-invalid-team-members-step.js";
+import {
+  TeamMemberFieldsAfterFilteringInvalidTeamMembersStep,
+  TeamSortOrderEntryFieldsAfterFilteringInvalidTeamMembersStep
+} from "./filter-invalid-team-members-step.js";
+
+type TeamSortOrderEntryFieldsAfterFormattingForDatabaseStep = TeamSortOrderEntryFieldsAfterFilteringInvalidTeamMembersStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allTeamMembers: CsvTeamMemberFieldsAfterFilteringInvalidTeamMembersStep[];
+  allTeamMembers: TeamMemberFieldsAfterFilteringInvalidTeamMembersStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterFilteringInvalidTeamMembersStep[];
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allTeamMembers: TeamMemberDocument[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterFormattingForDatabaseStep[];
 }
 
 export const transformIntoFormatForDatabaseStep = (
@@ -19,6 +26,7 @@ export const transformIntoFormatForDatabaseStep = (
 
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
+  const largestTeamSortOrder = Math.max(...input.teamSortOrder.map((teamSortOrderEntry) => teamSortOrderEntry.sortOrder));
 
   const allTeamMembers = input.allTeamMembers.map((teamMember) => ({
     _id: new ObjectId(),
@@ -27,7 +35,14 @@ export const transformIntoFormatForDatabaseStep = (
     email: !!teamMember.email ? teamMember.email : undefined,
     twitterUrl: teamMember.twitterUrl ? teamMember.twitterUrl : undefined,
     linkedinUrl: teamMember.linkedinUrl ? teamMember.linkedinUrl : undefined,
-    teams: teamMember.teams.map((team) => ({ label: team })),
+    teams: teamMember.teams.map((team) => {
+      const teamSortOrderEntry = input.teamSortOrder.find((teamSortOrderEntry) => teamSortOrderEntry.team === team);
+
+      return {
+        label: team,
+        sortOrder: teamSortOrderEntry ? teamSortOrderEntry.sortOrder : largestTeamSortOrder + 1
+      }
+    }),
     affiliations: teamMember.affiliations.map((affiliation) => ({
       label: affiliation,
     })),
@@ -35,5 +50,5 @@ export const transformIntoFormatForDatabaseStep = (
     updatedAt: updatedAtForAllRecords,
   }));
 
-  return { allTeamMembers };
+  return { allTeamMembers, teamSortOrder: input.teamSortOrder };
 };

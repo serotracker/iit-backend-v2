@@ -40,10 +40,20 @@ export const generateTeamResolvers = (input: GenerateTeamResolversInput): Genera
         }
       },
       {
+        $sort: {
+          "_id.sortOrder": 1
+        }
+      },
+      {
         $project: {
           _id: 0,
           label: "$_id.label",
-          teamMembers: 1
+          teamMembers: {
+            $sortArray: {
+              input: "$teamMembers",
+              sortBy: { firstName: 1, lastName: 1 }
+            }
+          }
         }
       }
     ]).toArray() as Array<{label: string, teamMembers: Pick<TeamMemberDocument, 'firstName'|'lastName'|'email'|'twitterUrl'|'linkedinUrl'|'affiliations'>[]}>;

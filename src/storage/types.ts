@@ -47,7 +47,8 @@ export interface TeamMemberDocument {
   twitterUrl: string | undefined;
   linkedinUrl: string | undefined;
   teams: Array<{
-    label: string
+    label: string,
+    sortOrder: number,
   }>;
   affiliations: Array<{
     label: string;

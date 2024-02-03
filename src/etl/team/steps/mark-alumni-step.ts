@@ -1,13 +1,16 @@
-import { CsvTeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep } from "./consolidate-into-array-fields-step.js";
+import { TeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep, TeamSortOrderEntryFieldsAfterConsolidatingIntoArrayFieldsStep } from "./consolidate-into-array-fields-step.js";
 
-export type CsvTeamMemberFieldsAfterMarkingAlumniStep = CsvTeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep;
+export type TeamMemberFieldsAfterMarkingAlumniStep = TeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep;
+export type TeamSortOrderEntryFieldsAfterMarkingAlumniStep = TeamSortOrderEntryFieldsAfterConsolidatingIntoArrayFieldsStep;
 
 interface MarkAlumniStepInput {
-  allTeamMembers: CsvTeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep[];
+  allTeamMembers: TeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterConsolidatingIntoArrayFieldsStep[];
 }
 
 interface MarkAlumniStepOutput {
-  allTeamMembers: CsvTeamMemberFieldsAfterMarkingAlumniStep[];
+  allTeamMembers: TeamMemberFieldsAfterMarkingAlumniStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterMarkingAlumniStep[];
 }
 
 export const markAlumniStep = (
@@ -28,5 +31,8 @@ export const markAlumniStep = (
     }
   });
 
-  return { allTeamMembers };
+  return {
+    allTeamMembers,
+    teamSortOrder: input.teamSortOrder
+  };
 };

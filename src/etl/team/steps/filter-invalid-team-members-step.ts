@@ -1,14 +1,21 @@
-import { CsvTeamMemberFieldsAfterMarkingAlumniStep } from "./mark-alumni-step.js";
+import {
+  TeamMemberFieldsAfterMarkingAlumniStep,
+  TeamSortOrderEntryFieldsAfterMarkingAlumniStep
+} from "./mark-alumni-step.js";
 
-export type CsvTeamMemberFieldsAfterFilteringInvalidTeamMembersStep =
-  CsvTeamMemberFieldsAfterMarkingAlumniStep;
+export type TeamMemberFieldsAfterFilteringInvalidTeamMembersStep =
+  TeamMemberFieldsAfterMarkingAlumniStep;
+export type TeamSortOrderEntryFieldsAfterFilteringInvalidTeamMembersStep =
+  TeamSortOrderEntryFieldsAfterMarkingAlumniStep;
 
 interface FilterInvalidTeamMembersStepInput {
-  allTeamMembers: CsvTeamMemberFieldsAfterMarkingAlumniStep[];
+  allTeamMembers: TeamMemberFieldsAfterMarkingAlumniStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterMarkingAlumniStep[];
 }
 
 interface FilterInvalidTeamMembersStepOutput {
-  allTeamMembers: CsvTeamMemberFieldsAfterFilteringInvalidTeamMembersStep[];
+  allTeamMembers: TeamMemberFieldsAfterFilteringInvalidTeamMembersStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterFilteringInvalidTeamMembersStep[];
 }
 
 export const filterInvalidTeamMembers = (
@@ -20,5 +27,5 @@ export const filterInvalidTeamMembers = (
 
   const allTeamMembers = input.allTeamMembers.filter((teamMember) => teamMember.teams.length > 0);
 
-  return { allTeamMembers };
+  return { allTeamMembers, teamSortOrder: input.teamSortOrder };
 };

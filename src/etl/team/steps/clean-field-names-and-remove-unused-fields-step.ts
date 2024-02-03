@@ -1,11 +1,9 @@
-import { CsvTeamMemberFields } from "../types.js";
+import { TeamMemberFieldsAfterValidatingFieldSetFromAirtableStep, TeamSortOrderEntryFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 
-export interface CsvTeamMemberFieldsAfterCleaningFieldNamesStep {
+export interface TeamMemberFieldsAfterCleaningFieldNamesStep {
   firstName: string;
   lastName: string;
-  teamIdOne: string | undefined;
-  teamIdTwo: string | undefined;
-  teamIdThree: string | undefined;
+  teams: string[];
   active: boolean;
   hidden: boolean;
   email: string | undefined;
@@ -16,12 +14,19 @@ export interface CsvTeamMemberFieldsAfterCleaningFieldNamesStep {
   affiliationThree: string | undefined;
 }
 
+export interface TeamSortOrderEntryFieldsAfterCleaningFieldNamesStep {
+  sortOrder: number;
+  team: string;
+}
+
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
-  allTeamMembers: CsvTeamMemberFields[];
+  allTeamMembers: TeamMemberFieldsAfterValidatingFieldSetFromAirtableStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterValidatingFieldSetFromAirtableStep[];
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
-  allTeamMembers: CsvTeamMemberFieldsAfterCleaningFieldNamesStep[];
+  allTeamMembers: TeamMemberFieldsAfterCleaningFieldNamesStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterCleaningFieldNamesStep[];
 }
 
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (input: CleanFieldNamesAndRemoveUnusedFieldsStepInput): CleanFieldNamesAndRemoveUnusedFieldsStepOutput => {
@@ -32,11 +37,9 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (input: CleanFieldNamesA
   const allTeamMembers = input.allTeamMembers.map((teamMember) => ({
     firstName: teamMember["First Name"],
     lastName: teamMember["Last Name"],
-    teamIdOne: teamMember["Team ID 1"],
-    teamIdTwo: teamMember["Team ID 2"],
-    teamIdThree: teamMember["Team ID 3"],
-    active: teamMember["Active? (Y/N)"] === "Y" ? true : false,
-    hidden: teamMember["Shown in about page? (Y/N)"] === "Y" ? false : true,
+    teams: teamMember["Team"] ?? [],
+    active: teamMember["Active? (Y/N)"] ?? false,
+    hidden: teamMember["Shown in about page? (Y/N)"] ?? false,
     email: teamMember["Email"],
     twitterUrl: teamMember["Twitter URL"],
     linkedinUrl: teamMember["Linkedin URL"],
@@ -45,5 +48,10 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (input: CleanFieldNamesA
     affiliationThree: teamMember["Affiliation 3"]
   }))
 
-  return { allTeamMembers };
+  const teamSortOrder = input.teamSortOrder.map((teamSortOrderEntry) => ({
+    sortOrder: teamSortOrderEntry["Sort Order"],
+    team: teamSortOrderEntry["Team"]
+  }))
+
+  return { allTeamMembers, teamSortOrder };
 }

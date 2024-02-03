@@ -1,24 +1,27 @@
-import { CsvTeamMemberFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
+import {
+  TeamMemberFieldsAfterCleaningFieldNamesStep,
+  TeamSortOrderEntryFieldsAfterCleaningFieldNamesStep
+} from "./clean-field-names-and-remove-unused-fields-step.js";
 
-export type CsvTeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep = Omit<
-  CsvTeamMemberFieldsAfterCleaningFieldNamesStep,
-  | "teamIdOne"
-  | "teamIdTwo"
-  | "teamIdThree"
+export type TeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep = Omit<
+  TeamMemberFieldsAfterCleaningFieldNamesStep,
   | "affiliationOne"
   | "affiliationTwo"
   | "affiliationThree"
 > & {
-  teams: string[];
   affiliations: string[];
 };
 
+export type TeamSortOrderEntryFieldsAfterConsolidatingIntoArrayFieldsStep = TeamSortOrderEntryFieldsAfterCleaningFieldNamesStep;
+
 interface ConsolidateIntoArrayFieldsStepInput {
-  allTeamMembers: CsvTeamMemberFieldsAfterCleaningFieldNamesStep[];
+  allTeamMembers: TeamMemberFieldsAfterCleaningFieldNamesStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterCleaningFieldNamesStep[];
 }
 
 interface ConsolidateIntoArrayFieldsStepOutput {
-  allTeamMembers: CsvTeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep[];
+  allTeamMembers: TeamMemberFieldsAfterConsolidatingIntoArrayFieldsStep[];
+  teamSortOrder: TeamSortOrderEntryFieldsAfterConsolidatingIntoArrayFieldsStep[];
 }
 
 export const consolidateIntoArrayFields = (
@@ -30,9 +33,6 @@ export const consolidateIntoArrayFields = (
 
   const allTeamMembers = input.allTeamMembers.map((fullTeamMember) => {
     const {
-      teamIdOne,
-      teamIdTwo,
-      teamIdThree,
       affiliationOne,
       affiliationTwo,
       affiliationThree,
@@ -41,10 +41,12 @@ export const consolidateIntoArrayFields = (
 
     return {
       ...teamMember,
-      teams: [teamIdOne, teamIdTwo, teamIdThree].filter(<T>(team: T | undefined): team is T => !!team),
       affiliations: [affiliationOne, affiliationTwo, affiliationThree].filter(<T>(affiliation: T | undefined): affiliation is T => !!affiliation)
     };
   });
 
-  return { allTeamMembers };
+  return {
+    allTeamMembers,
+    teamSortOrder: input.teamSortOrder
+  };
 };
