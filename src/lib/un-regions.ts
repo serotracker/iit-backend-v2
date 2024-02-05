@@ -1,4 +1,4 @@
-import { TwoLetterIsoCountryCode } from "../etl/geocoding-api/country-codes";
+import { TwoLetterIsoCountryCode } from "./geocoding-api/country-codes";
 
 enum UNRegion {
   NORTHERN_AFRICA = "NORTHERN_AFRICA",

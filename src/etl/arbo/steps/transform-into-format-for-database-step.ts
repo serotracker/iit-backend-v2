@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { ArbovirusEstimateDocument } from "../../storage/types.js";
+import { ArbovirusEstimateDocument } from "../../../storage/types.js";
 import {
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
   AirtableSourceFieldsAfterJitteringPinLatLngStep,

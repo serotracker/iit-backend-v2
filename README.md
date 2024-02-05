@@ -21,12 +21,12 @@ This is a replacement for the legacy API which used to supply data to both the l
 
 ## Running the ETL
 
-The ETL script reads data from Airtable and populates the MongoDB database using that data. The ETL script also makes use of the Mapbox geocoding API to transform city, state, and country names to latitude and longitude values to show on the map of the application.
+The ETL scripts read data from Airtable and populates the MongoDB database using that data. Some ETL scripts also make use of the Mapbox geocoding API to transform city, state, and country names to latitude and longitude values to show on the map of the application.
 
 1. Run `bash generate-env-files.sh` if you have not already. You can create the environment files manually using the values in the bash script if you don't have access to the `bash` command.
-2. Specify `AIRTABLE_API_KEY`, `AIRTABLE_ARBO_BASE_ID`, `MONGODB_URI`, `MAPBOX_ACCESS_TOKEN`, and `DATABASE_NAME` in the `.env-local-etl` or `.env-production-etl` depending on whether you are running this on the production database or a database that you are using to test. Please reach out to a member of the development team in Basecamp if you are unsure what values to specify here.
+2. Specify `AIRTABLE_API_KEY`, `AIRTABLE_ARBO_BASE_ID`, `AIRTABLE_EMPLOYEE_BASE_ID`, `MONGODB_URI`, `MAPBOX_ACCESS_TOKEN`, and `DATABASE_NAME` in the `.env-local-etl` or `.env-production-etl` depending on whether you are running this on the production database or a database that you are using to test. Please reach out to a member of the development team in Basecamp if you are unsure what values to specify here.
 3. Run `npm i`
-4. Run `npm run run_etl_local` if you're running this on a non-production database. Run `npm run run_etl_production` if you're running this on the production database
+4. For the Arbovirus ETL, run `npm run run_arbo_etl_local` if you're running this on a non-production database and run `npm run run_arbo_etl_production` if you're running this on the production database. There are other ETL scripts, for example the team member ETL script that can be run with `run_team_etl_local` and `run_team_etl_production`. You can see a full list of ETL scripts available by looking at the `scripts` section in `package.json`.
 
 ## Starting the API
 

@@ -38,3 +38,21 @@ export interface ArbovirusEstimateDocument {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface TeamMemberDocument {
+  _id: ObjectId;
+  firstName: string;
+  lastName: string;
+  email: string | undefined;
+  twitterUrl: string | undefined;
+  linkedinUrl: string | undefined;
+  teams: Array<{
+    label: string,
+    sortOrder: number,
+  }>;
+  affiliations: Array<{
+    label: string;
+  }>;
+  createdAt: Date;
+  updatedAt: Date;
+}

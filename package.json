@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "run_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/index.js",
-    "run_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/index.js",
+    "run_arbo_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/arbo/index.js",
+    "run_arbo_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/arbo/index.js",
+    "run_arbo_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/arbo/index.js",
+    "run_team_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/team/index.js",
+    "run_team_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/team/index.js",
+    "run_team_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/team/index.js",
     "codegen": "graphql-codegen --config ./codegen.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,7 +28,8 @@
     "micro": "^9.4.1",
     "micro-cors": "^0.1.1",
     "mongodb": "^6.1.0",
-    "undici": "^6.2.1"
+    "undici": "^6.2.1",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.0",
