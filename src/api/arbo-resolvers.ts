@@ -112,11 +112,45 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     }
   }
 
+  const arbovirusDataStatistics = async () => {
+
+    const [
+      patricipantCountResult,
+      sourceCount,
+      estimateCount,
+      countryCount
+    ] = await Promise.all([
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').aggregate([
+        {
+          $group: {
+            _id: null, // Group all documents together
+            totalSampleSize: { $sum: "$sampleSize" } // Sum the sampleSize field values
+          }
+        }
+      ]).toArray(),
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sourceSheetId').then((elements) => elements.length),,
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').countDocuments(),
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('country').then((elements) => elements.length)
+    ]);
+
+    const patricipantCount = patricipantCountResult.length > 0 ? patricipantCountResult[0].totalSampleSize : 0;  
+    // The result is an array with a single object, e.g., [{ uniqueSourceIdsCount: <count> }]
+   
+    return {
+      patricipantCount,
+      sourceCount,
+      estimateCount,
+      countryCount
+    }
+  }
+
+  
   return {
     arboResolvers: {
       Query: {
         arbovirusEstimates,
-        arbovirusFilterOptions
+        arbovirusFilterOptions,
+        arbovirusDataStatistics
       }
     }
   }

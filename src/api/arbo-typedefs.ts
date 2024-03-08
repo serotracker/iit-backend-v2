@@ -52,8 +52,16 @@ export const arboTypedefs = `
     whoRegion: [String!]!
   }
 
+  type ArbovirusDataStatistics {
+    patricipantCount: Int!
+    sourceCount: Int!
+    estimateCount: Int!
+    countryCount: Int!
+  }
+
   type Query {
     arbovirusEstimates: [ArbovirusEstimate!]!
     arbovirusFilterOptions: ArbovirusFilterOptions
+    arbovirusDataStatistics: ArbovirusDataStatistics
   }
 `

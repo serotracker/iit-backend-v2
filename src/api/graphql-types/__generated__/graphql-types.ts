@@ -20,6 +20,14 @@ export type Affiliation = {
   label: Scalars['String']['output'];
 };
 
+export type ArbovirusDataStatistics = {
+  __typename?: 'ArbovirusDataStatistics';
+  countryCount: Scalars['Int']['output'];
+  estimateCount: Scalars['Int']['output'];
+  patricipantCount: Scalars['Int']['output'];
+  sourceCount: Scalars['Int']['output'];
+};
+
 export type ArbovirusEstimate = {
   __typename?: 'ArbovirusEstimate';
   ageGroup?: Maybe<Scalars['String']['output']>;
@@ -77,6 +85,7 @@ export type ArbovirusFilterOptions = {
 
 export type Query = {
   __typename?: 'Query';
+  arbovirusDataStatistics?: Maybe<ArbovirusDataStatistics>;
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions?: Maybe<ArbovirusFilterOptions>;
   groupedTeamMembers: Array<TeamMemberGroup>;
@@ -170,6 +179,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Affiliation: ResolverTypeWrapper<Affiliation>;
+  ArbovirusDataStatistics: ResolverTypeWrapper<ArbovirusDataStatistics>;
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -184,6 +194,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Affiliation: Affiliation;
+  ArbovirusDataStatistics: ArbovirusDataStatistics;
   ArbovirusEstimate: ArbovirusEstimate;
   ArbovirusFilterOptions: ArbovirusFilterOptions;
   Boolean: Scalars['Boolean']['output'];
@@ -197,6 +208,14 @@ export type ResolversParentTypes = {
 
 export type AffiliationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliation'] = ResolversParentTypes['Affiliation']> = {
   label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArbovirusDataStatisticsResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArbovirusDataStatistics'] = ResolversParentTypes['ArbovirusDataStatistics']> = {
+  countryCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  estimateCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  patricipantCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  sourceCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -256,6 +275,7 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  arbovirusDataStatistics?: Resolver<Maybe<ResolversTypes['ArbovirusDataStatistics']>, ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<Maybe<ResolversTypes['ArbovirusFilterOptions']>, ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
@@ -279,6 +299,7 @@ export type TeamMemberGroupResolvers<ContextType = any, ParentType extends Resol
 
 export type Resolvers<ContextType = any> = {
   Affiliation?: AffiliationResolvers<ContextType>;
+  ArbovirusDataStatistics?: ArbovirusDataStatisticsResolvers<ContextType>;
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
