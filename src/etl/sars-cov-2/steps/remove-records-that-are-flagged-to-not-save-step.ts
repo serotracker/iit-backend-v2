@@ -1,5 +1,4 @@
-import { parse } from "date-fns";
-import { EstimateFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step";
+import { EstimateFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep = EstimateFieldsAfterCleaningFieldNamesStep;
 

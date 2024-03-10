@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { EstimateFieldsAfterJitteringPinLatLngStep } from "./jitter-pin-lat-lng-step";
-import { SarsCov2EstimateDocument } from "../../../storage/types";
+import { EstimateFieldsAfterJitteringPinLatLngStep } from "./jitter-pin-lat-lng-step.js";
+import { SarsCov2EstimateDocument } from "../../../storage/types.js";
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
@@ -26,6 +26,7 @@ export const transformIntoFormatForDatabaseStep = (
       riskOfBias: estimate.riskOfBias,
       age: estimate.age,
       sex: estimate.sex,
+      sourceType: estimate.sourceType,
       populationGroup: estimate.populationGroup,
       country: estimate.country,
       state: estimate.state,

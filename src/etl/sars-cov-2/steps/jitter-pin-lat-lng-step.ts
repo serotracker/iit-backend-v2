@@ -1,4 +1,4 @@
-import { EstimateFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step";
+import { EstimateFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;

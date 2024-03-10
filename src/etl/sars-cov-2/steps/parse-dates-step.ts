@@ -1,13 +1,13 @@
 import { parse } from "date-fns";
-import { EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep } from "./remove-records-that-are-flagged-to-not-save-step";
+import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
 
-export type EstimateFieldsAfterParsingDatesStep = Omit<EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep, 'samplingEndDate' | 'samplingStartDate'> & {
+export type EstimateFieldsAfterParsingDatesStep = Omit<EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, 'samplingEndDate' | 'samplingStartDate'> & {
   samplingStartDate: Date | undefined;
   samplingEndDate: Date | undefined;
 };
 
 interface ParseDatesStepInput {
-  allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
+  allEstimates: EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
 }
 
 interface ParseDatesStepOutput {

@@ -62,12 +62,13 @@ export interface SarsCov2EstimateDocument {
   riskOfBias: string | undefined;
   age: string | undefined;
   sex: string | undefined;
+  sourceType: string | undefined;
   populationGroup: string | undefined;
   country: string;
   state: string | undefined;
   county: string | undefined;
   city: string | undefined;
-  scope: string;
+  scope: string | undefined;
   samplingEndDate: Date | undefined;
   samplingStartDate: Date | undefined;
   createdAt: Date;

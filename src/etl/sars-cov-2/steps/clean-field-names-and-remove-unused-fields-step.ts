@@ -1,4 +1,4 @@
-import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
+import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -7,13 +7,14 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   sex: string | undefined;
   populationGroup: string | undefined;
   includedInETL: number;
-  country: string;
+  country: string | undefined;
+  sourceType: string | undefined;
   state: string | undefined;
   county: string | undefined;
   city: string | undefined;
-  scope: string;
-  samplingEndDate: string;
-  samplingStartDate: string;
+  scope: string | undefined;
+  samplingEndDate: string | undefined;
+  samplingStartDate: string | undefined;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
@@ -65,6 +66,10 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
+      sourceType: cleanArrayField({
+        key: "Source Type",
+        estimate,
+      }).value,
       riskOfBias: cleanArrayField({
         key: "Overall Risk of Bias (JBI)",
         estimate,
@@ -74,13 +79,13 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       populationGroup:
         estimate["Sample Frame (groups of interest)"] ?? undefined,
       includedInETL: estimate["ETL Included"],
-      country: estimate.Country,
+      country: estimate.Country ?? undefined,
       state: estimate["State/Province"] ?? undefined,
       county: estimate.County ?? undefined,
       city: estimate.City ?? undefined,
-      scope: estimate["Grade of Estimate Scope"],
-      samplingEndDate: estimate["Sampling End Date"],
-      samplingStartDate: estimate["Sampling End Date"],
+      scope: estimate["Grade of Estimate Scope"] ?? undefined,
+      samplingEndDate: estimate["Sampling End Date"] ?? undefined,
+      samplingStartDate: estimate["Sampling End Date"] ?? undefined,
     })),
   };
 };

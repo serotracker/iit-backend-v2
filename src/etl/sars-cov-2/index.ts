@@ -14,6 +14,7 @@ import { latLngGenerationStep } from "./steps/lat-lng-generation-step.js";
 import { removeRecordsThatAreFlaggedNotToSave } from "./steps/remove-records-that-are-flagged-to-not-save-step.js";
 import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
+import { filterStudiesThatDoNotMeetDataStructureRequirement } from "./steps/filter-studies-that-do-not-meet-data-structure-requirements.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -47,6 +48,7 @@ const runEtlMain = async () => {
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
+    etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(parseDatesStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),

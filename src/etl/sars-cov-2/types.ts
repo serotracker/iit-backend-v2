@@ -6,11 +6,11 @@ export interface AirtableSarsCov2EstimateFields {
   "Sample Frame (sex)": string | null;
   "Sample Frame (groups of interest)": string | null;
   "ETL Included": number;
-  "Country": string;
+  "Country": string | null;
   "State/Province": string | null;
   "County": string | null;
   "City": string | null;
-  "Grade of Estimate Scope": string;
-  "Sampling End Date": string;
-  "Sampling Start Date": string;
+  "Grade of Estimate Scope": string | null;
+  "Sampling End Date": string | null;
+  "Sampling Start Date": string | null;
 }

@@ -1,8 +1,8 @@
 import { writeFileSync } from "fs";
-import { EstimateFieldsAfterParsingDatesStep } from "./parse-dates-step";
-import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types";
-import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions";
-import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers";
+import { EstimateFieldsAfterParsingDatesStep } from "./parse-dates-step.js";
+import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
+import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
+import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
 
 export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterParsingDatesStep & {
   latitude: number;

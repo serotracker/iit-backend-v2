@@ -19,19 +19,19 @@ export const validateFieldSetFromAirtableStep = (input: ValidateFieldSetFromAirt
 
   const zodSarsCov2EstimateFieldsObject = z.object({
     "id": z.string(),
-    "Source Type": z.string().nullable().array(),
-    "Overall Risk of Bias (JBI)": z.string().nullable().array(),
-    "Sample Frame (age)": z.string().nullable(),
-    "Sample Frame (sex)": z.string().nullable(),
-    "Sample Frame (groups of interest)": z.string().nullable(),
+    "Source Type": z.optional(z.string().nullable().array()).transform((field) => field ?? []),
+    "Overall Risk of Bias (JBI)": z.optional(z.string().nullable().array()).transform((field) => field ?? []),
+    "Sample Frame (age)": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "Sample Frame (sex)": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "Sample Frame (groups of interest)": z.optional(z.string().nullable()).transform((field) => field ?? null),
     "ETL Included": z.number(),
-    "Country": z.string(),
-    "State/Province": z.string().nullable(),
-    "County": z.string().nullable(),
-    "City": z.string().nullable(),
-    "Grade of Estimate Scope": z.string(),
-    "Sampling End Date": z.string(),
-    "Sampling Start Date": z.string()
+    "Country": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "State/Province": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "County": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "City": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "Grade of Estimate Scope": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "Sampling End Date": z.optional(z.string().nullable()).transform((field) => field ?? null),
+    "Sampling Start Date": z.optional(z.string().nullable()).transform((field) => field ?? null),
   })
   const allEstimates = input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate));
 
