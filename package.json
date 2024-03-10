@@ -11,6 +11,9 @@
     "run_team_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/team/index.js",
     "run_team_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/team/index.js",
     "run_team_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/team/index.js",
+    "run_sarscov2_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/sars-cov-2/index.js",
+    "run_sarscov2_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/sars-cov-2/arbo/index.js",
+    "run_sarscov2_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/sars-cov-2/index.js",
     "codegen": "graphql-codegen --config ./codegen.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -5,6 +5,7 @@ if ! [ -f $env_local_etl_file ]; then
   touch $env_local_etl_file
   echo "AIRTABLE_API_KEY=PLEASE_SPECIFY" >> $env_local_etl_file
   echo "AIRTABLE_ARBO_BASE_ID=PLEASE_SPECIFY" >> $env_local_etl_file
+  echo "AIRTABLE_SARSCOV2_BASE_ID=PLEASE_SPECIFY" >> $env_local_etl_file
   echo "AIRTABLE_EMPLOYEE_BASE_ID=PLEASE_SPECIFY" >> $env_production_etl_file
   echo "GEOCODING_API_ENABLED=true" >> $env_local_etl_file
   echo "MONGODB_URI=PLEASE_SPECIFY" >> $env_local_etl_file
@@ -18,6 +19,7 @@ if ! [ -f $env_production_etl_file ]; then
   touch $env_production_etl_file
   echo "AIRTABLE_API_KEY=PLEASE_SPECIFY" >> $env_production_etl_file
   echo "AIRTABLE_ARBO_BASE_ID=PLEASE_SPECIFY" >> $env_production_etl_file
+  echo "AIRTABLE_SARSCOV2_BASE_ID=PLEASE_SPECIFY" >> $env_production_etl_file
   echo "AIRTABLE_EMPLOYEE_BASE_ID=PLEASE_SPECIFY" >> $env_production_etl_file
   echo "GEOCODING_API_ENABLED=true" >> $env_production_etl_file
   echo "MONGODB_URI=PLEASE_SPECIFY" >> $env_production_etl_file

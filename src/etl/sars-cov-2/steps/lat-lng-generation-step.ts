@@ -1,46 +1,37 @@
-import { writeFileSync } from 'fs';
-import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
-import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
-import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
-import {
-  AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
-  AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
-} from "./merge-estimates-and-sources-step.js";
+import { writeFileSync } from "fs";
+import { EstimateFieldsAfterParsingDatesStep } from "./parse-dates-step";
+import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types";
+import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions";
+import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers";
 
-export type AirtableEstimateFieldsAfterLatLngGenerationStep =
-  AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep & {
-    latitude: number;
-    longitude: number;
-  };
-
-export type AirtableSourceFieldsAfterLatLngGenerationStep =
-  AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep;
+export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterParsingDatesStep & {
+  latitude: number;
+  longitude: number;
+};
 
 interface LatLngGenerationStepInput {
-  allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
-  allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
+  allEstimates: EstimateFieldsAfterParsingDatesStep[];
 }
 
 interface LatLngGenerationStepOutput {
-  allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
-  allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
+  allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
 }
 
 export const latLngGenerationStep = async(
   input: LatLngGenerationStepInput
 ): Promise<LatLngGenerationStepOutput> => {
-  const geocodingApiRequestReportFileName = './arbo-lat-lng-generation-report.txt';
+  const geocodingApiRequestReportFileName = './sars-cov-2-lat-lng-generation-report.txt';
   const geocodingApiEnabled = process.env.GEOCODING_API_ENABLED === 'true';
 
   writeFileSync(geocodingApiRequestReportFileName, '');
 
   console.log(`Running step: latLngGenerationStep. Remaining estimates: ${input.allEstimates.length}. GEOCODING_API_ENABLED=${geocodingApiEnabled}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates } = input;
 
   const intervalsToPrintProgressMessages = Array.from({length: 20}, (_, index) => Math.floor((allEstimates.length * (index + 1)) / 20));
 
-  const estimatesWithLatitudesAndLongitudes: AirtableEstimateFieldsAfterLatLngGenerationStep[] = [];
+  const estimatesWithLatitudesAndLongitudes: EstimateFieldsAfterLatLngGenerationStep[] = [];
   
   for(const estimate of allEstimates) {
     if(intervalsToPrintProgressMessages.includes(estimatesWithLatitudesAndLongitudes.length)) {
@@ -68,6 +59,5 @@ export const latLngGenerationStep = async(
 
   return {
     allEstimates: estimatesWithLatitudesAndLongitudes,
-    allSources: allSources,
   };
-};
+}

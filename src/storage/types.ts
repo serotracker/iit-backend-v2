@@ -56,3 +56,20 @@ export interface TeamMemberDocument {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface SarsCov2EstimateDocument {
+  _id: ObjectId;
+  riskOfBias: string | undefined;
+  age: string | undefined;
+  sex: string | undefined;
+  populationGroup: string | undefined;
+  country: string;
+  state: string | undefined;
+  county: string | undefined;
+  city: string | undefined;
+  scope: string;
+  samplingEndDate: Date | undefined;
+  samplingStartDate: Date | undefined;
+  createdAt: Date;
+  updatedAt: Date;
+}
