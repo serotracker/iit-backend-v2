@@ -52,10 +52,10 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       sourceType,
       riskOfBias,
     ] = await Promise.all([
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('sarsCov2Estimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('sarsCov2Estimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('sarsCov2Estimates').distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('sarsCov2Estimates').distinct('riskOfBias').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('riskOfBias').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     return {
