@@ -99,7 +99,6 @@ export const makeGeocodingApiRequest = async (
   
   if(!geocodingApiRequestParams) {
     console.error('Unable to make request to mapbox API, could not generate API request parameters.');
-    console.error(country);
 
     return "FAILED_RESPONSE";
   }
