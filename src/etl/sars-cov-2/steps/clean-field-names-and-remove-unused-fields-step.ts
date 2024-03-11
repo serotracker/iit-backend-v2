@@ -3,7 +3,7 @@ import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep } from "./validat
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
   id: string;
   riskOfBias: string | undefined;
-  age: string | undefined;
+  ageGroup: string | undefined;
   sex: string | undefined;
   populationGroup: string | undefined;
   includedInETL: number;
@@ -74,7 +74,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         key: "Overall Risk of Bias (JBI)",
         estimate,
       }).value,
-      age: estimate["Sample Frame (age)"] ?? undefined,
+      ageGroup: estimate["Sample Frame (age)"] ?? undefined,
       sex: estimate["Sample Frame (sex)"] ?? undefined,
       populationGroup:
         estimate["Sample Frame (groups of interest)"] ?? undefined,

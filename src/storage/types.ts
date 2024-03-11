@@ -60,10 +60,12 @@ export interface TeamMemberDocument {
 export interface SarsCov2EstimateDocument {
   _id: ObjectId;
   riskOfBias: string | undefined;
-  age: string | undefined;
+  ageGroup: string | undefined;
   sex: string | undefined;
   sourceType: string | undefined;
   populationGroup: string | undefined;
+  latitude: number;
+  longitude: number;
   country: string;
   state: string | undefined;
   county: string | undefined;

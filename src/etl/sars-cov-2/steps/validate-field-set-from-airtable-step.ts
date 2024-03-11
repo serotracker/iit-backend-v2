@@ -77,11 +77,7 @@ export const validateFieldSetFromAirtableStep = (
       .transform((field) => field ?? null),
   });
 
-  const allEstimates = input.allEstimates.map((estimate) => {
-    console.log(estimate);
-
-    return zodSarsCov2EstimateFieldsObject.parse(estimate)
-  });
+  const allEstimates = input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate));
 
   return { allEstimates };
 };

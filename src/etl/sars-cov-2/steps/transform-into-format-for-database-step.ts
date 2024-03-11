@@ -26,10 +26,12 @@ export const transformIntoFormatForDatabaseStep = (
     allEstimates: allEstimates.map((estimate) => ({
       _id: new ObjectId(),
       riskOfBias: estimate.riskOfBias,
-      age: estimate.age,
+      ageGroup: estimate.ageGroup,
       sex: estimate.sex,
       sourceType: estimate.sourceType,
       populationGroup: estimate.populationGroup,
+      latitude: estimate.latitude,
+      longitude: estimate.longitude,
       country: estimate.country,
       state: estimate.state,
       county: estimate.county,
