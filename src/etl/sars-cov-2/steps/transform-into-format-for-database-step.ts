@@ -15,7 +15,9 @@ export const transformIntoFormatForDatabaseStep = (
 ): TransformIntoFormatForDatabaseStepOutput => {
   const { allEstimates } = input;
 
-  console.log(`Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`);
+  console.log(
+    `Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`
+  );
 
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
@@ -36,7 +38,7 @@ export const transformIntoFormatForDatabaseStep = (
       samplingStartDate: estimate.samplingStartDate,
       samplingEndDate: estimate.samplingEndDate,
       createdAt: createdAtForAllRecords,
-      updatedAt: updatedAtForAllRecords
+      updatedAt: updatedAtForAllRecords,
     })),
   };
 };
