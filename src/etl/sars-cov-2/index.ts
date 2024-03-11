@@ -15,6 +15,7 @@ import { removeRecordsThatAreFlaggedNotToSave } from "./steps/remove-records-tha
 import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 import { filterStudiesThatDoNotMeetDataStructureRequirement } from "./steps/filter-studies-that-do-not-meet-data-structure-requirements.js";
+import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -49,6 +50,7 @@ const runEtlMain = async () => {
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
+    etlStep(transformNotReportedValuesToUndefinedStep),
     etlStep(parseDatesStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),

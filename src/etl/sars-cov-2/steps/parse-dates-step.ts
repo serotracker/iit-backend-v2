@@ -1,13 +1,13 @@
 import { parse } from "date-fns";
-import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
+import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 
-export type EstimateFieldsAfterParsingDatesStep = Omit<EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, 'samplingEndDate' | 'samplingStartDate'> & {
+export type EstimateFieldsAfterParsingDatesStep = Omit<EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, 'samplingEndDate' | 'samplingStartDate'> & {
   samplingStartDate: Date | undefined;
   samplingEndDate: Date | undefined;
 };
 
 interface ParseDatesStepInput {
-  allEstimates: EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
+  allEstimates: EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
 }
 
 interface ParseDatesStepOutput {
