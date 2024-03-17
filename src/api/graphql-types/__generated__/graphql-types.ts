@@ -119,6 +119,8 @@ export type SarsCov2FilterOptions = {
   country: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
+  unRegion: Array<UnRegion>;
+  whoRegion: Array<WhoRegion>;
 };
 
 export type TeamMember = {
@@ -378,6 +380,8 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Array<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

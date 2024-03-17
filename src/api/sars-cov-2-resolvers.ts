@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { SarsCov2Estimate, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
 import { SarsCov2EstimateDocument } from "../storage/types";
-import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers";
+import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 
 interface GenerateSarsCov2ResolversInput {
   mongoClient: MongoClient;

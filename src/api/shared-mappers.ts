@@ -1,6 +1,6 @@
-import { UnRegion as UnRegionForApi, WhoRegion as WhoRegionForApi } from "./graphql-types/__generated__/graphql-types";
-import { UNRegion } from "../lib/un-regions";
-import { WHORegion } from "../lib/who-regions";
+import { UnRegion as UnRegionForApi, WhoRegion as WhoRegionForApi } from "./graphql-types/__generated__/graphql-types.js";
+import { UNRegion } from "../lib/un-regions.js";
+import { WHORegion } from "../lib/who-regions.js";
 
 const unRegionMap: {[key in UNRegion]: UnRegionForApi} = {
   [UNRegion.NORTHERN_AFRICA]: UnRegionForApi.NorthernAfrica,
