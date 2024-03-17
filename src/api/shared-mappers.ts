@@ -36,5 +36,5 @@ const whoRegionMap: {[key in WHORegion]: WhoRegionForApi} = {
   [WHORegion.WPR]: WhoRegionForApi.Wpr,
 }
 
-export const mapUnRegionForApi = (unRegion: UNRegion | undefined): UnRegionForApi | undefined => unRegion ? unRegionMap[unRegion] : undefined;
-export const mapWhoRegionForApi = (whoRegion: WHORegion | undefined): WhoRegionForApi | undefined => whoRegion ? whoRegionMap[whoRegion] : undefined;
+export const mapUnRegionForApi = (unRegion: UNRegion): UnRegionForApi => unRegionMap[unRegion];
+export const mapWhoRegionForApi = (whoRegion: WHORegion): WhoRegionForApi => whoRegionMap[whoRegion];

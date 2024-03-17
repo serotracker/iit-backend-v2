@@ -21,8 +21,8 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     longitude: document.longitude,
     country: document.country,
     countryAlphaTwoCode: document.countryAlphaTwoCode,
-    unRegion: mapUnRegionForApi(document.unRegion),
-    whoRegion: mapWhoRegionForApi(document.whoRegion),
+    unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
+    whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
     state: document.state,
     city: document.city,
     populationGroup: document.populationGroup,
@@ -71,8 +71,8 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       country,
       sourceType,
       riskOfBias,
-      unRegion,
-      whoRegion
+      unRegion: unRegion.map((region) => mapUnRegionForApi(region)),
+      whoRegion: whoRegion.map((region) => mapWhoRegionForApi(region)),
     }
   }
   
