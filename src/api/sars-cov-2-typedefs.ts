@@ -1,5 +1,9 @@
 export const sarsCov2Typedefs = `
   type SarsCov2Estimate {
+    antibodies: [String!]!
+    isotypes: [String!]!
+    isWHOUnityAligned: Boolean!
+    testType: String
     sourceType: String
     riskOfBias: String
     populationGroup: String

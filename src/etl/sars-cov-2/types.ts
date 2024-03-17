@@ -9,6 +9,10 @@ export interface AirtableSarsCov2EstimateFields {
   "Country": string | null;
   "State/Province": string | null;
   "County": string | null;
+  "Test Type": string | null;
+  "Isotype(s) Reported": string | null;
+  'UNITY: Criteria': Array<'Unity-Aligned' | null>;
+  'Antibody target': string | null;
   "City": string | null;
   "Grade of Estimate Scope": string | null;
   "Sampling End Date": string | null;
