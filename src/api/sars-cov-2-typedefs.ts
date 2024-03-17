@@ -23,6 +23,8 @@ export const sarsCov2Typedefs = `
     country: [String!]!
     sourceType: [String!]!
     riskOfBias: [String!]!
+    unRegion: [UNRegion!]!
+    whoRegion: [WHORegion!]!
   }
 
   type Query {
