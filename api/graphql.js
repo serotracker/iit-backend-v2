@@ -6,6 +6,7 @@ import { send } from 'micro';
 import { arboTypedefs } from "../public/dist/src/api/arbo-typedefs.js";
 import { sarsCov2Typedefs } from "../public/dist/src/api/sars-cov-2-typedefs.js";
 import { teamTypedefs } from "../public/dist/src/api/team-typedefs.js";
+import { sharedTypedefs } from "../public/dist/src/api/shared-typedefs.js";
 import { generateArboResolvers } from "../public/dist/src/api/arbo-resolvers.js";
 import { generateTeamResolvers } from "../public/dist/src/api/team-resolvers.js";
 import { generateSarsCov2Resolvers } from "../public/dist/src/api/sars-cov-2-resolvers.js";
@@ -22,7 +23,12 @@ const mongoClient = new MongoClient(mongoUrl);
 await mongoClient.connect();
 
 const server = new ApolloServer({
-  typeDefs: mergeTypeDefs([arboTypedefs, teamTypedefs, sarsCov2Typedefs]),
+  typeDefs: mergeTypeDefs([
+    sharedTypedefs,
+    arboTypedefs,
+    teamTypedefs,
+    sarsCov2Typedefs
+  ]),
   resolvers: {
     Query: {
       ...generateTeamResolvers({ mongoClient }).teamResolvers.Query,
