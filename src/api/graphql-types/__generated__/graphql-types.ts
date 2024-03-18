@@ -96,10 +96,13 @@ export type Query = {
 export type SarsCov2Estimate = {
   __typename?: 'SarsCov2Estimate';
   ageGroup?: Maybe<Scalars['String']['output']>;
+  antibodies: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  isWHOUnityAligned: Scalars['Boolean']['output'];
+  isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
   populationGroup?: Maybe<Scalars['String']['output']>;
@@ -109,6 +112,7 @@ export type SarsCov2Estimate = {
   sex?: Maybe<Scalars['String']['output']>;
   sourceType?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  testType: Array<Scalars['String']['output']>;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
@@ -116,9 +120,12 @@ export type SarsCov2Estimate = {
 export type SarsCov2FilterOptions = {
   __typename?: 'SarsCov2FilterOptions';
   ageGroup: Array<Scalars['String']['output']>;
+  antibodies: Array<Scalars['String']['output']>;
   country: Array<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
+  testType: Array<Scalars['String']['output']>;
   unRegion: Array<UnRegion>;
   whoRegion: Array<WhoRegion>;
 };
@@ -357,10 +364,13 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['SarsCov2Estimate'] = ResolversParentTypes['SarsCov2Estimate']> = {
   ageGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  antibodies?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  isWHOUnityAligned?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   populationGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -370,6 +380,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -377,9 +388,12 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
 
 export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['SarsCov2FilterOptions'] = ResolversParentTypes['SarsCov2FilterOptions']> = {
   ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  antibodies?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Array<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

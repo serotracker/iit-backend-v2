@@ -3,7 +3,7 @@ export const sarsCov2Typedefs = `
     antibodies: [String!]!
     isotypes: [String!]!
     isWHOUnityAligned: Boolean!
-    testType: String
+    testType: [String!]!
     sourceType: String
     riskOfBias: String
     populationGroup: String
@@ -29,6 +29,9 @@ export const sarsCov2Typedefs = `
     riskOfBias: [String!]!
     unRegion: [UNRegion!]!
     whoRegion: [WHORegion!]!
+    antibodies: [String!]!
+    isotypes: [String!]!
+    testType: [String!]!
   }
 
   type Query {
