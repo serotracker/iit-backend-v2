@@ -1,4 +1,6 @@
 import { Document, ObjectId } from "mongodb";
+import { WHORegion } from "../lib/who-regions";
+import { UNRegion } from "../lib/un-regions";
 
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
@@ -53,6 +55,33 @@ export interface TeamMemberDocument {
   affiliations: Array<{
     label: string;
   }>;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SarsCov2EstimateDocument {
+  _id: ObjectId;
+  riskOfBias: string | undefined;
+  antibodies: string[];
+  isotypes: string[];
+  isWHOUnityAligned: boolean;
+  testType: string[];
+  ageGroup: string | undefined;
+  sex: string | undefined;
+  sourceType: string | undefined;
+  populationGroup: string | undefined;
+  latitude: number;
+  longitude: number;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+  country: string;
+  countryAlphaTwoCode: string;
+  state: string | undefined;
+  county: string | undefined;
+  city: string | undefined;
+  scope: string | undefined;
+  samplingEndDate: Date | undefined;
+  samplingStartDate: Date | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
