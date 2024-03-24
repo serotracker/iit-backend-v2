@@ -19,6 +19,10 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   sampleFrame: string | undefined;
   sampleFrameTargetGroup: string | undefined;
   seroprevalence: number | undefined;
+  seroprevalenceStudy95CILower: number | undefined;
+  seroprevalenceStudy95CIUpper: number | undefined;
+  seroprevalenceCalculated95CILower: number | undefined;
+  seroprevalenceCalculated95CIUpper: number | undefined;
   country: string | undefined;
   state: string | undefined;
   city: string | undefined;
@@ -74,6 +78,10 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       sampleFrame: estimate["Sample Frame"],
       sampleFrameTargetGroup: estimate["Sample Frame - Target Group"],
       seroprevalence: estimate["Seroprevalence"],
+      seroprevalenceStudy95CILower: estimate["Seroprevalence 95% CI Lower"],
+      seroprevalenceStudy95CIUpper: estimate["Seroprevalence 95% CI Upper"],
+      seroprevalenceCalculated95CILower: estimate["Seroprevalence 95% CI Lower (formula)"],
+      seroprevalenceCalculated95CIUpper: estimate["Seroprevalence 95% CI Upper (formula)"],
       country: estimate["Country"],
       state: estimate["State"],
       city: estimate["City"],

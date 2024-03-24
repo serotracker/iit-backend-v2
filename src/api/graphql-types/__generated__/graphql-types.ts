@@ -57,6 +57,10 @@ export type ArbovirusEstimate = {
   sampleSize: Scalars['Int']['output'];
   sampleStartDate?: Maybe<Scalars['String']['output']>;
   seroprevalence?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CIUpper?: Maybe<Scalars['Float']['output']>;
   serotype: Array<Scalars['String']['output']>;
   sex?: Maybe<Scalars['String']['output']>;
   sourceSheetId?: Maybe<Scalars['String']['output']>;
@@ -85,7 +89,7 @@ export type ArbovirusFilterOptions = {
 
 export type Query = {
   __typename?: 'Query';
-  arbovirusDataStatistics?: Maybe<ArbovirusDataStatistics>;
+  arbovirusDataStatistics: ArbovirusDataStatistics;
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions?: Maybe<ArbovirusFilterOptions>;
   groupedTeamMembers: Array<TeamMemberGroup>;
@@ -247,6 +251,10 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sampleSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sampleStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   seroprevalence?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -275,7 +283,7 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  arbovirusDataStatistics?: Resolver<Maybe<ResolversTypes['ArbovirusDataStatistics']>, ParentType, ContextType>;
+  arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<Maybe<ResolversTypes['ArbovirusFilterOptions']>, ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
