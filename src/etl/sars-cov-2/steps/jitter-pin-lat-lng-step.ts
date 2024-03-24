@@ -1,7 +1,9 @@
-import { EstimateFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { EstimateFieldsAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;
+export type StructuredVaccinationDataAfterJitteringPinLatLngStep = StructuredVaccinationDataAfterLatLngGenerationStep;
+export type StructuredPositiveCaseDataAfterJitteringPinLatLngStep = StructuredPositiveCaseDataAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -23,10 +25,14 @@ const jitterNumberValueByAmount = (
 
 interface JitterPinLatLngStepInput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
+  vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
 }
 
 interface JitterPinLatLngStepOutput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
 }
 
 export const jitterPinLatLngStep = (
@@ -51,5 +57,7 @@ export const jitterPinLatLngStep = (
         jitterAmount: maximumPinJitterMagnitude,
       }),
     })),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 };

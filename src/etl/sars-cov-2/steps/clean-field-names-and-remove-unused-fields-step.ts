@@ -1,5 +1,5 @@
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
-import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
+import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { isAirtableError, AirtableError } from "../types.js";
 
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
@@ -14,6 +14,7 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   populationGroup: string | undefined;
   includedInETL: number;
   country: string | undefined;
+  countryAlphaThreeCode: string | undefined;
   sourceType: string | undefined;
   state: string | undefined;
   county: string | undefined;
@@ -22,13 +23,19 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   samplingEndDate: string | undefined;
   samplingStartDate: string | undefined;
 }
+export type StructuredVaccinationDataAfterCleaningFieldNamesStep = StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
+export type StructuredPositiveCaseDataAfterCleaningFieldNamesStep = StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFieldNamesStep[];
+  vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
 }
 
 interface CleanArrayFieldToSingleValueInput<
@@ -145,6 +152,10 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         key: "Overall Risk of Bias (JBI)",
         estimate,
       }).value,
+      countryAlphaThreeCode: cleanArrayFieldToSingleValue({
+        key: 'Alpha3 Code',
+        estimate
+      }).value,
       ageGroup: estimate["Sample Frame (age)"] ?? undefined,
       sex: estimate["Sample Frame (sex)"] ?? undefined,
       populationGroup:
@@ -158,5 +169,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       samplingEndDate: estimate["Sampling End Date"] ?? undefined,
       samplingStartDate: estimate["Sampling End Date"] ?? undefined,
     })),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 };

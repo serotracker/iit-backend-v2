@@ -1,17 +1,29 @@
-import { EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep } from "./remove-records-that-are-flagged-to-not-save-step.js";
+import {
+  EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+} from "./remove-records-that-are-flagged-to-not-save-step.js";
 
 export type EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
   Omit<
     EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
-    "country"
-  > & { country: string };
+    "country" | "countryAlphaThreeCode"
+  > & { country: string; countryAlphaThreeCode: string };
+export type StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
+  StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+export type StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
+  StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsInput {
   allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
+  vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 }
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsOutput {
   allEstimates: EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
+  vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 }
 
 export const filterStudiesThatDoNotMeetDataStructureRequirement = (
@@ -26,7 +38,9 @@ export const filterStudiesThatDoNotMeetDataStructureRequirement = (
       (
         estimate
       ): estimate is EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =>
-        !!estimate.country
+        !!estimate.country && !!estimate.countryAlphaThreeCode
     ),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 };

@@ -1,14 +1,20 @@
-import { EstimateFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
+import { EstimateFieldsAfterCleaningFieldNamesStep, StructuredPositiveCaseDataAfterCleaningFieldNamesStep, StructuredVaccinationDataAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep =
   EstimateFieldsAfterCleaningFieldNamesStep;
+export type StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep = StructuredVaccinationDataAfterCleaningFieldNamesStep;
+export type StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep = StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
 
 interface RemoveRecordsThatAreFlaggedNotToSaveInput {
   allEstimates: EstimateFieldsAfterCleaningFieldNamesStep[];
+  vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
 }
 
 interface RemoveRecordsThatAreFlaggedNotToSaveOutput {
   allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
+  vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 }
 
 export const removeRecordsThatAreFlaggedNotToSave = (
@@ -20,5 +26,7 @@ export const removeRecordsThatAreFlaggedNotToSave = (
     allEstimates: input.allEstimates.filter(
       (estimate) => estimate.includedInETL !== 0
     ),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 };

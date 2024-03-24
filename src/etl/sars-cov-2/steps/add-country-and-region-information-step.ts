@@ -1,5 +1,4 @@
-import { parse } from "date-fns";
-import { EstimateFieldsAfterParsingDatesStep } from "./parse-dates-step.js";
+import { EstimateFieldsAfterParsingDatesStep, StructuredPositiveCaseDataAfterParsingDatesStep, StructuredVaccinationDataAfterParsingDatesStep } from "./parse-dates-step.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import { TwoLetterIsoCountryCode, countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
@@ -9,13 +8,19 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
   whoRegion: WHORegion | undefined;
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
 };
+export type StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep = StructuredVaccinationDataAfterParsingDatesStep;
+export type StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep = StructuredPositiveCaseDataAfterParsingDatesStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
+  vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
 }
 
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
+  vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
 }
 
 export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInformationStepInput): AddCountryAndRegionInformationStepOutput => {
@@ -42,6 +47,8 @@ export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInf
           whoRegion,
           unRegion,
         };
-      }).filter(<T>(estimate: T | undefined): estimate is T => !!estimate)
+      }).filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 }

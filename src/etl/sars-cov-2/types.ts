@@ -13,6 +13,7 @@ export const isAirtableError = (input: unknown): input is AirtableError => {
 
 export interface AirtableSarsCov2EstimateFields {
   id: string;
+  "Alpha3 Code": Array<string>;
   "Source Type": Array<string | null>;
   "Overall Risk of Bias (JBI)": Array<string | null | AirtableError>;
   "Sample Frame (age)": string | null;
@@ -31,3 +32,35 @@ export interface AirtableSarsCov2EstimateFields {
   "Sampling End Date": string | null;
   "Sampling Start Date": string | null;
 }
+
+export type StructuredVaccinationData = Array<{
+  threeLetterCountryCode: string,
+  data: {
+    year: string,
+    data: {
+      month: string,
+      data: {
+        day: string,
+        data: {
+          totalVaccinationsPerHundred: number
+        }
+      }
+    }
+  }
+}>
+
+export type StructuredPositiveCaseData = Array<{
+  twoLetterCountryCode: string,
+  data: {
+    year: string,
+    data: {
+      month: string,
+      data: {
+        day: string,
+        data: {
+          totalPositiveCasesPerHundred: number
+        }
+      }
+    }
+  }
+}>
