@@ -34,6 +34,20 @@ export const fetchVaccinationDataStep = async (
 
   const rawCsvData = await body.text();
 
+  const vaccinationData = [];
+
+  rawCsvData.split('\n').forEach((element, index) => {
+    if(index !== 0) {
+      const split_csv_line = element.split(',')
+
+      const countryAlphaThreeCode = split_csv_line[1];
+      const year = split_csv_line[2].split('-')[0]
+      const month = split_csv_line[2].split('-')[1]
+      const day = split_csv_line[2].split('-')[2]
+      const peopleVaccinatedPerHundred = split_csv_line[10]
+    }
+  });
+
   return {
     allEstimates: input.allEstimates,
     vaccinationData: input.vaccinationData,
