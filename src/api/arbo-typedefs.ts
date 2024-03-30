@@ -28,6 +28,10 @@ export const arboTypedefs = `
     sampleSize: Int!
     sampleStartDate: String
     seroprevalence: Float
+    seroprevalenceStudy95CILower: Float
+    seroprevalenceStudy95CIUpper: Float
+    seroprevalenceCalculated95CILower: Float
+    seroprevalenceCalculated95CIUpper: Float
     serotype: [String!]!
     sex: String
     sourceSheetId: String
