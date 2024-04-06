@@ -10,6 +10,7 @@ export type AirtableTeamMemberFields = {
   "Affiliation 1"?: string | undefined;
   "Affiliation 2"?: string | undefined;
   "Affiliation 3"?: string | undefined;
+  "ArboTracker"?: boolean | undefined;
 };
 
 export type TeamSortOrderEntryFields = {

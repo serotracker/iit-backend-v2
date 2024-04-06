@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { QueryResolvers } from "./graphql-types/__generated__/graphql-types";
+import { QueryResolvers, TeamMemberSymbol } from "./graphql-types/__generated__/graphql-types";
 import { TeamMemberDocument } from "../storage/types";
 
 interface GenerateTeamResolversInput {
@@ -34,7 +34,8 @@ export const generateTeamResolvers = (input: GenerateTeamResolversInput): Genera
               email: "$email",
               twitterUrl: "$twitterUrl",
               linkedinUrl: "$linkedinUrl",
-              affiliations: "$affiliations"
+              affiliations: "$affiliations",
+              arbotrackerContributorFlag: "$arbotrackerContributorFlag"
             }
           }
         }
@@ -56,9 +57,17 @@ export const generateTeamResolvers = (input: GenerateTeamResolversInput): Genera
           }
         }
       }
-    ]).toArray() as Array<{label: string, teamMembers: Pick<TeamMemberDocument, 'firstName'|'lastName'|'email'|'twitterUrl'|'linkedinUrl'|'affiliations'>[]}>;
+    ]).toArray() as Array<{label: string, teamMembers: Pick<TeamMemberDocument, 'firstName'|'lastName'|'email'|'twitterUrl'|'linkedinUrl'|'affiliations'|'arbotrackerContributorFlag'>[]}>;
 
-    return groupedTeamMemberData;
+    return groupedTeamMemberData.map((teamMemberGroup) => ({
+      ...teamMemberGroup,
+      teamMembers: teamMemberGroup.teamMembers.map((teamMember) => ({
+        ...teamMember,
+        additionalSymbols: [
+          ...(teamMember.arbotrackerContributorFlag ? [ TeamMemberSymbol.ArbotrackerSymbol ] : [])
+        ]
+      }))
+    }));
   }
 
   return {
