@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { QueryResolvers, TeamMemberSymbol } from "./graphql-types/__generated__/graphql-types";
+import { QueryResolvers, TeamMemberSymbol } from "./graphql-types/__generated__/graphql-types.js";
 import { TeamMemberDocument } from "../storage/types";
 
 interface GenerateTeamResolversInput {
