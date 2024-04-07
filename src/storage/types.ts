@@ -57,6 +57,7 @@ export interface TeamMemberDocument {
   affiliations: Array<{
     label: string;
   }>;
+  arbotrackerContributorFlag: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

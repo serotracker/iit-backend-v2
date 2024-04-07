@@ -97,6 +97,7 @@ export type Query = {
 
 export type TeamMember = {
   __typename?: 'TeamMember';
+  additionalSymbols: Array<TeamMemberSymbol>;
   affiliations: Array<Affiliation>;
   email?: Maybe<Scalars['String']['output']>;
   firstName: Scalars['String']['output'];
@@ -110,6 +111,10 @@ export type TeamMemberGroup = {
   label: Scalars['String']['output'];
   teamMembers: Array<TeamMember>;
 };
+
+export enum TeamMemberSymbol {
+  ArbotrackerSymbol = 'ARBOTRACKER_SYMBOL'
+}
 
 
 
@@ -193,6 +198,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   TeamMember: ResolverTypeWrapper<TeamMember>;
   TeamMemberGroup: ResolverTypeWrapper<TeamMemberGroup>;
+  TeamMemberSymbol: TeamMemberSymbol;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -290,6 +296,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type TeamMemberResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamMember'] = ResolversParentTypes['TeamMember']> = {
+  additionalSymbols?: Resolver<Array<ResolversTypes['TeamMemberSymbol']>, ParentType, ContextType>;
   affiliations?: Resolver<Array<ResolversTypes['Affiliation']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

@@ -32,6 +32,7 @@ export const validateFieldSetFromAirtableStep = (input: ValidateFieldSetFromAirt
     "Affiliation 1": z.string().or(z.undefined()),
     "Affiliation 2": z.string().or(z.undefined()),
     "Affiliation 3": z.string().or(z.undefined()),
+    "ArboTracker": z.boolean().or(z.undefined())
   })
   const allTeamMembers = input.allTeamMembers.map((teamMember) => zodAirtableTeamMemberFieldsObject.parse(teamMember));
 
