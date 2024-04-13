@@ -23,7 +23,7 @@ const runEtlMain = async () => {
   const airtableApiKey = getEnvironmentVariableOrThrow({
     key: "AIRTABLE_API_KEY",
   });
-  const airtableArboBaseId = getEnvironmentVariableOrThrow({
+  const airtableSC2BaseId = getEnvironmentVariableOrThrow({
     key: "AIRTABLE_SARSCOV2_BASE_ID",
   });
   const mongoUri = getEnvironmentVariableOrThrow({ key: "MONGODB_URI" });
@@ -32,7 +32,7 @@ const runEtlMain = async () => {
   const mongoClient = await getMongoClient({ mongoUri });
 
   const airtable = new Airtable({ apiKey: airtableApiKey });
-  const base = new Airtable.Base(airtable, airtableArboBaseId);
+  const base = new Airtable.Base(airtable, airtableSC2BaseId);
   const estimateSheet = base.table("Rapid Review: Estimates");
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] =
