@@ -93,6 +93,33 @@ export type Query = {
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions?: Maybe<ArbovirusFilterOptions>;
   groupedTeamMembers: Array<TeamMemberGroup>;
+  sarsCov2Estimates: Array<SarsCov2Estimate>;
+  sarsCov2FilterOptions: SarsCov2FilterOptions;
+};
+
+export type SarsCov2Estimate = {
+  __typename?: 'SarsCov2Estimate';
+  ageGroup?: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  populationGroup?: Maybe<Scalars['String']['output']>;
+  riskOfBias?: Maybe<Scalars['String']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  sourceType?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+};
+
+export type SarsCov2FilterOptions = {
+  __typename?: 'SarsCov2FilterOptions';
+  ageGroup: Array<Scalars['String']['output']>;
+  country: Array<Scalars['String']['output']>;
+  riskOfBias: Array<Scalars['String']['output']>;
+  sourceType: Array<Scalars['String']['output']>;
 };
 
 export type TeamMember = {
@@ -195,6 +222,8 @@ export type ResolversTypes = {
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   Query: ResolverTypeWrapper<{}>;
+  SarsCov2Estimate: ResolverTypeWrapper<SarsCov2Estimate>;
+  SarsCov2FilterOptions: ResolverTypeWrapper<SarsCov2FilterOptions>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   TeamMember: ResolverTypeWrapper<TeamMember>;
   TeamMemberGroup: ResolverTypeWrapper<TeamMemberGroup>;
@@ -211,6 +240,8 @@ export type ResolversParentTypes = {
   Float: Scalars['Float']['output'];
   Int: Scalars['Int']['output'];
   Query: {};
+  SarsCov2Estimate: SarsCov2Estimate;
+  SarsCov2FilterOptions: SarsCov2FilterOptions;
   String: Scalars['String']['output'];
   TeamMember: TeamMember;
   TeamMemberGroup: TeamMemberGroup;
@@ -293,6 +324,33 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<Maybe<ResolversTypes['ArbovirusFilterOptions']>, ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
+  sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
+  sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
+};
+
+export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['SarsCov2Estimate'] = ResolversParentTypes['SarsCov2Estimate']> = {
+  ageGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  populationGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  riskOfBias?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['SarsCov2FilterOptions'] = ResolversParentTypes['SarsCov2FilterOptions']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type TeamMemberResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamMember'] = ResolversParentTypes['TeamMember']> = {
@@ -318,6 +376,8 @@ export type Resolvers<ContextType = any> = {
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  SarsCov2Estimate?: SarsCov2EstimateResolvers<ContextType>;
+  SarsCov2FilterOptions?: SarsCov2FilterOptionsResolvers<ContextType>;
   TeamMember?: TeamMemberResolvers<ContextType>;
   TeamMemberGroup?: TeamMemberGroupResolvers<ContextType>;
 };
