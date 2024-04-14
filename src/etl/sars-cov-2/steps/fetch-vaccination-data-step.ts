@@ -1,6 +1,8 @@
 import { FieldSet } from "airtable";
+import { pipe } from "fp-ts/lib/function.js";
 import { StructuredVaccinationData } from "../types";
 import { request } from "undici";
+import { groupByArray, typedGroupBy } from "../../../lib/lib";
 
 export type EstimateFieldsAfterFetchingVaccinationDataStep = FieldSet;
 export type StructuredVaccinationDataAfterFetchingVaccinationDataStep =
@@ -34,23 +36,39 @@ export const fetchVaccinationDataStep = async (
 
   const rawCsvData = await body.text();
 
-  const vaccinationData = [];
+  const unformattedVaccinationData = rawCsvData
+    .split("\n")
+    .map((element, index) => {
+      if (index === 0) {
+        return undefined;
+      }
 
-  rawCsvData.split('\n').forEach((element, index) => {
-    if(index !== 0) {
-      const split_csv_line = element.split(',')
+      const split_csv_line = element.split(",");
 
-      const countryAlphaThreeCode = split_csv_line[1];
-      const year = split_csv_line[2].split('-')[0]
-      const month = split_csv_line[2].split('-')[1]
-      const day = split_csv_line[2].split('-')[2]
-      const peopleVaccinatedPerHundred = split_csv_line[10]
-    }
-  });
+      return {
+        threeLetterCountryCode: split_csv_line[1],
+        year: split_csv_line[2].split("-")[0],
+        month: split_csv_line[2].split("-")[1],
+        day: split_csv_line[2].split("-")[2],
+        totalVaccinationsPerHundred: parseFloat(split_csv_line[10]),
+      };
+    })
+    .filter(<T>(element: T | undefined): element is T => !!element);
+
+  const formattedVaccinationData = groupByArray(
+    unformattedVaccinationData,
+    "threeLetterCountryCode"
+  ).map(({ threeLetterCountryCode, data }) => ({
+    threeLetterCountryCode,
+    data: groupByArray(data, "year").map(({ year, data }) => ({
+      year,
+      data: groupByArray(data, "month"),
+    })),
+  }));
 
   return {
     allEstimates: input.allEstimates,
-    vaccinationData: input.vaccinationData,
+    vaccinationData: formattedVaccinationData,
     positiveCaseData: input.positiveCaseData,
   };
 };

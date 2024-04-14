@@ -1,3 +1,5 @@
+import { ThreeLetterIsoCountryCode } from "../../lib/geocoding-api/country-codes";
+
 export interface AirtableError {
   error: unknown;
 };
@@ -35,32 +37,28 @@ export interface AirtableSarsCov2EstimateFields {
 
 export type StructuredVaccinationData = Array<{
   threeLetterCountryCode: string,
-  data: {
+  data: Array<{
     year: string,
-    data: {
+    data: Array<{
       month: string,
-      data: {
+      data: Array<{
         day: string,
-        data: {
-          totalVaccinationsPerHundred: number
-        }
-      }
-    }
-  }
-}>
+        totalVaccinationsPerHundred: number
+      }>
+    }>
+  }>
+}>;
 
 export type StructuredPositiveCaseData = Array<{
   twoLetterCountryCode: string,
-  data: {
+  data: Array<{
     year: string,
-    data: {
+    data: Array<{
       month: string,
-      data: {
+      data: Array<{
         day: string,
-        data: {
-          totalPositiveCasesPerHundred: number
-        }
-      }
-    }
-  }
-}>
+        totalPositiveCasesPerHundred: number
+      }>
+    }>
+  }>
+}>;
