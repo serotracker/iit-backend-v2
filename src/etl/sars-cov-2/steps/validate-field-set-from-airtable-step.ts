@@ -32,7 +32,14 @@ export const validateFieldSetFromAirtableStep = (
     "Source Type": z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
-    "Alpha3 Code": z.string().array(),
+    "Alpha3 Code": z
+      .optional(
+        z.union([
+          z.string().nullable(),
+          z.object({ error: z.string() }),
+        ]).array()
+      )
+      .transform((field) => field ?? []),
     "Overall Risk of Bias (JBI)": z
       .optional(
         z.union([

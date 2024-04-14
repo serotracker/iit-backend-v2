@@ -1,8 +1,7 @@
 import { FieldSet } from "airtable";
-import { pipe } from "fp-ts/lib/function.js";
 import { StructuredVaccinationData } from "../types";
 import { request } from "undici";
-import { groupByArray, typedGroupBy } from "../../../lib/lib";
+import { groupByArray } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingVaccinationDataStep = FieldSet;
 export type StructuredVaccinationDataAfterFetchingVaccinationDataStep =
@@ -36,21 +35,28 @@ export const fetchVaccinationDataStep = async (
 
   const rawCsvData = await body.text();
 
+  const csvColumns = rawCsvData.split("\n").at(0)?.split(',') ?? []
+  const indexOfDateColumn = csvColumns.findIndex(columnValue => columnValue === 'date');
+  const indexOfThreeLetterCountryCode = csvColumns.findIndex(columnValue => columnValue === 'iso_code');
+  const indexOfCountryPeopleVaccinatedPerHundred = csvColumns.findIndex(columnValue => columnValue === 'people_vaccinated_per_hundred');
+  const indexOfCountryPeopleFullyVaccinatedPerHundred = csvColumns.findIndex(columnValue => columnValue === 'people_fully_vaccinated_per_hundred');
+
   const unformattedVaccinationData = rawCsvData
     .split("\n")
     .map((element, index) => {
-      if (index === 0) {
+      if (index === 0 || !element) {
         return undefined;
       }
 
       const split_csv_line = element.split(",");
 
       return {
-        threeLetterCountryCode: split_csv_line[1],
-        year: split_csv_line[2].split("-")[0],
-        month: split_csv_line[2].split("-")[1],
-        day: split_csv_line[2].split("-")[2],
-        totalVaccinationsPerHundred: !!split_csv_line[10] ? parseFloat(split_csv_line[10]) : 0,
+        threeLetterCountryCode: split_csv_line[indexOfThreeLetterCountryCode],
+        year: split_csv_line[indexOfDateColumn].split("-")[0],
+        month: split_csv_line[indexOfDateColumn].split("-")[1],
+        day: split_csv_line[indexOfDateColumn].split("-")[2],
+        countryPeopleVaccinatedPerHundred: split_csv_line[indexOfCountryPeopleVaccinatedPerHundred] !== '' ? parseFloat(split_csv_line[indexOfCountryPeopleVaccinatedPerHundred]) : undefined,
+        countryPeopleFullyVaccinatedPerHundred: split_csv_line[indexOfCountryPeopleFullyVaccinatedPerHundred] !== '' ? parseFloat(split_csv_line[indexOfCountryPeopleFullyVaccinatedPerHundred]) : undefined,
       };
     })
     .filter(<T>(element: T | undefined): element is T => !!element);

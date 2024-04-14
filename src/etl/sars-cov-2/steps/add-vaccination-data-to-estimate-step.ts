@@ -5,7 +5,10 @@ import {
 } from "./jitter-pin-lat-lng-step";
 
 export type EstimateFieldsAfterAddingVaccinationDataStep =
-  EstimateFieldsAfterJitteringPinLatLngStep;
+  EstimateFieldsAfterJitteringPinLatLngStep & {
+    countryPeopleVaccinatedPerHundred: number | undefined;
+    countryPeopleFullyVaccinatedPerHundred: number | undefined;
+  };
 export type StructuredVaccinationDataAfterAddingVaccinationDataStep =
   StructuredVaccinationDataAfterJitteringPinLatLngStep;
 export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
@@ -31,7 +34,24 @@ export const addVaccinationDataToEstimateStep = (
   );
 
   return {
-    allEstimates: input.allEstimates,
+    allEstimates: input.allEstimates.map((estimate) => {
+      const {
+        countryPeopleVaccinatedPerHundred,
+        countryPeopleFullyVaccinatedPerHundred
+      } = input.vaccinationData
+        .find((element) => element.threeLetterCountryCode === estimate.countryAlphaThreeCode)?.data
+        .find((element) => estimate.samplingMidDate && element.year === estimate.samplingMidDate.getUTCFullYear().toString())?.data
+        .find((element) => estimate.samplingMidDate && element.month === (estimate.samplingMidDate.getUTCMonth() + 1).toString())?.data
+        .find((element) => estimate.samplingMidDate && element.day === (estimate.samplingMidDate.getUTCDate()).toString()) ?? {
+          countryPeopleVaccinatedPerHundred: undefined,
+          countryPeopleFullyVaccinatedPerHundred: undefined
+        }
+      return {
+        ...estimate,
+        countryPeopleVaccinatedPerHundred,
+        countryPeopleFullyVaccinatedPerHundred
+      }
+    }),
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

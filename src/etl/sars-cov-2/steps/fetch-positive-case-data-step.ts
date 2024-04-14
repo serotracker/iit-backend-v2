@@ -253,7 +253,7 @@ export const fetchPositiveCaseDataStep = async(
 
   const rawCsvData = await body.text();
   
-  const csvColumns = rawCsvData.at(0)?.split(',') ?? []
+  const csvColumns = rawCsvData.split("\n").at(0)?.split(',') ?? []
   const indexOfDateColumn = csvColumns.findIndex(columnValue => columnValue === 'date');
   const countryCodesWithIndices = typedObjectEntries(countryNamesInCSVToTwoLetterCountryCode)
     .map(([countryNameInCsvFile, twoLetterCountryCode]) => ({
@@ -264,7 +264,7 @@ export const fetchPositiveCaseDataStep = async(
   const unformattedPositiveCaseData = rawCsvData
     .split("\n")
     .flatMap((element, index) => {
-      if (index === 0) {
+      if (index === 0 || !element) {
         return undefined;
       }
 
@@ -279,8 +279,8 @@ export const fetchPositiveCaseDataStep = async(
         year,
         month,
         day,
-        totalPositiveCasesPerHundred: !!split_csv_line[indexOfColumn] ? parseFloat(split_csv_line[indexOfColumn]) : 0,
-      }: undefined)).filter(<T>(element: T | undefined): element is T => !!element);
+        countryPositiveCasesPerMillionPeople: split_csv_line[indexOfColumn] !== '' ? parseFloat(split_csv_line[indexOfColumn]) : undefined,
+      } : undefined)).filter(<T>(element: T | undefined): element is T => !!element);
     })
     .filter(<T>(element: T | undefined): element is T => !!element);
 

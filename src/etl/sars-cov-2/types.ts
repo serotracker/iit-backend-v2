@@ -15,7 +15,7 @@ export const isAirtableError = (input: unknown): input is AirtableError => {
 
 export interface AirtableSarsCov2EstimateFields {
   id: string;
-  "Alpha3 Code": Array<string>;
+  "Alpha3 Code": Array<string | null | AirtableError>;
   "Source Type": Array<string | null>;
   "Overall Risk of Bias (JBI)": Array<string | null | AirtableError>;
   "Sample Frame (age)": string | null;
@@ -43,7 +43,8 @@ export type StructuredVaccinationData = Array<{
       month: string,
       data: Array<{
         day: string,
-        totalVaccinationsPerHundred: number
+        countryPeopleVaccinatedPerHundred: number | undefined,
+        countryPeopleFullyVaccinatedPerHundred: number | undefined
       }>
     }>
   }>
@@ -57,7 +58,7 @@ export type StructuredPositiveCaseData = Array<{
       month: string,
       data: Array<{
         day: string,
-        totalPositiveCasesPerHundred: number
+        countryPositiveCasesPerMillionPeople: number | undefined
       }>
     }>
   }>

@@ -19,6 +19,8 @@ import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not
 import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
 import { fetchVaccinationDataStep } from "./steps/fetch-vaccination-data-step.js";
 import { fetchPositiveCaseDataStep } from "./steps/fetch-positive-case-data-step.js";
+import { addVaccinationDataToEstimateStep } from "./steps/add-vaccination-data-to-estimate-step.js";
+import { addPositiveCaseDataToEstimateStep } from "./steps/add-positive-case-data-to-estimate-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");

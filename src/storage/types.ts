@@ -87,6 +87,10 @@ export interface SarsCov2EstimateDocument {
   scope: string | undefined;
   samplingEndDate: Date | undefined;
   samplingStartDate: Date | undefined;
+  samplingMidDate: Date | undefined;
+  countryPeopleVaccinatedPerHundred: number | undefined;
+  countryPeopleFullyVaccinatedPerHundred: number | undefined;
+  countryPositiveCasesPerMillionPeople: number | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
