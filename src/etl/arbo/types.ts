@@ -25,6 +25,10 @@ export type AirtableEstimateFields = {
   "Sample Size": number | undefined;
   "Serotype": string[] | undefined;
   Seroprevalence: number | undefined;
+  "Seroprevalence 95% CI Lower": number | undefined;
+  "Seroprevalence 95% CI Upper": number | undefined;
+  "Seroprevalence 95% CI Lower (formula)": number | undefined;
+  "Seroprevalence 95% CI Upper (formula)": number | undefined;
   "Subgroups Available": string[] | undefined;
   Continent: string | undefined;
   "Country archive": string | undefined;
