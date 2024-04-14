@@ -1,7 +1,6 @@
 import { FieldSet } from "airtable";
 import { z } from "zod";
 import { AirtableSarsCov2EstimateFields } from "../types.js";
-import { isArrayOfUnknownType } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2EstimateFields;
@@ -33,19 +32,7 @@ export const validateFieldSetFromAirtableStep = (
           z.object({ error: z.string() }),
         ]).array()
       )
-      .transform((field) => {
-        if (!field) {
-          return [];
-        }
-
-        return field.map((element) => {
-          if (typeof element === 'string') {
-            return element;
-          }
-
-          return undefined
-        }).filter(<T>(element: T | undefined): element is T => !!element)
-      }),
+      .transform((field) => field ?? []),
     "Sample Frame (age)": z
       .optional(z.string().nullable())
       .transform((field) => field ?? null),
@@ -74,6 +61,29 @@ export const validateFieldSetFromAirtableStep = (
       .transform((field) => field ?? null),
     "Sampling Start Date": z
       .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Test Type": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Isotype(s) Reported": z
+      .optional(z.union([
+        z.string().nullable(),
+        z.string().nullable().array()
+      ]))
+      .transform((field) => field ?? null),
+    "UNITY: Criteria": z
+      .optional(
+        z.union([
+          z.string().nullable(),
+          z.object({ error: z.string() }),
+        ]).array()
+      )
+      .transform((field) => field ?? []),
+    "Antibody target": z
+      .optional(z.union([
+        z.string().nullable(),
+        z.string().nullable().array()
+      ]))
       .transform((field) => field ?? null),
   });
 

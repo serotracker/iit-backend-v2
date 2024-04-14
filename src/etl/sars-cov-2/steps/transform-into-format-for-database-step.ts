@@ -25,6 +25,10 @@ export const transformIntoFormatForDatabaseStep = (
   return {
     allEstimates: allEstimates.map((estimate) => ({
       _id: new ObjectId(),
+      antibodies: estimate.antibodies,
+      isotypes: estimate.isotypes,
+      isWHOUnityAligned: estimate.isWHOUnityAligned,
+      testType: estimate.testType,
       riskOfBias: estimate.riskOfBias,
       ageGroup: estimate.ageGroup,
       sex: estimate.sex,

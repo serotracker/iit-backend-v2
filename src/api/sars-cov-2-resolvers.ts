@@ -30,7 +30,11 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     samplingEndDate: document.samplingEndDate?.toISOString(),
     samplingStartDate: document.samplingStartDate?.toISOString(),
     sex: document.sex,
-    sourceType: document.sourceType
+    sourceType: document.sourceType,
+    antibodies: document.antibodies,
+    isotypes: document.isotypes,
+    isWHOUnityAligned: document.isWHOUnityAligned,
+    testType: document.testType
   }
 }
 
@@ -57,6 +61,9 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       riskOfBias,
       unRegion,
       whoRegion,
+      antibodies,
+      isotypes,
+      testType
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -64,6 +71,9 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('riskOfBias').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('testType').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     return {
@@ -73,6 +83,9 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       riskOfBias,
       unRegion: unRegion.map((region) => mapUnRegionForApi(region)),
       whoRegion: whoRegion.map((region) => mapWhoRegionForApi(region)),
+      antibodies,
+      isotypes,
+      testType,
     }
   }
   

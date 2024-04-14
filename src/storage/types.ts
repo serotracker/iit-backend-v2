@@ -67,6 +67,10 @@ export interface TeamMemberDocument {
 export interface SarsCov2EstimateDocument {
   _id: ObjectId;
   riskOfBias: string | undefined;
+  antibodies: string[];
+  isotypes: string[];
+  isWHOUnityAligned: boolean;
+  testType: string[];
   ageGroup: string | undefined;
   sex: string | undefined;
   sourceType: string | undefined;

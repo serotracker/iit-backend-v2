@@ -1,7 +1,13 @@
+import { isArrayOfUnknownType } from "../../../lib/lib.js";
 import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
+import { isAirtableError, AirtableError } from "../types.js";
 
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
   id: string;
+  antibodies: string[];
+  isotypes: string[];
+  isWHOUnityAligned: boolean;
+  testType: string[];
   riskOfBias: string | undefined;
   ageGroup: string | undefined;
   sex: string | undefined;
@@ -25,25 +31,31 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFieldNamesStep[];
 }
 
-interface CleanArrayFieldInput<
+interface CleanArrayFieldToSingleValueInput<
   TFieldName extends string,
-  TEstimate extends Record<TFieldName, Array<string | null>> & { id: string },
+  TEstimate extends Record<TFieldName, Array<string | null | AirtableError>> & {
+    id: string;
+  },
 > {
   key: TFieldName;
   estimate: TEstimate;
 }
 
-interface CleanArrayFieldOutput {
+interface CleanArrayFieldToSingleValueOutput {
   value: string | undefined;
 }
 
-const cleanArrayField = <
+const cleanArrayFieldToSingleValue = <
   TFieldName extends string,
-  TEstimate extends Record<TFieldName, Array<string | null>> & { id: string },
+  TEstimate extends Record<TFieldName, Array<string | null | AirtableError>> & {
+    id: string;
+  },
 >(
-  input: CleanArrayFieldInput<TFieldName, TEstimate>
-): CleanArrayFieldOutput => {
-  const inputValue = input.estimate[input.key];
+  input: CleanArrayFieldToSingleValueInput<TFieldName, TEstimate>
+): CleanArrayFieldToSingleValueOutput => {
+  const inputValue = input.estimate[input.key].filter(
+    <T>(element: T | AirtableError): element is T => !isAirtableError(element)
+  );
 
   if (inputValue.length > 1) {
     console.error(
@@ -53,6 +65,45 @@ const cleanArrayField = <
 
   return {
     value: inputValue.length > 0 ? inputValue[0] ?? undefined : undefined,
+  };
+};
+
+interface ConvertSingleValueOrArrayToArrayInput<
+  TFieldName extends string,
+  TEstimate extends Record<TFieldName, string | null | Array<string | null>> & {
+    id: string;
+  },
+> {
+  key: TFieldName;
+  estimate: TEstimate;
+}
+
+interface ConvertSingleValueOrArrayToArrayOutput {
+  value: string[];
+}
+
+const convertSingleValueOrArrayToArray = <
+  TFieldName extends string,
+  TEstimate extends Record<TFieldName, string | null | Array<string | null>> & {
+    id: string;
+  },
+>(
+  input: ConvertSingleValueOrArrayToArrayInput<TFieldName, TEstimate>
+): ConvertSingleValueOrArrayToArrayOutput => {
+  const inputValue = input.estimate[input.key];
+
+  if (!inputValue) {
+    return { value: [] };
+  }
+
+  if (!isArrayOfUnknownType(inputValue)) {
+    return { value: [inputValue] };
+  }
+
+  return {
+    value: inputValue.filter(
+      <T>(element: T | null): element is T => element !== null
+    ),
   };
 };
 
@@ -66,11 +117,31 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
-      sourceType: cleanArrayField({
+      antibodies: convertSingleValueOrArrayToArray({
+        key: "Antibody target",
+        estimate,
+      }).value.flatMap((antibodyString) => {
+        return [...new Set(antibodyString.split(',').map((element) => element.trim()).filter((element) => !!element))]
+      }),
+      isotypes: convertSingleValueOrArrayToArray({
+        key: "Isotype(s) Reported",
+        estimate,
+      }).value.flatMap((isotypeString) => {
+        return [...new Set(isotypeString.split(',').map((element) => element.trim()).filter((element) => !!element))]
+      }),
+      isWHOUnityAligned:
+        cleanArrayFieldToSingleValue({
+          key: "UNITY: Criteria",
+          estimate,
+        }).value === "Unity-Aligned"
+          ? true
+          : false,
+      testType: estimate["Test Type"] ? [...new Set(estimate["Test Type"].split(',').map((element) => element.trim()).filter((element) => !!element))] : [],
+      sourceType: cleanArrayFieldToSingleValue({
         key: "Source Type",
         estimate,
       }).value,
-      riskOfBias: cleanArrayField({
+      riskOfBias: cleanArrayFieldToSingleValue({
         key: "Overall Risk of Bias (JBI)",
         estimate,
       }).value,
