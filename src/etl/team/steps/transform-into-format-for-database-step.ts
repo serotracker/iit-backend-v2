@@ -46,6 +46,7 @@ export const transformIntoFormatForDatabaseStep = (
     affiliations: teamMember.affiliations.map((affiliation) => ({
       label: affiliation,
     })),
+    arbotrackerContributorFlag: teamMember.arbotrackerContributorFlag,
     createdAt: createdAtForAllRecords,
     updatedAt: updatedAtForAllRecords,
   }));

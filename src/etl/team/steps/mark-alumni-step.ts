@@ -27,7 +27,7 @@ export const markAlumniStep = (
 
     return {
       ...teamMember,
-      teams: ["Alumni"]
+      teams: ["SeroTracker Alumni"]
     }
   });
 

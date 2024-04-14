@@ -57,6 +57,10 @@ export type ArbovirusEstimate = {
   sampleSize: Scalars['Int']['output'];
   sampleStartDate?: Maybe<Scalars['String']['output']>;
   seroprevalence?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CIUpper?: Maybe<Scalars['Float']['output']>;
   serotype: Array<Scalars['String']['output']>;
   sex?: Maybe<Scalars['String']['output']>;
   sourceSheetId?: Maybe<Scalars['String']['output']>;
@@ -132,6 +136,7 @@ export type SarsCov2FilterOptions = {
 
 export type TeamMember = {
   __typename?: 'TeamMember';
+  additionalSymbols: Array<TeamMemberSymbol>;
   affiliations: Array<Affiliation>;
   email?: Maybe<Scalars['String']['output']>;
   firstName: Scalars['String']['output'];
@@ -145,6 +150,10 @@ export type TeamMemberGroup = {
   label: Scalars['String']['output'];
   teamMembers: Array<TeamMember>;
 };
+
+export enum TeamMemberSymbol {
+  ArbotrackerSymbol = 'ARBOTRACKER_SYMBOL'
+}
 
 export enum UnRegion {
   AustraliaAndNewZealand = 'AUSTRALIA_AND_NEW_ZEALAND',
@@ -264,6 +273,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   TeamMember: ResolverTypeWrapper<TeamMember>;
   TeamMemberGroup: ResolverTypeWrapper<TeamMemberGroup>;
+  TeamMemberSymbol: TeamMemberSymbol;
   UNRegion: UnRegion;
   WHORegion: WhoRegion;
 };
@@ -326,6 +336,10 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sampleSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sampleStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   seroprevalence?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -400,6 +414,7 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
 };
 
 export type TeamMemberResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamMember'] = ResolversParentTypes['TeamMember']> = {
+  additionalSymbols?: Resolver<Array<ResolversTypes['TeamMemberSymbol']>, ParentType, ContextType>;
   affiliations?: Resolver<Array<ResolversTypes['Affiliation']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

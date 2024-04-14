@@ -12,6 +12,7 @@ export interface TeamMemberFieldsAfterCleaningFieldNamesStep {
   affiliationOne: string | undefined;
   affiliationTwo: string | undefined;
   affiliationThree: string | undefined;
+  arbotrackerContributorFlag: boolean;
 }
 
 export interface TeamSortOrderEntryFieldsAfterCleaningFieldNamesStep {
@@ -45,7 +46,8 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (input: CleanFieldNamesA
     linkedinUrl: teamMember["Linkedin URL"],
     affiliationOne: teamMember["Affiliation 1"],
     affiliationTwo: teamMember["Affiliation 2"],
-    affiliationThree: teamMember["Affiliation 3"]
+    affiliationThree: teamMember["Affiliation 3"],
+    arbotrackerContributorFlag: teamMember["ArboTracker"] ?? false
   }))
 
   const teamSortOrder = input.teamSortOrder.map((teamSortOrderEntry) => ({

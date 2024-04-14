@@ -7,9 +7,14 @@ export const teamTypedefs = `
     firstName: String!
     lastName: String!
     email: String
+    additionalSymbols: [TeamMemberSymbol!]!
     twitterUrl: String
     linkedinUrl: String
     affiliations: [Affiliation!]!
+  }
+
+  enum TeamMemberSymbol {
+    ARBOTRACKER_SYMBOL
   }
 
   type TeamMemberGroup {
