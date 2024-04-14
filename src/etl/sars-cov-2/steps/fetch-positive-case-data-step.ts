@@ -2,6 +2,7 @@ import { request } from "undici";
 import { StructuredPositiveCaseData } from "../types";
 import { EstimateFieldsAfterFetchingVaccinationDataStep, StructuredPositiveCaseDataAfterFetchingVaccinationDataStep, StructuredVaccinationDataAfterFetchingVaccinationDataStep } from "./fetch-vaccination-data-step";
 import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
+import { groupByArray, typedObjectEntries } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingPositiveCaseDataStep = EstimateFieldsAfterFetchingVaccinationDataStep;
 export type StructuredVaccinationDataAfterFetchingPositiveCaseDataStep = StructuredVaccinationDataAfterFetchingVaccinationDataStep;
@@ -251,10 +252,52 @@ export const fetchPositiveCaseDataStep = async(
   );
 
   const rawCsvData = await body.text();
+  
+  const csvColumns = rawCsvData.at(0)?.split(',') ?? []
+  const indexOfDateColumn = csvColumns.findIndex(columnValue => columnValue === 'date');
+  const countryCodesWithIndices = typedObjectEntries(countryNamesInCSVToTwoLetterCountryCode)
+    .map(([countryNameInCsvFile, twoLetterCountryCode]) => ({
+      twoLetterCountryCode: twoLetterCountryCode,
+      indexOfColumn: csvColumns.findIndex(columnValue => columnValue === countryNameInCsvFile)
+    }))
+
+  const unformattedPositiveCaseData = rawCsvData
+    .split("\n")
+    .flatMap((element, index) => {
+      if (index === 0) {
+        return undefined;
+      }
+
+      const split_csv_line = element.split(",");
+      const date = split_csv_line[indexOfDateColumn];
+      const year = date.split("-")[0]
+      const month = date.split("-")[1]
+      const day = date.split("-")[2]
+
+      return countryCodesWithIndices.map(({ twoLetterCountryCode, indexOfColumn }) => (twoLetterCountryCode ? {
+        twoLetterCountryCode,
+        year,
+        month,
+        day,
+        totalPositiveCasesPerHundred: !!split_csv_line[indexOfColumn] ? parseFloat(split_csv_line[indexOfColumn]) : 0,
+      }: undefined)).filter(<T>(element: T | undefined): element is T => !!element);
+    })
+    .filter(<T>(element: T | undefined): element is T => !!element);
+
+  const formattedPositiveCaseData = groupByArray(
+    unformattedPositiveCaseData,
+    "twoLetterCountryCode"
+  ).map(({ twoLetterCountryCode, data }) => ({
+    twoLetterCountryCode,
+    data: groupByArray(data, "year").map(({ year, data }) => ({
+      year,
+      data: groupByArray(data, "month"),
+    })),
+  }));
 
   return {
     allEstimates: input.allEstimates,
     vaccinationData: input.vaccinationData,
-    positiveCaseData: input.positiveCaseData,
+    positiveCaseData: formattedPositiveCaseData,
   };
 };

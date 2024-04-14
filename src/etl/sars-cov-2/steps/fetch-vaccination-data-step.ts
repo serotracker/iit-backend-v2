@@ -50,7 +50,7 @@ export const fetchVaccinationDataStep = async (
         year: split_csv_line[2].split("-")[0],
         month: split_csv_line[2].split("-")[1],
         day: split_csv_line[2].split("-")[2],
-        totalVaccinationsPerHundred: parseFloat(split_csv_line[10]),
+        totalVaccinationsPerHundred: !!split_csv_line[10] ? parseFloat(split_csv_line[10]) : 0,
       };
     })
     .filter(<T>(element: T | undefined): element is T => !!element);
