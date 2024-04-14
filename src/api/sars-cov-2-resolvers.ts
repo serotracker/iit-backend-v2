@@ -21,6 +21,7 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     longitude: document.longitude,
     country: document.country,
     countryAlphaTwoCode: document.countryAlphaTwoCode,
+    countryAlphaThreeCode: document.countryAlphaThreeCode,
     unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
     whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
     state: document.state,

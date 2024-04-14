@@ -49,6 +49,7 @@ export const transformIntoFormatForDatabaseStep = (
       longitude: estimate.longitude,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
+      countryAlphaThreeCode: estimate.countryAlphaThreeCode,
       whoRegion: estimate.whoRegion,
       unRegion: estimate.unRegion,
       state: estimate.state,

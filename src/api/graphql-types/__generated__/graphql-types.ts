@@ -103,6 +103,7 @@ export type SarsCov2Estimate = {
   antibodies: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
   countryPeopleFullyVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   countryPeopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
@@ -385,6 +386,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   antibodies?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryPeopleFullyVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   countryPeopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;

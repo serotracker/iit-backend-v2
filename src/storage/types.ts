@@ -81,6 +81,7 @@ export interface SarsCov2EstimateDocument {
   unRegion: UNRegion | undefined;
   country: string;
   countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
   state: string | undefined;
   county: string | undefined;
   city: string | undefined;
