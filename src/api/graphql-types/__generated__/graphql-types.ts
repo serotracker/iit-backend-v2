@@ -104,6 +104,9 @@ export type SarsCov2Estimate = {
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  countryPeopleFullyVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
+  countryPeopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
+  countryPositiveCasesPerMillionPeople?: Maybe<Scalars['Float']['output']>;
   id: Scalars['String']['output'];
   isWHOUnityAligned: Scalars['Boolean']['output'];
   isotypes: Array<Scalars['String']['output']>;
@@ -112,6 +115,7 @@ export type SarsCov2Estimate = {
   populationGroup?: Maybe<Scalars['String']['output']>;
   riskOfBias?: Maybe<Scalars['String']['output']>;
   samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
   samplingStartDate?: Maybe<Scalars['String']['output']>;
   sex?: Maybe<Scalars['String']['output']>;
   sourceType?: Maybe<Scalars['String']['output']>;
@@ -382,6 +386,9 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryPeopleFullyVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  countryPeopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  countryPositiveCasesPerMillionPeople?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   isWHOUnityAligned?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
@@ -390,6 +397,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   populationGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

@@ -20,6 +20,10 @@ export const sarsCov2Typedefs = `
     longitude: Float!
     samplingStartDate: String
     samplingEndDate: String
+    samplingMidDate: String
+    countryPeopleVaccinatedPerHundred: Float
+    countryPeopleFullyVaccinatedPerHundred: Float
+    countryPositiveCasesPerMillionPeople: Float
   }
 
   type SarsCov2FilterOptions {
