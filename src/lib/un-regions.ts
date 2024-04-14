@@ -1,6 +1,6 @@
 import { TwoLetterIsoCountryCode } from "./geocoding-api/country-codes";
 
-enum UNRegion {
+export enum UNRegion {
   NORTHERN_AFRICA = "NORTHERN_AFRICA",
   EASTERN_AFRICA = "EASTERN_AFRICA",
   MIDDLE_AFRICA = "MIDDLE_AFRICA",

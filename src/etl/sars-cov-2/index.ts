@@ -16,13 +16,14 @@ import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 import { filterStudiesThatDoNotMeetDataStructureRequirement } from "./steps/filter-studies-that-do-not-meet-data-structure-requirements.js";
 import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
+import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
   const airtableApiKey = getEnvironmentVariableOrThrow({
     key: "AIRTABLE_API_KEY",
   });
-  const airtableArboBaseId = getEnvironmentVariableOrThrow({
+  const airtableSC2BaseId = getEnvironmentVariableOrThrow({
     key: "AIRTABLE_SARSCOV2_BASE_ID",
   });
   const mongoUri = getEnvironmentVariableOrThrow({ key: "MONGODB_URI" });
@@ -31,7 +32,7 @@ const runEtlMain = async () => {
   const mongoClient = await getMongoClient({ mongoUri });
 
   const airtable = new Airtable({ apiKey: airtableApiKey });
-  const base = new Airtable.Base(airtable, airtableArboBaseId);
+  const base = new Airtable.Base(airtable, airtableSC2BaseId);
   const estimateSheet = base.table("Rapid Review: Estimates");
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] =
@@ -52,6 +53,7 @@ const runEtlMain = async () => {
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),
     etlStep(parseDatesStep),
+    etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
     etlStep(transformIntoFormatForDatabaseStep),

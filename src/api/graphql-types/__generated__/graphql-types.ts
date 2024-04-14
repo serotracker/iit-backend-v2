@@ -102,6 +102,7 @@ export type SarsCov2Estimate = {
   ageGroup?: Maybe<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
   id: Scalars['String']['output'];
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
@@ -112,6 +113,8 @@ export type SarsCov2Estimate = {
   sex?: Maybe<Scalars['String']['output']>;
   sourceType?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
 };
 
 export type SarsCov2FilterOptions = {
@@ -120,6 +123,8 @@ export type SarsCov2FilterOptions = {
   country: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
+  unRegion: Array<UnRegion>;
+  whoRegion: Array<WhoRegion>;
 };
 
 export type TeamMember = {
@@ -141,6 +146,40 @@ export type TeamMemberGroup = {
 
 export enum TeamMemberSymbol {
   ArbotrackerSymbol = 'ARBOTRACKER_SYMBOL'
+}
+
+export enum UnRegion {
+  AustraliaAndNewZealand = 'AUSTRALIA_AND_NEW_ZEALAND',
+  Caribbean = 'CARIBBEAN',
+  CentralAmerica = 'CENTRAL_AMERICA',
+  CentralAsia = 'CENTRAL_ASIA',
+  EasternAfrica = 'EASTERN_AFRICA',
+  EasternAsia = 'EASTERN_ASIA',
+  EasternEurope = 'EASTERN_EUROPE',
+  Melanesia = 'MELANESIA',
+  Micronesia = 'MICRONESIA',
+  MiddleAfrica = 'MIDDLE_AFRICA',
+  NorthernAfrica = 'NORTHERN_AFRICA',
+  NorthernAmerica = 'NORTHERN_AMERICA',
+  NorthernEurope = 'NORTHERN_EUROPE',
+  Polynesia = 'POLYNESIA',
+  SouthernAfrica = 'SOUTHERN_AFRICA',
+  SouthernAsia = 'SOUTHERN_ASIA',
+  SouthernEurope = 'SOUTHERN_EUROPE',
+  SouthAmerica = 'SOUTH_AMERICA',
+  SouthEasternAsia = 'SOUTH_EASTERN_ASIA',
+  WesternAfrica = 'WESTERN_AFRICA',
+  WesternAsia = 'WESTERN_ASIA',
+  WesternEurope = 'WESTERN_EUROPE'
+}
+
+export enum WhoRegion {
+  Afr = 'AFR',
+  Amr = 'AMR',
+  Emr = 'EMR',
+  Eur = 'EUR',
+  Sear = 'SEAR',
+  Wpr = 'WPR'
 }
 
 
@@ -228,6 +267,8 @@ export type ResolversTypes = {
   TeamMember: ResolverTypeWrapper<TeamMember>;
   TeamMemberGroup: ResolverTypeWrapper<TeamMemberGroup>;
   TeamMemberSymbol: TeamMemberSymbol;
+  UNRegion: UnRegion;
+  WHORegion: WhoRegion;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -332,6 +373,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   ageGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -342,6 +384,8 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -350,6 +394,8 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Array<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

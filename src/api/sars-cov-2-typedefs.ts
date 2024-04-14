@@ -6,6 +6,9 @@ export const sarsCov2Typedefs = `
     sex: String
     ageGroup: String
     country: String!
+    countryAlphaTwoCode: String!
+    whoRegion: WHORegion
+    unRegion: UNRegion
     state: String
     city: String
     id: String!
@@ -20,6 +23,8 @@ export const sarsCov2Typedefs = `
     country: [String!]!
     sourceType: [String!]!
     riskOfBias: [String!]!
+    unRegion: [UNRegion!]!
+    whoRegion: [WHORegion!]!
   }
 
   type Query {

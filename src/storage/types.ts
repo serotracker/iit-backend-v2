@@ -1,4 +1,6 @@
 import { Document, ObjectId } from "mongodb";
+import { WHORegion } from "../lib/who-regions";
+import { UNRegion } from "../lib/un-regions";
 
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
@@ -71,7 +73,10 @@ export interface SarsCov2EstimateDocument {
   populationGroup: string | undefined;
   latitude: number;
   longitude: number;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
   country: string;
+  countryAlphaTwoCode: string;
   state: string | undefined;
   county: string | undefined;
   city: string | undefined;
