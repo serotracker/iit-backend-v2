@@ -1,6 +1,12 @@
-import { UnRegion as UnRegionForApi, WhoRegion as WhoRegionForApi } from "./graphql-types/__generated__/graphql-types.js";
+import {
+  UnRegion as UnRegionForApi,
+  WhoRegion as WhoRegionForApi,
+  GbdSubRegion as GBDSubRegionForApi,
+  GbdSuperRegion as GBDSuperRegionForApi,
+} from "./graphql-types/__generated__/graphql-types.js";
 import { UNRegion } from "../lib/un-regions.js";
 import { WHORegion } from "../lib/who-regions.js";
+import { GBDSuperRegion, GBDSubRegion } from "../lib/gbd-regions.js";
 
 const unRegionMap: {[key in UNRegion]: UnRegionForApi} = {
   [UNRegion.NORTHERN_AFRICA]: UnRegionForApi.NorthernAfrica,
@@ -36,5 +42,41 @@ const whoRegionMap: {[key in WHORegion]: WhoRegionForApi} = {
   [WHORegion.WPR]: WhoRegionForApi.Wpr,
 }
 
+const gbSuperRegionMap: {[key in GBDSuperRegion]: GBDSuperRegionForApi} = {
+  [GBDSuperRegion.CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA]: GBDSuperRegionForApi.CentralEuropeEasternEuropeAndCentralAsia,
+  [GBDSuperRegion.HIGH_INCOME]: GBDSuperRegionForApi.HighIncome,
+  [GBDSuperRegion.LATIN_AMERICA_AND_CARIBBEAN]: GBDSuperRegionForApi.LatinAmericaAndCaribbean,
+  [GBDSuperRegion.NORTH_AFRICA_AND_MIDDLE_EAST]: GBDSuperRegionForApi.NorthAfricaAndMiddleEast,
+  [GBDSuperRegion.SOUTH_ASIA]: GBDSuperRegionForApi.SouthAsia,
+  [GBDSuperRegion.SOUTH_EAST_ASIA_EAST_ASIA_AND_OCEANIA]: GBDSuperRegionForApi.SouthEastAsiaEastAsiaAndOceania,
+  [GBDSuperRegion.SUB_SAHARAN_AFRICA]: GBDSuperRegionForApi.SubSaharanAfrica,
+}
+
+const gbSubRegionMap: {[key in GBDSubRegion]: GBDSubRegionForApi} = {
+  [GBDSubRegion.SOUTH_EAST_ASIA_EAST_ASIA_AND_OCEANIA_SUBREGION_SOUTH_EAST_ASIA]: GBDSubRegionForApi.SouthEastAsiaEastAsiaAndOceaniaSubregionSouthEastAsia,
+  [GBDSubRegion.SOUTH_EAST_ASIA_EAST_ASIA_AND_OCEANIA_SUBREGION_OCEANIA]: GBDSubRegionForApi.SouthEastAsiaEastAsiaAndOceaniaSubregionOceania,
+  [GBDSubRegion.SOUTH_EAST_ASIA_EAST_ASIA_AND_OCEANIA_SUBREGION_EAST_ASIA]: GBDSubRegionForApi.SouthEastAsiaEastAsiaAndOceaniaSubregionEastAsia,
+  [GBDSubRegion.SOUTH_ASIA_SUBREGION_SOUTH_ASIA]: GBDSubRegionForApi.SouthAsiaSubregionSouthAsia,
+  [GBDSubRegion.SUB_SAHARAN_AFRICA_SUBREGION_WESTERN]: GBDSubRegionForApi.SubSaharanAfricaSubregionWestern,
+  [GBDSubRegion.SUB_SAHARAN_AFRICA_SUBREGION_SOUTHERN]: GBDSubRegionForApi.SubSaharanAfricaSubregionSouthern,
+  [GBDSubRegion.SUB_SAHARAN_AFRICA_SUBREGION_CENTRAL]: GBDSubRegionForApi.SubSaharanAfricaSubregionCentral,
+  [GBDSubRegion.SUB_SAHARAN_AFRICA_SUBREGION_EASTERN]: GBDSubRegionForApi.SubSaharanAfricaSubregionEastern,
+  [GBDSubRegion.LATIN_AMERICA_AND_CARIBBEAN_SUBREGION_TROPICAL]: GBDSubRegionForApi.LatinAmericaAndCaribbeanSubregionTropical,
+  [GBDSubRegion.LATIN_AMERICA_AND_CARIBBEAN_SUBREGION_CARIBBEAN]: GBDSubRegionForApi.LatinAmericaAndCaribbeanSubregionCaribbean,
+  [GBDSubRegion.LATIN_AMERICA_AND_CARIBBEAN_SUBREGION_ANDEAN]: GBDSubRegionForApi.LatinAmericaAndCaribbeanSubregionAndean,
+  [GBDSubRegion.LATIN_AMERICA_AND_CARIBBEAN_SUBREGION_CENTRAL]: GBDSubRegionForApi.LatinAmericaAndCaribbeanSubregionCentral,
+  [GBDSubRegion.CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_CENTRAL_ASIA]: GBDSubRegionForApi.CentralEuropeEasternEuropeAndCentralAsiaSubregionCentralAsia,
+  [GBDSubRegion.CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_CENTRAL_EUROPE]: GBDSubRegionForApi.CentralEuropeEasternEuropeAndCentralAsiaSubregionCentralEurope,
+  [GBDSubRegion.CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_EASTERN_EUROPE]: GBDSubRegionForApi.CentralEuropeEasternEuropeAndCentralAsiaSubregionEasternEurope,
+  [GBDSubRegion.NORTH_AFRICA_AND_MIDDLE_EAST_SUBREGION_NORTH_AFRICA_AND_MIDDLE_EAST]: GBDSubRegionForApi.NorthAfricaAndMiddleEastSubregionNorthAfricaAndMiddleEast,
+  [GBDSubRegion.HIGH_INCOME_SUBREGION_WESTERN_EUROPE]: GBDSubRegionForApi.HighIncomeSubregionWesternEurope,
+  [GBDSubRegion.HIGH_INCOME_SUBREGION_SOUTHERN_LATIN_AMERICA]: GBDSubRegionForApi.HighIncomeSubregionSouthernLatinAmerica,
+  [GBDSubRegion.HIGH_INCOME_SUBREGION_NORTH_AMERICA]: GBDSubRegionForApi.HighIncomeSubregionNorthAmerica,
+  [GBDSubRegion.HIGH_INCOME_SUBREGION_ASIA_PACIFIC]: GBDSubRegionForApi.HighIncomeSubregionAsiaPacific,
+  [GBDSubRegion.HIGH_INCOME_SUBREGION_AUSTRALASIA]: GBDSubRegionForApi.HighIncomeSubregionAustralasia
+}
+
 export const mapUnRegionForApi = (unRegion: UNRegion): UnRegionForApi => unRegionMap[unRegion];
 export const mapWhoRegionForApi = (whoRegion: WHORegion): WhoRegionForApi => whoRegionMap[whoRegion];
+export const mapGbdSubRegionForApi = (gbdSubRegion: GBDSubRegion): GBDSubRegionForApi => gbSubRegionMap[gbdSubRegion];
+export const mapGbdSuperRegionForApi = (gbdSuperRegion: GBDSuperRegion): GBDSuperRegionForApi => gbSuperRegionMap[gbdSuperRegion];
