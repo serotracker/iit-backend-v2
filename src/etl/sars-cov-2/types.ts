@@ -1,3 +1,5 @@
+import { ThreeLetterIsoCountryCode } from "../../lib/geocoding-api/country-codes";
+
 export interface AirtableError {
   error: unknown;
 };
@@ -13,6 +15,7 @@ export const isAirtableError = (input: unknown): input is AirtableError => {
 
 export interface AirtableSarsCov2EstimateFields {
   id: string;
+  "Alpha3 Code": Array<string | null | AirtableError>;
   "Source Type": Array<string | null>;
   "Overall Risk of Bias (JBI)": Array<string | null | AirtableError>;
   "Sample Frame (age)": string | null;
@@ -31,3 +34,32 @@ export interface AirtableSarsCov2EstimateFields {
   "Sampling End Date": string | null;
   "Sampling Start Date": string | null;
 }
+
+export type StructuredVaccinationData = Array<{
+  threeLetterCountryCode: string,
+  data: Array<{
+    year: string,
+    data: Array<{
+      month: string,
+      data: Array<{
+        day: string,
+        countryPeopleVaccinatedPerHundred: number | undefined,
+        countryPeopleFullyVaccinatedPerHundred: number | undefined
+      }>
+    }>
+  }>
+}>;
+
+export type StructuredPositiveCaseData = Array<{
+  twoLetterCountryCode: string,
+  data: Array<{
+    year: string,
+    data: Array<{
+      month: string,
+      data: Array<{
+        day: string,
+        countryPositiveCasesPerMillionPeople: number | undefined
+      }>
+    }>
+  }>
+}>;

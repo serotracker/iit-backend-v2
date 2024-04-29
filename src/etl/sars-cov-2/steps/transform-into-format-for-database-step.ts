@@ -1,13 +1,24 @@
 import { ObjectId } from "mongodb";
-import { EstimateFieldsAfterJitteringPinLatLngStep } from "./jitter-pin-lat-lng-step.js";
 import { SarsCov2EstimateDocument } from "../../../storage/types.js";
+import { 
+  EstimateFieldsAfterAddingPositiveCaseDataStep,
+  StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep,
+  StructuredVaccinationDataAfterAddingPositiveCaseDataStep
+} from "./add-positive-case-data-to-estimate-step.js";
+
+export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
+export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
+  vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: SarsCov2EstimateDocument[];
+  vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
 }
 
 export const transformIntoFormatForDatabaseStep = (
@@ -38,6 +49,7 @@ export const transformIntoFormatForDatabaseStep = (
       longitude: estimate.longitude,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
+      countryAlphaThreeCode: estimate.countryAlphaThreeCode,
       whoRegion: estimate.whoRegion,
       unRegion: estimate.unRegion,
       state: estimate.state,
@@ -46,8 +58,14 @@ export const transformIntoFormatForDatabaseStep = (
       scope: estimate.scope,
       samplingStartDate: estimate.samplingStartDate,
       samplingEndDate: estimate.samplingEndDate,
+      samplingMidDate: estimate.samplingMidDate,
+      countryPeopleVaccinatedPerHundred: estimate.countryPeopleVaccinatedPerHundred,
+      countryPeopleFullyVaccinatedPerHundred: estimate.countryPeopleFullyVaccinatedPerHundred,
+      countryPositiveCasesPerMillionPeople: estimate.countryPositiveCasesPerMillionPeople,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 };

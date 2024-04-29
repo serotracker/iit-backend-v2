@@ -1,15 +1,21 @@
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
-import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
+import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
 
 export type EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep =
   EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+export type StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep = StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+export type StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep = StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
+  vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 }
 
 interface TransformNotReportedValuesToUndefinedStepOutput {
   allEstimates: EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  vaccinationData: StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
 }
 
 enum NotReportedValue {
@@ -50,6 +56,8 @@ export const transformNotReportedValuesToUndefinedStep = (
             return [key, value];
           })
         ) as EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep
-    )
+    ),
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData,
   };
 };

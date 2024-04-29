@@ -1,16 +1,23 @@
 import { FieldSet } from "airtable";
 import { z } from "zod";
 import { AirtableSarsCov2EstimateFields } from "../types.js";
+import { StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2EstimateFields;
+export type StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep = StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
+export type StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep = StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
+  vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
 }
 
 interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 }
 
 export const validateFieldSetFromAirtableStep = (
@@ -24,6 +31,14 @@ export const validateFieldSetFromAirtableStep = (
     id: z.string(),
     "Source Type": z
       .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Alpha3 Code": z
+      .optional(
+        z.union([
+          z.string().nullable(),
+          z.object({ error: z.string() }),
+        ]).array()
+      )
       .transform((field) => field ?? []),
     "Overall Risk of Bias (JBI)": z
       .optional(
@@ -89,5 +104,9 @@ export const validateFieldSetFromAirtableStep = (
 
   const allEstimates = input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate));
 
-  return { allEstimates };
+  return { 
+    allEstimates,
+    vaccinationData: input.vaccinationData,
+    positiveCaseData: input.positiveCaseData
+  };
 };

@@ -17,6 +17,10 @@ import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-forma
 import { filterStudiesThatDoNotMeetDataStructureRequirement } from "./steps/filter-studies-that-do-not-meet-data-structure-requirements.js";
 import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
 import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
+import { fetchVaccinationDataStep } from "./steps/fetch-vaccination-data-step.js";
+import { fetchPositiveCaseDataStep } from "./steps/fetch-positive-case-data-step.js";
+import { addVaccinationDataToEstimateStep } from "./steps/add-vaccination-data-to-estimate-step.js";
+import { addPositiveCaseDataToEstimateStep } from "./steps/add-positive-case-data-to-estimate-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -46,7 +50,11 @@ const runEtlMain = async () => {
   const { allEstimates } = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
+      vaccinationData: undefined,
+      positiveCaseData: undefined,
     },
+    asyncEtlStep(fetchVaccinationDataStep),
+    asyncEtlStep(fetchPositiveCaseDataStep),
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
@@ -56,6 +64,8 @@ const runEtlMain = async () => {
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
+    etlStep(addVaccinationDataToEstimateStep),
+    etlStep(addPositiveCaseDataToEstimateStep),
     etlStep(transformIntoFormatForDatabaseStep),
   );
 

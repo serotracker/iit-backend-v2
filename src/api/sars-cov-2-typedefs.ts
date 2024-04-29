@@ -11,6 +11,7 @@ export const sarsCov2Typedefs = `
     ageGroup: String
     country: String!
     countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
     whoRegion: WHORegion
     unRegion: UNRegion
     state: String
@@ -20,6 +21,10 @@ export const sarsCov2Typedefs = `
     longitude: Float!
     samplingStartDate: String
     samplingEndDate: String
+    samplingMidDate: String
+    countryPeopleVaccinatedPerHundred: Float
+    countryPeopleFullyVaccinatedPerHundred: Float
+    countryPositiveCasesPerMillionPeople: Float
   }
 
   type SarsCov2FilterOptions {
