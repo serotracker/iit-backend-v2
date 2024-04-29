@@ -4,6 +4,7 @@ import { request } from "undici";
 import { groupByArray } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingVaccinationDataStep = FieldSet;
+export type StudyFieldsAfterFetchingVaccinationDataStep = FieldSet;
 export type StructuredVaccinationDataAfterFetchingVaccinationDataStep =
   StructuredVaccinationData;
 export type StructuredPositiveCaseDataAfterFetchingVaccinationDataStep =
@@ -11,12 +12,14 @@ export type StructuredPositiveCaseDataAfterFetchingVaccinationDataStep =
 
 interface FetchVaccinationDataStepInput {
   allEstimates: FieldSet[];
+  allStudies: FieldSet[];
   vaccinationData: undefined;
   positiveCaseData: undefined;
 }
 
 interface FetchVaccinationDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingVaccinationDataStep[];
+  allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
 }
@@ -74,6 +77,7 @@ export const fetchVaccinationDataStep = async (
 
   return {
     allEstimates: input.allEstimates,
+    allStudies: input.allStudies,
     vaccinationData: formattedVaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

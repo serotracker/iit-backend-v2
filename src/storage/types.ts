@@ -74,6 +74,7 @@ export interface SarsCov2EstimateDocument {
   testType: string[];
   ageGroup: string | undefined;
   sex: string | undefined;
+  studyName: string;
   sourceType: string | undefined;
   populationGroup: string | undefined;
   latitude: number;

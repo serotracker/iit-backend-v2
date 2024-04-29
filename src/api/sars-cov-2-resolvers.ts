@@ -27,6 +27,7 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     gbdSubRegion: document.gbdSubRegion ? mapGbdSubRegionForApi(document.gbdSubRegion) : undefined,
     gbdSuperRegion: document.gbdSuperRegion ? mapGbdSuperRegionForApi(document.gbdSuperRegion) : undefined,
     state: document.state,
+    studyName: document.studyName,
     city: document.city,
     populationGroup: document.populationGroup,
     riskOfBias: document.riskOfBias,

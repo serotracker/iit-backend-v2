@@ -157,6 +157,7 @@ export type SarsCov2Estimate = {
   sex?: Maybe<Scalars['String']['output']>;
   sourceType?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyName: Scalars['String']['output'];
   testType: Array<Scalars['String']['output']>;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
@@ -444,6 +445,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;

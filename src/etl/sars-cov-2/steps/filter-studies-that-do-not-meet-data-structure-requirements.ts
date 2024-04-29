@@ -1,27 +1,32 @@
 import {
-  EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
-  StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
-  StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
-} from "./remove-records-that-are-flagged-to-not-save-step.js";
+  EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
+  StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep,
+  StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep,
+  StudyFieldsAfterCombiningEstimatesAndStudiesStep
+} from "./combine-estimates-and-studies-step.js";
 
 export type EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
   Omit<
-    EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
-    "country" | "countryAlphaThreeCode"
-  > & { country: string; countryAlphaThreeCode: string };
+    EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
+    "country" | "countryAlphaThreeCode" | "studyName"
+  > & { country: string; countryAlphaThreeCode: string, studyName: string };
+export type StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
+  StudyFieldsAfterCombiningEstimatesAndStudiesStep;
 export type StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
 export type StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsInput {
-  allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
-  vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  allEstimates: EstimateFieldsAfterCombiningEstimatesAndStudiesStep[];
+  allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
+  vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
 }
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsOutput {
   allEstimates: EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
+  allStudies: StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
   vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 }
@@ -38,8 +43,9 @@ export const filterStudiesThatDoNotMeetDataStructureRequirement = (
       (
         estimate
       ): estimate is EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =>
-        !!estimate.country && !!estimate.countryAlphaThreeCode
+        !!estimate.country && !!estimate.countryAlphaThreeCode && !!estimate.studyName
     ),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };
