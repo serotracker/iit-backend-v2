@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { SarsCov2Estimate, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
 import { SarsCov2EstimateDocument } from "../storage/types";
-import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
+import { mapGbdSubRegionForApi, mapGbdSuperRegionForApi, mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 
 interface GenerateSarsCov2ResolversInput {
   mongoClient: MongoClient;
@@ -24,6 +24,8 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     countryAlphaThreeCode: document.countryAlphaThreeCode,
     unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
     whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+    gbdSubRegion: document.gbdSubRegion ? mapGbdSubRegionForApi(document.gbdSubRegion) : undefined,
+    gbdSuperRegion: document.gbdSuperRegion ? mapGbdSuperRegionForApi(document.gbdSuperRegion) : undefined,
     state: document.state,
     city: document.city,
     populationGroup: document.populationGroup,

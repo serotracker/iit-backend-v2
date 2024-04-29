@@ -14,6 +14,8 @@ export const sarsCov2Typedefs = `
     countryAlphaThreeCode: String!
     whoRegion: WHORegion
     unRegion: UNRegion
+    gbdSuperRegion: GBDSuperRegion
+    gbdSubRegion: GBDSubRegion
     state: String
     city: String
     id: String!

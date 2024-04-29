@@ -52,6 +52,8 @@ export const transformIntoFormatForDatabaseStep = (
       countryAlphaThreeCode: estimate.countryAlphaThreeCode,
       whoRegion: estimate.whoRegion,
       unRegion: estimate.unRegion,
+      gbdSuperRegion: estimate.gbdSuperRegion,
+      gbdSubRegion: estimate.gbdSubRegion,
       state: estimate.state,
       county: estimate.county,
       city: estimate.city,

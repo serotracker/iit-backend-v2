@@ -1,6 +1,7 @@
 import { Document, ObjectId } from "mongodb";
 import { WHORegion } from "../lib/who-regions";
 import { UNRegion } from "../lib/un-regions";
+import { GBDSubRegion, GBDSuperRegion } from "../lib/gbd-regions";
 
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
@@ -79,6 +80,8 @@ export interface SarsCov2EstimateDocument {
   longitude: number;
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
+  gbdSuperRegion: GBDSuperRegion | undefined;
+  gbdSubRegion: GBDSubRegion | undefined;
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
