@@ -85,7 +85,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       seroprevalenceStudy95CIUpper: estimate["Seroprevalence 95% CI Upper"],
       seroprevalenceCalculated95CILower: estimate["Seroprevalence 95% CI Lower (formula)"],
       seroprevalenceCalculated95CIUpper: estimate["Seroprevalence 95% CI Upper (formula)"],
-      country: estimate["Country"],
+      country: estimate["Country archive"],
       state: estimate["State"],
       city: estimate["City"],
       url: estimate["URL"],
