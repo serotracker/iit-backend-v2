@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep,
@@ -18,11 +19,13 @@ export type AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep =
 interface CleanSingleElementArrayFieldsStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allSources: AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  mongoClient: MongoClient;
 }
 
 interface CleanSingleElementArrayFieldsStepOutput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
+  mongoClient: MongoClient;
 }
 
 export const cleanSingleElementArrayFieldsStep = (
@@ -42,5 +45,6 @@ export const cleanSingleElementArrayFieldsStep = (
       };
     }),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

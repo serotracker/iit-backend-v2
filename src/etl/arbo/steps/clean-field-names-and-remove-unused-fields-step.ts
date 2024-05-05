@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { AirtableEstimateFields, AirtableSourceFields } from "../types.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
@@ -44,11 +45,13 @@ export interface AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: AirtableEstimateFields[];
   allSources: AirtableSourceFields[];
+  mongoClient: MongoClient;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allSources: AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  mongoClient: MongoClient;
 }
 
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
@@ -98,5 +101,6 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       id: source["id"],
       sourceSheetName: source["Source Title"],
     })),
+    mongoClient: input.mongoClient
   };
 };

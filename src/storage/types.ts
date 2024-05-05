@@ -99,3 +99,40 @@ export interface SarsCov2EstimateDocument {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export enum CachedMapboxApiResponseStatus {
+  SUCCESSFUL_RESPONSE = "SUCCESSFUL_RESPONSE",
+  FAILED_RESPONSE = "FAILED_RESPONSE",
+}
+
+interface CachedMapboxApiResponseDocumentBase {
+  _id: ObjectId;
+  mapboxSearchText: string;
+  countryCode: string;
+  geocoderDataType: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface CachedMapboxApiSuccessResponseDocument extends CachedMapboxApiResponseDocumentBase {
+  status: CachedMapboxApiResponseStatus.SUCCESSFUL_RESPONSE,
+  centerCoordinates: {
+    longitude: number;
+    latitude: number;
+  };
+  boundingBox: {
+    longitudeMinimum: number;
+    latitudeMinimum: number;
+    longitudeMaximum: number;
+    latitudeMaximum: number;
+  } | undefined;
+  text: string | undefined;
+  matchingText: string | undefined;
+  regionName: string | undefined;
+}
+
+interface CachedMapboxApiFailureResponseDocument extends CachedMapboxApiResponseDocumentBase {
+  status: CachedMapboxApiResponseStatus.FAILED_RESPONSE,
+}
+
+export type CachedMapboxApiResponseDocument = CachedMapboxApiSuccessResponseDocument | CachedMapboxApiFailureResponseDocument;

@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 
@@ -15,6 +16,7 @@ interface ParseDatesStepInput {
   allStudies: StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
+  mongoClient: MongoClient;
 }
 
 interface ParseDatesStepOutput {
@@ -22,6 +24,7 @@ interface ParseDatesStepOutput {
   allStudies: StudyFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
+  mongoClient: MongoClient;
 }
 
 export const parseDatesStep = (input: ParseDatesStepInput): ParseDatesStepOutput => {
@@ -45,5 +48,6 @@ export const parseDatesStep = (input: ParseDatesStepInput): ParseDatesStepOutput
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 }

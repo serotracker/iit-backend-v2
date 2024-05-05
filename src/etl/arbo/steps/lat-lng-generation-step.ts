@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { writeFileSync } from 'fs';
 import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
@@ -19,11 +20,13 @@ export type AirtableSourceFieldsAfterLatLngGenerationStep =
 interface LatLngGenerationStepInput {
   allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
+  mongoClient: MongoClient;
 }
 
 interface LatLngGenerationStepOutput {
   allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
+  mongoClient: MongoClient;
 }
 
 export const latLngGenerationStep = async(
@@ -53,7 +56,8 @@ export const latLngGenerationStep = async(
         city: estimate.city,
         state: estimate.state,
         country: estimate.country,
-        geocodingApiRequestReportFileName
+        geocodingApiRequestReportFileName,
+        mongoClient: input.mongoClient
       })
     }
 
@@ -69,5 +73,6 @@ export const latLngGenerationStep = async(
   return {
     allEstimates: estimatesWithLatitudesAndLongitudes,
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };
