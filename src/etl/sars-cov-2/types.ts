@@ -31,7 +31,7 @@ export interface AirtableSarsCov2EstimateFields {
   "Grade of Estimate Scope": string | null;
   "Sampling End Date": string | null;
   "Sampling Start Date": string | null;
-  "Publication Date (ISO)": string | null;
+  "Publication Date (ISO)": string | null | AirtableError;
   "Rapid Review: Study": Array<string | null | AirtableError>;
 }
 

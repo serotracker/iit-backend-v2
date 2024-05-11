@@ -179,7 +179,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       scope: estimate["Grade of Estimate Scope"] ?? undefined,
       samplingEndDate: estimate["Sampling End Date"] ?? undefined,
       samplingStartDate: estimate["Sampling End Date"] ?? undefined,
-      publicationDate: estimate["Publication Date (ISO)"] ?? undefined,
+      publicationDate: !isAirtableError(estimate["Publication Date (ISO)"]) && !!estimate["Publication Date (ISO)"] ? estimate["Publication Date (ISO)"] : undefined,
       studyId: cleanArrayFieldToSingleValue({
         key: "Rapid Review: Study",
         object: estimate,
