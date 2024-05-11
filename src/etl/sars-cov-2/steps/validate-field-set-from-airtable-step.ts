@@ -80,6 +80,9 @@ export const validateFieldSetFromAirtableStep = (
     "Sampling End Date": z
       .optional(z.string().nullable())
       .transform((field) => field ?? null),
+    "Publication Date (ISO)": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
     "Sampling Start Date": z
       .optional(z.string().nullable())
       .transform((field) => field ?? null),

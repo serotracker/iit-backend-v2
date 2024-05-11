@@ -150,6 +150,7 @@ export type SarsCov2Estimate = {
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
   populationGroup?: Maybe<Scalars['String']['output']>;
+  publicationDate?: Maybe<Scalars['String']['output']>;
   riskOfBias?: Maybe<Scalars['String']['output']>;
   samplingEndDate?: Maybe<Scalars['String']['output']>;
   samplingMidDate?: Maybe<Scalars['String']['output']>;
@@ -440,6 +441,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   populationGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  publicationDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

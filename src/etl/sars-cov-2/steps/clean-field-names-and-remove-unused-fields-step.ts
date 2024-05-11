@@ -23,6 +23,7 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   scope: string | undefined;
   samplingEndDate: string | undefined;
   samplingStartDate: string | undefined;
+  publicationDate: string | undefined;
   studyId: string | undefined;
 }
 export interface StudyFieldsAfterCleaningFieldNamesStep {
@@ -178,6 +179,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       scope: estimate["Grade of Estimate Scope"] ?? undefined,
       samplingEndDate: estimate["Sampling End Date"] ?? undefined,
       samplingStartDate: estimate["Sampling End Date"] ?? undefined,
+      publicationDate: estimate["Publication Date (ISO)"] ?? undefined,
       studyId: cleanArrayFieldToSingleValue({
         key: "Rapid Review: Study",
         object: estimate,
