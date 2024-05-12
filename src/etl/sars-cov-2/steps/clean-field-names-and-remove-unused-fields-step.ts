@@ -27,6 +27,8 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   studyId: string | undefined;
   denominatorValue: number | undefined;
   numeratorValue: number | undefined;
+  estimateName: string | undefined;
+  url: string | undefined;
 }
 export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -188,6 +190,11 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       }).value,
       denominatorValue: estimate['Denominator Value'] ? Math.floor(estimate['Denominator Value']) : undefined,
       numeratorValue: estimate['Numerator Value'] ? Math.floor(estimate['Numerator Value']) : undefined,
+      estimateName: estimate["Prevalence Estimate Name"] ?? undefined,
+      url: cleanArrayFieldToSingleValue({
+        key: "URL",
+        object: estimate,
+      }).value,
     })),
     allStudies: input.allStudies.map((study) => ({
       id: study.id,

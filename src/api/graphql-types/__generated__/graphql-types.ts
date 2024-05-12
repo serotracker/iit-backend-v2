@@ -143,6 +143,7 @@ export type SarsCov2Estimate = {
   countryPeopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   countryPositiveCasesPerMillionPeople?: Maybe<Scalars['Float']['output']>;
   denominatorValue?: Maybe<Scalars['Int']['output']>;
+  estimateName?: Maybe<Scalars['String']['output']>;
   gbdSubRegion?: Maybe<GbdSubRegion>;
   gbdSuperRegion?: Maybe<GbdSuperRegion>;
   id: Scalars['String']['output'];
@@ -165,6 +166,7 @@ export type SarsCov2Estimate = {
   studyName: Scalars['String']['output'];
   testType: Array<Scalars['String']['output']>;
   unRegion?: Maybe<UnRegion>;
+  url?: Maybe<Scalars['String']['output']>;
   whoRegion?: Maybe<WhoRegion>;
 };
 
@@ -437,6 +439,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   countryPeopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   countryPositiveCasesPerMillionPeople?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   denominatorValue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  estimateName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   gbdSubRegion?: Resolver<Maybe<ResolversTypes['GBDSubRegion']>, ParentType, ContextType>;
   gbdSuperRegion?: Resolver<Maybe<ResolversTypes['GBDSuperRegion']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -459,6 +462,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   studyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

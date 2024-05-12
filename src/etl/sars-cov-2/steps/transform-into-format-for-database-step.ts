@@ -75,6 +75,8 @@ export const transformIntoFormatForDatabaseStep = (
       denominatorValue: estimate.denominatorValue,
       numeratorValue: estimate.numeratorValue,
       seroprevalence: estimate.seroprevalence,
+      estimateName: estimate.estimateName,
+      url: estimate.url,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),

@@ -46,6 +46,8 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     isWHOUnityAligned: document.isWHOUnityAligned,
     testType: document.testType,
     denominatorValue: document.denominatorValue,
+    estimateName: document.estimateName,
+    url: document.url,
     numeratorValue: document.numeratorValue,
     seroprevalence: document.seroprevalence
   }

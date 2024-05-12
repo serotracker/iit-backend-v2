@@ -100,6 +100,8 @@ export interface SarsCov2EstimateDocument {
   denominatorValue: number | undefined;
   numeratorValue: number | undefined;
   seroprevalence: number | undefined;
+  estimateName: string | undefined;
+  url: string | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
