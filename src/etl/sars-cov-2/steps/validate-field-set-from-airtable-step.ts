@@ -118,6 +118,8 @@ export const validateFieldSetFromAirtableStep = (
         ]).array()
       )
       .transform((field) => field ?? []),
+    "Denominator Value": z.optional(z.number()).transform((field) => field ?? null),
+    "Numerator Value": z.optional(z.number()).transform((field) => field ?? null),
   });
 
   const zodSarsCov2StudyFieldsObject = z.object({

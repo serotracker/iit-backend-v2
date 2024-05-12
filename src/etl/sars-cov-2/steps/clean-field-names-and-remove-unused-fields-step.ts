@@ -25,6 +25,8 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   samplingStartDate: string | undefined;
   publicationDate: string | undefined;
   studyId: string | undefined;
+  denominatorValue: number | undefined;
+  numeratorValue: number | undefined;
 }
 export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -183,7 +185,9 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       studyId: cleanArrayFieldToSingleValue({
         key: "Rapid Review: Study",
         object: estimate,
-      }).value
+      }).value,
+      denominatorValue: estimate['Denominator Value'] ?? undefined,
+      numeratorValue: estimate['Numerator Value'] ?? undefined,
     })),
     allStudies: input.allStudies.map((study) => ({
       id: study.id,

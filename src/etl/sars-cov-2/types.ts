@@ -33,6 +33,8 @@ export interface AirtableSarsCov2EstimateFields {
   "Sampling Start Date": string | null;
   "Publication Date (ISO)": string | null | AirtableError;
   "Rapid Review: Study": Array<string | null | AirtableError>;
+  "Denominator Value": number | null;
+  "Numerator Value": number | null;
 }
 
 export interface AirtableSarsCov2StudyFields {

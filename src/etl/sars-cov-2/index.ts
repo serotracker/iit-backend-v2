@@ -22,6 +22,7 @@ import { fetchPositiveCaseDataStep } from "./steps/fetch-positive-case-data-step
 import { addVaccinationDataToEstimateStep } from "./steps/add-vaccination-data-to-estimate-step.js";
 import { addPositiveCaseDataToEstimateStep } from "./steps/add-positive-case-data-to-estimate-step.js";
 import { combineEstimatesAndStudies } from "./steps/combine-estimates-and-studies-step.js";
+import { calculateSeroprevalenceStep } from "./steps/calculate-seroprevalence-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -74,6 +75,7 @@ const runEtlMain = async () => {
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),
     etlStep(parseDatesStep),
+    etlStep(calculateSeroprevalenceStep),
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),

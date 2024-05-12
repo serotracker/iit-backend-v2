@@ -44,7 +44,10 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     antibodies: document.antibodies,
     isotypes: document.isotypes,
     isWHOUnityAligned: document.isWHOUnityAligned,
-    testType: document.testType
+    testType: document.testType,
+    denominatorValue: document.denominatorValue,
+    numeratorValue: document.numeratorValue,
+    seroprevalence: document.seroprevalence
   }
 }
 

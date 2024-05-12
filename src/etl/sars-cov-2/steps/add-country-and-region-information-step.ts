@@ -1,26 +1,31 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterParsingDatesStep, StructuredPositiveCaseDataAfterParsingDatesStep, StructuredVaccinationDataAfterParsingDatesStep, StudyFieldsAfterParsingDatesStep } from "./parse-dates-step.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import { GBDSubRegion, GBDSuperRegion, getGBDRegionFromAlphaTwoCode } from "../../../lib/gbd-regions.js";
 import { TwoLetterIsoCountryCode, countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
+import {
+  EstimateFieldsAfterCalculatingSeroprevalenceStep,
+  StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep,
+  StructuredVaccinationDataAfterCalculatingSeroprevalenceStep,
+  StudyFieldsAfterCalculatingSeroprevalenceStep
+} from "./calculate-seroprevalence-step.js";
 
-export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterParsingDatesStep & {
+export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCalculatingSeroprevalenceStep & {
   unRegion: UNRegion | undefined;
   whoRegion: WHORegion | undefined;
   gbdSuperRegion: GBDSuperRegion | undefined;
   gbdSubRegion: GBDSubRegion | undefined;
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
 };
-export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterParsingDatesStep;
-export type StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep = StructuredVaccinationDataAfterParsingDatesStep;
-export type StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep = StructuredPositiveCaseDataAfterParsingDatesStep;
+export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCalculatingSeroprevalenceStep;
+export type StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep = StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
+export type StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep = StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
 
 interface AddCountryAndRegionInformationStepInput {
-  allEstimates: EstimateFieldsAfterParsingDatesStep[];
-  allStudies: StudyFieldsAfterParsingDatesStep[];
-  vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
+  allEstimates: EstimateFieldsAfterCalculatingSeroprevalenceStep[];
+  allStudies: StudyFieldsAfterCalculatingSeroprevalenceStep[];
+  vaccinationData: StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
   mongoClient: MongoClient;
 }
 
