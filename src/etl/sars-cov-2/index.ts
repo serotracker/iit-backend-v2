@@ -50,10 +50,6 @@ const runEtlMain = async () => {
         estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
       );
     
-  console.log(allEstimatesUnformatted[0]);
-  
-  process.exit(0);
-
   const allStudiesUnformatted: (FieldSet & { id: string })[] =
     await studySheet
       .select()
