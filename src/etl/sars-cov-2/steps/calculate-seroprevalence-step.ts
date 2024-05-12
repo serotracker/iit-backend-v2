@@ -9,7 +9,7 @@ import {
 } from "./parse-dates-step.js";
 
 export type EstimateFieldsAfterCalculatingSeroprevalenceStep = EstimateFieldsAfterParsingDatesStep & {
-  seroprevalence: number;
+  seroprevalence: number | undefined;
 };
 export type StudyFieldsAfterCalculatingSeroprevalenceStep = StudyFieldsAfterParsingDatesStep;
 export type StructuredVaccinationDataAfterCalculatingSeroprevalenceStep = StructuredVaccinationDataAfterParsingDatesStep;
@@ -39,7 +39,9 @@ export const calculateSeroprevalenceStep = (input: CalculateSeroprevalenceStepIn
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       ...estimate,
-      seroprevalence: estimate.denominatorValue > 0 ? estimate.numeratorValue / estimate.denominatorValue : 0,
+      seroprevalence: (estimate.denominatorValue !== undefined && estimate.numeratorValue)
+        ? estimate.denominatorValue > 0 ? estimate.numeratorValue / estimate.denominatorValue : 0
+        : undefined
     })),
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,

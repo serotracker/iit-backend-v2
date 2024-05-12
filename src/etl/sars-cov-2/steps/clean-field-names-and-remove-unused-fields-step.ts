@@ -186,8 +186,8 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         key: "Rapid Review: Study",
         object: estimate,
       }).value,
-      denominatorValue: estimate['Denominator Value'] ?? undefined,
-      numeratorValue: estimate['Numerator Value'] ?? undefined,
+      denominatorValue: estimate['Denominator Value'] ? Math.floor(estimate['Denominator Value']) : undefined,
+      numeratorValue: estimate['Numerator Value'] ? Math.floor(estimate['Numerator Value']) : undefined,
     })),
     allStudies: input.allStudies.map((study) => ({
       id: study.id,

@@ -9,8 +9,8 @@ import {
 export type EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
   Omit<
     EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
-    "country" | "countryAlphaThreeCode" | "studyName" | "denominatorValue" | "numeratorValue"
-  > & { country: string; countryAlphaThreeCode: string, studyName: string, denominatorValue: number, numeratorValue: number };
+    "country" | "countryAlphaThreeCode" | "studyName"
+  > & { country: string; countryAlphaThreeCode: string, studyName: string };
 export type StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
   StudyFieldsAfterCombiningEstimatesAndStudiesStep;
 export type StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
@@ -49,8 +49,6 @@ export const filterStudiesThatDoNotMeetDataStructureRequirement = (
         !!estimate.country
         && !!estimate.countryAlphaThreeCode
         && !!estimate.studyName
-        && (estimate.denominatorValue !== undefined) && Number.isInteger(estimate.denominatorValue)
-        && (estimate.numeratorValue !== undefined) && Number.isInteger(estimate.numeratorValue)
     ),
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
