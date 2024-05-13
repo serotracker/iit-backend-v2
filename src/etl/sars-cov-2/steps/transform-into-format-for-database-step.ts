@@ -68,6 +68,7 @@ export const transformIntoFormatForDatabaseStep = (
       samplingStartDate: estimate.samplingStartDate,
       samplingEndDate: estimate.samplingEndDate,
       samplingMidDate: estimate.samplingMidDate,
+      publicationDate: estimate.publicationDate,
       countryPeopleVaccinatedPerHundred: estimate.countryPeopleVaccinatedPerHundred,
       countryPeopleFullyVaccinatedPerHundred: estimate.countryPeopleFullyVaccinatedPerHundred,
       countryPositiveCasesPerMillionPeople: estimate.countryPositiveCasesPerMillionPeople,

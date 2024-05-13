@@ -2,10 +2,16 @@ import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 
-export type EstimateFieldsAfterParsingDatesStep = Omit<EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, 'samplingEndDate' | 'samplingStartDate'> & {
+export type EstimateFieldsAfterParsingDatesStep = Omit<
+  EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
+  'samplingEndDate' |
+  'publicationDate' |
+  'samplingStartDate'
+> & {
   samplingStartDate: Date | undefined;
   samplingEndDate: Date | undefined;
   samplingMidDate: Date | undefined;
+  publicationDate: Date | undefined;
 };
 export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep;
 export type StructuredVaccinationDataAfterParsingDatesStep = StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
@@ -36,13 +42,15 @@ export const parseDatesStep = (input: ParseDatesStepInput): ParseDatesStepOutput
     allEstimates: input.allEstimates.map((estimate) => {
       const samplingStartDate = estimate.samplingStartDate ? parse(estimate.samplingStartDate, "yyyy-MM-dd", new Date()) : undefined;
       const samplingEndDate = estimate.samplingStartDate ? parse(estimate.samplingStartDate, "yyyy-MM-dd", new Date()) : undefined;
+      const publicationDate = estimate.publicationDate ? parse(estimate.publicationDate, "yyyy-MM-dd", new Date()) : undefined;
       const samplingMidDate = samplingEndDate && samplingStartDate ? new Date((samplingStartDate.getTime() + samplingEndDate.getTime()) / 2) : undefined;
 
       return {
         ...estimate,
         samplingStartDate,
         samplingEndDate,
-        samplingMidDate, 
+        samplingMidDate,
+        publicationDate
       };
     }),
     allStudies: input.allStudies,

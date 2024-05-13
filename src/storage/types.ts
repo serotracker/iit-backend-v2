@@ -93,6 +93,7 @@ export interface SarsCov2EstimateDocument {
   samplingEndDate: Date | undefined;
   samplingStartDate: Date | undefined;
   samplingMidDate: Date | undefined;
+  publicationDate: Date | undefined;
   countryPeopleVaccinatedPerHundred: number | undefined;
   countryPeopleFullyVaccinatedPerHundred: number | undefined;
   countryPositiveCasesPerMillionPeople: number | undefined;
