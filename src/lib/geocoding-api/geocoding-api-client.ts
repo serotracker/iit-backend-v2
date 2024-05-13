@@ -87,6 +87,7 @@ export const makeGeocodingApiRequest = async (
     state,
     country,
     geocodingApiRequestParamOverride,
+    mongoClient
   } = input;
 
   const geocodingApiRequestParams =
@@ -103,8 +104,9 @@ export const makeGeocodingApiRequest = async (
     return "FAILED_RESPONSE";
   }
 
-  const cachedQueryValue = lookupInGeocodingApiResponseCache({
+  const cachedQueryValue = await lookupInGeocodingApiResponseCache({
     geocodingApiRequestParams,
+    mongoClient
   });
 
   if (!!cachedQueryValue && isGeocodingApiFailureResponse(cachedQueryValue)) {
@@ -134,6 +136,7 @@ export const makeGeocodingApiRequest = async (
   saveInGeocodingApiResponseCache({
     key: { geocodingApiRequestParams },
     cacheValue: parsedApiResponse,
+    mongoClient
   });
 
   if(shouldSaveInGeocodingApiRequestReport(input)) {
@@ -143,7 +146,8 @@ export const makeGeocodingApiRequest = async (
       country: country,
       geocodingApiRequestUrl: queryUrl,
       geocodingApiResponse: parsedApiResponse,
-      geocodingApiRequestReportFileName: input.geocodingApiRequestReportFileName
+      geocodingApiRequestReportFileName: input.geocodingApiRequestReportFileName,
+      mongoClient
     })
   }
 

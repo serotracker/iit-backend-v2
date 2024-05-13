@@ -1,4 +1,5 @@
 import { request } from "undici";
+import { MongoClient } from "mongodb";
 import { StructuredPositiveCaseData } from "../types";
 import { EstimateFieldsAfterFetchingVaccinationDataStep, StructuredPositiveCaseDataAfterFetchingVaccinationDataStep, StructuredVaccinationDataAfterFetchingVaccinationDataStep, StudyFieldsAfterFetchingVaccinationDataStep } from "./fetch-vaccination-data-step";
 import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
@@ -14,6 +15,7 @@ interface FetchPositiveCaseDataStepInput {
   allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
+  mongoClient: MongoClient;
 }
 
 interface FetchPositiveCaseDataStepOutput {
@@ -21,6 +23,7 @@ interface FetchPositiveCaseDataStepOutput {
   allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+  mongoClient: MongoClient;
 }
 
 const countryNamesInCSVToTwoLetterCountryCode: Record<string, TwoLetterIsoCountryCode | undefined> = {
@@ -303,5 +306,6 @@ export const fetchPositiveCaseDataStep = async(
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: formattedPositiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

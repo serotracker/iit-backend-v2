@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { writeFileSync } from "fs";
 import { EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep, StudyFieldsAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
@@ -17,6 +18,7 @@ interface LatLngGenerationStepInput {
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
+  mongoClient: MongoClient;
 }
 
 interface LatLngGenerationStepOutput {
@@ -24,6 +26,7 @@ interface LatLngGenerationStepOutput {
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
+  mongoClient: MongoClient;
 }
 
 export const latLngGenerationStep = async(
@@ -53,7 +56,8 @@ export const latLngGenerationStep = async(
         city: estimate.city,
         state: estimate.state,
         country: estimate.country,
-        geocodingApiRequestReportFileName
+        geocodingApiRequestReportFileName,
+        mongoClient: input.mongoClient
       })
     }
 
@@ -71,5 +75,6 @@ export const latLngGenerationStep = async(
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 }

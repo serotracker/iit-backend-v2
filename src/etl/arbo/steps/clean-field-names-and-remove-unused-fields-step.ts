@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { AirtableEstimateFields, AirtableSourceFields } from "../types.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
@@ -44,11 +45,13 @@ export interface AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: AirtableEstimateFields[];
   allSources: AirtableSourceFields[];
+  mongoClient: MongoClient;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allSources: AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  mongoClient: MongoClient;
 }
 
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
@@ -82,7 +85,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       seroprevalenceStudy95CIUpper: estimate["Seroprevalence 95% CI Upper"],
       seroprevalenceCalculated95CILower: estimate["Seroprevalence 95% CI Lower (formula)"],
       seroprevalenceCalculated95CIUpper: estimate["Seroprevalence 95% CI Upper (formula)"],
-      country: estimate["Country"],
+      country: estimate["Country archive"],
       state: estimate["State"],
       city: estimate["City"],
       url: estimate["URL"],
@@ -98,5 +101,6 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       id: source["id"],
       sourceSheetName: source["Source Title"],
     })),
+    mongoClient: input.mongoClient
   };
 };

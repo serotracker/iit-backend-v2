@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { TwoLetterIsoCountryCode } from "./country-codes.js";
 
 export interface MakeGeocodingApiRequestAndSaveRequestInput {
@@ -7,6 +8,7 @@ export interface MakeGeocodingApiRequestAndSaveRequestInput {
   geocodingApiRequestReportFileName: string;
   shouldSaveInGeocodingApiRequestReport: true;
   geocodingApiRequestParamOverride?: GeocodingApiRequestParameters;
+  mongoClient: MongoClient;
 }
 
 export interface MakeGeocodingApiRequestWithoutSavingRequestInput {
@@ -15,6 +17,7 @@ export interface MakeGeocodingApiRequestWithoutSavingRequestInput {
   country: string;
   shouldSaveInGeocodingApiRequestReport: false;
   geocodingApiRequestParamOverride?: GeocodingApiRequestParameters;
+  mongoClient: MongoClient;
 }
 
 export type MakeGeocodingApiRequestInput = MakeGeocodingApiRequestAndSaveRequestInput | MakeGeocodingApiRequestWithoutSavingRequestInput;

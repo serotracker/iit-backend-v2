@@ -1,37 +1,110 @@
+import { ObjectId } from "mongodb";
+import { CachedMapboxApiResponseDocument, CachedMapboxApiResponseStatus } from "../../storage/types.js";
 import {
-  GeocodingApiResponseCache,
-  GeocodingApiResponseCacheKey,
-  GeocodingApiResponseCacheKeyInput,
   GeocodingApiResponseCacheValue,
   LookupInGeocodingApiResponseCacheInput,
   SaveInGeocodingApiResponseCacheInput,
 } from "./geocoding-api-response-cache-types.js";
+import { isGeocodingApiFailureResponse } from "./geocoding-api-client-types.js";
 
-let geocodingApiResponseCache: GeocodingApiResponseCache = {};
-
-const generateGeocodingApiResponseCacheKey = (
-  input: GeocodingApiResponseCacheKeyInput
-): GeocodingApiResponseCacheKey => {
-  const {mapboxSearchText, countryCode, geocoderDataType} = input.geocodingApiRequestParams;
-
-  return `mapboxSearchText:${mapboxSearchText},countryCode:${countryCode},geocoderDataType:${geocoderDataType}`;
-};
-
-export const lookupInGeocodingApiResponseCache = (
+export const lookupInGeocodingApiResponseCache = async(
   input: LookupInGeocodingApiResponseCacheInput
-): GeocodingApiResponseCacheValue => {
-  const { geocodingApiRequestParams } = input;
-  const key = generateGeocodingApiResponseCacheKey({ geocodingApiRequestParams });
+): Promise<GeocodingApiResponseCacheValue> => {
+  const { geocodingApiRequestParams, mongoClient } = input;
 
-  return geocodingApiResponseCache[key];
+  const databaseName = process.env.DATABASE_NAME;
+
+  const cachedApiResponses = await mongoClient
+    .db(databaseName)
+    .collection<CachedMapboxApiResponseDocument>('mapboxGeocodingApiCachedResponses')
+    .find({
+      mapboxSearchText: geocodingApiRequestParams.mapboxSearchText,
+      countryCode: geocodingApiRequestParams.countryCode,
+      geocoderDataType: geocodingApiRequestParams.geocoderDataType
+    })
+    .sort({createdAt: -1, _id: 1})
+    .limit(1)
+    .toArray()
+  
+  if(cachedApiResponses.length === 0) {
+    return undefined;
+  }
+  
+  const cachedApiResponse = cachedApiResponses[0];
+
+  if(cachedApiResponse.status === CachedMapboxApiResponseStatus.FAILED_RESPONSE) {
+    return "FAILED_RESPONSE";
+  }
+
+  return {
+    centerCoordinates: [
+      cachedApiResponse.centerCoordinates.longitude,
+      cachedApiResponse.centerCoordinates.latitude
+    ],
+    boundingBox: cachedApiResponse.boundingBox ? [
+      cachedApiResponse.boundingBox.longitudeMinimum,
+      cachedApiResponse.boundingBox.latitudeMinimum,
+      cachedApiResponse.boundingBox.longitudeMaximum,
+      cachedApiResponse.boundingBox.latitudeMaximum
+    ] : undefined,
+    text: cachedApiResponse.text,
+    matchingText: cachedApiResponse.matchingText,
+    regionName: cachedApiResponse.regionName
+  }
 };
 
-export const saveInGeocodingApiResponseCache = (
+export const saveInGeocodingApiResponseCache = async(
   input: SaveInGeocodingApiResponseCacheInput
-): void => {
-  const { cacheValue } = input;
+): Promise<void> => {
+  const { cacheValue, mongoClient } = input;
   const { geocodingApiRequestParams } = input.key
-  const key = generateGeocodingApiResponseCacheKey({ geocodingApiRequestParams });
 
-  geocodingApiResponseCache = { ...geocodingApiResponseCache, [key]: cacheValue };
+  const cacheEntryCreationDate = new Date();
+
+  const databaseName = process.env.DATABASE_NAME;
+
+  if(isGeocodingApiFailureResponse(cacheValue)) {
+    await mongoClient
+      .db(databaseName)
+      .collection<CachedMapboxApiResponseDocument>('mapboxGeocodingApiCachedResponses')
+      .insertOne({
+        _id: new ObjectId(),
+        status: CachedMapboxApiResponseStatus.FAILED_RESPONSE,
+        mapboxSearchText: geocodingApiRequestParams.mapboxSearchText,
+        countryCode: geocodingApiRequestParams.countryCode,
+        geocoderDataType: geocodingApiRequestParams.geocoderDataType,
+        createdAt: cacheEntryCreationDate,
+        updatedAt: cacheEntryCreationDate,
+      })
+    
+    return;
+  }
+
+  await mongoClient
+    .db(databaseName)
+    .collection<CachedMapboxApiResponseDocument>('mapboxGeocodingApiCachedResponses')
+    .insertOne({
+      _id: new ObjectId(),
+      status: CachedMapboxApiResponseStatus.SUCCESSFUL_RESPONSE,
+      mapboxSearchText: geocodingApiRequestParams.mapboxSearchText,
+      countryCode: geocodingApiRequestParams.countryCode,
+      geocoderDataType: geocodingApiRequestParams.geocoderDataType,
+      centerCoordinates: {
+        longitude: cacheValue.centerCoordinates[0],
+        latitude: cacheValue.centerCoordinates[1]
+      },
+      boundingBox: cacheValue.boundingBox ? {
+        longitudeMinimum: cacheValue.boundingBox[0],
+        latitudeMinimum: cacheValue.boundingBox[1],
+        longitudeMaximum: cacheValue.boundingBox[2],
+        latitudeMaximum: cacheValue.boundingBox[3],
+      } : undefined,
+      text: cacheValue.text,
+      matchingText: cacheValue.matchingText,
+      regionName: cacheValue.regionName,
+      createdAt: cacheEntryCreationDate,
+      updatedAt: cacheEntryCreationDate,
+    });
+  
+  return;
 };

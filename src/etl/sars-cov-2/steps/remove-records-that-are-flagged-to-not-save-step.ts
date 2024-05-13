@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { EstimateFieldsAfterCleaningFieldNamesStep, StructuredPositiveCaseDataAfterCleaningFieldNamesStep, StructuredVaccinationDataAfterCleaningFieldNamesStep, StudyFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep =
@@ -12,6 +13,7 @@ interface RemoveRecordsThatAreFlaggedNotToSaveInput {
   allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
+  mongoClient: MongoClient;
 }
 
 interface RemoveRecordsThatAreFlaggedNotToSaveOutput {
@@ -19,6 +21,7 @@ interface RemoveRecordsThatAreFlaggedNotToSaveOutput {
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  mongoClient: MongoClient;
 }
 
 export const removeRecordsThatAreFlaggedNotToSave = (
@@ -33,5 +36,6 @@ export const removeRecordsThatAreFlaggedNotToSave = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

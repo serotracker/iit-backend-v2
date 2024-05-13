@@ -1,17 +1,22 @@
-interface GetCityLatLngInput {
+import { MongoClient } from "mongodb";
+
+export interface GetCityLatLngInput {
   city: string | undefined;
   state: string | undefined;
   country: string;
   geocodingApiRequestReportFileName: string;
+  mongoClient: MongoClient;
 }
 
-interface GetStateLatLngInput {
+export interface GetStateLatLngInput {
   state: string | undefined;
   country: string;
   geocodingApiRequestReportFileName: string;
+  mongoClient: MongoClient;
 }
 
-interface GetCountryLatLngInput {
+export interface GetCountryLatLngInput {
   country: string;
   geocodingApiRequestReportFileName: string;
+  mongoClient: MongoClient;
 }

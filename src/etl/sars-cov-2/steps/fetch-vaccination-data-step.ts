@@ -1,4 +1,5 @@
 import { FieldSet } from "airtable";
+import { MongoClient } from "mongodb";
 import { StructuredVaccinationData } from "../types";
 import { request } from "undici";
 import { groupByArray } from "../../../lib/lib.js";
@@ -15,6 +16,7 @@ interface FetchVaccinationDataStepInput {
   allStudies: FieldSet[];
   vaccinationData: undefined;
   positiveCaseData: undefined;
+  mongoClient: MongoClient;
 }
 
 interface FetchVaccinationDataStepOutput {
@@ -22,6 +24,7 @@ interface FetchVaccinationDataStepOutput {
   allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
+  mongoClient: MongoClient;
 }
 
 export const fetchVaccinationDataStep = async (
@@ -80,5 +83,6 @@ export const fetchVaccinationDataStep = async (
     allStudies: input.allStudies,
     vaccinationData: formattedVaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

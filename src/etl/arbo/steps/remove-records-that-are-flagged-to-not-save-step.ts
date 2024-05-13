@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep,
   AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep,
@@ -14,11 +15,13 @@ export type AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep 
 interface RemoveRecordsThatAreFlaggedToNotSaveStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   allSources: AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
+  mongoClient: MongoClient;
 }
 
 interface RemoveRecordsThatAreFlaggedToNotSaveStepOutput {
   allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allSources: AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  mongoClient: MongoClient;
 }
 
 export const removeRecordsThatAreFlaggedToNotSaveStep = (
@@ -33,5 +36,6 @@ export const removeRecordsThatAreFlaggedToNotSaveStep = (
       estimate.includeInEtl === 1
     ),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

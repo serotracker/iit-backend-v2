@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
@@ -17,11 +18,13 @@ export type AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep =
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allSources: AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  mongoClient: MongoClient;
 }
 
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
+  mongoClient: MongoClient;
 }
 
 export const addCountryAndRegionInformationStep = (
@@ -53,5 +56,6 @@ export const addCountryAndRegionInformationStep = (
       })
       .filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

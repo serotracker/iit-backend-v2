@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 
 export type AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep =
@@ -15,11 +16,13 @@ export type AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep =
 interface AssertMandatoryFieldsArePresentStepInput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  mongoClient: MongoClient;
 }
 
 interface AssertMandatoryFieldsAreStepOutput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
+  mongoClient: MongoClient;
 }
 
 export const assertMandatoryFieldsArePresentStep = (
@@ -34,5 +37,6 @@ export const assertMandatoryFieldsArePresentStep = (
       return !!estimate.country && !!estimate.pathogen;
     }),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

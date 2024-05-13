@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { AirtableEstimateFieldsAfterLatLngGenerationStep, AirtableSourceFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type AirtableEstimateFieldsAfterJitteringPinLatLngStep = AirtableEstimateFieldsAfterLatLngGenerationStep;
@@ -21,11 +22,13 @@ const jitterNumberValueByAmount = (input: JitterNumberValueByAmountInput): numbe
 interface JitterPinLatLngStepInput {
   allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
+  mongoClient: MongoClient;
 }
 
 interface JitterPinLatLngStepOutput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
+  mongoClient: MongoClient;
 }
 
 export const jitterPinLatLngStep = (
@@ -43,5 +46,6 @@ export const jitterPinLatLngStep = (
       longitude: jitterNumberValueByAmount({value: estimate.longitude, jitterAmount: maximumPinJitterMagnitude}),
     })),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

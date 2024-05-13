@@ -1,5 +1,5 @@
-import { FieldSet } from "airtable";
 import { z } from "zod";
+import { MongoClient } from "mongodb";
 import { AirtableSarsCov2EstimateFields, AirtableSarsCov2StudyFields } from "../types.js";
 import { EstimateFieldsAfterFetchingPositiveCaseDataStep, StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep, StudyFieldsAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
 
@@ -15,6 +15,7 @@ interface ValidateFieldSetFromAirtableStepInput {
   allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+  mongoClient: MongoClient;
 }
 
 interface ValidateFieldSetFromAirtableStepOutput {
@@ -22,6 +23,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  mongoClient: MongoClient;
 }
 
 export const validateFieldSetFromAirtableStep = (
@@ -133,6 +135,7 @@ export const validateFieldSetFromAirtableStep = (
     allEstimates,
     allStudies,
     vaccinationData: input.vaccinationData,
-    positiveCaseData: input.positiveCaseData
+    positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

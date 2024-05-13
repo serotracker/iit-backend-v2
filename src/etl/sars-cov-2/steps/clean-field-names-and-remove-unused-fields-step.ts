@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
 import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { isAirtableError, AirtableError } from "../types.js";
@@ -36,6 +37,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  mongoClient: MongoClient;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
@@ -43,6 +45,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
+  mongoClient: MongoClient;
 }
 
 interface CleanArrayFieldToSingleValueInput<
@@ -189,5 +192,6 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
     })),
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

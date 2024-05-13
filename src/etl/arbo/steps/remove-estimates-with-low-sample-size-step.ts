@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   AirtableEstimateFieldsAfterParsingDatesStep,
   AirtableSourceFieldsAfterParsingDatesStep,
@@ -12,11 +13,13 @@ export type AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep =
 interface RemoveEstimatesWithLowSampleSizeStepInput {
   allEstimates: AirtableEstimateFieldsAfterParsingDatesStep[];
   allSources: AirtableSourceFieldsAfterParsingDatesStep[];
+  mongoClient: MongoClient;
 }
 
 interface RemoveEstimatesWithLowSampleSizeStepOutput {
   allEstimates: AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   allSources: AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
+  mongoClient: MongoClient;
 }
 
 export const removeEstimatesWithLowSampleSizeStep = (
@@ -41,5 +44,6 @@ export const removeEstimatesWithLowSampleSizeStep = (
       return true;
     }),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import { AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep, AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep } from "./assert-mandatory-fields-are-present-step.js";
 
@@ -15,11 +16,13 @@ export type AirtableSourceFieldsAfterParsingDatesStep =
 interface ParseDatesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allSources: AirtableSourceFieldsAfterParsingDatesStep[];
+  mongoClient: MongoClient;
 }
 
 interface ParseDatesStepOutput {
   allEstimates: AirtableEstimateFieldsAfterParsingDatesStep[];
   allSources: AirtableSourceFieldsAfterParsingDatesStep[];
+  mongoClient: MongoClient;
 }
 
 export const parseDatesStep = (
@@ -38,5 +41,6 @@ export const parseDatesStep = (
       };
     }),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

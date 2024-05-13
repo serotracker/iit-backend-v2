@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
@@ -21,6 +22,7 @@ interface AddVaccinationDataToEstimateStepInput {
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  mongoClient: MongoClient;
 }
 
 interface AddVaccinationDataToEstimateStepOutput {
@@ -28,6 +30,7 @@ interface AddVaccinationDataToEstimateStepOutput {
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+  mongoClient: MongoClient;
 }
 
 export const addVaccinationDataToEstimateStep = (
@@ -59,5 +62,6 @@ export const addVaccinationDataToEstimateStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

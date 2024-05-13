@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { ObjectId, MongoClient } from "mongodb";
 import { ArbovirusEstimateDocument } from "../../../storage/types.js";
 import {
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
@@ -12,11 +12,13 @@ export type AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep = Air
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
+  mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: ArbovirusEstimateDocument[];
   allSources: AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep[];
+  mongoClient: MongoClient;
 }
 
 export const transformIntoFormatForDatabaseStep = (
@@ -73,5 +75,6 @@ export const transformIntoFormatForDatabaseStep = (
       updatedAt: updatedAtForAllRecords
     })),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

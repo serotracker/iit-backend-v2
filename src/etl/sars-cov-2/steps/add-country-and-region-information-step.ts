@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { EstimateFieldsAfterParsingDatesStep, StructuredPositiveCaseDataAfterParsingDatesStep, StructuredVaccinationDataAfterParsingDatesStep, StudyFieldsAfterParsingDatesStep } from "./parse-dates-step.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
@@ -20,6 +21,7 @@ interface AddCountryAndRegionInformationStepInput {
   allStudies: StudyFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
+  mongoClient: MongoClient;
 }
 
 interface AddCountryAndRegionInformationStepOutput {
@@ -27,6 +29,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
+  mongoClient: MongoClient;
 }
 
 export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInformationStepInput): AddCountryAndRegionInformationStepOutput => {
@@ -63,5 +66,6 @@ export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInf
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 }

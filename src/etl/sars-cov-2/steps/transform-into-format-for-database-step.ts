@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { ObjectId, MongoClient } from "mongodb";
 import { SarsCov2EstimateDocument } from "../../../storage/types.js";
 import { 
   EstimateFieldsAfterAddingPositiveCaseDataStep,
@@ -16,6 +16,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+  mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
@@ -23,6 +24,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
+  mongoClient: MongoClient;
 }
 
 export const transformIntoFormatForDatabaseStep = (
@@ -75,5 +77,6 @@ export const transformIntoFormatForDatabaseStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

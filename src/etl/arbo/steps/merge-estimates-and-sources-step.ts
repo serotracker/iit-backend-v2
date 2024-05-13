@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep,
   AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep
@@ -14,11 +15,13 @@ export type AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep =
 interface MergeEstimatesAndSourcesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
+  mongoClient: MongoClient;
 }
 
 interface MergeEstimatesAndSourcesStepOutput {
   allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
+  mongoClient: MongoClient;
 }
 
 export const mergeEstimatesAndSourcesStep = (
@@ -40,5 +43,6 @@ export const mergeEstimatesAndSourcesStep = (
       };
     }),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

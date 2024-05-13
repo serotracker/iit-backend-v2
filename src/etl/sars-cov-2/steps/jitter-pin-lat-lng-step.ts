@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { EstimateFieldsAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
@@ -30,6 +31,7 @@ interface JitterPinLatLngStepInput {
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
+  mongoClient: MongoClient;
 }
 
 interface JitterPinLatLngStepOutput {
@@ -37,6 +39,7 @@ interface JitterPinLatLngStepOutput {
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  mongoClient: MongoClient;
 }
 
 export const jitterPinLatLngStep = (
@@ -64,5 +67,6 @@ export const jitterPinLatLngStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

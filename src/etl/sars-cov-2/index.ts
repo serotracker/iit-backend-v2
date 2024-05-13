@@ -63,6 +63,7 @@ const runEtlMain = async () => {
       allStudies: allStudiesUnformatted,
       vaccinationData: undefined,
       positiveCaseData: undefined,
+      mongoClient
     },
     asyncEtlStep(fetchVaccinationDataStep),
     asyncEtlStep(fetchPositiveCaseDataStep),
