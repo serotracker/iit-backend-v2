@@ -35,6 +35,8 @@ export interface AirtableSarsCov2EstimateFields {
   "Rapid Review: Study": Array<string | null | AirtableError>;
   "Denominator Value": number | null;
   "Numerator Value": number | null;
+  "Prevalence Estimate Name": string | null;
+  "URL": Array<string | null | AirtableError>;
 }
 
 export interface AirtableSarsCov2StudyFields {

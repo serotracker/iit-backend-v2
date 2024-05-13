@@ -30,6 +30,8 @@ export const sarsCov2Typedefs = `
     denominatorValue: Int
     numeratorValue: Int
     seroprevalence: Float
+    estimateName: String
+    url: String
     countryPeopleVaccinatedPerHundred: Float
     countryPeopleFullyVaccinatedPerHundred: Float
     countryPositiveCasesPerMillionPeople: Float

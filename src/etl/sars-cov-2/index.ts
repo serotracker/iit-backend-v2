@@ -49,7 +49,7 @@ const runEtlMain = async () => {
       .then((estimateSheet) =>
         estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
       );
-
+    
   const allStudiesUnformatted: (FieldSet & { id: string })[] =
     await studySheet
       .select()
