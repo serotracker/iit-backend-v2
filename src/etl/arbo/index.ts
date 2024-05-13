@@ -56,6 +56,7 @@ const runEtlMain = async () => {
       {
         allEstimates: allEstimatesUnformatted,
         allSources: allSourcesUnformatted,
+        mongoClient
       },
       etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
       etlStep(cleanSingleElementArrayFieldsStep),

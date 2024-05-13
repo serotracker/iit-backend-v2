@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
@@ -17,6 +18,7 @@ interface CombineEstimatesAndStudiesInput {
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  mongoClient: MongoClient;
 }
 
 interface CombineEstimatesAndStudiesOutput {
@@ -24,6 +26,7 @@ interface CombineEstimatesAndStudiesOutput {
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
   vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  mongoClient: MongoClient;
 }
 
 export const combineEstimatesAndStudies = (
@@ -52,5 +55,6 @@ export const combineEstimatesAndStudies = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

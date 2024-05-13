@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import { ObjectId, MongoClient } from "mongodb";
 import { SarsCov2EstimateDocument } from "../../../storage/types.js";
 import { 
   EstimateFieldsAfterAddingPositiveCaseDataStep,
@@ -16,6 +16,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+  mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
@@ -23,6 +24,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
+  mongoClient: MongoClient;
 }
 
 export const transformIntoFormatForDatabaseStep = (
@@ -66,14 +68,19 @@ export const transformIntoFormatForDatabaseStep = (
       samplingStartDate: estimate.samplingStartDate,
       samplingEndDate: estimate.samplingEndDate,
       samplingMidDate: estimate.samplingMidDate,
+      publicationDate: estimate.publicationDate,
       countryPeopleVaccinatedPerHundred: estimate.countryPeopleVaccinatedPerHundred,
       countryPeopleFullyVaccinatedPerHundred: estimate.countryPeopleFullyVaccinatedPerHundred,
       countryPositiveCasesPerMillionPeople: estimate.countryPositiveCasesPerMillionPeople,
+      denominatorValue: estimate.denominatorValue,
+      numeratorValue: estimate.numeratorValue,
+      seroprevalence: estimate.seroprevalence,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

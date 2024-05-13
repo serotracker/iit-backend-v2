@@ -1,3 +1,4 @@
+import { MongoClient } from 'mongodb';
 import { GeocodingApiRequestUrl, GeocodingApiResponse } from "./geocoding-api-client-types.js";
 
 export enum GeocodingApiRequestLogLevel {
@@ -38,6 +39,7 @@ export interface GenerateLineForCityStateBoundingBoxConsistencyCheckInput {
   state: string | undefined;
   country: string;
   geocodingApiResponse: GeocodingApiResponse;
+  mongoClient: MongoClient;
 }
 
 export interface GenerateLineForInvalidCityButValidStateCheckInput {
@@ -45,6 +47,7 @@ export interface GenerateLineForInvalidCityButValidStateCheckInput {
   state: string | undefined;
   country: string;
   geocodingApiResponse: GeocodingApiResponse;
+  mongoClient: MongoClient;
 }
 
 export interface GenerateLineForInvalidCityButValidDistrictCheckInput {
@@ -52,6 +55,7 @@ export interface GenerateLineForInvalidCityButValidDistrictCheckInput {
   state: string | undefined;
   country: string;
   geocodingApiResponse: GeocodingApiResponse;
+  mongoClient: MongoClient;
 }
 
 export interface RecordGeocodingApiRequestInGeocodingReportInput {
@@ -61,4 +65,5 @@ export interface RecordGeocodingApiRequestInGeocodingReportInput {
   geocodingApiRequestUrl: GeocodingApiRequestUrl;
   geocodingApiResponse: GeocodingApiResponse;
   geocodingApiRequestReportFileName: string;
+  mongoClient: MongoClient;
 }

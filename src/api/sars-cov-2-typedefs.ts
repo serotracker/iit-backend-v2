@@ -26,6 +26,10 @@ export const sarsCov2Typedefs = `
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
+    publicationDate: String
+    denominatorValue: Int
+    numeratorValue: Int
+    seroprevalence: Float
     countryPeopleVaccinatedPerHundred: Float
     countryPeopleFullyVaccinatedPerHundred: Float
     countryPositiveCasesPerMillionPeople: Float

@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
 import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { isAirtableError, AirtableError } from "../types.js";
@@ -22,7 +23,10 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   scope: string | undefined;
   samplingEndDate: string | undefined;
   samplingStartDate: string | undefined;
+  publicationDate: string | undefined;
   studyId: string | undefined;
+  denominatorValue: number | undefined;
+  numeratorValue: number | undefined;
 }
 export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -36,6 +40,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  mongoClient: MongoClient;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
@@ -43,6 +48,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
+  mongoClient: MongoClient;
 }
 
 interface CleanArrayFieldToSingleValueInput<
@@ -175,10 +181,13 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       scope: estimate["Grade of Estimate Scope"] ?? undefined,
       samplingEndDate: estimate["Sampling End Date"] ?? undefined,
       samplingStartDate: estimate["Sampling Start Date"] ?? undefined,
+      publicationDate: !isAirtableError(estimate["Publication Date (ISO)"]) && !!estimate["Publication Date (ISO)"] ? estimate["Publication Date (ISO)"] : undefined,
       studyId: cleanArrayFieldToSingleValue({
         key: "Rapid Review: Study",
         object: estimate,
-      }).value
+      }).value,
+      denominatorValue: estimate['Denominator Value'] ? Math.floor(estimate['Denominator Value']) : undefined,
+      numeratorValue: estimate['Numerator Value'] ? Math.floor(estimate['Numerator Value']) : undefined,
     })),
     allStudies: input.allStudies.map((study) => ({
       id: study.id,
@@ -189,5 +198,6 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
     })),
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

@@ -1,5 +1,5 @@
-import { FieldSet } from "airtable";
 import { z } from "zod";
+import { MongoClient } from "mongodb";
 import { AirtableSarsCov2EstimateFields, AirtableSarsCov2StudyFields } from "../types.js";
 import { EstimateFieldsAfterFetchingPositiveCaseDataStep, StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep, StudyFieldsAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
 
@@ -15,6 +15,7 @@ interface ValidateFieldSetFromAirtableStepInput {
   allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+  mongoClient: MongoClient;
 }
 
 interface ValidateFieldSetFromAirtableStepOutput {
@@ -22,6 +23,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  mongoClient: MongoClient;
 }
 
 export const validateFieldSetFromAirtableStep = (
@@ -78,6 +80,10 @@ export const validateFieldSetFromAirtableStep = (
     "Sampling End Date": z
       .optional(z.string().nullable())
       .transform((field) => field ?? null),
+    "Publication Date (ISO)": z.union([
+      z.optional(z.string().nullable()).transform((field) => field ?? null),
+      z.object({ error: z.string() }),
+    ]),
     "Sampling Start Date": z
       .optional(z.string().nullable())
       .transform((field) => field ?? null),
@@ -112,6 +118,8 @@ export const validateFieldSetFromAirtableStep = (
         ]).array()
       )
       .transform((field) => field ?? []),
+    "Denominator Value": z.optional(z.number()).transform((field) => field ?? null),
+    "Numerator Value": z.optional(z.number()).transform((field) => field ?? null),
   });
 
   const zodSarsCov2StudyFieldsObject = z.object({
@@ -133,6 +141,7 @@ export const validateFieldSetFromAirtableStep = (
     allEstimates,
     allStudies,
     vaccinationData: input.vaccinationData,
-    positiveCaseData: input.positiveCaseData
+    positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

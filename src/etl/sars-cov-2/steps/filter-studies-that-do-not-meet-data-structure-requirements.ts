@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
   StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep,
@@ -22,6 +23,7 @@ interface FilterStudiesThatDoNotMeetDataStructureRequirementsInput {
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
   vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  mongoClient: MongoClient;
 }
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsOutput {
@@ -29,6 +31,7 @@ interface FilterStudiesThatDoNotMeetDataStructureRequirementsOutput {
   allStudies: StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
   vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+  mongoClient: MongoClient;
 }
 
 export const filterStudiesThatDoNotMeetDataStructureRequirement = (
@@ -43,10 +46,13 @@ export const filterStudiesThatDoNotMeetDataStructureRequirement = (
       (
         estimate
       ): estimate is EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =>
-        !!estimate.country && !!estimate.countryAlphaThreeCode && !!estimate.studyName
+        !!estimate.country
+        && !!estimate.countryAlphaThreeCode
+        && !!estimate.studyName
     ),
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
 import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
 
@@ -13,6 +14,7 @@ interface TransformNotReportedValuesToUndefinedStepInput {
   allStudies: StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[]
   vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+  mongoClient: MongoClient;
 }
 
 interface TransformNotReportedValuesToUndefinedStepOutput {
@@ -20,6 +22,7 @@ interface TransformNotReportedValuesToUndefinedStepOutput {
   allStudies: StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
+  mongoClient: MongoClient;
 }
 
 enum NotReportedValue {
@@ -64,5 +67,6 @@ export const transformNotReportedValuesToUndefinedStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    mongoClient: input.mongoClient
   };
 };

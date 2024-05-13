@@ -101,14 +101,14 @@ const generateLineForTextConsistencyCheck = (input: GenerateLineForTextConsisten
 }
 
 const generateLineForCityStateBoundingBoxConsistencyCheck = async (input: GenerateLineForCityStateBoundingBoxConsistencyCheckInput): Promise<string | undefined> => {
-  const { city, state, country, geocodingApiResponse } = input;
+  const { city, state, country, geocodingApiResponse, mongoClient } = input;
 
   if(!city || !state || isGeocodingApiFailureResponse(geocodingApiResponse)) {
     return;
   }
 
-  const apiResponseForCity = await makeGeocodingApiRequest({city, state, country, shouldSaveInGeocodingApiRequestReport: false});
-  const apiResponseForState = await makeGeocodingApiRequest({city: undefined, state, country, shouldSaveInGeocodingApiRequestReport: false});
+  const apiResponseForCity = await makeGeocodingApiRequest({city, state, country, shouldSaveInGeocodingApiRequestReport: false, mongoClient});
+  const apiResponseForState = await makeGeocodingApiRequest({city: undefined, state, country, shouldSaveInGeocodingApiRequestReport: false, mongoClient});
 
   if(isGeocodingApiFailureResponse(apiResponseForCity) || isGeocodingApiFailureResponse(apiResponseForState) || !apiResponseForState.boundingBox) {
     return;
@@ -127,7 +127,7 @@ const generateLineForCityStateBoundingBoxConsistencyCheck = async (input: Genera
 }
 
 const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineForInvalidCityButValidStateCheckInput): Promise<string | undefined> => {
-  const { city, state, country, geocodingApiResponse } = input;
+  const { city, state, country, geocodingApiResponse, mongoClient } = input;
 
   if(!city) {
     return;
@@ -137,7 +137,13 @@ const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineF
     return;
   }
 
-  const apiResponseForState = await makeGeocodingApiRequest({city: undefined, state, country, shouldSaveInGeocodingApiRequestReport: false});
+  const apiResponseForState = await makeGeocodingApiRequest({
+    city: undefined,
+    state,
+    country,
+    shouldSaveInGeocodingApiRequestReport: false,
+    mongoClient
+  });
 
   if(isGeocodingApiFailureResponse(apiResponseForState)) {
     return;
@@ -155,7 +161,7 @@ const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineF
 }
 
 const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLineForInvalidCityButValidDistrictCheckInput): Promise<string | undefined> => {
-  const { city, state, country, geocodingApiResponse } = input;
+  const { city, state, country, geocodingApiResponse, mongoClient } = input;
 
   if(!city) {
     return;
@@ -180,7 +186,8 @@ const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLi
       countryCode,
       geocoderDataType: GeocoderDataType.DISTRICT,
       mapboxSearchText: city
-    }
+    },
+    mongoClient
   });
 
   if(isGeocodingApiFailureResponse(apiResponseForState)) {
@@ -199,14 +206,14 @@ const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLi
 }
 
 export const recordGeocodingApiRequestInGeocodingReport = async(input: RecordGeocodingApiRequestInGeocodingReportInput): Promise<void> => {
-  const { city, state, country, geocodingApiRequestUrl, geocodingApiResponse, geocodingApiRequestReportFileName } = input;
+  const { city, state, country, geocodingApiRequestUrl, geocodingApiResponse, geocodingApiRequestReportFileName, mongoClient } = input;
 
   const linesToWrite = await Promise.all([
       generateLineForResponseAndRequest({city, state, country, geocodingApiRequestUrl, geocodingApiResponse}),
       generateLineForTextConsistencyCheck({city, state, country, geocodingApiResponse}),
-      generateLineForCityStateBoundingBoxConsistencyCheck({city, state, country, geocodingApiResponse}),
-      generateLineForInvalidCityButValidStateCheck({city, state, country, geocodingApiResponse}),
-      generateLineForInvalidCityButValidDistrictCheck({city, state, country, geocodingApiResponse}),
+      generateLineForCityStateBoundingBoxConsistencyCheck({city, state, country, geocodingApiResponse, mongoClient}),
+      generateLineForInvalidCityButValidStateCheck({city, state, country, geocodingApiResponse, mongoClient}),
+      generateLineForInvalidCityButValidDistrictCheck({city, state, country, geocodingApiResponse, mongoClient}),
   ]);
 
   linesToWrite.forEach((line) => {

@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
 import {
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
@@ -13,11 +14,13 @@ export type AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedSte
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
+  mongoClient: MongoClient;
 }
 
 interface TransformNotReportedValuesToUndefinedStepOutput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  mongoClient: MongoClient;
 }
 
 enum NotReportedValue {
@@ -60,5 +63,6 @@ export const transformNotReportedValuesToUndefinedStep = (
         ) as AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep
     ),
     allSources: allSources,
+    mongoClient: input.mongoClient
   };
 };

@@ -35,6 +35,7 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     samplingEndDate: document.samplingEndDate?.toISOString(),
     samplingStartDate: document.samplingStartDate?.toISOString(),
     samplingMidDate: document.samplingMidDate?.toISOString(),
+    publicationDate: document.publicationDate?.toISOString(),
     countryPeopleVaccinatedPerHundred: document.countryPeopleVaccinatedPerHundred,
     countryPeopleFullyVaccinatedPerHundred: document.countryPeopleFullyVaccinatedPerHundred,
     countryPositiveCasesPerMillionPeople: document.countryPositiveCasesPerMillionPeople,
@@ -43,7 +44,10 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     antibodies: document.antibodies,
     isotypes: document.isotypes,
     isWHOUnityAligned: document.isWHOUnityAligned,
-    testType: document.testType
+    testType: document.testType,
+    denominatorValue: document.denominatorValue,
+    numeratorValue: document.numeratorValue,
+    seroprevalence: document.seroprevalence
   }
 }
 

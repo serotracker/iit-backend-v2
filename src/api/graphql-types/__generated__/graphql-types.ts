@@ -142,6 +142,7 @@ export type SarsCov2Estimate = {
   countryPeopleFullyVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   countryPeopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   countryPositiveCasesPerMillionPeople?: Maybe<Scalars['Float']['output']>;
+  denominatorValue?: Maybe<Scalars['Int']['output']>;
   gbdSubRegion?: Maybe<GbdSubRegion>;
   gbdSuperRegion?: Maybe<GbdSuperRegion>;
   id: Scalars['String']['output'];
@@ -149,12 +150,15 @@ export type SarsCov2Estimate = {
   isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
+  numeratorValue?: Maybe<Scalars['Int']['output']>;
   populationGroup?: Maybe<Scalars['String']['output']>;
+  publicationDate?: Maybe<Scalars['String']['output']>;
   riskOfBias?: Maybe<Scalars['String']['output']>;
   samplingEndDate?: Maybe<Scalars['String']['output']>;
   samplingMidDate?: Maybe<Scalars['String']['output']>;
   samplingStartDate?: Maybe<Scalars['String']['output']>;
   scope?: Maybe<Scalars['String']['output']>;
+  seroprevalence?: Maybe<Scalars['Float']['output']>;
   sex?: Maybe<Scalars['String']['output']>;
   sourceType?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
@@ -432,6 +436,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   countryPeopleFullyVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   countryPeopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   countryPositiveCasesPerMillionPeople?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  denominatorValue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   gbdSubRegion?: Resolver<Maybe<ResolversTypes['GBDSubRegion']>, ParentType, ContextType>;
   gbdSuperRegion?: Resolver<Maybe<ResolversTypes['GBDSuperRegion']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -439,12 +444,15 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  numeratorValue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   populationGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  publicationDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   scope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
