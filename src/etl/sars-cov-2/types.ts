@@ -1,5 +1,3 @@
-import { ThreeLetterIsoCountryCode } from "../../lib/geocoding-api/country-codes";
-
 export interface AirtableError {
   error: unknown;
 };
@@ -33,6 +31,12 @@ export interface AirtableSarsCov2EstimateFields {
   "Grade of Estimate Scope": string | null;
   "Sampling End Date": string | null;
   "Sampling Start Date": string | null;
+  "Rapid Review: Study": Array<string | null | AirtableError>;
+}
+
+export interface AirtableSarsCov2StudyFields {
+  id: string;
+  "Source Name (from Rapid Review: Source)": Array<string | null | AirtableError>;
 }
 
 export type StructuredVaccinationData = Array<{

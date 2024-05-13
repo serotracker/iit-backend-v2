@@ -1,21 +1,25 @@
 import { FieldSet } from "airtable";
 import { z } from "zod";
-import { AirtableSarsCov2EstimateFields } from "../types.js";
-import { StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
+import { AirtableSarsCov2EstimateFields, AirtableSarsCov2StudyFields } from "../types.js";
+import { EstimateFieldsAfterFetchingPositiveCaseDataStep, StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep, StudyFieldsAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2EstimateFields;
+export type StudyFieldsAfterValidatingFieldSetFromAirtableStep =
+  AirtableSarsCov2StudyFields;
 export type StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep = StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
 export type StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep = StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
 
 interface ValidateFieldSetFromAirtableStepInput {
-  allEstimates: FieldSet[];
+  allEstimates: EstimateFieldsAfterFetchingPositiveCaseDataStep[];
+  allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
 }
 
 interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 }
@@ -100,12 +104,34 @@ export const validateFieldSetFromAirtableStep = (
         z.string().nullable().array()
       ]))
       .transform((field) => field ?? null),
+    "Rapid Review: Study": z
+      .optional(
+        z.union([
+          z.string().nullable(),
+          z.object({ error: z.string() }),
+        ]).array()
+      )
+      .transform((field) => field ?? []),
   });
 
+  const zodSarsCov2StudyFieldsObject = z.object({
+    id: z.string(),
+    "Source Name (from Rapid Review: Source)": z
+      .optional(
+        z.union([
+          z.string().nullable(),
+          z.object({ error: z.string() }),
+        ]).array()
+      )
+      .transform((field) => field ?? []),
+  })
+
   const allEstimates = input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate));
+  const allStudies = input.allStudies.map((study) => zodSarsCov2StudyFieldsObject.parse(study));
 
   return { 
     allEstimates,
+    allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData
   };

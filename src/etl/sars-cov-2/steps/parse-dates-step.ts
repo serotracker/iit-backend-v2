@@ -1,22 +1,25 @@
 import { parse } from "date-fns";
-import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
+import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 
 export type EstimateFieldsAfterParsingDatesStep = Omit<EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, 'samplingEndDate' | 'samplingStartDate'> & {
   samplingStartDate: Date | undefined;
   samplingEndDate: Date | undefined;
   samplingMidDate: Date | undefined;
 };
+export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep;
 export type StructuredVaccinationDataAfterParsingDatesStep = StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
 export type StructuredPositiveCaseDataAfterParsingDatesStep = StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
 
 interface ParseDatesStepInput {
   allEstimates: EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  allStudies: StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
 }
 
 interface ParseDatesStepOutput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
+  allStudies: StudyFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
 }
@@ -39,6 +42,7 @@ export const parseDatesStep = (input: ParseDatesStepInput): ParseDatesStepOutput
         samplingMidDate, 
       };
     }),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

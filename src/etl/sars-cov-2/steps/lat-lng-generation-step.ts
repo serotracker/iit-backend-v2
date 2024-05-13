@@ -1,5 +1,5 @@
 import { writeFileSync } from "fs";
-import { EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
+import { EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep, StudyFieldsAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
 import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
 import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
@@ -8,17 +8,20 @@ export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingC
   latitude: number;
   longitude: number;
 };
+export type StudyFieldsAfterLatLngGenerationStep = StudyFieldsAfterAddingCountryAndRegionInformationStep;
 export type StructuredVaccinationDataAfterLatLngGenerationStep = StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
 export type StructuredPositiveCaseDataAfterLatLngGenerationStep = StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
+  allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
 }
 
 interface LatLngGenerationStepOutput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
+  allStudies: StudyFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
 }
@@ -65,6 +68,7 @@ export const latLngGenerationStep = async(
 
   return {
     allEstimates: estimatesWithLatitudesAndLongitudes,
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

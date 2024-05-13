@@ -154,9 +154,11 @@ export type SarsCov2Estimate = {
   samplingEndDate?: Maybe<Scalars['String']['output']>;
   samplingMidDate?: Maybe<Scalars['String']['output']>;
   samplingStartDate?: Maybe<Scalars['String']['output']>;
+  scope?: Maybe<Scalars['String']['output']>;
   sex?: Maybe<Scalars['String']['output']>;
   sourceType?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyName: Scalars['String']['output'];
   testType: Array<Scalars['String']['output']>;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
@@ -169,6 +171,7 @@ export type SarsCov2FilterOptions = {
   country: Array<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
+  scope: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
   testType: Array<Scalars['String']['output']>;
   unRegion: Array<UnRegion>;
@@ -441,9 +444,11 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  scope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
@@ -456,6 +461,7 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  scope?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;

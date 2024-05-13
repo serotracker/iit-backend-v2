@@ -1,5 +1,5 @@
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
-import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
+import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { isAirtableError, AirtableError } from "../types.js";
 
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
@@ -22,30 +22,37 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   scope: string | undefined;
   samplingEndDate: string | undefined;
   samplingStartDate: string | undefined;
+  studyId: string | undefined;
+}
+export interface StudyFieldsAfterCleaningFieldNamesStep {
+  id: string;
+  studyName: string | undefined;
 }
 export type StructuredVaccinationDataAfterCleaningFieldNamesStep = StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
 export type StructuredPositiveCaseDataAfterCleaningFieldNamesStep = StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFieldNamesStep[];
+  allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
 }
 
 interface CleanArrayFieldToSingleValueInput<
   TFieldName extends string,
-  TEstimate extends Record<TFieldName, Array<string | null | AirtableError>> & {
+  TObject extends Record<TFieldName, Array<string | null | AirtableError>> & {
     id: string;
   },
 > {
   key: TFieldName;
-  estimate: TEstimate;
+  object: TObject;
 }
 
 interface CleanArrayFieldToSingleValueOutput {
@@ -54,19 +61,19 @@ interface CleanArrayFieldToSingleValueOutput {
 
 const cleanArrayFieldToSingleValue = <
   TFieldName extends string,
-  TEstimate extends Record<TFieldName, Array<string | null | AirtableError>> & {
+  TObject extends Record<TFieldName, Array<string | null | AirtableError>> & {
     id: string;
   },
 >(
-  input: CleanArrayFieldToSingleValueInput<TFieldName, TEstimate>
+  input: CleanArrayFieldToSingleValueInput<TFieldName, TObject>
 ): CleanArrayFieldToSingleValueOutput => {
-  const inputValue = input.estimate[input.key].filter(
+  const inputValue = input.object[input.key].filter(
     <T>(element: T | AirtableError): element is T => !isAirtableError(element)
   );
 
   if (inputValue.length > 1) {
     console.error(
-      `Unable to clean array field "${input.key}" with more than one element for estimate with id ${input.estimate.id}`
+      `Unable to clean array field "${input.key}" with more than one element for object with id ${input.object.id}`
     );
   }
 
@@ -77,12 +84,12 @@ const cleanArrayFieldToSingleValue = <
 
 interface ConvertSingleValueOrArrayToArrayInput<
   TFieldName extends string,
-  TEstimate extends Record<TFieldName, string | null | Array<string | null>> & {
+  TObject extends Record<TFieldName, string | null | Array<string | null>> & {
     id: string;
   },
 > {
   key: TFieldName;
-  estimate: TEstimate;
+  object: TObject;
 }
 
 interface ConvertSingleValueOrArrayToArrayOutput {
@@ -91,13 +98,13 @@ interface ConvertSingleValueOrArrayToArrayOutput {
 
 const convertSingleValueOrArrayToArray = <
   TFieldName extends string,
-  TEstimate extends Record<TFieldName, string | null | Array<string | null>> & {
+  TObject extends Record<TFieldName, string | null | Array<string | null>> & {
     id: string;
   },
 >(
-  input: ConvertSingleValueOrArrayToArrayInput<TFieldName, TEstimate>
+  input: ConvertSingleValueOrArrayToArrayInput<TFieldName, TObject>
 ): ConvertSingleValueOrArrayToArrayOutput => {
-  const inputValue = input.estimate[input.key];
+  const inputValue = input.object[input.key];
 
   if (!inputValue) {
     return { value: [] };
@@ -126,35 +133,35 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       id: estimate.id,
       antibodies: convertSingleValueOrArrayToArray({
         key: "Antibody target",
-        estimate,
+        object: estimate,
       }).value.flatMap((antibodyString) => {
         return [...new Set(antibodyString.split(',').map((element) => element.trim()).filter((element) => !!element))]
       }),
       isotypes: convertSingleValueOrArrayToArray({
         key: "Isotype(s) Reported",
-        estimate,
+        object: estimate,
       }).value.flatMap((isotypeString) => {
         return [...new Set(isotypeString.split(',').map((element) => element.trim()).filter((element) => !!element))]
       }),
       isWHOUnityAligned:
         cleanArrayFieldToSingleValue({
           key: "UNITY: Criteria",
-          estimate,
+          object: estimate,
         }).value === "Unity-Aligned"
           ? true
           : false,
       testType: estimate["Test Type"] ? [...new Set(estimate["Test Type"].split(',').map((element) => element.trim()).filter((element) => !!element))] : [],
       sourceType: cleanArrayFieldToSingleValue({
         key: "Source Type",
-        estimate,
+        object: estimate,
       }).value,
       riskOfBias: cleanArrayFieldToSingleValue({
         key: "Overall Risk of Bias (JBI)",
-        estimate,
+        object: estimate,
       }).value,
       countryAlphaThreeCode: cleanArrayFieldToSingleValue({
         key: 'Alpha3 Code',
-        estimate
+        object: estimate,
       }).value,
       ageGroup: estimate["Sample Frame (age)"] ?? undefined,
       sex: estimate["Sample Frame (sex)"] ?? undefined,
@@ -168,6 +175,17 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       scope: estimate["Grade of Estimate Scope"] ?? undefined,
       samplingEndDate: estimate["Sampling End Date"] ?? undefined,
       samplingStartDate: estimate["Sampling Start Date"] ?? undefined,
+      studyId: cleanArrayFieldToSingleValue({
+        key: "Rapid Review: Study",
+        object: estimate,
+      }).value
+    })),
+    allStudies: input.allStudies.map((study) => ({
+      id: study.id,
+      studyName: cleanArrayFieldToSingleValue({
+        key: "Source Name (from Rapid Review: Source)",
+        object: study,
+      }).value
     })),
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,

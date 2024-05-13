@@ -1,21 +1,24 @@
 import { request } from "undici";
 import { StructuredPositiveCaseData } from "../types";
-import { EstimateFieldsAfterFetchingVaccinationDataStep, StructuredPositiveCaseDataAfterFetchingVaccinationDataStep, StructuredVaccinationDataAfterFetchingVaccinationDataStep } from "./fetch-vaccination-data-step";
+import { EstimateFieldsAfterFetchingVaccinationDataStep, StructuredPositiveCaseDataAfterFetchingVaccinationDataStep, StructuredVaccinationDataAfterFetchingVaccinationDataStep, StudyFieldsAfterFetchingVaccinationDataStep } from "./fetch-vaccination-data-step";
 import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
 import { groupByArray, typedObjectEntries } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingPositiveCaseDataStep = EstimateFieldsAfterFetchingVaccinationDataStep;
+export type StudyFieldsAfterFetchingPositiveCaseDataStep = StudyFieldsAfterFetchingVaccinationDataStep;
 export type StructuredVaccinationDataAfterFetchingPositiveCaseDataStep = StructuredVaccinationDataAfterFetchingVaccinationDataStep;
 export type StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep = StructuredPositiveCaseData;
 
 interface FetchPositiveCaseDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingVaccinationDataStep[];
+  allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
 }
 
 interface FetchPositiveCaseDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingPositiveCaseDataStep[];
+  allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
 }
@@ -297,6 +300,7 @@ export const fetchPositiveCaseDataStep = async(
 
   return {
     allEstimates: input.allEstimates,
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: formattedPositiveCaseData,
   };

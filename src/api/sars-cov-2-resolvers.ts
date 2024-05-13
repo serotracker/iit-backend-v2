@@ -27,6 +27,8 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     gbdSubRegion: document.gbdSubRegion ? mapGbdSubRegionForApi(document.gbdSubRegion) : undefined,
     gbdSuperRegion: document.gbdSuperRegion ? mapGbdSuperRegionForApi(document.gbdSuperRegion) : undefined,
     state: document.state,
+    scope: document.scope,
+    studyName: document.studyName,
     city: document.city,
     populationGroup: document.populationGroup,
     riskOfBias: document.riskOfBias,
@@ -64,6 +66,7 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
     const [
       ageGroup,
       country,
+      scope,
       sourceType,
       riskOfBias,
       unRegion,
@@ -74,6 +77,7 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('scope').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('riskOfBias').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -86,6 +90,7 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
     return {
       ageGroup,
       country,
+      scope,
       sourceType,
       riskOfBias,
       unRegion: unRegion.map((region) => mapUnRegionForApi(region)),

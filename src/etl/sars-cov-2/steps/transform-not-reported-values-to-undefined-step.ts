@@ -1,19 +1,23 @@
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
-import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
+import { EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep, StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep } from "./filter-studies-that-do-not-meet-data-structure-requirements.js";
 
 export type EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep =
   EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+export type StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep =
+  StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 export type StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep = StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 export type StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep = StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
+  allStudies: StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[]
   vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
 }
 
 interface TransformNotReportedValuesToUndefinedStepOutput {
   allEstimates: EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  allStudies: StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
 }
@@ -57,6 +61,7 @@ export const transformNotReportedValuesToUndefinedStep = (
           })
         ) as EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep
     ),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };
