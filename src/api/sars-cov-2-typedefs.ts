@@ -6,6 +6,7 @@ export const sarsCov2Typedefs = `
     testType: [String!]!
     sourceType: String
     riskOfBias: String
+    studyName: String!
     populationGroup: String
     sex: String
     ageGroup: String
@@ -17,6 +18,7 @@ export const sarsCov2Typedefs = `
     gbdSuperRegion: GBDSuperRegion
     gbdSubRegion: GBDSubRegion
     state: String
+    scope: String
     city: String
     id: String!
     latitude: Float!
@@ -32,6 +34,7 @@ export const sarsCov2Typedefs = `
   type SarsCov2FilterOptions {
     ageGroup: [String!]!
     country: [String!]!
+    scope: [String!]!
     sourceType: [String!]!
     riskOfBias: [String!]!
     unRegion: [UNRegion!]!

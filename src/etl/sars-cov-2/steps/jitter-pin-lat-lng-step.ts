@@ -1,7 +1,9 @@
-import { EstimateFieldsAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { EstimateFieldsAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;
+export type StudyFieldsAfterJitteringPinLatLngStep =
+  StudyFieldsAfterLatLngGenerationStep;
 export type StructuredVaccinationDataAfterJitteringPinLatLngStep = StructuredVaccinationDataAfterLatLngGenerationStep;
 export type StructuredPositiveCaseDataAfterJitteringPinLatLngStep = StructuredPositiveCaseDataAfterLatLngGenerationStep;
 
@@ -25,12 +27,14 @@ const jitterNumberValueByAmount = (
 
 interface JitterPinLatLngStepInput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
+  allStudies: StudyFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
 }
 
 interface JitterPinLatLngStepOutput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
 }
@@ -57,6 +61,7 @@ export const jitterPinLatLngStep = (
         jitterAmount: maximumPinJitterMagnitude,
       }),
     })),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

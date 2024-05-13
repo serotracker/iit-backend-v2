@@ -2,6 +2,7 @@ import {
   EstimateFieldsAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
   StructuredVaccinationDataAfterJitteringPinLatLngStep,
+  StudyFieldsAfterJitteringPinLatLngStep,
 } from "./jitter-pin-lat-lng-step";
 
 export type EstimateFieldsAfterAddingVaccinationDataStep =
@@ -9,6 +10,7 @@ export type EstimateFieldsAfterAddingVaccinationDataStep =
     countryPeopleVaccinatedPerHundred: number | undefined;
     countryPeopleFullyVaccinatedPerHundred: number | undefined;
   };
+export type StudyFieldsAfterAddingVaccinationDataStep = StudyFieldsAfterJitteringPinLatLngStep;
 export type StructuredVaccinationDataAfterAddingVaccinationDataStep =
   StructuredVaccinationDataAfterJitteringPinLatLngStep;
 export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
@@ -16,12 +18,14 @@ export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
 
 interface AddVaccinationDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
 }
 
 interface AddVaccinationDataToEstimateStepOutput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
+  allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
 }
@@ -52,6 +56,7 @@ export const addVaccinationDataToEstimateStep = (
         countryPeopleFullyVaccinatedPerHundred
       }
     }),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

@@ -3,20 +3,24 @@ import { SarsCov2EstimateDocument } from "../../../storage/types.js";
 import { 
   EstimateFieldsAfterAddingPositiveCaseDataStep,
   StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep,
-  StructuredVaccinationDataAfterAddingPositiveCaseDataStep
+  StructuredVaccinationDataAfterAddingPositiveCaseDataStep,
+  StudyFieldsAfterAddingPositiveCaseDataStep
 } from "./add-positive-case-data-to-estimate-step.js";
 
+export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAddingPositiveCaseDataStep;
 export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
 export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
+  allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: SarsCov2EstimateDocument[];
+  allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
 }
@@ -43,6 +47,7 @@ export const transformIntoFormatForDatabaseStep = (
       riskOfBias: estimate.riskOfBias,
       ageGroup: estimate.ageGroup,
       sex: estimate.sex,
+      studyName: estimate.studyName,
       sourceType: estimate.sourceType,
       populationGroup: estimate.populationGroup,
       latitude: estimate.latitude,
@@ -67,6 +72,7 @@ export const transformIntoFormatForDatabaseStep = (
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };

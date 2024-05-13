@@ -1,4 +1,4 @@
-import { EstimateFieldsAfterParsingDatesStep, StructuredPositiveCaseDataAfterParsingDatesStep, StructuredVaccinationDataAfterParsingDatesStep } from "./parse-dates-step.js";
+import { EstimateFieldsAfterParsingDatesStep, StructuredPositiveCaseDataAfterParsingDatesStep, StructuredVaccinationDataAfterParsingDatesStep, StudyFieldsAfterParsingDatesStep } from "./parse-dates-step.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import { GBDSubRegion, GBDSuperRegion, getGBDRegionFromAlphaTwoCode } from "../../../lib/gbd-regions.js";
@@ -11,17 +11,20 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
   gbdSubRegion: GBDSubRegion | undefined;
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
 };
+export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterParsingDatesStep;
 export type StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep = StructuredVaccinationDataAfterParsingDatesStep;
 export type StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep = StructuredPositiveCaseDataAfterParsingDatesStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
+  allStudies: StudyFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
 }
 
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
+  allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
 }
@@ -57,6 +60,7 @@ export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInf
           gbdSubRegion
         };
       }).filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
+    allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
   };
