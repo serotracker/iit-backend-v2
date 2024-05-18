@@ -3,12 +3,13 @@ import {
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step.js";
-import { countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
+import { countryNameToThreeLetterIsoCountryCode, countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 import { getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 
 export type AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep =
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep & {
     countryAlphaTwoCode: string;
+    countryAlphaThreeCode: string;
     unRegion: string | undefined;
   };
 
@@ -46,11 +47,19 @@ export const addCountryAndRegionInformationStep = (
           return undefined;
         }
 
+        const countryAlphaThreeCode = countryNameToThreeLetterIsoCountryCode(
+          estimate.country
+        );
+        if (!countryAlphaThreeCode) {
+          return undefined;
+        }
+
         const unRegion = getUNRegionFromAlphaTwoCode(countryAlphaTwoCode)
 
         return {
           ...estimate,
           countryAlphaTwoCode,
+          countryAlphaThreeCode,
           unRegion,
         };
       })

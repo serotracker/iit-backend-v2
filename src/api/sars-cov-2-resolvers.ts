@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { SarsCov2Estimate, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
+import { SarsCov2Estimate, QueryResolvers, CountryIdentifiers } from "./graphql-types/__generated__/graphql-types";
 import { SarsCov2EstimateDocument } from "../storage/types";
 import { mapGbdSubRegionForApi, mapGbdSuperRegionForApi, mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 
@@ -79,7 +79,8 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       whoRegion,
       antibodies,
       isotypes,
-      testType
+      testType,
+      countryIdentifiers
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -91,6 +92,29 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('testType').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').aggregate([
+        {
+          $group: {
+            _id: {
+              countryAlphaTwoCode: "$countryAlphaTwoCode"
+            },
+            country: {
+              $first: "$country"
+            },
+            countryAlphaThreeCode: {
+              $first: "$countryAlphaThreeCode"
+            }
+          }
+        },
+        {
+          $project: {
+            "_id": 0,
+            "countryAlphaTwoCode": "$_id.countryAlphaTwoCode",
+            "country": 1,
+            "countryAlphaThreeCode": 1
+          }
+        }
+      ]).toArray()
     ])
 
     return {
@@ -104,6 +128,7 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       antibodies,
       isotypes,
       testType,
+      countryIdentifiers: countryIdentifiers as CountryIdentifiers[]
     }
   }
   

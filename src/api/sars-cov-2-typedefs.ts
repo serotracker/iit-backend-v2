@@ -40,6 +40,7 @@ export const sarsCov2Typedefs = `
   type SarsCov2FilterOptions {
     ageGroup: [String!]!
     country: [String!]!
+    countryIdentifiers: [CountryIdentifiers!]!
     scope: [String!]!
     sourceType: [String!]!
     riskOfBias: [String!]!

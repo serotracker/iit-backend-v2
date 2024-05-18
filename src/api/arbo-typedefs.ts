@@ -11,6 +11,7 @@ export const arboTypedefs = `
     state: String
     country: String!
     countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
     createdAt: String!
     estimateId: String
     id: String!
@@ -46,6 +47,7 @@ export const arboTypedefs = `
     antibody: [String!]!
     assay: [String!]!
     country: [String!]!
+    countryIdentifiers: [CountryIdentifiers!]!
     unRegion: [String!]!
     pathogen: [String!]!
     pediatricAgeGroup: [String!]!

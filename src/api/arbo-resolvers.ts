@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { ArbovirusEstimate, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
+import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
 import { ArbovirusEstimateDocument } from "../storage/types";
 
 interface GenerateArboResolversInput {
@@ -25,6 +25,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     state: document.state,
     country: document.country,
     countryAlphaTwoCode: document.countryAlphaTwoCode,
+    countryAlphaThreeCode: document.countryAlphaThreeCode,
     createdAt: document.createdAt.toISOString(),
     estimateId: document.estimateId,
     id: document._id.toHexString(),
@@ -84,7 +85,8 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       serotype,
       sex,
       unRegion,
-      whoRegion
+      whoRegion,
+      countryIdentifiers
     ] = await Promise.all([
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -98,6 +100,29 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').aggregate([
+        {
+          $group: {
+            _id: {
+              countryAlphaTwoCode: "$countryAlphaTwoCode"
+            },
+            country: {
+              $first: "$country"
+            },
+            countryAlphaThreeCode: {
+              $first: "$countryAlphaThreeCode"
+            }
+          }
+        },
+        {
+          $project: {
+            "_id": 0,
+            "countryAlphaTwoCode": "$_id.countryAlphaTwoCode",
+            "country": 1,
+            "countryAlphaThreeCode": 1
+          }
+        }
+      ]).toArray()
     ])
 
     return {
@@ -113,6 +138,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       sex,
       unRegion,
       whoRegion,
+      countryIdentifiers: countryIdentifiers as CountryIdentifiers[]
     }
   }
 
