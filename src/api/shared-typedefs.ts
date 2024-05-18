@@ -68,8 +68,8 @@ export const sharedTypedefs = `
   }
 
   type CountryIdentifiers {
-    country: String!
-    countryAlphaTwoCode: String!
-    countryAlphaThreeCode: String!
+    name: String!
+    alphaTwoCode: String!
+    alphaThreeCode: String!
   }
 `

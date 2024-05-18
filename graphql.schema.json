@@ -998,7 +998,7 @@
         "description": null,
         "fields": [
           {
-            "name": "country",
+            "name": "alphaThreeCode",
             "description": null,
             "args": [],
             "type": {
@@ -1014,7 +1014,7 @@
             "deprecationReason": null
           },
           {
-            "name": "countryAlphaThreeCode",
+            "name": "alphaTwoCode",
             "description": null,
             "args": [],
             "type": {
@@ -1030,7 +1030,7 @@
             "deprecationReason": null
           },
           {
-            "name": "countryAlphaTwoCode",
+            "name": "name",
             "description": null,
             "args": [],
             "type": {

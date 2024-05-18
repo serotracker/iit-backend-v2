@@ -104,12 +104,12 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
         {
           $group: {
             _id: {
-              countryAlphaTwoCode: "$countryAlphaTwoCode"
+              alphaTwoCode: "$countryAlphaTwoCode"
             },
-            country: {
+            name: {
               $first: "$country"
             },
-            countryAlphaThreeCode: {
+            alphaThreeCode: {
               $first: "$countryAlphaThreeCode"
             }
           }
@@ -117,9 +117,16 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
         {
           $project: {
             "_id": 0,
-            "countryAlphaTwoCode": "$_id.countryAlphaTwoCode",
-            "country": 1,
-            "countryAlphaThreeCode": 1
+            "alphaTwoCode": "$_id.alphaTwoCode",
+            "name": 1,
+            "alphaThreeCode": 1
+          }
+        },
+        {
+          $sort: {
+            name: 1,
+            alphaTwoCode: 1,
+            alphaThreeCode: 1,
           }
         }
       ]).toArray()

@@ -91,9 +91,9 @@ export type ArbovirusFilterOptions = {
 
 export type CountryIdentifiers = {
   __typename?: 'CountryIdentifiers';
-  country: Scalars['String']['output'];
-  countryAlphaThreeCode: Scalars['String']['output'];
-  countryAlphaTwoCode: Scalars['String']['output'];
+  alphaThreeCode: Scalars['String']['output'];
+  alphaTwoCode: Scalars['String']['output'];
+  name: Scalars['String']['output'];
 };
 
 export enum GbdSubRegion {
@@ -434,9 +434,9 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
 };
 
 export type CountryIdentifiersResolvers<ContextType = any, ParentType extends ResolversParentTypes['CountryIdentifiers'] = ResolversParentTypes['CountryIdentifiers']> = {
-  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
