@@ -67,7 +67,7 @@ export const arboTypedefs = `
 
   type Query {
     arbovirusEstimates: [ArbovirusEstimate!]!
-    arbovirusFilterOptions: ArbovirusFilterOptions
+    arbovirusFilterOptions: ArbovirusFilterOptions!
     arbovirusDataStatistics: ArbovirusDataStatistics!
   }
 `

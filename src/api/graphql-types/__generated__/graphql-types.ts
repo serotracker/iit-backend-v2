@@ -134,7 +134,7 @@ export type Query = {
   __typename?: 'Query';
   arbovirusDataStatistics: ArbovirusDataStatistics;
   arbovirusEstimates: Array<ArbovirusEstimate>;
-  arbovirusFilterOptions?: Maybe<ArbovirusFilterOptions>;
+  arbovirusFilterOptions: ArbovirusFilterOptions;
   groupedTeamMembers: Array<TeamMemberGroup>;
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
@@ -443,7 +443,7 @@ export type CountryIdentifiersResolvers<ContextType = any, ParentType extends Re
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
-  arbovirusFilterOptions?: Resolver<Maybe<ResolversTypes['ArbovirusFilterOptions']>, ParentType, ContextType>;
+  arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
   sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
   sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
