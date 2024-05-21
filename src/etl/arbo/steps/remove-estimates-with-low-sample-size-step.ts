@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  AirtableCountryFieldsAfterParsingDatesStep,
   AirtableEstimateFieldsAfterParsingDatesStep,
   AirtableSourceFieldsAfterParsingDatesStep,
 } from "./parse-dates-step.js";
@@ -10,15 +11,20 @@ export type AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep =
 export type AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep =
   AirtableSourceFieldsAfterParsingDatesStep;
 
+export type AirtableCountryFieldsAfterRemovingEstimatesWithLowSampleSizeStep =
+  AirtableCountryFieldsAfterParsingDatesStep;
+
 interface RemoveEstimatesWithLowSampleSizeStepInput {
   allEstimates: AirtableEstimateFieldsAfterParsingDatesStep[];
   allSources: AirtableSourceFieldsAfterParsingDatesStep[];
+  allCountries: AirtableCountryFieldsAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
 interface RemoveEstimatesWithLowSampleSizeStepOutput {
   allEstimates: AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   allSources: AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
+  allCountries: AirtableCountryFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   mongoClient: MongoClient;
 }
 
@@ -29,7 +35,7 @@ export const removeEstimatesWithLowSampleSizeStep = (
 
   console.log(`Running step: removeEstimatesWithLowSampleSizeStep. minimumSampleSize=${minimumSampleSize}. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.filter((estimate): estimate is AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep => {
@@ -44,6 +50,7 @@ export const removeEstimatesWithLowSampleSizeStep = (
       return true;
     }),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

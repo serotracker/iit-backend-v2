@@ -25,8 +25,8 @@ const shouldSaveInGeocodingApiRequestReport = (input: MakeGeocodingApiRequestInp
 const generateGeocodingApiQueryUrl = (
   input: GeocodingApiRequestParameters & { mapboxAccessToken: string }
 ): GeocodingApiRequestUrl => {
-  const { mapboxSearchText, countryCode, geocoderDataType, mapboxAccessToken } =
-    input;
+  const { mapboxSearchText, countryAlphaTwoCode, geocoderDataType, mapboxAccessToken } = input;
+
   const geocoderDataTypeToMapboxGeocoderDataType = {
     [GeocoderDataType.COUNTRY]: "country",
     [GeocoderDataType.DISTRICT]: "district",
@@ -34,24 +34,18 @@ const generateGeocodingApiQueryUrl = (
     [GeocoderDataType.PLACE]: "place",
   } as const;
 
-  return `https://api.mapbox.com/geocoding/v5/mapbox.places/${mapboxSearchText}.json?access_token=${mapboxAccessToken}&types=${geocoderDataTypeToMapboxGeocoderDataType[geocoderDataType]}&country=${countryCode}`;
+  return `https://api.mapbox.com/geocoding/v5/mapbox.places/${mapboxSearchText}.json?access_token=${mapboxAccessToken}&types=${geocoderDataTypeToMapboxGeocoderDataType[geocoderDataType]}&country=${countryAlphaTwoCode}`;
 };
 
 const generateGeocodingApiRequestParameters = (
   input: GenerateGeocodingApiRequestParametersInput
 ): GeocodingApiRequestParameters | undefined => {
-  const { city, state, country } = input;
-
-  const countryCode = countryNameToTwoLetterIsoCountryCode(country);
-
-  if (countryCode === undefined) {
-    return undefined;
-  }
+  const { city, state, countryAlphaTwoCode, countryName } = input;
 
   if (!city && !state) {
     return {
-      mapboxSearchText: country,
-      countryCode,
+      mapboxSearchText: countryName,
+      countryAlphaTwoCode,
       geocoderDataType: GeocoderDataType.COUNTRY,
     };
   }
@@ -59,7 +53,7 @@ const generateGeocodingApiRequestParameters = (
   if (!city && state) {
     return {
       mapboxSearchText: state,
-      countryCode,
+      countryAlphaTwoCode,
       geocoderDataType: GeocoderDataType.REGION,
     };
   }
@@ -67,14 +61,14 @@ const generateGeocodingApiRequestParameters = (
   if (city && !state) {
     return {
       mapboxSearchText: city,
-      countryCode,
+      countryAlphaTwoCode,
       geocoderDataType: GeocoderDataType.PLACE,
     };
   }
 
   return {
     mapboxSearchText: `${city},${state}`,
-    countryCode,
+    countryAlphaTwoCode,
     geocoderDataType: GeocoderDataType.PLACE,
   };
 };
@@ -85,7 +79,8 @@ export const makeGeocodingApiRequest = async (
   const {
     city,
     state,
-    country,
+    countryName,
+    countryAlphaTwoCode,
     geocodingApiRequestParamOverride,
     mongoClient
   } = input;
@@ -95,7 +90,8 @@ export const makeGeocodingApiRequest = async (
     generateGeocodingApiRequestParameters({
       city,
       state,
-      country,
+      countryName,
+      countryAlphaTwoCode,
     });
   
   if(!geocodingApiRequestParams) {
@@ -143,7 +139,8 @@ export const makeGeocodingApiRequest = async (
     recordGeocodingApiRequestInGeocodingReport({
       city: city,
       state: state,
-      country: country,
+      countryName: countryName,
+      countryAlphaTwoCode: countryAlphaTwoCode,
       geocodingApiRequestUrl: queryUrl,
       geocodingApiResponse: parsedApiResponse,
       geocodingApiRequestReportFileName: input.geocodingApiRequestReportFileName,

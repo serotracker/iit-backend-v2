@@ -19,7 +19,7 @@ export const lookupInGeocodingApiResponseCache = async(
     .collection<CachedMapboxApiResponseDocument>('mapboxGeocodingApiCachedResponses')
     .find({
       mapboxSearchText: geocodingApiRequestParams.mapboxSearchText,
-      countryCode: geocodingApiRequestParams.countryCode,
+      countryCode: geocodingApiRequestParams.countryAlphaTwoCode,
       geocoderDataType: geocodingApiRequestParams.geocoderDataType
     })
     .sort({createdAt: -1, _id: 1})
@@ -71,7 +71,7 @@ export const saveInGeocodingApiResponseCache = async(
         _id: new ObjectId(),
         status: CachedMapboxApiResponseStatus.FAILED_RESPONSE,
         mapboxSearchText: geocodingApiRequestParams.mapboxSearchText,
-        countryCode: geocodingApiRequestParams.countryCode,
+        countryCode: geocodingApiRequestParams.countryAlphaTwoCode,
         geocoderDataType: geocodingApiRequestParams.geocoderDataType,
         createdAt: cacheEntryCreationDate,
         updatedAt: cacheEntryCreationDate,
@@ -87,7 +87,7 @@ export const saveInGeocodingApiResponseCache = async(
       _id: new ObjectId(),
       status: CachedMapboxApiResponseStatus.SUCCESSFUL_RESPONSE,
       mapboxSearchText: geocodingApiRequestParams.mapboxSearchText,
-      countryCode: geocodingApiRequestParams.countryCode,
+      countryCode: geocodingApiRequestParams.countryAlphaTwoCode,
       geocoderDataType: geocodingApiRequestParams.geocoderDataType,
       centerCoordinates: {
         longitude: cacheValue.centerCoordinates[0],

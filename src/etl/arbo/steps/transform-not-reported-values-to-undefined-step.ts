@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
 import {
+  AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
 } from "./clean-single-element-array-fields-step.js";
@@ -11,15 +12,20 @@ export type AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedS
 export type AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep =
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep;
 
+export type AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep =
+  AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep;
+
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
+  allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
 interface TransformNotReportedValuesToUndefinedStepOutput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
@@ -43,7 +49,7 @@ export const transformNotReportedValuesToUndefinedStep = (
 ): TransformNotReportedValuesToUndefinedStepOutput => {
   console.log(`Running step: transformNotReportedValuesToUndefinedStep. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.map(
@@ -63,6 +69,7 @@ export const transformNotReportedValuesToUndefinedStep = (
         ) as AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep
     ),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep,
   AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep,
   AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step.js";
@@ -12,15 +13,20 @@ export type AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep =
 export type AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep =
   AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep;
 
+export type AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep =
+  AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep;
+
 interface MergeEstimatesAndSourcesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
+  allCountries: AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
 interface MergeEstimatesAndSourcesStepOutput {
   allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
+  allCountries: AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -29,7 +35,7 @@ export const mergeEstimatesAndSourcesStep = (
 ): MergeEstimatesAndSourcesStepOutput => {
   console.log(`Running step: mergeEstimatesAndSourcesStep. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.map((estimate) => {
@@ -43,6 +49,7 @@ export const mergeEstimatesAndSourcesStep = (
       };
     }),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

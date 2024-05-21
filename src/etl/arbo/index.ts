@@ -1,4 +1,4 @@
-import Airtable from "airtable";
+import Airtable, { FieldSet } from "airtable";
 import { pipe } from "fp-ts/lib/function.js";
 import { AirtableEstimateFields, AirtableSourceFields } from "./types.js";
 import { cleanFieldNamesAndRemoveUnusedFieldsStep } from "./steps/clean-field-names-and-remove-unused-fields-step.js";
@@ -14,6 +14,7 @@ import { assertMandatoryFieldsArePresentStep } from "./steps/assert-mandatory-fi
 import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
 import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
 import { asyncEtlStep, etlStep, getEnvironmentVariableOrThrow, getMongoClient, writeDataToMongoEtlStep } from "../helpers.js";
+import { validateFieldSetFromAirtableStep } from "./steps/validate-field-set-from-airtable-step.js";
 
 const runEtlMain = async () => {
   console.log("Running arbo ETL");
@@ -31,6 +32,8 @@ const runEtlMain = async () => {
   );
   const sourceSheet =
     base.table<Omit<AirtableSourceFields, "id">>("Source Sheet");
+  const countrySheet =
+    base.table<Omit<FieldSet, "id">>("Selectable Countries & Territories");
 
   const allEstimatesUnformatted = await estimateSheet
     .select()
@@ -50,14 +53,26 @@ const runEtlMain = async () => {
           ({ ...record.fields, id: record["id"] }) as AirtableSourceFields
       )
     );
+  
+  const allCountries: Array<FieldSet & {id: string}> = await countrySheet
+    .select()
+    .all()
+    .then((sourceSheet) =>
+      sourceSheet.map(
+        (record) =>
+          ({ ...record.fields, id: record["id"] })
+      )
+    );
 
-  const { allEstimates, allSources: _ } = await (
+  const { allEstimates } = await (
     pipe(
       {
         allEstimates: allEstimatesUnformatted,
         allSources: allSourcesUnformatted,
+        allCountries: allCountries,
         mongoClient
       },
+      etlStep(validateFieldSetFromAirtableStep),
       etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
       etlStep(cleanSingleElementArrayFieldsStep),
       etlStep(transformNotReportedValuesToUndefinedStep),

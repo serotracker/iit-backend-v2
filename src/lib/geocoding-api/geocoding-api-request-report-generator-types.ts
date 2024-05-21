@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { GeocodingApiRequestUrl, GeocodingApiResponse } from "./geocoding-api-client-types.js";
+import { TwoLetterIsoCountryCode } from './country-codes.js';
 
 export enum GeocodingApiRequestLogLevel {
   INFO = "INFO",
@@ -10,7 +11,8 @@ export enum GeocodingApiRequestLogLevel {
 export interface GenerateGeocodingApiRequestLogPrefixInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   logLevel: GeocodingApiRequestLogLevel;
 }
 
@@ -22,7 +24,8 @@ export interface FormatTextAndMatchingTextForDisplayInput {
 export interface GenerateLineForRequestAndResponseInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiRequestUrl: GeocodingApiRequestUrl;
   geocodingApiResponse: GeocodingApiResponse;
 }
@@ -30,14 +33,16 @@ export interface GenerateLineForRequestAndResponseInput {
 export interface GenerateLineForTextConsistencyCheckInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiResponse: GeocodingApiResponse;
 }
 
 export interface GenerateLineForCityStateBoundingBoxConsistencyCheckInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiResponse: GeocodingApiResponse;
   mongoClient: MongoClient;
 }
@@ -45,7 +50,8 @@ export interface GenerateLineForCityStateBoundingBoxConsistencyCheckInput {
 export interface GenerateLineForInvalidCityButValidStateCheckInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiResponse: GeocodingApiResponse;
   mongoClient: MongoClient;
 }
@@ -53,7 +59,8 @@ export interface GenerateLineForInvalidCityButValidStateCheckInput {
 export interface GenerateLineForInvalidCityButValidDistrictCheckInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiResponse: GeocodingApiResponse;
   mongoClient: MongoClient;
 }
@@ -61,7 +68,8 @@ export interface GenerateLineForInvalidCityButValidDistrictCheckInput {
 export interface RecordGeocodingApiRequestInGeocodingReportInput {
   city: string | undefined,
   state: string | undefined,
-  country: string,
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiRequestUrl: GeocodingApiRequestUrl;
   geocodingApiResponse: GeocodingApiResponse;
   geocodingApiRequestReportFileName: string;

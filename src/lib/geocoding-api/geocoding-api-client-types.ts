@@ -4,7 +4,8 @@ import { TwoLetterIsoCountryCode } from "./country-codes.js";
 export interface MakeGeocodingApiRequestAndSaveRequestInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiRequestReportFileName: string;
   shouldSaveInGeocodingApiRequestReport: true;
   geocodingApiRequestParamOverride?: GeocodingApiRequestParameters;
@@ -14,7 +15,8 @@ export interface MakeGeocodingApiRequestAndSaveRequestInput {
 export interface MakeGeocodingApiRequestWithoutSavingRequestInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   shouldSaveInGeocodingApiRequestReport: false;
   geocodingApiRequestParamOverride?: GeocodingApiRequestParameters;
   mongoClient: MongoClient;
@@ -39,12 +41,13 @@ export enum GeocoderDataType {
 export interface GenerateGeocodingApiRequestParametersInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
 }
 
 export interface GeocodingApiRequestParameters {
   mapboxSearchText: string;
-  countryCode: TwoLetterIsoCountryCode;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocoderDataType: GeocoderDataType;
 }
 

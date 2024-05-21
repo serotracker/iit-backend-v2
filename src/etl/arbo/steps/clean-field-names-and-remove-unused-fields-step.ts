@@ -1,5 +1,7 @@
 import { MongoClient } from "mongodb";
 import { AirtableEstimateFields, AirtableSourceFields } from "../types.js";
+import { AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep, AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep, AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
+import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
   sourceSheetId: string[] | undefined;
@@ -24,7 +26,6 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   seroprevalenceStudy95CIUpper: number | undefined;
   seroprevalenceCalculated95CILower: number | undefined;
   seroprevalenceCalculated95CIUpper: number | undefined;
-  country: string | undefined;
   state: string | undefined;
   city: string | undefined;
   url: string[] | undefined;
@@ -35,22 +36,32 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   producer: string | undefined;
   producerOther: string | undefined;
   whoRegion: string[] | undefined;
+  countryId: string[] | undefined;
 }
 
-export interface AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep {
+export interface AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
   id: string;
   sourceSheetName: string | undefined;
 }
 
+export interface AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
+  id: string;
+  name: string;
+  alphaThreeCode: ThreeLetterIsoCountryCode;
+  alphaTwoCode: TwoLetterIsoCountryCode;
+}
+
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
-  allEstimates: AirtableEstimateFields[];
-  allSources: AirtableSourceFields[];
+  allEstimates: AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allSources: AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
-  allSources: AirtableSourceFieldsCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  allSources: AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,7 +70,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
 ): CleanFieldNamesAndRemoveUnusedFieldsStepOutput => {
   console.log(`Running step: cleanFieldNamesAndRemoveUnusedFields. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.map((estimate) => ({
@@ -85,7 +96,6 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       seroprevalenceStudy95CIUpper: estimate["Seroprevalence 95% CI Upper"],
       seroprevalenceCalculated95CILower: estimate["Seroprevalence 95% CI Lower (formula)"],
       seroprevalenceCalculated95CIUpper: estimate["Seroprevalence 95% CI Upper (formula)"],
-      country: estimate["Country archive"],
       state: estimate["State"],
       city: estimate["City"],
       url: estimate["URL"],
@@ -96,10 +106,17 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       producer: estimate["Producer"],
       producerOther: estimate["Producer - Other"],
       includeInEtl: estimate["ETL Included"],
+      countryId: estimate["Country"]
     })),
     allSources: allSources.map((source) => ({
       id: source["id"],
       sourceSheetName: source["Source Title"],
+    })),
+    allCountries: allCountries.map((country) => ({
+      id: country["id"],
+      name: country["Country"],
+      alphaThreeCode: country["Alpha3 Code"] as ThreeLetterIsoCountryCode,
+      alphaTwoCode: country["Alpha2 Code"] as TwoLetterIsoCountryCode
     })),
     mongoClient: input.mongoClient
   };
