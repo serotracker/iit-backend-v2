@@ -248,7 +248,7 @@ interface AddVaccinationDataToEstimateStepOutput {
 export const addVaccinationDataToEstimateStep = (
   input: AddVaccinationDataToEstimateStepInput
 ): AddVaccinationDataToEstimateStepOutput => {
-  const acceptableDayDifferenceRange = 7;
+  const acceptableDayDifferenceRange = 31;
 
   console.log(
     `Running step: addVaccinationDataToEstimateStep. Remaining estimates: ${input.allEstimates.length}. Acceptable day difference range: ${acceptableDayDifferenceRange}`
