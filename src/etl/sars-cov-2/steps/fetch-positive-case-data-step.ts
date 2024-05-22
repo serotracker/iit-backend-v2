@@ -277,8 +277,8 @@ export const fetchPositiveCaseDataStep = async(
       const split_csv_line = element.split(",");
       const date = split_csv_line[indexOfDateColumn];
       const year = date.split("-")[0]
-      const month = date.split("-")[1]
-      const day = date.split("-")[2]
+      const month = date.split("-")[1].replace(/^0+/, '')
+      const day = date.split("-")[2].replace(/^0+/, '')
 
       return countryCodesWithIndices.map(({ twoLetterCountryCode, indexOfColumn }) => (twoLetterCountryCode ? {
         twoLetterCountryCode,
