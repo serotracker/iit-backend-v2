@@ -1,12 +1,5 @@
 import { MongoClient } from "mongodb";
-import { add, sub } from 'date-fns';
-import {
-  EstimateFieldsAfterAddingVaccinationDataStep,
-  StructuredPositiveCaseDataAfterAddingVaccinationDataStep,
-  StructuredVaccinationDataAfterAddingVaccinationDataStep,
-  StudyFieldsAfterAddingVaccinationDataStep
-} from "./add-vaccination-data-to-estimate-step";
-import { StructuredPositiveCaseData } from "../types";
+import { EstimateFieldsAfterAddingVaccinationDataStep, StructuredPositiveCaseDataAfterAddingVaccinationDataStep, StructuredVaccinationDataAfterAddingVaccinationDataStep, StudyFieldsAfterAddingVaccinationDataStep } from "./add-vaccination-data-to-estimate-step";
 
 export type EstimateFieldsAfterAddingPositiveCaseDataStep =
   EstimateFieldsAfterAddingVaccinationDataStep & { 
