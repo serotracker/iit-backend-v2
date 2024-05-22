@@ -20,7 +20,7 @@ export interface ArbovirusEstimateDocument {
   inclusionCriteria: string | undefined;
   pathogen: string;
   pediatricAgeGroup: string | undefined;
-  seroprevalence: number | undefined;
+  seroprevalence: number;
   seroprevalenceStudy95CILower: number | undefined;
   seroprevalenceStudy95CIUpper: number | undefined;
   seroprevalenceCalculated95CILower: number | undefined;

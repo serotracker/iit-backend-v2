@@ -28,7 +28,7 @@ export const arboTypedefs = `
     sampleNumerator: Int
     sampleSize: Int!
     sampleStartDate: String
-    seroprevalence: Float
+    seroprevalence: Float!
     seroprevalenceStudy95CILower: Float
     seroprevalenceStudy95CIUpper: Float
     seroprevalenceCalculated95CILower: Float

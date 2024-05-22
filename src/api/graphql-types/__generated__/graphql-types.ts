@@ -57,7 +57,7 @@ export type ArbovirusEstimate = {
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
   sampleSize: Scalars['Int']['output'];
   sampleStartDate?: Maybe<Scalars['String']['output']>;
-  seroprevalence?: Maybe<Scalars['Float']['output']>;
+  seroprevalence: Scalars['Float']['output'];
   seroprevalenceCalculated95CILower?: Maybe<Scalars['Float']['output']>;
   seroprevalenceCalculated95CIUpper?: Maybe<Scalars['Float']['output']>;
   seroprevalenceStudy95CILower?: Maybe<Scalars['Float']['output']>;
@@ -400,7 +400,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sampleStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  seroprevalence?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalenceCalculated95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalenceCalculated95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalenceStudy95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;

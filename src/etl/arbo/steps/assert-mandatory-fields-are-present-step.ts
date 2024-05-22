@@ -8,9 +8,11 @@ import {
 export type AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep =
   Omit<
     AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
-    "pathogen"
+    | "pathogen"
+    | "seroprevalence"
   > & {
     pathogen: string;
+    seroprevalence: number;
   };
 
 export type AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep =
@@ -42,7 +44,10 @@ export const assertMandatoryFieldsArePresentStep = (
 
   return {
     allEstimates: allEstimates.filter((estimate): estimate is AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep => {
-      return !!estimate.pathogen;
+      return (
+        !!estimate.pathogen &&
+        (estimate.seroprevalence !== undefined && estimate.seroprevalence !== null) 
+      );
     }),
     allSources: allSources,
     allCountries: allCountries,
