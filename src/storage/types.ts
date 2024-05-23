@@ -3,6 +3,17 @@ import { WHORegion } from "../lib/who-regions";
 import { UNRegion } from "../lib/un-regions";
 import { GBDSubRegion, GBDSuperRegion } from "../lib/gbd-regions";
 
+export enum Arbovirus {
+  ZIKV = "ZIKV",
+  DENV = "DENV",
+  CHIKV = "CHIKV",
+  YF = "YF",
+  WNV = "WNV",
+  MAYV = "MAYV"
+}
+
+export const isArbovirus = (arbovirus: string): arbovirus is Arbovirus => Object.values(Arbovirus).some((element) => element === arbovirus);
+
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
   sex: string | undefined;
@@ -18,7 +29,7 @@ export interface ArbovirusEstimateDocument {
   serotype: string[];
   sampleNumerator: number | undefined;
   inclusionCriteria: string | undefined;
-  pathogen: string;
+  pathogen: Arbovirus;
   pediatricAgeGroup: string | undefined;
   seroprevalence: number;
   seroprevalenceStudy95CILower: number | undefined;
@@ -36,7 +47,7 @@ export interface ArbovirusEstimateDocument {
   sampleStartDate: Date | undefined;
   sampleEndDate: Date | undefined;
   assay: string | undefined;
-  unRegion: string | undefined;
+  unRegion: UNRegion | undefined;
   url: string | undefined;
   sourceSheetId: string | undefined;
   antigen: string | undefined;

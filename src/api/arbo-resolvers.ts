@@ -1,6 +1,19 @@
 import { MongoClient } from "mongodb";
 import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
-import { ArbovirusEstimateDocument } from "../storage/types";
+import { Arbovirus, ArbovirusEstimateDocument } from '../storage/types.js';
+import { Arbovirus as ArbovirusForApi } from "./graphql-types/__generated__/graphql-types.js";
+import { mapUnRegionForApi } from "./shared-mappers.js";
+
+const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
+  [Arbovirus.ZIKV]: ArbovirusForApi.Zikv,
+  [Arbovirus.DENV]: ArbovirusForApi.Denv,
+  [Arbovirus.CHIKV]: ArbovirusForApi.Chikv,
+  [Arbovirus.YF]: ArbovirusForApi.Yf,
+  [Arbovirus.WNV]: ArbovirusForApi.Wnv,
+  [Arbovirus.MAYV]: ArbovirusForApi.Mayv,
+}
+
+const mapArbovirusForApi = (arbovirus: Arbovirus): ArbovirusForApi => arbovirusMap[arbovirus];
 
 interface GenerateArboResolversInput {
   mongoClient: MongoClient;
@@ -32,7 +45,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     inclusionCriteria: document.inclusionCriteria,
     latitude: document.latitude,
     longitude: document.longitude,
-    pathogen: document.pathogen,
+    pathogen: mapArbovirusForApi(document.pathogen),
     pediatricAgeGroup: document.pediatricAgeGroup,
     producer: document.producer,
     producerOther: document.producerOther,
@@ -51,7 +64,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     sex: document.sex,
     sourceSheetId: document.sourceSheetId,
     sourceSheetName: document.sourceSheetName,
-    unRegion: document.unRegion,
+    unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
     url: document.url,
     whoRegion: document.whoRegion
   }

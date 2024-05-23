@@ -20,6 +20,15 @@ export type Affiliation = {
   label: Scalars['String']['output'];
 };
 
+export enum Arbovirus {
+  Chikv = 'CHIKV',
+  Denv = 'DENV',
+  Mayv = 'MAYV',
+  Wnv = 'WNV',
+  Yf = 'YF',
+  Zikv = 'ZIKV'
+}
+
 export type ArbovirusDataStatistics = {
   __typename?: 'ArbovirusDataStatistics';
   countryCount: Scalars['Int']['output'];
@@ -47,7 +56,7 @@ export type ArbovirusEstimate = {
   inclusionCriteria?: Maybe<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
-  pathogen: Scalars['String']['output'];
+  pathogen: Arbovirus;
   pediatricAgeGroup?: Maybe<Scalars['String']['output']>;
   producer?: Maybe<Scalars['String']['output']>;
   producerOther?: Maybe<Scalars['String']['output']>;
@@ -67,7 +76,7 @@ export type ArbovirusEstimate = {
   sourceSheetId?: Maybe<Scalars['String']['output']>;
   sourceSheetName?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
-  unRegion?: Maybe<Scalars['String']['output']>;
+  unRegion?: Maybe<UnRegion>;
   url?: Maybe<Scalars['String']['output']>;
   whoRegion?: Maybe<Scalars['String']['output']>;
 };
@@ -321,6 +330,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Affiliation: ResolverTypeWrapper<Affiliation>;
+  Arbovirus: Arbovirus;
   ArbovirusDataStatistics: ResolverTypeWrapper<ArbovirusDataStatistics>;
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
@@ -390,7 +400,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  pathogen?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  pathogen?: Resolver<ResolversTypes['Arbovirus'], ParentType, ContextType>;
   pediatricAgeGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   producer?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   producerOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -410,7 +420,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  unRegion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
