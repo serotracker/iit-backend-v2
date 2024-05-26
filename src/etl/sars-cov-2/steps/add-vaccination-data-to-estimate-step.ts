@@ -1,10 +1,100 @@
 import { MongoClient } from "mongodb";
+import { add, sub } from 'date-fns';
 import {
   EstimateFieldsAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
   StructuredVaccinationDataAfterJitteringPinLatLngStep,
   StudyFieldsAfterJitteringPinLatLngStep,
 } from "./jitter-pin-lat-lng-step";
+import { StructuredVaccinationData } from "../types";
+
+interface GetAssociatedDataForEstimateInput<TKey extends keyof Omit<StructuredVaccinationData[number]['data'][number]['data'][number]['data'][number], 'day'>> {
+  estimate: {
+    threeLetterCountryCode: string;
+    samplingMidDate: Date | undefined;
+  };
+  vaccinationData: StructuredVaccinationData;
+  fieldName: TKey;
+  acceptableDayDifferenceRange: number;
+}
+
+const getAssociatedVaccinationDataForEstimate = <
+  TKey extends keyof Omit<StructuredVaccinationData[number]['data'][number]['data'][number]['data'][number], 'day'>
+>(input: GetAssociatedDataForEstimateInput<TKey>): StructuredVaccinationData[number]['data'][number]['data'][number]['data'][number][TKey] | undefined => {
+  const { samplingMidDate } = input.estimate;
+  const { fieldName } = input;
+
+  if(!samplingMidDate) {
+    return undefined;
+  }
+
+  const acceptableDayDifferences = [...Array(input.acceptableDayDifferenceRange).keys()];
+
+  const dayDifferencesWithData = acceptableDayDifferences.flatMap((dayDifference) => {
+    const pastDateToEvaluate = sub(samplingMidDate, {days: dayDifference});
+    const futureDateToEvaluate = add(samplingMidDate, {days: dayDifference});
+
+    const dataForPastDateToEvaluate = input.vaccinationData
+      .find((element) => element.threeLetterCountryCode === input.estimate.threeLetterCountryCode)?.data
+      .find((element) => element.year === pastDateToEvaluate.getUTCFullYear().toString())?.data
+      .find((element) => element.month === (pastDateToEvaluate.getUTCMonth() + 1).toString())?.data
+      .find((element) => element.day === (pastDateToEvaluate.getUTCDate()).toString());
+
+    const dataForFutureDateToEvaluate = input.vaccinationData
+      .find((element) => element.threeLetterCountryCode === input.estimate.threeLetterCountryCode)?.data
+      .find((element) => element.year === futureDateToEvaluate.getUTCFullYear().toString())?.data
+      .find((element) => element.month === (futureDateToEvaluate.getUTCMonth() + 1).toString())?.data
+      .find((element) => element.day === (futureDateToEvaluate.getUTCDate()).toString());
+    
+    const fieldForPastDate = dataForPastDateToEvaluate?.[fieldName];
+    const fieldForFutureDate = dataForFutureDateToEvaluate?.[fieldName];
+
+    return [(
+      fieldForPastDate ? {
+        dayDifference: -dayDifference,
+        data: fieldForPastDate
+      } : undefined
+    ), (
+      fieldForFutureDate ? {
+        dayDifference: dayDifference,
+        data: fieldForFutureDate
+      } : undefined
+    )];
+  }).filter(<T extends unknown>(element: T | undefined): element is T => element !== undefined)
+
+  const dataForDay = dayDifferencesWithData.find((element) => element.dayDifference === 0)
+
+  if(!!dataForDay) {
+    return dataForDay.data;
+  }
+
+  const dayInThePastWithTheLeastDifference = dayDifferencesWithData
+    .filter((element) => element.dayDifference < 0)
+    .sort((a, b) => Math.abs(a.dayDifference) - Math.abs(b.dayDifference))
+    .at(0);
+
+  const dayInTheFutureWithTheLeastDifference = dayDifferencesWithData
+    .filter((element) => element.dayDifference > 0)
+    .sort((a, b) => Math.abs(a.dayDifference) - Math.abs(b.dayDifference))
+    .at(0);
+  
+  if(dayInThePastWithTheLeastDifference && dayInTheFutureWithTheLeastDifference) {
+    // Turn this into a line with a slope of y=mx+b where x is the date.
+    // We approximate the line to be linear on such a small time scale (~14 days).
+
+    // m = dy/dx
+    const m = (dayInTheFutureWithTheLeastDifference.data - dayInThePastWithTheLeastDifference.data) / (dayInTheFutureWithTheLeastDifference.dayDifference - dayInThePastWithTheLeastDifference.dayDifference);
+
+    // b = y-mx
+    const b = (dayInTheFutureWithTheLeastDifference.data) - (m * dayInTheFutureWithTheLeastDifference.dayDifference)
+
+    // y = mx+b, x=0 in this case because the day difference is zero
+    return (m * 0) + b;
+  }
+
+  // Getting here means we simply didn't have enough data to tell how many vaccinations had occurred at this time.
+  return undefined;
+}
 
 export type EstimateFieldsAfterAddingVaccinationDataStep =
   EstimateFieldsAfterJitteringPinLatLngStep & {
@@ -36,29 +126,34 @@ interface AddVaccinationDataToEstimateStepOutput {
 export const addVaccinationDataToEstimateStep = (
   input: AddVaccinationDataToEstimateStepInput
 ): AddVaccinationDataToEstimateStepOutput => {
+  const acceptableDayDifferenceRange = 31;
+
   console.log(
-    `Running step: addVaccinationDataToEstimateStep. Remaining estimates: ${input.allEstimates.length}`
+    `Running step: addVaccinationDataToEstimateStep. Remaining estimates: ${input.allEstimates.length}. Acceptable day difference range: ${acceptableDayDifferenceRange}`
   );
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => {
-      const {
-        countryPeopleVaccinatedPerHundred,
-        countryPeopleFullyVaccinatedPerHundred
-      } = input.vaccinationData
-        .find((element) => element.threeLetterCountryCode === estimate.countryAlphaThreeCode)?.data
-        .find((element) => estimate.samplingMidDate && element.year === estimate.samplingMidDate.getUTCFullYear().toString())?.data
-        .find((element) => estimate.samplingMidDate && element.month === (estimate.samplingMidDate.getUTCMonth() + 1).toString())?.data
-        .find((element) => estimate.samplingMidDate && element.day === (estimate.samplingMidDate.getUTCDate()).toString()) ?? {
-          countryPeopleVaccinatedPerHundred: undefined,
-          countryPeopleFullyVaccinatedPerHundred: undefined
-        }
-      return {
-        ...estimate,
-        countryPeopleVaccinatedPerHundred,
-        countryPeopleFullyVaccinatedPerHundred
-      }
-    }),
+    allEstimates: input.allEstimates.map((estimate) => ({
+      ...estimate,
+      countryPeopleVaccinatedPerHundred: getAssociatedVaccinationDataForEstimate({
+        estimate: {
+          threeLetterCountryCode: estimate.countryAlphaThreeCode,
+          samplingMidDate: estimate.samplingMidDate
+        },
+        fieldName: 'countryPeopleVaccinatedPerHundred',
+        vaccinationData: input.vaccinationData,
+        acceptableDayDifferenceRange
+      }),
+      countryPeopleFullyVaccinatedPerHundred: getAssociatedVaccinationDataForEstimate({
+        estimate: {
+          threeLetterCountryCode: estimate.countryAlphaThreeCode,
+          samplingMidDate: estimate.samplingMidDate
+        },
+        fieldName: 'countryPeopleFullyVaccinatedPerHundred',
+        vaccinationData: input.vaccinationData,
+        acceptableDayDifferenceRange
+      })
+    })),
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,

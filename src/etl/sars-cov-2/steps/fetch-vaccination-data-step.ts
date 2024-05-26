@@ -59,8 +59,8 @@ export const fetchVaccinationDataStep = async (
       return {
         threeLetterCountryCode: split_csv_line[indexOfThreeLetterCountryCode],
         year: split_csv_line[indexOfDateColumn].split("-")[0],
-        month: split_csv_line[indexOfDateColumn].split("-")[1],
-        day: split_csv_line[indexOfDateColumn].split("-")[2],
+        month: split_csv_line[indexOfDateColumn].split("-")[1].replace(/^0+/, ''),
+        day: split_csv_line[indexOfDateColumn].split("-")[2].replace(/^0+/, ''),
         countryPeopleVaccinatedPerHundred: split_csv_line[indexOfCountryPeopleVaccinatedPerHundred] !== '' ? parseFloat(split_csv_line[indexOfCountryPeopleVaccinatedPerHundred]) : undefined,
         countryPeopleFullyVaccinatedPerHundred: split_csv_line[indexOfCountryPeopleFullyVaccinatedPerHundred] !== '' ? parseFloat(split_csv_line[indexOfCountryPeopleFullyVaccinatedPerHundred]) : undefined,
       };
