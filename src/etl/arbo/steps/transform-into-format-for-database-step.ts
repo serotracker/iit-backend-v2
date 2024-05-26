@@ -1,32 +1,35 @@
 import { ObjectId, MongoClient } from "mongodb";
 import { ArbovirusEstimateDocument } from "../../../storage/types.js";
 import {
+  AirtableCountryFieldsAfterJitteringPinLatLngStep,
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
   AirtableSourceFieldsAfterJitteringPinLatLngStep,
 } from "./jitter-pin-lat-lng-step.js";
 
-export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep = AirtableEstimateFieldsAfterJitteringPinLatLngStep;
-
+export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep = ArbovirusEstimateDocument;
 export type AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep = AirtableSourceFieldsAfterJitteringPinLatLngStep;
+export type AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep = AirtableCountryFieldsAfterJitteringPinLatLngStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
+  allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
-  allEstimates: ArbovirusEstimateDocument[];
+  allEstimates: AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep[];
   allSources: AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep[];
+  allCountries: AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
-  const { allEstimates, allSources } = input;
-
   console.log(`Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`);
+
+  const { allEstimates, allSources, allCountries } = input;
 
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
@@ -76,6 +79,7 @@ export const transformIntoFormatForDatabaseStep = (
       updatedAt: updatedAtForAllRecords
     })),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

@@ -8,12 +8,13 @@ import { GetCityLatLngInput, GetCountryLatLngInput, GetStateLatLngInput } from "
 export const getCityLatLng = async (
   input: GetCityLatLngInput
 ): Promise<Point | undefined> => {
-  const { city, state, country, geocodingApiRequestReportFileName, mongoClient } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiRequestReportFileName, mongoClient } = input;
 
   if (!city) {
     return getStateLatLng({
       state,
-      country,
+      countryName,
+      countryAlphaTwoCode,
       geocodingApiRequestReportFileName,
       mongoClient
     });
@@ -22,7 +23,8 @@ export const getCityLatLng = async (
   const geocodingApiResponse = await makeGeocodingApiRequest({
     city,
     state,
-    country,
+    countryName,
+    countryAlphaTwoCode,
     geocodingApiRequestReportFileName,
     shouldSaveInGeocodingApiRequestReport: true,
     mongoClient
@@ -31,7 +33,8 @@ export const getCityLatLng = async (
   if (isGeocodingApiFailureResponse(geocodingApiResponse)) {
     return getStateLatLng({
       state,
-      country,
+      countryName,
+      countryAlphaTwoCode,
       geocodingApiRequestReportFileName,
       mongoClient
     });
@@ -43,23 +46,24 @@ export const getCityLatLng = async (
 const getStateLatLng = async (
   input: GetStateLatLngInput
 ): Promise<Point | undefined> => {
-  const { state, country, geocodingApiRequestReportFileName, mongoClient } = input;
+  const { state, countryName, countryAlphaTwoCode, geocodingApiRequestReportFileName, mongoClient } = input;
 
   if (!state) {
-    return getCountryLatLng({ country, geocodingApiRequestReportFileName, mongoClient });
+    return getCountryLatLng({ countryName, countryAlphaTwoCode, geocodingApiRequestReportFileName, mongoClient });
   }
 
   const geocodingApiResponse = await makeGeocodingApiRequest({
     city: undefined,
     state,
-    country,
+    countryName,
+    countryAlphaTwoCode,
     geocodingApiRequestReportFileName,
     shouldSaveInGeocodingApiRequestReport: true,
     mongoClient
   });
 
   if (isGeocodingApiFailureResponse(geocodingApiResponse)) {
-    return getCountryLatLng({ country, geocodingApiRequestReportFileName, mongoClient });
+    return getCountryLatLng({ countryName, countryAlphaTwoCode, geocodingApiRequestReportFileName, mongoClient });
   }
 
   return geocodingApiResponse.centerCoordinates;
@@ -68,12 +72,13 @@ const getStateLatLng = async (
 const getCountryLatLng = async (
   input: GetCountryLatLngInput
 ): Promise<Point | undefined> => {
-  const { country, geocodingApiRequestReportFileName, mongoClient } = input;
+  const { countryName, countryAlphaTwoCode, geocodingApiRequestReportFileName, mongoClient } = input;
 
   const geocodingApiResponse = await makeGeocodingApiRequest({
     city: undefined,
     state: undefined,
-    country,
+    countryName,
+    countryAlphaTwoCode,
     geocodingApiRequestReportFileName,
     shouldSaveInGeocodingApiRequestReport: true,
     mongoClient

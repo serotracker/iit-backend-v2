@@ -1,22 +1,26 @@
 import { MongoClient } from "mongodb";
+import { TwoLetterIsoCountryCode } from "./country-codes";
 
 export interface GetCityLatLngInput {
   city: string | undefined;
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiRequestReportFileName: string;
   mongoClient: MongoClient;
 }
 
 export interface GetStateLatLngInput {
   state: string | undefined;
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiRequestReportFileName: string;
   mongoClient: MongoClient;
 }
 
 export interface GetCountryLatLngInput {
-  country: string;
+  countryName: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
   geocodingApiRequestReportFileName: string;
   mongoClient: MongoClient;
 }

@@ -1,9 +1,13 @@
 import { MongoClient } from "mongodb";
-import { AirtableEstimateFieldsAfterLatLngGenerationStep, AirtableSourceFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import {
+  AirtableCountryFieldsAfterLatLngGenerationStep,
+  AirtableEstimateFieldsAfterLatLngGenerationStep,
+  AirtableSourceFieldsAfterLatLngGenerationStep
+} from "./lat-lng-generation-step.js";
 
 export type AirtableEstimateFieldsAfterJitteringPinLatLngStep = AirtableEstimateFieldsAfterLatLngGenerationStep;
-
 export type AirtableSourceFieldsAfterJitteringPinLatLngStep = AirtableSourceFieldsAfterLatLngGenerationStep
+export type AirtableCountryFieldsAfterJitteringPinLatLngStep = AirtableCountryFieldsAfterLatLngGenerationStep
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -22,22 +26,24 @@ const jitterNumberValueByAmount = (input: JitterNumberValueByAmountInput): numbe
 interface JitterPinLatLngStepInput {
   allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
+  allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
 interface JitterPinLatLngStepOutput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
+  allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
 export const jitterPinLatLngStep = (
   input: JitterPinLatLngStepInput
 ): JitterPinLatLngStepOutput => {
-  const { allEstimates, allSources } = input;
   const maximumPinJitterMagnitude = 0.1;
-
   console.log(`Running step: jitterPinLatLngStep. Remaining estimates: ${input.allEstimates.length}. Maximum pin jitter mangnitude: ${maximumPinJitterMagnitude}`);
+
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.map((estimate) => ({
@@ -46,6 +52,7 @@ export const jitterPinLatLngStep = (
       longitude: jitterNumberValueByAmount({value: estimate.longitude, jitterAmount: maximumPinJitterMagnitude}),
     })),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

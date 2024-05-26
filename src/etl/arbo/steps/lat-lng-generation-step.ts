@@ -4,6 +4,7 @@ import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
 import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
 import {
+  AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
 } from "./merge-estimates-and-sources-step.js";
@@ -17,15 +18,20 @@ export type AirtableEstimateFieldsAfterLatLngGenerationStep =
 export type AirtableSourceFieldsAfterLatLngGenerationStep =
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep;
 
+export type AirtableCountryFieldsAfterLatLngGenerationStep =
+  AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep;
+
 interface LatLngGenerationStepInput {
   allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
+  allCountries: AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep[];
   mongoClient: MongoClient;
 }
 
 interface LatLngGenerationStepOutput {
   allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
+  allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -39,7 +45,7 @@ export const latLngGenerationStep = async(
 
   console.log(`Running step: latLngGenerationStep. Remaining estimates: ${input.allEstimates.length}. GEOCODING_API_ENABLED=${geocodingApiEnabled}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   const intervalsToPrintProgressMessages = Array.from({length: 20}, (_, index) => Math.floor((allEstimates.length * (index + 1)) / 20));
 
@@ -55,7 +61,8 @@ export const latLngGenerationStep = async(
       cityLatLng = await getCityLatLng({
         city: estimate.city,
         state: estimate.state,
-        country: estimate.country,
+        countryName: estimate.country,
+        countryAlphaTwoCode: estimate.countryAlphaTwoCode,
         geocodingApiRequestReportFileName,
         mongoClient: input.mongoClient
       })
@@ -73,6 +80,7 @@ export const latLngGenerationStep = async(
   return {
     allEstimates: estimatesWithLatitudesAndLongitudes,
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

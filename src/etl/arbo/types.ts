@@ -31,10 +31,9 @@ export type AirtableEstimateFields = {
   "Seroprevalence 95% CI Upper (formula)": number | undefined;
   "Subgroups Available": string[] | undefined;
   Continent: string | undefined;
-  "Country archive": string | undefined;
+  "Country": string[] | undefined;
   "Sample Numerator": number | undefined;
   URL: string[] | undefined;
-  Country: string | undefined;
   "Age group": string | undefined;
   City: string | undefined;
   State: string | undefined;
@@ -54,3 +53,10 @@ export type AirtableSourceFields = {
   Extractor: string | undefined;
   "First Author Last Name": string | undefined;
 } & Record<string, never>;
+
+export type AirtableCountryFields = {
+  "id": string;
+  "Country": string;
+  "Alpha3 Code": string;
+  "Alpha2 Code": string;
+}

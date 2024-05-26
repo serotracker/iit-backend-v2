@@ -55,7 +55,8 @@ export const latLngGenerationStep = async(
       cityLatLng = await getCityLatLng({
         city: estimate.city,
         state: estimate.state,
-        country: estimate.country,
+        countryName: estimate.country,
+        countryAlphaTwoCode: estimate.countryAlphaTwoCode,
         geocodingApiRequestReportFileName,
         mongoClient: input.mongoClient
       })

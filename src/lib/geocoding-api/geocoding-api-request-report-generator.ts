@@ -32,9 +32,9 @@ const redactMapboxApiKeyFromGeocodingApiQueryUrl = (
 const generateGeocodingApiRequestLogPrefix = (
   input: GenerateGeocodingApiRequestLogPrefixInput
 ): string => {
-  const { city, state, country, logLevel } = input;
+  const { city, state, countryName, logLevel } = input;
 
-  return `[${logLevel}] - [${city ?? "N/A"}, ${state ?? "N/A"}, ${country}]`;
+  return `[${logLevel}] - [${city ?? "N/A"}, ${state ?? "N/A"}, ${countryName}]`;
 };
 
 const formatTextAndMatchingTextForDisplay = (
@@ -68,9 +68,9 @@ const formatGeocodingApiResponseAsString = (
 };
 
 const generateLineForResponseAndRequest = (input: GenerateLineForRequestAndResponseInput): string => {
-  const { city, state, country, geocodingApiRequestUrl, geocodingApiResponse } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiRequestUrl, geocodingApiResponse } = input;
 
-  const prefix = generateGeocodingApiRequestLogPrefix({city, state, country, logLevel: GeocodingApiRequestLogLevel.INFO})
+  const prefix = generateGeocodingApiRequestLogPrefix({city, state, countryName, countryAlphaTwoCode, logLevel: GeocodingApiRequestLogLevel.INFO})
   const redactedRequestUrl = redactMapboxApiKeyFromGeocodingApiQueryUrl(geocodingApiRequestUrl);
   const formattedApiResponse = formatGeocodingApiResponseAsString(geocodingApiResponse);
 
@@ -78,13 +78,13 @@ const generateLineForResponseAndRequest = (input: GenerateLineForRequestAndRespo
 }
 
 const generateLineForTextConsistencyCheck = (input: GenerateLineForTextConsistencyCheckInput): string | undefined => {
-  const { city, state, country, geocodingApiResponse } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiResponse } = input;
 
   if(isGeocodingApiFailureResponse(geocodingApiResponse)) {
     return;
   }
   
-  const expectedText = city ?? state ?? country;
+  const expectedText = city ?? state ?? countryName;
 
   if(expectedText === geocodingApiResponse.matchingText || expectedText === geocodingApiResponse.text) {
     return;
@@ -92,7 +92,7 @@ const generateLineForTextConsistencyCheck = (input: GenerateLineForTextConsisten
 
   const geocodingApiResponseTextFormatted = formatTextAndMatchingTextForDisplay({text: geocodingApiResponse.text, matchingText: geocodingApiResponse.matchingText});
 
-  const prefix = generateGeocodingApiRequestLogPrefix({city, state, country, logLevel: GeocodingApiRequestLogLevel.WARN})
+  const prefix = generateGeocodingApiRequestLogPrefix({city, state, countryName, countryAlphaTwoCode, logLevel: GeocodingApiRequestLogLevel.WARN})
   const infoStatement = "[Text returned from the mapbox API did not match expected text]"
   const details = `[Expected text: "${expectedText}", Actual: "${geocodingApiResponseTextFormatted}"]`
   const suggestion = "[If one of the actual text values listed is the correct name of the city/state/country and no other errors or warnings are present, It might be appropriate to change the name of this location in Airtable to the actual name listed. Otherwise, please look to the other warnings and errors for this location for more guidance, the texts not matching might be indicative that mapbox has identified the wrong city based on the text it was given.]"
@@ -101,14 +101,14 @@ const generateLineForTextConsistencyCheck = (input: GenerateLineForTextConsisten
 }
 
 const generateLineForCityStateBoundingBoxConsistencyCheck = async (input: GenerateLineForCityStateBoundingBoxConsistencyCheckInput): Promise<string | undefined> => {
-  const { city, state, country, geocodingApiResponse, mongoClient } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiResponse, mongoClient } = input;
 
   if(!city || !state || isGeocodingApiFailureResponse(geocodingApiResponse)) {
     return;
   }
 
-  const apiResponseForCity = await makeGeocodingApiRequest({city, state, country, shouldSaveInGeocodingApiRequestReport: false, mongoClient});
-  const apiResponseForState = await makeGeocodingApiRequest({city: undefined, state, country, shouldSaveInGeocodingApiRequestReport: false, mongoClient});
+  const apiResponseForCity = await makeGeocodingApiRequest({city, state, countryName, countryAlphaTwoCode, shouldSaveInGeocodingApiRequestReport: false, mongoClient});
+  const apiResponseForState = await makeGeocodingApiRequest({city: undefined, state, countryName, countryAlphaTwoCode, shouldSaveInGeocodingApiRequestReport: false, mongoClient});
 
   if(isGeocodingApiFailureResponse(apiResponseForCity) || isGeocodingApiFailureResponse(apiResponseForState) || !apiResponseForState.boundingBox) {
     return;
@@ -118,7 +118,7 @@ const generateLineForCityStateBoundingBoxConsistencyCheck = async (input: Genera
     return;
   }
 
-  const prefix = generateGeocodingApiRequestLogPrefix({city, state, country, logLevel: GeocodingApiRequestLogLevel.ERROR})
+  const prefix = generateGeocodingApiRequestLogPrefix({city, state, countryName, countryAlphaTwoCode, logLevel: GeocodingApiRequestLogLevel.ERROR})
   const infoStatement = "[City listed and state listed are incompatible with one another]";
   const details = `[City name: "${city ?? 'N/A'}", State name: "${state ?? 'N/A'}"]`
   const suggestion = `[According to mapbox, the state this city belongs to is "${geocodingApiResponse.regionName ?? 'N/A'}". If there are no other errors and you agree with this state placement, consider moving the city to that state. If that state name sounds wrong, please feel free to omit the city name since it might be resulting in the pin being in the incorrect state. Please also check the other errors to see if they provide any more context here.]`;
@@ -127,7 +127,7 @@ const generateLineForCityStateBoundingBoxConsistencyCheck = async (input: Genera
 }
 
 const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineForInvalidCityButValidStateCheckInput): Promise<string | undefined> => {
-  const { city, state, country, geocodingApiResponse, mongoClient } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiResponse, mongoClient } = input;
 
   if(!city) {
     return;
@@ -140,7 +140,8 @@ const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineF
   const apiResponseForState = await makeGeocodingApiRequest({
     city: undefined,
     state,
-    country,
+    countryName,
+    countryAlphaTwoCode,
     shouldSaveInGeocodingApiRequestReport: false,
     mongoClient
   });
@@ -152,7 +153,7 @@ const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineF
   const originalRequestTextAsString = isGeocodingApiSuccessResponse(geocodingApiResponse) ? formatTextAndMatchingTextForDisplay({text: geocodingApiResponse.text, matchingText: geocodingApiResponse.matchingText}) : 'N/A'
   const stateNameFromStateRequest = formatTextAndMatchingTextForDisplay({text: apiResponseForState.text, matchingText: apiResponseForState.matchingText});
 
-  const prefix = generateGeocodingApiRequestLogPrefix({city, state, country, logLevel: GeocodingApiRequestLogLevel.WARN})
+  const prefix = generateGeocodingApiRequestLogPrefix({city, state, countryName, countryAlphaTwoCode, logLevel: GeocodingApiRequestLogLevel.WARN})
   const infoStatement = isGeocodingApiSuccessResponse(geocodingApiResponse) ? "[City listed is recognized as both a valid city and a valid state.]" :  "[City listed is not a valid city, but is a valid state]"
   const details = `[City name given: "${city ?? 'N/A'}", State name given: "${state ?? 'N/A'}"]`
   const suggestion = `[According to mapbox, the city you've given is the name of a valid state called "${stateNameFromStateRequest}". This might be resulting in the pin being in the wrong location because it might be using a city whose name is similar instead of using the state. The city name mapbox lists for this city is "${originalRequestTextAsString}" so if that sounds wrong I would recommend moving the current city name to the state column in Airtable if that seems appropriate and makes sense given the other error messages.]`
@@ -161,7 +162,7 @@ const generateLineForInvalidCityButValidStateCheck = async (input: GenerateLineF
 }
 
 const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLineForInvalidCityButValidDistrictCheckInput): Promise<string | undefined> => {
-  const { city, state, country, geocodingApiResponse, mongoClient } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiResponse, mongoClient } = input;
 
   if(!city) {
     return;
@@ -171,19 +172,14 @@ const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLi
     return;
   }
 
-  const countryCode = countryNameToTwoLetterIsoCountryCode(country);
-
-  if(!countryCode) {
-    return;
-  }
-
   const apiResponseForState = await makeGeocodingApiRequest({
     city: undefined,
     state,
-    country,
+    countryName,
+    countryAlphaTwoCode,
     shouldSaveInGeocodingApiRequestReport: false,
     geocodingApiRequestParamOverride: {
-      countryCode,
+      countryAlphaTwoCode,
       geocoderDataType: GeocoderDataType.DISTRICT,
       mapboxSearchText: city
     },
@@ -197,7 +193,7 @@ const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLi
   const originalRequestTextAsString = isGeocodingApiSuccessResponse(geocodingApiResponse) ? formatTextAndMatchingTextForDisplay({text: geocodingApiResponse.text, matchingText: geocodingApiResponse.matchingText}) : 'N/A'
   const districtNameFromDistrictRequest = formatTextAndMatchingTextForDisplay({text: apiResponseForState.text, matchingText: apiResponseForState.matchingText});
 
-  const prefix = generateGeocodingApiRequestLogPrefix({city, state, country, logLevel: GeocodingApiRequestLogLevel.WARN})
+  const prefix = generateGeocodingApiRequestLogPrefix({city, state, countryName, countryAlphaTwoCode, logLevel: GeocodingApiRequestLogLevel.WARN})
   const infoStatement = isGeocodingApiSuccessResponse(geocodingApiResponse) ? "[City listed is recognized as both a valid city and a valid district.]" :  "[City listed is not a valid city, but is a valid district]"
   const details = `[City name given: "${city ?? 'N/A'}", State name given: "${state ?? 'N/A'}"]`
   const suggestion = `[According to mapbox, the city you've given is the name of a valid district called "${districtNameFromDistrictRequest}". This might be resulting in the pin being in the wrong location because it might be using a city whose name is similar instead of using the district. The city name mapbox lists for this city is "${originalRequestTextAsString}" so if that sounds wrong I would recommend moving the current city name to the state column in Airtable if that seems appropriate and makes sense given the other error messages.]`
@@ -206,14 +202,14 @@ const generateLineForInvalidCityButValidDistrictCheck = async (input: GenerateLi
 }
 
 export const recordGeocodingApiRequestInGeocodingReport = async(input: RecordGeocodingApiRequestInGeocodingReportInput): Promise<void> => {
-  const { city, state, country, geocodingApiRequestUrl, geocodingApiResponse, geocodingApiRequestReportFileName, mongoClient } = input;
+  const { city, state, countryName, countryAlphaTwoCode, geocodingApiRequestUrl, geocodingApiResponse, geocodingApiRequestReportFileName, mongoClient } = input;
 
   const linesToWrite = await Promise.all([
-      generateLineForResponseAndRequest({city, state, country, geocodingApiRequestUrl, geocodingApiResponse}),
-      generateLineForTextConsistencyCheck({city, state, country, geocodingApiResponse}),
-      generateLineForCityStateBoundingBoxConsistencyCheck({city, state, country, geocodingApiResponse, mongoClient}),
-      generateLineForInvalidCityButValidStateCheck({city, state, country, geocodingApiResponse, mongoClient}),
-      generateLineForInvalidCityButValidDistrictCheck({city, state, country, geocodingApiResponse, mongoClient}),
+      generateLineForResponseAndRequest({city, state, countryName, countryAlphaTwoCode, geocodingApiRequestUrl, geocodingApiResponse}),
+      generateLineForTextConsistencyCheck({city, state, countryName, countryAlphaTwoCode, geocodingApiResponse}),
+      generateLineForCityStateBoundingBoxConsistencyCheck({city, state, countryName, countryAlphaTwoCode, geocodingApiResponse, mongoClient}),
+      generateLineForInvalidCityButValidStateCheck({city, state, countryName, countryAlphaTwoCode, geocodingApiResponse, mongoClient}),
+      generateLineForInvalidCityButValidDistrictCheck({city, state, countryName, countryAlphaTwoCode, geocodingApiResponse, mongoClient}),
   ]);
 
   linesToWrite.forEach((line) => {

@@ -1,27 +1,35 @@
 import { MongoClient } from "mongodb";
-import { AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
+import {
+  AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep,
+  AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
+  AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep
+} from "./transform-not-reported-values-to-undefined-step.js";
 
 export type AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep =
   Omit<
     AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
-    "country" | "pathogen"
+    "pathogen"
   > & {
-    country: string;
     pathogen: string;
   };
 
 export type AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep =
   AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep;
 
+export type AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep =
+  AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep;
+
 interface AssertMandatoryFieldsArePresentStepInput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
 interface AssertMandatoryFieldsAreStepOutput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
+  allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   mongoClient: MongoClient;
 }
 
@@ -30,13 +38,14 @@ export const assertMandatoryFieldsArePresentStep = (
 ): AssertMandatoryFieldsAreStepOutput => {
   console.log(`Running step: assertMandatoryFieldsArePresentStep. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.filter((estimate): estimate is AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep => {
-      return !!estimate.country && !!estimate.pathogen;
+      return !!estimate.pathogen;
     }),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };

@@ -1,6 +1,10 @@
 import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
-import { AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep, AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep } from "./assert-mandatory-fields-are-present-step.js";
+import {
+  AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep,
+  AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
+  AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep
+} from "./assert-mandatory-fields-are-present-step.js";
 
 export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
   AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
@@ -13,15 +17,20 @@ export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
 export type AirtableSourceFieldsAfterParsingDatesStep =
   AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep;
 
+export type AirtableCountryFieldsAfterParsingDatesStep =
+  AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep;
+
 interface ParseDatesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
-  allSources: AirtableSourceFieldsAfterParsingDatesStep[];
+  allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
+  allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   mongoClient: MongoClient;
 }
 
 interface ParseDatesStepOutput {
   allEstimates: AirtableEstimateFieldsAfterParsingDatesStep[];
   allSources: AirtableSourceFieldsAfterParsingDatesStep[];
+  allCountries: AirtableCountryFieldsAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -30,7 +39,7 @@ export const parseDatesStep = (
 ): ParseDatesStepOutput => {
   console.log(`Running step: parseDatesStep. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources } = input;
+  const { allEstimates, allSources, allCountries } = input;
 
   return {
     allEstimates: allEstimates.map((estimate) => {
@@ -41,6 +50,7 @@ export const parseDatesStep = (
       };
     }),
     allSources: allSources,
+    allCountries: allCountries,
     mongoClient: input.mongoClient
   };
 };
