@@ -18,7 +18,7 @@ export const arboTypedefs = `
     inclusionCriteria: String
     latitude: Float!
     longitude: Float!
-    pathogen: String!
+    pathogen: Arbovirus!
     pediatricAgeGroup: String
     producer: String
     producerOther: String
@@ -28,7 +28,7 @@ export const arboTypedefs = `
     sampleNumerator: Int
     sampleSize: Int!
     sampleStartDate: String
-    seroprevalence: Float
+    seroprevalence: Float!
     seroprevalenceStudy95CILower: Float
     seroprevalenceStudy95CIUpper: Float
     seroprevalenceCalculated95CILower: Float
@@ -37,9 +37,18 @@ export const arboTypedefs = `
     sex: String
     sourceSheetId: String
     sourceSheetName: String
-    unRegion: String
+    unRegion: UNRegion
     url: String
     whoRegion: String
+  }
+
+  enum Arbovirus {
+    ZIKV
+    DENV
+    CHIKV
+    YF
+    WNV
+    MAYV
   }
 
   type ArbovirusFilterOptions {

@@ -5,14 +5,14 @@ import {
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step.js";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode, countryNameToThreeLetterIsoCountryCode, countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
-import { getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
+import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 
 export type AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep =
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep & {
     country: string;
     countryAlphaTwoCode: TwoLetterIsoCountryCode;
     countryAlphaThreeCode: ThreeLetterIsoCountryCode;
-    unRegion: string | undefined;
+    unRegion: UNRegion | undefined;
   };
 
 export type AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep =
