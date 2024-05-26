@@ -27,6 +27,7 @@ export interface ArbovirusEstimateDocument {
   seroprevalenceCalculated95CIUpper: number | undefined;
   country: string;
   countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
   state: string | undefined;
   city: string | undefined;
   antibodies: string[] | undefined;

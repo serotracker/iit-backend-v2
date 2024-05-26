@@ -57,6 +57,7 @@ export const transformIntoFormatForDatabaseStep = (
       seroprevalenceCalculated95CIUpper: estimate.seroprevalenceCalculated95CIUpper,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
+      countryAlphaThreeCode: estimate.countryAlphaThreeCode,
       state: estimate.state,
       city: estimate.city,
       latitude: estimate.latitude,

@@ -66,4 +66,10 @@ export const sharedTypedefs = `
     HIGH_INCOME_SUBREGION_ASIA_PACIFIC
     HIGH_INCOME_SUBREGION_AUSTRALASIA
   }
+
+  type CountryIdentifiers {
+    name: String!
+    alphaTwoCode: String!
+    alphaThreeCode: String!
+  }
 `
