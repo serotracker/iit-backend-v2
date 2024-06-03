@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
+  StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep,
   StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep,
   StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep,
   StudyFieldsAfterCombiningEstimatesAndStudiesStep
@@ -17,12 +18,15 @@ export type StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStruc
   StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
 export type StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
   StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+export type StructuredCountryPopulationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
+  StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesAndStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
   vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
   mongoClient: MongoClient;
 }
 
@@ -31,6 +35,7 @@ interface FilterStudiesThatDoNotMeetDataStructureRequirementsOutput {
   allStudies: StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep[];
   vaccinationData: StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep;
   mongoClient: MongoClient;
 }
 
@@ -53,6 +58,7 @@ export const filterStudiesThatDoNotMeetDataStructureRequirement = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

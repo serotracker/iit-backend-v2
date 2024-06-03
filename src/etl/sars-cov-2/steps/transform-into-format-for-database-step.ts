@@ -1,29 +1,36 @@
 import { ObjectId, MongoClient } from "mongodb";
-import { SarsCov2EstimateDocument } from "../../../storage/types.js";
+import { SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../../../storage/types.js";
 import { 
   EstimateFieldsAfterAddingPositiveCaseDataStep,
+  StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep,
   StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep,
   StructuredVaccinationDataAfterAddingPositiveCaseDataStep,
   StudyFieldsAfterAddingPositiveCaseDataStep
 } from "./add-positive-case-data-to-estimate-step.js";
 
+export type EstimateFieldsAfterTransformingFormatForDatabaseStep = SarsCov2EstimateDocument;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAddingPositiveCaseDataStep;
 export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
 export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+export type StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep = StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
+export type ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep = SarsCov2CountryDataDocument;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
   mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
-  allEstimates: SarsCov2EstimateDocument[];
+  allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -83,6 +90,8 @@ export const transformIntoFormatForDatabaseStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: [],
     mongoClient: input.mongoClient
   };
 };

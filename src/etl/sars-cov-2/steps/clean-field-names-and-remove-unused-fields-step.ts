@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
-import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
+import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { isAirtableError, AirtableError } from "../types.js";
 
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
@@ -36,12 +36,14 @@ export interface StudyFieldsAfterCleaningFieldNamesStep {
 }
 export type StructuredVaccinationDataAfterCleaningFieldNamesStep = StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
 export type StructuredPositiveCaseDataAfterCleaningFieldNamesStep = StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+export type StructuredCountryPopulationDataAfterCleaningFieldNamesStep = StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
   mongoClient: MongoClient;
 }
 
@@ -50,6 +52,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCleaningFieldNamesStep;
   mongoClient: MongoClient;
 }
 
@@ -205,6 +208,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
     })),
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

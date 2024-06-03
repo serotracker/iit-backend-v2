@@ -10,12 +10,15 @@ export type StructuredVaccinationDataAfterFetchingVaccinationDataStep =
   StructuredVaccinationData;
 export type StructuredPositiveCaseDataAfterFetchingVaccinationDataStep =
   undefined;
+export type StructuredCountryPopulationDataAfterFetchingVaccinationDataStep =
+  undefined;
 
 interface FetchVaccinationDataStepInput {
   allEstimates: FieldSet[];
   allStudies: FieldSet[];
   vaccinationData: undefined;
   positiveCaseData: undefined;
+  countryPopulationData: undefined;
   mongoClient: MongoClient;
 }
 
@@ -24,6 +27,7 @@ interface FetchVaccinationDataStepOutput {
   allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterFetchingVaccinationDataStep;
   mongoClient: MongoClient;
 }
 
@@ -83,6 +87,7 @@ export const fetchVaccinationDataStep = async (
     allStudies: input.allStudies,
     vaccinationData: formattedVaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

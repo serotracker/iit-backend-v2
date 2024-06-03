@@ -1,5 +1,11 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterAddingVaccinationDataStep, StructuredPositiveCaseDataAfterAddingVaccinationDataStep, StructuredVaccinationDataAfterAddingVaccinationDataStep, StudyFieldsAfterAddingVaccinationDataStep } from "./add-vaccination-data-to-estimate-step";
+import {
+  EstimateFieldsAfterAddingVaccinationDataStep,
+  StructuredCountryPopulationDataAfterAddingVaccinationDataStep,
+  StructuredPositiveCaseDataAfterAddingVaccinationDataStep,
+  StructuredVaccinationDataAfterAddingVaccinationDataStep,
+  StudyFieldsAfterAddingVaccinationDataStep
+} from "./add-vaccination-data-to-estimate-step";
 
 export type EstimateFieldsAfterAddingPositiveCaseDataStep =
   EstimateFieldsAfterAddingVaccinationDataStep & { 
@@ -11,12 +17,15 @@ export type StructuredVaccinationDataAfterAddingPositiveCaseDataStep =
   StructuredVaccinationDataAfterAddingVaccinationDataStep;
 export type StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep =
   StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+export type StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep =
+  StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
 
 interface AddPositiveCaseDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
   mongoClient: MongoClient;
 }
 
@@ -25,6 +34,7 @@ interface AddPositiveCaseDataToEstimateStepOutput {
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
   mongoClient: MongoClient;
 }
 
@@ -47,6 +57,7 @@ export const addPositiveCaseDataToEstimateStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

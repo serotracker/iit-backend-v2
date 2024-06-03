@@ -1,7 +1,13 @@
 import { request } from "undici";
 import { MongoClient } from "mongodb";
 import { StructuredPositiveCaseData } from "../types";
-import { EstimateFieldsAfterFetchingVaccinationDataStep, StructuredPositiveCaseDataAfterFetchingVaccinationDataStep, StructuredVaccinationDataAfterFetchingVaccinationDataStep, StudyFieldsAfterFetchingVaccinationDataStep } from "./fetch-vaccination-data-step";
+import {
+  EstimateFieldsAfterFetchingVaccinationDataStep,
+  StructuredCountryPopulationDataAfterFetchingVaccinationDataStep,
+  StructuredPositiveCaseDataAfterFetchingVaccinationDataStep,
+  StructuredVaccinationDataAfterFetchingVaccinationDataStep,
+  StudyFieldsAfterFetchingVaccinationDataStep
+} from "./fetch-vaccination-data-step";
 import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
 import { groupByArray, typedObjectEntries } from "../../../lib/lib.js";
 
@@ -9,12 +15,14 @@ export type EstimateFieldsAfterFetchingPositiveCaseDataStep = EstimateFieldsAfte
 export type StudyFieldsAfterFetchingPositiveCaseDataStep = StudyFieldsAfterFetchingVaccinationDataStep;
 export type StructuredVaccinationDataAfterFetchingPositiveCaseDataStep = StructuredVaccinationDataAfterFetchingVaccinationDataStep;
 export type StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep = StructuredPositiveCaseData;
+export type StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep = StructuredCountryPopulationDataAfterFetchingVaccinationDataStep;
 
 interface FetchPositiveCaseDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingVaccinationDataStep[];
   allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterFetchingVaccinationDataStep;
   mongoClient: MongoClient;
 }
 
@@ -23,6 +31,7 @@ interface FetchPositiveCaseDataStepOutput {
   allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep;
   mongoClient: MongoClient;
 }
 
@@ -306,6 +315,7 @@ export const fetchPositiveCaseDataStep = async(
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: formattedPositiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

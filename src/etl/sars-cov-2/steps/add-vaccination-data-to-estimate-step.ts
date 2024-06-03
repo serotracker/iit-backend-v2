@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import { add, sub } from 'date-fns';
 import {
   EstimateFieldsAfterJitteringPinLatLngStep,
+  StructuredCountryPopulationDataAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
   StructuredVaccinationDataAfterJitteringPinLatLngStep,
   StudyFieldsAfterJitteringPinLatLngStep,
@@ -106,12 +107,15 @@ export type StructuredVaccinationDataAfterAddingVaccinationDataStep =
   StructuredVaccinationDataAfterJitteringPinLatLngStep;
 export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+export type StructuredCountryPopulationDataAfterAddingVaccinationDataStep =
+  StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
 
 interface AddVaccinationDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
   mongoClient: MongoClient;
 }
 
@@ -120,6 +124,7 @@ interface AddVaccinationDataToEstimateStepOutput {
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
   mongoClient: MongoClient;
 }
 
@@ -157,6 +162,7 @@ export const addVaccinationDataToEstimateStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

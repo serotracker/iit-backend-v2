@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
@@ -12,12 +13,15 @@ export type StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep 
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep =
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+export type StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep =
+  StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 
 interface CombineEstimatesAndStudiesInput {
   allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   mongoClient: MongoClient;
 }
 
@@ -26,6 +30,7 @@ interface CombineEstimatesAndStudiesOutput {
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
   vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
   mongoClient: MongoClient;
 }
 
@@ -55,6 +60,7 @@ export const combineEstimatesAndStudies = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };
