@@ -76,7 +76,7 @@ export type StructuredPositiveCaseData = Array<{
 export type StructuredCountryPopulationData = Array<{
   threeLetterCountryCode: string,
   data: Array<{
-    year: string,
+    year: number,
     populationEstimate: number
   }>
 }>

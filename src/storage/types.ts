@@ -124,6 +124,7 @@ export interface SarsCov2EstimateDocument {
   countryPeopleVaccinatedPerHundred: number | undefined;
   countryPeopleFullyVaccinatedPerHundred: number | undefined;
   countryPositiveCasesPerMillionPeople: number | undefined;
+  countryPopulation: number | undefined;
   denominatorValue: number | undefined;
   numeratorValue: number | undefined;
   seroprevalence: number | undefined;

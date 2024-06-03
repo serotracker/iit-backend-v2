@@ -16,6 +16,10 @@ export const typedObjectEntries = <TKey extends string, TValue>(input: Record<TK
   return Object.entries(input) as [TKey, TValue][];
 }
 
+export const typedObjectFromEntries = <TKey extends string, TValue>(input: [TKey, TValue][]): Record<TKey, TValue> => {
+  return Object.fromEntries(input) as Record<TKey, TValue>;
+}
+
 export const groupByArray = <TGroupingKey extends string, TGroupingValue extends string, TValue extends Record<TGroupingKey, TGroupingValue>>(values: TValue[], groupingKey: TGroupingKey): Array<Record<TGroupingKey, TGroupingValue> & {data: Omit<TValue, TGroupingKey>[]}> => {
   const valueToGroupingValue = (value: TValue): TGroupingValue => {
     return value[groupingKey]

@@ -26,6 +26,7 @@ import { calculateSeroprevalenceStep } from "./steps/calculate-seroprevalence-st
 import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
 import { writeCountryDataToMongoDbStep } from "./steps/write-country-data-to-mongodb-step.js";
 import { writeEstimateDataToMongoDbStep } from "./steps/write-estimate-data-to-mongodb-step.js";
+import { addCountryPopulationDataToEstimateStep } from "./steps/add-country-population-data-to-estimate-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -61,7 +62,8 @@ const runEtlMain = async () => {
         studySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
-  await pipe(
+  //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
+  const outputFromFirstPipeHalf = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allStudies: allStudiesUnformatted,
@@ -80,16 +82,21 @@ const runEtlMain = async () => {
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),
     etlStep(parseDatesStep),
+  );
+
+  await pipe(
+    outputFromFirstPipeHalf,
     etlStep(calculateSeroprevalenceStep),
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
     etlStep(addVaccinationDataToEstimateStep),
     etlStep(addPositiveCaseDataToEstimateStep),
+    etlStep(addCountryPopulationDataToEstimateStep),
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeCountryDataToMongoDbStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
-  );
+  )
 
   console.log("Exiting");
   process.exit(1);
