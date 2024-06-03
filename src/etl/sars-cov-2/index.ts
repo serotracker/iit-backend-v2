@@ -91,13 +91,6 @@ const runEtlMain = async () => {
     asyncEtlStep(writeEstimateDataToMongoDbStep),
   );
 
-  await writeDataToMongoEtlStep({
-    databaseName,
-    collectionName: "sarsCov2Estimates",
-    data: allEstimates,
-    mongoClient,
-  });
-
   console.log("Exiting");
   process.exit(1);
 };
