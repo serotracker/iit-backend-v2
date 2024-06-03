@@ -42,6 +42,8 @@ export const sarsCov2Typedefs = `
     country: [String!]!
     countryIdentifiers: [CountryIdentifiers!]!
     scope: [String!]!
+    sex: [String!]!
+    populationGroup: [String!]!
     sourceType: [String!]!
     riskOfBias: [String!]!
     unRegion: [UNRegion!]!
