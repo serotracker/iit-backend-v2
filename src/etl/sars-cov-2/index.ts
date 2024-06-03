@@ -61,7 +61,7 @@ const runEtlMain = async () => {
         studySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
-  const { allEstimates } = await pipe(
+  await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allStudies: allStudiesUnformatted,
