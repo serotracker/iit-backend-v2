@@ -131,7 +131,10 @@ export const validateFieldSetFromAirtableStep = (
       .transform((field) => field ?? []),
     "SeroTracker Analysis Primary Estimate": z
       .optional(z.boolean())
-      .transform((field) => field ?? false)
+      .transform((field) => field ?? false),
+    "Serum positive prevalence (%)": z
+      .optional(z.number())
+      .transform((field) => field ?? null),
   });
 
   const zodSarsCov2StudyFieldsObject = z.object({
