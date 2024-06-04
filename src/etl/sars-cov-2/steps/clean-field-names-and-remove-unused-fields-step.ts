@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { isArrayOfUnknownType } from "../../../lib/lib.js";
-import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
+import { CountryFieldsAfterValidatingFieldSetFromAirtableStep, EstimateFieldsAfterValidatingFieldSetFromAirtableStep, StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep, StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep, StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep, StudyFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { isAirtableError, AirtableError } from "../types.js";
 
 export interface EstimateFieldsAfterCleaningFieldNamesStep {
@@ -34,6 +34,12 @@ export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
   studyName: string | undefined;
 }
+export interface CountryFieldsAfterCleaningFieldNamesStep {
+  id: string;
+  countryName: string;
+  alphaThreeCode: string | undefined;
+  alphaTwoCode: string | undefined;
+}
 export type StructuredVaccinationDataAfterCleaningFieldNamesStep = StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
 export type StructuredPositiveCaseDataAfterCleaningFieldNamesStep = StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
 export type StructuredCountryPopulationDataAfterCleaningFieldNamesStep = StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -41,6 +47,7 @@ export type StructuredCountryPopulationDataAfterCleaningFieldNamesStep = Structu
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
   countryPopulationData: StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -50,6 +57,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
 interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFieldNamesStep[];
   allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
+  allCountries: CountryFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
   countryPopulationData: StructuredCountryPopulationDataAfterCleaningFieldNamesStep;
@@ -205,6 +213,12 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         key: "Source Name (from Rapid Review: Source)",
         object: study,
       }).value
+    })),
+    allCountries: input.allCountries.map((country) => ({
+      id: country.id,
+      countryName: country["Country"],
+      alphaThreeCode: country["Alpha3 Code"] ?? undefined,
+      alphaTwoCode: country["Alpha2 Code"] ?? undefined
     })),
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,

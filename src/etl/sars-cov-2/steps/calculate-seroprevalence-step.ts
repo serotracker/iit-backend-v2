@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 import {
+  CountryFieldsAfterParsingDatesStep,
   EstimateFieldsAfterParsingDatesStep,
   StructuredCountryPopulationDataAfterParsingDatesStep,
   StructuredPositiveCaseDataAfterParsingDatesStep,
@@ -13,6 +14,7 @@ export type EstimateFieldsAfterCalculatingSeroprevalenceStep = EstimateFieldsAft
   seroprevalence: number | undefined;
 };
 export type StudyFieldsAfterCalculatingSeroprevalenceStep = StudyFieldsAfterParsingDatesStep;
+export type CountryFieldsAfterCalculatingSeroprevalenceStep = CountryFieldsAfterParsingDatesStep;
 export type StructuredVaccinationDataAfterCalculatingSeroprevalenceStep = StructuredVaccinationDataAfterParsingDatesStep;
 export type StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep = StructuredPositiveCaseDataAfterParsingDatesStep;
 export type StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep = StructuredCountryPopulationDataAfterParsingDatesStep;
@@ -20,6 +22,7 @@ export type StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep = 
 interface CalculateSeroprevalenceStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
+  allCountries: CountryFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
   countryPopulationData: StructuredCountryPopulationDataAfterParsingDatesStep;
@@ -29,6 +32,7 @@ interface CalculateSeroprevalenceStepInput {
 interface CalculateSeroprevalenceStepOutput {
   allEstimates: EstimateFieldsAfterCalculatingSeroprevalenceStep[];
   allStudies: StudyFieldsAfterCalculatingSeroprevalenceStep[];
+  allCountries: CountryFieldsAfterCalculatingSeroprevalenceStep[];
   vaccinationData: StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
   countryPopulationData: StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep;
@@ -48,6 +52,7 @@ export const calculateSeroprevalenceStep = (input: CalculateSeroprevalenceStepIn
         : undefined
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

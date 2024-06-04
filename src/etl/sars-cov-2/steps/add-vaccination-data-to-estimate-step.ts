@@ -3,6 +3,7 @@ import { add, sub } from 'date-fns';
 import { StructuredVaccinationData } from "../types";
 import {
   ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataStep,
+  CountryFieldsAfterGeneratingConsolidatedCountryDataStep,
   EstimateFieldsAfterGeneratingConsolidatedCountryDataStep,
   StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep,
   StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep,
@@ -104,6 +105,7 @@ export type EstimateFieldsAfterAddingVaccinationDataStep =
     countryPeopleFullyVaccinatedPerHundred: number | undefined;
   };
 export type StudyFieldsAfterAddingVaccinationDataStep = StudyFieldsAfterGeneratingConsolidatedCountryDataStep;
+export type CountryFieldsAfterAddingVaccinationDataStep = CountryFieldsAfterGeneratingConsolidatedCountryDataStep;
 export type StructuredVaccinationDataAfterAddingVaccinationDataStep =
   StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep;
 export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
@@ -119,6 +121,7 @@ export type ConsolidatedCountryDataAfterAddingVaccinationDataStep =
 interface AddVaccinationDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterGeneratingConsolidatedCountryDataStep[];
   allStudies: StudyFieldsAfterGeneratingConsolidatedCountryDataStep[];
+  allCountries: CountryFieldsAfterGeneratingConsolidatedCountryDataStep[];
   vaccinationData: StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep;
@@ -129,6 +132,7 @@ interface AddVaccinationDataToEstimateStepInput {
 interface AddVaccinationDataToEstimateStepOutput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
+  allCountries: CountryFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
@@ -168,6 +172,7 @@ export const addVaccinationDataToEstimateStep = (
       })
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { writeFileSync } from "fs";
-import { EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep, StudyFieldsAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
+import { CountryFieldsAfterAddingCountryAndRegionInformationStep, EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep, StudyFieldsAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
 import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
 import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
@@ -10,6 +10,7 @@ export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingC
   longitude: number;
 };
 export type StudyFieldsAfterLatLngGenerationStep = StudyFieldsAfterAddingCountryAndRegionInformationStep;
+export type CountryFieldsAfterLatLngGenerationStep = CountryFieldsAfterAddingCountryAndRegionInformationStep;
 export type StructuredVaccinationDataAfterLatLngGenerationStep = StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
 export type StructuredPositiveCaseDataAfterLatLngGenerationStep = StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
 export type StructuredCountryPopulationDataAfterLatLngGenerationStep = StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep;
@@ -17,6 +18,7 @@ export type StructuredCountryPopulationDataAfterLatLngGenerationStep = Structure
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
+  allCountries: CountryFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep;
@@ -26,6 +28,7 @@ interface LatLngGenerationStepInput {
 interface LatLngGenerationStepOutput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
+  allCountries: CountryFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterLatLngGenerationStep;
@@ -77,6 +80,7 @@ export const latLngGenerationStep = async(
   return {
     allEstimates: estimatesWithLatitudesAndLongitudes,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

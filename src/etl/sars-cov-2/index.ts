@@ -14,7 +14,7 @@ import { latLngGenerationStep } from "./steps/lat-lng-generation-step.js";
 import { removeRecordsThatAreFlaggedNotToSave } from "./steps/remove-records-that-are-flagged-to-not-save-step.js";
 import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
-import { filterStudiesThatDoNotMeetDataStructureRequirement } from "./steps/filter-studies-that-do-not-meet-data-structure-requirements.js";
+import { filterEntitiesThatDoNotMeetDataStructureRequirement } from "./steps/filter-entities-that-do-not-meet-data-structure-requirements.js";
 import { transformNotReportedValuesToUndefinedStep } from "./steps/transform-not-reported-values-to-undefined-step.js";
 import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
 import { fetchVaccinationDataStep } from "./steps/fetch-vaccination-data-step.js";
@@ -46,6 +46,7 @@ const runEtlMain = async () => {
   const base = new Airtable.Base(airtable, airtableSC2BaseId);
   const estimateSheet = base.table("Rapid Review: Estimates");
   const studySheet = base.table("Rapid Review: Study");
+  const countrySheet = base.table("Countries");
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] =
     await estimateSheet
@@ -62,12 +63,21 @@ const runEtlMain = async () => {
       .then((studySheet) =>
         studySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
+  
+  const allCountriesUnformatted: (FieldSet & { id: string })[] =
+    await countrySheet
+      .select()
+      .all()
+      .then((countrySheet) =>
+        countrySheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
 
   //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
   const outputFromFirstPipeHalf = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allStudies: allStudiesUnformatted,
+      allCountries: allCountriesUnformatted,
       vaccinationData: undefined,
       positiveCaseData: undefined,
       countryPopulationData: undefined,
@@ -80,7 +90,7 @@ const runEtlMain = async () => {
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
     etlStep(combineEstimatesAndStudies),
-    etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
+    etlStep(filterEntitiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),
     etlStep(parseDatesStep),
   );

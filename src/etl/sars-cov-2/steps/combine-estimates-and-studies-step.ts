@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
@@ -9,6 +10,8 @@ import {
 
 export type EstimateFieldsAfterCombiningEstimatesAndStudiesStep = EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep & {studyName: string | undefined};
 export type StudyFieldsAfterCombiningEstimatesAndStudiesStep = StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+export type CountryFieldsAfterCombiningEstimatesAndStudiesStep =
+  CountryFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep =
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep =
@@ -19,6 +22,7 @@ export type StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudie
 interface CombineEstimatesAndStudiesInput {
   allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
+  allCountries: CountryFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   countryPopulationData: StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
@@ -28,6 +32,7 @@ interface CombineEstimatesAndStudiesInput {
 interface CombineEstimatesAndStudiesOutput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesAndStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
+  allCountries: CountryFieldsAfterCombiningEstimatesAndStudiesStep[];
   vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
@@ -58,6 +63,7 @@ export const combineEstimatesAndStudies = (
       }
     }),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

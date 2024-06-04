@@ -2,6 +2,7 @@ import { ObjectId, MongoClient } from "mongodb";
 import { Month, SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../../../storage/types.js";
 import {
   ConsolidatedCountryDataAfterAddingCountryPopulationDataStep,
+  CountryFieldsAfterAddingCountryPopulationDataStep,
   EstimateFieldsAfterAddingCountryPopulationDataStep,
   StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep,
   StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep,
@@ -11,6 +12,7 @@ import {
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = SarsCov2EstimateDocument;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAddingCountryPopulationDataStep;
+export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterAddingCountryPopulationDataStep;
 export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
 export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
 export type StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep = StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
@@ -19,6 +21,7 @@ export type ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep = Sars
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryPopulationDataStep[];
   allStudies: StudyFieldsAfterAddingCountryPopulationDataStep[];
+  allCountries: CountryFieldsAfterAddingCountryPopulationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
@@ -29,6 +32,7 @@ interface TransformIntoFormatForDatabaseStepInput {
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
+  allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
   countryPopulationData: StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep;
@@ -102,6 +106,7 @@ export const transformIntoFormatForDatabaseStep = (
       updatedAt: updatedAtForAllRecords,
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

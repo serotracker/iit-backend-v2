@@ -2,6 +2,7 @@ import { request } from "undici";
 import { MongoClient } from "mongodb";
 import { StructuredPositiveCaseData } from "../types";
 import {
+  CountryFieldsAfterFetchingVaccinationDataStep,
   EstimateFieldsAfterFetchingVaccinationDataStep,
   StructuredCountryPopulationDataAfterFetchingVaccinationDataStep,
   StructuredPositiveCaseDataAfterFetchingVaccinationDataStep,
@@ -13,6 +14,7 @@ import { groupByArray, typedObjectEntries } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingPositiveCaseDataStep = EstimateFieldsAfterFetchingVaccinationDataStep;
 export type StudyFieldsAfterFetchingPositiveCaseDataStep = StudyFieldsAfterFetchingVaccinationDataStep;
+export type CountryFieldsAfterFetchingPositiveCaseDataStep = CountryFieldsAfterFetchingVaccinationDataStep;
 export type StructuredVaccinationDataAfterFetchingPositiveCaseDataStep = StructuredVaccinationDataAfterFetchingVaccinationDataStep;
 export type StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep = StructuredPositiveCaseData;
 export type StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep = StructuredCountryPopulationDataAfterFetchingVaccinationDataStep;
@@ -20,6 +22,7 @@ export type StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep = S
 interface FetchPositiveCaseDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingVaccinationDataStep[];
   allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
+  allCountries: CountryFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterFetchingVaccinationDataStep;
@@ -29,6 +32,7 @@ interface FetchPositiveCaseDataStepInput {
 interface FetchPositiveCaseDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingPositiveCaseDataStep[];
   allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
+  allCountries: CountryFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep;
@@ -313,6 +317,7 @@ export const fetchPositiveCaseDataStep = async(
   return {
     allEstimates: input.allEstimates,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: formattedPositiveCaseData,
     countryPopulationData: input.countryPopulationData,
