@@ -7,7 +7,7 @@ import {
   StructuredVaccinationDataAfterTransformingFormatForDatabaseStep,
   StudyFieldsAfterTransformingFormatForDatabaseStep,
 } from "./transform-into-format-for-database-step";
-import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers";
+import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 
 export type EstimateFieldsAfterWritingCountryDataToMongoDbStep =
   EstimateFieldsAfterTransformingFormatForDatabaseStep;

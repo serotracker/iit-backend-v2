@@ -8,7 +8,7 @@ import {
   StudyFieldsAfterFetchingPositiveCaseDataStep
 } from "./fetch-positive-case-data-step";
 import { StructuredCountryPopulationData } from "../types";
-import { groupByArray, typedObjectFromEntries } from "../../../lib/lib";
+import { groupByArray, typedObjectFromEntries } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingCountryPopulationStep =
   EstimateFieldsAfterFetchingPositiveCaseDataStep;
