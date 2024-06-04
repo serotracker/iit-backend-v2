@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
-import { SarsCov2Estimate, QueryResolvers, CountryIdentifiers } from "./graphql-types/__generated__/graphql-types";
-import { SarsCov2EstimateDocument } from "../storage/types";
-import { mapGbdSubRegionForApi, mapGbdSuperRegionForApi, mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
+import { SarsCov2Estimate, QueryResolvers, CountryIdentifiers, MonthlySarsCov2CountryInformationEntry } from "./graphql-types/__generated__/graphql-types";
+import { SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../storage/types";
+import { mapGbdSubRegionForApi, mapGbdSuperRegionForApi, mapMonthForApi, mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 
 interface GenerateSarsCov2ResolversInput {
   mongoClient: MongoClient;
@@ -12,6 +12,17 @@ interface GenerateSarsCov2ResolversOutput {
 }
 
 const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
+
+const transformSarsCov2CountryDataDocumentForApi = (document: SarsCov2CountryDataDocument): MonthlySarsCov2CountryInformationEntry => ({
+  population: document.population,
+  peopleVaccinatedPerHundred: document.peopleVaccinatedPerHundred,
+  peopleFullyVaccinatedPerHundred: document.peopleFullyVaccinatedPerHundred,
+  positiveCasesPerMillionPeople: document.positiveCasesPerMillionPeople,
+  alphaTwoCode: document.alphaTwoCode,
+  alphaThreeCode: document.alphaThreeCode,
+  month: mapMonthForApi(document.month),
+  year: document.year,
+})
 
 const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocument): SarsCov2Estimate => {
   return {
@@ -138,12 +149,23 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       countryIdentifiers: countryIdentifiers as CountryIdentifiers[]
     }
   }
+
+  const monthlySarsCov2CountryInformation = async () => {
+    const monthlySarsCov2CountryInformationDocuments = await mongoClient
+      .db(databaseName)
+      .collection<SarsCov2CountryDataDocument>('sarsCov2CountryData')
+      .find({})
+      .toArray();
+
+    return monthlySarsCov2CountryInformationDocuments.map((document) => transformSarsCov2CountryDataDocumentForApi(document));
+  }
   
   return {
     sarsCov2Resolvers: {
       Query: {
         sarsCov2Estimates,
         sarsCov2FilterOptions,
+        monthlySarsCov2CountryInformation
       }
     }
   }
