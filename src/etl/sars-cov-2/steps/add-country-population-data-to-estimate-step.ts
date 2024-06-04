@@ -4,7 +4,8 @@ import {
   StudyFieldsAfterAddingPositiveCaseDataStep,
   StructuredVaccinationDataAfterAddingPositiveCaseDataStep,
   StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep,
-  StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep
+  StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep,
+  ConsolidatedCountryDataAfterAddingPositiveCaseDataStep
 } from "./add-positive-case-data-to-estimate-step";
 
 export type EstimateFieldsAfterAddingCountryPopulationDataStep =
@@ -19,6 +20,10 @@ export type StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep =
   StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
 export type StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep =
   StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
+export type ConsolidatedCountryDataAfterAddingCountryPopulationDataStep =
+  ConsolidatedCountryDataAfterAddingPositiveCaseDataStep & {
+    countryPopulation: number | undefined;
+  };
 
 interface AddCountryPopulationDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
@@ -26,6 +31,7 @@ interface AddCountryPopulationDataToEstimateStepInput {
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingPositiveCaseDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -35,6 +41,7 @@ interface AddCountryPopulationDataToEstimateStepOutput {
   vaccinationData: StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingCountryPopulationDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -54,6 +61,12 @@ export const addCountryPopulationDataToEstimateStep = (
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint) => ({
+      ...countryDataPoint,
+      countryPopulation: input.countryPopulationData
+        .find((element) => element.threeLetterCountryCode === countryDataPoint.alphaThreeCode)?.data
+        .find((element) => element.year === countryDataPoint.year)?.populationEstimate
+    })),
     mongoClient: input.mongoClient
   };
 };

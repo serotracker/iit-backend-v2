@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  ConsolidatedCountryDataAfterAddingVaccinationDataStep,
   EstimateFieldsAfterAddingVaccinationDataStep,
   StructuredCountryPopulationDataAfterAddingVaccinationDataStep,
   StructuredPositiveCaseDataAfterAddingVaccinationDataStep,
@@ -19,6 +20,10 @@ export type StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep =
   StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
 export type StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep =
   StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
+export type ConsolidatedCountryDataAfterAddingPositiveCaseDataStep =
+  ConsolidatedCountryDataAfterAddingVaccinationDataStep & {
+    countryPositiveCasesPerMillionPeople: number | undefined;
+  };
 
 interface AddPositiveCaseDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
@@ -26,6 +31,7 @@ interface AddPositiveCaseDataToEstimateStepInput {
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingVaccinationDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -35,6 +41,7 @@ interface AddPositiveCaseDataToEstimateStepOutput {
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingPositiveCaseDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -58,6 +65,19 @@ export const addPositiveCaseDataToEstimateStep = (
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint) => ({
+      ...countryDataPoint,
+      countryPositiveCasesPerMillionPeople: input.positiveCaseData
+        .find((element) => element.twoLetterCountryCode === countryDataPoint.alphaTwoCode)?.data
+        .find((element) => element.year === countryDataPoint.year.toString())?.data
+        .find((element) => element.month === (countryDataPoint.year + 1).toString())?.data
+        .map((element) => ({
+          differenceFromMiddleOfMonth: Math.abs(parseInt(element.day) - 14),
+          countryPositiveCasesPerMillionPeople: element.countryPositiveCasesPerMillionPeople
+        }))
+        .sort((a, b) => a.differenceFromMiddleOfMonth - b.differenceFromMiddleOfMonth)
+        .at(0)?.countryPositiveCasesPerMillionPeople
+    })),
     mongoClient: input.mongoClient
   };
 };

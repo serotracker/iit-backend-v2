@@ -1,6 +1,7 @@
 import { ObjectId, MongoClient } from "mongodb";
-import { SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../../../storage/types.js";
+import { Month, SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../../../storage/types.js";
 import {
+  ConsolidatedCountryDataAfterAddingCountryPopulationDataStep,
   EstimateFieldsAfterAddingCountryPopulationDataStep,
   StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep,
   StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep,
@@ -21,6 +22,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   vaccinationData: StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingCountryPopulationDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -37,17 +39,28 @@ interface TransformIntoFormatForDatabaseStepOutput {
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
-  const { allEstimates } = input;
-
-  console.log(
-    `Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`
-  );
+  console.log(`Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
 
+  const monthNumberToMonthEnumMap: Record<number, Month | undefined> = {
+    1: Month.JANUARY,
+    2: Month.FEBRUARY,
+    3: Month.MARCH,
+    4: Month.APRIL,
+    5: Month.MAY,
+    6: Month.JUNE,
+    7: Month.JULY,
+    8: Month.AUGUST,
+    9: Month.SEPTEMBER,
+    10: Month.OCTOBER,
+    11: Month.NOVEMBER,
+    12: Month.DECEMBER,
+  }
+
   return {
-    allEstimates: allEstimates.map((estimate) => ({
+    allEstimates: input.allEstimates.map((estimate) => ({
       _id: new ObjectId(),
       antibodies: estimate.antibodies,
       isotypes: estimate.isotypes,
@@ -92,7 +105,19 @@ export const transformIntoFormatForDatabaseStep = (
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,
-    consolidatedCountryData: [],
+    consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint) => ({
+      _id: new ObjectId(),
+      population: countryDataPoint.countryPopulation,
+      peopleVaccinatedPerHundred: countryDataPoint.countryPeopleVaccinatedPerHundred,
+      peopleFullyVaccinatedPerHundred: countryDataPoint.countryPeopleFullyVaccinatedPerHundred,
+      positiveCasesPerMillionPeople: countryDataPoint.countryPositiveCasesPerMillionPeople,
+      month: monthNumberToMonthEnumMap[countryDataPoint.month],
+      year: countryDataPoint.year,
+      createdAt: createdAtForAllRecords,
+      updatedAt: createdAtForAllRecords
+    })).filter((countryDataPoint): countryDataPoint is Omit<typeof countryDataPoint, 'month'> & {
+      month: NonNullable<typeof countryDataPoint['month']>
+    } => !!countryDataPoint.month),
     mongoClient: input.mongoClient
   };
 };

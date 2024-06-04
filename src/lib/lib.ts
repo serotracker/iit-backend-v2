@@ -43,3 +43,12 @@ export const groupByArray = <TGroupingKey extends string, TGroupingValue extends
     }
   })
 }
+
+interface GenerateRangeInput {
+  startInclusive: number,
+  endInclusive: number,
+  stepSize: number
+}
+
+export const generateRange = (input: GenerateRangeInput) =>
+  Array.from({ length: (input.endInclusive - input.startInclusive) / input.stepSize + 1 }, (_, i) => input.startInclusive + i * input.stepSize);
