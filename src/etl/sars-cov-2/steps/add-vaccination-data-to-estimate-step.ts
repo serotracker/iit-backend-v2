@@ -182,7 +182,7 @@ export const addVaccinationDataToEstimateStep = (
         estimate: {
           threeLetterCountryCode: countryDataPoint.alphaThreeCode,
           //Pick a mid date close enough to the middle of the month
-          samplingMidDate: new Date(2024, countryDataPoint.month - 1, 14)
+          samplingMidDate: new Date(countryDataPoint.year, countryDataPoint.month - 1, 14)
         },
         fieldName: 'countryPeopleVaccinatedPerHundred',
         vaccinationData: input.vaccinationData,
@@ -192,7 +192,7 @@ export const addVaccinationDataToEstimateStep = (
         estimate: {
           threeLetterCountryCode: countryDataPoint.alphaThreeCode,
           //Pick a mid date close enough to the middle of the month
-          samplingMidDate: new Date(2024, countryDataPoint.month - 1, 14)
+          samplingMidDate: new Date(countryDataPoint.year, countryDataPoint.month - 1, 14)
         },
         fieldName: 'countryPeopleFullyVaccinatedPerHundred',
         vaccinationData: input.vaccinationData,

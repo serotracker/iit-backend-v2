@@ -140,6 +140,8 @@ export interface SarsCov2CountryDataDocument {
   peopleVaccinatedPerHundred: number | undefined;
   peopleFullyVaccinatedPerHundred: number | undefined;
   positiveCasesPerMillionPeople: number | undefined;
+  alphaTwoCode: string;
+  alphaThreeCode: string;
   month: Month;
   year: number;
   createdAt: Date;

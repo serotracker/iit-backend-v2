@@ -116,6 +116,8 @@ export const transformIntoFormatForDatabaseStep = (
       peopleVaccinatedPerHundred: countryDataPoint.countryPeopleVaccinatedPerHundred,
       peopleFullyVaccinatedPerHundred: countryDataPoint.countryPeopleFullyVaccinatedPerHundred,
       positiveCasesPerMillionPeople: countryDataPoint.countryPositiveCasesPerMillionPeople,
+      alphaTwoCode: countryDataPoint.alphaTwoCode,
+      alphaThreeCode: countryDataPoint.alphaThreeCode,
       month: monthNumberToMonthEnumMap[countryDataPoint.month],
       year: countryDataPoint.year,
       createdAt: createdAtForAllRecords,
