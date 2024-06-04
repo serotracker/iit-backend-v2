@@ -50,9 +50,21 @@ export const sarsCov2Typedefs = `
     isotypes: [String!]!
     testType: [String!]!
   }
+  
+  type MonthlySarsCov2CountryInformationEntry {
+    population: Int
+    peopleVaccinatedPerHundred: Float
+    peopleFullyVaccinatedPerHundred: Float
+    positiveCasesPerMillionPeople: Float
+    alphaTwoCode: String!
+    alphaThreeCode: String!
+    month: Month!
+    year: Int!
+  }
 
   type Query {
     sarsCov2Estimates: [SarsCov2Estimate!]!
     sarsCov2FilterOptions: SarsCov2FilterOptions!
+    monthlySarsCov2CountryInformation: [MonthlySarsCov2CountryInformationEntry!]!
   }
 `
