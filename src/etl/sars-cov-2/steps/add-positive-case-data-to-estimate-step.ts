@@ -76,7 +76,7 @@ export const addPositiveCaseDataToEstimateStep = (
       countryPositiveCasesPerMillionPeople: input.positiveCaseData
         .find((element) => element.twoLetterCountryCode === countryDataPoint.alphaTwoCode)?.data
         .find((element) => element.year === countryDataPoint.year.toString())?.data
-        .find((element) => element.month === (countryDataPoint.month + 1).toString())?.data
+        .find((element) => element.month === countryDataPoint.month.toString())?.data
         .map((element) => ({
           differenceFromMiddleOfMonth: Math.abs(parseInt(element.day) - 14),
           countryPositiveCasesPerMillionPeople: element.countryPositiveCasesPerMillionPeople
