@@ -23,6 +23,7 @@ import { addVaccinationDataToEstimateStep } from "./steps/add-vaccination-data-t
 import { addPositiveCaseDataToEstimateStep } from "./steps/add-positive-case-data-to-estimate-step.js";
 import { combineEstimatesAndStudies } from "./steps/combine-estimates-and-studies-step.js";
 import { calculateSeroprevalenceStep } from "./steps/calculate-seroprevalence-step.js";
+import { removeNonPrimaryEstimatesStep } from "./steps/remove-non-primary-estimates-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -71,6 +72,7 @@ const runEtlMain = async () => {
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
+    etlStep(removeNonPrimaryEstimatesStep),
     etlStep(combineEstimatesAndStudies),
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),

@@ -29,6 +29,7 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   numeratorValue: number | undefined;
   estimateName: string | undefined;
   url: string | undefined;
+  isPrimaryEstimate: boolean;
 }
 export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -195,6 +196,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         key: "URL",
         object: estimate,
       }).value,
+      isPrimaryEstimate: estimate["SeroTracker Analysis Primary Estimate"]
     })),
     allStudies: input.allStudies.map((study) => ({
       id: study.id,

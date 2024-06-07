@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
-  StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep,
-  StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep,
+  StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep,
+  StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep,
   StudyFieldsAfterCombiningEstimatesAndStudiesStep
 } from "./combine-estimates-and-studies-step.js";
 
@@ -14,15 +14,15 @@ export type EstimateFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequire
 export type StudyFieldsAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
   StudyFieldsAfterCombiningEstimatesAndStudiesStep;
 export type StructuredVaccinationDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
+  StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep;
 export type StructuredPositiveCaseDataAfterFilteringStudiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep;
 
 interface FilterStudiesThatDoNotMeetDataStructureRequirementsInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesAndStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
-  vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  vaccinationData: StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep;
   mongoClient: MongoClient;
 }
 
