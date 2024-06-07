@@ -100,10 +100,10 @@ const runEtlMain = async () => {
   await pipe(
     outputFromFirstPipeHalf,
     etlStep(calculateSeroprevalenceStep),
+    etlStep(generateConsolidatedCountryDataStep),
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
-    etlStep(generateConsolidatedCountryDataStep),
     etlStep(addVaccinationDataToEstimateStep),
     etlStep(addPositiveCaseDataToEstimateStep),
     etlStep(addCountryPopulationDataToEstimateStep),

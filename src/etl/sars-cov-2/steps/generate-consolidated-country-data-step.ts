@@ -1,27 +1,28 @@
 import { MongoClient } from "mongodb";
-import {
-  CountryFieldsAfterJitteringPinLatLngStep,
-  EstimateFieldsAfterJitteringPinLatLngStep,
-  StructuredCountryPopulationDataAfterJitteringPinLatLngStep,
-  StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
-  StructuredVaccinationDataAfterJitteringPinLatLngStep,
-  StudyFieldsAfterJitteringPinLatLngStep
-} from "./jitter-pin-lat-lng-step.js";
 import { dateToMonthCount, monthCountToMonthNumber, monthCountToYear } from "../../../lib/time-utils.js";
 import { generateRange } from "../../../lib/lib.js";
+import {
+  CountryFieldsAfterCalculatingSeroprevalenceStep,
+  EstimateFieldsAfterCalculatingSeroprevalenceStep,
+  StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep,
+  StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep,
+  StructuredVaccinationDataAfterCalculatingSeroprevalenceStep,
+  StudyFieldsAfterCalculatingSeroprevalenceStep
+} from "./calculate-seroprevalence-step.js";
 
 export type EstimateFieldsAfterGeneratingConsolidatedCountryDataStep =
-  EstimateFieldsAfterJitteringPinLatLngStep;
+  EstimateFieldsAfterCalculatingSeroprevalenceStep;
 export type StudyFieldsAfterGeneratingConsolidatedCountryDataStep =
-  StudyFieldsAfterJitteringPinLatLngStep;
+  StudyFieldsAfterCalculatingSeroprevalenceStep;
 export type CountryFieldsAfterGeneratingConsolidatedCountryDataStep =
-  CountryFieldsAfterJitteringPinLatLngStep;
+  CountryFieldsAfterCalculatingSeroprevalenceStep;
 export type StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep =
-  StructuredVaccinationDataAfterJitteringPinLatLngStep;
+  StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
 export type StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep =
-  StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
 export type StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep =
-  StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
+  StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep;
+
 export interface ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataStep {
   year: number;
   month: number;
@@ -31,12 +32,12 @@ export interface ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataSt
 
 
 interface GenerateConsolidatedCountryDataStepInput {
-  allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
-  allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
-  allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
-  vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
-  countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
+  allEstimates: EstimateFieldsAfterCalculatingSeroprevalenceStep[];
+  allStudies: StudyFieldsAfterCalculatingSeroprevalenceStep[];
+  allCountries: CountryFieldsAfterCalculatingSeroprevalenceStep[];
+  vaccinationData: StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep;
   mongoClient: MongoClient;
 }
 
