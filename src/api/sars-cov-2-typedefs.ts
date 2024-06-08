@@ -66,9 +66,31 @@ export const sarsCov2Typedefs = `
     year: Int!
   }
 
+  input PartitionedSarsCov2EstimatesInput {
+    partitionKey: Int!
+  }
+
+  type PartitionedSarsCov2EstimatesOutput {
+    partitionKey: Int!
+    sarsCov2Estimates: [SarsCov2Estimate!]!
+  }
+
+  input PartitionedMonthlySarsCov2CountryInformationInput {
+    partitionKey: Int!
+  }
+
+  type PartitionedMonthlySarsCov2CountryInformationOutput {
+    partitionKey: Int!
+    monthlySarsCov2CountryInformation: [MonthlySarsCov2CountryInformationEntry!]!
+  }
+
   type Query {
     sarsCov2Estimates: [SarsCov2Estimate!]!
+    partitionedSarsCov2Estimates(input: PartitionedSarsCov2EstimatesInput!): PartitionedSarsCov2EstimatesOutput!
+    allSarsCov2EstimatePartitionKeys: [Int!]!
     sarsCov2FilterOptions: SarsCov2FilterOptions!
     monthlySarsCov2CountryInformation: [MonthlySarsCov2CountryInformationEntry!]!
+    partitionedMonthlySarsCov2CountryInformation(input: PartitionedMonthlySarsCov2CountryInformationInput!): PartitionedMonthlySarsCov2CountryInformationOutput!
+    allMonthlySarsCov2CountryInformationPartitionKeys: [Int!]!
   }
 `

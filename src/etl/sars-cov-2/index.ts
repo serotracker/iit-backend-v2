@@ -4,8 +4,7 @@ import {
   asyncEtlStep,
   etlStep,
   getEnvironmentVariableOrThrow,
-  getMongoClient,
-  writeDataToMongoEtlStep,
+  getMongoClient
 } from "../helpers.js";
 import { validateFieldSetFromAirtableStep } from "./steps/validate-field-set-from-airtable-step.js";
 import { cleanFieldNamesAndRemoveUnusedFieldsStep } from "./steps/clean-field-names-and-remove-unused-fields-step.js";
@@ -29,6 +28,7 @@ import { writeEstimateDataToMongoDbStep } from "./steps/write-estimate-data-to-m
 import { addCountryPopulationDataToEstimateStep } from "./steps/add-country-population-data-to-estimate-step.js";
 import { generateConsolidatedCountryDataStep } from "./steps/generate-consolidated-country-data-step.js";
 import { removeNonPrimaryEstimatesStep } from "./steps/remove-non-primary-estimates-step.js";
+import { assignPartitionsStep } from "./steps/assign-partitions-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -107,6 +107,7 @@ const runEtlMain = async () => {
     etlStep(addVaccinationDataToEstimateStep),
     etlStep(addPositiveCaseDataToEstimateStep),
     etlStep(addCountryPopulationDataToEstimateStep),
+    etlStep(assignPartitionsStep),
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeCountryDataToMongoDbStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),

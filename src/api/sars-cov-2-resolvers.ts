@@ -83,6 +83,34 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
     return databaseEstimates.map((estimate) => transformSarsCov2EstimateDocumentForApi(estimate));
   }
 
+  const partitionedSarsCov2Estimates: QueryResolvers['partitionedSarsCov2Estimates'] = async (_, variables) => {
+    const { partitionKey } = variables.input;
+
+    const databaseEstimates = await mongoClient.db(databaseName)
+      .collection<SarsCov2EstimateDocument>('sarsCov2Estimates')
+      .find({ partitionKey })
+      .toArray();
+
+    return {
+      partitionKey,
+      sarsCov2Estimates: databaseEstimates.map((estimate) => transformSarsCov2EstimateDocumentForApi(estimate))
+    }
+  }
+
+  const allSarsCov2EstimatePartitionKeys = async () => {
+    const [
+      partitionKeys
+    ] = await Promise.all([
+      mongoClient
+        .db(databaseName)
+        .collection<SarsCov2EstimateDocument>('sarsCov2Estimates')
+        .distinct('partitionKey')
+        .then((elements) => filterUndefinedValuesFromArray(elements)),
+    ])
+
+    return partitionKeys;
+  }
+
   const sarsCov2FilterOptions = async () => {
     const [
       ageGroup,
@@ -163,13 +191,46 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
 
     return monthlySarsCov2CountryInformationDocuments.map((document) => transformSarsCov2CountryDataDocumentForApi(document));
   }
+
+  const partitionedMonthlySarsCov2CountryInformation: QueryResolvers['partitionedMonthlySarsCov2CountryInformation'] = async (_, variables) => {
+    const { partitionKey } = variables.input;
+
+    const monthlySarsCov2CountryInformationDocuments = await mongoClient
+      .db(databaseName)
+      .collection<SarsCov2CountryDataDocument>('sarsCov2CountryData')
+      .find({ partitionKey })
+      .toArray();
+
+    return {
+      partitionKey,
+      monthlySarsCov2CountryInformation: monthlySarsCov2CountryInformationDocuments.map((document) => transformSarsCov2CountryDataDocumentForApi(document))
+    }
+  }
+  
+  const allMonthlySarsCov2CountryInformationPartitionKeys = async () => {
+    const [
+      partitionKeys
+    ] = await Promise.all([
+      mongoClient
+        .db(databaseName)
+        .collection<SarsCov2CountryDataDocument>('sarsCov2CountryData')
+        .distinct('partitionKey')
+        .then((elements) => filterUndefinedValuesFromArray(elements)),
+    ])
+
+    return partitionKeys;
+  }
   
   return {
     sarsCov2Resolvers: {
       Query: {
         sarsCov2Estimates,
         sarsCov2FilterOptions,
-        monthlySarsCov2CountryInformation
+        partitionedSarsCov2Estimates,
+        allSarsCov2EstimatePartitionKeys,
+        monthlySarsCov2CountryInformation,
+        partitionedMonthlySarsCov2CountryInformation,
+        allMonthlySarsCov2CountryInformationPartitionKeys
       }
     }
   }
