@@ -118,6 +118,18 @@ export interface SarsCov2EstimateDocument {
   updatedAt: Date;
 }
 
+export interface MersEstimateDocument {
+  _id: ObjectId;
+  country: string;
+  countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
+  whoRegion: WHORegion | undefined;
+  latitude: number;
+  longitude: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export enum CachedMapboxApiResponseStatus {
   SUCCESSFUL_RESPONSE = "SUCCESSFUL_RESPONSE",
   FAILED_RESPONSE = "FAILED_RESPONSE",
