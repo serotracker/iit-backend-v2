@@ -51,7 +51,7 @@ export const assignPartitionsStep = (input: AssignPartitionsStepInput): AssignPa
   return {
     allEstimates: input.allEstimates.map((estimate, index) => ({
       ...estimate,
-      partitionKey: index % estimatePartitionSize
+      partitionKey: Math.floor(index / estimatePartitionSize)
     })),
     allStudies: input.allStudies,
     allCountries: input.allCountries,
@@ -60,7 +60,7 @@ export const assignPartitionsStep = (input: AssignPartitionsStepInput): AssignPa
     countryPopulationData: input.countryPopulationData,
     consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint, index) => ({
       ...countryDataPoint,
-      partitionKey: index % consolidatedCountryDataPartitionSize
+      partitionKey: Math.floor(index % consolidatedCountryDataPartitionSize)
     })),
     mongoClient: input.mongoClient
   };
