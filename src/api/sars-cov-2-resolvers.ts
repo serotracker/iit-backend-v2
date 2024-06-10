@@ -105,7 +105,6 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
         .db(databaseName)
         .collection<SarsCov2EstimateDocument>('sarsCov2Estimates')
         .distinct('partitionKey')
-        .then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     return partitionKeys;
@@ -215,7 +214,6 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
         .db(databaseName)
         .collection<SarsCov2CountryDataDocument>('sarsCov2CountryData')
         .distinct('partitionKey')
-        .then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     return partitionKeys;
