@@ -14,6 +14,9 @@
     "run_sarscov2_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/sars-cov-2/index.js",
     "run_sarscov2_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/sars-cov-2/index.js",
     "run_sarscov2_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/sars-cov-2/index.js",
+    "run_mers_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/mers/index.js",
+    "run_mers_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/mers/index.js",
+    "run_mers_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/mers/index.js",
     "codegen": "graphql-codegen --config ./codegen.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +28,7 @@
     "@graphql-tools/schema": "^10.0.4",
     "airtable": "^0.12.2",
     "apollo-server-micro": "^3.13.0",
+    "assert-never": "^1.2.1",
     "date-fns": "^3.6.0",
     "fp-ts": "^2.16.6",
     "graphql": "^16.8.1",

@@ -2,6 +2,7 @@ import { Document, ObjectId } from "mongodb";
 import { WHORegion } from "../lib/who-regions";
 import { UNRegion } from "../lib/un-regions";
 import { GBDSubRegion, GBDSuperRegion } from "../lib/gbd-regions";
+import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../lib/geocoding-api/country-codes";
 
 export enum Arbovirus {
   ZIKV = "ZIKV",
@@ -152,10 +153,86 @@ export interface SarsCov2CountryDataDocument {
   updatedAt: Date;
 }
 
+export interface MersEstimateDocument {
+  _id: ObjectId;
+  country: string;
+  countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
+  whoRegion: WHORegion | undefined;
+  latitude: number;
+  longitude: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export enum MersDiagnosisStatus {
+  CONFIRMED = "CONFIRMED",
+  DENIED = "DENIED"
+}
+
+export enum MersDiagnosisSource {
+  WORLD_ORGANISATION_FOR_ANIMAL_HEALTH = "WORLD_ORGANISATION_FOR_ANIMAL_HEALTH",
+  WORLD_HEALTH_ORGANIZATION = "WORLD_HEALTH_ORGANIZATION",
+  NATIONAL_AUTHORITIES = "NATIONAL_AUTHORITIES",
+  PUBLICATIONS = "PUBLICATIONS",
+  MEDIA = "MEDIA",
+  FAO_FIELD_OFFICER = "FAO_FIELD_OFFICER"
+}
+
+export enum MersEventAnimalType {
+  DOMESTIC = "DOMESTIC",
+  WILD = "WILD"
+}
+
+export enum MersEventAnimalSpecies {
+  CAMEL = "CAMEL",
+  BAT = "BAT"
+}
+
+export enum MersEventType {
+  HUMAN = "HUMAN",
+  ANIMAL = "ANIMAL"
+}
+
 export enum CachedMapboxApiResponseStatus {
   SUCCESSFUL_RESPONSE = "SUCCESSFUL_RESPONSE",
   FAILED_RESPONSE = "FAILED_RESPONSE",
 }
+
+export interface FaoMersEventDocumentBase {
+  _id: ObjectId;
+  partitionKey: number;
+  diagnosisStatus: MersDiagnosisStatus;
+  diagnosisSource: MersDiagnosisSource;
+  country: string;
+  state: string;
+  city: string;
+  latitude: number;
+  longitude: number;
+  observationDate: Date | undefined;
+  reportDate: Date;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  whoRegion: WHORegion | undefined;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export type FaoMersAnimalEventDocument = FaoMersEventDocumentBase & {
+  type: MersEventType.ANIMAL;
+  animalType: MersEventAnimalType;
+  animalSpecies: MersEventAnimalSpecies;
+}
+
+export type FaoMersHumanEventDocument = FaoMersEventDocumentBase & {
+  type: MersEventType.HUMAN;
+  humansAffected: number;
+  humanDeaths: number;
+}
+
+export type FaoMersEventDocument =
+  | FaoMersAnimalEventDocument
+  | FaoMersHumanEventDocument;
 
 interface CachedMapboxApiResponseDocumentBase {
   _id: ObjectId;
