@@ -8,9 +8,6 @@ import {
 } from "./clean-fao-mers-event-fields-step";
 
 export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterCleaningFaoMersEventFieldsStep;
-//export type FaoMersEventAfterParsingDatesStep = Omit<
-//  FaoMersEventAfterCleaningFaoMersEventFieldsStep,'observationDate'|'reportDate'
-//> & {
 export type FaoMersEventAfterParsingDatesStep = (Omit<
   AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep,'observationDate'|'reportDate'
 > | Omit <

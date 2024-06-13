@@ -87,8 +87,8 @@ const cleanFaoMersEventBase = (event: FaoMersEventAfterValidatingFaoMersEventsSt
   country: event['Country'],
   state: event['Admin.level.1'],
   city: event['Locality'],
-  latitude: event['Latitude'],
-  longitude: event['Longitude'],
+  latitude: !Number.isNaN(event['Latitude']) ? event['Latitude'] : 0,
+  longitude: !Number.isNaN(event['Longitude']) ? event['Longitude'] : 0,
   observationDate: event['Observation.date..dd.mm.yyyy.'] ?? undefined,
   reportDate: event['Report.date..dd.mm.yyyy.']
 })
@@ -103,8 +103,8 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
         return {
           ...cleanFaoMersEventBase(event),
           type: MersEventType.HUMAN,
-          humansAffected: event['Humans.affected'],
-          humanDeaths: event['Human.deaths']
+          humansAffected: !Number.isNaN(event['Humans.affected']) ? event['Humans.affected'] : 0,
+          humanDeaths: !Number.isNaN(event['Human.deaths']) ? event['Human.deaths'] : 0,
         }
       }
       if(event.type === MersEventType.ANIMAL) {
