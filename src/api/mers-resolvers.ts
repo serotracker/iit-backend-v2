@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import uniqBy from "lodash/uniqBy.js";
+import uniq from "lodash/uniq.js";
 import {
   CountryIdentifiers,
   MersEstimate,
@@ -146,11 +147,13 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     const [
       countryIdentifiersFromEstimates,
       countryIdentifiersFromFaoMersEvents,
-      whoRegion
+      whoRegionsFromEstimates,
+      whoRegionsFromFaoMersEvents
     ] = await Promise.all([
       runCountryIdentifierAggregation({ collection: estimateCollection }),
       runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
-      mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      faoMersEventsCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     // Lodash's uniqBy function keeps the first occurrence of the key so if there is a different country name
@@ -162,7 +165,10 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
 
     return {
       countryIdentifiers,
-      whoRegion: whoRegion.map((element) => mapWhoRegionForApi(element))
+      whoRegion: uniq([
+        ...whoRegionsFromEstimates,
+        ...whoRegionsFromFaoMersEvents
+      ]).map((whoRegion) => mapWhoRegionForApi(whoRegion))
     }
   }
 
