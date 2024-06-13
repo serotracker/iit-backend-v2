@@ -11,6 +11,7 @@ export const mersTypedefs = `
 
   enum MersDiagnosisStatus {
     CONFIRMED
+    DENIED
   }
 
   enum MersDiagnosisSource {
@@ -18,17 +19,28 @@ export const mersTypedefs = `
     WORLD_HEALTH_ORGANIZATION
     NATIONAL_AUTHORITIES
     PUBLICATIONS
+    MEDIA
+    FAO_FIELD_OFFICER
   }
 
   enum MersEventAnimalType {
     DOMESTIC
+    WILD
   }
 
   enum MersEventAnimalSpecies {
     CAMEL
+    BAT
   }
 
-  type AnimalMersEvent {
+  enum MersEventType {
+    HUMAN
+    ANIMAL
+  }
+
+  interface MersEventInterface {
+    id: String!
+    type: MersEventType!
     diagnosisStatus: MersDiagnosisStatus!
     diagnosisSource: MersDiagnosisSource!
     country: CountryIdentifiers!
@@ -39,11 +51,32 @@ export const mersTypedefs = `
     whoRegion: WHORegion
     observationDate: String
     reportDate: String!
+  }
+
+  type AnimalMersEvent implements MersEventInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    type: MersEventType!
+    diagnosisStatus: MersDiagnosisStatus!
+    diagnosisSource: MersDiagnosisSource!
+    country: CountryIdentifiers!
+    state: String!
+    city: String!
+    latitude: Float!
+    longitude: Float!
+    whoRegion: WHORegion
+    observationDate: String
+    reportDate: String!
+    ####### END INTERFACE FIELDS #######
+
     animalType: MersEventAnimalType!
     animalSpecies: MersEventAnimalSpecies!
   }
 
-  type HumanMersEvent {
+  type HumanMersEvent implements MersEventInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    type: MersEventType!
     diagnosisStatus: MersDiagnosisStatus!
     diagnosisSource: MersDiagnosisSource!
     country: CountryIdentifiers!
@@ -54,6 +87,8 @@ export const mersTypedefs = `
     whoRegion: WHORegion
     observationDate: String
     reportDate: String!
+    ####### END INTERFACE FIELDS #######
+
     humansAffected: Int!
     humanDeaths: Int!
   }

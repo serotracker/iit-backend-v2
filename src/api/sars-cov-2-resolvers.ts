@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 import { SarsCov2Estimate, QueryResolvers, CountryIdentifiers } from "./graphql-types/__generated__/graphql-types";
 import { SarsCov2EstimateDocument } from "../storage/types";
 import { mapGbdSubRegionForApi, mapGbdSuperRegionForApi, mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
-import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation";
+import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
 
 interface GenerateSarsCov2ResolversInput {
   mongoClient: MongoClient;
