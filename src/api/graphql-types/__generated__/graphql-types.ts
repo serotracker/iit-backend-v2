@@ -281,9 +281,31 @@ export type PartitionedFeoMersEventsOutput = {
   partitionKey: Scalars['Int']['output'];
 };
 
+export type PartitionedMonthlySarsCov2CountryInformationInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type PartitionedMonthlySarsCov2CountryInformationOutput = {
+  __typename?: 'PartitionedMonthlySarsCov2CountryInformationOutput';
+  monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
+  partitionKey: Scalars['Int']['output'];
+};
+
+export type PartitionedSarsCov2EstimatesInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type PartitionedSarsCov2EstimatesOutput = {
+  __typename?: 'PartitionedSarsCov2EstimatesOutput';
+  partitionKey: Scalars['Int']['output'];
+  sarsCov2Estimates: Array<SarsCov2Estimate>;
+};
+
 export type Query = {
   __typename?: 'Query';
   allFaoMersEventPartitionKeys: Array<Scalars['Int']['output']>;
+  allMonthlySarsCov2CountryInformationPartitionKeys: Array<Scalars['Int']['output']>;
+  allSarsCov2EstimatePartitionKeys: Array<Scalars['Int']['output']>;
   arbovirusDataStatistics: ArbovirusDataStatistics;
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
@@ -292,6 +314,8 @@ export type Query = {
   mersFilterOptions: MersFilterOptions;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
+  partitionedMonthlySarsCov2CountryInformation: PartitionedMonthlySarsCov2CountryInformationOutput;
+  partitionedSarsCov2Estimates: PartitionedSarsCov2EstimatesOutput;
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
 };
@@ -299,6 +323,16 @@ export type Query = {
 
 export type QueryPartitionedFaoMersEventsArgs = {
   input: PartitionedFaoMersEventsInput;
+};
+
+
+export type QueryPartitionedMonthlySarsCov2CountryInformationArgs = {
+  input: PartitionedMonthlySarsCov2CountryInformationInput;
+};
+
+
+export type QueryPartitionedSarsCov2EstimatesArgs = {
+  input: PartitionedSarsCov2EstimatesInput;
 };
 
 export type SarsCov2Estimate = {
@@ -517,6 +551,10 @@ export type ResolversTypes = {
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: ResolverTypeWrapper<Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversTypes['MersEvent']> }>;
+  PartitionedMonthlySarsCov2CountryInformationInput: PartitionedMonthlySarsCov2CountryInformationInput;
+  PartitionedMonthlySarsCov2CountryInformationOutput: ResolverTypeWrapper<PartitionedMonthlySarsCov2CountryInformationOutput>;
+  PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
+  PartitionedSarsCov2EstimatesOutput: ResolverTypeWrapper<PartitionedSarsCov2EstimatesOutput>;
   Query: ResolverTypeWrapper<{}>;
   SarsCov2Estimate: ResolverTypeWrapper<SarsCov2Estimate>;
   SarsCov2FilterOptions: ResolverTypeWrapper<SarsCov2FilterOptions>;
@@ -547,6 +585,10 @@ export type ResolversParentTypes = {
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversParentTypes['MersEvent']> };
+  PartitionedMonthlySarsCov2CountryInformationInput: PartitionedMonthlySarsCov2CountryInformationInput;
+  PartitionedMonthlySarsCov2CountryInformationOutput: PartitionedMonthlySarsCov2CountryInformationOutput;
+  PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
+  PartitionedSarsCov2EstimatesOutput: PartitionedSarsCov2EstimatesOutput;
   Query: {};
   SarsCov2Estimate: SarsCov2Estimate;
   SarsCov2FilterOptions: SarsCov2FilterOptions;
@@ -731,8 +773,22 @@ export type PartitionedFeoMersEventsOutputResolvers<ContextType = any, ParentTyp
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedMonthlySarsCov2CountryInformationOutput'] = ResolversParentTypes['PartitionedMonthlySarsCov2CountryInformationOutput']> = {
+  monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PartitionedSarsCov2EstimatesOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedSarsCov2EstimatesOutput'] = ResolversParentTypes['PartitionedSarsCov2EstimatesOutput']> = {
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   allFaoMersEventPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  allMonthlySarsCov2CountryInformationPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  allSarsCov2EstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
@@ -741,6 +797,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
+  partitionedMonthlySarsCov2CountryInformation?: Resolver<ResolversTypes['PartitionedMonthlySarsCov2CountryInformationOutput'], ParentType, ContextType, RequireFields<QueryPartitionedMonthlySarsCov2CountryInformationArgs, 'input'>>;
+  partitionedSarsCov2Estimates?: Resolver<ResolversTypes['PartitionedSarsCov2EstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedSarsCov2EstimatesArgs, 'input'>>;
   sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
   sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
 };
@@ -832,6 +890,8 @@ export type Resolvers<ContextType = any> = {
   MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;
+  PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;
+  PartitionedSarsCov2EstimatesOutput?: PartitionedSarsCov2EstimatesOutputResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   SarsCov2Estimate?: SarsCov2EstimateResolvers<ContextType>;
   SarsCov2FilterOptions?: SarsCov2FilterOptionsResolvers<ContextType>;
