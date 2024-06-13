@@ -1,7 +1,5 @@
 import { MongoClient } from "mongodb";
 import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, FaoMersEventAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
-import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
-import { WHORegion } from "../../../lib/who-regions.js";
 import { readFileSync } from "fs";
 
 export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterValidatingFieldSetFromAirtableStep;
