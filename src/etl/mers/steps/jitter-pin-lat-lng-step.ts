@@ -1,8 +1,9 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;
+export type FaoMersEventAfterJitteringPinLatLngStep = FaoMersEventAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -24,11 +25,13 @@ const jitterNumberValueByAmount = (
 
 interface JitterPinLatLngStepInput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
+  allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
 interface JitterPinLatLngStepOutput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -50,6 +53,17 @@ export const jitterPinLatLngStep = (
       }),
       longitude: jitterNumberValueByAmount({
         value: estimate.longitude,
+        jitterAmount: maximumPinJitterMagnitude,
+      }),
+    })),
+    allFaoMersEvents: input.allFaoMersEvents.map((event) => ({
+      ...event,
+      latitude: jitterNumberValueByAmount({
+        value: event.latitude,
+        jitterAmount: maximumPinJitterMagnitude,
+      }),
+      longitude: jitterNumberValueByAmount({
+        value: event.longitude,
         jitterAmount: maximumPinJitterMagnitude,
       }),
     })),

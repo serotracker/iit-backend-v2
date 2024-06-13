@@ -28,6 +28,7 @@
     "@graphql-tools/schema": "^10.0.2",
     "airtable": "^0.12.2",
     "apollo-server-micro": "^3.13.0",
+    "assert-never": "^1.2.1",
     "date-fns": "^3.0.6",
     "fp-ts": "^2.16.1",
     "graphql": "^16.8.1",

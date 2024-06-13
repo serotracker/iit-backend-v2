@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb";
+import uniqBy from "lodash/uniqBy.js";
 import { CountryIdentifiers, MersEstimate, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
-import { MersEstimateDocument } from '../storage/types.js';
+import { FaoMersEventDocument, MersEstimateDocument } from '../storage/types.js';
 import { mapWhoRegionForApi } from "./shared-mappers.js";
+import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation";
 
 interface GenerateMersResolversInput {
   mongoClient: MongoClient;
@@ -41,45 +43,28 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
   }
 
   const mersFilterOptions = async () => {
+    const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
+    const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
+
     const [
-      countryIdentifiers,
+      countryIdentifiersFromEstimates,
+      countryIdentifiersFromFaoMersEvents,
       whoRegion
     ] = await Promise.all([
-      mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates').aggregate([
-        {
-          $group: {
-            _id: {
-              alphaTwoCode: "$countryAlphaTwoCode"
-            },
-            name: {
-              $first: "$country"
-            },
-            alphaThreeCode: {
-              $first: "$countryAlphaThreeCode"
-            }
-          }
-        },
-        {
-          $project: {
-            "_id": 0,
-            "alphaTwoCode": "$_id.alphaTwoCode",
-            "name": 1,
-            "alphaThreeCode": 1
-          }
-        },
-        {
-          $sort: {
-            name: 1,
-            alphaTwoCode: 1,
-            alphaThreeCode: 1,
-          }
-        }
-      ]).toArray(),
+      runCountryIdentifierAggregation({ collection: estimateCollection }),
+      runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
       mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
+    // Lodash's uniqBy function keeps the first occurrence of the key so if there is a different country name
+    // between the estimates and the fao mers events, the country name in the estimates will be used.
+    const countryIdentifiers = uniqBy(
+      [...countryIdentifiersFromEstimates, ...countryIdentifiersFromFaoMersEvents],
+      (countryIdentifiers: CountryIdentifiers) => countryIdentifiers.alphaTwoCode
+    )
+
     return {
-      countryIdentifiers: countryIdentifiers as CountryIdentifiers[],
+      countryIdentifiers,
       whoRegion: whoRegion.map((element) => mapWhoRegionForApi(element))
     }
   }
