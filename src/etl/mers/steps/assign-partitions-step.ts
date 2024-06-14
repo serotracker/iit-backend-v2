@@ -9,7 +9,9 @@ export type EstimateFieldsAfterAssigningPartitionsStep = EstimateFieldsAfterJitt
 export type FaoMersEventAfterAssigningPartitionsStep = FaoMersEventAfterJitteringPinLatLngStep & {
   partitionKey: number;
 };
-export type YearlyCamelPopulationDataAfterAssigningPartitionsStep = YearlyCamelPopulationDataAfterJitteringPinLatLngStep;
+export type YearlyCamelPopulationDataAfterAssigningPartitionsStep = YearlyCamelPopulationDataAfterJitteringPinLatLngStep & {
+  partitionKey: number;
+};
 
 interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
@@ -29,7 +31,8 @@ export const assignPartitionsStep = (
   input: AssignPartitionsStepInput
 ): AssignPartitionsStepOutput => {
   const faoMersEventPartitionSize = 1000;
-  console.log(`Running step: assignPartitionsStep. Remaining estimates: ${input.allEstimates.length}. faoMersEventPartitionSize: ${faoMersEventPartitionSize}`);
+  const faoYearlyCamelPopulationPartitionSize = 1000;
+  console.log(`Running step: assignPartitionsStep. Remaining estimates: ${input.allEstimates.length}. faoMersEventPartitionSize: ${faoMersEventPartitionSize}. faoYearlyCamelPopulationPartitionSize: ${faoYearlyCamelPopulationPartitionSize}`);
 
   return {
     allEstimates: input.allEstimates,
@@ -37,7 +40,10 @@ export const assignPartitionsStep = (
       ...event,
       partitionKey: Math.floor(index / faoMersEventPartitionSize)
     })),
-    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((element, index) => ({
+      ...element,
+      partitionKey: Math.floor(index / faoMersEventPartitionSize)
+    })),
     mongoClient: input.mongoClient
   };
 };

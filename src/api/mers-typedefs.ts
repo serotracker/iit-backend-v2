@@ -108,11 +108,30 @@ export const mersTypedefs = `
     countryIdentifiers: [CountryIdentifiers!]!
     whoRegion: [WHORegion!]!
   }
+    
+  input PartitionedYearlyFaoCamelPopulationDataInput {
+    partitionKey: Int!
+  }
+
+  type YearlyFaoCamelPopulationDataEntry {
+    id: String!
+    countryAlphaThreeCode: String!
+    year: Int!
+    camelCount: Int!
+    note: String!
+  }
+  
+  type PartitionedYearlyFaoCamelPopulationDataOutput {
+    partitionKey: Int!
+    yearlyFaoCamelPopulationData: [YearlyFaoCamelPopulationDataEntry!]!
+  }
 
   type Query {
     mersEstimates: [MersEstimate!]!
     allFaoMersEventPartitionKeys: [Int!]!
     partitionedFaoMersEvents(input: PartitionedFaoMersEventsInput!): PartitionedFeoMersEventsOutput!
+    yearlyFaoCamelPopulationDataPartitionKeys: [Int!]!
+    partitionedYearlyFaoCamelPopulationData(input: PartitionedYearlyFaoCamelPopulationDataInput!): PartitionedYearlyFaoCamelPopulationDataOutput!
     mersFilterOptions: MersFilterOptions!
   }
 `

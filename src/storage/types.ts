@@ -202,6 +202,7 @@ export type FaoMersEventDocument =
 
 export interface FaoYearlyCamelPopulationDataDocument {
   _id: ObjectId;
+  partitionKey: number;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   year: number;
   camelCount: number;

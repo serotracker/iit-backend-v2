@@ -11,7 +11,8 @@ import {
   MersDiagnosisStatus as MersDiagnosisStatusForApi,
   MersDiagnosisSource as MersDiagnosisSourceForApi,
   MersEventInterface,
-  QueryResolvers
+  QueryResolvers,
+  YearlyFaoCamelPopulationDataEntry
 } from "./graphql-types/__generated__/graphql-types.js";
 import {
   FaoMersEventDocument,
@@ -21,7 +22,8 @@ import {
   MersEstimateDocument,
   MersEventAnimalSpecies,
   MersEventAnimalType,
-  MersEventType
+  MersEventType,
+  FaoYearlyCamelPopulationDataDocument
 } from '../storage/types.js';
 import { mapWhoRegionForApi } from "./shared-mappers.js";
 import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
@@ -125,6 +127,14 @@ const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): Me
   assertNever(document);
 }
 
+const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearlyCamelPopulationDataDocument): YearlyFaoCamelPopulationDataEntry => ({
+  id: document._id.toHexString(),
+  countryAlphaThreeCode: document.countryAlphaThreeCode,
+  year: document.year,
+  camelCount: document.camelCount,
+  note: document.note
+})
+
 export const generateMersResolvers = (input: GenerateMersResolversInput): GenerateMersResolversOutput => {
   const { mongoClient } = input;
 
@@ -199,12 +209,41 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     }
   }
 
+  const yearlyFaoCamelPopulationDataPartitionKeys = async () => {
+    const [
+      partitionKeys
+    ] = await Promise.all([
+      mongoClient
+        .db(databaseName)
+        .collection<FaoYearlyCamelPopulationDataDocument>('mersFaoYearlyCamelPopulationData')
+        .distinct('partitionKey')
+    ])
+
+    return partitionKeys;
+  }
+
+  const partitionedYearlyFaoCamelPopulationData: QueryResolvers['partitionedYearlyFaoCamelPopulationData'] = async (_, variables) => {
+    const { partitionKey } = variables.input;
+
+    const yearlyFaoCamelPopulationData = await mongoClient.db(databaseName)
+      .collection<FaoYearlyCamelPopulationDataDocument>('mersFaoYearlyCamelPopulationData')
+      .find({ partitionKey })
+      .toArray();
+
+    return {
+      partitionKey,
+      yearlyFaoCamelPopulationData: yearlyFaoCamelPopulationData.map((document) => transformFaoYearlyCamelPopulationDataDocumentForApi(document))
+    }
+  }
+
   return {
     mersResolvers: {
       Query: {
         mersEstimates,
         allFaoMersEventPartitionKeys,
         partitionedFaoMersEvents,
+        yearlyFaoCamelPopulationDataPartitionKeys,
+        partitionedYearlyFaoCamelPopulationData,
         mersFilterOptions
       }
     }

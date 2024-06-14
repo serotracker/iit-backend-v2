@@ -99,6 +99,7 @@ export const transformIntoFormatForDatabaseStep = (
     }),
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((element) => ({
       _id: new ObjectId(),
+      partitionKey: element.partitionKey,
       countryAlphaThreeCode: element.threeLetterCountryCode,
       year: element.year,
       camelCount: element.camelCount,
