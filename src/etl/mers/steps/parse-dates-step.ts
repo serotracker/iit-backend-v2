@@ -1,13 +1,18 @@
 import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import {
-    AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep,
-  EstimateFieldsAfterCleaningFaoMersEventFieldsStep,
-  FaoMersEventAfterCleaningFaoMersEventFieldsStep,
+  AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep,
   HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep
 } from "./clean-fao-mers-event-fields-step";
+import {
+  EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep,
+  FaoMersEventAfterCleaningCamelPopulationByCountryDataStep,
+  YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep
+} from "./clean-camel-population-by-country-data-step";
 
-export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterCleaningFaoMersEventFieldsStep;
+export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep;
+// Intentionally from a type a few steps back. This is because the individual parts of the union type are not carried through the steps,
+// just the union type itself. You could fix this by carrying the individual parts of the union type through the steps.
 export type FaoMersEventAfterParsingDatesStep = (Omit<
   AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep,'observationDate'|'reportDate'
 > | Omit <
@@ -17,15 +22,19 @@ export type FaoMersEventAfterParsingDatesStep = (Omit<
   reportDate: Date;
 };
 
+export type YearlyCamelPopulationDataAfterParsingDatesStep = YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
+
 interface ParseDatesStepInput {
-  allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
-  allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
+  allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
+  allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
 interface ParseDatesStepOutput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -41,6 +50,7 @@ export const parseDatesStep = (
       observationDate: event.observationDate ? parse(event.observationDate, "dd/MM/yyyy", new Date()) : undefined,
       reportDate: parse(event.reportDate, "dd/MM/yyyy", new Date())
     })),
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };

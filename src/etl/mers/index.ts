@@ -17,6 +17,7 @@ import { assignPartitionsStep } from "./steps/assign-partitions-step.js";
 import { fetchCamelPopulationByCountryDataStep } from "./steps/fetch-camel-population-by-country-data-step.js";
 import { validateCamelPopulationByCountryDataStep } from "./steps/validate-camel-population-by-country-data-step.js";
 import { cleanCamelPopulationByCountryDataStep } from "./steps/clean-camel-population-by-country-data-step.js";
+import { writeFaoYearlyCamelPopulationDataToMongoDbStep } from "./steps/write-fao-yearly-camel-population-data-to-mongodb-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -49,7 +50,7 @@ const runEtlMain = async () => {
     {
       allEstimates: allEstimatesUnformatted,
       allFaoMersEvents: [],
-      camelPopulationByCountryData: [],
+      yearlyCamelPopulationByCountryData: [],
       mongoClient
     },
     etlStep(validateFieldSetFromAirtableStep),
@@ -66,7 +67,8 @@ const runEtlMain = async () => {
     etlStep(assignPartitionsStep),
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
-    asyncEtlStep(writeFaoMersEventDataToMongoDbStep) 
+    asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
+    asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep)
   );
 
   console.log("Exiting");

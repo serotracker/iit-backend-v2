@@ -2,7 +2,8 @@ import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterFetchingFaoMersEventsStep,
-  FaoMersEventAfterFetchingFaoMersEventsStep
+  FaoMersEventAfterFetchingFaoMersEventsStep,
+  YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep
 } from "./fetch-fao-mers-events-step.js";
 import { MersEventType } from "../../../storage/types.js";
 
@@ -58,16 +59,19 @@ export type EstimateFieldsAfterValidatingFaoMersEventsStep = EstimateFieldsAfter
 export type FaoMersEventAfterValidatingFaoMersEventsStep = 
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
+export type YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep = YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep;
 
 interface ValidateFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
 interface ValidateFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -147,6 +151,7 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
   return {
     allEstimates: input.allEstimates,
     allFaoMersEvents: allFaoMersEvents,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };

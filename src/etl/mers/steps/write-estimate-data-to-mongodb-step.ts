@@ -1,21 +1,25 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
-import { EstimateFieldsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
+import { EstimateFieldsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep, YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
 
 export type EstimateFieldsAfterWritingEstimateToMongodbStep =
   EstimateFieldsAfterTransformingFormatForDatabaseStep;
 export type FaoMersEventAfterWritingEstimateToMongodbStep =
   FaoMersEventAfterTransformingFormatForDatabaseStep;
+export type YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep =
+  YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep;
 
 interface WriteEstimateDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
 interface WriteEstimateDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -36,6 +40,7 @@ export const writeEstimateDataToMongoDbStep = async(
   return {
     allEstimates: input.allEstimates,
     allFaoMersEvents: input.allFaoMersEvents,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };

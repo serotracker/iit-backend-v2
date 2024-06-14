@@ -1,23 +1,27 @@
 import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterJitteringPinLatLngStep,
-  FaoMersEventAfterJitteringPinLatLngStep
+  FaoMersEventAfterJitteringPinLatLngStep,
+  YearlyCamelPopulationDataAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step.js";
 
 export type EstimateFieldsAfterAssigningPartitionsStep = EstimateFieldsAfterJitteringPinLatLngStep;
 export type FaoMersEventAfterAssigningPartitionsStep = FaoMersEventAfterJitteringPinLatLngStep & {
   partitionKey: number;
 };
+export type YearlyCamelPopulationDataAfterAssigningPartitionsStep = YearlyCamelPopulationDataAfterJitteringPinLatLngStep;
 
 interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
 interface AssignPartitionsStepOutput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   mongoClient: MongoClient;
 }
 
@@ -33,6 +37,7 @@ export const assignPartitionsStep = (
       ...event,
       partitionKey: Math.floor(index / faoMersEventPartitionSize)
     })),
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };

@@ -3,7 +3,8 @@ import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import {
   EstimateFieldsAfterParsingDatesStep,
-  FaoMersEventAfterParsingDatesStep
+  FaoMersEventAfterParsingDatesStep,
+  YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterParsingDatesStep & {
@@ -19,15 +20,19 @@ export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEven
   whoRegion: WHORegion | undefined;
 };
 
+export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterParsingDatesStep;
+
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -101,6 +106,7 @@ export const addCountryAndRegionInformationStep = (
         }
       })
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };

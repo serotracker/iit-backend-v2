@@ -6,7 +6,8 @@ import {
   RawFaoMersEventAnimalSpecies,
   RawFaoMersEventAnimalType,
   RawFaoMersEventDiagnosisSource,
-  RawFaoMersEventDiagnosisStatus
+  RawFaoMersEventDiagnosisStatus,
+  YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep
 } from "./validate-fao-mers-events-step.js";
 import {
   MersDiagnosisSource,
@@ -69,15 +70,19 @@ export type FaoMersEventAfterCleaningFaoMersEventFieldsStep =
   | AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep
   | HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep;
 
+export type YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep = YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep;
+
 interface CleanFaoMersEventFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
 interface CleanFaoMersEventFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -118,6 +123,7 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
 
       assertNever(event);
     }),
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };

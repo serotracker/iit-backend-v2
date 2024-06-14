@@ -2,7 +2,8 @@ import { MongoClient } from "mongodb";
 import { writeFileSync } from "fs";
 import {
   EstimateFieldsAfterAddingCountryAndRegionInformationStep,
-  FaoMersEventAfterAddingCountryAndRegionInformationStep
+  FaoMersEventAfterAddingCountryAndRegionInformationStep,
+  YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step";
 
 export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingCountryAndRegionInformationStep & {
@@ -10,16 +11,19 @@ export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingC
   longitude: number;
 };
 export type FaoMersEventAfterLatLngGenerationStep = FaoMersEventAfterAddingCountryAndRegionInformationStep;
+export type YearlyCamelPopulationDataAfterLatLngGenerationStep = YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
 interface LatLngGenerationStepOutput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -40,6 +44,7 @@ export const latLngGenerationStep = async(
       longitude: -114.0719
     })),
     allFaoMersEvents: input.allFaoMersEvents,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 }
