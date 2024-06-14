@@ -86,10 +86,17 @@ export const cleanCamelPopulationByCountryDataStep = (
         return undefined;
       }
 
+      const year = parseInt(element.Year);
+      const camelCount = parseInt(element["Stocks (Head)"].replace(',', ''));
+
+      if(Number.isNaN(year) || Number.isNaN(camelCount)) {
+        return undefined;
+      }
+
       return {
         threeLetterCountryCode: countryCodesForData.countryAlphaThreeCode,
-        year: parseInt(element.Year),
-        camelCount: parseInt(element["Stocks (Head)"].replace(',', '')),
+        year,
+        camelCount: camelCount,
         note: element["Stocks (Head) flag"]
       }
     })
