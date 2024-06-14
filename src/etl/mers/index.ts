@@ -16,6 +16,7 @@ import { writeFaoMersEventDataToMongoDbStep } from "./steps/write-fao-mers-event
 import { assignPartitionsStep } from "./steps/assign-partitions-step.js";
 import { fetchCamelPopulationByCountryDataStep } from "./steps/fetch-camel-population-by-country-data-step.js";
 import { validateCamelPopulationByCountryDataStep } from "./steps/validate-camel-population-by-country-data-step.js";
+import { cleanCamelPopulationByCountryDataStep } from "./steps/clean-camel-population-by-country-data-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
