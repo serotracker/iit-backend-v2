@@ -1,6 +1,7 @@
 import { assertNever } from "assert-never";
 import { MongoClient } from "mongodb";
 import {
+  CountryPopulationDataAfterValidatingFaoMersEventsStep,
   EstimateFieldsAfterValidatingFaoMersEventsStep,
   FaoMersEventAfterValidatingFaoMersEventsStep,
   RawFaoMersEventAnimalSpecies,
@@ -71,11 +72,13 @@ export type FaoMersEventAfterCleaningFaoMersEventFieldsStep =
   | HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep;
 
 export type YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep = YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep;
+export type CountryPopulationDataAfterCleaningFaoMersEventFieldsStep = CountryPopulationDataAfterValidatingFaoMersEventsStep;
 
 interface CleanFaoMersEventFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -83,6 +86,7 @@ interface CleanFaoMersEventFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
+  countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -124,6 +128,7 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
       assertNever(event);
     }),
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

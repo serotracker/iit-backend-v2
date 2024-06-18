@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import {
+  CountryPopulationDataAfterParsingDatesStep,
   EstimateFieldsAfterParsingDatesStep,
   FaoMersEventAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
@@ -21,11 +22,13 @@ export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEven
 };
 
 export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterParsingDatesStep;
+export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterParsingDatesStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
+  countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -33,6 +36,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
+  countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -106,6 +110,7 @@ export const addCountryAndRegionInformationStep = (
         }
       })
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
+    countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };

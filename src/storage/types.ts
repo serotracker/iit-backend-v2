@@ -206,6 +206,7 @@ export interface FaoYearlyCamelPopulationDataDocument {
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   year: number;
   camelCount: number;
+  camelCountPerCapita: number | undefined;
   note: string;
   createdAt: Date;
   updatedAt: Date;

@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 import {
+  CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep,
   EstimateFieldsAfterWritingFaoMersEventsToMongodbStep,
   FaoMersEventAfterWritingFaoMersEventsToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep
@@ -12,11 +13,14 @@ type FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
   FaoMersEventAfterWritingFaoMersEventsToMongodbStep;
 type YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
   YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep;
+export type CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
+  CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep;
 
 interface WriteFaoYearlyCamelPopulationDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
+  countryPopulationData: CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -24,6 +28,7 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  countryPopulationData: CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -45,6 +50,7 @@ export const writeFaoYearlyCamelPopulationDataToMongoDbStep = async(
     allEstimates: input.allEstimates,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

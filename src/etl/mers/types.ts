@@ -12,3 +12,11 @@ export type StructuredYearlyCamelPopulationByCountryData = Array<{
     }>
   }>
 }>;
+
+export type StructuredCountryPopulationDataPoint = {
+  threeLetterCountryCode: string,
+  data: Array<{
+    year: number,
+    populationEstimate: number
+  }>
+}

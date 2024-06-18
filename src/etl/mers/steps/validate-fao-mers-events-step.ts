@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
+  CountryPopulationDataAfterFetchingFaoMersEventsStep,
   EstimateFieldsAfterFetchingFaoMersEventsStep,
   FaoMersEventAfterFetchingFaoMersEventsStep,
   YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep
@@ -60,11 +61,13 @@ export type FaoMersEventAfterValidatingFaoMersEventsStep =
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
 export type YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep = YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep;
+export type CountryPopulationDataAfterValidatingFaoMersEventsStep = CountryPopulationDataAfterFetchingFaoMersEventsStep;
 
 interface ValidateFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
+  countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -72,6 +75,7 @@ interface ValidateFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -152,6 +156,7 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
     allEstimates: input.allEstimates,
     allFaoMersEvents: allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

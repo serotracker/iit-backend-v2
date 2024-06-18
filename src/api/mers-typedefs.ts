@@ -118,6 +118,7 @@ export const mersTypedefs = `
     countryAlphaThreeCode: String!
     year: Int!
     camelCount: Int!
+    camelCountPerCapita: Float
     note: String!
   }
   

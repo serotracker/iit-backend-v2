@@ -26,7 +26,7 @@ const redactMapboxApiKeyFromGeocodingApiQueryUrl = (
 ): string => {
   const accessTokenRegex = /access_token=([^&]+)/;
 
-  return url.replace(accessTokenRegex, "[REDACTED]");
+  return url.replaceAll(accessTokenRegex, "[REDACTED]");
 };
 
 const generateGeocodingApiRequestLogPrefix = (

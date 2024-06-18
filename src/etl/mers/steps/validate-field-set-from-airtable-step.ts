@@ -6,11 +6,13 @@ import { AirtableMersEstimateFields } from "../types";
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMersEstimateFields;
 export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 export type YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
+export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
   allFaoMersEvents: never[];
   yearlyCamelPopulationByCountryData: never[];
+  countryPopulationData: never[];
   mongoClient: MongoClient;
 }
 
@@ -18,6 +20,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -38,6 +41,7 @@ export const validateFieldSetFromAirtableStep = (
     allEstimates,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   }
 }

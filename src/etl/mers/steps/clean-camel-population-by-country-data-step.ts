@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep,
   EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep,
   FaoMersEventAfterValidatingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep
@@ -14,11 +15,13 @@ export type YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataSt
   camelCount: number;
   note: string;
 };
+export type CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep = CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep;
 
 interface CleanCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -26,6 +29,7 @@ interface CleanCamelPopulationByCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
+  countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,7 +91,7 @@ export const cleanCamelPopulationByCountryDataStep = (
       }
 
       const year = parseInt(element.Year);
-      const camelCount = parseInt(element["Stocks (Head)"].replace(',', ''));
+      const camelCount = parseInt(element["Stocks (Head)"].replaceAll(',', ''));
 
       if(Number.isNaN(year) || Number.isNaN(camelCount)) {
         return undefined;
@@ -106,6 +110,7 @@ export const cleanCamelPopulationByCountryDataStep = (
     allEstimates: input.allEstimates,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: cleanedDataArray,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

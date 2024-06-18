@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 import {
+  CountryPopulationDataAfterWritingEstimateToMongodbStep,
   EstimateFieldsAfterWritingEstimateToMongodbStep,
   FaoMersEventAfterWritingEstimateToMongodbStep,
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep
@@ -12,11 +13,14 @@ export type FaoMersEventAfterWritingFaoMersEventsToMongodbStep =
   FaoMersEventAfterWritingEstimateToMongodbStep;
 export type YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep =
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep;
+export type CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep =
+  CountryPopulationDataAfterWritingEstimateToMongodbStep;
 
 interface WriteFaoMersEventDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
+  countryPopulationData: CountryPopulationDataAfterWritingEstimateToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -24,6 +28,7 @@ interface WriteFaoMersEventDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
+  countryPopulationData: CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -45,6 +50,7 @@ export const writeFaoMersEventDataToMongoDbStep = async(
     allEstimates: input.allEstimates,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

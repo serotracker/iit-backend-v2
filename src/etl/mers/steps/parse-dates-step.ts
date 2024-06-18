@@ -5,12 +5,13 @@ import {
   HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep
 } from "./clean-fao-mers-event-fields-step";
 import {
-  EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep,
-  FaoMersEventAfterCleaningCamelPopulationByCountryDataStep,
-  YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep
-} from "./clean-camel-population-by-country-data-step";
+  CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep,
+  EstimateFieldsAfterGeneratingCamelDataPerCapitaStep,
+  FaoMersEventAfterGeneratingCamelDataPerCapitaStep,
+  YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep
+} from "./generate-camel-data-per-capita-step";
 
-export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep;
+export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterGeneratingCamelDataPerCapitaStep;
 // Intentionally from a type a few steps back. This is because the individual parts of the union type are not carried through the steps,
 // just the union type itself. You could fix this by carrying the individual parts of the union type through the steps.
 export type FaoMersEventAfterParsingDatesStep = (Omit<
@@ -22,12 +23,14 @@ export type FaoMersEventAfterParsingDatesStep = (Omit<
   reportDate: Date;
 };
 
-export type YearlyCamelPopulationDataAfterParsingDatesStep = YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
+export type YearlyCamelPopulationDataAfterParsingDatesStep = YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep;
+export type CountryPopulationDataAfterParsingDatesStep = CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep;
 
 interface ParseDatesStepInput {
-  allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
-  allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
+  allEstimates: EstimateFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
+  countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   mongoClient: MongoClient;
 }
 
@@ -35,6 +38,7 @@ interface ParseDatesStepOutput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
+  countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -51,6 +55,7 @@ export const parseDatesStep = (
       reportDate: parse(event.reportDate, "dd/MM/yyyy", new Date())
     })),
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

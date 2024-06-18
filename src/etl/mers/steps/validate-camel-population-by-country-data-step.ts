@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
+  CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep,
   EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep,
   FaoMersEventAfterFetchingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep
@@ -15,11 +16,13 @@ export type YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryData
   "Country": string;
   "Stocks (Head) flag": string;
 };
+export type CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep = CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep;
 
 interface ValidateCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
+  countryPopulationData: CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -27,6 +30,7 @@ interface ValidateCamelPopulationByCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -54,6 +58,7 @@ export const validateCamelPopulationByCountryDataStep = (
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((camelPopulationDataPoint) => 
       zodCamelPopulationByCountryObject.parse(camelPopulationDataPoint)
     ),
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

@@ -132,6 +132,7 @@ const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearly
   countryAlphaThreeCode: document.countryAlphaThreeCode,
   year: document.year,
   camelCount: document.camelCount,
+  camelCountPerCapita: document.camelCountPerCapita,
   note: document.note
 })
 
