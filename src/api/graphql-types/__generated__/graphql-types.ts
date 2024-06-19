@@ -405,6 +405,7 @@ export type YearlyFaoCamelPopulationDataEntry = {
   countryAlphaThreeCode: Scalars['String']['output'];
   id: Scalars['String']['output'];
   note: Scalars['String']['output'];
+  whoRegion?: Maybe<WhoRegion>;
   year: Scalars['Int']['output'];
 };
 
@@ -815,6 +816,7 @@ export type YearlyFaoCamelPopulationDataEntryResolvers<ContextType = any, Parent
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   note?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

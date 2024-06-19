@@ -107,6 +107,7 @@ export const transformIntoFormatForDatabaseStep = (
       countryAlphaThreeCode: element.threeLetterCountryCode,
       countryAlphaTwoCode: element.twoLetterCountryCode,
       countryName: element.countryName,
+      whoRegion: element.whoRegion,
       year: element.year,
       camelCount: element.camelCount,
       camelCountPerCapita: element.camelCountPerCapita,

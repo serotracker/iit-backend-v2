@@ -135,6 +135,7 @@ const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearly
     alphaTwoCode: document.countryAlphaTwoCode,
     name: document.countryName
   },
+  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
   year: document.year,
   camelCount: document.camelCount,
   camelCountPerCapita: document.camelCountPerCapita,

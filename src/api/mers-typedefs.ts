@@ -120,6 +120,7 @@ export const mersTypedefs = `
     year: Int!
     camelCount: Int!
     camelCountPerCapita: Float
+    whoRegion: WHORegion
     note: String!
   }
   

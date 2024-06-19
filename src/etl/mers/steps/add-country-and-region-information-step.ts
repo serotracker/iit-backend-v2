@@ -21,7 +21,9 @@ export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEven
   whoRegion: WHORegion | undefined;
 };
 
-export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterParsingDatesStep;
+export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterParsingDatesStep & {
+  whoRegion: WHORegion | undefined;
+};
 export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterParsingDatesStep;
 
 interface AddCountryAndRegionInformationStepInput {
@@ -111,7 +113,14 @@ export const addCountryAndRegionInformationStep = (
       })
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     countryPopulationData: input.countryPopulationData,
-    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((dataPoint) => {
+      const whoRegion = getWHORegionFromAlphaTwoCode(dataPoint.twoLetterCountryCode);
+
+      return {
+        ...dataPoint,
+        whoRegion
+      }
+    }),
     mongoClient: input.mongoClient
   };
 };
