@@ -130,6 +130,11 @@ const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): Me
 const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearlyCamelPopulationDataDocument): YearlyFaoCamelPopulationDataEntry => ({
   id: document._id.toHexString(),
   countryAlphaThreeCode: document.countryAlphaThreeCode,
+  country: {
+    alphaThreeCode: document.countryAlphaThreeCode,
+    alphaTwoCode: document.countryAlphaTwoCode,
+    name: document.countryName
+  },
   year: document.year,
   camelCount: document.camelCount,
   camelCountPerCapita: document.camelCountPerCapita,

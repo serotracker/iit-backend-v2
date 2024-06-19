@@ -204,6 +204,8 @@ export interface FaoYearlyCamelPopulationDataDocument {
   _id: ObjectId;
   partitionKey: number;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  countryName: string;
   year: number;
   camelCount: number;
   camelCountPerCapita: number | undefined;

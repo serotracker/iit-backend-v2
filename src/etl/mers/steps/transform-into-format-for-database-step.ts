@@ -105,6 +105,8 @@ export const transformIntoFormatForDatabaseStep = (
       _id: new ObjectId(),
       partitionKey: element.partitionKey,
       countryAlphaThreeCode: element.threeLetterCountryCode,
+      countryAlphaTwoCode: element.twoLetterCountryCode,
+      countryName: element.countryName,
       year: element.year,
       camelCount: element.camelCount,
       camelCountPerCapita: element.camelCountPerCapita,

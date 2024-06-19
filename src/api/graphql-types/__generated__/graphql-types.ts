@@ -401,6 +401,7 @@ export type YearlyFaoCamelPopulationDataEntry = {
   __typename?: 'YearlyFaoCamelPopulationDataEntry';
   camelCount: Scalars['Int']['output'];
   camelCountPerCapita?: Maybe<Scalars['Float']['output']>;
+  country: CountryIdentifiers;
   countryAlphaThreeCode: Scalars['String']['output'];
   id: Scalars['String']['output'];
   note: Scalars['String']['output'];
@@ -810,6 +811,7 @@ export type TeamMemberGroupResolvers<ContextType = any, ParentType extends Resol
 export type YearlyFaoCamelPopulationDataEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['YearlyFaoCamelPopulationDataEntry'] = ResolversParentTypes['YearlyFaoCamelPopulationDataEntry']> = {
   camelCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   camelCountPerCapita?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   note?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
