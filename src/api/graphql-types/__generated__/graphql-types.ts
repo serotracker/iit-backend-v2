@@ -125,6 +125,13 @@ export type CountryIdentifiers = {
   name: Scalars['String']['output'];
 };
 
+export type FaoMersEventFilterOptions = {
+  __typename?: 'FaoMersEventFilterOptions';
+  animalSpecies: MersEventAnimalSpecies;
+  animalType: MersEventAnimalType;
+  diagnosisSource: MersDiagnosisSource;
+};
+
 export enum GbdSubRegion {
   CentralEuropeEasternEuropeAndCentralAsiaSubregionCentralAsia = 'CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_CENTRAL_ASIA',
   CentralEuropeEasternEuropeAndCentralAsiaSubregionCentralEurope = 'CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_CENTRAL_EUROPE',
@@ -266,6 +273,7 @@ export type Query = {
   arbovirusDataStatistics: ArbovirusDataStatistics;
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
+  faoMersEventFilterOptions: FaoMersEventFilterOptions;
   groupedTeamMembers: Array<TeamMemberGroup>;
   mersEstimates: Array<MersEstimate>;
   mersFilterOptions: MersFilterOptions;
@@ -496,6 +504,7 @@ export type ResolversTypes = {
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   CountryIdentifiers: ResolverTypeWrapper<CountryIdentifiers>;
+  FaoMersEventFilterOptions: ResolverTypeWrapper<FaoMersEventFilterOptions>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   GBDSubRegion: GbdSubRegion;
   GBDSuperRegion: GbdSuperRegion;
@@ -535,6 +544,7 @@ export type ResolversParentTypes = {
   ArbovirusFilterOptions: ArbovirusFilterOptions;
   Boolean: Scalars['Boolean']['output'];
   CountryIdentifiers: CountryIdentifiers;
+  FaoMersEventFilterOptions: FaoMersEventFilterOptions;
   Float: Scalars['Float']['output'];
   HumanMersEvent: HumanMersEvent;
   Int: Scalars['Int']['output'];
@@ -654,6 +664,13 @@ export type CountryIdentifiersResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FaoMersEventFilterOptions'] = ResolversParentTypes['FaoMersEventFilterOptions']> = {
+  animalSpecies?: Resolver<ResolversTypes['MersEventAnimalSpecies'], ParentType, ContextType>;
+  animalType?: Resolver<ResolversTypes['MersEventAnimalType'], ParentType, ContextType>;
+  diagnosisSource?: Resolver<ResolversTypes['MersDiagnosisSource'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type HumanMersEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersEvent'] = ResolversParentTypes['HumanMersEvent']> = {
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
@@ -726,6 +743,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
+  faoMersEventFilterOptions?: Resolver<ResolversTypes['FaoMersEventFilterOptions'], ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
   mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
@@ -828,6 +846,7 @@ export type Resolvers<ContextType = any> = {
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;
+  FaoMersEventFilterOptions?: FaoMersEventFilterOptionsResolvers<ContextType>;
   HumanMersEvent?: HumanMersEventResolvers<ContextType>;
   MersEstimate?: MersEstimateResolvers<ContextType>;
   MersEvent?: MersEventResolvers<ContextType>;

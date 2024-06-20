@@ -242,16 +242,37 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       yearlyFaoCamelPopulationData: yearlyFaoCamelPopulationData.map((document) => transformFaoYearlyCamelPopulationDataDocumentForApi(document))
     }
   }
+  
+  const faoMersEventFilterOptions = async () => {
+    const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
+
+    const [
+      countryIdentifiersFromEstimates,
+      countryIdentifiersFromFaoMersEvents,
+      whoRegionsFromEstimates,
+      whoRegionsFromFaoMersEvents
+    ] = await Promise.all([
+      runCountryIdentifierAggregation({ collection: estimateCollection }),
+      runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
+      estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      faoMersEventsCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+    ])
+
+    return {
+
+    }
+  }
 
   return {
     mersResolvers: {
       Query: {
         mersEstimates,
+        mersFilterOptions,
         allFaoMersEventPartitionKeys,
         partitionedFaoMersEvents,
+        faoMersEventFilterOptions,
         yearlyFaoCamelPopulationDataPartitionKeys,
         partitionedYearlyFaoCamelPopulationData,
-        mersFilterOptions
       }
     }
   }
