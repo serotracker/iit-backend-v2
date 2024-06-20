@@ -247,19 +247,19 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
 
     const [
-      countryIdentifiersFromEstimates,
-      countryIdentifiersFromFaoMersEvents,
-      whoRegionsFromEstimates,
-      whoRegionsFromFaoMersEvents
+      diagnosisSource,
+      animalType,
+      animalSpecies
     ] = await Promise.all([
-      runCountryIdentifierAggregation({ collection: estimateCollection }),
-      runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
-      estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      faoMersEventsCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      faoMersEventsCollection.distinct('diagnosisSource').then((element) => filterUndefinedValuesFromArray(element)),
+      faoMersEventsCollection.distinct('animalType').then((element) => filterUndefinedValuesFromArray(element)),
+      faoMersEventsCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
     ])
 
     return {
-
+      diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
+      animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
+      animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
     }
   }
 

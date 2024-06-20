@@ -127,9 +127,9 @@ export type CountryIdentifiers = {
 
 export type FaoMersEventFilterOptions = {
   __typename?: 'FaoMersEventFilterOptions';
-  animalSpecies: MersEventAnimalSpecies;
-  animalType: MersEventAnimalType;
-  diagnosisSource: MersDiagnosisSource;
+  animalSpecies: Array<MersEventAnimalSpecies>;
+  animalType: Array<MersEventAnimalType>;
+  diagnosisSource: Array<MersDiagnosisSource>;
 };
 
 export enum GbdSubRegion {
@@ -665,9 +665,9 @@ export type CountryIdentifiersResolvers<ContextType = any, ParentType extends Re
 };
 
 export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FaoMersEventFilterOptions'] = ResolversParentTypes['FaoMersEventFilterOptions']> = {
-  animalSpecies?: Resolver<ResolversTypes['MersEventAnimalSpecies'], ParentType, ContextType>;
-  animalType?: Resolver<ResolversTypes['MersEventAnimalType'], ParentType, ContextType>;
-  diagnosisSource?: Resolver<ResolversTypes['MersDiagnosisSource'], ParentType, ContextType>;
+  animalSpecies?: Resolver<Array<ResolversTypes['MersEventAnimalSpecies']>, ParentType, ContextType>;
+  animalType?: Resolver<Array<ResolversTypes['MersEventAnimalType']>, ParentType, ContextType>;
+  diagnosisSource?: Resolver<Array<ResolversTypes['MersDiagnosisSource']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

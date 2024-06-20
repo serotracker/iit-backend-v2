@@ -1348,9 +1348,17 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "ENUM",
-                "name": "MersEventAnimalSpecies",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "MersEventAnimalSpecies",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -1364,9 +1372,17 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "ENUM",
-                "name": "MersEventAnimalType",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "MersEventAnimalType",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,
@@ -1380,9 +1396,17 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "ENUM",
-                "name": "MersDiagnosisSource",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "MersDiagnosisSource",
+                    "ofType": null
+                  }
+                }
               }
             },
             "isDeprecated": false,

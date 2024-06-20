@@ -186,6 +186,8 @@ export interface FaoMersEventDocumentBase {
 
 export type FaoMersAnimalEventDocument = FaoMersEventDocumentBase & {
   type: MersEventType.ANIMAL;
+  humansAffected: undefined;
+  humanDeaths: undefined;
   animalType: MersEventAnimalType;
   animalSpecies: MersEventAnimalSpecies;
 }
@@ -194,6 +196,8 @@ export type FaoMersHumanEventDocument = FaoMersEventDocumentBase & {
   type: MersEventType.HUMAN;
   humansAffected: number;
   humanDeaths: number;
+  animalType: undefined;
+  animalSpecies: undefined;
 }
 
 export type FaoMersEventDocument =

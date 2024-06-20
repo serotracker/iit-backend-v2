@@ -130,9 +130,9 @@ export const mersTypedefs = `
   }
 
   type FaoMersEventFilterOptions {
-    diagnosisSource: MersDiagnosisSource!
-    animalType: MersEventAnimalType!
-    animalSpecies: MersEventAnimalSpecies!
+    diagnosisSource: [MersDiagnosisSource!]!
+    animalType: [MersEventAnimalType!]!
+    animalSpecies: [MersEventAnimalSpecies!]!
   }
 
   type Query {
