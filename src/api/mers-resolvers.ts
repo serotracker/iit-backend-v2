@@ -11,7 +11,8 @@ import {
   MersDiagnosisStatus as MersDiagnosisStatusForApi,
   MersDiagnosisSource as MersDiagnosisSourceForApi,
   MersEventInterface,
-  QueryResolvers
+  QueryResolvers,
+  YearlyFaoCamelPopulationDataEntry
 } from "./graphql-types/__generated__/graphql-types.js";
 import {
   FaoMersEventDocument,
@@ -21,7 +22,8 @@ import {
   MersEstimateDocument,
   MersEventAnimalSpecies,
   MersEventAnimalType,
-  MersEventType
+  MersEventType,
+  FaoYearlyCamelPopulationDataDocument
 } from '../storage/types.js';
 import { mapWhoRegionForApi } from "./shared-mappers.js";
 import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
@@ -125,6 +127,21 @@ const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): Me
   assertNever(document);
 }
 
+const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearlyCamelPopulationDataDocument): YearlyFaoCamelPopulationDataEntry => ({
+  id: document._id.toHexString(),
+  countryAlphaThreeCode: document.countryAlphaThreeCode,
+  country: {
+    alphaThreeCode: document.countryAlphaThreeCode,
+    alphaTwoCode: document.countryAlphaTwoCode,
+    name: document.countryName
+  },
+  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+  year: document.year,
+  camelCount: document.camelCount,
+  camelCountPerCapita: document.camelCountPerCapita,
+  note: document.note
+})
+
 export const generateMersResolvers = (input: GenerateMersResolversInput): GenerateMersResolversOutput => {
   const { mongoClient } = input;
 
@@ -199,13 +216,63 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     }
   }
 
+  const yearlyFaoCamelPopulationDataPartitionKeys = async () => {
+    const [
+      partitionKeys
+    ] = await Promise.all([
+      mongoClient
+        .db(databaseName)
+        .collection<FaoYearlyCamelPopulationDataDocument>('mersFaoYearlyCamelPopulationData')
+        .distinct('partitionKey')
+    ])
+
+    return partitionKeys;
+  }
+
+  const partitionedYearlyFaoCamelPopulationData: QueryResolvers['partitionedYearlyFaoCamelPopulationData'] = async (_, variables) => {
+    const { partitionKey } = variables.input;
+
+    const yearlyFaoCamelPopulationData = await mongoClient.db(databaseName)
+      .collection<FaoYearlyCamelPopulationDataDocument>('mersFaoYearlyCamelPopulationData')
+      .find({ partitionKey })
+      .toArray();
+
+    return {
+      partitionKey,
+      yearlyFaoCamelPopulationData: yearlyFaoCamelPopulationData.map((document) => transformFaoYearlyCamelPopulationDataDocumentForApi(document))
+    }
+  }
+  
+  const faoMersEventFilterOptions = async () => {
+    const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
+
+    const [
+      diagnosisSource,
+      animalType,
+      animalSpecies
+    ] = await Promise.all([
+      faoMersEventsCollection.distinct('diagnosisSource').then((element) => filterUndefinedValuesFromArray(element)),
+      faoMersEventsCollection.distinct('animalType').then((element) => filterUndefinedValuesFromArray(element)),
+      faoMersEventsCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
+    ])
+
+    return {
+      diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
+      animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
+      animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
+    }
+  }
+
   return {
     mersResolvers: {
       Query: {
         mersEstimates,
+        mersFilterOptions,
         allFaoMersEventPartitionKeys,
         partitionedFaoMersEvents,
-        mersFilterOptions
+        faoMersEventFilterOptions,
+        yearlyFaoCamelPopulationDataPartitionKeys,
+        partitionedYearlyFaoCamelPopulationData,
       }
     }
   }

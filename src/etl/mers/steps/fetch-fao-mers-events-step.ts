@@ -1,21 +1,25 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterValidatingFieldSetFromAirtableStep, FaoMersEventAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
-import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
-import { WHORegion } from "../../../lib/who-regions.js";
+import { CountryPopulationDataAfterValidatingFieldSetFromAirtableStep, EstimateFieldsAfterValidatingFieldSetFromAirtableStep, FaoMersEventAfterValidatingFieldSetFromAirtableStep, YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
 import { readFileSync } from "fs";
 
 export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterValidatingFieldSetFromAirtableStep;
 export type FaoMersEventAfterFetchingFaoMersEventsStep = Record<string, string | undefined>;
+export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
+export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
 
 interface FetchFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
 interface FetchFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
+  countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -33,6 +37,8 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
     return {
       allEstimates: input.allEstimates,
       allFaoMersEvents: [],
+      yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+      countryPopulationData: input.countryPopulationData,
       mongoClient: input.mongoClient
     };
   }
@@ -51,6 +57,8 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
   return {
     allEstimates: input.allEstimates,
     allFaoMersEvents: data,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

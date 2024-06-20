@@ -108,11 +108,40 @@ export const mersTypedefs = `
     countryIdentifiers: [CountryIdentifiers!]!
     whoRegion: [WHORegion!]!
   }
+    
+  input PartitionedYearlyFaoCamelPopulationDataInput {
+    partitionKey: Int!
+  }
+
+  type YearlyFaoCamelPopulationDataEntry {
+    id: String!
+    countryAlphaThreeCode: String!
+    country: CountryIdentifiers!
+    year: Int!
+    camelCount: Int!
+    camelCountPerCapita: Float
+    whoRegion: WHORegion
+    note: String!
+  }
+  
+  type PartitionedYearlyFaoCamelPopulationDataOutput {
+    partitionKey: Int!
+    yearlyFaoCamelPopulationData: [YearlyFaoCamelPopulationDataEntry!]!
+  }
+
+  type FaoMersEventFilterOptions {
+    diagnosisSource: [MersDiagnosisSource!]!
+    animalType: [MersEventAnimalType!]!
+    animalSpecies: [MersEventAnimalSpecies!]!
+  }
 
   type Query {
     mersEstimates: [MersEstimate!]!
+    mersFilterOptions: MersFilterOptions!
     allFaoMersEventPartitionKeys: [Int!]!
     partitionedFaoMersEvents(input: PartitionedFaoMersEventsInput!): PartitionedFeoMersEventsOutput!
-    mersFilterOptions: MersFilterOptions!
+    faoMersEventFilterOptions: FaoMersEventFilterOptions!
+    yearlyFaoCamelPopulationDataPartitionKeys: [Int!]!
+    partitionedYearlyFaoCamelPopulationData(input: PartitionedYearlyFaoCamelPopulationDataInput!): PartitionedYearlyFaoCamelPopulationDataOutput!
   }
 `
