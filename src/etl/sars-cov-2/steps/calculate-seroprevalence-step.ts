@@ -45,12 +45,17 @@ export const calculateSeroprevalenceStep = (input: CalculateSeroprevalenceStepIn
   );
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      ...estimate,
-      seroprevalence: (estimate.denominatorValue !== undefined && estimate.numeratorValue)
-        ? estimate.denominatorValue > 0 ? estimate.numeratorValue / estimate.denominatorValue : 0
-        : undefined
-    })),
+    allEstimates: input.allEstimates.map((estimate) => {
+      const seroprevalenceFromAirtable = estimate.airtableRawSeroprevalence ? estimate.airtableRawSeroprevalence / 100 : undefined;
+      const calculatedSeroprevalence = (estimate.denominatorValue !== undefined && estimate.numeratorValue) ? (
+        estimate.denominatorValue > 0 ? estimate.numeratorValue / estimate.denominatorValue : 0
+      ) : undefined;
+
+      return {
+        ...estimate,
+        seroprevalence: seroprevalenceFromAirtable ?? calculatedSeroprevalence ?? undefined,
+      }
+    }),
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
