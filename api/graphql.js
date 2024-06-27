@@ -6,10 +6,12 @@ import { send } from 'micro';
 import { arboTypedefs } from "../public/dist/src/api/arbo-typedefs.js";
 import { sarsCov2Typedefs } from "../public/dist/src/api/sars-cov-2-typedefs.js";
 import { teamTypedefs } from "../public/dist/src/api/team-typedefs.js";
+import { mersTypedefs } from "../public/dist/src/api/mers-typedefs.js";
 import { sharedTypedefs } from "../public/dist/src/api/shared-typedefs.js";
 import { generateArboResolvers } from "../public/dist/src/api/arbo-resolvers.js";
 import { generateTeamResolvers } from "../public/dist/src/api/team-resolvers.js";
 import { generateSarsCov2Resolvers } from "../public/dist/src/api/sars-cov-2-resolvers.js";
+import { generateMersResolvers } from "../public/dist/src/api/mers-resolvers.js";
 
 const mongoUrl = process.env.MONGODB_URI;
 
@@ -27,13 +29,15 @@ const server = new ApolloServer({
     sharedTypedefs,
     arboTypedefs,
     teamTypedefs,
-    sarsCov2Typedefs
+    sarsCov2Typedefs,
+    mersTypedefs
   ]),
   resolvers: {
     Query: {
       ...generateTeamResolvers({ mongoClient }).teamResolvers.Query,
       ...generateArboResolvers({ mongoClient }).arboResolvers.Query,
       ...generateSarsCov2Resolvers({ mongoClient }).sarsCov2Resolvers.Query,
+      ...generateMersResolvers({ mongoClient }).mersResolvers.Query
     }
   },
   introspection: true,

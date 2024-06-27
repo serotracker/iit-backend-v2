@@ -134,6 +134,18 @@ export interface SarsCov2EstimateDocument {
   updatedAt: Date;
 }
 
+export interface MersEstimateDocument {
+  _id: ObjectId;
+  country: string;
+  countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
+  whoRegion: WHORegion | undefined;
+  latitude: number;
+  longitude: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface SarsCov2CountryDataDocument {
   _id: ObjectId;
   population: number | undefined;

@@ -8,7 +8,7 @@ import {
   StructuredCountryPopulationDataAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
   StructuredVaccinationDataAfterJitteringPinLatLngStep,
-  StudyFieldsAfterJitteringPinLatLngStep 
+  StudyFieldsAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step";
 
 interface GetAssociatedDataForEstimateInput<TKey extends keyof Omit<StructuredVaccinationData[number]['data'][number]['data'][number]['data'][number], 'day'>> {

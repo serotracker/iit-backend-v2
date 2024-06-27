@@ -139,6 +139,23 @@ export enum GbdSuperRegion {
   SubSaharanAfrica = 'SUB_SAHARAN_AFRICA'
 }
 
+export type MersEstimate = {
+  __typename?: 'MersEstimate';
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type MersFilterOptions = {
+  __typename?: 'MersFilterOptions';
+  countryIdentifiers: Array<CountryIdentifiers>;
+  whoRegion: Array<WhoRegion>;
+};
+
 export enum Month {
   April = 'APRIL',
   August = 'AUGUST',
@@ -176,6 +193,8 @@ export type Query = {
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
   groupedTeamMembers: Array<TeamMemberGroup>;
+  mersEstimates: Array<MersEstimate>;
+  mersFilterOptions: MersFilterOptions;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
@@ -227,8 +246,10 @@ export type SarsCov2FilterOptions = {
   country: Array<Scalars['String']['output']>;
   countryIdentifiers: Array<CountryIdentifiers>;
   isotypes: Array<Scalars['String']['output']>;
+  populationGroup: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
   scope: Array<Scalars['String']['output']>;
+  sex: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
   testType: Array<Scalars['String']['output']>;
   unRegion: Array<UnRegion>;
@@ -372,6 +393,8 @@ export type ResolversTypes = {
   GBDSubRegion: GbdSubRegion;
   GBDSuperRegion: GbdSuperRegion;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  MersEstimate: ResolverTypeWrapper<MersEstimate>;
+  MersFilterOptions: ResolverTypeWrapper<MersFilterOptions>;
   Month: Month;
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
   Query: ResolverTypeWrapper<{}>;
@@ -395,6 +418,8 @@ export type ResolversParentTypes = {
   CountryIdentifiers: CountryIdentifiers;
   Float: Scalars['Float']['output'];
   Int: Scalars['Int']['output'];
+  MersEstimate: MersEstimate;
+  MersFilterOptions: MersFilterOptions;
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   Query: {};
   SarsCov2Estimate: SarsCov2Estimate;
@@ -485,6 +510,23 @@ export type CountryIdentifiersResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MersEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEstimate'] = ResolversParentTypes['MersEstimate']> = {
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersFilterOptions'] = ResolversParentTypes['MersFilterOptions']> = {
+  countryIdentifiers?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Array<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MonthlySarsCov2CountryInformationEntry'] = ResolversParentTypes['MonthlySarsCov2CountryInformationEntry']> = {
   alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -506,6 +548,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
+  mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;
+  mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
   sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
@@ -556,8 +600,10 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   countryIdentifiers?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  populationGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   scope?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;
@@ -588,6 +634,8 @@ export type Resolvers<ContextType = any> = {
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;
+  MersEstimate?: MersEstimateResolvers<ContextType>;
+  MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   SarsCov2Estimate?: SarsCov2EstimateResolvers<ContextType>;
