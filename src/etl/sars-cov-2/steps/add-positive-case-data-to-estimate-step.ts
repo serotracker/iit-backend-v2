@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import {
   ConsolidatedCountryDataAfterAddingVaccinationDataStep,
+  CountryFieldsAfterAddingVaccinationDataStep,
   EstimateFieldsAfterAddingVaccinationDataStep,
   StructuredCountryPopulationDataAfterAddingVaccinationDataStep,
   StructuredPositiveCaseDataAfterAddingVaccinationDataStep,
@@ -14,6 +15,8 @@ export type EstimateFieldsAfterAddingPositiveCaseDataStep =
   };
 export type StudyFieldsAfterAddingPositiveCaseDataStep =
   StudyFieldsAfterAddingVaccinationDataStep;
+export type CountryFieldsAfterAddingPositiveCaseDataStep =
+  CountryFieldsAfterAddingVaccinationDataStep;
 export type StructuredVaccinationDataAfterAddingPositiveCaseDataStep =
   StructuredVaccinationDataAfterAddingVaccinationDataStep;
 export type StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep =
@@ -28,6 +31,7 @@ export type ConsolidatedCountryDataAfterAddingPositiveCaseDataStep =
 interface AddPositiveCaseDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
+  allCountries: CountryFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
@@ -38,6 +42,7 @@ interface AddPositiveCaseDataToEstimateStepInput {
 interface AddPositiveCaseDataToEstimateStepOutput {
   allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
+  allCountries: CountryFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
@@ -62,6 +67,7 @@ export const addPositiveCaseDataToEstimateStep = (
         .find((element) => estimate.samplingMidDate && element.day === (estimate.samplingMidDate.getUTCDate()).toString())?.countryPositiveCasesPerMillionPeople
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

@@ -6,6 +6,7 @@ import { groupByArray } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingVaccinationDataStep = FieldSet;
 export type StudyFieldsAfterFetchingVaccinationDataStep = FieldSet;
+export type CountryFieldsAfterFetchingVaccinationDataStep = FieldSet;
 export type StructuredVaccinationDataAfterFetchingVaccinationDataStep =
   StructuredVaccinationData;
 export type StructuredPositiveCaseDataAfterFetchingVaccinationDataStep =
@@ -16,6 +17,7 @@ export type StructuredCountryPopulationDataAfterFetchingVaccinationDataStep =
 interface FetchVaccinationDataStepInput {
   allEstimates: FieldSet[];
   allStudies: FieldSet[];
+  allCountries: FieldSet[];
   vaccinationData: undefined;
   positiveCaseData: undefined;
   countryPopulationData: undefined;
@@ -25,6 +27,7 @@ interface FetchVaccinationDataStepInput {
 interface FetchVaccinationDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingVaccinationDataStep[];
   allStudies: StudyFieldsAfterFetchingVaccinationDataStep[];
+  allCountries: CountryFieldsAfterFetchingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingVaccinationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterFetchingVaccinationDataStep;
@@ -85,6 +88,7 @@ export const fetchVaccinationDataStep = async (
   return {
     allEstimates: input.allEstimates,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: formattedVaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

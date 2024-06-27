@@ -46,6 +46,13 @@ export interface AirtableSarsCov2StudyFields {
   "Source Name (from Rapid Review: Source)": Array<string | null | AirtableError>;
 }
 
+export interface AirtableSarsCov2CountryFields {
+  id: string;
+  "Country": string;
+  "Alpha3 Code": string | null;
+  "Alpha2 Code": string | null;
+}
+
 export type StructuredVaccinationData = Array<{
   threeLetterCountryCode: string,
   data: Array<{

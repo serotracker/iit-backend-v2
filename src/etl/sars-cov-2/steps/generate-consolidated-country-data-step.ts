@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterJitteringPinLatLngStep,
   EstimateFieldsAfterJitteringPinLatLngStep,
   StructuredCountryPopulationDataAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
@@ -13,6 +14,8 @@ export type EstimateFieldsAfterGeneratingConsolidatedCountryDataStep =
   EstimateFieldsAfterJitteringPinLatLngStep;
 export type StudyFieldsAfterGeneratingConsolidatedCountryDataStep =
   StudyFieldsAfterJitteringPinLatLngStep;
+export type CountryFieldsAfterGeneratingConsolidatedCountryDataStep =
+  CountryFieldsAfterJitteringPinLatLngStep;
 export type StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep =
   StructuredVaccinationDataAfterJitteringPinLatLngStep;
 export type StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep =
@@ -30,6 +33,7 @@ export interface ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataSt
 interface GenerateConsolidatedCountryDataStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
+  allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
   countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
@@ -39,6 +43,7 @@ interface GenerateConsolidatedCountryDataStepInput {
 interface GenerateConsolidatedCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterGeneratingConsolidatedCountryDataStep[];
   allStudies: StudyFieldsAfterGeneratingConsolidatedCountryDataStep[];
+  allCountries: CountryFieldsAfterGeneratingConsolidatedCountryDataStep[];
   vaccinationData: StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep;
@@ -81,6 +86,7 @@ export const generateConsolidatedCountryDataStep = (
   return {
     allEstimates: input.allEstimates,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,
@@ -91,7 +97,7 @@ export const generateConsolidatedCountryDataStep = (
     }).map((monthCount) => ({
       year: monthCountToYear(monthCount),
       month: monthCountToMonthNumber(monthCount) + 1
-    })).flatMap(({year, month}) => allCountries.map(({ alphaTwoCode, alphaThreeCode }) => ({
+    })).flatMap(({year, month}) => input.allCountries.map(({ alphaTwoCode, alphaThreeCode }) => ({
       year,
       month,
       alphaTwoCode,

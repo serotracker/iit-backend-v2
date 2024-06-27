@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import { readFileSync } from "fs";
 import {
+  CountryFieldsAfterFetchingPositiveCaseDataStep,
   EstimateFieldsAfterFetchingPositiveCaseDataStep,
   StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep,
   StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep,
@@ -8,12 +9,14 @@ import {
   StudyFieldsAfterFetchingPositiveCaseDataStep
 } from "./fetch-positive-case-data-step";
 import { StructuredCountryPopulationData } from "../types";
-import { groupByArray, typedObjectFromEntries } from "../../../lib/lib.js";
+import { groupByArray } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingCountryPopulationStep =
   EstimateFieldsAfterFetchingPositiveCaseDataStep;
 export type StudyFieldsAfterFetchingCountryPopulationStep =
   StudyFieldsAfterFetchingPositiveCaseDataStep;
+export type CountryFieldsAfterFetchingCountryPopulationStep =
+  CountryFieldsAfterFetchingPositiveCaseDataStep;
 export type StructuredVaccinationDataAfterFetchingCountryPopulationStep = StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
 export type StructuredPositiveCaseDataAfterFetchingCountryPopulationStep = StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
 export type StructuredCountryPopulationDataAfterFetchingCountryPopulationStep = StructuredCountryPopulationData;
@@ -21,6 +24,7 @@ export type StructuredCountryPopulationDataAfterFetchingCountryPopulationStep = 
 interface FetchCountryPopulationDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingPositiveCaseDataStep[];
   allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
+  allCountries: CountryFieldsAfterFetchingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterFetchingPositiveCaseDataStep;
@@ -30,6 +34,7 @@ interface FetchCountryPopulationDataStepInput {
 interface FetchCountryPopulationDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingCountryPopulationStep[];
   allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
+  allCountries: CountryFieldsAfterFetchingCountryPopulationStep[];
   vaccinationData: StructuredVaccinationDataAfterFetchingCountryPopulationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterFetchingCountryPopulationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterFetchingCountryPopulationStep;
@@ -48,6 +53,7 @@ export const fetchCountryPopulationDataStep = (
     return {
       allEstimates: input.allEstimates,
       allStudies: input.allStudies,
+      allCountries: input.allCountries,
       vaccinationData: input.vaccinationData,
       positiveCaseData: input.positiveCaseData,
       countryPopulationData: [],
@@ -112,6 +118,7 @@ export const fetchCountryPopulationDataStep = (
   return {
     allEstimates: input.allEstimates,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: groupByArray(dataRows, 'threeLetterCountryCode'),

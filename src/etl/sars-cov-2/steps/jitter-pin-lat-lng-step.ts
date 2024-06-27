@@ -1,10 +1,11 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterLatLngGenerationStep, StructuredCountryPopulationDataAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { CountryFieldsAfterLatLngGenerationStep, EstimateFieldsAfterLatLngGenerationStep, StructuredCountryPopulationDataAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;
 export type StudyFieldsAfterJitteringPinLatLngStep =
   StudyFieldsAfterLatLngGenerationStep;
+export type CountryFieldsAfterJitteringPinLatLngStep = CountryFieldsAfterLatLngGenerationStep;
 export type StructuredVaccinationDataAfterJitteringPinLatLngStep = StructuredVaccinationDataAfterLatLngGenerationStep;
 export type StructuredPositiveCaseDataAfterJitteringPinLatLngStep = StructuredPositiveCaseDataAfterLatLngGenerationStep;
 export type StructuredCountryPopulationDataAfterJitteringPinLatLngStep = StructuredCountryPopulationDataAfterLatLngGenerationStep;
@@ -30,6 +31,7 @@ const jitterNumberValueByAmount = (
 interface JitterPinLatLngStepInput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
+  allCountries: CountryFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterLatLngGenerationStep;
@@ -39,6 +41,7 @@ interface JitterPinLatLngStepInput {
 interface JitterPinLatLngStepOutput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
+  allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
   countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
@@ -68,6 +71,7 @@ export const jitterPinLatLngStep = (
       }),
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

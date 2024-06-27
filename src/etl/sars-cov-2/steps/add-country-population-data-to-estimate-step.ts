@@ -5,7 +5,8 @@ import {
   StructuredVaccinationDataAfterAddingPositiveCaseDataStep,
   StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep,
   StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep,
-  ConsolidatedCountryDataAfterAddingPositiveCaseDataStep
+  ConsolidatedCountryDataAfterAddingPositiveCaseDataStep,
+  CountryFieldsAfterAddingPositiveCaseDataStep
 } from "./add-positive-case-data-to-estimate-step";
 
 export type EstimateFieldsAfterAddingCountryPopulationDataStep =
@@ -14,6 +15,8 @@ export type EstimateFieldsAfterAddingCountryPopulationDataStep =
   };
 export type StudyFieldsAfterAddingCountryPopulationDataStep =
   StudyFieldsAfterAddingPositiveCaseDataStep;
+export type CountryFieldsAfterAddingCountryPopulationDataStep =
+  CountryFieldsAfterAddingPositiveCaseDataStep;
 export type StructuredVaccinationDataAfterAddingCountryPopulationDataStep =
   StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
 export type StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep =
@@ -28,6 +31,7 @@ export type ConsolidatedCountryDataAfterAddingCountryPopulationDataStep =
 interface AddCountryPopulationDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
+  allCountries: CountryFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
@@ -38,6 +42,7 @@ interface AddCountryPopulationDataToEstimateStepInput {
 interface AddCountryPopulationDataToEstimateStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryPopulationDataStep[];
   allStudies: StudyFieldsAfterAddingCountryPopulationDataStep[];
+  allCountries: CountryFieldsAfterAddingCountryPopulationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
@@ -58,6 +63,7 @@ export const addCountryPopulationDataToEstimateStep = (
         .find((element) => estimate.samplingMidDate && element.year === estimate.samplingMidDate.getUTCFullYear())?.populationEstimate
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

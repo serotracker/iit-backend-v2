@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
@@ -9,6 +10,8 @@ import {
 
 export type EstimateFieldsAfterRemovingNonPrimaryEstimatesStep = EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StudyFieldsAfterRemovingNonPrimaryEstimatesStep = StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+export type CountryFieldsAfterRemovingNonPrimaryEstimatesStep =
+  CountryFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep =
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep =
@@ -19,6 +22,7 @@ export type StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep 
 interface RemoveNonPrimaryEstimatesStepInput {
   allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
+  allCountries: CountryFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   countryPopulationData: StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
@@ -28,6 +32,7 @@ interface RemoveNonPrimaryEstimatesStepInput {
 interface RemoveNonPrimaryEstimatesStepOutput {
   allEstimates: EstimateFieldsAfterRemovingNonPrimaryEstimatesStep[];
   allStudies: StudyFieldsAfterRemovingNonPrimaryEstimatesStep[];
+  allCountries: CountryFieldsAfterRemovingNonPrimaryEstimatesStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep;
   countryPopulationData: StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep;
@@ -44,6 +49,7 @@ export const removeNonPrimaryEstimatesStep = (
   return {
     allEstimates: input.allEstimates.filter((estimate) => estimate.isPrimaryEstimate),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

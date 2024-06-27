@@ -2,8 +2,9 @@ import { MongoClient } from "mongodb";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import { GBDSubRegion, GBDSuperRegion, getGBDRegionFromAlphaTwoCode } from "../../../lib/gbd-regions.js";
-import { TwoLetterIsoCountryCode, countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
+import { TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 import {
+  CountryFieldsAfterCalculatingSeroprevalenceStep,
   EstimateFieldsAfterCalculatingSeroprevalenceStep,
   StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep,
   StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep,
@@ -19,6 +20,7 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
 };
 export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCalculatingSeroprevalenceStep;
+export type CountryFieldsAfterAddingCountryAndRegionInformationStep = CountryFieldsAfterCalculatingSeroprevalenceStep;
 export type StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep = StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
 export type StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep = StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
 export type StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep = StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep;
@@ -26,6 +28,7 @@ export type StructuredCountryPopulationDataAfterAddingCountryAndRegionInformatio
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterCalculatingSeroprevalenceStep[];
   allStudies: StudyFieldsAfterCalculatingSeroprevalenceStep[];
+  allCountries: CountryFieldsAfterCalculatingSeroprevalenceStep[];
   vaccinationData: StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
   countryPopulationData: StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep,
@@ -35,6 +38,7 @@ interface AddCountryAndRegionInformationStepInput {
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
+  allCountries: CountryFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep,
@@ -49,12 +53,13 @@ export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInf
   return {
     allEstimates: input.allEstimates
       .map((estimate) => {
-        const countryAlphaTwoCode = countryNameToTwoLetterIsoCountryCode(
-          estimate.country
-        );
-        if (!countryAlphaTwoCode) {
+        const fullCountryInformation = input.allCountries.find((element) => element.alphaThreeCode === estimate.countryAlphaThreeCode);
+
+        if(!fullCountryInformation) {
           return undefined;
         }
+
+        const countryAlphaTwoCode = fullCountryInformation.alphaTwoCode as TwoLetterIsoCountryCode;
 
         const unRegion = getUNRegionFromAlphaTwoCode(countryAlphaTwoCode)
         const whoRegion = getWHORegionFromAlphaTwoCode(countryAlphaTwoCode)
@@ -73,6 +78,7 @@ export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInf
         };
       }).filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,

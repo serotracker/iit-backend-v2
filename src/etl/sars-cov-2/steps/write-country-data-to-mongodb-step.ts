@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import {
   ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep,
+  CountryFieldsAfterTransformingFormatForDatabaseStep,
   EstimateFieldsAfterTransformingFormatForDatabaseStep,
   StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep,
   StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep,
@@ -13,6 +14,8 @@ export type EstimateFieldsAfterWritingCountryDataToMongoDbStep =
   EstimateFieldsAfterTransformingFormatForDatabaseStep;
 export type StudyFieldsAfterWritingCountryDataToMongoDbStep =
   StudyFieldsAfterTransformingFormatForDatabaseStep;
+export type CountryFieldsAfterWritingCountryDataToMongoDbStep =
+  CountryFieldsAfterTransformingFormatForDatabaseStep;
 export type StructuredVaccinationDataAfterWritingCountryDataToMongoDbStep =
   StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
 export type StructuredPositiveCaseDataAfterWritingCountryDataToMongoDbStep =
@@ -25,6 +28,7 @@ export type ConsolidatedCountryDataAfterWritingCountryDataToMongoDbStep =
 interface WriteCountryDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
+  allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
   countryPopulationData: StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep;
@@ -35,6 +39,7 @@ interface WriteCountryDataToMongoDbStepInput {
 interface WriteCountryDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingCountryDataToMongoDbStep[];
   allStudies: StudyFieldsAfterWritingCountryDataToMongoDbStep[];
+  allCountries: CountryFieldsAfterWritingCountryDataToMongoDbStep[];
   vaccinationData: StructuredVaccinationDataAfterWritingCountryDataToMongoDbStep;
   positiveCaseData: StructuredPositiveCaseDataAfterWritingCountryDataToMongoDbStep;
   countryPopulationData: StructuredCountryPopulationDataAfterWritingCountryDataToMongoDbStep;
@@ -59,6 +64,7 @@ export const writeCountryDataToMongoDbStep = async(
   return {
     allEstimates: input.allEstimates,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,
