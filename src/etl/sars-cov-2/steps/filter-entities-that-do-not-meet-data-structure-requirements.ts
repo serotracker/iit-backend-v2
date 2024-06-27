@@ -2,9 +2,9 @@ import { MongoClient } from "mongodb";
 import {
   CountryFieldsAfterCombiningEstimatesAndStudiesStep,
   EstimateFieldsAfterCombiningEstimatesAndStudiesStep,
-  StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep,
-  StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep,
-  StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep,
+  StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep,
+  StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep,
+  StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep,
   StudyFieldsAfterCombiningEstimatesAndStudiesStep
 } from "./combine-estimates-and-studies-step.js";
 
@@ -21,19 +21,19 @@ export type CountryFieldsAfterFilteringEntitiesThatDoNotMeetDataStructureRequire
     'alphaThreeCode' | 'alphaTwoCode'
   > & { alphaThreeCode: string, alphaTwoCode: string };
 export type StructuredVaccinationDataAfterFilteringEntitiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
+  StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep;
 export type StructuredPositiveCaseDataAfterFilteringEntitiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
+  StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep;
 export type StructuredCountryPopulationDataAfterFilteringEntitiesThatDoNotMeetDataStructureRequirementsStep =
-  StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
+  StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep;
 
 interface FilterEntitiesThatDoNotMeetDataStructureRequirementsInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesAndStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
   allCountries: CountryFieldsAfterCombiningEstimatesAndStudiesStep[];
-  vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
-  countryPopulationData: StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
+  vaccinationData: StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep;
   mongoClient: MongoClient;
 }
 
