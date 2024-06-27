@@ -73,15 +73,6 @@ export const generateConsolidatedCountryDataStep = (
   ))
   const earliestMonthCount = dateToMonthCount(earliestSamplingStartDate);
   const latestMonthCount = dateToMonthCount(latestSamplingEndDate);
-  //In the second part of this issue, make this contain every single country by reading data from Airtable.
-  const allCountries = [{
-    alphaTwoCode: 'CA',
-    alphaThreeCode: 'CAN'
-  }, {
-    alphaTwoCode: 'US',
-    alphaThreeCode: 'USA'
-  }]
-
 
   return {
     allEstimates: input.allEstimates,
