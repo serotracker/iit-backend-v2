@@ -1,20 +1,28 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import { AirtableSarsCov2EstimateFields, AirtableSarsCov2StudyFields } from "../types.js";
-import { EstimateFieldsAfterFetchingPositiveCaseDataStep, StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep, StudyFieldsAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
+import {
+  EstimateFieldsAfterFetchingCountryPopulationStep,
+  StructuredCountryPopulationDataAfterFetchingCountryPopulationStep,
+  StructuredPositiveCaseDataAfterFetchingCountryPopulationStep,
+  StructuredVaccinationDataAfterFetchingCountryPopulationStep,
+  StudyFieldsAfterFetchingCountryPopulationStep
+} from "./fetch-country-population-data-step.js";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2EstimateFields;
 export type StudyFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2StudyFields;
-export type StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep = StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
-export type StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep = StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+export type StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep = StructuredVaccinationDataAfterFetchingCountryPopulationStep;
+export type StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep = StructuredPositiveCaseDataAfterFetchingCountryPopulationStep;
+export type StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep = StructuredCountryPopulationDataAfterFetchingCountryPopulationStep;
 
 interface ValidateFieldSetFromAirtableStepInput {
-  allEstimates: EstimateFieldsAfterFetchingPositiveCaseDataStep[];
-  allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
-  vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+  allEstimates: EstimateFieldsAfterFetchingCountryPopulationStep[];
+  allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
+  vaccinationData: StructuredVaccinationDataAfterFetchingCountryPopulationStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterFetchingCountryPopulationStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterFetchingCountryPopulationStep;
   mongoClient: MongoClient;
 }
 
@@ -23,6 +31,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
   mongoClient: MongoClient;
 }
 
@@ -131,7 +140,10 @@ export const validateFieldSetFromAirtableStep = (
       .transform((field) => field ?? []),
     "SeroTracker Analysis Primary Estimate": z
       .optional(z.boolean())
-      .transform((field) => field ?? false)
+      .transform((field) => field ?? false),
+    "Serum positive prevalence (%)": z
+      .optional(z.number())
+      .transform((field) => field ?? null),
   });
 
   const zodSarsCov2StudyFieldsObject = z.object({
@@ -154,6 +166,7 @@ export const validateFieldSetFromAirtableStep = (
     allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

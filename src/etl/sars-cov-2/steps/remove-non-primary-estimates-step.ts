@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import {
   EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
@@ -12,12 +13,15 @@ export type StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep =
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep =
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+export type StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep =
+  StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 
 interface RemoveNonPrimaryEstimatesStepInput {
   allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   mongoClient: MongoClient;
 }
 
@@ -26,6 +30,7 @@ interface RemoveNonPrimaryEstimatesStepOutput {
   allStudies: StudyFieldsAfterRemovingNonPrimaryEstimatesStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep;
   mongoClient: MongoClient;
 }
 
@@ -41,6 +46,7 @@ export const removeNonPrimaryEstimatesStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

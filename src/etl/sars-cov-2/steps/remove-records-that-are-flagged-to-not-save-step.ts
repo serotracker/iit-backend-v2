@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterCleaningFieldNamesStep, StructuredPositiveCaseDataAfterCleaningFieldNamesStep, StructuredVaccinationDataAfterCleaningFieldNamesStep, StudyFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
+import { EstimateFieldsAfterCleaningFieldNamesStep, StructuredCountryPopulationDataAfterCleaningFieldNamesStep, StructuredPositiveCaseDataAfterCleaningFieldNamesStep, StructuredVaccinationDataAfterCleaningFieldNamesStep, StudyFieldsAfterCleaningFieldNamesStep } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep =
   EstimateFieldsAfterCleaningFieldNamesStep;
@@ -7,12 +7,14 @@ export type StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep =
   StudyFieldsAfterCleaningFieldNamesStep;
 export type StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep = StructuredVaccinationDataAfterCleaningFieldNamesStep;
 export type StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep = StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
+export type StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep = StructuredCountryPopulationDataAfterCleaningFieldNamesStep;
 
 interface RemoveRecordsThatAreFlaggedNotToSaveInput {
   allEstimates: EstimateFieldsAfterCleaningFieldNamesStep[];
   allStudies: StudyFieldsAfterCleaningFieldNamesStep[];
   vaccinationData: StructuredVaccinationDataAfterCleaningFieldNamesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCleaningFieldNamesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCleaningFieldNamesStep;
   mongoClient: MongoClient;
 }
 
@@ -21,6 +23,7 @@ interface RemoveRecordsThatAreFlaggedNotToSaveOutput {
   allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
   mongoClient: MongoClient;
 }
 
@@ -36,6 +39,7 @@ export const removeRecordsThatAreFlaggedNotToSave = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

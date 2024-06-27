@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { EstimateFieldsAfterLatLngGenerationStep, StructuredCountryPopulationDataAfterLatLngGenerationStep, StructuredPositiveCaseDataAfterLatLngGenerationStep, StructuredVaccinationDataAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;
@@ -7,6 +7,7 @@ export type StudyFieldsAfterJitteringPinLatLngStep =
   StudyFieldsAfterLatLngGenerationStep;
 export type StructuredVaccinationDataAfterJitteringPinLatLngStep = StructuredVaccinationDataAfterLatLngGenerationStep;
 export type StructuredPositiveCaseDataAfterJitteringPinLatLngStep = StructuredPositiveCaseDataAfterLatLngGenerationStep;
+export type StructuredCountryPopulationDataAfterJitteringPinLatLngStep = StructuredCountryPopulationDataAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -31,6 +32,7 @@ interface JitterPinLatLngStepInput {
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterLatLngGenerationStep;
   mongoClient: MongoClient;
 }
 
@@ -39,6 +41,7 @@ interface JitterPinLatLngStepOutput {
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
   mongoClient: MongoClient;
 }
 
@@ -67,6 +70,7 @@ export const jitterPinLatLngStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

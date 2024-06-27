@@ -1,5 +1,12 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterAddingVaccinationDataStep, StructuredPositiveCaseDataAfterAddingVaccinationDataStep, StructuredVaccinationDataAfterAddingVaccinationDataStep, StudyFieldsAfterAddingVaccinationDataStep } from "./add-vaccination-data-to-estimate-step";
+import {
+  ConsolidatedCountryDataAfterAddingVaccinationDataStep,
+  EstimateFieldsAfterAddingVaccinationDataStep,
+  StructuredCountryPopulationDataAfterAddingVaccinationDataStep,
+  StructuredPositiveCaseDataAfterAddingVaccinationDataStep,
+  StructuredVaccinationDataAfterAddingVaccinationDataStep,
+  StudyFieldsAfterAddingVaccinationDataStep
+} from "./add-vaccination-data-to-estimate-step";
 
 export type EstimateFieldsAfterAddingPositiveCaseDataStep =
   EstimateFieldsAfterAddingVaccinationDataStep & { 
@@ -11,12 +18,20 @@ export type StructuredVaccinationDataAfterAddingPositiveCaseDataStep =
   StructuredVaccinationDataAfterAddingVaccinationDataStep;
 export type StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep =
   StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+export type StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep =
+  StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
+export type ConsolidatedCountryDataAfterAddingPositiveCaseDataStep =
+  ConsolidatedCountryDataAfterAddingVaccinationDataStep & {
+    countryPositiveCasesPerMillionPeople: number | undefined;
+  };
 
 interface AddPositiveCaseDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingVaccinationDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -25,6 +40,8 @@ interface AddPositiveCaseDataToEstimateStepOutput {
   allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingPositiveCaseDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingPositiveCaseDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -47,6 +64,20 @@ export const addPositiveCaseDataToEstimateStep = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint) => ({
+      ...countryDataPoint,
+      countryPositiveCasesPerMillionPeople: input.positiveCaseData
+        .find((element) => element.twoLetterCountryCode === countryDataPoint.alphaTwoCode)?.data
+        .find((element) => element.year === countryDataPoint.year.toString())?.data
+        .find((element) => element.month === countryDataPoint.month.toString())?.data
+        .map((element) => ({
+          differenceFromMiddleOfMonth: Math.abs(parseInt(element.day) - 14),
+          countryPositiveCasesPerMillionPeople: element.countryPositiveCasesPerMillionPeople
+        }))
+        .sort((a, b) => a.differenceFromMiddleOfMonth - b.differenceFromMiddleOfMonth)
+        .at(0)?.countryPositiveCasesPerMillionPeople
+    })),
     mongoClient: input.mongoClient
   };
 };
