@@ -60,6 +60,10 @@ export const sarsCov2Typedefs = `
     positiveCasesPerMillionPeople: Float
     alphaTwoCode: String!
     alphaThreeCode: String!
+    whoRegion: WHORegion
+    unRegion: UNRegion
+    gbdSuperRegion: GBDSuperRegion
+    gbdSubRegion: GBDSubRegion
     month: Month!
     year: Int!
   }

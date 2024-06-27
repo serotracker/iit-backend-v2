@@ -20,6 +20,10 @@ const transformSarsCov2CountryDataDocumentForApi = (document: SarsCov2CountryDat
   positiveCasesPerMillionPeople: document.positiveCasesPerMillionPeople,
   alphaTwoCode: document.alphaTwoCode,
   alphaThreeCode: document.alphaThreeCode,
+  unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
+  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+  gbdSubRegion: document.gbdSubRegion ? mapGbdSubRegionForApi(document.gbdSubRegion) : undefined,
+  gbdSuperRegion: document.gbdSuperRegion ? mapGbdSuperRegionForApi(document.gbdSuperRegion) : undefined,
   month: mapMonthForApi(document.month),
   year: document.year,
 })

@@ -2,14 +2,14 @@ import { MongoClient } from "mongodb";
 import { add, sub } from 'date-fns';
 import { StructuredVaccinationData } from "../types";
 import {
-  ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataStep,
-  CountryFieldsAfterGeneratingConsolidatedCountryDataStep,
-  EstimateFieldsAfterGeneratingConsolidatedCountryDataStep,
-  StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep,
-  StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep,
-  StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep,
-  StudyFieldsAfterGeneratingConsolidatedCountryDataStep
-} from "./generate-consolidated-country-data-step";
+  ConsolidatedCountryDataAfterJitteringPinLatLngStep,
+  CountryFieldsAfterJitteringPinLatLngStep,
+  EstimateFieldsAfterJitteringPinLatLngStep,
+  StructuredCountryPopulationDataAfterJitteringPinLatLngStep,
+  StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
+  StructuredVaccinationDataAfterJitteringPinLatLngStep,
+  StudyFieldsAfterJitteringPinLatLngStep
+} from "./jitter-pin-lat-lng-step";
 
 interface GetAssociatedDataForEstimateInput<TKey extends keyof Omit<StructuredVaccinationData[number]['data'][number]['data'][number]['data'][number], 'day'>> {
   estimate: {
@@ -100,32 +100,32 @@ const getAssociatedVaccinationDataForEstimate = <
 }
 
 export type EstimateFieldsAfterAddingVaccinationDataStep =
-  EstimateFieldsAfterGeneratingConsolidatedCountryDataStep & {
+  EstimateFieldsAfterJitteringPinLatLngStep & {
     countryPeopleVaccinatedPerHundred: number | undefined;
     countryPeopleFullyVaccinatedPerHundred: number | undefined;
   };
-export type StudyFieldsAfterAddingVaccinationDataStep = StudyFieldsAfterGeneratingConsolidatedCountryDataStep;
-export type CountryFieldsAfterAddingVaccinationDataStep = CountryFieldsAfterGeneratingConsolidatedCountryDataStep;
+export type StudyFieldsAfterAddingVaccinationDataStep = StudyFieldsAfterJitteringPinLatLngStep;
+export type CountryFieldsAfterAddingVaccinationDataStep = CountryFieldsAfterJitteringPinLatLngStep;
 export type StructuredVaccinationDataAfterAddingVaccinationDataStep =
-  StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep;
+  StructuredVaccinationDataAfterJitteringPinLatLngStep;
 export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
-  StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep;
+  StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
 export type StructuredCountryPopulationDataAfterAddingVaccinationDataStep =
-  StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep;
+  StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
 export type ConsolidatedCountryDataAfterAddingVaccinationDataStep =
-  ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataStep & {
+  ConsolidatedCountryDataAfterJitteringPinLatLngStep & {
     countryPeopleVaccinatedPerHundred: number | undefined;
     countryPeopleFullyVaccinatedPerHundred: number | undefined;
   };
 
 interface AddVaccinationDataToEstimateStepInput {
-  allEstimates: EstimateFieldsAfterGeneratingConsolidatedCountryDataStep[];
-  allStudies: StudyFieldsAfterGeneratingConsolidatedCountryDataStep[];
-  allCountries: CountryFieldsAfterGeneratingConsolidatedCountryDataStep[];
-  vaccinationData: StructuredVaccinationDataAfterGeneratingConsolidatedCountryDataStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterGeneratingConsolidatedCountryDataStep;
-  countryPopulationData: StructuredCountryPopulationDataAfterGeneratingConsolidatedCountryDataStep;
-  consolidatedCountryData: ConsolidatedCountryDataAfterGeneratingConsolidatedCountryDataStep[];
+  allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
+  allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
+  vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 

@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { writeFileSync } from "fs";
-import { CountryFieldsAfterAddingCountryAndRegionInformationStep, EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep, StudyFieldsAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
+import { ConsolidatedCountryDataAfterAddingCountryAndRegionInformationStep, CountryFieldsAfterAddingCountryAndRegionInformationStep, EstimateFieldsAfterAddingCountryAndRegionInformationStep, StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep, StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep, StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep, StudyFieldsAfterAddingCountryAndRegionInformationStep } from "./add-country-and-region-information-step";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types.js";
 import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
 import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
@@ -14,6 +14,7 @@ export type CountryFieldsAfterLatLngGenerationStep = CountryFieldsAfterAddingCou
 export type StructuredVaccinationDataAfterLatLngGenerationStep = StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
 export type StructuredPositiveCaseDataAfterLatLngGenerationStep = StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
 export type StructuredCountryPopulationDataAfterLatLngGenerationStep = StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep;
+export type ConsolidatedCountryDataAfterLatLngGenerationStep = ConsolidatedCountryDataAfterAddingCountryAndRegionInformationStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
@@ -22,6 +23,7 @@ interface LatLngGenerationStepInput {
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -32,6 +34,7 @@ interface LatLngGenerationStepOutput {
   vaccinationData: StructuredVaccinationDataAfterLatLngGenerationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterLatLngGenerationStep;
   countryPopulationData: StructuredCountryPopulationDataAfterLatLngGenerationStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -84,6 +87,7 @@ export const latLngGenerationStep = async(
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
     countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: input.consolidatedCountryData,
     mongoClient: input.mongoClient
   };
 }

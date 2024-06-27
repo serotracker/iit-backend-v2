@@ -154,6 +154,10 @@ export interface SarsCov2CountryDataDocument {
   positiveCasesPerMillionPeople: number | undefined;
   alphaTwoCode: string;
   alphaThreeCode: string;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+  gbdSuperRegion: GBDSuperRegion | undefined;
+  gbdSubRegion: GBDSubRegion | undefined;
   month: Month;
   year: number;
   createdAt: Date;

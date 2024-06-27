@@ -175,11 +175,15 @@ export type MonthlySarsCov2CountryInformationEntry = {
   __typename?: 'MonthlySarsCov2CountryInformationEntry';
   alphaThreeCode: Scalars['String']['output'];
   alphaTwoCode: Scalars['String']['output'];
+  gbdSubRegion?: Maybe<GbdSubRegion>;
+  gbdSuperRegion?: Maybe<GbdSuperRegion>;
   month: Month;
   peopleFullyVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   peopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   population?: Maybe<Scalars['Int']['output']>;
   positiveCasesPerMillionPeople?: Maybe<Scalars['Float']['output']>;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
   year: Scalars['Int']['output'];
 };
 
@@ -526,11 +530,15 @@ export type MersFilterOptionsResolvers<ContextType = any, ParentType extends Res
 export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MonthlySarsCov2CountryInformationEntry'] = ResolversParentTypes['MonthlySarsCov2CountryInformationEntry']> = {
   alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  gbdSubRegion?: Resolver<Maybe<ResolversTypes['GBDSubRegion']>, ParentType, ContextType>;
+  gbdSuperRegion?: Resolver<Maybe<ResolversTypes['GBDSuperRegion']>, ParentType, ContextType>;
   month?: Resolver<ResolversTypes['Month'], ParentType, ContextType>;
   peopleFullyVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   peopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   population?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   positiveCasesPerMillionPeople?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

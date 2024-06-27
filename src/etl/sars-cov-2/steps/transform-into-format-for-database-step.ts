@@ -120,6 +120,10 @@ export const transformIntoFormatForDatabaseStep = (
       alphaThreeCode: countryDataPoint.alphaThreeCode,
       month: monthNumberToMonthEnumMap[countryDataPoint.month],
       year: countryDataPoint.year,
+      unRegion: countryDataPoint.unRegion,
+      whoRegion: countryDataPoint.whoRegion,
+      gbdSuperRegion: countryDataPoint.gbdSuperRegion,
+      gbdSubRegion: countryDataPoint.gbdSubRegion,
       createdAt: createdAtForAllRecords,
       updatedAt: createdAtForAllRecords
     })).filter((countryDataPoint): countryDataPoint is Omit<typeof countryDataPoint, 'month'> & {
