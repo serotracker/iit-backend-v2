@@ -195,8 +195,10 @@ export type SarsCov2FilterOptions = {
   country: Array<Scalars['String']['output']>;
   countryIdentifiers: Array<CountryIdentifiers>;
   isotypes: Array<Scalars['String']['output']>;
+  populationGroup: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
   scope: Array<Scalars['String']['output']>;
+  sex: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
   testType: Array<Scalars['String']['output']>;
   unRegion: Array<UnRegion>;
@@ -504,8 +506,10 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   countryIdentifiers?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  populationGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   scope?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;

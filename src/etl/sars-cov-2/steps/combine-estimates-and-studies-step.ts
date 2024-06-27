@@ -6,31 +6,38 @@ import {
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
   StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step.js";
+import {
+  EstimateFieldsAfterRemovingNonPrimaryEstimatesStep,
+  StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep,
+  StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep,
+  StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep,
+  StudyFieldsAfterRemovingNonPrimaryEstimatesStep
+} from "./remove-non-primary-estimates-step.js";
 
 export type EstimateFieldsAfterCombiningEstimatesAndStudiesStep = EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep & {studyName: string | undefined};
 export type StudyFieldsAfterCombiningEstimatesAndStudiesStep = StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
-export type StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep =
+export type StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep =
   StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
-export type StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep =
+export type StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep =
   StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
-export type StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep =
+export type StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep =
   StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 
 interface CombineEstimatesAndStudiesInput {
-  allEstimates: EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
-  allStudies: StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep[];
-  vaccinationData: StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
-  countryPopulationData: StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+  allEstimates: EstimateFieldsAfterRemovingNonPrimaryEstimatesStep[];
+  allStudies: StudyFieldsAfterRemovingNonPrimaryEstimatesStep[];
+  vaccinationData: StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep;
   mongoClient: MongoClient;
 }
 
 interface CombineEstimatesAndStudiesOutput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesAndStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
-  vaccinationData: StructuredVaccinationDataAfterAfterCombiningEstimatesAndStudiesStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterAfterCombiningEstimatesAndStudiesStep;
-  countryPopulationData: StructuredCountryPopulationDataAfterAfterCombiningEstimatesAndStudiesStep;
+  vaccinationData: StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep;
   mongoClient: MongoClient;
 }
 

@@ -27,8 +27,10 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
   studyId: string | undefined;
   denominatorValue: number | undefined;
   numeratorValue: number | undefined;
+  airtableRawSeroprevalence: number | undefined;
   estimateName: string | undefined;
   url: string | undefined;
+  isPrimaryEstimate: boolean;
 }
 export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -198,6 +200,8 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         key: "URL",
         object: estimate,
       }).value,
+      isPrimaryEstimate: estimate["SeroTracker Analysis Primary Estimate"],
+      airtableRawSeroprevalence: estimate["Serum positive prevalence (%)"] ?? undefined
     })),
     allStudies: input.allStudies.map((study) => ({
       id: study.id,

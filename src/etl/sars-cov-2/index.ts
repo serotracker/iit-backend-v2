@@ -28,6 +28,7 @@ import { writeCountryDataToMongoDbStep } from "./steps/write-country-data-to-mon
 import { writeEstimateDataToMongoDbStep } from "./steps/write-estimate-data-to-mongodb-step.js";
 import { addCountryPopulationDataToEstimateStep } from "./steps/add-country-population-data-to-estimate-step.js";
 import { generateConsolidatedCountryDataStep } from "./steps/generate-consolidated-country-data-step.js";
+import { removeNonPrimaryEstimatesStep } from "./steps/remove-non-primary-estimates-step.js";
 
 const runEtlMain = async () => {
   console.log("Running SarsCoV-2 ETL");
@@ -79,6 +80,7 @@ const runEtlMain = async () => {
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
+    etlStep(removeNonPrimaryEstimatesStep),
     etlStep(combineEstimatesAndStudies),
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),
