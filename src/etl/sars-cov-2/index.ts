@@ -23,6 +23,11 @@ import { addVaccinationDataToEstimateStep } from "./steps/add-vaccination-data-t
 import { addPositiveCaseDataToEstimateStep } from "./steps/add-positive-case-data-to-estimate-step.js";
 import { combineEstimatesAndStudies } from "./steps/combine-estimates-and-studies-step.js";
 import { calculateSeroprevalenceStep } from "./steps/calculate-seroprevalence-step.js";
+import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
+import { writeCountryDataToMongoDbStep } from "./steps/write-country-data-to-mongodb-step.js";
+import { writeEstimateDataToMongoDbStep } from "./steps/write-estimate-data-to-mongodb-step.js";
+import { addCountryPopulationDataToEstimateStep } from "./steps/add-country-population-data-to-estimate-step.js";
+import { generateConsolidatedCountryDataStep } from "./steps/generate-consolidated-country-data-step.js";
 import { removeNonPrimaryEstimatesStep } from "./steps/remove-non-primary-estimates-step.js";
 
 const runEtlMain = async () => {
@@ -59,16 +64,19 @@ const runEtlMain = async () => {
         studySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
-  const { allEstimates } = await pipe(
+  //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
+  const outputFromFirstPipeHalf = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allStudies: allStudiesUnformatted,
       vaccinationData: undefined,
       positiveCaseData: undefined,
+      countryPopulationData: undefined,
       mongoClient
     },
     asyncEtlStep(fetchVaccinationDataStep),
     asyncEtlStep(fetchPositiveCaseDataStep),
+    etlStep(fetchCountryPopulationDataStep),
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanFieldNamesAndRemoveUnusedFieldsStep),
     etlStep(removeRecordsThatAreFlaggedNotToSave),
@@ -77,21 +85,22 @@ const runEtlMain = async () => {
     etlStep(filterStudiesThatDoNotMeetDataStructureRequirement),
     etlStep(transformNotReportedValuesToUndefinedStep),
     etlStep(parseDatesStep),
+  );
+
+  await pipe(
+    outputFromFirstPipeHalf,
     etlStep(calculateSeroprevalenceStep),
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
+    etlStep(generateConsolidatedCountryDataStep),
     etlStep(addVaccinationDataToEstimateStep),
     etlStep(addPositiveCaseDataToEstimateStep),
+    etlStep(addCountryPopulationDataToEstimateStep),
     etlStep(transformIntoFormatForDatabaseStep),
-  );
-
-  await writeDataToMongoEtlStep({
-    databaseName,
-    collectionName: "sarsCov2Estimates",
-    data: allEstimates,
-    mongoClient,
-  });
+    asyncEtlStep(writeCountryDataToMongoDbStep),
+    asyncEtlStep(writeEstimateDataToMongoDbStep),
+  )
 
   console.log("Exiting");
   process.exit(1);

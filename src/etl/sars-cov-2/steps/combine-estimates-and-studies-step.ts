@@ -1,23 +1,34 @@
 import { MongoClient } from "mongodb";
 import {
+  EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+  StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep,
+} from "./remove-records-that-are-flagged-to-not-save-step.js";
+import {
   EstimateFieldsAfterRemovingNonPrimaryEstimatesStep,
+  StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep,
   StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep,
   StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep,
-  StudyFieldsAfterRemovingNonPrimaryEstimatesStep,
+  StudyFieldsAfterRemovingNonPrimaryEstimatesStep
 } from "./remove-non-primary-estimates-step.js";
 
-export type EstimateFieldsAfterCombiningEstimatesAndStudiesStep = EstimateFieldsAfterRemovingNonPrimaryEstimatesStep & {studyName: string | undefined};
-export type StudyFieldsAfterCombiningEstimatesAndStudiesStep = StudyFieldsAfterRemovingNonPrimaryEstimatesStep;
+export type EstimateFieldsAfterCombiningEstimatesAndStudiesStep = EstimateFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep & {studyName: string | undefined};
+export type StudyFieldsAfterCombiningEstimatesAndStudiesStep = StudyFieldsAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep =
-  StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep;
+  StructuredVaccinationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 export type StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep =
-  StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep;
+  StructuredPositiveCaseDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
+export type StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep =
+  StructuredCountryPopulationDataAfterRemovingRecordsThatAreFlaggedNotToSaveStep;
 
 interface CombineEstimatesAndStudiesInput {
   allEstimates: EstimateFieldsAfterRemovingNonPrimaryEstimatesStep[];
   allStudies: StudyFieldsAfterRemovingNonPrimaryEstimatesStep[];
   vaccinationData: StructuredVaccinationDataAfterRemovingNonPrimaryEstimatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterRemovingNonPrimaryEstimatesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterRemovingNonPrimaryEstimatesStep;
   mongoClient: MongoClient;
 }
 
@@ -26,6 +37,7 @@ interface CombineEstimatesAndStudiesOutput {
   allStudies: StudyFieldsAfterCombiningEstimatesAndStudiesStep[];
   vaccinationData: StructuredVaccinationDataAfterCombiningEstimatesAndStudiesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCombiningEstimatesAndStudiesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCombiningEstimatesAndStudiesStep;
   mongoClient: MongoClient;
 }
 
@@ -55,6 +67,7 @@ export const combineEstimatesAndStudies = (
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

@@ -74,3 +74,11 @@ export type StructuredPositiveCaseData = Array<{
     }>
   }>
 }>;
+
+export type StructuredCountryPopulationData = Array<{
+  threeLetterCountryCode: string,
+  data: Array<{
+    year: number,
+    populationEstimate: number
+  }>
+}>

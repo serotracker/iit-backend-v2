@@ -5,6 +5,7 @@ import { GBDSubRegion, GBDSuperRegion, getGBDRegionFromAlphaTwoCode } from "../.
 import { TwoLetterIsoCountryCode, countryNameToTwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 import {
   EstimateFieldsAfterCalculatingSeroprevalenceStep,
+  StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep,
   StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep,
   StructuredVaccinationDataAfterCalculatingSeroprevalenceStep,
   StudyFieldsAfterCalculatingSeroprevalenceStep
@@ -20,12 +21,14 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
 export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCalculatingSeroprevalenceStep;
 export type StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep = StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
 export type StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep = StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
+export type StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep = StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterCalculatingSeroprevalenceStep[];
   allStudies: StudyFieldsAfterCalculatingSeroprevalenceStep[];
   vaccinationData: StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep,
   mongoClient: MongoClient;
 }
 
@@ -34,6 +37,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingCountryAndRegionInformationStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryAndRegionInformationStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryAndRegionInformationStep,
   mongoClient: MongoClient;
 }
 
@@ -71,6 +75,7 @@ export const addCountryAndRegionInformationStep = (input: AddCountryAndRegionInf
     allStudies: input.allStudies,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 }
