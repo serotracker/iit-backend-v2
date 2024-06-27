@@ -38,6 +38,7 @@ export interface AirtableSarsCov2EstimateFields {
   "Prevalence Estimate Name": string | null;
   "SeroTracker Analysis Primary Estimate": boolean;
   "URL": Array<string | null | AirtableError>;
+  "Serum positive prevalence (%)": number | null;
 }
 
 export interface AirtableSarsCov2StudyFields {
