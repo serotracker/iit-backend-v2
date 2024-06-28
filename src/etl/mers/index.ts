@@ -20,6 +20,7 @@ import { cleanCamelPopulationByCountryDataStep } from "./steps/clean-camel-popul
 import { writeFaoYearlyCamelPopulationDataToMongoDbStep } from "./steps/write-fao-yearly-camel-population-data-to-mongodb-step.js";
 import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
 import { generateCamelDataPerCapitaStep } from "./steps/generate-camel-data-per-capita-step.js";
+import { addDatabaseIndexesStep } from "./steps/add-database-indexes-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -73,7 +74,8 @@ const runEtlMain = async () => {
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
-    asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep)
+    asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
+    asyncEtlStep(addDatabaseIndexesStep)
   );
 
   console.log("Exiting");
