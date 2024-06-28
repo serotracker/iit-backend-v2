@@ -242,16 +242,37 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       yearlyFaoCamelPopulationData: yearlyFaoCamelPopulationData.map((document) => transformFaoYearlyCamelPopulationDataDocumentForApi(document))
     }
   }
+  
+  const faoMersEventFilterOptions = async () => {
+    const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
+
+    const [
+      diagnosisSource,
+      animalType,
+      animalSpecies
+    ] = await Promise.all([
+      faoMersEventsCollection.distinct('diagnosisSource').then((element) => filterUndefinedValuesFromArray(element)),
+      faoMersEventsCollection.distinct('animalType').then((element) => filterUndefinedValuesFromArray(element)),
+      faoMersEventsCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
+    ])
+
+    return {
+      diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
+      animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
+      animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
+    }
+  }
 
   return {
     mersResolvers: {
       Query: {
         mersEstimates,
+        mersFilterOptions,
         allFaoMersEventPartitionKeys,
         partitionedFaoMersEvents,
+        faoMersEventFilterOptions,
         yearlyFaoCamelPopulationDataPartitionKeys,
         partitionedYearlyFaoCamelPopulationData,
-        mersFilterOptions
       }
     }
   }

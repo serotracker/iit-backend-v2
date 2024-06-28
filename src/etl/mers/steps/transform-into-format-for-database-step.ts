@@ -85,6 +85,8 @@ export const transformIntoFormatForDatabaseStep = (
           type: MersEventType.HUMAN as const,
           humansAffected: event.humansAffected,
           humanDeaths: event.humanDeaths,
+          animalSpecies: undefined,
+          animalType: undefined
         }
       }
       if(event.type === MersEventType.ANIMAL) {
@@ -95,6 +97,8 @@ export const transformIntoFormatForDatabaseStep = (
             updatedAtForAllRecords
           }),
           type: MersEventType.ANIMAL as const,
+          humansAffected: undefined,
+          humanDeaths: undefined,
           animalSpecies: event.animalSpecies,
           animalType: event.animalType,
         }

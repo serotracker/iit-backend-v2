@@ -129,12 +129,19 @@ export const mersTypedefs = `
     yearlyFaoCamelPopulationData: [YearlyFaoCamelPopulationDataEntry!]!
   }
 
+  type FaoMersEventFilterOptions {
+    diagnosisSource: [MersDiagnosisSource!]!
+    animalType: [MersEventAnimalType!]!
+    animalSpecies: [MersEventAnimalSpecies!]!
+  }
+
   type Query {
     mersEstimates: [MersEstimate!]!
+    mersFilterOptions: MersFilterOptions!
     allFaoMersEventPartitionKeys: [Int!]!
     partitionedFaoMersEvents(input: PartitionedFaoMersEventsInput!): PartitionedFeoMersEventsOutput!
+    faoMersEventFilterOptions: FaoMersEventFilterOptions!
     yearlyFaoCamelPopulationDataPartitionKeys: [Int!]!
     partitionedYearlyFaoCamelPopulationData(input: PartitionedYearlyFaoCamelPopulationDataInput!): PartitionedYearlyFaoCamelPopulationDataOutput!
-    mersFilterOptions: MersFilterOptions!
   }
 `
