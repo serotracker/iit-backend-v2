@@ -14,6 +14,12 @@ import { cleanFaoMersEventFieldsStep } from "./steps/clean-fao-mers-event-fields
 import { parseDatesStep } from "./steps/parse-dates-step.js";
 import { writeFaoMersEventDataToMongoDbStep } from "./steps/write-fao-mers-event-data-to-mongodb-step.js";
 import { assignPartitionsStep } from "./steps/assign-partitions-step.js";
+import { fetchCamelPopulationByCountryDataStep } from "./steps/fetch-camel-population-by-country-data-step.js";
+import { validateCamelPopulationByCountryDataStep } from "./steps/validate-camel-population-by-country-data-step.js";
+import { cleanCamelPopulationByCountryDataStep } from "./steps/clean-camel-population-by-country-data-step.js";
+import { writeFaoYearlyCamelPopulationDataToMongoDbStep } from "./steps/write-fao-yearly-camel-population-data-to-mongodb-step.js";
+import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
+import { generateCamelDataPerCapitaStep } from "./steps/generate-camel-data-per-capita-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -46,12 +52,19 @@ const runEtlMain = async () => {
     {
       allEstimates: allEstimatesUnformatted,
       allFaoMersEvents: [],
+      yearlyCamelPopulationByCountryData: [],
+      countryPopulationData: [],
       mongoClient
     },
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),
     etlStep(cleanFaoMersEventFieldsStep),
+    etlStep(fetchCamelPopulationByCountryDataStep),
+    etlStep(validateCamelPopulationByCountryDataStep),
+    etlStep(cleanCamelPopulationByCountryDataStep),
+    etlStep(fetchCountryPopulationDataStep),
+    etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
@@ -59,7 +72,8 @@ const runEtlMain = async () => {
     etlStep(assignPartitionsStep),
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
-    asyncEtlStep(writeFaoMersEventDataToMongoDbStep) 
+    asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
+    asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep)
   );
 
   console.log("Exiting");

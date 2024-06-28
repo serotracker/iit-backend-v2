@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
+  CountryPopulationDataAfterFetchingFaoMersEventsStep,
   EstimateFieldsAfterFetchingFaoMersEventsStep,
-  FaoMersEventAfterFetchingFaoMersEventsStep
+  FaoMersEventAfterFetchingFaoMersEventsStep,
+  YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep
 } from "./fetch-fao-mers-events-step.js";
 import { MersEventType } from "../../../storage/types.js";
 
@@ -58,16 +60,22 @@ export type EstimateFieldsAfterValidatingFaoMersEventsStep = EstimateFieldsAfter
 export type FaoMersEventAfterValidatingFaoMersEventsStep = 
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
+export type YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep = YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep;
+export type CountryPopulationDataAfterValidatingFaoMersEventsStep = CountryPopulationDataAfterFetchingFaoMersEventsStep;
 
 interface ValidateFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
+  countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
 interface ValidateFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
+  countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -147,6 +155,8 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
   return {
     allEstimates: input.allEstimates,
     allFaoMersEvents: allFaoMersEvents,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

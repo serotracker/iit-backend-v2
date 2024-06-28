@@ -234,6 +234,18 @@ export type FaoMersEventDocument =
   | FaoMersAnimalEventDocument
   | FaoMersHumanEventDocument;
 
+export interface FaoYearlyCamelPopulationDataDocument {
+  _id: ObjectId;
+  partitionKey: number;
+  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  year: number;
+  camelCount: number;
+  camelCountPerCapita: number | undefined;
+  note: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 interface CachedMapboxApiResponseDocumentBase {
   _id: ObjectId;
   mapboxSearchText: string;

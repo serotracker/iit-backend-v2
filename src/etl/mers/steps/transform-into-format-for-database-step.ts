@@ -1,23 +1,31 @@
 import { MongoClient, ObjectId } from "mongodb";
-import { MersEstimateDocument, MersEventType, FaoMersEventDocumentBase } from "../../../storage/types.js";
+import { MersEstimateDocument, MersEventType, FaoMersEventDocumentBase, FaoMersEventDocument, FaoYearlyCamelPopulationDataDocument } from "../../../storage/types.js";
 import {
+  CountryPopulationDataAfterAssigningPartitionsStep,
   EstimateFieldsAfterAssigningPartitionsStep,
-  FaoMersEventAfterAssigningPartitionsStep
+  FaoMersEventAfterAssigningPartitionsStep,
+  YearlyCamelPopulationDataAfterAssigningPartitionsStep
 } from "./assign-partitions-step.js";
 import assertNever from "assert-never";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
-export type FaoMersEventAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
+export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
+export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
+export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterAssigningPartitionsStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
+  countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
   mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
+  countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -93,6 +101,18 @@ export const transformIntoFormatForDatabaseStep = (
       }
       assertNever(event);
     }),
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((element) => ({
+      _id: new ObjectId(),
+      partitionKey: element.partitionKey,
+      countryAlphaThreeCode: element.threeLetterCountryCode,
+      year: element.year,
+      camelCount: element.camelCount,
+      camelCountPerCapita: element.camelCountPerCapita,
+      note: element.note,
+      createdAt: createdAtForAllRecords,
+      updatedAt: updatedAtForAllRecords,
+    })),
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

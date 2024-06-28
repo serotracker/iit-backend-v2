@@ -1,9 +1,11 @@
 import { MongoClient } from "mongodb";
-import { EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { CountryPopulationDataAfterLatLngGenerationStep, EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep, YearlyCamelPopulationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep =
   EstimateFieldsAfterLatLngGenerationStep;
 export type FaoMersEventAfterJitteringPinLatLngStep = FaoMersEventAfterLatLngGenerationStep;
+export type YearlyCamelPopulationDataAfterJitteringPinLatLngStep = YearlyCamelPopulationDataAfterLatLngGenerationStep;
+export type CountryPopulationDataAfterJitteringPinLatLngStep = CountryPopulationDataAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -26,12 +28,16 @@ const jitterNumberValueByAmount = (
 interface JitterPinLatLngStepInput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
+  countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
 interface JitterPinLatLngStepOutput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
+  countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -67,6 +73,8 @@ export const jitterPinLatLngStep = (
         jitterAmount: maximumPinJitterMagnitude,
       }),
     })),
+    countryPopulationData: input.countryPopulationData,
+    yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     mongoClient: input.mongoClient
   };
 };
