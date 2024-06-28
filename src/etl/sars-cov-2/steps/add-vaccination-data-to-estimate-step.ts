@@ -1,12 +1,15 @@
 import { MongoClient } from "mongodb";
 import { add, sub } from 'date-fns';
+import { StructuredVaccinationData } from "../types";
 import {
+  ConsolidatedCountryDataAfterJitteringPinLatLngStep,
+  CountryFieldsAfterJitteringPinLatLngStep,
   EstimateFieldsAfterJitteringPinLatLngStep,
+  StructuredCountryPopulationDataAfterJitteringPinLatLngStep,
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep,
   StructuredVaccinationDataAfterJitteringPinLatLngStep,
-  StudyFieldsAfterJitteringPinLatLngStep,
+  StudyFieldsAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step";
-import { StructuredVaccinationData } from "../types";
 
 interface GetAssociatedDataForEstimateInput<TKey extends keyof Omit<StructuredVaccinationData[number]['data'][number]['data'][number]['data'][number], 'day'>> {
   estimate: {
@@ -102,24 +105,38 @@ export type EstimateFieldsAfterAddingVaccinationDataStep =
     countryPeopleFullyVaccinatedPerHundred: number | undefined;
   };
 export type StudyFieldsAfterAddingVaccinationDataStep = StudyFieldsAfterJitteringPinLatLngStep;
+export type CountryFieldsAfterAddingVaccinationDataStep = CountryFieldsAfterJitteringPinLatLngStep;
 export type StructuredVaccinationDataAfterAddingVaccinationDataStep =
   StructuredVaccinationDataAfterJitteringPinLatLngStep;
 export type StructuredPositiveCaseDataAfterAddingVaccinationDataStep =
   StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+export type StructuredCountryPopulationDataAfterAddingVaccinationDataStep =
+  StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
+export type ConsolidatedCountryDataAfterAddingVaccinationDataStep =
+  ConsolidatedCountryDataAfterJitteringPinLatLngStep & {
+    countryPeopleVaccinatedPerHundred: number | undefined;
+    countryPeopleFullyVaccinatedPerHundred: number | undefined;
+  };
 
 interface AddVaccinationDataToEstimateStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
+  allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
   vaccinationData: StructuredVaccinationDataAfterJitteringPinLatLngStep;
   positiveCaseData: StructuredPositiveCaseDataAfterJitteringPinLatLngStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterJitteringPinLatLngStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
 interface AddVaccinationDataToEstimateStepOutput {
   allEstimates: EstimateFieldsAfterAddingVaccinationDataStep[];
   allStudies: StudyFieldsAfterAddingVaccinationDataStep[];
+  allCountries: CountryFieldsAfterAddingVaccinationDataStep[];
   vaccinationData: StructuredVaccinationDataAfterAddingVaccinationDataStep;
   positiveCaseData: StructuredPositiveCaseDataAfterAddingVaccinationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingVaccinationDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingVaccinationDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -155,8 +172,33 @@ export const addVaccinationDataToEstimateStep = (
       })
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint) => ({
+      ...countryDataPoint,
+      countryPeopleVaccinatedPerHundred: getAssociatedVaccinationDataForEstimate({
+        estimate: {
+          threeLetterCountryCode: countryDataPoint.alphaThreeCode,
+          //Pick a mid date close enough to the middle of the month
+          samplingMidDate: new Date(countryDataPoint.year, countryDataPoint.month - 1, 14)
+        },
+        fieldName: 'countryPeopleVaccinatedPerHundred',
+        vaccinationData: input.vaccinationData,
+        acceptableDayDifferenceRange
+      }),
+      countryPeopleFullyVaccinatedPerHundred: getAssociatedVaccinationDataForEstimate({
+        estimate: {
+          threeLetterCountryCode: countryDataPoint.alphaThreeCode,
+          //Pick a mid date close enough to the middle of the month
+          samplingMidDate: new Date(countryDataPoint.year, countryDataPoint.month - 1, 14)
+        },
+        fieldName: 'countryPeopleFullyVaccinatedPerHundred',
+        vaccinationData: input.vaccinationData,
+        acceptableDayDifferenceRange
+      })
+    })),
     mongoClient: input.mongoClient
   };
 };

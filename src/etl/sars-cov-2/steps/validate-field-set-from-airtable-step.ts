@@ -1,28 +1,42 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
-import { AirtableSarsCov2EstimateFields, AirtableSarsCov2StudyFields } from "../types.js";
-import { EstimateFieldsAfterFetchingPositiveCaseDataStep, StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep, StructuredVaccinationDataAfterFetchingPositiveCaseDataStep, StudyFieldsAfterFetchingPositiveCaseDataStep } from "./fetch-positive-case-data-step.js";
+import { AirtableSarsCov2CountryFields, AirtableSarsCov2EstimateFields, AirtableSarsCov2StudyFields } from "../types.js";
+import {
+  CountryFieldsAfterFetchingCountryPopulationStep,
+  EstimateFieldsAfterFetchingCountryPopulationStep,
+  StructuredCountryPopulationDataAfterFetchingCountryPopulationStep,
+  StructuredPositiveCaseDataAfterFetchingCountryPopulationStep,
+  StructuredVaccinationDataAfterFetchingCountryPopulationStep,
+  StudyFieldsAfterFetchingCountryPopulationStep
+} from "./fetch-country-population-data-step.js";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2EstimateFields;
 export type StudyFieldsAfterValidatingFieldSetFromAirtableStep =
   AirtableSarsCov2StudyFields;
-export type StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep = StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
-export type StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep = StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+export type CountryFieldsAfterValidatingFieldSetFromAirtableStep =
+  AirtableSarsCov2CountryFields;
+export type StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep = StructuredVaccinationDataAfterFetchingCountryPopulationStep;
+export type StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep = StructuredPositiveCaseDataAfterFetchingCountryPopulationStep;
+export type StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep = StructuredCountryPopulationDataAfterFetchingCountryPopulationStep;
 
 interface ValidateFieldSetFromAirtableStepInput {
-  allEstimates: EstimateFieldsAfterFetchingPositiveCaseDataStep[];
-  allStudies: StudyFieldsAfterFetchingPositiveCaseDataStep[];
-  vaccinationData: StructuredVaccinationDataAfterFetchingPositiveCaseDataStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterFetchingPositiveCaseDataStep;
+  allEstimates: EstimateFieldsAfterFetchingCountryPopulationStep[];
+  allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
+  allCountries: CountryFieldsAfterFetchingCountryPopulationStep[];
+  vaccinationData: StructuredVaccinationDataAfterFetchingCountryPopulationStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterFetchingCountryPopulationStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterFetchingCountryPopulationStep;
   mongoClient: MongoClient;
 }
 
 interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   vaccinationData: StructuredVaccinationDataAfterValidatingFieldSetFromAirtableStep;
   positiveCaseData: StructuredPositiveCaseDataAfterValidatingFieldSetFromAirtableStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
   mongoClient: MongoClient;
 }
 
@@ -131,7 +145,10 @@ export const validateFieldSetFromAirtableStep = (
       .transform((field) => field ?? []),
     "SeroTracker Analysis Primary Estimate": z
       .optional(z.boolean())
-      .transform((field) => field ?? false)
+      .transform((field) => field ?? false),
+    "Serum positive prevalence (%)": z
+      .optional(z.number())
+      .transform((field) => field ?? null),
   });
 
   const zodSarsCov2StudyFieldsObject = z.object({
@@ -146,14 +163,28 @@ export const validateFieldSetFromAirtableStep = (
       .transform((field) => field ?? []),
   })
 
+  const zodSarsCov2CountryFieldsObject = z.object({
+    id: z.string(),
+    "Country": z.string(),
+    "Alpha3 Code": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Alpha2 Code": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null)
+  })
+
   const allEstimates = input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate));
   const allStudies = input.allStudies.map((study) => zodSarsCov2StudyFieldsObject.parse(study));
+  const allCountries = input.allCountries.map((country) => zodSarsCov2CountryFieldsObject.parse(country));
 
   return { 
     allEstimates,
     allStudies,
+    allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 };

@@ -108,10 +108,6 @@ export const mersTypedefs = `
     countryIdentifiers: [CountryIdentifiers!]!
     whoRegion: [WHORegion!]!
   }
-    
-  input PartitionedYearlyFaoCamelPopulationDataInput {
-    partitionKey: Int!
-  }
 
   type YearlyFaoCamelPopulationDataEntry {
     id: String!
@@ -122,6 +118,10 @@ export const mersTypedefs = `
     camelCountPerCapita: Float
     whoRegion: WHORegion
     note: String!
+  }
+
+  input PartitionedYearlyFaoCamelPopulationDataInput {
+    partitionKey: Int!
   }
   
   type PartitionedYearlyFaoCamelPopulationDataOutput {

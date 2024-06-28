@@ -2,7 +2,9 @@ import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 import {
+  CountryFieldsAfterParsingDatesStep,
   EstimateFieldsAfterParsingDatesStep,
+  StructuredCountryPopulationDataAfterParsingDatesStep,
   StructuredPositiveCaseDataAfterParsingDatesStep,
   StructuredVaccinationDataAfterParsingDatesStep,
   StudyFieldsAfterParsingDatesStep
@@ -12,22 +14,28 @@ export type EstimateFieldsAfterCalculatingSeroprevalenceStep = EstimateFieldsAft
   seroprevalence: number | undefined;
 };
 export type StudyFieldsAfterCalculatingSeroprevalenceStep = StudyFieldsAfterParsingDatesStep;
+export type CountryFieldsAfterCalculatingSeroprevalenceStep = CountryFieldsAfterParsingDatesStep;
 export type StructuredVaccinationDataAfterCalculatingSeroprevalenceStep = StructuredVaccinationDataAfterParsingDatesStep;
 export type StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep = StructuredPositiveCaseDataAfterParsingDatesStep;
+export type StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep = StructuredCountryPopulationDataAfterParsingDatesStep;
 
 interface CalculateSeroprevalenceStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
+  allCountries: CountryFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterParsingDatesStep;
   mongoClient: MongoClient;
 }
 
 interface CalculateSeroprevalenceStepOutput {
   allEstimates: EstimateFieldsAfterCalculatingSeroprevalenceStep[];
   allStudies: StudyFieldsAfterCalculatingSeroprevalenceStep[];
+  allCountries: CountryFieldsAfterCalculatingSeroprevalenceStep[];
   vaccinationData: StructuredVaccinationDataAfterCalculatingSeroprevalenceStep;
   positiveCaseData: StructuredPositiveCaseDataAfterCalculatingSeroprevalenceStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterCalculatingSeroprevalenceStep;
   mongoClient: MongoClient;
 }
 
@@ -37,15 +45,22 @@ export const calculateSeroprevalenceStep = (input: CalculateSeroprevalenceStepIn
   );
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      ...estimate,
-      seroprevalence: (estimate.denominatorValue !== undefined && estimate.numeratorValue)
-        ? estimate.denominatorValue > 0 ? estimate.numeratorValue / estimate.denominatorValue : 0
-        : undefined
-    })),
+    allEstimates: input.allEstimates.map((estimate) => {
+      const seroprevalenceFromAirtable = estimate.airtableRawSeroprevalence ? estimate.airtableRawSeroprevalence / 100 : undefined;
+      const calculatedSeroprevalence = (estimate.denominatorValue !== undefined && estimate.numeratorValue) ? (
+        estimate.denominatorValue > 0 ? estimate.numeratorValue / estimate.denominatorValue : 0
+      ) : undefined;
+
+      return {
+        ...estimate,
+        seroprevalence: seroprevalenceFromAirtable ?? calculatedSeroprevalence ?? undefined,
+      }
+    }),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 }
