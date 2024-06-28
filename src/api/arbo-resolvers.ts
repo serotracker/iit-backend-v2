@@ -3,6 +3,7 @@ import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "./graphql
 import { Arbovirus, ArbovirusEstimateDocument } from '../storage/types.js';
 import { Arbovirus as ArbovirusForApi } from "./graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi } from "./shared-mappers.js";
+import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
 
 const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.ZIKV]: ArbovirusForApi.Zikv,
@@ -86,6 +87,8 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
   }
 
   const arbovirusFilterOptions = async () => {
+    const estimateCollection = mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates');
+
     const [
       ageGroup,
       antibody,
@@ -101,48 +104,19 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       whoRegion,
       countryIdentifiers
     ] = await Promise.all([
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('assay').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('pathogen').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('pediatricAgeGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('producer').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('serotype').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').aggregate([
-        {
-          $group: {
-            _id: {
-              alphaTwoCode: "$countryAlphaTwoCode"
-            },
-            name: {
-              $first: "$country"
-            },
-            alphaThreeCode: {
-              $first: "$countryAlphaThreeCode"
-            }
-          }
-        },
-        {
-          $project: {
-            "_id": 0,
-            "alphaTwoCode": "$_id.alphaTwoCode",
-            "name": 1,
-            "alphaThreeCode": 1
-          }
-        },
-        {
-          $sort: {
-            name: 1,
-            alphaTwoCode: 1,
-            alphaThreeCode: 1,
-          }
-        }
-      ]).toArray()
+      estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('assay').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('pathogen').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('pediatricAgeGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('producer').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('serotype').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      runCountryIdentifierAggregation({ collection: estimateCollection })
     ])
 
     return {

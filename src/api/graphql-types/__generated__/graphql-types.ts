@@ -6,6 +6,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -19,6 +20,24 @@ export type Scalars = {
 export type Affiliation = {
   __typename?: 'Affiliation';
   label: Scalars['String']['output'];
+};
+
+export type AnimalMersEvent = MersEventInterface & {
+  __typename?: 'AnimalMersEvent';
+  animalSpecies: MersEventAnimalSpecies;
+  animalType: MersEventAnimalType;
+  city: Scalars['String']['output'];
+  country: CountryIdentifiers;
+  diagnosisSource: MersDiagnosisSource;
+  diagnosisStatus: MersDiagnosisStatus;
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  observationDate?: Maybe<Scalars['String']['output']>;
+  reportDate: Scalars['String']['output'];
+  state: Scalars['String']['output'];
+  type: MersEventType;
+  whoRegion?: Maybe<WhoRegion>;
 };
 
 export enum Arbovirus {
@@ -106,6 +125,13 @@ export type CountryIdentifiers = {
   name: Scalars['String']['output'];
 };
 
+export type FaoMersEventFilterOptions = {
+  __typename?: 'FaoMersEventFilterOptions';
+  animalSpecies: Array<MersEventAnimalSpecies>;
+  animalType: Array<MersEventAnimalType>;
+  diagnosisSource: Array<MersDiagnosisSource>;
+};
+
 export enum GbdSubRegion {
   CentralEuropeEasternEuropeAndCentralAsiaSubregionCentralAsia = 'CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_CENTRAL_ASIA',
   CentralEuropeEasternEuropeAndCentralAsiaSubregionCentralEurope = 'CENTRAL_EUROPE_EASTERN_EUROPE_AND_CENTRAL_ASIA_SUBREGION_CENTRAL_EUROPE',
@@ -140,6 +166,87 @@ export enum GbdSuperRegion {
   SubSaharanAfrica = 'SUB_SAHARAN_AFRICA'
 }
 
+export type HumanMersEvent = MersEventInterface & {
+  __typename?: 'HumanMersEvent';
+  city: Scalars['String']['output'];
+  country: CountryIdentifiers;
+  diagnosisSource: MersDiagnosisSource;
+  diagnosisStatus: MersDiagnosisStatus;
+  humanDeaths: Scalars['Int']['output'];
+  humansAffected: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  observationDate?: Maybe<Scalars['String']['output']>;
+  reportDate: Scalars['String']['output'];
+  state: Scalars['String']['output'];
+  type: MersEventType;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export enum MersDiagnosisSource {
+  FaoFieldOfficer = 'FAO_FIELD_OFFICER',
+  Media = 'MEDIA',
+  NationalAuthorities = 'NATIONAL_AUTHORITIES',
+  Publications = 'PUBLICATIONS',
+  WorldHealthOrganization = 'WORLD_HEALTH_ORGANIZATION',
+  WorldOrganisationForAnimalHealth = 'WORLD_ORGANISATION_FOR_ANIMAL_HEALTH'
+}
+
+export enum MersDiagnosisStatus {
+  Confirmed = 'CONFIRMED',
+  Denied = 'DENIED'
+}
+
+export type MersEstimate = {
+  __typename?: 'MersEstimate';
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type MersEvent = AnimalMersEvent | HumanMersEvent;
+
+export enum MersEventAnimalSpecies {
+  Bat = 'BAT',
+  Camel = 'CAMEL'
+}
+
+export enum MersEventAnimalType {
+  Domestic = 'DOMESTIC',
+  Wild = 'WILD'
+}
+
+export type MersEventInterface = {
+  city: Scalars['String']['output'];
+  country: CountryIdentifiers;
+  diagnosisSource: MersDiagnosisSource;
+  diagnosisStatus: MersDiagnosisStatus;
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  observationDate?: Maybe<Scalars['String']['output']>;
+  reportDate: Scalars['String']['output'];
+  state: Scalars['String']['output'];
+  type: MersEventType;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export enum MersEventType {
+  Animal = 'ANIMAL',
+  Human = 'HUMAN'
+}
+
+export type MersFilterOptions = {
+  __typename?: 'MersFilterOptions';
+  countryIdentifiers: Array<CountryIdentifiers>;
+  whoRegion: Array<WhoRegion>;
+};
+
 export enum Month {
   April = 'APRIL',
   August = 'AUGUST',
@@ -171,6 +278,16 @@ export type MonthlySarsCov2CountryInformationEntry = {
   year: Scalars['Int']['output'];
 };
 
+export type PartitionedFaoMersEventsInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type PartitionedFeoMersEventsOutput = {
+  __typename?: 'PartitionedFeoMersEventsOutput';
+  mersEvents: Array<MersEvent>;
+  partitionKey: Scalars['Int']['output'];
+};
+
 export type PartitionedMonthlySarsCov2CountryInformationInput = {
   partitionKey: Scalars['Int']['input'];
 };
@@ -191,19 +308,41 @@ export type PartitionedSarsCov2EstimatesOutput = {
   sarsCov2Estimates: Array<SarsCov2Estimate>;
 };
 
+export type PartitionedYearlyFaoCamelPopulationDataInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type PartitionedYearlyFaoCamelPopulationDataOutput = {
+  __typename?: 'PartitionedYearlyFaoCamelPopulationDataOutput';
+  partitionKey: Scalars['Int']['output'];
+  yearlyFaoCamelPopulationData: Array<YearlyFaoCamelPopulationDataEntry>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  allFaoMersEventPartitionKeys: Array<Scalars['Int']['output']>;
   allMonthlySarsCov2CountryInformationPartitionKeys: Array<Scalars['Int']['output']>;
   allSarsCov2EstimatePartitionKeys: Array<Scalars['Int']['output']>;
   arbovirusDataStatistics: ArbovirusDataStatistics;
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
+  faoMersEventFilterOptions: FaoMersEventFilterOptions;
   groupedTeamMembers: Array<TeamMemberGroup>;
+  mersEstimates: Array<MersEstimate>;
+  mersFilterOptions: MersFilterOptions;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
+  partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
   partitionedMonthlySarsCov2CountryInformation: PartitionedMonthlySarsCov2CountryInformationOutput;
   partitionedSarsCov2Estimates: PartitionedSarsCov2EstimatesOutput;
+  partitionedYearlyFaoCamelPopulationData: PartitionedYearlyFaoCamelPopulationDataOutput;
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
+  yearlyFaoCamelPopulationDataPartitionKeys: Array<Scalars['Int']['output']>;
+};
+
+
+export type QueryPartitionedFaoMersEventsArgs = {
+  input: PartitionedFaoMersEventsInput;
 };
 
 
@@ -214,6 +353,11 @@ export type QueryPartitionedMonthlySarsCov2CountryInformationArgs = {
 
 export type QueryPartitionedSarsCov2EstimatesArgs = {
   input: PartitionedSarsCov2EstimatesInput;
+};
+
+
+export type QueryPartitionedYearlyFaoCamelPopulationDataArgs = {
+  input: PartitionedYearlyFaoCamelPopulationDataInput;
 };
 
 export type SarsCov2Estimate = {
@@ -262,8 +406,10 @@ export type SarsCov2FilterOptions = {
   country: Array<Scalars['String']['output']>;
   countryIdentifiers: Array<CountryIdentifiers>;
   isotypes: Array<Scalars['String']['output']>;
+  populationGroup: Array<Scalars['String']['output']>;
   riskOfBias: Array<Scalars['String']['output']>;
   scope: Array<Scalars['String']['output']>;
+  sex: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
   testType: Array<Scalars['String']['output']>;
   unRegion: Array<UnRegion>;
@@ -324,6 +470,18 @@ export enum WhoRegion {
   Sear = 'SEAR',
   Wpr = 'WPR'
 }
+
+export type YearlyFaoCamelPopulationDataEntry = {
+  __typename?: 'YearlyFaoCamelPopulationDataEntry';
+  camelCount: Scalars['Int']['output'];
+  camelCountPerCapita?: Maybe<Scalars['Float']['output']>;
+  country: CountryIdentifiers;
+  countryAlphaThreeCode: Scalars['String']['output'];
+  id: Scalars['String']['output'];
+  note: Scalars['String']['output'];
+  whoRegion?: Maybe<WhoRegion>;
+  year: Scalars['Int']['output'];
+};
 
 
 
@@ -392,27 +550,51 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+/** Mapping of union types */
+export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
+  MersEvent: ( AnimalMersEvent ) | ( HumanMersEvent );
+};
 
+/** Mapping of interface types */
+export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = {
+  MersEventInterface: ( AnimalMersEvent ) | ( HumanMersEvent );
+};
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Affiliation: ResolverTypeWrapper<Affiliation>;
+  AnimalMersEvent: ResolverTypeWrapper<AnimalMersEvent>;
   Arbovirus: Arbovirus;
   ArbovirusDataStatistics: ResolverTypeWrapper<ArbovirusDataStatistics>;
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   CountryIdentifiers: ResolverTypeWrapper<CountryIdentifiers>;
+  FaoMersEventFilterOptions: ResolverTypeWrapper<FaoMersEventFilterOptions>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   GBDSubRegion: GbdSubRegion;
   GBDSuperRegion: GbdSuperRegion;
+  HumanMersEvent: ResolverTypeWrapper<HumanMersEvent>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  MersDiagnosisSource: MersDiagnosisSource;
+  MersDiagnosisStatus: MersDiagnosisStatus;
+  MersEstimate: ResolverTypeWrapper<MersEstimate>;
+  MersEvent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['MersEvent']>;
+  MersEventAnimalSpecies: MersEventAnimalSpecies;
+  MersEventAnimalType: MersEventAnimalType;
+  MersEventInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['MersEventInterface']>;
+  MersEventType: MersEventType;
+  MersFilterOptions: ResolverTypeWrapper<MersFilterOptions>;
   Month: Month;
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
+  PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
+  PartitionedFeoMersEventsOutput: ResolverTypeWrapper<Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversTypes['MersEvent']> }>;
   PartitionedMonthlySarsCov2CountryInformationInput: PartitionedMonthlySarsCov2CountryInformationInput;
   PartitionedMonthlySarsCov2CountryInformationOutput: ResolverTypeWrapper<PartitionedMonthlySarsCov2CountryInformationOutput>;
   PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
   PartitionedSarsCov2EstimatesOutput: ResolverTypeWrapper<PartitionedSarsCov2EstimatesOutput>;
+  PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
+  PartitionedYearlyFaoCamelPopulationDataOutput: ResolverTypeWrapper<PartitionedYearlyFaoCamelPopulationDataOutput>;
   Query: ResolverTypeWrapper<{}>;
   SarsCov2Estimate: ResolverTypeWrapper<SarsCov2Estimate>;
   SarsCov2FilterOptions: ResolverTypeWrapper<SarsCov2FilterOptions>;
@@ -422,33 +604,64 @@ export type ResolversTypes = {
   TeamMemberSymbol: TeamMemberSymbol;
   UNRegion: UnRegion;
   WHORegion: WhoRegion;
+  YearlyFaoCamelPopulationDataEntry: ResolverTypeWrapper<YearlyFaoCamelPopulationDataEntry>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Affiliation: Affiliation;
+  AnimalMersEvent: AnimalMersEvent;
   ArbovirusDataStatistics: ArbovirusDataStatistics;
   ArbovirusEstimate: ArbovirusEstimate;
   ArbovirusFilterOptions: ArbovirusFilterOptions;
   Boolean: Scalars['Boolean']['output'];
   CountryIdentifiers: CountryIdentifiers;
+  FaoMersEventFilterOptions: FaoMersEventFilterOptions;
   Float: Scalars['Float']['output'];
+  HumanMersEvent: HumanMersEvent;
   Int: Scalars['Int']['output'];
+  MersEstimate: MersEstimate;
+  MersEvent: ResolversUnionTypes<ResolversParentTypes>['MersEvent'];
+  MersEventInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersEventInterface'];
+  MersFilterOptions: MersFilterOptions;
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
+  PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
+  PartitionedFeoMersEventsOutput: Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversParentTypes['MersEvent']> };
   PartitionedMonthlySarsCov2CountryInformationInput: PartitionedMonthlySarsCov2CountryInformationInput;
   PartitionedMonthlySarsCov2CountryInformationOutput: PartitionedMonthlySarsCov2CountryInformationOutput;
   PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
   PartitionedSarsCov2EstimatesOutput: PartitionedSarsCov2EstimatesOutput;
+  PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
+  PartitionedYearlyFaoCamelPopulationDataOutput: PartitionedYearlyFaoCamelPopulationDataOutput;
   Query: {};
   SarsCov2Estimate: SarsCov2Estimate;
   SarsCov2FilterOptions: SarsCov2FilterOptions;
   String: Scalars['String']['output'];
   TeamMember: TeamMember;
   TeamMemberGroup: TeamMemberGroup;
+  YearlyFaoCamelPopulationDataEntry: YearlyFaoCamelPopulationDataEntry;
 };
 
 export type AffiliationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliation'] = ResolversParentTypes['Affiliation']> = {
   label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AnimalMersEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['AnimalMersEvent'] = ResolversParentTypes['AnimalMersEvent']> = {
+  animalSpecies?: Resolver<ResolversTypes['MersEventAnimalSpecies'], ParentType, ContextType>;
+  animalType?: Resolver<ResolversTypes['MersEventAnimalType'], ParentType, ContextType>;
+  city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
+  diagnosisSource?: Resolver<ResolversTypes['MersDiagnosisSource'], ParentType, ContextType>;
+  diagnosisStatus?: Resolver<ResolversTypes['MersDiagnosisStatus'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  observationDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  reportDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEventType'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -528,6 +741,68 @@ export type CountryIdentifiersResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FaoMersEventFilterOptions'] = ResolversParentTypes['FaoMersEventFilterOptions']> = {
+  animalSpecies?: Resolver<Array<ResolversTypes['MersEventAnimalSpecies']>, ParentType, ContextType>;
+  animalType?: Resolver<Array<ResolversTypes['MersEventAnimalType']>, ParentType, ContextType>;
+  diagnosisSource?: Resolver<Array<ResolversTypes['MersDiagnosisSource']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type HumanMersEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersEvent'] = ResolversParentTypes['HumanMersEvent']> = {
+  city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
+  diagnosisSource?: Resolver<ResolversTypes['MersDiagnosisSource'], ParentType, ContextType>;
+  diagnosisStatus?: Resolver<ResolversTypes['MersDiagnosisStatus'], ParentType, ContextType>;
+  humanDeaths?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  humansAffected?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  observationDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  reportDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEventType'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEstimate'] = ResolversParentTypes['MersEstimate']> = {
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEvent'] = ResolversParentTypes['MersEvent']> = {
+  __resolveType: TypeResolveFn<'AnimalMersEvent' | 'HumanMersEvent', ParentType, ContextType>;
+};
+
+export type MersEventInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEventInterface'] = ResolversParentTypes['MersEventInterface']> = {
+  __resolveType: TypeResolveFn<'AnimalMersEvent' | 'HumanMersEvent', ParentType, ContextType>;
+  city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
+  diagnosisSource?: Resolver<ResolversTypes['MersDiagnosisSource'], ParentType, ContextType>;
+  diagnosisStatus?: Resolver<ResolversTypes['MersDiagnosisStatus'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  observationDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  reportDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEventType'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+};
+
+export type MersFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersFilterOptions'] = ResolversParentTypes['MersFilterOptions']> = {
+  countryIdentifiers?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Array<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MonthlySarsCov2CountryInformationEntry'] = ResolversParentTypes['MonthlySarsCov2CountryInformationEntry']> = {
   alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -544,6 +819,12 @@ export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, P
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PartitionedFeoMersEventsOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedFeoMersEventsOutput'] = ResolversParentTypes['PartitionedFeoMersEventsOutput']> = {
+  mersEvents?: Resolver<Array<ResolversTypes['MersEvent']>, ParentType, ContextType>;
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedMonthlySarsCov2CountryInformationOutput'] = ResolversParentTypes['PartitionedMonthlySarsCov2CountryInformationOutput']> = {
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -556,18 +837,31 @@ export type PartitionedSarsCov2EstimatesOutputResolvers<ContextType = any, Paren
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedYearlyFaoCamelPopulationDataOutput'] = ResolversParentTypes['PartitionedYearlyFaoCamelPopulationDataOutput']> = {
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  yearlyFaoCamelPopulationData?: Resolver<Array<ResolversTypes['YearlyFaoCamelPopulationDataEntry']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  allFaoMersEventPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allMonthlySarsCov2CountryInformationPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allSarsCov2EstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
+  faoMersEventFilterOptions?: Resolver<ResolversTypes['FaoMersEventFilterOptions'], ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
+  mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;
+  mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
+  partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
   partitionedMonthlySarsCov2CountryInformation?: Resolver<ResolversTypes['PartitionedMonthlySarsCov2CountryInformationOutput'], ParentType, ContextType, RequireFields<QueryPartitionedMonthlySarsCov2CountryInformationArgs, 'input'>>;
   partitionedSarsCov2Estimates?: Resolver<ResolversTypes['PartitionedSarsCov2EstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedSarsCov2EstimatesArgs, 'input'>>;
+  partitionedYearlyFaoCamelPopulationData?: Resolver<ResolversTypes['PartitionedYearlyFaoCamelPopulationDataOutput'], ParentType, ContextType, RequireFields<QueryPartitionedYearlyFaoCamelPopulationDataArgs, 'input'>>;
   sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
   sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
+  yearlyFaoCamelPopulationDataPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
 };
 
 export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['SarsCov2Estimate'] = ResolversParentTypes['SarsCov2Estimate']> = {
@@ -615,8 +909,10 @@ export type SarsCov2FilterOptionsResolvers<ContextType = any, ParentType extends
   country?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   countryIdentifiers?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  populationGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   riskOfBias?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   scope?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;
@@ -641,19 +937,41 @@ export type TeamMemberGroupResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type YearlyFaoCamelPopulationDataEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['YearlyFaoCamelPopulationDataEntry'] = ResolversParentTypes['YearlyFaoCamelPopulationDataEntry']> = {
+  camelCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  camelCountPerCapita?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  note?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Affiliation?: AffiliationResolvers<ContextType>;
+  AnimalMersEvent?: AnimalMersEventResolvers<ContextType>;
   ArbovirusDataStatistics?: ArbovirusDataStatisticsResolvers<ContextType>;
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;
+  FaoMersEventFilterOptions?: FaoMersEventFilterOptionsResolvers<ContextType>;
+  HumanMersEvent?: HumanMersEventResolvers<ContextType>;
+  MersEstimate?: MersEstimateResolvers<ContextType>;
+  MersEvent?: MersEventResolvers<ContextType>;
+  MersEventInterface?: MersEventInterfaceResolvers<ContextType>;
+  MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
+  PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;
   PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;
   PartitionedSarsCov2EstimatesOutput?: PartitionedSarsCov2EstimatesOutputResolvers<ContextType>;
+  PartitionedYearlyFaoCamelPopulationDataOutput?: PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   SarsCov2Estimate?: SarsCov2EstimateResolvers<ContextType>;
   SarsCov2FilterOptions?: SarsCov2FilterOptionsResolvers<ContextType>;
   TeamMember?: TeamMemberResolvers<ContextType>;
   TeamMemberGroup?: TeamMemberGroupResolvers<ContextType>;
+  YearlyFaoCamelPopulationDataEntry?: YearlyFaoCamelPopulationDataEntryResolvers<ContextType>;
 };
 
