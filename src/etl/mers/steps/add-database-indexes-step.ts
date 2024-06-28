@@ -5,7 +5,7 @@ import {
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep
 } from "./write-fao-yearly-camel-population-data-to-mongodb-step";
-import { getEnvironmentVariableOrThrow } from "../../helpers";
+import { getEnvironmentVariableOrThrow } from "../../helpers.js";
 
 export type EstimateFieldsAfterAddingDatabaseIndexesStep =
   EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
@@ -39,12 +39,12 @@ export const addDatabaseIndexesStep = async(
 
   const databaseName = getEnvironmentVariableOrThrow({ key: "DATABASE_NAME" });
 
-  input.mongoClient.db(databaseName).collection('mersEstimates').dropIndexes()
-  input.mongoClient.db(databaseName).collection('mersFaoEventData').dropIndexes()
-  input.mongoClient.db(databaseName).collection('mersFaoYearlyCamelPopulationData').dropIndexes()
+  await input.mongoClient.db(databaseName).collection('mersEstimates').dropIndexes()
+  await input.mongoClient.db(databaseName).collection('mersFaoEventData').dropIndexes()
+  await input.mongoClient.db(databaseName).collection('mersFaoYearlyCamelPopulationData').dropIndexes()
 
-  input.mongoClient.db(databaseName).collection('mersFaoEventData').createIndex({ partitionKey: 1 })
-  input.mongoClient.db(databaseName).collection('mersFaoYearlyCamelPopulationData').createIndex({ partitionKey: 1 })
+  await input.mongoClient.db(databaseName).collection('mersFaoEventData').createIndex({ partitionKey: 1 })
+  await input.mongoClient.db(databaseName).collection('mersFaoYearlyCamelPopulationData').createIndex({ partitionKey: 1 })
 
   return {
     allEstimates: input.allEstimates,
