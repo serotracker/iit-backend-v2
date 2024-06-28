@@ -13,6 +13,21 @@ export enum Arbovirus {
   MAYV = "MAYV"
 }
 
+export enum Month {
+  JANUARY = "JANUARY",
+  FEBRUARY = "FEBRUARY",
+  MARCH = "MARCH",
+  APRIL = "APRIL",
+  MAY = "MAY",
+  JUNE = "JUNE",
+  JULY = "JULY",
+  AUGUST = "AUGUST",
+  SEPTEMBER = "SEPTEMBER",
+  OCTOBER = "OCTOBER",
+  NOVEMBER = "NOVEMBER",
+  DECEMBER = "DECEMBER"
+}
+
 export const isArbovirus = (arbovirus: string): arbovirus is Arbovirus => Object.values(Arbovirus).some((element) => element === arbovirus);
 
 export interface ArbovirusEstimateDocument {
@@ -110,6 +125,7 @@ export interface SarsCov2EstimateDocument {
   countryPeopleVaccinatedPerHundred: number | undefined;
   countryPeopleFullyVaccinatedPerHundred: number | undefined;
   countryPositiveCasesPerMillionPeople: number | undefined;
+  countryPopulation: number | undefined;
   denominatorValue: number | undefined;
   numeratorValue: number | undefined;
   seroprevalence: number | undefined;
@@ -158,6 +174,24 @@ export enum MersEventAnimalSpecies {
 export enum MersEventType {
   HUMAN = "HUMAN",
   ANIMAL = "ANIMAL"
+}
+
+export interface SarsCov2CountryDataDocument {
+  _id: ObjectId;
+  population: number | undefined;
+  peopleVaccinatedPerHundred: number | undefined;
+  peopleFullyVaccinatedPerHundred: number | undefined;
+  positiveCasesPerMillionPeople: number | undefined;
+  alphaTwoCode: string;
+  alphaThreeCode: string;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+  gbdSuperRegion: GBDSuperRegion | undefined;
+  gbdSubRegion: GBDSubRegion | undefined;
+  month: Month;
+  year: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export enum CachedMapboxApiResponseStatus {

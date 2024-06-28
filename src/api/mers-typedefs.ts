@@ -111,8 +111,11 @@ export const mersTypedefs = `
 
   type Query {
     mersEstimates: [MersEstimate!]!
+<<<<<<< HEAD
     allFaoMersEventPartitionKeys: [Int!]!
     partitionedFaoMersEvents(input: PartitionedFaoMersEventsInput!): PartitionedFeoMersEventsOutput!
+=======
+>>>>>>> 4ad33f8ee212e71f6f5f956b9488286f5a0892f5
     mersFilterOptions: MersFilterOptions!
   }
 `

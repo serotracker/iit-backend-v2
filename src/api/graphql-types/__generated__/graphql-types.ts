@@ -248,6 +248,37 @@ export type PartitionedFeoMersEventsOutput = {
   __typename?: 'PartitionedFeoMersEventsOutput';
   mersEvents: Array<MersEvent>;
   partitionKey: Scalars['Int']['output'];
+}
+
+export enum Month {
+  April = 'APRIL',
+  August = 'AUGUST',
+  December = 'DECEMBER',
+  February = 'FEBRUARY',
+  January = 'JANUARY',
+  July = 'JULY',
+  June = 'JUNE',
+  March = 'MARCH',
+  May = 'MAY',
+  November = 'NOVEMBER',
+  October = 'OCTOBER',
+  September = 'SEPTEMBER'
+}
+
+export type MonthlySarsCov2CountryInformationEntry = {
+  __typename?: 'MonthlySarsCov2CountryInformationEntry';
+  alphaThreeCode: Scalars['String']['output'];
+  alphaTwoCode: Scalars['String']['output'];
+  gbdSubRegion?: Maybe<GbdSubRegion>;
+  gbdSuperRegion?: Maybe<GbdSuperRegion>;
+  month: Month;
+  peopleFullyVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
+  peopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
+  population?: Maybe<Scalars['Int']['output']>;
+  positiveCasesPerMillionPeople?: Maybe<Scalars['Float']['output']>;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+  year: Scalars['Int']['output'];
 };
 
 export type Query = {
@@ -260,6 +291,7 @@ export type Query = {
   mersEstimates: Array<MersEstimate>;
   mersFilterOptions: MersFilterOptions;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
+  monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
 };
@@ -483,6 +515,8 @@ export type ResolversTypes = {
   MersFilterOptions: ResolverTypeWrapper<MersFilterOptions>;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: ResolverTypeWrapper<Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversTypes['MersEvent']> }>;
+  Month: Month;
+  MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
   Query: ResolverTypeWrapper<{}>;
   SarsCov2Estimate: ResolverTypeWrapper<SarsCov2Estimate>;
   SarsCov2FilterOptions: ResolverTypeWrapper<SarsCov2FilterOptions>;
@@ -512,6 +546,7 @@ export type ResolversParentTypes = {
   MersFilterOptions: MersFilterOptions;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversParentTypes['MersEvent']> };
+  MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   Query: {};
   SarsCov2Estimate: SarsCov2Estimate;
   SarsCov2FilterOptions: SarsCov2FilterOptions;
@@ -678,6 +713,21 @@ export type PartitionedFeoMersEventsOutputResolvers<ContextType = any, ParentTyp
   mersEvents?: Resolver<Array<ResolversTypes['MersEvent']>, ParentType, ContextType>;
   partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}
+export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MonthlySarsCov2CountryInformationEntry'] = ResolversParentTypes['MonthlySarsCov2CountryInformationEntry']> = {
+  alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  gbdSubRegion?: Resolver<Maybe<ResolversTypes['GBDSubRegion']>, ParentType, ContextType>;
+  gbdSuperRegion?: Resolver<Maybe<ResolversTypes['GBDSuperRegion']>, ParentType, ContextType>;
+  month?: Resolver<ResolversTypes['Month'], ParentType, ContextType>;
+  peopleFullyVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  peopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  population?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  positiveCasesPerMillionPeople?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -689,6 +739,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
+  monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
   sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
 };
@@ -774,11 +825,12 @@ export type Resolvers<ContextType = any> = {
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;
   HumanMersEvent?: HumanMersEventResolvers<ContextType>;
-  MersEstimate?: MersEstimateResolvers<ContextType>;
   MersEvent?: MersEventResolvers<ContextType>;
   MersEventInterface?: MersEventInterfaceResolvers<ContextType>;
   MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
   PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;
+  MersEstimate?: MersEstimateResolvers<ContextType>;
+  MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   SarsCov2Estimate?: SarsCov2EstimateResolvers<ContextType>;
   SarsCov2FilterOptions?: SarsCov2FilterOptionsResolvers<ContextType>;

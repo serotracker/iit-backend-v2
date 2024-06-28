@@ -39,7 +39,7 @@ export const writeDataToMongoEtlStep = async<TData extends {_id: ObjectId, creat
     .collection(input.collectionName)
     .insertMany(input.data);
 
-  console.log(`Inserted ${insertedCount} records into the database.`);
+  console.log(`Inserted ${insertedCount} records into the ${input.databaseName}.${input.collectionName} database.`);
 
   if(insertedCount === 0) {
     console.log("Not deleting data because no records were inserted. Please investigate.")
@@ -51,7 +51,7 @@ export const writeDataToMongoEtlStep = async<TData extends {_id: ObjectId, creat
     .collection(input.collectionName)
     .deleteMany({ createdAt: { $ne: input.data[0].createdAt } });
 
-  console.log(`Cleared ${deletedCount} records from the database.`);
+  console.log(`Cleared ${deletedCount} records from the ${input.databaseName}.${input.collectionName} database.`);
 }
 
 interface GetEnvironmentVariableOrThrowInput {
