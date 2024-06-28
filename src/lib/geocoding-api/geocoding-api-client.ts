@@ -1,5 +1,4 @@
 import Undici from "undici";
-import { countryNameToTwoLetterIsoCountryCode } from "./country-codes.js";
 import {
   GenerateGeocodingApiRequestParametersInput,
   GeocoderDataType,

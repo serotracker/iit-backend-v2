@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
-import { EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
+import { CountryFieldsAfterTransformingNotReportedValuesToUndefinedStep, EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep, StructuredCountryPopulationDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep, StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep, StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep } from "./transform-not-reported-values-to-undefined-step.js";
 
 export type EstimateFieldsAfterParsingDatesStep = Omit<
   EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
@@ -14,22 +14,28 @@ export type EstimateFieldsAfterParsingDatesStep = Omit<
   publicationDate: Date | undefined;
 };
 export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep;
+export type CountryFieldsAfterParsingDatesStep = CountryFieldsAfterTransformingNotReportedValuesToUndefinedStep;
 export type StructuredVaccinationDataAfterParsingDatesStep = StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
 export type StructuredPositiveCaseDataAfterParsingDatesStep = StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
+export type StructuredCountryPopulationDataAfterParsingDatesStep = StructuredCountryPopulationDataAfterTransformingNotReportedValuesToUndefinedStep;
 
 interface ParseDatesStepInput {
   allEstimates: EstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allStudies: StudyFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  allCountries: CountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingNotReportedValuesToUndefinedStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingNotReportedValuesToUndefinedStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterTransformingNotReportedValuesToUndefinedStep;
   mongoClient: MongoClient;
 }
 
 interface ParseDatesStepOutput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
+  allCountries: CountryFieldsAfterParsingDatesStep[];
   vaccinationData: StructuredVaccinationDataAfterParsingDatesStep;
   positiveCaseData: StructuredPositiveCaseDataAfterParsingDatesStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterParsingDatesStep;
   mongoClient: MongoClient;
 }
 
@@ -54,8 +60,10 @@ export const parseDatesStep = (input: ParseDatesStepInput): ParseDatesStepOutput
       };
     }),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
     mongoClient: input.mongoClient
   };
 }

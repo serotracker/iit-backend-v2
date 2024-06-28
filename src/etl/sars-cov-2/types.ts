@@ -38,11 +38,19 @@ export interface AirtableSarsCov2EstimateFields {
   "Prevalence Estimate Name": string | null;
   "SeroTracker Analysis Primary Estimate": boolean;
   "URL": Array<string | null | AirtableError>;
+  "Serum positive prevalence (%)": number | null;
 }
 
 export interface AirtableSarsCov2StudyFields {
   id: string;
   "Source Name (from Rapid Review: Source)": Array<string | null | AirtableError>;
+}
+
+export interface AirtableSarsCov2CountryFields {
+  id: string;
+  "Country": string;
+  "Alpha3 Code": string | null;
+  "Alpha2 Code": string | null;
 }
 
 export type StructuredVaccinationData = Array<{
@@ -73,3 +81,11 @@ export type StructuredPositiveCaseData = Array<{
     }>
   }>
 }>;
+
+export type StructuredCountryPopulationData = Array<{
+  threeLetterCountryCode: string,
+  data: Array<{
+    year: number,
+    populationEstimate: number
+  }>
+}>

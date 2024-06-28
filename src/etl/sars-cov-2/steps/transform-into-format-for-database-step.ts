@@ -1,46 +1,70 @@
 import { ObjectId, MongoClient } from "mongodb";
-import { SarsCov2EstimateDocument } from "../../../storage/types.js";
-import { 
-  EstimateFieldsAfterAddingPositiveCaseDataStep,
-  StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep,
-  StructuredVaccinationDataAfterAddingPositiveCaseDataStep,
-  StudyFieldsAfterAddingPositiveCaseDataStep
-} from "./add-positive-case-data-to-estimate-step.js";
+import { Month, SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../../../storage/types.js";
+import {
+  ConsolidatedCountryDataAfterAddingCountryPopulationDataStep,
+  CountryFieldsAfterAddingCountryPopulationDataStep,
+  EstimateFieldsAfterAddingCountryPopulationDataStep,
+  StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep,
+  StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep,
+  StructuredVaccinationDataAfterAddingCountryPopulationDataStep,
+  StudyFieldsAfterAddingCountryPopulationDataStep
+} from "./add-country-population-data-to-estimate-step.js";
 
-export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAddingPositiveCaseDataStep;
-export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
-export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+export type EstimateFieldsAfterTransformingFormatForDatabaseStep = SarsCov2EstimateDocument;
+export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAddingCountryPopulationDataStep;
+export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterAddingCountryPopulationDataStep;
+export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
+export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
+export type StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep = StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
+export type ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep = SarsCov2CountryDataDocument;
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: EstimateFieldsAfterAddingPositiveCaseDataStep[];
-  allStudies: StudyFieldsAfterAddingPositiveCaseDataStep[];
-  vaccinationData: StructuredVaccinationDataAfterAddingPositiveCaseDataStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterAddingPositiveCaseDataStep;
+  allEstimates: EstimateFieldsAfterAddingCountryPopulationDataStep[];
+  allStudies: StudyFieldsAfterAddingCountryPopulationDataStep[];
+  allCountries: CountryFieldsAfterAddingCountryPopulationDataStep[];
+  vaccinationData: StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAddingCountryPopulationDataStep[];
   mongoClient: MongoClient;
 }
 
 interface TransformIntoFormatForDatabaseStepOutput {
-  allEstimates: SarsCov2EstimateDocument[];
+  allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
+  allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
   vaccinationData: StructuredVaccinationDataAfterTransformingFormatForDatabaseStep;
   positiveCaseData: StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
-  const { allEstimates } = input;
-
-  console.log(
-    `Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`
-  );
+  console.log(`Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
 
+  const monthNumberToMonthEnumMap: Record<number, Month | undefined> = {
+    1: Month.JANUARY,
+    2: Month.FEBRUARY,
+    3: Month.MARCH,
+    4: Month.APRIL,
+    5: Month.MAY,
+    6: Month.JUNE,
+    7: Month.JULY,
+    8: Month.AUGUST,
+    9: Month.SEPTEMBER,
+    10: Month.OCTOBER,
+    11: Month.NOVEMBER,
+    12: Month.DECEMBER,
+  }
+
   return {
-    allEstimates: allEstimates.map((estimate) => ({
+    allEstimates: input.allEstimates.map((estimate) => ({
       _id: new ObjectId(),
       antibodies: estimate.antibodies,
       isotypes: estimate.isotypes,
@@ -77,12 +101,34 @@ export const transformIntoFormatForDatabaseStep = (
       seroprevalence: estimate.seroprevalence,
       estimateName: estimate.estimateName,
       url: estimate.url,
+      countryPopulation: estimate.countryPopulation,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     vaccinationData: input.vaccinationData,
     positiveCaseData: input.positiveCaseData,
+    countryPopulationData: input.countryPopulationData,
+    consolidatedCountryData: input.consolidatedCountryData.map((countryDataPoint) => ({
+      _id: new ObjectId(),
+      population: countryDataPoint.countryPopulation,
+      peopleVaccinatedPerHundred: countryDataPoint.countryPeopleVaccinatedPerHundred,
+      peopleFullyVaccinatedPerHundred: countryDataPoint.countryPeopleFullyVaccinatedPerHundred,
+      positiveCasesPerMillionPeople: countryDataPoint.countryPositiveCasesPerMillionPeople,
+      alphaTwoCode: countryDataPoint.alphaTwoCode,
+      alphaThreeCode: countryDataPoint.alphaThreeCode,
+      month: monthNumberToMonthEnumMap[countryDataPoint.month],
+      year: countryDataPoint.year,
+      unRegion: countryDataPoint.unRegion,
+      whoRegion: countryDataPoint.whoRegion,
+      gbdSuperRegion: countryDataPoint.gbdSuperRegion,
+      gbdSubRegion: countryDataPoint.gbdSubRegion,
+      createdAt: createdAtForAllRecords,
+      updatedAt: createdAtForAllRecords
+    })).filter((countryDataPoint): countryDataPoint is Omit<typeof countryDataPoint, 'month'> & {
+      month: NonNullable<typeof countryDataPoint['month']>
+    } => !!countryDataPoint.month),
     mongoClient: input.mongoClient
   };
 };

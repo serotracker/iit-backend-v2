@@ -18,7 +18,6 @@ import {
   GeocodingApiRequestLogLevel,
   RecordGeocodingApiRequestInGeocodingReportInput,
 } from "./geocoding-api-request-report-generator-types.js";
-import { countryNameToTwoLetterIsoCountryCode } from "./country-codes.js"
 import { isPointInBoundingBox } from "./coordinate-helpers.js";
 
 const redactMapboxApiKeyFromGeocodingApiQueryUrl = (
