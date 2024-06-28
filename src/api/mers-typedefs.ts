@@ -112,9 +112,11 @@ export const mersTypedefs = `
   type YearlyFaoCamelPopulationDataEntry {
     id: String!
     countryAlphaThreeCode: String!
+    country: CountryIdentifiers!
     year: Int!
     camelCount: Int!
     camelCountPerCapita: Float
+    whoRegion: WHORegion
     note: String!
   }
 

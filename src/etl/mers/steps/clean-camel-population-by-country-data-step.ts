@@ -11,6 +11,8 @@ export type EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep = Estima
 export type FaoMersEventAfterCleaningCamelPopulationByCountryDataStep = FaoMersEventAfterValidatingCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep = {
   threeLetterCountryCode: ThreeLetterIsoCountryCode;
+  twoLetterCountryCode: TwoLetterIsoCountryCode;
+  countryName: string;
   year: number;
   camelCount: number;
   note: string;
@@ -99,6 +101,8 @@ export const cleanCamelPopulationByCountryDataStep = (
 
       return {
         threeLetterCountryCode: countryCodesForData.countryAlphaThreeCode,
+        twoLetterCountryCode: countryCodesForData.countryAlphaTwoCode,
+        countryName: element.Country,
         year,
         camelCount: camelCount,
         note: element["Stocks (Head) flag"]
