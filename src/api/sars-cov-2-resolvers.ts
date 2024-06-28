@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
 import { SarsCov2Estimate, QueryResolvers, CountryIdentifiers, MonthlySarsCov2CountryInformationEntry } from "./graphql-types/__generated__/graphql-types";
 import { SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../storage/types";
 import { mapGbdSubRegionForApi, mapGbdSuperRegionForApi, mapMonthForApi, mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
@@ -84,6 +85,8 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
   }
 
   const sarsCov2FilterOptions = async () => {
+    const estimateCollection = mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates');
+
     const [
       ageGroup,
       country,
@@ -99,48 +102,19 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       testType,
       countryIdentifiers
     ] = await Promise.all([
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('scope').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('populationGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('riskOfBias').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').distinct('testType').then((elements) => filterUndefinedValuesFromArray(elements)),
-      mongoClient.db(databaseName).collection<SarsCov2EstimateDocument>('sarsCov2Estimates').aggregate([
-        {
-          $group: {
-            _id: {
-              alphaTwoCode: "$countryAlphaTwoCode"
-            },
-            name: {
-              $first: "$country"
-            },
-            alphaThreeCode: {
-              $first: "$countryAlphaThreeCode"
-            }
-          }
-        },
-        {
-          $project: {
-            "_id": 0,
-            "alphaTwoCode": "$_id.alphaTwoCode",
-            "name": 1,
-            "alphaThreeCode": 1
-          }
-        },
-        {
-          $sort: {
-            name: 1,
-            alphaTwoCode: 1,
-            alphaThreeCode: 1,
-          }
-        }
-      ]).toArray()
+      estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('scope').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('populationGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('riskOfBias').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('testType').then((elements) => filterUndefinedValuesFromArray(elements)),
+      runCountryIdentifierAggregation({ collection: estimateCollection })
     ])
 
     return {
@@ -156,7 +130,7 @@ export const generateSarsCov2Resolvers = (input: GenerateSarsCov2ResolversInput)
       antibodies,
       isotypes,
       testType,
-      countryIdentifiers: countryIdentifiers as CountryIdentifiers[]
+      countryIdentifiers
     }
   }
 

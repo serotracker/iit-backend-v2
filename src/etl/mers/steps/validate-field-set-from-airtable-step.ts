@@ -4,14 +4,17 @@ import { FieldSet } from "airtable";
 import { AirtableMersEstimateFields } from "../types";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMersEstimateFields;
+export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
+  allFaoMersEvents: never[];
   mongoClient: MongoClient;
 }
 
 interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -30,6 +33,7 @@ export const validateFieldSetFromAirtableStep = (
 
   return {
     allEstimates,
+    allFaoMersEvents: input.allFaoMersEvents,
     mongoClient: input.mongoClient
   }
 }

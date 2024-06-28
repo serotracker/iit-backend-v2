@@ -8,6 +8,12 @@ import { writeEstimateDataToMongoDbStep } from "./steps/write-estimate-data-to-m
 import { addCountryAndRegionInformationStep } from "./steps/add-country-and-region-information-step.js";
 import { latLngGenerationStep } from "./steps/lat-lng-generation-step.js";
 import { jitterPinLatLngStep } from "./steps/jitter-pin-lat-lng-step.js";
+import { fetchFaoMersEventsStep } from "./steps/fetch-fao-mers-events-step.js";
+import { validateFaoMersEventsStep } from "./steps/validate-fao-mers-events-step.js";
+import { cleanFaoMersEventFieldsStep } from "./steps/clean-fao-mers-event-fields-step.js";
+import { parseDatesStep } from "./steps/parse-dates-step.js";
+import { writeFaoMersEventDataToMongoDbStep } from "./steps/write-fao-mers-event-data-to-mongodb-step.js";
+import { assignPartitionsStep } from "./steps/assign-partitions-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -39,14 +45,21 @@ const runEtlMain = async () => {
   await pipe(
     {
       allEstimates: allEstimatesUnformatted,
+      allFaoMersEvents: [],
       mongoClient
     },
     etlStep(validateFieldSetFromAirtableStep),
+    etlStep(fetchFaoMersEventsStep),
+    etlStep(validateFaoMersEventsStep),
+    etlStep(cleanFaoMersEventFieldsStep),
+    etlStep(parseDatesStep),
     etlStep(addCountryAndRegionInformationStep),
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
+    etlStep(assignPartitionsStep),
     etlStep(transformIntoFormatForDatabaseStep),
-    asyncEtlStep(writeEstimateDataToMongoDbStep) 
+    asyncEtlStep(writeEstimateDataToMongoDbStep),
+    asyncEtlStep(writeFaoMersEventDataToMongoDbStep) 
   );
 
   console.log("Exiting");

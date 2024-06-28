@@ -1,17 +1,21 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
-import { EstimateFieldsAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
+import { EstimateFieldsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
 
-type EstimateFieldsAfterWritingEstimateToMongodbStep =
+export type EstimateFieldsAfterWritingEstimateToMongodbStep =
   EstimateFieldsAfterTransformingFormatForDatabaseStep;
+export type FaoMersEventAfterWritingEstimateToMongodbStep =
+  FaoMersEventAfterTransformingFormatForDatabaseStep;
 
 interface WriteEstimateDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
+  allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
 interface WriteEstimateDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
+  allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -31,6 +35,7 @@ export const writeEstimateDataToMongoDbStep = async(
 
   return {
     allEstimates: input.allEstimates,
+    allFaoMersEvents: input.allFaoMersEvents,
     mongoClient: input.mongoClient
   };
 };
