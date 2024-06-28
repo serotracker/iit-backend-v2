@@ -3,10 +3,12 @@ import {
   WhoRegion as WhoRegionForApi,
   GbdSubRegion as GBDSubRegionForApi,
   GbdSuperRegion as GBDSuperRegionForApi,
+  Month as MonthForApi
 } from "./graphql-types/__generated__/graphql-types.js";
 import { UNRegion } from "../lib/un-regions.js";
 import { WHORegion } from "../lib/who-regions.js";
 import { GBDSuperRegion, GBDSubRegion } from "../lib/gbd-regions.js";
+import { Month } from "../storage/types.js";
 
 const unRegionMap: {[key in UNRegion]: UnRegionForApi} = {
   [UNRegion.NORTHERN_AFRICA]: UnRegionForApi.NorthernAfrica,
@@ -31,6 +33,21 @@ const unRegionMap: {[key in UNRegion]: UnRegionForApi} = {
   [UNRegion.MELANESIA]: UnRegionForApi.Melanesia,
   [UNRegion.MICRONESIA]: UnRegionForApi.Micronesia,
   [UNRegion.POLYNESIA]: UnRegionForApi.Polynesia,
+}
+
+const monthMap: {[key in Month]: MonthForApi} = {
+  [Month.JANUARY]: MonthForApi.January,
+  [Month.FEBRUARY]: MonthForApi.February,
+  [Month.MARCH]: MonthForApi.March,
+  [Month.APRIL]: MonthForApi.April,
+  [Month.MAY]: MonthForApi.May,
+  [Month.JUNE]: MonthForApi.June,
+  [Month.JULY]: MonthForApi.July,
+  [Month.AUGUST]: MonthForApi.August,
+  [Month.SEPTEMBER]: MonthForApi.September,
+  [Month.OCTOBER]: MonthForApi.October,
+  [Month.NOVEMBER]: MonthForApi.November,
+  [Month.DECEMBER]: MonthForApi.December
 }
 
 const whoRegionMap: {[key in WHORegion]: WhoRegionForApi} = {
@@ -78,5 +95,6 @@ const gbSubRegionMap: {[key in GBDSubRegion]: GBDSubRegionForApi} = {
 
 export const mapUnRegionForApi = (unRegion: UNRegion): UnRegionForApi => unRegionMap[unRegion];
 export const mapWhoRegionForApi = (whoRegion: WHORegion): WhoRegionForApi => whoRegionMap[whoRegion];
+export const mapMonthForApi = (month: Month): MonthForApi => monthMap[month];
 export const mapGbdSubRegionForApi = (gbdSubRegion: GBDSubRegion): GBDSubRegionForApi => gbSubRegionMap[gbdSubRegion];
 export const mapGbdSuperRegionForApi = (gbdSuperRegion: GBDSuperRegion): GBDSuperRegionForApi => gbSuperRegionMap[gbdSuperRegion];

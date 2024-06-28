@@ -8,6 +8,21 @@ export const sharedTypedefs = `
     WPR
   }
 
+  enum Month {
+    JANUARY
+    FEBRUARY
+    MARCH
+    APRIL
+    MAY
+    JUNE
+    JULY
+    AUGUST
+    SEPTEMBER
+    OCTOBER
+    NOVEMBER
+    DECEMBER
+  }
+
   enum UNRegion {
     NORTHERN_AFRICA
     EASTERN_AFRICA
