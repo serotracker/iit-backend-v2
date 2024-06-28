@@ -130,6 +130,7 @@ export interface SarsCov2EstimateDocument {
   numeratorValue: number | undefined;
   seroprevalence: number | undefined;
   estimateName: string | undefined;
+  partitionKey: number;
   url: string | undefined;
   createdAt: Date;
   updatedAt: Date;
@@ -190,6 +191,7 @@ export interface SarsCov2CountryDataDocument {
   gbdSubRegion: GBDSubRegion | undefined;
   month: Month;
   year: number;
+  partitionKey: number;
   createdAt: Date;
   updatedAt: Date;
 }

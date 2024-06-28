@@ -1,31 +1,31 @@
 import { ObjectId, MongoClient } from "mongodb";
 import { Month, SarsCov2CountryDataDocument, SarsCov2EstimateDocument } from "../../../storage/types.js";
 import {
-  ConsolidatedCountryDataAfterAddingCountryPopulationDataStep,
-  CountryFieldsAfterAddingCountryPopulationDataStep,
-  EstimateFieldsAfterAddingCountryPopulationDataStep,
-  StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep,
-  StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep,
-  StructuredVaccinationDataAfterAddingCountryPopulationDataStep,
-  StudyFieldsAfterAddingCountryPopulationDataStep
-} from "./add-country-population-data-to-estimate-step.js";
+  ConsolidatedCountryDataAfterAssigningPartitionStep,
+  CountryFieldsAfterAssigningPartitionStep,
+  EstimateFieldsAfterAssigningPartitionStep,
+  StructuredCountryPopulationDataAfterAssigningPartitionStep,
+  StructuredPositiveCaseDataAfterAssigningPartitionStep,
+  StructuredVaccinationDataAfterAssigningPartitionStep,
+  StudyFieldsAfterAssigningPartitionStep
+} from "./assign-partitions-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = SarsCov2EstimateDocument;
-export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAddingCountryPopulationDataStep;
-export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterAddingCountryPopulationDataStep;
-export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
-export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
-export type StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep = StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
+export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAssigningPartitionStep;
+export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterAssigningPartitionStep;
+export type StructuredVaccinationDataAfterTransformingFormatForDatabaseStep = StructuredVaccinationDataAfterAssigningPartitionStep;
+export type StructuredPositiveCaseDataAfterTransformingFormatForDatabaseStep = StructuredPositiveCaseDataAfterAssigningPartitionStep;
+export type StructuredCountryPopulationDataAfterTransformingFormatForDatabaseStep = StructuredCountryPopulationDataAfterAssigningPartitionStep;
 export type ConsolidatedCountryDataAfterTransformingFormatForDatabaseStep = SarsCov2CountryDataDocument;
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: EstimateFieldsAfterAddingCountryPopulationDataStep[];
-  allStudies: StudyFieldsAfterAddingCountryPopulationDataStep[];
-  allCountries: CountryFieldsAfterAddingCountryPopulationDataStep[];
-  vaccinationData: StructuredVaccinationDataAfterAddingCountryPopulationDataStep;
-  positiveCaseData: StructuredPositiveCaseDataAfterAddingCountryPopulationDataStep;
-  countryPopulationData: StructuredCountryPopulationDataAfterAddingCountryPopulationDataStep;
-  consolidatedCountryData: ConsolidatedCountryDataAfterAddingCountryPopulationDataStep[];
+  allEstimates: EstimateFieldsAfterAssigningPartitionStep[];
+  allStudies: StudyFieldsAfterAssigningPartitionStep[];
+  allCountries: CountryFieldsAfterAssigningPartitionStep[];
+  vaccinationData: StructuredVaccinationDataAfterAssigningPartitionStep;
+  positiveCaseData: StructuredPositiveCaseDataAfterAssigningPartitionStep;
+  countryPopulationData: StructuredCountryPopulationDataAfterAssigningPartitionStep;
+  consolidatedCountryData: ConsolidatedCountryDataAfterAssigningPartitionStep[];
   mongoClient: MongoClient;
 }
 
@@ -102,6 +102,7 @@ export const transformIntoFormatForDatabaseStep = (
       estimateName: estimate.estimateName,
       url: estimate.url,
       countryPopulation: estimate.countryPopulation,
+      partitionKey: estimate.partitionKey,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
@@ -124,6 +125,7 @@ export const transformIntoFormatForDatabaseStep = (
       whoRegion: countryDataPoint.whoRegion,
       gbdSuperRegion: countryDataPoint.gbdSuperRegion,
       gbdSubRegion: countryDataPoint.gbdSubRegion,
+      partitionKey: countryDataPoint.partitionKey,
       createdAt: createdAtForAllRecords,
       updatedAt: createdAtForAllRecords
     })).filter((countryDataPoint): countryDataPoint is Omit<typeof countryDataPoint, 'month'> & {
