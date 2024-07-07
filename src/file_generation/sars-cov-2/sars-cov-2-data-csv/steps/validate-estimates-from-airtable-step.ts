@@ -25,6 +25,20 @@ export interface EstimateFieldsAfterValidatingEstimatesFromAirtableStep {
   "Sub-grouping Variable": string | null;
   "Sub-group specific category (clean)": string | null;
   "Denominator Value": number | null;
+  "Serum positive prevalence": number | null;
+  "estimate check 95% lower bound": number | string | null;
+  "estimate check 95% upper bound": number | string | null;
+  "SeroTracker Analysis Primary Estimate": boolean | null;
+  "Test Adjustment": boolean | null;
+  "Population Adjustment": boolean | null;
+  "Clustering Adjustment": boolean | null;
+  "Academic Primary Estimate": boolean | null;
+  "Sampling Method": string | null;
+  "Test Name": string | null;
+  "Test Manufacturer": string | null;
+  "Test Type": string | null;
+  "Specimen Type": string | null;
+  "Isotype(s) Reported (Reviewer)": Array<string | null>;
 };
 
 interface ValidateEstimatesFromAirtableStepInput {
@@ -106,6 +120,54 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
     "Denominator Value": z
       .optional(z.number().nullable())
       .transform((field) => field ?? null),
+    "Serum positive prevalence": z
+      .optional(z.number().nullable())
+      .transform((field) => field ?? null),
+    "estimate check 95% lower bound": z
+      .optional(z.union([
+        z.number(),
+        z.string(),
+      ]).nullable())
+      .transform((field) => field ?? null),
+    "estimate check 95% upper bound": z
+      .optional(z.union([
+        z.number(),
+        z.string(),
+      ]).nullable())
+      .transform((field) => field ?? null),
+    "SeroTracker Analysis Primary Estimate": z
+      .optional(z.boolean())
+      .transform((field) => field ?? null),
+    "Test Adjustment": z
+      .optional(z.boolean())
+      .transform((field) => field ?? null),
+    "Population Adjustment": z
+      .optional(z.boolean())
+      .transform((field) => field ?? null),
+    "Clustering Adjustment": z
+      .optional(z.boolean())
+      .transform((field) => field ?? null),
+    "Academic Primary Estimate": z
+      .optional(z.boolean())
+      .transform((field) => field ?? null),
+    "Sampling Method": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Test Name": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Test Manufacturer": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Test Type": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Specimen Type": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Isotype(s) Reported (Reviewer)": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
   })
 
   return {

@@ -1,5 +1,6 @@
 import { writeFileSync } from 'fs';
 import { EstimateFieldsAfterFilteringEstimatesWhichDontMeetDataStructureRequirementsStep } from './filter-estimates-which-dont-meet-data-structure-requirements';
+import { isArrayOfUnknownType } from '../../../../lib/lib.js';
 
 export type EstimateFieldsAfterWritingEstimatesToCsvStep = EstimateFieldsAfterFilteringEstimatesWhichDontMeetDataStructureRequirementsStep;
 
@@ -37,7 +38,22 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
     age_min: estimate.ageMinimum,
     age_max: estimate.ageMaximum,
     subgroup_var: estimate.subgroupingVariable,
-    subgroup_specific_category: estimate.subgroupCategory
+    subgroup_specific_category: estimate.subgroupCategory,
+    denominator_value: estimate.denominatorValue,
+    serum_pos_prevalence: estimate.seroprevalence,
+    seroprev_95_ci_lower: estimate.confidenceInterval95PercentLowerBound,
+    seroprev_95_ci_upper: estimate.confidenceInterval95PercentUpperBound,
+    dashboard_primary_estimate: estimate.isSeroTrackerPrimaryEstimate,
+    test_adj: estimate.isTestAdjusted,
+    pop_adj: estimate.isPopulationAdjusted,
+    clustering_adjustment: estimate.isClusteringAdjusted,
+    academic_primary_estimate: estimate.isAcademicPrimaryEstimate,
+    sampling_method: estimate.samplingMethod,
+    test_name: estimate.testName,
+    test_manufacturer: estimate.testManufacturer,
+    test_type: estimate.testType,
+    specimen_type: estimate.specimenType,
+    isotypes: estimate.reportedIsotypes,
   }))
 
   const fieldNames = [
@@ -61,7 +77,22 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
     'age_min',
     'age_max',
     'subgroup_var',
-    'subgroup_specific_category'
+    'subgroup_specific_category',
+    'denominator_value',
+    'serum_pos_prevalence',
+    'seroprev_95_ci_lower',
+    'seroprev_95_ci_upper',
+    'dashboard_primary_estimate',
+    'test_adj',
+    'pop_adj',
+    'clustering_adjustment',
+    'academic_primary_estimate',
+    'sampling_method',
+    'test_name',
+    'test_manufacturer',
+    'test_type',
+    'specimen_type',
+    'isotypes',
   ] as const;
 
   const headersForCsv = fieldNames.join(',')
@@ -80,6 +111,24 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
       .map((value) => {
         if(typeof value === 'number') {
           return formatValueForCsv(value.toString());
+        }
+
+        if(typeof value === 'boolean') {
+          return value === true
+            ? 'True'
+            : 'False'
+        }
+
+        if(isArrayOfUnknownType(value)) {
+          if(value.length === 0) {
+            return ""
+          }
+
+          if(value.length === 1) {
+            return `[${value}]`;
+          }
+
+          return `"[${value.join(',')}]"`;
         }
 
         return formatValueForCsv(value);

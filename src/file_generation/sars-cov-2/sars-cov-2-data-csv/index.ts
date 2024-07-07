@@ -5,6 +5,7 @@ import { validateEstimatesFromAirtableStep } from "./steps/validate-estimates-fr
 import { cleanEstimatesFromAirtableStep } from "./steps/clean-estimates-from-airtable-step.js";
 import { writeEstimatesToCsvStep } from "./steps/write-estimates-to-csv-step.js";
 import { filterEstimatesWhichDontMeetDataStructureRequirements } from "./steps/filter-estimates-which-dont-meet-data-structure-requirements.js";
+import { cleanBadValuesFromEstimatesStep } from "./steps/clean-bad-values-from-estimates-step.js";
 
 const generateSarsCov2DataCsv = async () => {
   console.log("Generating SarsCov2 Data CSV");
@@ -273,6 +274,7 @@ const generateSarsCov2DataCsv = async () => {
     },
     validateEstimatesFromAirtableStep,
     cleanEstimatesFromAirtableStep,
+    cleanBadValuesFromEstimatesStep,
     filterEstimatesWhichDontMeetDataStructureRequirements,
     writeEstimatesToCsvStep
   );

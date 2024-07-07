@@ -23,6 +23,21 @@ export interface EstimateFieldsAfterCleaningEstimatesFromAirtableStep {
   ageMaximum: number | null;
   subgroupingVariable: string | null;
   subgroupCategory: string | null;
+  denominatorValue: number | null;
+  seroprevalence: number | null;
+  confidenceInterval95PercentLowerBound: number | string | null;
+  confidenceInterval95PercentUpperBound: number | string | null;
+  isSeroTrackerPrimaryEstimate: boolean | null;
+  isTestAdjusted: boolean | null;
+  isPopulationAdjusted: boolean | null;
+  isClusteringAdjusted: boolean | null;
+  isAcademicPrimaryEstimate: boolean | null;
+  samplingMethod: string | null;
+  testName: string | null;
+  testManufacturer: string | null;
+  testType: string | null;
+  specimenType: string | null;
+  reportedIsotypes: string[];
 }
 
 interface CleanEstimatesFromAirtableStepInput {
@@ -60,6 +75,21 @@ export const cleanEstimatesFromAirtableStep = (input: CleanEstimatesFromAirtable
       ageMaximum: estimate['Age Maximum'],
       subgroupingVariable: estimate['Sub-grouping Variable'],
       subgroupCategory: estimate['Sub-group specific category (clean)'],
+      denominatorValue: estimate['Denominator Value'],
+      seroprevalence: estimate['Serum positive prevalence'],
+      confidenceInterval95PercentLowerBound: estimate['estimate check 95% lower bound'],
+      confidenceInterval95PercentUpperBound: estimate['estimate check 95% upper bound'],
+      isSeroTrackerPrimaryEstimate: estimate['SeroTracker Analysis Primary Estimate'],
+      isTestAdjusted: estimate['Test Adjustment'],
+      isPopulationAdjusted: estimate['Population Adjustment'],
+      isClusteringAdjusted: estimate['Clustering Adjustment'],
+      isAcademicPrimaryEstimate: estimate['Academic Primary Estimate'],
+      samplingMethod: estimate['Sampling Method'],
+      testName: estimate['Test Name'],
+      testManufacturer: estimate['Test Manufacturer'],
+      testType: estimate['Test Type'],
+      specimenType: estimate['Specimen Type'],
+      reportedIsotypes: estimate['Isotype(s) Reported (Reviewer)'].filter((element): element is NonNullable<typeof element> => !!element)
     }))
   };
 }
