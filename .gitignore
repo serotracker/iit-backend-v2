@@ -8,6 +8,7 @@ lat-lng-generation-report.txt
 arbo-lat-lng-generation-report.txt
 sars-cov-2-lat-lng-generation-report.txt
 mers-lat-lng-generation-report.txt
+serotracker_dataset.csv
 
 # Files containing secret information
 .env
