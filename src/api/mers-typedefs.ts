@@ -7,6 +7,7 @@ export const mersTypedefs = `
     latitude: Float!
     longitude: Float!
     whoRegion: WHORegion
+    unRegion: UNRegion
   }
 
   enum MersDiagnosisStatus {
@@ -49,6 +50,7 @@ export const mersTypedefs = `
     latitude: Float!
     longitude: Float!
     whoRegion: WHORegion
+    unRegion: UNRegion
     observationDate: String
     reportDate: String!
   }
@@ -65,6 +67,7 @@ export const mersTypedefs = `
     latitude: Float!
     longitude: Float!
     whoRegion: WHORegion
+    unRegion: UNRegion
     observationDate: String
     reportDate: String!
     ####### END INTERFACE FIELDS #######
@@ -85,6 +88,7 @@ export const mersTypedefs = `
     latitude: Float!
     longitude: Float!
     whoRegion: WHORegion
+    unRegion: UNRegion
     observationDate: String
     reportDate: String!
     ####### END INTERFACE FIELDS #######
@@ -107,6 +111,7 @@ export const mersTypedefs = `
   type MersFilterOptions {
     countryIdentifiers: [CountryIdentifiers!]!
     whoRegion: [WHORegion!]!
+    unRegion: [UNRegion!]!
   }
 
   type YearlyFaoCamelPopulationDataEntry {
@@ -117,6 +122,7 @@ export const mersTypedefs = `
     camelCount: Int!
     camelCountPerCapita: Float
     whoRegion: WHORegion
+    unRegion: UNRegion
     note: String!
   }
 
