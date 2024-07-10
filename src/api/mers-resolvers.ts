@@ -25,7 +25,7 @@ import {
   MersEventType,
   FaoYearlyCamelPopulationDataDocument
 } from '../storage/types.js';
-import { mapWhoRegionForApi } from "./shared-mappers.js";
+import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
 import assertNever from "assert-never";
 
@@ -47,7 +47,8 @@ const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): Me
     countryAlphaThreeCode: document.countryAlphaThreeCode,
     latitude: document.latitude,
     longitude: document.longitude,
-    whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined
+    whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+    unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined
   }
 }
 
@@ -101,7 +102,8 @@ const transformFaoMersEventDocumentBaseForApi = (document: FaoMersEventDocumentB
   diagnosisStatus: transformFaoMersEventDiagnosisStatusForApi(document.diagnosisStatus),
   diagnosisSource: transformFaoMersEventDiagnosisSourceForApi(document.diagnosisSource),
   reportDate: document.reportDate.toISOString(),
-  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined
+  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+  unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined
 })
 
 const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): MersEvent => {
@@ -136,6 +138,7 @@ const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearly
     name: document.countryName
   },
   whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+  unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
   year: document.year,
   camelCount: document.camelCount,
   camelCountPerCapita: document.camelCountPerCapita,
@@ -165,12 +168,16 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       countryIdentifiersFromEstimates,
       countryIdentifiersFromFaoMersEvents,
       whoRegionsFromEstimates,
-      whoRegionsFromFaoMersEvents
+      whoRegionsFromFaoMersEvents,
+      unRegionsFromEstimates,
+      unRegionsFromFaoMersEvents
     ] = await Promise.all([
       runCountryIdentifierAggregation({ collection: estimateCollection }),
       runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
       estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       faoMersEventsCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      faoMersEventsCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     // Lodash's uniqBy function keeps the first occurrence of the key so if there is a different country name
@@ -185,7 +192,11 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       whoRegion: uniq([
         ...whoRegionsFromEstimates,
         ...whoRegionsFromFaoMersEvents
-      ]).map((whoRegion) => mapWhoRegionForApi(whoRegion))
+      ]).map((whoRegion) => mapWhoRegionForApi(whoRegion)),
+      unRegion: uniq([
+        ...unRegionsFromEstimates,
+        ...unRegionsFromFaoMersEvents
+      ]).map((unRegion) => mapUnRegionForApi(unRegion))
     }
   }
 

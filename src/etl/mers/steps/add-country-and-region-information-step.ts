@@ -7,7 +7,7 @@ import {
   FaoMersEventAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
-import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions";
+import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterParsingDatesStep & {
   country: string;

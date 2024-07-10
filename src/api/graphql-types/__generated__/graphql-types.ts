@@ -37,6 +37,7 @@ export type AnimalMersEvent = MersEventInterface & {
   reportDate: Scalars['String']['output'];
   state: Scalars['String']['output'];
   type: MersEventType;
+  unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
 
@@ -181,6 +182,7 @@ export type HumanMersEvent = MersEventInterface & {
   reportDate: Scalars['String']['output'];
   state: Scalars['String']['output'];
   type: MersEventType;
+  unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
 
@@ -206,6 +208,7 @@ export type MersEstimate = {
   id: Scalars['String']['output'];
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
+  unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
 
@@ -233,6 +236,7 @@ export type MersEventInterface = {
   reportDate: Scalars['String']['output'];
   state: Scalars['String']['output'];
   type: MersEventType;
+  unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
 
@@ -244,6 +248,7 @@ export enum MersEventType {
 export type MersFilterOptions = {
   __typename?: 'MersFilterOptions';
   countryIdentifiers: Array<CountryIdentifiers>;
+  unRegion: Array<UnRegion>;
   whoRegion: Array<WhoRegion>;
 };
 
@@ -479,6 +484,7 @@ export type YearlyFaoCamelPopulationDataEntry = {
   countryAlphaThreeCode: Scalars['String']['output'];
   id: Scalars['String']['output'];
   note: Scalars['String']['output'];
+  unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
   year: Scalars['Int']['output'];
 };
@@ -661,6 +667,7 @@ export type AnimalMersEventResolvers<ContextType = any, ParentType extends Resol
   reportDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['MersEventType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -762,6 +769,7 @@ export type HumanMersEventResolvers<ContextType = any, ParentType extends Resolv
   reportDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['MersEventType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -773,6 +781,7 @@ export type MersEstimateResolvers<ContextType = any, ParentType extends Resolver
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -794,11 +803,13 @@ export type MersEventInterfaceResolvers<ContextType = any, ParentType extends Re
   reportDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['MersEventType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
 };
 
 export type MersFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersFilterOptions'] = ResolversParentTypes['MersFilterOptions']> = {
   countryIdentifiers?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
+  unRegion?: Resolver<Array<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Array<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -944,6 +955,7 @@ export type YearlyFaoCamelPopulationDataEntryResolvers<ContextType = any, Parent
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   note?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   year?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
