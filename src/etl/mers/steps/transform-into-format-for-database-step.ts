@@ -50,6 +50,7 @@ const transformFaoMersEventBaseForDatabase = (input: TransformFaoMersEventBaseFo
   countryAlphaTwoCode: input.event.countryAlphaTwoCode,
   countryAlphaThreeCode: input.event.countryAlphaThreeCode,
   whoRegion: input.event.whoRegion,
+  unRegion: input.event.unRegion,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 })
@@ -71,6 +72,7 @@ export const transformIntoFormatForDatabaseStep = (
       latitude: estimate.latitude,
       longitude: estimate.longitude,
       whoRegion: estimate.whoRegion,
+      unRegion: estimate.unRegion,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
@@ -112,6 +114,7 @@ export const transformIntoFormatForDatabaseStep = (
       countryAlphaTwoCode: element.twoLetterCountryCode,
       countryName: element.countryName,
       whoRegion: element.whoRegion,
+      unRegion: element.unRegion,
       year: element.year,
       camelCount: element.camelCount,
       camelCountPerCapita: element.camelCountPerCapita,

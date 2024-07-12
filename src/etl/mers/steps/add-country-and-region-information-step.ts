@@ -7,22 +7,26 @@ import {
   FaoMersEventAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
+import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterParsingDatesStep & {
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
   whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
 };
 
 export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterParsingDatesStep & {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
 };
 
 export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterParsingDatesStep & {
   whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
 };
 export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterParsingDatesStep;
 
@@ -90,7 +94,8 @@ export const addCountryAndRegionInformationStep = (
       country: 'Canada',
       countryAlphaTwoCode: 'CA',
       countryAlphaThreeCode: 'CAN',
-      whoRegion: WHORegion.AMR
+      whoRegion: WHORegion.AMR,
+      unRegion: UNRegion.NORTHERN_AMERICA
     })),
     allFaoMersEvents: input.allFaoMersEvents
       .map((event) => {
@@ -103,22 +108,26 @@ export const addCountryAndRegionInformationStep = (
         const { countryAlphaTwoCode, countryAlphaThreeCode } = countryCodes;
 
         const whoRegion = getWHORegionFromAlphaTwoCode(countryAlphaTwoCode);
+        const unRegion = getUNRegionFromAlphaTwoCode(countryAlphaTwoCode);
 
         return {
           ...event,
           countryAlphaTwoCode,
           countryAlphaThreeCode,
-          whoRegion
+          whoRegion,
+          unRegion
         }
       })
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((dataPoint) => {
       const whoRegion = getWHORegionFromAlphaTwoCode(dataPoint.twoLetterCountryCode);
+      const unRegion = getUNRegionFromAlphaTwoCode(dataPoint.twoLetterCountryCode);
 
       return {
         ...dataPoint,
-        whoRegion
+        whoRegion,
+        unRegion
       }
     }),
     mongoClient: input.mongoClient

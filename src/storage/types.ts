@@ -142,6 +142,7 @@ export interface MersEstimateDocument {
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
   whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
   latitude: number;
   longitude: number;
   createdAt: Date;
@@ -216,6 +217,7 @@ export interface FaoMersEventDocumentBase {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -247,6 +249,7 @@ export interface FaoYearlyCamelPopulationDataDocument {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
   countryName: string;
   whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
   year: number;
   camelCount: number;
   camelCountPerCapita: number | undefined;
