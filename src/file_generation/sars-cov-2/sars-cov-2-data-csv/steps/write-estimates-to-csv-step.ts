@@ -54,6 +54,29 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
     test_type: estimate.testType,
     specimen_type: estimate.specimenType,
     isotypes: estimate.reportedIsotypes,
+    antibody_target: estimate.antibodyTarget,
+    test_validation: estimate.testValidation,
+    sensitivity: estimate.sensitivity,
+    specificity: estimate.specificity,
+    overall_risk_of_bias: estimate.overallRiskOfBias,
+    jbi_1: estimate.jbi1,
+    jbi_2: estimate.jbi2,
+    jbi_3: estimate.jbi3,
+    jbi_4: estimate.jbi4,
+    jbi_5: estimate.jbi5,
+    jbi_6: estimate.jbi6,
+    jbi_7: estimate.jbi7,
+    jbi_8: estimate.jbi8,
+    jbi_9: estimate.jbi9,
+    first_author: estimate.firstAuthor,
+    lead_institution: estimate.leadInstitution,
+    is_unity_aligned: estimate.unityCriteria,
+    url: estimate.url,
+    date_created: estimate.dateCreated,
+    last_modified_time: estimate.lastModifiedTime,
+    data_quality_status: estimate.dataQualityStatus,
+    zotero_citation_key: estimate.zoteroCitationKey,
+    alpha_3_code: estimate.countryAlphaThreeCode,
   }))
 
   const fieldNames = [
@@ -93,6 +116,29 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
     'test_type',
     'specimen_type',
     'isotypes',
+    'antibody_target',
+    'test_validation',
+    'sensitivity',
+    'specificity',
+    'overall_risk_of_bias',
+    'jbi_1',
+    'jbi_2',
+    'jbi_3',
+    'jbi_4',
+    'jbi_5',
+    'jbi_6',
+    'jbi_7',
+    'jbi_8',
+    'jbi_9',
+    'first_author',
+    'lead_institution',
+    'is_unity_aligned',
+    'url',
+    'date_created',
+    'last_modified_time',
+    'data_quality_status',
+    'zotero_citation_key',
+    'alpha_3_code'
   ] as const;
 
   const headersForCsv = fieldNames.join(',')
@@ -125,10 +171,10 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
           }
 
           if(value.length === 1) {
-            return `[${value}]`;
+            return `['${value}']`;
           }
 
-          return `"[${value.join(',')}]"`;
+          return `"[${value.map((element) => `'${element}'`).join(',')}]"`;
         }
 
         return formatValueForCsv(value);

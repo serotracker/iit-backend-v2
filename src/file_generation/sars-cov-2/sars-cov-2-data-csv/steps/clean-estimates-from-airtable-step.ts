@@ -2,6 +2,7 @@ import { EstimateFieldsAfterValidatingEstimatesFromAirtableStep } from "./valida
 
 export interface EstimateFieldsAfterCleaningEstimatesFromAirtableStep {
   id: string;
+  isIncludedInGithubCsv: boolean;
   estimateName: string | null;
   studyName: string | null;
   sourceName: string | null;
@@ -38,6 +39,29 @@ export interface EstimateFieldsAfterCleaningEstimatesFromAirtableStep {
   testType: string | null;
   specimenType: string | null;
   reportedIsotypes: string[];
+  antibodyTarget: string | null;
+  testValidation: string | null;
+  sensitivity: number | null;
+  specificity: number | null;
+  overallRiskOfBias: string[];
+  jbi1: string | null;
+  jbi2: string | null;
+  jbi3: string | null;
+  jbi4: string | null;
+  jbi5: string | null;
+  jbi6: string | null;
+  jbi7: string | null;
+  jbi8: string | null;
+  jbi9: string | null;
+  firstAuthor: string | null;
+  leadInstitution: string | null;
+  unityCriteria: string | null;
+  url: string | null;
+  dateCreated: string | null;
+  lastModifiedTime: string | null;
+  dataQualityStatus: string | null;
+  zoteroCitationKey: string | null;
+  countryAlphaThreeCode: string | null;
 }
 
 interface CleanEstimatesFromAirtableStepInput {
@@ -54,6 +78,7 @@ export const cleanEstimatesFromAirtableStep = (input: CleanEstimatesFromAirtable
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
+      isIncludedInGithubCsv: estimate['GitHub CSV Included'] === 1 ? true : false,
       estimateName: estimate['Prevalence Estimate Name'],
       studyName: estimate['Rapid Review Study Name (Text)'],
       sourceName: estimate['Source Name'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
@@ -89,7 +114,30 @@ export const cleanEstimatesFromAirtableStep = (input: CleanEstimatesFromAirtable
       testManufacturer: estimate['Test Manufacturer'],
       testType: estimate['Test Type'],
       specimenType: estimate['Specimen Type'],
-      reportedIsotypes: estimate['Isotype(s) Reported (Reviewer)'].filter((element): element is NonNullable<typeof element> => !!element)
+      reportedIsotypes: estimate['Isotype(s) Reported (Reviewer)'].filter((element): element is NonNullable<typeof element> => !!element),
+      antibodyTarget: estimate['Antibody target'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      testValidation: estimate['Test Validation'],
+      sensitivity: estimate['Sensitivity'],
+      specificity: estimate['Specificity'],
+      overallRiskOfBias: estimate['Overall Risk of Bias (JBI)'].filter((element): element is NonNullable<typeof element> => !!element),
+      jbi1: estimate['JBI 1'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi2: estimate['JBI 2'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi3: estimate['JBI 3'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi4: estimate['JBI 4'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi5: estimate['JBI 5'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi6: estimate['JBI 6'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi7: estimate['JBI 7'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi8: estimate['JBI 8'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      jbi9: estimate['JBI 9'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      firstAuthor: estimate['First Author Full Name'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      leadInstitution: estimate['Lead Institution'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      unityCriteria: estimate['UNITY: Criteria'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      url: estimate['URL'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      dateCreated: estimate['Date Created (ISO)'],
+      lastModifiedTime: estimate['Last Modified time (ISO)'],
+      dataQualityStatus: estimate['Data Quality Status'],
+      zoteroCitationKey: estimate['Zotero Citation Key'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      countryAlphaThreeCode: estimate['Alpha3 Code'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
     }))
   };
 }

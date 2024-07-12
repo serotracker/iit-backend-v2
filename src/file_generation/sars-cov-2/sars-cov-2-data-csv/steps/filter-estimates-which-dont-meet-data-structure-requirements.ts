@@ -2,6 +2,7 @@ import { EstimateFieldsAfterCleaningEstimatesFromAirtableStep } from "./clean-es
 
 export type EstimateFieldsAfterFilteringEstimatesWhichDontMeetDataStructureRequirementsStep = Omit<
   EstimateFieldsAfterCleaningEstimatesFromAirtableStep,
+  | 'isIncludedInGithubCsv'
   | 'estimateName'
   | 'studyName'
   | 'sourceName'
@@ -11,6 +12,7 @@ export type EstimateFieldsAfterFilteringEstimatesWhichDontMeetDataStructureRequi
   | 'studyType'
   | 'country'
 > & {
+  isIncludedInGithubCsv: true;
   estimateName: NonNullable<EstimateFieldsAfterCleaningEstimatesFromAirtableStep['estimateName']>,
   studyName: NonNullable<EstimateFieldsAfterCleaningEstimatesFromAirtableStep['studyName']>,
   sourceName: NonNullable<EstimateFieldsAfterCleaningEstimatesFromAirtableStep['sourceName']>,
@@ -36,6 +38,7 @@ export const filterEstimatesWhichDontMeetDataStructureRequirements = (
 
   return {
     allEstimates: input.allEstimates.filter((estimate): estimate is EstimateFieldsAfterFilteringEstimatesWhichDontMeetDataStructureRequirementsStep => 
+      !!estimate.isIncludedInGithubCsv &&
       !!estimate.estimateName &&
       !!estimate.studyName &&
       !!estimate.sourceName &&

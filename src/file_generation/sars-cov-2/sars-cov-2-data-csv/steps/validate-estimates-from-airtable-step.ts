@@ -3,6 +3,7 @@ import { FieldSet } from "airtable";
 
 export interface EstimateFieldsAfterValidatingEstimatesFromAirtableStep {
   id: string;
+  "GitHub CSV Included": number;
   "Prevalence Estimate Name": string | null;
   "Rapid Review Study Name (Text)": string | null;
   "Source Name": Array<string | null>;
@@ -39,6 +40,29 @@ export interface EstimateFieldsAfterValidatingEstimatesFromAirtableStep {
   "Test Type": string | null;
   "Specimen Type": string | null;
   "Isotype(s) Reported (Reviewer)": Array<string | null>;
+  "Antibody target": Array<string | null>;
+  "Test Validation": string | null;
+  Sensitivity: number | null;
+  Specificity: number | null;
+  "Overall Risk of Bias (JBI)": Array<string | null>;
+  "JBI 1": Array<string | null>;
+  "JBI 2": Array<string | null>;
+  "JBI 3": Array<string | null>;
+  "JBI 4": Array<string | null>;
+  "JBI 5": Array<string | null>;
+  "JBI 6": Array<string | null>;
+  "JBI 7": Array<string | null>;
+  "JBI 8": Array<string | null>;
+  "JBI 9": Array<string | null>;
+  "First Author Full Name": Array<string | null>;
+  "Lead Institution": Array<string | null>;
+  "UNITY: Criteria": Array<string | null>;
+  "URL": Array<string | null>;
+  "Date Created (ISO)": string | null;
+  "Last Modified time (ISO)": string | null;
+  "Data Quality Status": string | null;
+  "Zotero Citation Key": Array<string | null>;
+  "Alpha3 Code": Array<string | null>;
 };
 
 interface ValidateEstimatesFromAirtableStepInput {
@@ -53,7 +77,10 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
   console.log(`Running step: validateEstimatesFromAirtableStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const zodSarsCov2EstimateFieldsObject = z.object({
-    id: z.string(),
+    id: z
+      .string(),
+    "GitHub CSV Included": z
+      .number(),
     "Prevalence Estimate Name": z
       .optional(z.string().nullable())
       .transform((field) => field ?? null),
@@ -166,6 +193,75 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
       .optional(z.string().nullable())
       .transform((field) => field ?? null),
     "Isotype(s) Reported (Reviewer)": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Antibody target": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Test Validation": z
+      .optional(z.string().nullable())
+      .transform((value) => value ?? null),
+    Sensitivity: z
+      .optional(z.number().nullable())
+      .transform((value) => value ?? null),
+    Specificity: z
+      .optional(z.number().nullable())
+      .transform((value) => value ?? null),
+    "Overall Risk of Bias (JBI)": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 1": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 2": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 3": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 4": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 5": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 6": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 7": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 8": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "JBI 9": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "First Author Full Name": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Lead Institution": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "UNITY: Criteria": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "URL": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Date Created (ISO)": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Last Modified time (ISO)": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Data Quality Status": z
+      .optional(z.string().nullable())
+      .transform((field) => field ?? null),
+    "Zotero Citation Key": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Alpha3 Code": z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
   })
