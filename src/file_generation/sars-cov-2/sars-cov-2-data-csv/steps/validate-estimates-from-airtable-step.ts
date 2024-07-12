@@ -40,7 +40,7 @@ export interface EstimateFieldsAfterValidatingEstimatesFromAirtableStep {
   "Test Type": string | null;
   "Specimen Type": string | null;
   "Isotype(s) Reported (Reviewer)": Array<string | null>;
-  "Antibody target": Array<string | null>;
+  "Antibody target (Reviewer)": Array<string | null>;
   "Test Validation": string | null;
   Sensitivity: number | null;
   Specificity: number | null;
@@ -195,7 +195,7 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
     "Isotype(s) Reported (Reviewer)": z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
-    "Antibody target": z
+    "Antibody target (Reviewer)": z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     "Test Validation": z

@@ -115,7 +115,7 @@ export const cleanEstimatesFromAirtableStep = (input: CleanEstimatesFromAirtable
       testType: estimate['Test Type'],
       specimenType: estimate['Specimen Type'],
       reportedIsotypes: estimate['Isotype(s) Reported (Reviewer)'].filter((element): element is NonNullable<typeof element> => !!element),
-      antibodyTarget: estimate['Antibody target'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      antibodyTarget: estimate['Antibody target (Reviewer)'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
       testValidation: estimate['Test Validation'],
       sensitivity: estimate['Sensitivity'],
       specificity: estimate['Specificity'],
