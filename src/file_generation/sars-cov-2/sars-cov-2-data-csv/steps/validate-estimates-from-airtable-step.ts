@@ -44,19 +44,19 @@ export interface EstimateFieldsAfterValidatingEstimatesFromAirtableStep {
   "Test Validation": string | null;
   Sensitivity: number | null;
   Specificity: number | null;
-  "Overall Risk of Bias (JBI)": Array<string | null>;
-  "JBI 1": Array<string | null>;
-  "JBI 2": Array<string | null>;
-  "JBI 3": Array<string | null>;
-  "JBI 4": Array<string | null>;
-  "JBI 5": Array<string | null>;
-  "JBI 6": Array<string | null>;
-  "JBI 7": Array<string | null>;
-  "JBI 8": Array<string | null>;
-  "JBI 9": Array<string | null>;
+  "Overall Risk of Bias (JBI)": Array<string | null|  { error: "#ERROR!" }>;
+  "JBI 1": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 2": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 3": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 4": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 5": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 6": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 7": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 8": Array<string | null | { error: "#ERROR!" }>;
+  "JBI 9": Array<string | null | { error: "#ERROR!" }>;
   "First Author Full Name": Array<string | null>;
   "Lead Institution": Array<string | null>;
-  "UNITY: Criteria": Array<string | null>;
+  "UNITY: Criteria": Array<string | null|  { error: "#ERROR!" }>;
   "URL": Array<string | null>;
   "Date Created (ISO)": string | null;
   "Last Modified time (ISO)": string | null;
@@ -208,34 +208,84 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
       .optional(z.number().nullable())
       .transform((value) => value ?? null),
     "Overall Risk of Bias (JBI)": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 1": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 2": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 3": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 4": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 5": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 6": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 7": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 8": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "JBI 9": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "First Author Full Name": z
       .optional(z.string().nullable().array())
@@ -244,7 +294,12 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     "UNITY: Criteria": z
-      .optional(z.string().nullable().array())
+      .optional(z.union([
+        z.string().nullable(),
+        z.object({
+          error: z.literal("#ERROR!")
+        })
+      ]).array())
       .transform((field) => field ?? []),
     "URL": z
       .optional(z.string().nullable().array())
@@ -267,6 +322,14 @@ export const validateEstimatesFromAirtableStep = (input: ValidateEstimatesFromAi
   })
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate))
+    allEstimates: input.allEstimates.map((estimate) => {
+      try {
+        return zodSarsCov2EstimateFieldsObject.parse(estimate);
+      } catch (error) {
+        console.log(estimate);
+
+        throw error;
+      }
+    })
   };
 }

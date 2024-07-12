@@ -32,6 +32,10 @@ const isNotReportedValue = (value: unknown): value is NotReportedValue => {
   return typeof value === 'string' && Object.values(NotReportedValue).some((notReportedValue) => notReportedValue === value);
 }
 
+const isAirtableError = (value: unknown): value is { error: "#ERROR!" } => {
+  return typeof value === 'object' && !!value && 'error' in value && value['error'] === '#ERROR';
+}
+
 export const cleanBadValuesFromEstimatesStep = (input: CleanBadValuesFromEstimatesStepInput): CleanBadValuesFromEstimatesStepOutput => {
   console.log(`Running step: cleanBadValuesFromEstimatesStep. Remaining estimates: ${input.allEstimates.length}`);
 
@@ -46,12 +50,15 @@ export const cleanBadValuesFromEstimatesStep = (input: CleanBadValuesFromEstimat
 
       const estimateWithNotReportedValuesFiltered = Object.fromEntries(
         Object.entries(estimate).map(([key, value]) => {
-          if (isNotReportedValue(value)) {
+          if (isNotReportedValue(value) || isAirtableError(value)) {
             return [key, null];
           }
 
           if(isArrayOfUnknownType(value)) {
-            return [key, value.filter((element) => !isNotReportedValue(element))]
+            return [key, value
+              .filter((element) => !isNotReportedValue(element))
+              .filter((element) => !isAirtableError(element))
+            ]
           }
 
           return [key, value];

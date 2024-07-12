@@ -17,7 +17,46 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
 
   const outputFilename = './serotracker_dataset.csv'
 
-  const estimatesWithCsvFieldNames = input.allEstimates.map((estimate) => ({
+  const sortedEstimates = input.allEstimates
+    .sort((estimateA, estimateB) => {
+      if(estimateA.country !== estimateB.country) {
+        return estimateA.country > estimateB.country ? 1 : -1
+      }
+
+      if(estimateA.publicationDate !== estimateB.publicationDate) {
+        return estimateA.publicationDate > estimateB.publicationDate ? 1 : -1
+      }
+
+      if(estimateA.sourceName !== estimateB.sourceName) {
+        return estimateA.sourceName > estimateB.sourceName ? 1 : -1
+      }
+
+      if(estimateA.studyName !== estimateB.studyName) {
+        return estimateA.sourceName > estimateB.sourceName ? 1 : -1
+      }
+
+      if(
+        estimateA.isSeroTrackerPrimaryEstimate === true && (
+          estimateB.isSeroTrackerPrimaryEstimate === null ||
+          estimateB.isSeroTrackerPrimaryEstimate === false
+        )
+      ) {
+        return -1;
+      }
+
+      if(
+        estimateB.isSeroTrackerPrimaryEstimate === true && (
+          estimateA.isSeroTrackerPrimaryEstimate === null ||
+          estimateA.isSeroTrackerPrimaryEstimate === false
+        )
+      ) {
+        return 1;
+      }
+
+      return 0;
+    })
+
+  const estimatesWithCsvFieldNames = sortedEstimates.map((estimate) => ({
     estimate_name: estimate.estimateName,
     study_name: estimate.studyName,
     source_name: estimate.sourceName,
@@ -144,7 +183,11 @@ export const writeEstimatesToCsvStep = (input: WriteEstimatesToCsvStepInput): Wr
   const headersForCsv = fieldNames.join(',')
 
   const formatValueForCsv = (value: string): string => {
-    if(value.includes(',')) {
+    if(value.includes(',') || value.includes('\n')) {
+      if(value.at(0) === '"' && value.at(-1) === '"') {
+        return value;
+      }
+
       return `"${value}"`;
     }
 

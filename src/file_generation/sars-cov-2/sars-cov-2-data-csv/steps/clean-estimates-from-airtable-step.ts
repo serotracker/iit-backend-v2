@@ -119,19 +119,51 @@ export const cleanEstimatesFromAirtableStep = (input: CleanEstimatesFromAirtable
       testValidation: estimate['Test Validation'],
       sensitivity: estimate['Sensitivity'],
       specificity: estimate['Specificity'],
-      overallRiskOfBias: estimate['Overall Risk of Bias (JBI)'].filter((element): element is NonNullable<typeof element> => !!element),
-      jbi1: estimate['JBI 1'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi2: estimate['JBI 2'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi3: estimate['JBI 3'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi4: estimate['JBI 4'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi5: estimate['JBI 5'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi6: estimate['JBI 6'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi7: estimate['JBI 7'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi8: estimate['JBI 8'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      jbi9: estimate['JBI 9'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      overallRiskOfBias: estimate['Overall Risk of Bias (JBI)']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string'),
+      jbi1: estimate['JBI 1']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi2: estimate['JBI 2']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi3: estimate['JBI 3']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi4: estimate['JBI 4']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi5: estimate['JBI 5']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi6: estimate['JBI 6']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi7: estimate['JBI 7']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi8: estimate['JBI 8']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
+      jbi9: estimate['JBI 9']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
       firstAuthor: estimate['First Author Full Name'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
       leadInstitution: estimate['Lead Institution'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
-      unityCriteria: estimate['UNITY: Criteria'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
+      unityCriteria: estimate['UNITY: Criteria']
+        .filter((element): element is NonNullable<typeof element> => !!element)
+        .filter((element): element is string => typeof element === 'string')
+        .at(0) ?? null,
       url: estimate['URL'].filter((element): element is NonNullable<typeof element> => !!element).at(0) ?? null,
       dateCreated: estimate['Date Created (ISO)'],
       lastModifiedTime: estimate['Last Modified time (ISO)'],
