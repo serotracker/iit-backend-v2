@@ -17,6 +17,8 @@
     "run_mers_etl_local": "npm run build && node --env-file=.env-local-etl ./public/dist/src/etl/mers/index.js",
     "run_mers_etl_production": "npm run build && node --env-file=.env-production-etl ./public/dist/src/etl/mers/index.js",
     "run_mers_etl_production_no_build": "node --env-file=.env-production-etl ./public/dist/src/etl/mers/index.js",
+    "generate_sarscov2_data_csv": "npm run build && node --env-file=.env-production-etl ./public/dist/src/file_generation/sars-cov-2/sars-cov-2-data-csv/index.js",
+    "generate_sarscov2_data_csv_no_build": "node --env-file=.env-production-etl ./public/dist/src/file_generation/sars-cov-2/sars-cov-2-data-csv/index.js",
     "codegen": "graphql-codegen --config ./codegen.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
