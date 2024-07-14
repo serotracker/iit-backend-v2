@@ -4,17 +4,20 @@ import {
   CountryPopulationDataAfterAssigningPartitionsStep,
   EstimateFieldsAfterAssigningPartitionsStep,
   FaoMersEventAfterAssigningPartitionsStep,
+  SourceFieldsAfterAssigningPartitionsStep,
   YearlyCamelPopulationDataAfterAssigningPartitionsStep
 } from "./assign-partitions-step.js";
 import assertNever from "assert-never";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
+export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterAssigningPartitionsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterAssigningPartitionsStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
+  allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -23,6 +26,7 @@ interface TransformIntoFormatForDatabaseStepInput {
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
+  allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -66,6 +70,8 @@ export const transformIntoFormatForDatabaseStep = (
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       _id: new ObjectId(),
+      seroprevalence: estimate.seroprevalence,
+      estimateId: estimate.estimateId,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
       countryAlphaThreeCode: estimate.countryAlphaThreeCode,
@@ -73,9 +79,15 @@ export const transformIntoFormatForDatabaseStep = (
       longitude: estimate.longitude,
       whoRegion: estimate.whoRegion,
       unRegion: estimate.unRegion,
+      firstAuthorFullName: estimate.firstAuthorFullName,
+      sourceUrl: estimate.sourceUrl,
+      sourceType: estimate.sourceType,
+      sourceTitle: estimate.sourceTitle,
+      insitutution: estimate.insitutution,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => {
       if(event.type === MersEventType.HUMAN) {
         return {

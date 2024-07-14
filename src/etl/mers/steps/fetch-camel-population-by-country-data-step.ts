@@ -4,16 +4,19 @@ import {
   CountryPopulationDataAfterCleaningFaoMersEventFieldsStep,
   EstimateFieldsAfterCleaningFaoMersEventFieldsStep,
   FaoMersEventAfterCleaningFaoMersEventFieldsStep,
+  SourceFieldsAfterCleaningFaoMersEventFieldsStep,
   YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep
 } from "./clean-fao-mers-event-fields-step";
 
 export type EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep = EstimateFieldsAfterCleaningFaoMersEventFieldsStep;
+export type SourceFieldsAfterFetchingCamelPopulationByCountryDataStep = SourceFieldsAfterCleaningFaoMersEventFieldsStep;
 export type FaoMersEventAfterFetchingCamelPopulationByCountryDataStep = FaoMersEventAfterCleaningFaoMersEventFieldsStep;
 export type YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep = Record<string, string | undefined>;
 export type CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep = CountryPopulationDataAfterCleaningFaoMersEventFieldsStep;
 
 interface FetchCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
+  allSources: SourceFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
@@ -22,6 +25,7 @@ interface FetchCamelPopulationByCountryDataStepInput {
 
 interface FetchCamelPopulationByCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep[];
+  allSources: SourceFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
@@ -42,6 +46,7 @@ export const fetchCamelPopulationByCountryDataStep = (
   if(rawFileDataRows.length === 0 || rawFileDataHeaders === undefined) {
     return {
       allEstimates: input.allEstimates,
+      allSources: input.allSources,
       allFaoMersEvents: input.allFaoMersEvents,
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: input.countryPopulationData,
@@ -74,6 +79,7 @@ export const fetchCamelPopulationByCountryDataStep = (
 
   return {
     allEstimates: input.allEstimates,
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: data,
     countryPopulationData: input.countryPopulationData,

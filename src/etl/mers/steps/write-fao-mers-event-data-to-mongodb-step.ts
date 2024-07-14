@@ -4,11 +4,14 @@ import {
   CountryPopulationDataAfterWritingEstimateToMongodbStep,
   EstimateFieldsAfterWritingEstimateToMongodbStep,
   FaoMersEventAfterWritingEstimateToMongodbStep,
+  SourceFieldsAfterWritingEstimateToMongodbStep,
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep
 } from "./write-estimate-data-to-mongodb-step.js";
 
 export type EstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
   EstimateFieldsAfterWritingEstimateToMongodbStep;
+export type SourceFieldsAfterWritingFaoMersEventsToMongodbStep =
+  SourceFieldsAfterWritingEstimateToMongodbStep;
 export type FaoMersEventAfterWritingFaoMersEventsToMongodbStep =
   FaoMersEventAfterWritingEstimateToMongodbStep;
 export type YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep =
@@ -18,6 +21,7 @@ export type CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep =
 
 interface WriteFaoMersEventDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
+  allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingEstimateToMongodbStep[];
@@ -26,6 +30,7 @@ interface WriteFaoMersEventDataToMongoDbStepInput {
 
 interface WriteFaoMersEventDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
+  allSources: SourceFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
@@ -48,6 +53,7 @@ export const writeFaoMersEventDataToMongoDbStep = async(
 
   return {
     allEstimates: input.allEstimates,
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

@@ -138,6 +138,8 @@ export interface SarsCov2EstimateDocument {
 
 export interface MersEstimateDocument {
   _id: ObjectId;
+  seroprevalence: number;
+  estimateId: string;
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
@@ -145,6 +147,11 @@ export interface MersEstimateDocument {
   unRegion: UNRegion | undefined;
   latitude: number;
   longitude: number;
+  firstAuthorFullName: string;
+  sourceUrl: string;
+  sourceType: string;
+  sourceTitle: string;
+  insitutution: string;
   createdAt: Date;
   updatedAt: Date;
 }

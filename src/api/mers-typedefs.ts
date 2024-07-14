@@ -1,6 +1,8 @@
 export const mersTypedefs = `
   type MersEstimate {
     id: String!
+    seroprevalence: Float!
+    estimateId: String!
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -8,6 +10,11 @@ export const mersTypedefs = `
     longitude: Float!
     whoRegion: WHORegion
     unRegion: UNRegion
+    firstAuthorFullName: String!
+    sourceUrl: String!
+    sourceType: String!
+    sourceTitle: String!
+    insitutution: String!
   }
 
   enum MersDiagnosisStatus {

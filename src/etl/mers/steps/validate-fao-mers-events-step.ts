@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterFetchingFaoMersEventsStep,
   EstimateFieldsAfterFetchingFaoMersEventsStep,
   FaoMersEventAfterFetchingFaoMersEventsStep,
+  SourceFieldsAfterFetchingFaoMersEventsStep,
   YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep
 } from "./fetch-fao-mers-events-step.js";
 import { MersEventType } from "../../../storage/types.js";
@@ -57,6 +58,7 @@ type HumanFaoMersEventAfterValidatingFaoMersEventsStep = FaoMersEventAfterValida
 }
 
 export type EstimateFieldsAfterValidatingFaoMersEventsStep = EstimateFieldsAfterFetchingFaoMersEventsStep;
+export type SourceFieldsAfterValidatingFaoMersEventsStep = SourceFieldsAfterFetchingFaoMersEventsStep;
 export type FaoMersEventAfterValidatingFaoMersEventsStep = 
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
@@ -65,6 +67,7 @@ export type CountryPopulationDataAfterValidatingFaoMersEventsStep = CountryPopul
 
 interface ValidateFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
+  allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -73,6 +76,7 @@ interface ValidateFaoMersEventsStepInput {
 
 interface ValidateFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
+  allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -154,6 +158,7 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
 
   return {
     allEstimates: input.allEstimates,
+    allSources: input.allSources,
     allFaoMersEvents: allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

@@ -3,10 +3,12 @@ import {
   CountryPopulationDataAfterFetchingCountryPopulationStep,
   EstimateFieldsAfterFetchingCountryPopulationStep,
   FaoMersEventAfterFetchingCountryPopulationStep,
+  SourceFieldsAfterFetchingCountryPopulationStep,
   YearlyCamelPopulationDataAfterFetchingCountryPopulationStep
 } from "./fetch-country-population-data-step";
 
 export type EstimateFieldsAfterGeneratingCamelDataPerCapitaStep = EstimateFieldsAfterFetchingCountryPopulationStep;
+export type SourceFieldsAfterGeneratingCamelDataPerCapitaStep = SourceFieldsAfterFetchingCountryPopulationStep;
 export type FaoMersEventAfterGeneratingCamelDataPerCapitaStep = FaoMersEventAfterFetchingCountryPopulationStep;
 export type YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep = YearlyCamelPopulationDataAfterFetchingCountryPopulationStep & {
   camelCountPerCapita: number | undefined;
@@ -15,6 +17,7 @@ export type CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep = Country
 
 interface GenerateCamelDataPerCapitaStepInput {
   allEstimates: EstimateFieldsAfterFetchingCountryPopulationStep[];
+  allSources: SourceFieldsAfterFetchingCountryPopulationStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCountryPopulationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCountryPopulationStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCountryPopulationStep[];
@@ -23,6 +26,7 @@ interface GenerateCamelDataPerCapitaStepInput {
 
 interface GenerateCamelDataPerCapitaStepOutput {
   allEstimates: EstimateFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allSources: SourceFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
@@ -36,6 +40,7 @@ export const generateCamelDataPerCapitaStep = (
 
   return {
     allEstimates: input.allEstimates,
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((camelPopulationDataPoint) => {
       const countryPopulationDataForYear = input.countryPopulationData

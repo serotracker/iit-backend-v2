@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterAddingCountryAndRegionInformationStep,
   EstimateFieldsAfterAddingCountryAndRegionInformationStep,
   FaoMersEventAfterAddingCountryAndRegionInformationStep,
+  SourceFieldsAfterAddingCountryAndRegionInformationStep,
   YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step";
 
@@ -11,12 +12,14 @@ export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingC
   latitude: number;
   longitude: number;
 };
+export type SourceFieldsAfterLatLngGenerationStep = SourceFieldsAfterAddingCountryAndRegionInformationStep;
 export type FaoMersEventAfterLatLngGenerationStep = FaoMersEventAfterAddingCountryAndRegionInformationStep;
 export type YearlyCamelPopulationDataAfterLatLngGenerationStep = YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep;
 export type CountryPopulationDataAfterLatLngGenerationStep = CountryPopulationDataAfterAddingCountryAndRegionInformationStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
+  allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -25,6 +28,7 @@ interface LatLngGenerationStepInput {
 
 interface LatLngGenerationStepOutput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
+  allSources: SourceFieldsAfterLatLngGenerationStep[];
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
@@ -47,6 +51,7 @@ export const latLngGenerationStep = async(
       latitude: 51.0447,
       longitude: -114.0719
     })),
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

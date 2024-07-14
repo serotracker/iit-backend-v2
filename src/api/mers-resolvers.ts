@@ -42,13 +42,20 @@ const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => arr
 const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): MersEstimate => {
   return {
     id: document._id.toHexString(),
+    seroprevalence: document.seroprevalence,
+    estimateId: document.estimateId,
     country: document.country,
     countryAlphaTwoCode: document.countryAlphaTwoCode,
     countryAlphaThreeCode: document.countryAlphaThreeCode,
     latitude: document.latitude,
     longitude: document.longitude,
     whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
-    unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined
+    unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
+    firstAuthorFullName: document.firstAuthorFullName,
+    sourceUrl: document.sourceUrl,
+    sourceType: document.sourceType,
+    sourceTitle: document.sourceTitle,
+    insitutution: document.insitutution,
   }
 }
 
