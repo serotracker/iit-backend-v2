@@ -4,17 +4,20 @@ import {
   CountryPopulationDataAfterAssigningPartitionsStep,
   EstimateFieldsAfterAssigningPartitionsStep,
   FaoMersEventAfterAssigningPartitionsStep,
+  SourceFieldsAfterAssigningPartitionsStep,
   YearlyCamelPopulationDataAfterAssigningPartitionsStep
 } from "./assign-partitions-step.js";
 import assertNever from "assert-never";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
+export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterAssigningPartitionsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterAssigningPartitionsStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
+  allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -23,6 +26,7 @@ interface TransformIntoFormatForDatabaseStepInput {
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
+  allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -76,6 +80,7 @@ export const transformIntoFormatForDatabaseStep = (
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => {
       if(event.type === MersEventType.HUMAN) {
         return {

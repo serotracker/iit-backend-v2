@@ -1,15 +1,16 @@
 import { MongoClient } from "mongodb";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
-import {
-  CountryPopulationDataAfterParsingDatesStep,
-  EstimateFieldsAfterParsingDatesStep,
-  FaoMersEventAfterParsingDatesStep,
-  YearlyCamelPopulationDataAfterParsingDatesStep
-} from "./parse-dates-step";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
+import {
+  CountryPopulationDataAfterCombiningEstimatesWithSourcesStep,
+  EstimateFieldsAfterCombiningEstimatesWithSourcesStep,
+  FaoMersEventAfterCombiningEstimatesWithSourcesStep,
+  SourceFieldsAfterCombiningEstimatesWithSourcesStep,
+  YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep
+} from "./combine-estimates-with-sources-step";
 
-export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterParsingDatesStep & {
+export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithSourcesStep & {
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
@@ -17,29 +18,33 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
   unRegion: UNRegion | undefined;
 };
 
-export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterParsingDatesStep & {
+export type SourceFieldsAfterAddingCountryAndRegionInformationStep = SourceFieldsAfterCombiningEstimatesWithSourcesStep;
+
+export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterCombiningEstimatesWithSourcesStep & {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
 };
 
-export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterParsingDatesStep & {
+export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep & {
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
 };
-export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterParsingDatesStep;
+export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterCombiningEstimatesWithSourcesStep;
 
 interface AddCountryAndRegionInformationStepInput {
-  allEstimates: EstimateFieldsAfterParsingDatesStep[];
-  allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
-  countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
+  allEstimates: EstimateFieldsAfterCombiningEstimatesWithSourcesStep[];
+  allSources: SourceFieldsAfterCombiningEstimatesWithSourcesStep[];
+  allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithSourcesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep[];
+  countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithSourcesStep[];
   mongoClient: MongoClient;
 }
 
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
+  allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -97,6 +102,7 @@ export const addCountryAndRegionInformationStep = (
       whoRegion: WHORegion.AMR,
       unRegion: UNRegion.NORTHERN_AMERICA
     })),
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents
       .map((event) => {
         const countryCodes = faoMersEventCountryToAlphaTwoAndAlphaThreeCode[event.country]

@@ -1,14 +1,17 @@
 import { MongoClient } from "mongodb";
-import { CountryPopulationDataAfterValidatingFieldSetFromAirtableStep, EstimateFieldsAfterValidatingFieldSetFromAirtableStep, FaoMersEventAfterValidatingFieldSetFromAirtableStep, YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
+import { CountryPopulationDataAfterValidatingFieldSetFromAirtableStep, EstimateFieldsAfterValidatingFieldSetFromAirtableStep, FaoMersEventAfterValidatingFieldSetFromAirtableStep, SourceFieldsAfterValidatingFieldSetFromAirtableStep, YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
 import { readFileSync } from "fs";
+import { SourceFieldsAfterCleaningSourcesStep } from "./clean-sources-step";
 
 export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterValidatingFieldSetFromAirtableStep;
+export type SourceFieldsAfterFetchingFaoMersEventsStep = SourceFieldsAfterValidatingFieldSetFromAirtableStep;
 export type FaoMersEventAfterFetchingFaoMersEventsStep = Record<string, string | undefined>;
 export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
 export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
 
 interface FetchFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allSources: SourceFieldsAfterCleaningSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -17,6 +20,7 @@ interface FetchFaoMersEventsStepInput {
 
 interface FetchFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
+  allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -36,6 +40,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
   if(rawFileDataRows.length === 0 || rawFileDataHeaders === undefined) {
     return {
       allEstimates: input.allEstimates,
+      allSources: input.allSources,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: input.countryPopulationData,
@@ -56,6 +61,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
 
   return {
     allEstimates: input.allEstimates,
+    allSources: input.allSources,
     allFaoMersEvents: data,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

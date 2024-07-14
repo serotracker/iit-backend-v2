@@ -1,15 +1,17 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import { FieldSet } from "airtable";
-import { AirtableMersEstimateFields } from "../types";
+import { AirtableMersEstimateFields, AirtableSourceFields } from "../types";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMersEstimateFields;
+export type SourceFieldsAfterValidatingFieldSetFromAirtableStep = AirtableSourceFields;
 export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 export type YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
+  allSources: FieldSet[];
   allFaoMersEvents: never[];
   yearlyCamelPopulationByCountryData: never[];
   countryPopulationData: never[];
@@ -18,6 +20,7 @@ interface ValidateFieldSetFromAirtableStepInput {
 
 interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -31,14 +34,25 @@ export const validateFieldSetFromAirtableStep = (
     `Running step: validateFieldSetFromAirtableStep. Remaining estimates: ${input.allEstimates.length}`
   );
 
-  const zodSarsCov2EstimateFieldsObject = z.object({
-    id: z.string()
-  })
+  const zodMersSourceFieldsObject = z.object({
+    id: z.string(),
+    "First author name": z.string(),
+    "DOI/url": z.string(),
+    "Source type": z.string(),
+    "Source title": z.string(),
+    "Institution": z.string(),
+    "Country": z.string().array()
+  });
+  const allSources = input.allSources.map((source) => zodMersSourceFieldsObject.parse(source));
 
-  const allEstimates = input.allEstimates.map((estimate) => zodSarsCov2EstimateFieldsObject.parse(estimate));
+  const zodMersEstimateFieldsObject = z.object({
+    id: z.string(),
+  })
+  const allEstimates = input.allEstimates.map((estimate) => zodMersEstimateFieldsObject.parse(estimate));
 
   return {
     allEstimates,
+    allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

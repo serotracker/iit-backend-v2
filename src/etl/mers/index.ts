@@ -1,7 +1,7 @@
 import { pipe } from "fp-ts/lib/function.js";
 import { asyncEtlStep, etlStep, getEnvironmentVariableOrThrow, getMongoClient } from "../helpers.js";
 import { ObjectId } from "mongodb";
-import { FieldSet } from "airtable";
+import Airtable, { FieldSet } from "airtable";
 import { validateFieldSetFromAirtableStep } from "./steps/validate-field-set-from-airtable-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";
 import { writeEstimateDataToMongoDbStep } from "./steps/write-estimate-data-to-mongodb-step.js";
@@ -21,43 +21,49 @@ import { writeFaoYearlyCamelPopulationDataToMongoDbStep } from "./steps/write-fa
 import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
 import { generateCamelDataPerCapitaStep } from "./steps/generate-camel-data-per-capita-step.js";
 import { addDatabaseIndexesStep } from "./steps/add-database-indexes-step.js";
+import { combineEstimatesWithSourcesStep } from "./steps/combine-estimates-with-sources-step.js";
+import { cleanSourcesStep } from "./steps/clean-sources-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
-  //const airtableApiKey = getEnvironmentVariableOrThrow({
-  //  key: "AIRTABLE_API_KEY",
-  //});
-  //const airtableMERSBaseId = getEnvironmentVariableOrThrow({
-  //  key: "AIRTABLE_MERS_BASE_ID",
-  //});
+  const airtableApiKey = getEnvironmentVariableOrThrow({
+    key: "AIRTABLE_API_KEY",
+  });
+  const airtableMERSBaseId = getEnvironmentVariableOrThrow({
+    key: "AIRTABLE_MERS_BASE_ID",
+  });
 
   const mongoUri = getEnvironmentVariableOrThrow({ key: "MONGODB_URI" });
 
   const mongoClient = await getMongoClient({ mongoUri });
 
-  //const airtable = new Airtable({ apiKey: airtableApiKey });
-  //const base = new Airtable.Base(airtable, airtableSC2BaseId);
+  const airtable = new Airtable({ apiKey: airtableApiKey });
+  const base = new Airtable.Base(airtable, airtableMERSBaseId);
   //const estimateSheet = base.table("...");
+  const sourceSheet = base.table("Source");
 
-  //const allEstimatesUnformatted: (FieldSet & { id: string })[] =
-  //  await estimateSheet
-  //    .select()
-  //    .all()
-  //    .then((estimateSheet) =>
-  //      estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
-  //    );
+  const allSourcesUnformatted: (FieldSet & { id: string })[] =
+    await sourceSheet
+      .select()
+      .all()
+      .then((estimateSheet) =>
+        estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] = Array(5).fill(0).map(() => ({ id: new ObjectId().toString() }))
 
-  await pipe(
+  //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
+  const outputFromFirstPipeHalf = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
+      allSources: allSourcesUnformatted,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: [],
       mongoClient
     },
     etlStep(validateFieldSetFromAirtableStep),
+    etlStep(cleanSourcesStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),
     etlStep(cleanFaoMersEventFieldsStep),
@@ -67,7 +73,12 @@ const runEtlMain = async () => {
     etlStep(fetchCountryPopulationDataStep),
     etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
+    etlStep(combineEstimatesWithSourcesStep),
     etlStep(addCountryAndRegionInformationStep),
+  );
+
+  await pipe(
+    outputFromFirstPipeHalf,
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
     etlStep(assignPartitionsStep),

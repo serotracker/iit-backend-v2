@@ -3,10 +3,12 @@ import {
   CountryPopulationDataAfterJitteringPinLatLngStep,
   EstimateFieldsAfterJitteringPinLatLngStep,
   FaoMersEventAfterJitteringPinLatLngStep,
+  SourceFieldsAfterJitteringPinLatLngStep,
   YearlyCamelPopulationDataAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step.js";
 
 export type EstimateFieldsAfterAssigningPartitionsStep = EstimateFieldsAfterJitteringPinLatLngStep;
+export type SourceFieldsAfterAssigningPartitionsStep = SourceFieldsAfterJitteringPinLatLngStep;
 export type FaoMersEventAfterAssigningPartitionsStep = FaoMersEventAfterJitteringPinLatLngStep & {
   partitionKey: number;
 };
@@ -17,6 +19,7 @@ export type CountryPopulationDataAfterAssigningPartitionsStep = CountryPopulatio
 
 interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
+  allSources: SourceFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
@@ -25,6 +28,7 @@ interface AssignPartitionsStepInput {
 
 interface AssignPartitionsStepOutput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
+  allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -40,6 +44,7 @@ export const assignPartitionsStep = (
 
   return {
     allEstimates: input.allEstimates,
+    allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents.map((event, index) => ({
       ...event,
       partitionKey: Math.floor(index / faoMersEventPartitionSize)
