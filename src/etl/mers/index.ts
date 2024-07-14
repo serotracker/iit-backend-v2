@@ -23,6 +23,7 @@ import { generateCamelDataPerCapitaStep } from "./steps/generate-camel-data-per-
 import { addDatabaseIndexesStep } from "./steps/add-database-indexes-step.js";
 import { combineEstimatesWithSourcesStep } from "./steps/combine-estimates-with-sources-step.js";
 import { cleanSourcesStep } from "./steps/clean-sources-step.js";
+import { cleanEstimatesStep } from "./steps/clean-estimates-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -64,6 +65,7 @@ const runEtlMain = async () => {
     },
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanSourcesStep),
+    etlStep(cleanEstimatesStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),
     etlStep(cleanFaoMersEventFieldsStep),

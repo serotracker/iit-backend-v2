@@ -1,8 +1,13 @@
 export interface AirtableSourceFields {
-  "First author name": string;
-  "DOI/url": string;
-  "Source type": string;
-  "Institution": string;
+  id: string,
+  "First author name": string,
+  "DOI/url": string,
+  "Source type": string,
+  "Source title": string,
+  "Institution": string,
+  "Country": string[],
+  "seropositive (1/0)": string | null,
+  "PCR positive (1/0)": string | null
 }
 
 export interface AirtableMersEstimateFields {

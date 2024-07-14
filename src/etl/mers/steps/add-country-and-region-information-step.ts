@@ -11,7 +11,6 @@ import {
 } from "./combine-estimates-with-sources-step";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithSourcesStep & {
-  country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
   whoRegion: WHORegion | undefined;
@@ -88,20 +87,55 @@ const faoMersEventCountryToAlphaTwoAndAlphaThreeCode: Record<string, {
   "Yemen": { countryAlphaTwoCode: 'YE', countryAlphaThreeCode: 'YEM' }
 }
 
+const sourceCountryToAlphaTwoAndAlphaThreeCode: Record<string, {
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+} | undefined> = {
+  "Czech Republic": { countryAlphaTwoCode: 'CZ', countryAlphaThreeCode: 'CZE' },
+  "Egypt": { countryAlphaTwoCode: 'EG', countryAlphaThreeCode: 'EGY' },
+  "Ethiopia": { countryAlphaTwoCode: 'ET', countryAlphaThreeCode: 'ETH' },
+  "Kenya": { countryAlphaTwoCode: 'KE', countryAlphaThreeCode: 'KEN' },
+  "Turkey": { countryAlphaTwoCode: 'TR', countryAlphaThreeCode: 'TUR' },
+  "Nigeria": { countryAlphaTwoCode: 'NG', countryAlphaThreeCode: 'NGA' },
+  "Saudi Arabia": { countryAlphaTwoCode: 'SA', countryAlphaThreeCode: 'SAU' },
+  "KSA": { countryAlphaTwoCode: 'SA', countryAlphaThreeCode: 'SAU' },
+  "Jordan": { countryAlphaTwoCode: 'JO', countryAlphaThreeCode: 'JOR' },
+  "Pakistan": { countryAlphaTwoCode: 'PK', countryAlphaThreeCode: 'PAK' },
+  "India": { countryAlphaTwoCode: 'IN', countryAlphaThreeCode: 'IND' },
+  "Indonesia": { countryAlphaTwoCode: 'ID', countryAlphaThreeCode: 'IDN' },
+  "USA": { countryAlphaTwoCode: 'US', countryAlphaThreeCode: 'USA' },
+  "UAE": { countryAlphaTwoCode: 'AE', countryAlphaThreeCode: 'ARE' },
+  "Qatar": { countryAlphaTwoCode: 'QA', countryAlphaThreeCode: 'QAT' },
+}
+
 export const addCountryAndRegionInformationStep = (
   input: AddCountryAndRegionInformationStepInput
 ): AddCountryAndRegionInformationStepOutput => {
   console.log(`Running step: addCountryAndRegionInformationStep. Remaining estimates: ${input.allEstimates.length}`);
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      ...estimate,
-      country: 'Canada',
-      countryAlphaTwoCode: 'CA',
-      countryAlphaThreeCode: 'CAN',
-      whoRegion: WHORegion.AMR,
-      unRegion: UNRegion.NORTHERN_AMERICA
-    })),
+    allEstimates: input.allEstimates
+      .map((estimate) => {
+        const countryCodes = sourceCountryToAlphaTwoAndAlphaThreeCode[estimate.country]
+
+        if(!countryCodes) {
+          return undefined;
+        }
+
+        const { countryAlphaTwoCode, countryAlphaThreeCode } = countryCodes;
+
+        const whoRegion = getWHORegionFromAlphaTwoCode(countryAlphaTwoCode);
+        const unRegion = getUNRegionFromAlphaTwoCode(countryAlphaTwoCode);
+
+        return {
+          ...estimate,
+          countryAlphaTwoCode,
+          countryAlphaThreeCode,
+          whoRegion,
+          unRegion,
+        }
+      })
+      .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents
       .map((event) => {

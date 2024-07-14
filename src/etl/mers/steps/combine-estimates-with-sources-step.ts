@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import {
   CountryPopulationDataAfterParsingDatesStep,
   EstimateFieldsAfterParsingDatesStep,
@@ -40,15 +40,17 @@ interface CombineEstimatesWithSourcesStepOutput {
 
 export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourcesStepInput): CombineEstimatesWithSourcesStepOutput => {
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      ...estimate,
-      firstAuthorFullName: '',
-      sourceUrl: '',
-      sourceType: '',
-      sourceTitle: '',
-      insitutution: '',
-      country: '',
-    })),
+    allEstimates: input.allSources.flatMap((source) => source.country.map((country) => ({
+      id: new ObjectId().toHexString(),
+      seroprevalence: 0.1,
+      estimateId: 'Test Data',
+      firstAuthorFullName: source.firstAuthorFullName,
+      sourceUrl: source.sourceUrl,
+      sourceType: source.sourceType,
+      sourceTitle: source.sourceTitle,
+      insitutution: source.insitutution,
+      country: country,
+    }))),
     allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

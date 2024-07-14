@@ -1,20 +1,25 @@
 import { MongoClient } from "mongodb";
-import { CountryPopulationDataAfterValidatingFieldSetFromAirtableStep, EstimateFieldsAfterValidatingFieldSetFromAirtableStep, FaoMersEventAfterValidatingFieldSetFromAirtableStep, SourceFieldsAfterValidatingFieldSetFromAirtableStep, YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step";
 import { readFileSync } from "fs";
-import { SourceFieldsAfterCleaningSourcesStep } from "./clean-sources-step";
+import {
+  CountryPopulationDataAfterCleaningEstimatesStep,
+  EstimateFieldsAfterCleaningEstimatesStep,
+  FaoMersEventAfterCleaningEstimatesStep,
+  SourceFieldsAfterCleaningEstimatesStep,
+  YearlyCamelPopulationDataAfterCleaningEstimatesStep
+} from "./clean-estimates-step";
 
-export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterValidatingFieldSetFromAirtableStep;
-export type SourceFieldsAfterFetchingFaoMersEventsStep = SourceFieldsAfterValidatingFieldSetFromAirtableStep;
+export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterCleaningEstimatesStep;
+export type SourceFieldsAfterFetchingFaoMersEventsStep = SourceFieldsAfterCleaningEstimatesStep;
 export type FaoMersEventAfterFetchingFaoMersEventsStep = Record<string, string | undefined>;
-export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
-export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
+export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterCleaningEstimatesStep;
+export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterCleaningEstimatesStep;
 
 interface FetchFaoMersEventsStepInput {
-  allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
-  allSources: SourceFieldsAfterCleaningSourcesStep[];
-  allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
-  countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
+  allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
+  allSources: SourceFieldsAfterCleaningEstimatesStep[];
+  allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
+  countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
   mongoClient: MongoClient;
 }
 

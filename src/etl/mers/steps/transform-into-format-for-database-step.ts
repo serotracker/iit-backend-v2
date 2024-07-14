@@ -70,6 +70,8 @@ export const transformIntoFormatForDatabaseStep = (
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       _id: new ObjectId(),
+      seroprevalence: estimate.seroprevalence,
+      estimateId: estimate.estimateId,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
       countryAlphaThreeCode: estimate.countryAlphaThreeCode,
@@ -77,6 +79,11 @@ export const transformIntoFormatForDatabaseStep = (
       longitude: estimate.longitude,
       whoRegion: estimate.whoRegion,
       unRegion: estimate.unRegion,
+      firstAuthorFullName: estimate.firstAuthorFullName,
+      sourceUrl: estimate.sourceUrl,
+      sourceType: estimate.sourceType,
+      sourceTitle: estimate.sourceTitle,
+      insitutution: estimate.insitutution,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
