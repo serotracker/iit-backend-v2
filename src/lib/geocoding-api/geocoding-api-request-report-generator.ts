@@ -23,7 +23,7 @@ import { isPointInBoundingBox } from "./coordinate-helpers.js";
 const redactMapboxApiKeyFromGeocodingApiQueryUrl = (
   url: GeocodingApiRequestUrl
 ): string => {
-  const accessTokenRegex = /access_token=([^&]+)/;
+  const accessTokenRegex = /access_token=([^&]+)/g;
 
   return url.replaceAll(accessTokenRegex, "[REDACTED]");
 };

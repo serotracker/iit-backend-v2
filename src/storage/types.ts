@@ -140,6 +140,8 @@ export interface MersEstimateDocument {
   _id: ObjectId;
   seroprevalence: number;
   estimateId: string;
+  city: string | undefined;
+  state: string | undefined;
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;

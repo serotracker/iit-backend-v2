@@ -3,6 +3,8 @@ export const mersTypedefs = `
     id: String!
     seroprevalence: Float!
     estimateId: String!
+    city: String
+    state: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!

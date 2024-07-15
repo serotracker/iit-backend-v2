@@ -44,6 +44,8 @@ const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): Me
     id: document._id.toHexString(),
     seroprevalence: document.seroprevalence,
     estimateId: document.estimateId,
+    city: document.city,
+    state: document.state,
     country: document.country,
     countryAlphaTwoCode: document.countryAlphaTwoCode,
     countryAlphaThreeCode: document.countryAlphaThreeCode,

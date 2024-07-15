@@ -7,6 +7,9 @@ import {
   SourceFieldsAfterAddingCountryAndRegionInformationStep,
   YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step";
+import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types";
+import { getCityLatLng } from "../../../lib/geocoding-api/geocoding-functions.js";
+import { getLatitude, getLongitude } from "../../../lib/geocoding-api/coordinate-helpers.js";
 
 export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingCountryAndRegionInformationStep & {
   latitude: number;
@@ -45,12 +48,38 @@ export const latLngGenerationStep = async(
 
   console.log(`Running step: latLngGenerationStep. Remaining estimates: ${input.allEstimates.length}. GEOCODING_API_ENABLED=${geocodingApiEnabled}`);
 
+  const intervalsToPrintProgressMessages = Array.from({length: 20}, (_, index) => Math.floor((input.allEstimates.length * (index + 1)) / 20));
+
+  const estimatesWithLatitudesAndLongitudes: EstimateFieldsAfterLatLngGenerationStep[] = [];
+  
+  for(const estimate of input.allEstimates) {
+    if(intervalsToPrintProgressMessages.includes(estimatesWithLatitudesAndLongitudes.length)) {
+      console.log(`LatLng generation ${Math.ceil((100 * estimatesWithLatitudesAndLongitudes.length) / input.allEstimates.length)}% complete.`)
+    }
+    let cityLatLng: Point | undefined = [0, 0];
+
+    if(geocodingApiEnabled) {
+      cityLatLng = await getCityLatLng({
+        city: estimate.city,
+        state: estimate.state,
+        countryName: estimate.country,
+        countryAlphaTwoCode: estimate.countryAlphaTwoCode,
+        geocodingApiRequestReportFileName,
+        mongoClient: input.mongoClient
+      })
+    }
+
+    if(cityLatLng) {
+      estimatesWithLatitudesAndLongitudes.push({
+        ...estimate,
+        latitude: getLatitude(cityLatLng),
+        longitude: getLongitude(cityLatLng)
+      })
+    }
+  }
+
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      ...estimate,
-      latitude: 51.0447,
-      longitude: -114.0719
-    })),
+    allEstimates: estimatesWithLatitudesAndLongitudes,
     allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

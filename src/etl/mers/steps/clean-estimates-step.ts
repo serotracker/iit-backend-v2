@@ -11,6 +11,8 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   seroprevalence: number;
   estimateId: string;
+  city: string | undefined;
+  state: string | undefined;
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningSourcesStep;
 export type FaoMersEventAfterCleaningEstimatesStep = FaoMersEventAfterCleaningSourcesStep;
@@ -40,7 +42,9 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
       seroprevalence: 0.1,
-      estimateId: 'Test Data'
+      estimateId: 'Test Data',
+      city: undefined,
+      state: undefined,
     })),
     allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
