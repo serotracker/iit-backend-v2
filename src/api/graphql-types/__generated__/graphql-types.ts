@@ -202,6 +202,7 @@ export enum MersDiagnosisStatus {
 
 export type MersEstimate = {
   __typename?: 'MersEstimate';
+  city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
@@ -215,6 +216,7 @@ export type MersEstimate = {
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
+  state?: Maybe<Scalars['String']['output']>;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
@@ -782,6 +784,7 @@ export type HumanMersEventResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type MersEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEstimate'] = ResolversParentTypes['MersEstimate']> = {
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -795,6 +798,7 @@ export type MersEstimateResolvers<ContextType = any, ParentType extends Resolver
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

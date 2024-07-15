@@ -72,6 +72,8 @@ export const transformIntoFormatForDatabaseStep = (
       _id: new ObjectId(),
       seroprevalence: estimate.seroprevalence,
       estimateId: estimate.estimateId,
+      city: estimate.city,
+      state: estimate.state,
       country: estimate.country,
       countryAlphaTwoCode: estimate.countryAlphaTwoCode,
       countryAlphaThreeCode: estimate.countryAlphaThreeCode,

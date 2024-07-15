@@ -43,6 +43,8 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
     allEstimates: input.allSources.flatMap((source) => source.country.map((country) => ({
       id: new ObjectId().toHexString(),
       seroprevalence: 0.1,
+      city: undefined,
+      state: undefined,
       estimateId: 'Test Data',
       firstAuthorFullName: source.firstAuthorFullName,
       sourceUrl: source.sourceUrl,

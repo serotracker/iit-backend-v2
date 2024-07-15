@@ -11,8 +11,8 @@ import {
 } from "./combine-estimates-with-sources-step";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithSourcesStep & {
-  countryAlphaTwoCode: string;
-  countryAlphaThreeCode: string;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
 };
