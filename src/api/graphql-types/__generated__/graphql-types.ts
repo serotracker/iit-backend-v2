@@ -221,6 +221,11 @@ export type MersEstimate = {
   whoRegion?: Maybe<WhoRegion>;
 };
 
+export type MersEstimateFilterOptions = {
+  __typename?: 'MersEstimateFilterOptions';
+  sourceType: Array<Scalars['String']['output']>;
+};
+
 export type MersEvent = AnimalMersEvent | HumanMersEvent;
 
 export enum MersEventAnimalSpecies {
@@ -343,6 +348,7 @@ export type Query = {
   faoMersEventFilterOptions: FaoMersEventFilterOptions;
   groupedTeamMembers: Array<TeamMemberGroup>;
   mersEstimates: Array<MersEstimate>;
+  mersEstimatesFilterOptions: MersEstimateFilterOptions;
   mersFilterOptions: MersFilterOptions;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
@@ -594,6 +600,7 @@ export type ResolversTypes = {
   MersDiagnosisSource: MersDiagnosisSource;
   MersDiagnosisStatus: MersDiagnosisStatus;
   MersEstimate: ResolverTypeWrapper<MersEstimate>;
+  MersEstimateFilterOptions: ResolverTypeWrapper<MersEstimateFilterOptions>;
   MersEvent: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['MersEvent']>;
   MersEventAnimalSpecies: MersEventAnimalSpecies;
   MersEventAnimalType: MersEventAnimalType;
@@ -636,6 +643,7 @@ export type ResolversParentTypes = {
   HumanMersEvent: HumanMersEvent;
   Int: Scalars['Int']['output'];
   MersEstimate: MersEstimate;
+  MersEstimateFilterOptions: MersEstimateFilterOptions;
   MersEvent: ResolversUnionTypes<ResolversParentTypes>['MersEvent'];
   MersEventInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersEventInterface'];
   MersFilterOptions: MersFilterOptions;
@@ -804,6 +812,11 @@ export type MersEstimateResolvers<ContextType = any, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MersEstimateFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEstimateFilterOptions'] = ResolversParentTypes['MersEstimateFilterOptions']> = {
+  sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MersEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEvent'] = ResolversParentTypes['MersEvent']> = {
   __resolveType: TypeResolveFn<'AnimalMersEvent' | 'HumanMersEvent', ParentType, ContextType>;
 };
@@ -882,6 +895,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   faoMersEventFilterOptions?: Resolver<ResolversTypes['FaoMersEventFilterOptions'], ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
   mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;
+  mersEstimatesFilterOptions?: Resolver<ResolversTypes['MersEstimateFilterOptions'], ParentType, ContextType>;
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
@@ -989,6 +1003,7 @@ export type Resolvers<ContextType = any> = {
   FaoMersEventFilterOptions?: FaoMersEventFilterOptionsResolvers<ContextType>;
   HumanMersEvent?: HumanMersEventResolvers<ContextType>;
   MersEstimate?: MersEstimateResolvers<ContextType>;
+  MersEstimateFilterOptions?: MersEstimateFilterOptionsResolvers<ContextType>;
   MersEvent?: MersEventResolvers<ContextType>;
   MersEventInterface?: MersEventInterfaceResolvers<ContextType>;
   MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;

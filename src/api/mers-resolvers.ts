@@ -208,6 +208,20 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       ]).map((unRegion) => mapUnRegionForApi(unRegion))
     }
   }
+  
+  const mersEstimatesFilterOptions = async () => {
+    const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
+
+    const [
+      sourceType,
+    ] = await Promise.all([
+      estimateCollection.distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
+    ])
+
+    return {
+      sourceType
+    }
+  }
 
   const allFaoMersEventPartitionKeys = async () => {
     const [
@@ -288,6 +302,7 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       Query: {
         mersEstimates,
         mersFilterOptions,
+        mersEstimatesFilterOptions,
         allFaoMersEventPartitionKeys,
         partitionedFaoMersEvents,
         faoMersEventFilterOptions,

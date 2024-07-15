@@ -117,6 +117,10 @@ export const mersTypedefs = `
     mersEvents: [MersEvent!]!
   }
 
+  type MersEstimateFilterOptions {
+    sourceType: [String!]!
+  }
+
   type MersFilterOptions {
     countryIdentifiers: [CountryIdentifiers!]!
     whoRegion: [WHORegion!]!
@@ -153,6 +157,7 @@ export const mersTypedefs = `
   type Query {
     mersEstimates: [MersEstimate!]!
     mersFilterOptions: MersFilterOptions!
+    mersEstimatesFilterOptions: MersEstimateFilterOptions!
     allFaoMersEventPartitionKeys: [Int!]!
     partitionedFaoMersEvents(input: PartitionedFaoMersEventsInput!): PartitionedFeoMersEventsOutput!
     faoMersEventFilterOptions: FaoMersEventFilterOptions!
