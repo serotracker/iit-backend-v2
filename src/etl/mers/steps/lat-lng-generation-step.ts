@@ -79,7 +79,15 @@ export const latLngGenerationStep = async(
   }
 
   return {
+<<<<<<< HEAD
     allEstimates: estimatesWithLatitudesAndLongitudes,
+=======
+    allEstimates: input.allEstimates.map((estimate) => ({
+      ...estimate,
+      latitude: 51.0447,
+      longitude: -114.0719
+    })),
+>>>>>>> c31954ebfb3e01538d8f78bf63858f0387fcafc2
     allSources: input.allSources,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

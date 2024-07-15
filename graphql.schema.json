@@ -2198,6 +2198,7 @@
             "deprecationReason": null
           },
           {
+<<<<<<< HEAD
             "name": "state",
             "description": null,
             "args": [],
@@ -2210,6 +2211,8 @@
             "deprecationReason": null
           },
           {
+=======
+>>>>>>> c31954ebfb3e01538d8f78bf63858f0387fcafc2
             "name": "unRegion",
             "description": null,
             "args": [],

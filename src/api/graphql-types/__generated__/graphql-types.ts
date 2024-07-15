@@ -216,7 +216,10 @@ export type MersEstimate = {
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
+<<<<<<< HEAD
   state?: Maybe<Scalars['String']['output']>;
+=======
+>>>>>>> c31954ebfb3e01538d8f78bf63858f0387fcafc2
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
 };
@@ -798,7 +801,10 @@ export type MersEstimateResolvers<ContextType = any, ParentType extends Resolver
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+<<<<<<< HEAD
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+=======
+>>>>>>> c31954ebfb3e01538d8f78bf63858f0387fcafc2
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
