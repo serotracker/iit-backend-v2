@@ -70,6 +70,7 @@ export const transformIntoFormatForDatabaseStep = (
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       _id: new ObjectId(),
+      type: estimate.type,
       seroprevalence: estimate.seroprevalence,
       estimateId: estimate.estimateId,
       city: estimate.city,

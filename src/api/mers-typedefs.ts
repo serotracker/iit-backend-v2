@@ -19,6 +19,80 @@ export const mersTypedefs = `
     insitutution: String!
   }
 
+  enum MersEstimateType {
+    HUMAN
+    ANIMAL
+  }
+
+  interface MersEstimateInterface {
+    id: String!
+    type: MersEstimateType!
+    seroprevalence: Float!
+    estimateId: String!
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    latitude: Float!
+    longitude: Float!
+    whoRegion: WHORegion
+    unRegion: UNRegion
+    firstAuthorFullName: String!
+    sourceUrl: String!
+    sourceType: String!
+    sourceTitle: String!
+    insitutution: String!
+  }
+
+  type HumanMersEstimate implements MersEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    type: MersEstimateType!
+    seroprevalence: Float!
+    estimateId: String!
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    latitude: Float!
+    longitude: Float!
+    whoRegion: WHORegion
+    unRegion: UNRegion
+    firstAuthorFullName: String!
+    sourceUrl: String!
+    sourceType: String!
+    sourceTitle: String!
+    insitutution: String!
+    ####### END INTERFACE FIELDS #######
+  }
+
+  type AnimalMersEstimate implements MersEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    type: MersEstimateType!
+    seroprevalence: Float!
+    estimateId: String!
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    latitude: Float!
+    longitude: Float!
+    whoRegion: WHORegion
+    unRegion: UNRegion
+    firstAuthorFullName: String!
+    sourceUrl: String!
+    sourceType: String!
+    sourceTitle: String!
+    insitutution: String!
+    ####### END INTERFACE FIELDS #######
+  }
+
+  union MersEstimate_V2 = HumanMersEstimate | AnimalMersEstimate
+
   enum MersDiagnosisStatus {
     CONFIRMED
     DENIED
@@ -156,6 +230,7 @@ export const mersTypedefs = `
 
   type Query {
     mersEstimates: [MersEstimate!]!
+    mersEstimates_V2: [MersEstimate_V2!]!
     mersFilterOptions: MersFilterOptions!
     mersEstimatesFilterOptions: MersEstimateFilterOptions!
     allFaoMersEventPartitionKeys: [Int!]!

@@ -6,9 +6,11 @@ import {
   SourceFieldsAfterCleaningSourcesStep,
   YearlyCamelPopulationDataAfterCleaningSourcesStep
 } from "./clean-sources-step";
+import { MersEstimateType } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
+  type: MersEstimateType;
   seroprevalence: number;
   estimateId: string;
   city: string | undefined;
@@ -41,6 +43,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
+      type: MersEstimateType.HUMAN,
       seroprevalence: 0.1,
       estimateId: 'Test Data',
       city: undefined,

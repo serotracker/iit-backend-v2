@@ -16,6 +16,7 @@ export type SourceFieldsAfterCleaningSourcesStep = {
   sourceTitle: string;
   insitutution: string;
   country: string[];
+  populationType: string[];
 };
 export type FaoMersEventAfterCleaningSourcesStep = FaoMersEventAfterValidatingFieldSetFromAirtableStep;
 export type YearlyCamelPopulationDataAfterCleaningSourcesStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -49,7 +50,8 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
       sourceType: source['Source type'],
       sourceTitle: source['Source title'],
       insitutution: source['Institution'],
-      country: source['Country']
+      country: source['Country'],
+      populationType: source['Population type']
     })),
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
