@@ -12,7 +12,10 @@ import {
   MersDiagnosisSource as MersDiagnosisSourceForApi,
   MersEventInterface,
   QueryResolvers,
-  YearlyFaoCamelPopulationDataEntry
+  YearlyFaoCamelPopulationDataEntry,
+  MersEstimate_V2,
+  MersEstimateInterface,
+  MersEstimateType as MersEstimateTypeForApi
 } from "./graphql-types/__generated__/graphql-types.js";
 import {
   FaoMersEventDocument,
@@ -23,7 +26,8 @@ import {
   MersEventAnimalSpecies,
   MersEventAnimalType,
   MersEventType,
-  FaoYearlyCamelPopulationDataDocument
+  FaoYearlyCamelPopulationDataDocument,
+  MersEstimateType
 } from '../storage/types.js';
 import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
@@ -38,6 +42,47 @@ interface GenerateMersResolversOutput {
 }
 
 const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
+
+const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument): MersEstimate_V2 => {
+  const base: MersEstimateInterface = {
+    id: document._id.toHexString(),
+    type: MersEstimateTypeForApi.Human,
+    seroprevalence: document.seroprevalence,
+    estimateId: document.estimateId,
+    city: document.city,
+    state: document.state,
+    country: document.country,
+    countryAlphaTwoCode: document.countryAlphaTwoCode,
+    countryAlphaThreeCode: document.countryAlphaThreeCode,
+    latitude: document.latitude,
+    longitude: document.longitude,
+    whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
+    unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
+    firstAuthorFullName: document.firstAuthorFullName,
+    sourceUrl: document.sourceUrl,
+    sourceType: document.sourceType,
+    sourceTitle: document.sourceTitle,
+    insitutution: document.insitutution,
+  }
+
+  if(document.type === MersEstimateType.HUMAN) {
+    return {
+      ...base,
+      __typename: 'HumanMersEstimate',
+      type: MersEstimateTypeForApi.Human,
+    }
+  }
+
+  if(document.type === MersEstimateType.ANIMAL) {
+    return {
+      ...base,
+      __typename: 'AnimalMersEstimate',
+      type: MersEstimateTypeForApi.Animal,
+    }
+  }
+
+  assertNever(document);
+}
 
 const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): MersEstimate => {
   return {
@@ -167,6 +212,12 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     const databaseEstimates = await mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates').find({}).toArray();
 
     return databaseEstimates.map((estimate) => transformMersEstimateDocumentForApi(estimate));
+  }
+
+  const mersEstimates_V2 = async () => {
+    const databaseEstimates = await mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates').find({}).toArray();
+
+    return databaseEstimates.map((estimate) => transformMersEstimateDocumentForApi_V2(estimate));
   }
 
   const mersFilterOptions = async () => {
@@ -301,6 +352,7 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     mersResolvers: {
       Query: {
         mersEstimates,
+        mersEstimates_V2,
         mersFilterOptions,
         mersEstimatesFilterOptions,
         allFaoMersEventPartitionKeys,

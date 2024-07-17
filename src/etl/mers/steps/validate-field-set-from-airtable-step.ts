@@ -45,7 +45,8 @@ export const validateFieldSetFromAirtableStep = (
     "Source type": z.string(),
     "Source title": z.string(),
     "Institution": z.string(),
-    "Country": z.string().array()
+    "Country": z.string().array(),
+    "Population type": z.string().array()
   });
   const allSources = input.allSources
     .map((source) => ({

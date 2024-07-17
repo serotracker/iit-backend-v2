@@ -6,6 +6,7 @@ import {
   SourceFieldsAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
+import { MersEstimateType } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCombiningEstimatesWithSourcesStep = EstimateFieldsAfterParsingDatesStep & {
   firstAuthorFullName: string;
@@ -42,6 +43,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
   return {
     allEstimates: input.allSources.flatMap((source) => source.country.map((country) => ({
       id: new ObjectId().toHexString(),
+      type: source.populationType.includes('Animal') ? MersEstimateType.ANIMAL : MersEstimateType.HUMAN,
       seroprevalence: 0.1,
       city: undefined,
       state: undefined,

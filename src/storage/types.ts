@@ -136,7 +136,12 @@ export interface SarsCov2EstimateDocument {
   updatedAt: Date;
 }
 
-export interface MersEstimateDocument {
+export enum MersEstimateType {
+  HUMAN = 'HUMAN',
+  ANIMAL = 'ANIMAL',
+}
+
+export interface MersEstimateDocumentBase {
   _id: ObjectId;
   seroprevalence: number;
   estimateId: string;
@@ -157,6 +162,18 @@ export interface MersEstimateDocument {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type HumanMersEstimateDocument = MersEstimateDocumentBase & {
+  type: MersEstimateType.HUMAN;
+}
+
+export type AnimalMersEstimateDocument = MersEstimateDocumentBase & {
+  type: MersEstimateType.ANIMAL;
+}
+
+export type MersEstimateDocument = 
+  | HumanMersEstimateDocument
+  | AnimalMersEstimateDocument;
 
 export enum MersDiagnosisStatus {
   CONFIRMED = "CONFIRMED",
