@@ -1,11 +1,12 @@
 import { MongoClient } from "mongodb";
 import {
-  CountryPopulationDataAfterCleaningSourcesStep,
-  EstimateFieldsAfterCleaningSourcesStep,
-  FaoMersEventAfterCleaningSourcesStep,
-  SourceFieldsAfterCleaningSourcesStep,
-  YearlyCamelPopulationDataAfterCleaningSourcesStep
-} from "./clean-sources-step";
+  EstimateFieldsAfterCleaningStudiesStep,
+  CountryPopulationDataAfterCleaningStudiesStep,
+  FaoMersEventAfterCleaningStudiesStep,
+  SourceFieldsAfterCleaningStudiesStep,
+  StudyFieldsAfterCleaningStudiesStep,
+  YearlyCamelPopulationDataAfterCleaningStudiesStep
+} from "./clean-studies-step";
 import { MersEstimateType } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCleaningEstimatesStep = {
@@ -15,24 +16,29 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   estimateId: string;
   city: string | undefined;
   state: string | undefined;
+  studyInclusionCriteria: string | undefined;
+  studyExclusionCriteria: string | undefined;
 }
-export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningSourcesStep;
-export type FaoMersEventAfterCleaningEstimatesStep = FaoMersEventAfterCleaningSourcesStep;
-export type YearlyCamelPopulationDataAfterCleaningEstimatesStep = YearlyCamelPopulationDataAfterCleaningSourcesStep;
-export type CountryPopulationDataAfterCleaningEstimatesStep = CountryPopulationDataAfterCleaningSourcesStep;
+export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
+export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
+export type FaoMersEventAfterCleaningEstimatesStep = FaoMersEventAfterCleaningStudiesStep;
+export type YearlyCamelPopulationDataAfterCleaningEstimatesStep = YearlyCamelPopulationDataAfterCleaningStudiesStep;
+export type CountryPopulationDataAfterCleaningEstimatesStep = CountryPopulationDataAfterCleaningStudiesStep;
 
 interface CleanEstimatesStepInput {
-  allEstimates: EstimateFieldsAfterCleaningSourcesStep[];
-  allSources: SourceFieldsAfterCleaningSourcesStep[];
-  allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
-  countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
+  allEstimates: EstimateFieldsAfterCleaningStudiesStep[];
+  allSources: SourceFieldsAfterCleaningStudiesStep[];
+  allStudies: StudyFieldsAfterCleaningStudiesStep[];
+  allFaoMersEvents: FaoMersEventAfterCleaningStudiesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningStudiesStep[];
+  countryPopulationData: CountryPopulationDataAfterCleaningStudiesStep[];
   mongoClient: MongoClient;
 }
 
 interface CleanEstimatesStepOutput {
   allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
   allSources: SourceFieldsAfterCleaningEstimatesStep[];
+  allStudies: StudyFieldsAfterCleaningEstimatesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
@@ -48,8 +54,11 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       estimateId: 'Test Data',
       city: undefined,
       state: undefined,
+      studyInclusionCriteria: undefined,
+      studyExclusionCriteria: undefined
     })),
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

@@ -4,11 +4,13 @@ import {
   EstimateFieldsAfterJitteringPinLatLngStep,
   FaoMersEventAfterJitteringPinLatLngStep,
   SourceFieldsAfterJitteringPinLatLngStep,
+  StudyFieldsAfterJitteringPinLatLngStep,
   YearlyCamelPopulationDataAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step.js";
 
 export type EstimateFieldsAfterAssigningPartitionsStep = EstimateFieldsAfterJitteringPinLatLngStep;
 export type SourceFieldsAfterAssigningPartitionsStep = SourceFieldsAfterJitteringPinLatLngStep;
+export type StudyFieldsAfterAssigningPartitionsStep = StudyFieldsAfterJitteringPinLatLngStep;
 export type FaoMersEventAfterAssigningPartitionsStep = FaoMersEventAfterJitteringPinLatLngStep & {
   partitionKey: number;
 };
@@ -20,6 +22,7 @@ export type CountryPopulationDataAfterAssigningPartitionsStep = CountryPopulatio
 interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: SourceFieldsAfterJitteringPinLatLngStep[];
+  allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
@@ -29,6 +32,7 @@ interface AssignPartitionsStepInput {
 interface AssignPartitionsStepOutput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
   allSources: SourceFieldsAfterAssigningPartitionsStep[];
+  allStudies: StudyFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -45,6 +49,7 @@ export const assignPartitionsStep = (
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents.map((event, index) => ({
       ...event,
       partitionKey: Math.floor(index / faoMersEventPartitionSize)

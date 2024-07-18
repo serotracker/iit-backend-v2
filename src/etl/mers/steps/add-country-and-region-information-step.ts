@@ -7,6 +7,7 @@ import {
   EstimateFieldsAfterCombiningEstimatesWithSourcesStep,
   FaoMersEventAfterCombiningEstimatesWithSourcesStep,
   SourceFieldsAfterCombiningEstimatesWithSourcesStep,
+  StudyFieldsAfterCombiningEstimatesWithSourcesStep,
   YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep
 } from "./combine-estimates-with-sources-step";
 
@@ -18,6 +19,7 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
 };
 
 export type SourceFieldsAfterAddingCountryAndRegionInformationStep = SourceFieldsAfterCombiningEstimatesWithSourcesStep;
+export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCombiningEstimatesWithSourcesStep;
 
 export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterCombiningEstimatesWithSourcesStep & {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
@@ -35,6 +37,7 @@ export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = Co
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesWithSourcesStep[];
   allSources: SourceFieldsAfterCombiningEstimatesWithSourcesStep[];
+  allStudies: StudyFieldsAfterCombiningEstimatesWithSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithSourcesStep[];
@@ -44,6 +47,7 @@ interface AddCountryAndRegionInformationStepInput {
 interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
+  allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -137,6 +141,7 @@ export const addCountryAndRegionInformationStep = (
       })
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents
       .map((event) => {
         const countryCodes = faoMersEventCountryToAlphaTwoAndAlphaThreeCode[event.country]

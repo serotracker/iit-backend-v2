@@ -63,6 +63,8 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
     sourceType: document.sourceType,
     sourceTitle: document.sourceTitle,
     insitutution: document.insitutution,
+    studyInclusionCriteria: document.studyInclusionCriteria,
+    studyExclusionCriteria: document.studyExclusionCriteria,
   }
 
   if(document.type === MersEstimateType.HUMAN) {

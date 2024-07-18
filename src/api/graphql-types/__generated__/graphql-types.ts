@@ -39,6 +39,8 @@ export type AnimalMersEstimate = MersEstimateInterface & {
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
   state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   type: MersEstimateType;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
@@ -206,6 +208,8 @@ export type HumanMersEstimate = MersEstimateInterface & {
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
   state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   type: MersEstimateType;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
@@ -286,6 +290,8 @@ export type MersEstimateInterface = {
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
   state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   type: MersEstimateType;
   unRegion?: Maybe<UnRegion>;
   whoRegion?: Maybe<WhoRegion>;
@@ -770,6 +776,8 @@ export type AnimalMersEstimateResolvers<ContextType = any, ParentType extends Re
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
@@ -894,6 +902,8 @@ export type HumanMersEstimateResolvers<ContextType = any, ParentType extends Res
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
@@ -962,6 +972,8 @@ export type MersEstimateInterfaceResolvers<ContextType = any, ParentType extends
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;

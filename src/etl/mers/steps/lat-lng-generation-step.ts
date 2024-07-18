@@ -5,6 +5,7 @@ import {
   EstimateFieldsAfterAddingCountryAndRegionInformationStep,
   FaoMersEventAfterAddingCountryAndRegionInformationStep,
   SourceFieldsAfterAddingCountryAndRegionInformationStep,
+  StudyFieldsAfterAddingCountryAndRegionInformationStep,
   YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types";
@@ -16,6 +17,7 @@ export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingC
   longitude: number;
 };
 export type SourceFieldsAfterLatLngGenerationStep = SourceFieldsAfterAddingCountryAndRegionInformationStep;
+export type StudyFieldsAfterLatLngGenerationStep = StudyFieldsAfterAddingCountryAndRegionInformationStep;
 export type FaoMersEventAfterLatLngGenerationStep = FaoMersEventAfterAddingCountryAndRegionInformationStep;
 export type YearlyCamelPopulationDataAfterLatLngGenerationStep = YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep;
 export type CountryPopulationDataAfterLatLngGenerationStep = CountryPopulationDataAfterAddingCountryAndRegionInformationStep;
@@ -23,6 +25,7 @@ export type CountryPopulationDataAfterLatLngGenerationStep = CountryPopulationDa
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
+  allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -32,6 +35,7 @@ interface LatLngGenerationStepInput {
 interface LatLngGenerationStepOutput {
   allEstimates: EstimateFieldsAfterLatLngGenerationStep[];
   allSources: SourceFieldsAfterLatLngGenerationStep[];
+  allStudies: StudyFieldsAfterLatLngGenerationStep[];
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
@@ -81,6 +85,7 @@ export const latLngGenerationStep = async(
   return {
     allEstimates: estimatesWithLatitudesAndLongitudes,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

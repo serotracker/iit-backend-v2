@@ -43,6 +43,8 @@ export const mersTypedefs = `
     sourceType: String!
     sourceTitle: String!
     insitutution: String!
+    studyInclusionCriteria: String
+    studyExclusionCriteria: String
   }
 
   type HumanMersEstimate implements MersEstimateInterface {
@@ -65,6 +67,8 @@ export const mersTypedefs = `
     sourceType: String!
     sourceTitle: String!
     insitutution: String!
+    studyInclusionCriteria: String
+    studyExclusionCriteria: String
     ####### END INTERFACE FIELDS #######
   }
 
@@ -88,6 +92,8 @@ export const mersTypedefs = `
     sourceType: String!
     sourceTitle: String!
     insitutution: String!
+    studyInclusionCriteria: String
+    studyExclusionCriteria: String
     ####### END INTERFACE FIELDS #######
   }
 

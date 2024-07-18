@@ -24,6 +24,7 @@ import { addDatabaseIndexesStep } from "./steps/add-database-indexes-step.js";
 import { combineEstimatesWithSourcesStep } from "./steps/combine-estimates-with-sources-step.js";
 import { cleanSourcesStep } from "./steps/clean-sources-step.js";
 import { cleanEstimatesStep } from "./steps/clean-estimates-step.js";
+import { cleanStudiesStep } from "./steps/clean-studies-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -53,11 +54,18 @@ const runEtlMain = async () => {
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] = Array(5).fill(0).map(() => ({ id: new ObjectId().toString() }))
 
+  const allStudiesUnformatted = [{
+    id: new ObjectId().toString(),
+    'Inclusion Criteria': 'Inclusion Criteria',
+    'Exclusion Criteria': 'Exclusion Criteria',
+  }]
+
   //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
   const outputFromFirstPipeHalf = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allSources: allSourcesUnformatted,
+      allStudies: allStudiesUnformatted,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: [],
@@ -65,6 +73,7 @@ const runEtlMain = async () => {
     },
     etlStep(validateFieldSetFromAirtableStep),
     etlStep(cleanSourcesStep),
+    etlStep(cleanStudiesStep),
     etlStep(cleanEstimatesStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),

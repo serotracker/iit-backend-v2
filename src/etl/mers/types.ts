@@ -11,6 +11,12 @@ export interface AirtableSourceFields {
   "PCR positive (1/0)": string | null
 }
 
+export interface AirtableStudyFields {
+  id: string;
+  'Inclusion Criteria': string | null;
+  'Exclusion Criteria': string | null;
+}
+
 export interface AirtableMersEstimateFields {
   id: string;
 }
