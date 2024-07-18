@@ -54,8 +54,8 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       estimateId: 'Test Data',
       city: undefined,
       state: undefined,
-      studyInclusionCriteria: undefined,
-      studyExclusionCriteria: undefined
+      studyInclusionCriteria: 'Test Inclusion Criteria',
+      studyExclusionCriteria: 'Test Exclusion Criteria',
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,
