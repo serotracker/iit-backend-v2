@@ -9,11 +9,13 @@ import {
   EstimateFieldsAfterGeneratingCamelDataPerCapitaStep,
   FaoMersEventAfterGeneratingCamelDataPerCapitaStep,
   SourceFieldsAfterGeneratingCamelDataPerCapitaStep,
+  StudyFieldsAfterGeneratingCamelDataPerCapitaStep,
   YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep
 } from "./generate-camel-data-per-capita-step";
 
 export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterGeneratingCamelDataPerCapitaStep;
 export type SourceFieldsAfterParsingDatesStep = SourceFieldsAfterGeneratingCamelDataPerCapitaStep;
+export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterGeneratingCamelDataPerCapitaStep;
 // Intentionally from a type a few steps back. This is because the individual parts of the union type are not carried through the steps,
 // just the union type itself. You could fix this by carrying the individual parts of the union type through the steps.
 export type FaoMersEventAfterParsingDatesStep = (Omit<
@@ -31,6 +33,7 @@ export type CountryPopulationDataAfterParsingDatesStep = CountryPopulationDataAf
 interface ParseDatesStepInput {
   allEstimates: EstimateFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allSources: SourceFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allStudies: StudyFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
@@ -40,6 +43,7 @@ interface ParseDatesStepInput {
 interface ParseDatesStepOutput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allSources: SourceFieldsAfterParsingDatesStep[];
+  allStudies: StudyFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
@@ -54,6 +58,7 @@ export const parseDatesStep = (
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => ({
       ...event,
       observationDate: event.observationDate ? parse(event.observationDate, "dd/MM/yyyy", new Date()) : undefined,

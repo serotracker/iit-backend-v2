@@ -5,6 +5,7 @@ import {
   EstimateFieldsAfterFetchingFaoMersEventsStep,
   FaoMersEventAfterFetchingFaoMersEventsStep,
   SourceFieldsAfterFetchingFaoMersEventsStep,
+  StudyFieldsAfterFetchingFaoMersEventsStep,
   YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep
 } from "./fetch-fao-mers-events-step.js";
 import { MersEventType } from "../../../storage/types.js";
@@ -59,6 +60,7 @@ type HumanFaoMersEventAfterValidatingFaoMersEventsStep = FaoMersEventAfterValida
 
 export type EstimateFieldsAfterValidatingFaoMersEventsStep = EstimateFieldsAfterFetchingFaoMersEventsStep;
 export type SourceFieldsAfterValidatingFaoMersEventsStep = SourceFieldsAfterFetchingFaoMersEventsStep;
+export type StudyFieldsAfterValidatingFaoMersEventsStep = StudyFieldsAfterFetchingFaoMersEventsStep;
 export type FaoMersEventAfterValidatingFaoMersEventsStep = 
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
@@ -68,6 +70,7 @@ export type CountryPopulationDataAfterValidatingFaoMersEventsStep = CountryPopul
 interface ValidateFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
+  allStudies: StudyFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -77,6 +80,7 @@ interface ValidateFaoMersEventsStepInput {
 interface ValidateFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
+  allStudies: StudyFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -159,6 +163,7 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

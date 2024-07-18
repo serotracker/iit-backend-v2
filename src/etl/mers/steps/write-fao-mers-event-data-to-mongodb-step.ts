@@ -5,6 +5,7 @@ import {
   EstimateFieldsAfterWritingEstimateToMongodbStep,
   FaoMersEventAfterWritingEstimateToMongodbStep,
   SourceFieldsAfterWritingEstimateToMongodbStep,
+  StudyFieldsAfterWritingEstimateToMongodbStep,
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep
 } from "./write-estimate-data-to-mongodb-step.js";
 
@@ -12,6 +13,8 @@ export type EstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
   EstimateFieldsAfterWritingEstimateToMongodbStep;
 export type SourceFieldsAfterWritingFaoMersEventsToMongodbStep =
   SourceFieldsAfterWritingEstimateToMongodbStep;
+export type StudyFieldsAfterWritingFaoMersEventsToMongodbStep =
+  StudyFieldsAfterWritingEstimateToMongodbStep;
 export type FaoMersEventAfterWritingFaoMersEventsToMongodbStep =
   FaoMersEventAfterWritingEstimateToMongodbStep;
 export type YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep =
@@ -22,6 +25,7 @@ export type CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep =
 interface WriteFaoMersEventDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
   allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
+  allStudies: StudyFieldsAfterWritingEstimateToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingEstimateToMongodbStep[];
@@ -31,6 +35,7 @@ interface WriteFaoMersEventDataToMongoDbStepInput {
 interface WriteFaoMersEventDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoMersEventsToMongodbStep[];
+  allStudies: StudyFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
@@ -54,6 +59,7 @@ export const writeFaoMersEventDataToMongoDbStep = async(
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

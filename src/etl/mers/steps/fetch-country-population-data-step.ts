@@ -6,12 +6,14 @@ import {
   EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep,
   FaoMersEventAfterCleaningCamelPopulationByCountryDataStep,
   SourceFieldsAfterCleaningCamelPopulationByCountryDataStep,
+  StudyFieldsAfterCleaningCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep
 } from "./clean-camel-population-by-country-data-step";
 import { groupByArray } from "../../../lib/lib.js";
 
 export type EstimateFieldsAfterFetchingCountryPopulationStep = EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep;
 export type SourceFieldsAfterFetchingCountryPopulationStep = SourceFieldsAfterCleaningCamelPopulationByCountryDataStep;
+export type StudyFieldsAfterFetchingCountryPopulationStep = StudyFieldsAfterCleaningCamelPopulationByCountryDataStep;
 export type FaoMersEventAfterFetchingCountryPopulationStep = FaoMersEventAfterCleaningCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterFetchingCountryPopulationStep = YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
 export type CountryPopulationDataAfterFetchingCountryPopulationStep = StructuredCountryPopulationDataPoint;
@@ -19,6 +21,7 @@ export type CountryPopulationDataAfterFetchingCountryPopulationStep = Structured
 interface FetchCountryPopulationDataStepInput {
   allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allSources: SourceFieldsAfterCleaningCamelPopulationByCountryDataStep[];
+  allStudies: StudyFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
@@ -28,6 +31,7 @@ interface FetchCountryPopulationDataStepInput {
 interface FetchCountryPopulationDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingCountryPopulationStep[];
   allSources: SourceFieldsAfterFetchingCountryPopulationStep[];
+  allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCountryPopulationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCountryPopulationStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCountryPopulationStep[];
@@ -46,6 +50,7 @@ export const fetchCountryPopulationDataStep = (
     return {
       allEstimates: input.allEstimates,
       allSources: input.allSources,
+      allStudies: input.allStudies,
       allFaoMersEvents: input.allFaoMersEvents,
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: [],
@@ -110,6 +115,7 @@ export const fetchCountryPopulationDataStep = (
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: groupByArray(dataRows, 'threeLetterCountryCode') ,

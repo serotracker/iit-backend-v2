@@ -5,11 +5,13 @@ import {
   EstimateFieldsAfterCleaningEstimatesStep,
   FaoMersEventAfterCleaningEstimatesStep,
   SourceFieldsAfterCleaningEstimatesStep,
+  StudyFieldsAfterCleaningEstimatesStep,
   YearlyCamelPopulationDataAfterCleaningEstimatesStep
 } from "./clean-estimates-step";
 
 export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterCleaningEstimatesStep;
 export type SourceFieldsAfterFetchingFaoMersEventsStep = SourceFieldsAfterCleaningEstimatesStep;
+export type StudyFieldsAfterFetchingFaoMersEventsStep = StudyFieldsAfterCleaningEstimatesStep;
 export type FaoMersEventAfterFetchingFaoMersEventsStep = Record<string, string | undefined>;
 export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterCleaningEstimatesStep;
 export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterCleaningEstimatesStep;
@@ -17,6 +19,7 @@ export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulat
 interface FetchFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
   allSources: SourceFieldsAfterCleaningEstimatesStep[];
+  allStudies: StudyFieldsAfterCleaningEstimatesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
@@ -26,6 +29,7 @@ interface FetchFaoMersEventsStepInput {
 interface FetchFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
+  allStudies: StudyFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -46,6 +50,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
     return {
       allEstimates: input.allEstimates,
       allSources: input.allSources,
+      allStudies: input.allStudies,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: input.countryPopulationData,
@@ -67,6 +72,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: data,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

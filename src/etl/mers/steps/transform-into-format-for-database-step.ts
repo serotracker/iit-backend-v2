@@ -5,12 +5,14 @@ import {
   EstimateFieldsAfterAssigningPartitionsStep,
   FaoMersEventAfterAssigningPartitionsStep,
   SourceFieldsAfterAssigningPartitionsStep,
+  StudyFieldsAfterAssigningPartitionsStep,
   YearlyCamelPopulationDataAfterAssigningPartitionsStep
 } from "./assign-partitions-step.js";
 import assertNever from "assert-never";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
 export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterAssigningPartitionsStep;
+export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAssigningPartitionsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterAssigningPartitionsStep;
@@ -18,6 +20,7 @@ export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = Countr
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
   allSources: SourceFieldsAfterAssigningPartitionsStep[];
+  allStudies: StudyFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -27,6 +30,7 @@ interface TransformIntoFormatForDatabaseStepInput {
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
+  allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -87,10 +91,13 @@ export const transformIntoFormatForDatabaseStep = (
       sourceType: estimate.sourceType,
       sourceTitle: estimate.sourceTitle,
       insitutution: estimate.insitutution,
+      studyInclusionCriteria: estimate.studyInclusionCriteria,
+      studyExclusionCriteria: estimate.studyExclusionCriteria,
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords,
     })),
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => {
       if(event.type === MersEventType.HUMAN) {
         return {

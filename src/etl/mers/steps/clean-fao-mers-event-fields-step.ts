@@ -9,6 +9,7 @@ import {
   RawFaoMersEventDiagnosisSource,
   RawFaoMersEventDiagnosisStatus,
   SourceFieldsAfterValidatingFaoMersEventsStep,
+  StudyFieldsAfterValidatingFaoMersEventsStep,
   YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep
 } from "./validate-fao-mers-events-step.js";
 import {
@@ -69,6 +70,7 @@ export type HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep = FaoMersEventA
 
 export type EstimateFieldsAfterCleaningFaoMersEventFieldsStep = EstimateFieldsAfterValidatingFaoMersEventsStep;
 export type SourceFieldsAfterCleaningFaoMersEventFieldsStep = SourceFieldsAfterValidatingFaoMersEventsStep;
+export type StudyFieldsAfterCleaningFaoMersEventFieldsStep = StudyFieldsAfterValidatingFaoMersEventsStep;
 export type FaoMersEventAfterCleaningFaoMersEventFieldsStep = 
   | AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep
   | HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep;
@@ -79,6 +81,7 @@ export type CountryPopulationDataAfterCleaningFaoMersEventFieldsStep = CountryPo
 interface CleanFaoMersEventFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
+  allStudies: StudyFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -88,6 +91,7 @@ interface CleanFaoMersEventFieldsStepInput {
 interface CleanFaoMersEventFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
   allSources: SourceFieldsAfterCleaningFaoMersEventFieldsStep[];
+  allStudies: StudyFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
@@ -112,6 +116,7 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => {
       if(event.type === MersEventType.HUMAN) {
         return {

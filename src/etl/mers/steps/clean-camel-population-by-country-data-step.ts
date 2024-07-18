@@ -4,12 +4,14 @@ import {
   EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep,
   FaoMersEventAfterValidatingCamelPopulationByCountryDataStep,
   SourceFieldsAfterValidatingCamelPopulationByCountryDataStep,
+  StudyFieldsAfterValidatingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep
 } from "./validate-camel-population-by-country-data-step";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
 
 export type EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep = EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep;
 export type SourceFieldsAfterCleaningCamelPopulationByCountryDataStep = SourceFieldsAfterValidatingCamelPopulationByCountryDataStep;
+export type StudyFieldsAfterCleaningCamelPopulationByCountryDataStep = StudyFieldsAfterValidatingCamelPopulationByCountryDataStep;
 export type FaoMersEventAfterCleaningCamelPopulationByCountryDataStep = FaoMersEventAfterValidatingCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep = {
   threeLetterCountryCode: ThreeLetterIsoCountryCode;
@@ -24,6 +26,7 @@ export type CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep =
 interface CleanCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allSources: SourceFieldsAfterValidatingCamelPopulationByCountryDataStep[];
+  allStudies: StudyFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
@@ -33,6 +36,7 @@ interface CleanCamelPopulationByCountryDataStepInput {
 interface CleanCamelPopulationByCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allSources: SourceFieldsAfterCleaningCamelPopulationByCountryDataStep[];
+  allStudies: StudyFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
@@ -117,6 +121,7 @@ export const cleanCamelPopulationByCountryDataStep = (
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: cleanedDataArray,
     countryPopulationData: input.countryPopulationData,

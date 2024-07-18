@@ -4,6 +4,7 @@ import {
   EstimateFieldsAfterParsingDatesStep,
   FaoMersEventAfterParsingDatesStep,
   SourceFieldsAfterParsingDatesStep,
+  StudyFieldsAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
 import { MersEstimateType } from "../../../storage/types.js";
@@ -17,6 +18,7 @@ export type EstimateFieldsAfterCombiningEstimatesWithSourcesStep = EstimateField
   country: string;
 };
 export type SourceFieldsAfterCombiningEstimatesWithSourcesStep = SourceFieldsAfterParsingDatesStep;
+export type StudyFieldsAfterCombiningEstimatesWithSourcesStep = StudyFieldsAfterParsingDatesStep;
 export type FaoMersEventAfterCombiningEstimatesWithSourcesStep = FaoMersEventAfterParsingDatesStep;
 export type YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep = YearlyCamelPopulationDataAfterParsingDatesStep;
 export type CountryPopulationDataAfterCombiningEstimatesWithSourcesStep = CountryPopulationDataAfterParsingDatesStep;
@@ -24,6 +26,7 @@ export type CountryPopulationDataAfterCombiningEstimatesWithSourcesStep = Countr
 interface CombineEstimatesWithSourcesStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allSources: SourceFieldsAfterParsingDatesStep[];
+  allStudies: StudyFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
@@ -33,6 +36,7 @@ interface CombineEstimatesWithSourcesStepInput {
 interface CombineEstimatesWithSourcesStepOutput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesWithSourcesStep[];
   allSources: SourceFieldsAfterCombiningEstimatesWithSourcesStep[];
+  allStudies: StudyFieldsAfterCombiningEstimatesWithSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithSourcesStep[];
@@ -53,9 +57,12 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
       sourceType: source.sourceType,
       sourceTitle: source.sourceTitle,
       insitutution: source.insitutution,
+      studyInclusionCriteria: 'Test Inclusion Criteria',
+      studyExclusionCriteria: 'Test Exclusion Criteria',
       country: country,
     }))),
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

@@ -4,6 +4,7 @@ import {
   EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
+  StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep
 } from "./write-fao-yearly-camel-population-data-to-mongodb-step";
 import { getEnvironmentVariableOrThrow } from "../../helpers.js";
@@ -12,6 +13,8 @@ export type EstimateFieldsAfterAddingDatabaseIndexesStep =
   EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type SourceFieldsAfterAddingDatabaseIndexesStep =
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
+export type StudyFieldsAfterAddingDatabaseIndexesStep =
+  StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type FaoMersEventAfterAddingDatabaseIndexesStep =
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type YearlyCamelPopulationDataAfterAddingDatabaseIndexesStep =
@@ -22,6 +25,7 @@ export type CountryPopulationDataAfterAddingDatabaseIndexesStep =
 interface AddDatabaseIndexesStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  allStudies: StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -31,6 +35,7 @@ interface AddDatabaseIndexesStepInput {
 interface AddDatabaseIndexesStepOutput {
   allEstimates: EstimateFieldsAfterAddingDatabaseIndexesStep[];
   allSources: SourceFieldsAfterAddingDatabaseIndexesStep[];
+  allStudies: StudyFieldsAfterAddingDatabaseIndexesStep[];
   allFaoMersEvents: FaoMersEventAfterAddingDatabaseIndexesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingDatabaseIndexesStep[];
   countryPopulationData: CountryPopulationDataAfterAddingDatabaseIndexesStep[];
@@ -54,6 +59,7 @@ export const addDatabaseIndexesStep = async(
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

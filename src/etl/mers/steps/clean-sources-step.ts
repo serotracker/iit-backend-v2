@@ -4,6 +4,7 @@ import {
   EstimateFieldsAfterValidatingFieldSetFromAirtableStep,
   FaoMersEventAfterValidatingFieldSetFromAirtableStep,
   SourceFieldsAfterValidatingFieldSetFromAirtableStep,
+  StudyFieldsAfterValidatingFieldSetFromAirtableStep,
   YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep
 } from "./validate-field-set-from-airtable-step";
 
@@ -18,6 +19,7 @@ export type SourceFieldsAfterCleaningSourcesStep = {
   country: string[];
   populationType: string[];
 };
+export type StudyFieldsAfterCleaningSourcesStep = StudyFieldsAfterValidatingFieldSetFromAirtableStep;
 export type FaoMersEventAfterCleaningSourcesStep = FaoMersEventAfterValidatingFieldSetFromAirtableStep;
 export type YearlyCamelPopulationDataAfterCleaningSourcesStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
 export type CountryPopulationDataAfterCleaningSourcesStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -25,6 +27,7 @@ export type CountryPopulationDataAfterCleaningSourcesStep = CountryPopulationDat
 interface CleanSourcesStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -34,6 +37,7 @@ interface CleanSourcesStepInput {
 interface CleanSourcesStepOutput {
   allEstimates: EstimateFieldsAfterCleaningSourcesStep[];
   allSources: SourceFieldsAfterCleaningSourcesStep[];
+  allStudies: StudyFieldsAfterCleaningSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
@@ -53,6 +57,7 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
       country: source['Country'],
       populationType: source['Population type']
     })),
+    allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

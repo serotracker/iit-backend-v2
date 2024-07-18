@@ -159,6 +159,8 @@ export interface MersEstimateDocumentBase {
   sourceType: string;
   sourceTitle: string;
   insitutution: string;
+  studyInclusionCriteria: string | undefined;
+  studyExclusionCriteria: string | undefined;
   createdAt: Date;
   updatedAt: Date;
 }

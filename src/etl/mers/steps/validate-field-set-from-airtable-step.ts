@@ -1,10 +1,11 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import { FieldSet } from "airtable";
-import { AirtableMersEstimateFields, AirtableSourceFields } from "../types";
+import { AirtableMersEstimateFields, AirtableSourceFields, AirtableStudyFields } from "../types";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMersEstimateFields;
 export type SourceFieldsAfterValidatingFieldSetFromAirtableStep = AirtableSourceFields;
+export type StudyFieldsAfterValidatingFieldSetFromAirtableStep = AirtableStudyFields;
 export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 export type YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
@@ -12,6 +13,7 @@ export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
   allSources: FieldSet[];
+  allStudies: FieldSet[];
   allFaoMersEvents: never[];
   yearlyCamelPopulationByCountryData: never[];
   countryPopulationData: never[];
@@ -21,19 +23,22 @@ interface ValidateFieldSetFromAirtableStepInput {
 interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
-export const validateFieldSetFromAirtableStep = (
-  input: ValidateFieldSetFromAirtableStepInput
-): ValidateFieldSetFromAirtableStepOutput => {
-  console.log(
-    `Running step: validateFieldSetFromAirtableStep. Remaining estimates: ${input.allEstimates.length}`
-  );
+const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
+  const zodMersEstimateFieldsObject = z.object({
+    id: z.string(),
+  })
 
+  return zodMersEstimateFieldsObject.parse(estimate);
+}
+
+const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
   const zodMersSourceFieldsObjectBase = z.object({
     "seropositive (1/0)": z.optional(z.string().nullable()).transform((value => value ?? null)),
     "PCR positive (1/0)": z.optional(z.string().nullable()).transform((value => value ?? null)),
@@ -48,26 +53,49 @@ export const validateFieldSetFromAirtableStep = (
     "Country": z.string().array(),
     "Population type": z.string().array()
   });
-  const allSources = input.allSources
-    .map((source) => ({
-      ...source,
-      ...zodMersSourceFieldsObjectBase.parse(source)
-    }))
-    .filter((source) => source['seropositive (1/0)'] !== 'NA' && source['PCR positive (1/0)'] !== 'NA')
-    .map((source) => ({
-      ...zodMersSourceFieldsObject.parse(source),
-      "seropositive (1/0)": source['seropositive (1/0)'],
-      "PCR positive (1/0)": source['PCR positive (1/0)']
-    }));
 
-  const zodMersEstimateFieldsObject = z.object({
-    id: z.string(),
-  })
-  const allEstimates = input.allEstimates.map((estimate) => zodMersEstimateFieldsObject.parse(estimate));
+  const sourceWithBaseParsed = {
+    ...source,
+    ...zodMersSourceFieldsObjectBase.parse(source)
+  }
+
+  if(
+    sourceWithBaseParsed['seropositive (1/0)'] === 'NA'
+    || sourceWithBaseParsed['PCR positive (1/0)'] === 'NA'
+  ) {
+    return undefined;
+  }
 
   return {
-    allEstimates,
-    allSources,
+    ...zodMersSourceFieldsObject.parse(sourceWithBaseParsed),
+    "seropositive (1/0)": sourceWithBaseParsed['seropositive (1/0)'],
+    "PCR positive (1/0)": sourceWithBaseParsed['PCR positive (1/0)']
+  }
+}
+
+const parseStudy = (study: FieldSet): AirtableStudyFields => {
+  const zodMersStudyFieldsObject = z.object({
+    id: z.string(),
+    'Inclusion Criteria': z.optional(z.string().nullable()).transform((value => value ?? null)),
+    'Exclusion Criteria': z.optional(z.string().nullable()).transform((value => value ?? null)),
+  })
+
+  return zodMersStudyFieldsObject.parse(study);
+}
+
+export const validateFieldSetFromAirtableStep = (
+  input: ValidateFieldSetFromAirtableStepInput
+): ValidateFieldSetFromAirtableStepOutput => {
+  console.log(
+    `Running step: validateFieldSetFromAirtableStep. Remaining estimates: ${input.allEstimates.length}`
+  );
+
+  return {
+    allEstimates: input.allEstimates.map((estimate) => parseEstimate(estimate)),
+    allSources: input.allSources
+      .map((source) => parseSource(source))
+      .filter((source): source is NonNullable<typeof source> => !!source),
+    allStudies: input.allStudies.map((study) => parseStudy(study)),
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
