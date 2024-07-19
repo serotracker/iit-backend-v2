@@ -20,14 +20,15 @@ export const mersTypedefs = `
   }
 
   enum MersEstimateType {
-    HUMAN
-    ANIMAL
+    HUMAN_SEROPREVALENCE
+    ANIMAL_SEROPREVALENCE
+    HUMAN_VIRAL
+    ANIMAL_VIRAL
   }
 
   interface MersEstimateInterface {
     id: String!
     type: MersEstimateType!
-    seroprevalence: Float!
     estimateId: String!
     city: String
     state: String
@@ -45,13 +46,67 @@ export const mersTypedefs = `
     insitutution: String!
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+  }
+
+  type HumanMersViralEstimate implements MersEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    type: MersEstimateType!
+    estimateId: String!
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    latitude: Float!
+    longitude: Float!
+    whoRegion: WHORegion
+    unRegion: UNRegion
+    firstAuthorFullName: String!
+    sourceUrl: String!
+    sourceType: String!
+    sourceTitle: String!
+    insitutution: String!
+    studyInclusionCriteria: String
+    studyExclusionCriteria: String
+    ####### END INTERFACE FIELDS #######
+
+    positivePrevalence: Float!
+    ageGroup: String
+  }
+
+  type AnimalMersViralEstimate implements MersEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    type: MersEstimateType!
+    estimateId: String!
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    latitude: Float!
+    longitude: Float!
+    whoRegion: WHORegion
+    unRegion: UNRegion
+    firstAuthorFullName: String!
+    sourceUrl: String!
+    sourceType: String!
+    sourceTitle: String!
+    insitutution: String!
+    studyInclusionCriteria: String
+    studyExclusionCriteria: String
+    ####### END INTERFACE FIELDS #######
+
+    positivePrevalence: Float!
+    animalType: MersAnimalType!
+    animalSpecies: MersAnimalSpecies!
   }
 
   type HumanMersEstimate implements MersEstimateInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
-    seroprevalence: Float!
     estimateId: String!
     city: String
     state: String
@@ -70,13 +125,15 @@ export const mersTypedefs = `
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     ####### END INTERFACE FIELDS #######
+
+    seroprevalence: Float!
+    ageGroup: String
   }
 
   type AnimalMersEstimate implements MersEstimateInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
-    seroprevalence: Float!
     estimateId: String!
     city: String
     state: String
@@ -95,9 +152,13 @@ export const mersTypedefs = `
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     ####### END INTERFACE FIELDS #######
+
+    seroprevalence: Float!
+    animalType: MersAnimalType!
+    animalSpecies: MersAnimalSpecies!
   }
 
-  union MersEstimate_V2 = HumanMersEstimate | AnimalMersEstimate
+  union MersEstimate_V2 = HumanMersEstimate | AnimalMersEstimate | HumanMersViralEstimate |  AnimalMersViralEstimate
 
   enum MersDiagnosisStatus {
     CONFIRMED
@@ -111,6 +172,16 @@ export const mersTypedefs = `
     PUBLICATIONS
     MEDIA
     FAO_FIELD_OFFICER
+  }
+
+  enum MersAnimalType {
+    DOMESTIC
+    WILD
+  }
+
+  enum MersAnimalSpecies {
+    CAMEL
+    BAT
   }
 
   enum MersEventAnimalType {

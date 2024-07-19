@@ -1,4 +1,4 @@
-import { Document, ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 import { WHORegion } from "../lib/who-regions";
 import { UNRegion } from "../lib/un-regions";
 import { GBDSubRegion, GBDSuperRegion } from "../lib/gbd-regions";
@@ -137,13 +137,24 @@ export interface SarsCov2EstimateDocument {
 }
 
 export enum MersEstimateType {
-  HUMAN = 'HUMAN',
-  ANIMAL = 'ANIMAL',
+  HUMAN_VIRAL = 'HUMAN_VIRAL',
+  ANIMAL_VIRAL = 'ANIMAL_VIRAL',
+  HUMAN_SEROPREVALENCE = 'HUMAN_SEROPREVALENCE',
+  ANIMAL_SEROPREVALENCE = 'ANIMAL_SEROPREVALENCE',
+}
+
+export enum MersAnimalSpecies {
+  CAMEL = "CAMEL",
+  BAT = "BAT",
+}
+
+export enum MersAnimalType {
+  DOMESTIC = "DOMESTIC",
+  WILD = "WILD",
 }
 
 export interface MersEstimateDocumentBase {
   _id: ObjectId;
-  seroprevalence: number;
   estimateId: string;
   city: string | undefined;
   state: string | undefined;
@@ -165,17 +176,37 @@ export interface MersEstimateDocumentBase {
   updatedAt: Date;
 }
 
-export type HumanMersEstimateDocument = MersEstimateDocumentBase & {
-  type: MersEstimateType.HUMAN;
+export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
+  type: MersEstimateType.HUMAN_SEROPREVALENCE;
+  seroprevalence: number;
+  ageGroup: string | undefined;
 }
 
-export type AnimalMersEstimateDocument = MersEstimateDocumentBase & {
-  type: MersEstimateType.ANIMAL;
+export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
+  type: MersEstimateType.HUMAN_VIRAL;
+  positivePrevalence: number;
+  ageGroup: string | undefined;
+}
+
+export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
+  type: MersEstimateType.ANIMAL_SEROPREVALENCE;
+  seroprevalence: number;
+  animalSpecies: MersAnimalSpecies;
+  animalType: MersAnimalType;
+}
+
+export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
+  type: MersEstimateType.ANIMAL_VIRAL;
+  positivePrevalence: number;
+  animalSpecies: MersAnimalSpecies;
+  animalType: MersAnimalType;
 }
 
 export type MersEstimateDocument = 
-  | HumanMersEstimateDocument
-  | AnimalMersEstimateDocument;
+  | HumanMersSeroprevalenceEstimateDocument
+  | HumanMersViralEstimateDocument
+  | AnimalMersSeroprevalenceEstimateDocument
+  | AnimalMersViralEstimateDocument;
 
 export enum MersDiagnosisStatus {
   CONFIRMED = "CONFIRMED",

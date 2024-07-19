@@ -15,6 +15,8 @@ import {
   YearlyFaoCamelPopulationDataEntry,
   MersEstimate_V2,
   MersEstimateInterface,
+  MersAnimalSpecies as MersAnimalSpeciesForApi,
+  MersAnimalType as MersAnimalTypeForApi,
   MersEstimateType as MersEstimateTypeForApi
 } from "./graphql-types/__generated__/graphql-types.js";
 import {
@@ -27,7 +29,9 @@ import {
   MersEventAnimalType,
   MersEventType,
   FaoYearlyCamelPopulationDataDocument,
-  MersEstimateType
+  MersEstimateType,
+  MersAnimalSpecies,
+  MersAnimalType
 } from '../storage/types.js';
 import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
 import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
@@ -43,11 +47,22 @@ interface GenerateMersResolversOutput {
 
 const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
 
+const mersAnimalSpeciesMapForApi = {
+  [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
+  [MersAnimalSpecies.CAMEL]: MersAnimalSpeciesForApi.Camel,
+}
+const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesMapForApi[animalSpecies];
+
+const mersAnimalTypeMapForApi = {
+  [MersAnimalType.WILD]: MersAnimalTypeForApi.Wild,
+  [MersAnimalType.DOMESTIC]: MersAnimalTypeForApi.Domestic,
+}
+const mapMersAnimalTypeForApi = (animalType: MersAnimalType): MersAnimalTypeForApi => mersAnimalTypeMapForApi[animalType];
+
 const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument): MersEstimate_V2 => {
   const base: MersEstimateInterface = {
     id: document._id.toHexString(),
-    type: MersEstimateTypeForApi.Human,
-    seroprevalence: document.seroprevalence,
+    type: MersEstimateTypeForApi.HumanSeroprevalence,
     estimateId: document.estimateId,
     city: document.city,
     state: document.state,
@@ -67,19 +82,45 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
     studyExclusionCriteria: document.studyExclusionCriteria,
   }
 
-  if(document.type === MersEstimateType.HUMAN) {
+  if(document.type === MersEstimateType.HUMAN_SEROPREVALENCE) {
     return {
       ...base,
       __typename: 'HumanMersEstimate',
-      type: MersEstimateTypeForApi.Human,
+      seroprevalence: document.seroprevalence,
+      type: MersEstimateTypeForApi.HumanSeroprevalence,
+      ageGroup: document.ageGroup
     }
   }
 
-  if(document.type === MersEstimateType.ANIMAL) {
+  if(document.type === MersEstimateType.ANIMAL_SEROPREVALENCE) {
     return {
       ...base,
       __typename: 'AnimalMersEstimate',
-      type: MersEstimateTypeForApi.Animal,
+      seroprevalence: document.seroprevalence,
+      type: MersEstimateTypeForApi.AnimalSeroprevalence,
+      animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
+      animalType: mapMersAnimalTypeForApi(document.animalType),
+    }
+  }
+
+  if(document.type === MersEstimateType.HUMAN_VIRAL) {
+    return {
+      ...base,
+      __typename: 'HumanMersViralEstimate',
+      positivePrevalence: document.positivePrevalence,
+      type: MersEstimateTypeForApi.HumanViral,
+      ageGroup: document.ageGroup
+    }
+  }
+
+  if(document.type === MersEstimateType.ANIMAL_VIRAL) {
+    return {
+      ...base,
+      __typename: 'AnimalMersViralEstimate',
+      positivePrevalence: document.positivePrevalence,
+      type: MersEstimateTypeForApi.AnimalViral,
+      animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
+      animalType: mapMersAnimalTypeForApi(document.animalType),
     }
   }
 
@@ -87,9 +128,8 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
 }
 
 const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): MersEstimate => {
-  return {
+  const base = {
     id: document._id.toHexString(),
-    seroprevalence: document.seroprevalence,
     estimateId: document.estimateId,
     city: document.city,
     state: document.state,
@@ -106,6 +146,36 @@ const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): Me
     sourceTitle: document.sourceTitle,
     insitutution: document.insitutution,
   }
+
+  if(document.type === MersEstimateType.HUMAN_VIRAL) {
+    return {
+      ...base,
+      seroprevalence: document.positivePrevalence
+    }
+  }
+
+  if(document.type === MersEstimateType.ANIMAL_VIRAL) {
+    return {
+      ...base,
+      seroprevalence: document.positivePrevalence
+    }
+  }
+
+  if(document.type === MersEstimateType.HUMAN_SEROPREVALENCE) {
+    return {
+      ...base,
+      seroprevalence: document.seroprevalence
+    }
+  }
+
+  if(document.type === MersEstimateType.ANIMAL_SEROPREVALENCE) {
+    return {
+      ...base,
+      seroprevalence: document.seroprevalence
+    }
+  }
+
+  assertNever(document);
 }
 
 const faoMersEventAnimalSpeciesMap = {

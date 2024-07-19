@@ -47,7 +47,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
   return {
     allEstimates: input.allSources.flatMap((source) => source.country.map((country) => ({
       id: new ObjectId().toHexString(),
-      type: source.populationType.includes('Animal') ? MersEstimateType.ANIMAL : MersEstimateType.HUMAN,
+      type: source.populationType.includes('Animal') ? MersEstimateType.ANIMAL_SEROPREVALENCE : MersEstimateType.HUMAN_SEROPREVALENCE,
       seroprevalence: 0.1,
       city: undefined,
       state: undefined,

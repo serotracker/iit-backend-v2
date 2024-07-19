@@ -1,29 +1,29 @@
 import { MongoClient, ObjectId } from "mongodb";
-import { MersEstimateDocument, MersEventType, FaoMersEventDocumentBase, FaoMersEventDocument, FaoYearlyCamelPopulationDataDocument } from "../../../storage/types.js";
-import {
-  CountryPopulationDataAfterAssigningPartitionsStep,
-  EstimateFieldsAfterAssigningPartitionsStep,
-  FaoMersEventAfterAssigningPartitionsStep,
-  SourceFieldsAfterAssigningPartitionsStep,
-  StudyFieldsAfterAssigningPartitionsStep,
-  YearlyCamelPopulationDataAfterAssigningPartitionsStep
-} from "./assign-partitions-step.js";
+import { MersEstimateDocument, MersEventType, FaoMersEventDocumentBase, FaoMersEventDocument, FaoYearlyCamelPopulationDataDocument, MersEstimateType, MersEstimateDocumentBase } from "../../../storage/types.js";
 import assertNever from "assert-never";
+import {
+  CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep,
+  EstimateFieldsAfterApplyingTypedEstimateConstraintsStep,
+  FaoMersEventAfterApplyingTypedEstimateConstraintsStep,
+  SourceFieldsAfterApplyingTypedEstimateConstraintsStep,
+  StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
+  YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
+} from "./apply-typed-estimate-constraints-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
-export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterAssigningPartitionsStep;
-export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterAssigningPartitionsStep;
+export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
+export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
-export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterAssigningPartitionsStep;
+export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
-  allSources: SourceFieldsAfterAssigningPartitionsStep[];
-  allStudies: StudyFieldsAfterAssigningPartitionsStep[];
-  allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
-  countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
+  allEstimates: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
+  countryPopulationData: CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
   mongoClient: MongoClient;
 }
 
@@ -38,7 +38,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
 }
 
 interface TransformFaoMersEventBaseForDatabaseInput {
-  event: FaoMersEventAfterAssigningPartitionsStep;
+  event: FaoMersEventAfterApplyingTypedEstimateConstraintsStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -63,6 +63,127 @@ const transformFaoMersEventBaseForDatabase = (input: TransformFaoMersEventBaseFo
   updatedAt: input.updatedAtForAllRecords,
 })
 
+interface TransformFaoMersEventForDatabaseInput {
+  event: FaoMersEventAfterApplyingTypedEstimateConstraintsStep;
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+const transformFaoMersEventForDatabase = (input: TransformFaoMersEventForDatabaseInput): FaoMersEventDocument => {
+  const { event, createdAtForAllRecords, updatedAtForAllRecords } = input;
+
+  if(event.type === MersEventType.HUMAN) {
+    return {
+      ...transformFaoMersEventBaseForDatabase({
+        event,
+        createdAtForAllRecords,
+        updatedAtForAllRecords
+      }),
+      type: MersEventType.HUMAN as const,
+      humansAffected: event.humansAffected,
+      humanDeaths: event.humanDeaths,
+      animalSpecies: undefined,
+      animalType: undefined
+    }
+  }
+
+  if(event.type === MersEventType.ANIMAL) {
+    return {
+      ...transformFaoMersEventBaseForDatabase({
+        event,
+        createdAtForAllRecords,
+        updatedAtForAllRecords
+      }),
+      type: MersEventType.ANIMAL as const,
+      humansAffected: undefined,
+      humanDeaths: undefined,
+      animalSpecies: event.animalSpecies,
+      animalType: event.animalType,
+    }
+  }
+
+  assertNever(event);
+}
+
+interface TransformMersEstimateBaseForDatabaseInput {
+  estimate: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseForDatabaseInput): MersEstimateDocumentBase => ({
+  _id: new ObjectId(),
+  estimateId: input.estimate.estimateId,
+  city: input.estimate.city,
+  state: input.estimate.state,
+  country: input.estimate.country,
+  countryAlphaTwoCode: input.estimate.countryAlphaTwoCode,
+  countryAlphaThreeCode: input.estimate.countryAlphaThreeCode,
+  whoRegion: input.estimate.whoRegion,
+  unRegion: input.estimate.unRegion,
+  latitude: input.estimate.latitude,
+  longitude: input.estimate.longitude,
+  firstAuthorFullName: input.estimate.firstAuthorFullName,
+  sourceUrl: input.estimate.sourceUrl,
+  sourceType: input.estimate.sourceType,
+  sourceTitle: input.estimate.sourceTitle,
+  insitutution: input.estimate.insitutution,
+  studyInclusionCriteria: input.estimate.studyInclusionCriteria,
+  studyExclusionCriteria: input.estimate.studyExclusionCriteria,
+  createdAt: input.createdAtForAllRecords,
+  updatedAt: input.updatedAtForAllRecords,
+})
+
+interface TransformMersEstimateForDatabaseInput {
+  estimate: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabaseInput): MersEstimateDocument => {
+  const { estimate, createdAtForAllRecords, updatedAtForAllRecords } = input;
+
+  if(estimate.type === MersEstimateType.HUMAN_SEROPREVALENCE) {
+    return {
+      ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
+      type: MersEstimateType.HUMAN_SEROPREVALENCE,
+      seroprevalence: estimate.seroprevalence,
+      ageGroup: estimate.ageGroup
+    }
+  }
+
+  if(estimate.type === MersEstimateType.HUMAN_VIRAL) {
+    return {
+      ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
+      type: MersEstimateType.HUMAN_VIRAL,
+      positivePrevalence: estimate.positivePrevalence,
+      ageGroup: estimate.ageGroup
+    }
+  }
+
+  if(estimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE) {
+    return {
+      ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
+      type: MersEstimateType.ANIMAL_SEROPREVALENCE,
+      seroprevalence: estimate.seroprevalence,
+      animalSpecies: estimate.animalSpecies,
+      animalType: estimate.animalType,
+    }
+  }
+
+  if(estimate.type === MersEstimateType.ANIMAL_VIRAL) {
+    return {
+      ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
+      type: MersEstimateType.ANIMAL_VIRAL,
+      positivePrevalence: estimate.positivePrevalence,
+      animalSpecies: estimate.animalSpecies,
+      animalType: estimate.animalType,
+    }
+  }
+
+  assertNever(estimate);
+}
+
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
@@ -72,63 +193,18 @@ export const transformIntoFormatForDatabaseStep = (
   const updatedAtForAllRecords = createdAtForAllRecords;
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      _id: new ObjectId(),
-      type: estimate.type,
-      seroprevalence: estimate.seroprevalence,
-      estimateId: estimate.estimateId,
-      city: estimate.city,
-      state: estimate.state,
-      country: estimate.country,
-      countryAlphaTwoCode: estimate.countryAlphaTwoCode,
-      countryAlphaThreeCode: estimate.countryAlphaThreeCode,
-      latitude: estimate.latitude,
-      longitude: estimate.longitude,
-      whoRegion: estimate.whoRegion,
-      unRegion: estimate.unRegion,
-      firstAuthorFullName: estimate.firstAuthorFullName,
-      sourceUrl: estimate.sourceUrl,
-      sourceType: estimate.sourceType,
-      sourceTitle: estimate.sourceTitle,
-      insitutution: estimate.insitutution,
-      studyInclusionCriteria: estimate.studyInclusionCriteria,
-      studyExclusionCriteria: estimate.studyExclusionCriteria,
-      createdAt: createdAtForAllRecords,
-      updatedAt: updatedAtForAllRecords,
+    allEstimates: input.allEstimates.map((estimate) => transformMersEstimateForDatabase({
+      estimate,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,
-    allFaoMersEvents: input.allFaoMersEvents.map((event) => {
-      if(event.type === MersEventType.HUMAN) {
-        return {
-          ...transformFaoMersEventBaseForDatabase({
-            event,
-            createdAtForAllRecords,
-            updatedAtForAllRecords
-          }),
-          type: MersEventType.HUMAN as const,
-          humansAffected: event.humansAffected,
-          humanDeaths: event.humanDeaths,
-          animalSpecies: undefined,
-          animalType: undefined
-        }
-      }
-      if(event.type === MersEventType.ANIMAL) {
-        return {
-          ...transformFaoMersEventBaseForDatabase({
-            event,
-            createdAtForAllRecords,
-            updatedAtForAllRecords
-          }),
-          type: MersEventType.ANIMAL as const,
-          humansAffected: undefined,
-          humanDeaths: undefined,
-          animalSpecies: event.animalSpecies,
-          animalType: event.animalType,
-        }
-      }
-      assertNever(event);
-    }),
+    allFaoMersEvents: input.allFaoMersEvents.map((event) => transformFaoMersEventForDatabase({
+      event,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
+    })),
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((element) => ({
       _id: new ObjectId(),
       partitionKey: element.partitionKey,
