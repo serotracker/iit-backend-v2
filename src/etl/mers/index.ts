@@ -25,6 +25,7 @@ import { combineEstimatesWithSourcesStep } from "./steps/combine-estimates-with-
 import { cleanSourcesStep } from "./steps/clean-sources-step.js";
 import { cleanEstimatesStep } from "./steps/clean-estimates-step.js";
 import { cleanStudiesStep } from "./steps/clean-studies-step.js";
+import { applyTypedEstimateConstraintsStep } from "./steps/apply-typed-estimate-constraints-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -93,6 +94,7 @@ const runEtlMain = async () => {
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
     etlStep(assignPartitionsStep),
+    etlStep(applyTypedEstimateConstraintsStep),
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),

@@ -7,17 +7,20 @@ import {
   StudyFieldsAfterCleaningStudiesStep,
   YearlyCamelPopulationDataAfterCleaningStudiesStep
 } from "./clean-studies-step";
-import { MersEstimateType } from "../../../storage/types.js";
+import { MersAnimalSpecies, MersAnimalType, MersEstimateType } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   type: MersEstimateType;
-  seroprevalence: number;
+  positivePrevalence: number;
+  ageGroup: string | undefined;
   estimateId: string;
   city: string | undefined;
   state: string | undefined;
   studyInclusionCriteria: string | undefined;
   studyExclusionCriteria: string | undefined;
+  animalType: MersAnimalType | undefined;
+  animalSpecies: MersAnimalSpecies | undefined;
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
@@ -49,13 +52,16 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
   return {
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
-      type: MersEstimateType.HUMAN,
-      seroprevalence: 0.1,
+      type: MersEstimateType.HUMAN_SEROPREVALENCE,
+      positivePrevalence: 0.1,
+      ageGroup: 'Test Age Group',
       estimateId: 'Test Data',
       city: undefined,
       state: undefined,
       studyInclusionCriteria: 'Test Inclusion Criteria',
       studyExclusionCriteria: 'Test Exclusion Criteria',
+      animalSpecies: MersAnimalSpecies.CAMEL,
+      animalType: MersAnimalType.DOMESTIC,
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,
