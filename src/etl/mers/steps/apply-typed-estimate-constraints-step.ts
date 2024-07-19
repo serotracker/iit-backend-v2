@@ -7,7 +7,7 @@ import {
   StudyFieldsAfterAssigningPartitionsStep,
   YearlyCamelPopulationDataAfterAssigningPartitionsStep
 } from "./assign-partitions-step";
-import { MersAnimalSpecies, MersAnimalType, MersEstimateType } from "../../../storage/types";
+import { MersAnimalSpecies, MersAnimalType, MersEstimateType } from "../../../storage/types.js";
 import assertNever from "assert-never";
 
 type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
