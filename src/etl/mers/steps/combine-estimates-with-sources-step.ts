@@ -7,7 +7,7 @@ import {
   StudyFieldsAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
-import { MersEstimateType } from "../../../storage/types.js";
+import { MersAnimalSpecies, MersAnimalType, MersEstimateType } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCombiningEstimatesWithSourcesStep = EstimateFieldsAfterParsingDatesStep & {
   firstAuthorFullName: string;
@@ -47,8 +47,6 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
   return {
     allEstimates: input.allSources.flatMap((source) => source.country.map((country) => ({
       id: new ObjectId().toHexString(),
-      type: source.populationType.includes('Animal') ? MersEstimateType.ANIMAL_SEROPREVALENCE : MersEstimateType.HUMAN_SEROPREVALENCE,
-      seroprevalence: 0.1,
       city: undefined,
       state: undefined,
       estimateId: 'Test Data',
@@ -60,6 +58,20 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
       studyInclusionCriteria: 'Test Inclusion Criteria',
       studyExclusionCriteria: 'Test Exclusion Criteria',
       country: country,
+      ...(source.populationType.includes('Animal') ? {
+          type: MersEstimateType.ANIMAL_SEROPREVALENCE as const,
+          animalSpecies: MersAnimalSpecies.CAMEL,
+          animalType: MersAnimalType.DOMESTIC,
+          positivePrevalence: 0.1,
+          ageGroup: undefined,
+        } : {
+          type: MersEstimateType.HUMAN_SEROPREVALENCE as const,
+          animalSpecies: undefined,
+          animalType: undefined,
+          ageGroup: 'Test Age Group',
+          positivePrevalence: 0.1,
+        }
+      )
     }))),
     allSources: input.allSources,
     allStudies: input.allStudies,
