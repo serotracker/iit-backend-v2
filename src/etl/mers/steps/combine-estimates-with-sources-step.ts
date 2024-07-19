@@ -45,34 +45,68 @@ interface CombineEstimatesWithSourcesStepOutput {
 
 export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourcesStepInput): CombineEstimatesWithSourcesStepOutput => {
   return {
-    allEstimates: input.allSources.flatMap((source) => source.country.map((country) => ({
-      id: new ObjectId().toHexString(),
-      city: undefined,
-      state: undefined,
-      estimateId: 'Test Data',
-      firstAuthorFullName: source.firstAuthorFullName,
-      sourceUrl: source.sourceUrl,
-      sourceType: source.sourceType,
-      sourceTitle: source.sourceTitle,
-      insitutution: source.insitutution,
-      studyInclusionCriteria: 'Test Inclusion Criteria',
-      studyExclusionCriteria: 'Test Exclusion Criteria',
-      country: country,
-      ...(source.populationType.includes('Animal') ? {
-          type: MersEstimateType.ANIMAL_SEROPREVALENCE as const,
-          animalSpecies: MersAnimalSpecies.CAMEL,
-          animalType: MersAnimalType.DOMESTIC,
-          positivePrevalence: 0.1,
-          ageGroup: undefined,
-        } : {
-          type: MersEstimateType.HUMAN_SEROPREVALENCE as const,
-          animalSpecies: undefined,
-          animalType: undefined,
-          ageGroup: 'Test Age Group',
-          positivePrevalence: 0.1,
-        }
-      )
-    }))),
+    allEstimates: input.allSources
+      .flatMap((source) =>
+        source.country.flatMap((country) => [1,2].flatMap((num) => {
+          const base = {
+            id: new ObjectId().toHexString(),
+            city: undefined,
+            state: undefined,
+            estimateId: 'Test Data',
+            firstAuthorFullName: source.firstAuthorFullName,
+            sourceUrl: source.sourceUrl,
+            sourceType: source.sourceType,
+            sourceTitle: source.sourceTitle,
+            insitutution: source.insitutution,
+            studyInclusionCriteria: 'Test Inclusion Criteria',
+            studyExclusionCriteria: 'Test Exclusion Criteria',
+            country: country,
+          }
+
+          if(source.populationType.includes('Animal')) {
+            if( num === 1 ) {
+              return {
+                ...base,
+                type: MersEstimateType.ANIMAL_SEROPREVALENCE as const,
+                animalSpecies: MersAnimalSpecies.CAMEL,
+                animalType: MersAnimalType.DOMESTIC,
+                positivePrevalence: 0.1,
+                ageGroup: undefined,
+              };
+            }
+            if( num === 2 ) {
+              return {
+                ...base,
+                type: MersEstimateType.ANIMAL_VIRAL as const,
+                animalSpecies: MersAnimalSpecies.CAMEL,
+                animalType: MersAnimalType.DOMESTIC,
+                positivePrevalence: 0.1,
+                ageGroup: undefined,
+              };
+            }
+          }
+
+            if( num === 1 ) {
+              return {
+                ...base,
+                type: MersEstimateType.HUMAN_SEROPREVALENCE as const,
+                animalSpecies: undefined,
+                animalType: undefined,
+                ageGroup: 'Test Age Group',
+                positivePrevalence: 0.1,
+              };
+            }
+
+            return {
+              ...base,
+              type: MersEstimateType.HUMAN_VIRAL as const,
+              animalSpecies: undefined,
+              animalType: undefined,
+              ageGroup: 'Test Age Group',
+              positivePrevalence: 0.1,
+            };
+        }))
+    ),
     allSources: input.allSources,
     allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents,
