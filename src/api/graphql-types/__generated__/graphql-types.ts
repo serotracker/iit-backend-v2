@@ -411,7 +411,12 @@ export type MersEstimate = {
 
 export type MersEstimateFilterOptions = {
   __typename?: 'MersEstimateFilterOptions';
+  ageGroup: Array<Scalars['String']['output']>;
+  assay: Array<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
+  sex: Array<Scalars['String']['output']>;
   sourceType: Array<Scalars['String']['output']>;
+  specimenType: Array<Scalars['String']['output']>;
 };
 
 export type MersEstimateInterface = {
@@ -1245,7 +1250,12 @@ export type MersEstimateResolvers<ContextType = any, ParentType extends Resolver
 };
 
 export type MersEstimateFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersEstimateFilterOptions'] = ResolversParentTypes['MersEstimateFilterOptions']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sourceType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

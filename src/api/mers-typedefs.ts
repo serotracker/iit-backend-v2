@@ -363,6 +363,11 @@ export const mersTypedefs = `
 
   type MersEstimateFilterOptions {
     sourceType: [String!]!
+    ageGroup: [String!]!
+    assay: [String!]!
+    specimenType: [String!]!
+    sex: [String!]!
+    isotypes: [String!]!
   }
 
   type MersFilterOptions {
