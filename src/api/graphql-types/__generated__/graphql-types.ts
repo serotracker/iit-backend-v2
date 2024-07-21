@@ -25,7 +25,7 @@ export type Affiliation = {
 export type AnimalMersEstimate = MersEstimateInterface & {
   __typename?: 'AnimalMersEstimate';
   animalSpecies: MersAnimalSpecies;
-  animalType: MersAnimalType;
+  animalType: Array<MersAnimalType>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
@@ -40,6 +40,9 @@ export type AnimalMersEstimate = MersEstimateInterface & {
   longitude: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
   sensitivity?: Maybe<Scalars['Float']['output']>;
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -86,7 +89,7 @@ export type AnimalMersEvent = MersEventInterface & {
 export type AnimalMersViralEstimate = MersEstimateInterface & {
   __typename?: 'AnimalMersViralEstimate';
   animalSpecies: MersAnimalSpecies;
-  animalType: MersAnimalType;
+  animalType: Array<MersAnimalType>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
@@ -104,6 +107,9 @@ export type AnimalMersViralEstimate = MersEstimateInterface & {
   positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
   sensitivity?: Maybe<Scalars['Float']['output']>;
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -268,6 +274,9 @@ export type HumanMersEstimate = MersEstimateInterface & {
   longitude: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
   sensitivity?: Maybe<Scalars['Float']['output']>;
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -331,6 +340,9 @@ export type HumanMersViralEstimate = MersEstimateInterface & {
   positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
   sensitivity?: Maybe<Scalars['Float']['output']>;
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -417,6 +429,9 @@ export type MersEstimateInterface = {
   longitude: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
   sensitivity?: Maybe<Scalars['Float']['output']>;
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -911,7 +926,7 @@ export type AffiliationResolvers<ContextType = any, ParentType extends Resolvers
 
 export type AnimalMersEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AnimalMersEstimate'] = ResolversParentTypes['AnimalMersEstimate']> = {
   animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
-  animalType?: Resolver<ResolversTypes['MersAnimalType'], ParentType, ContextType>;
+  animalType?: Resolver<Array<ResolversTypes['MersAnimalType']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -926,6 +941,9 @@ export type AnimalMersEstimateResolvers<ContextType = any, ParentType extends Re
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -972,7 +990,7 @@ export type AnimalMersEventResolvers<ContextType = any, ParentType extends Resol
 
 export type AnimalMersViralEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AnimalMersViralEstimate'] = ResolversParentTypes['AnimalMersViralEstimate']> = {
   animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
-  animalType?: Resolver<ResolversTypes['MersAnimalType'], ParentType, ContextType>;
+  animalType?: Resolver<Array<ResolversTypes['MersAnimalType']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -990,6 +1008,9 @@ export type AnimalMersViralEstimateResolvers<ContextType = any, ParentType exten
   positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -1111,6 +1132,9 @@ export type HumanMersEstimateResolvers<ContextType = any, ParentType extends Res
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -1174,6 +1198,9 @@ export type HumanMersViralEstimateResolvers<ContextType = any, ParentType extend
   positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -1238,6 +1265,9 @@ export type MersEstimateInterfaceResolvers<ContextType = any, ParentType extends
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;

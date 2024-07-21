@@ -186,6 +186,9 @@ export interface MersEstimateDocumentBase {
   specimenType: string | undefined;
   sex: string | undefined;
   isotypes: string[];
+  samplingStartDate: Date | undefined;
+  samplingEndDate: Date | undefined;
+  samplingMidDate: Date | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -212,7 +215,7 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies;
-  animalType: MersAnimalType;
+  animalType: MersAnimalType[];
 }
 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -221,7 +224,7 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies;
-  animalType: MersAnimalType;
+  animalType: MersAnimalType[];
 }
 
 export type MersEstimateDocument = 

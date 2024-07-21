@@ -21,7 +21,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   state: string | undefined;
   studyInclusionCriteria: string | undefined;
   studyExclusionCriteria: string | undefined;
-  animalType: MersAnimalType | undefined;
+  animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies | undefined;
   sensitivity: number | undefined;
   sensitivity95CILower: number | undefined;
@@ -33,6 +33,9 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   specificityDenominator: number | undefined;
   sampleDenominator: number | undefined;
   sampleNumerator: number | undefined;
+  samplingStartDate: Date | undefined;
+  samplingEndDate: Date | undefined;
+  samplingMidDate: Date | undefined;
   assay: string[];
   specimenType: string | undefined;
   sex: string | undefined;
@@ -79,7 +82,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       studyInclusionCriteria: 'Test Inclusion Criteria',
       studyExclusionCriteria: 'Test Exclusion Criteria',
       animalSpecies: MersAnimalSpecies.CAMEL,
-      animalType: MersAnimalType.DOMESTIC,
+      animalType: [ MersAnimalType.DOMESTIC ],
       sensitivity: 0.2,
       sensitivity95CILower: 0.1,
       sensitivity95CIUpper: 0.3,
@@ -93,7 +96,10 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       assay: ['ELISA'],
       specimenType: 'Serum',
       sex: 'Male',
-      isotypes: ['IgG']
+      isotypes: ['IgG'],
+      samplingStartDate: new Date(),
+      samplingEndDate: new Date(),
+      samplingMidDate: new Date()
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,

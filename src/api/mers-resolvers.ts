@@ -93,7 +93,10 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
     assay: document.assay,
     specimenType: document.specimenType,
     sex: document.sex,
-    isotypes: document.isotypes
+    isotypes: document.isotypes,
+    samplingStartDate: document.samplingStartDate ? document.samplingStartDate.toISOString() : undefined,
+    samplingEndDate: document.samplingEndDate ? document.samplingEndDate.toISOString() : undefined,
+    samplingMidDate: document.samplingMidDate ? document.samplingMidDate.toISOString() : undefined,
   }
 
   if(document.type === MersEstimateType.HUMAN_SEROPREVALENCE) {
@@ -117,7 +120,7 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       seroprevalence95CIUpper: document.seroprevalence95CIUpper,
       type: MersEstimateTypeForApi.AnimalSeroprevalence,
       animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
-      animalType: mapMersAnimalTypeForApi(document.animalType),
+      animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType)))
     }
   }
 
@@ -142,7 +145,7 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       positivePrevalence95CIUpper: document.positivePrevalence95CIUpper,
       type: MersEstimateTypeForApi.AnimalViral,
       animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
-      animalType: mapMersAnimalTypeForApi(document.animalType),
+      animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType)))
     }
   }
 
