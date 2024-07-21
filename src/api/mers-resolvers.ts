@@ -358,11 +358,6 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
   
   const mersEstimatesFilterOptions = async () => {
     const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
-    ageGroup: [String!]!
-    assay: [String!]!
-    specimenType: [String!]!
-    sex: [String!]!
-    isotypes: [String!]!
 
     const [
       sourceType,
