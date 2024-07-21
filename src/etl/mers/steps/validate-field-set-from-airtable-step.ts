@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import { FieldSet } from "airtable";
-import { AirtableMersEstimateFields, AirtableSourceFields, AirtableStudyFields } from "../types";
+import { AirtableCountryFields, AirtableMersEstimateFields, AirtableSourceFields, AirtableStudyFields } from "../types";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMersEstimateFields;
 export type SourceFieldsAfterValidatingFieldSetFromAirtableStep = AirtableSourceFields;
 export type StudyFieldsAfterValidatingFieldSetFromAirtableStep = AirtableStudyFields;
+export type CountryFieldsAfterValidatingFieldSetFromAirtableStep = AirtableCountryFields;
 export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 export type YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
@@ -14,6 +15,7 @@ interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
   allSources: FieldSet[];
   allStudies: FieldSet[];
+  allCountries: FieldSet[];
   allFaoMersEvents: never[];
   yearlyCamelPopulationByCountryData: never[];
   countryPopulationData: never[];
@@ -24,6 +26,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -155,6 +158,17 @@ const parseStudy = (study: FieldSet): AirtableStudyFields => {
   return zodMersStudyFieldsObject.parse(study);
 }
 
+const parseCountry = (country: FieldSet): AirtableCountryFields => {
+  const zodMersCountryFieldsObject = z.object({
+    id: z.string(),
+    'Country':  z.string(),
+    'Alpha3 Code':  z.string(),
+    'Alpha2 Code':  z.string()
+  })
+
+  return zodMersCountryFieldsObject.parse(country);
+}
+
 export const validateFieldSetFromAirtableStep = (
   input: ValidateFieldSetFromAirtableStepInput
 ): ValidateFieldSetFromAirtableStepOutput => {
@@ -162,14 +176,13 @@ export const validateFieldSetFromAirtableStep = (
     `Running step: validateFieldSetFromAirtableStep. Remaining estimates: ${input.allEstimates.length}`
   );
 
-  console.log(input.allEstimates.at(0));
-
   return {
     allEstimates: input.allEstimates.map((estimate) => parseEstimate(estimate)),
     allSources: input.allSources
       .map((source) => parseSource(source))
       .filter((source): source is NonNullable<typeof source> => !!source),
     allStudies: input.allStudies.map((study) => parseStudy(study)),
+    allCountries: input.allCountries.map((country) => parseCountry(country)),
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

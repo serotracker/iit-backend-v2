@@ -2,6 +2,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import { MersEstimateDocument, MersEventType, FaoMersEventDocumentBase, FaoMersEventDocument, FaoYearlyCamelPopulationDataDocument, MersEstimateType, MersEstimateDocumentBase } from "../../../storage/types.js";
 import assertNever from "assert-never";
 import {
+  CountryFieldsAfterApplyingTypedEstimateConstraintsStep,
   CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep,
   EstimateFieldsAfterApplyingTypedEstimateConstraintsStep,
   FaoMersEventAfterApplyingTypedEstimateConstraintsStep,
@@ -13,6 +14,7 @@ import {
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
 export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
+export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep;
@@ -21,6 +23,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allCountries: CountryFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
   countryPopulationData: CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
@@ -31,6 +34,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
+  allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -225,6 +229,7 @@ export const transformIntoFormatForDatabaseStep = (
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => transformFaoMersEventForDatabase({
       event,
       createdAtForAllRecords,

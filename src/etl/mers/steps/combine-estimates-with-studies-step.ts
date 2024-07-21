@@ -5,7 +5,8 @@ import {
   StudyFieldsAfterCombiningStudiesWithSourcesStep,
   FaoMersEventAfterCombiningStudiesWithSourcesStep,
   YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep,
-  CountryPopulationDataAfterCombiningStudiesWithSourcesStep
+  CountryPopulationDataAfterCombiningStudiesWithSourcesStep,
+  CountryFieldsAfterCombiningStudiesWithSourcesStep
 } from "./combine-studies-with-sources-step";
 
 export type EstimateFieldsAfterCombiningEstimatesWithStudiesStep = EstimateFieldsAfterCombiningStudiesWithSourcesStep & {
@@ -13,6 +14,7 @@ export type EstimateFieldsAfterCombiningEstimatesWithStudiesStep = EstimateField
 };
 export type SourceFieldsAfterCombiningEstimatesWithStudiesStep = SourceFieldsAfterCombiningStudiesWithSourcesStep;
 export type StudyFieldsAfterCombiningEstimatesWithStudiesStep = StudyFieldsAfterCombiningStudiesWithSourcesStep;
+export type CountryFieldsAfterCombiningEstimatesWithStudiesStep = CountryFieldsAfterCombiningStudiesWithSourcesStep;
 export type FaoMersEventAfterCombiningEstimatesWithStudiesStep = FaoMersEventAfterCombiningStudiesWithSourcesStep;
 export type YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep = YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep;
 export type CountryPopulationDataAfterCombiningEstimatesWithStudiesStep = CountryPopulationDataAfterCombiningStudiesWithSourcesStep;
@@ -21,6 +23,7 @@ interface CombineEstimatesWithStudiesStepInput {
   allEstimates: EstimateFieldsAfterCombiningStudiesWithSourcesStep[];
   allSources: SourceFieldsAfterCombiningStudiesWithSourcesStep[];
   allStudies: StudyFieldsAfterCombiningStudiesWithSourcesStep[];
+  allCountries: CountryFieldsAfterCombiningStudiesWithSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningStudiesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningStudiesWithSourcesStep[];
@@ -31,6 +34,7 @@ interface CombineEstimatesWithStudiesStepOutput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesWithStudiesStep[];
   allSources: SourceFieldsAfterCombiningEstimatesWithStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allCountries: CountryFieldsAfterCombiningEstimatesWithStudiesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithStudiesStep[];
@@ -57,6 +61,7 @@ export const combineEstimatesWithStudiesStep = (
     }).filter((study): study is NonNullable<typeof study> => !!study),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

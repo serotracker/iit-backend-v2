@@ -9,6 +9,7 @@ import {
   FaoMersEventAfterCombiningEstimatesWithStudiesStep,
   YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep,
   CountryPopulationDataAfterCombiningEstimatesWithStudiesStep,
+  CountryFieldsAfterCombiningEstimatesWithStudiesStep,
 } from "./combine-estimates-with-studies-step";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithStudiesStep & {
@@ -21,6 +22,7 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
 
 export type SourceFieldsAfterAddingCountryAndRegionInformationStep = SourceFieldsAfterCombiningEstimatesWithStudiesStep;
 export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCombiningEstimatesWithStudiesStep;
+export type CountryFieldsAfterAddingCountryAndRegionInformationStep = CountryFieldsAfterCombiningEstimatesWithStudiesStep;
 
 export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterCombiningEstimatesWithStudiesStep & {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
@@ -39,6 +41,7 @@ interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesWithStudiesStep[];
   allSources: SourceFieldsAfterCombiningEstimatesWithStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allCountries: CountryFieldsAfterCombiningEstimatesWithStudiesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithStudiesStep[];
@@ -49,6 +52,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
+  allCountries: CountryFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -100,18 +104,32 @@ export const addCountryAndRegionInformationStep = (
   return {
     allEstimates: input.allEstimates
       .map((estimate) => {
+        if(!estimate.countryId) {
+          return undefined;
+        }
+
+        const country = input.allCountries.find((country) => country.id === estimate.countryId);
+
+        if(!country) {
+          return undefined;
+        }
+
+        const whoRegion = getWHORegionFromAlphaTwoCode(country.countryAlphaTwoCode);
+        const unRegion = getUNRegionFromAlphaTwoCode(country.countryAlphaTwoCode);
+
         return {
           ...estimate,
-          country: 'Canada',
-          countryAlphaTwoCode: "CA" as const,
-          countryAlphaThreeCode: "CAN" as const,
-          whoRegion: WHORegion.AMR,
-          unRegion: UNRegion.NORTHERN_AMERICA,
+          country: country.countryName,
+          countryAlphaTwoCode: country.countryAlphaTwoCode,
+          countryAlphaThreeCode: country.countryAlphaThreeCode,
+          whoRegion,
+          unRegion,
         }
       })
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents
       .map((event) => {
         const countryCodes = faoMersEventCountryToAlphaTwoAndAlphaThreeCode[event.country]

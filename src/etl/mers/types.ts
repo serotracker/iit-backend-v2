@@ -18,6 +18,13 @@ export interface AirtableStudyFields {
   'Source Sheet': Array<string | null>;
 }
 
+export interface AirtableCountryFields {
+  id: string;
+  'Country': string;
+  'Alpha3 Code': string;
+  'Alpha2 Code': string;
+}
+
 export interface AirtableMersEstimateFields {
   id: string;
   'Sex': string | null;

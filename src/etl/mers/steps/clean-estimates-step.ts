@@ -5,7 +5,8 @@ import {
   FaoMersEventAfterCleaningStudiesStep,
   SourceFieldsAfterCleaningStudiesStep,
   StudyFieldsAfterCleaningStudiesStep,
-  YearlyCamelPopulationDataAfterCleaningStudiesStep
+  YearlyCamelPopulationDataAfterCleaningStudiesStep,
+  CountryFieldsAfterCleaningStudiesStep
 } from "./clean-studies-step";
 import { MersAnimalSpecies, MersAnimalType, MersEstimateType, isMersAnimalType } from "../../../storage/types.js";
 
@@ -42,6 +43,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
+export type CountryFieldsAfterCleaningEstimatesStep = CountryFieldsAfterCleaningStudiesStep;
 export type FaoMersEventAfterCleaningEstimatesStep = FaoMersEventAfterCleaningStudiesStep;
 export type YearlyCamelPopulationDataAfterCleaningEstimatesStep = YearlyCamelPopulationDataAfterCleaningStudiesStep;
 export type CountryPopulationDataAfterCleaningEstimatesStep = CountryPopulationDataAfterCleaningStudiesStep;
@@ -50,6 +52,7 @@ interface CleanEstimatesStepInput {
   allEstimates: EstimateFieldsAfterCleaningStudiesStep[];
   allSources: SourceFieldsAfterCleaningStudiesStep[];
   allStudies: StudyFieldsAfterCleaningStudiesStep[];
+  allCountries: CountryFieldsAfterCleaningStudiesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningStudiesStep[];
@@ -60,6 +63,7 @@ interface CleanEstimatesStepOutput {
   allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
   allSources: SourceFieldsAfterCleaningEstimatesStep[];
   allStudies: StudyFieldsAfterCleaningEstimatesStep[];
+  allCountries: CountryFieldsAfterCleaningEstimatesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
@@ -108,6 +112,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

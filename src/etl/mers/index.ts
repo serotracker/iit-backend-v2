@@ -27,6 +27,7 @@ import { cleanStudiesStep } from "./steps/clean-studies-step.js";
 import { applyTypedEstimateConstraintsStep } from "./steps/apply-typed-estimate-constraints-step.js";
 import { combineStudiesWithSourcesStep } from "./steps/combine-studies-with-sources-step.js";
 import { combineEstimatesWithStudiesStep } from "./steps/combine-estimates-with-studies-step.js";
+import { cleanCountriesStep } from "./steps/clean-countries-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -45,7 +46,8 @@ const runEtlMain = async () => {
   const base = new Airtable.Base(airtable, airtableMERSBaseId);
   const estimateSheet = base.table("Estimates");
   const sourceSheet = base.table("Source");
-  const studySheet = base.table("Study")
+  const studySheet = base.table("Study");
+  const countrySheet = base.table("Selectable Countries & Territories");
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] =
     await estimateSheet
@@ -71,12 +73,21 @@ const runEtlMain = async () => {
         studySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
+  const allCountriesUnformatted: (FieldSet & { id: string })[] =
+    await countrySheet
+      .select()
+      .all()
+      .then((countrySheet) =>
+        countrySheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
+
   //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
   const outputFromFirstPipeHalf = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allSources: allSourcesUnformatted,
       allStudies: allStudiesUnformatted,
+      allCountries: allCountriesUnformatted,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: [],
@@ -86,6 +97,7 @@ const runEtlMain = async () => {
     etlStep(cleanSourcesStep),
     etlStep(cleanStudiesStep),
     etlStep(cleanEstimatesStep),
+    etlStep(cleanCountriesStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),
     etlStep(cleanFaoMersEventFieldsStep),

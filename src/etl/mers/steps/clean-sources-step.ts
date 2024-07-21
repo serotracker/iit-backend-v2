@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterValidatingFieldSetFromAirtableStep,
   CountryPopulationDataAfterValidatingFieldSetFromAirtableStep,
   EstimateFieldsAfterValidatingFieldSetFromAirtableStep,
   FaoMersEventAfterValidatingFieldSetFromAirtableStep,
@@ -20,6 +21,7 @@ export type SourceFieldsAfterCleaningSourcesStep = {
   populationType: string[];
 };
 export type StudyFieldsAfterCleaningSourcesStep = StudyFieldsAfterValidatingFieldSetFromAirtableStep;
+export type CountryFieldsAfterCleaningSourcesStep = CountryFieldsAfterValidatingFieldSetFromAirtableStep;
 export type FaoMersEventAfterCleaningSourcesStep = FaoMersEventAfterValidatingFieldSetFromAirtableStep;
 export type YearlyCamelPopulationDataAfterCleaningSourcesStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
 export type CountryPopulationDataAfterCleaningSourcesStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -28,6 +30,7 @@ interface CleanSourcesStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -38,6 +41,7 @@ interface CleanSourcesStepOutput {
   allEstimates: EstimateFieldsAfterCleaningSourcesStep[];
   allSources: SourceFieldsAfterCleaningSourcesStep[];
   allStudies: StudyFieldsAfterCleaningSourcesStep[];
+  allCountries: CountryFieldsAfterCleaningSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
@@ -58,6 +62,7 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
       populationType: source['Population type']
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterFetchingCountryPopulationStep,
   CountryPopulationDataAfterFetchingCountryPopulationStep,
   EstimateFieldsAfterFetchingCountryPopulationStep,
   FaoMersEventAfterFetchingCountryPopulationStep,
@@ -11,6 +12,7 @@ import {
 export type EstimateFieldsAfterGeneratingCamelDataPerCapitaStep = EstimateFieldsAfterFetchingCountryPopulationStep;
 export type SourceFieldsAfterGeneratingCamelDataPerCapitaStep = SourceFieldsAfterFetchingCountryPopulationStep;
 export type StudyFieldsAfterGeneratingCamelDataPerCapitaStep = StudyFieldsAfterFetchingCountryPopulationStep;
+export type CountryFieldsAfterGeneratingCamelDataPerCapitaStep = CountryFieldsAfterFetchingCountryPopulationStep;
 export type FaoMersEventAfterGeneratingCamelDataPerCapitaStep = FaoMersEventAfterFetchingCountryPopulationStep;
 export type YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep = YearlyCamelPopulationDataAfterFetchingCountryPopulationStep & {
   camelCountPerCapita: number | undefined;
@@ -21,6 +23,7 @@ interface GenerateCamelDataPerCapitaStepInput {
   allEstimates: EstimateFieldsAfterFetchingCountryPopulationStep[];
   allSources: SourceFieldsAfterFetchingCountryPopulationStep[];
   allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
+  allCountries: CountryFieldsAfterFetchingCountryPopulationStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCountryPopulationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCountryPopulationStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCountryPopulationStep[];
@@ -31,6 +34,7 @@ interface GenerateCamelDataPerCapitaStepOutput {
   allEstimates: EstimateFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allSources: SourceFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allStudies: StudyFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allCountries: CountryFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
@@ -46,6 +50,7 @@ export const generateCamelDataPerCapitaStep = (
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((camelPopulationDataPoint) => {
       const countryPopulationDataForYear = input.countryPopulationData

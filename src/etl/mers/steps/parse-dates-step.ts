@@ -5,6 +5,7 @@ import {
   HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep
 } from "./clean-fao-mers-event-fields-step";
 import {
+  CountryFieldsAfterGeneratingCamelDataPerCapitaStep,
   CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep,
   EstimateFieldsAfterGeneratingCamelDataPerCapitaStep,
   FaoMersEventAfterGeneratingCamelDataPerCapitaStep,
@@ -22,6 +23,7 @@ export type EstimateFieldsAfterParsingDatesStep = Omit<
 };
 export type SourceFieldsAfterParsingDatesStep = SourceFieldsAfterGeneratingCamelDataPerCapitaStep;
 export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterGeneratingCamelDataPerCapitaStep;
+export type CountryFieldsAfterParsingDatesStep = CountryFieldsAfterGeneratingCamelDataPerCapitaStep;
 // Intentionally from a type a few steps back. This is because the individual parts of the union type are not carried through the steps,
 // just the union type itself. You could fix this by carrying the individual parts of the union type through the steps.
 export type FaoMersEventAfterParsingDatesStep = (Omit<
@@ -40,6 +42,7 @@ interface ParseDatesStepInput {
   allEstimates: EstimateFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allSources: SourceFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allStudies: StudyFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allCountries: CountryFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
@@ -50,6 +53,7 @@ interface ParseDatesStepOutput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allSources: SourceFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
+  allCountries: CountryFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
@@ -76,6 +80,7 @@ export const parseDatesStep = (
     }),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => ({
       ...event,
       observationDate: event.observationDate ? parse(event.observationDate, "dd/MM/yyyy", new Date()) : undefined,

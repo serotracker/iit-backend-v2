@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterParsingDatesStep,
     CountryPopulationDataAfterParsingDatesStep,
   EstimateFieldsAfterParsingDatesStep,
   FaoMersEventAfterParsingDatesStep,
@@ -13,6 +14,7 @@ export type SourceFieldsAfterCombiningStudiesWithSourcesStep = SourceFieldsAfter
 export type StudyFieldsAfterCombiningStudiesWithSourcesStep = StudyFieldsAfterParsingDatesStep & {
   source: SourceFieldsAfterParsingDatesStep;
 };
+export type CountryFieldsAfterCombiningStudiesWithSourcesStep = CountryFieldsAfterParsingDatesStep;
 export type FaoMersEventAfterCombiningStudiesWithSourcesStep = FaoMersEventAfterParsingDatesStep;
 export type YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep = YearlyCamelPopulationDataAfterParsingDatesStep;
 export type CountryPopulationDataAfterCombiningStudiesWithSourcesStep = CountryPopulationDataAfterParsingDatesStep;
@@ -21,6 +23,7 @@ interface CombineStudiesWithSourcesStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
   allSources: SourceFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
+  allCountries: CountryFieldsAfterParsingDatesStep[];
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
@@ -31,6 +34,7 @@ interface CombineStudiesWithSourcesStepOutput {
   allEstimates: EstimateFieldsAfterCombiningStudiesWithSourcesStep[];
   allSources: SourceFieldsAfterCombiningStudiesWithSourcesStep[];
   allStudies: StudyFieldsAfterCombiningStudiesWithSourcesStep[];
+  allCountries: CountryFieldsAfterCombiningStudiesWithSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningStudiesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningStudiesWithSourcesStep[];
@@ -57,6 +61,7 @@ export const combineStudiesWithSourcesStep = (
         source,
       }
     }).filter((study): study is NonNullable<typeof study> => !!study),
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

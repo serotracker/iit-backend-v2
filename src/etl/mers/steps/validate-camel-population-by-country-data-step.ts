@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterFetchingCamelPopulationByCountryDataStep,
   CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep,
   EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep,
   FaoMersEventAfterFetchingCamelPopulationByCountryDataStep,
@@ -12,6 +13,7 @@ import {
 export type EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep = EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep;
 export type SourceFieldsAfterValidatingCamelPopulationByCountryDataStep = SourceFieldsAfterFetchingCamelPopulationByCountryDataStep;
 export type StudyFieldsAfterValidatingCamelPopulationByCountryDataStep = StudyFieldsAfterFetchingCamelPopulationByCountryDataStep;
+export type CountryFieldsAfterValidatingCamelPopulationByCountryDataStep = CountryFieldsAfterFetchingCamelPopulationByCountryDataStep;
 export type FaoMersEventAfterValidatingCamelPopulationByCountryDataStep = FaoMersEventAfterFetchingCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep = {
   Item: string;
@@ -26,6 +28,7 @@ interface ValidateCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allSources: SourceFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterFetchingCamelPopulationByCountryDataStep[];
+  allCountries: CountryFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
@@ -36,6 +39,7 @@ interface ValidateCamelPopulationByCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allSources: SourceFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterValidatingCamelPopulationByCountryDataStep[];
+  allCountries: CountryFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
@@ -64,6 +68,7 @@ export const validateCamelPopulationByCountryDataStep = (
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((camelPopulationDataPoint) => 
       zodCamelPopulationByCountryObject.parse(camelPopulationDataPoint)
