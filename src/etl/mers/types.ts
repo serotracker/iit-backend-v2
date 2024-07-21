@@ -15,6 +15,7 @@ export interface AirtableStudyFields {
   id: string;
   'Inclusion Criteria': string | null;
   'Exclusion Criteria': string | null;
+  'Source Sheet': Array<string | null>;
 }
 
 export interface AirtableMersEstimateFields {

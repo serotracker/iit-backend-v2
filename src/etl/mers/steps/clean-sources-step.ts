@@ -12,9 +12,9 @@ export type EstimateFieldsAfterCleaningSourcesStep = EstimateFieldsAfterValidati
 export type SourceFieldsAfterCleaningSourcesStep = {
   id: string;
   firstAuthorFullName: string;
-  sourceUrl: string;
-  sourceType: string;
-  sourceTitle: string;
+  url: string;
+  type: string;
+  title: string;
   insitutution: string | undefined;
   country: string[];
   populationType: string[];
@@ -50,9 +50,9 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
     allSources: input.allSources.map((source) => ({
       id: source['id'],
       firstAuthorFullName: source['First author name'],
-      sourceUrl: source['DOI/url'],
-      sourceType: source['Source type'],
-      sourceTitle: source['Source title'],
+      url: source['DOI/url'],
+      type: source['Source type'],
+      title: source['Source title'],
       insitutution: source['Institution'] ?? undefined,
       country: source['Country'],
       populationType: source['Population type']

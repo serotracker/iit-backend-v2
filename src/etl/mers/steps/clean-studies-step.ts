@@ -14,6 +14,7 @@ export interface StudyFieldsAfterCleaningStudiesStep {
   id: string;
   inclusionCriteria: string | undefined;
   exclusionCriteria: string | undefined;
+  sourceId: string | undefined;
 }
 export type FaoMersEventAfterCleaningStudiesStep = FaoMersEventAfterCleaningSourcesStep;
 export type YearlyCamelPopulationDataAfterCleaningStudiesStep = YearlyCamelPopulationDataAfterCleaningSourcesStep;
@@ -47,6 +48,9 @@ export const cleanStudiesStep = (input: CleanStudiesStepInput): CleanStudiesStep
       id: study['id'],
       inclusionCriteria: study['Inclusion Criteria'] ?? undefined,
       exclusionCriteria: study['Exclusion Criteria'] ?? undefined,
+      sourceId: study['Source Sheet']
+        .filter((sourceSheetId): sourceSheetId is NonNullable<typeof sourceSheetId> => !!sourceSheetId)
+        .at(0)
     })),
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

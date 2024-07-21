@@ -21,11 +21,12 @@ import { writeFaoYearlyCamelPopulationDataToMongoDbStep } from "./steps/write-fa
 import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
 import { generateCamelDataPerCapitaStep } from "./steps/generate-camel-data-per-capita-step.js";
 import { addDatabaseIndexesStep } from "./steps/add-database-indexes-step.js";
-import { combineEstimatesWithSourcesStep } from "./steps/combine-estimates-with-sources-step.js";
 import { cleanSourcesStep } from "./steps/clean-sources-step.js";
 import { cleanEstimatesStep } from "./steps/clean-estimates-step.js";
 import { cleanStudiesStep } from "./steps/clean-studies-step.js";
 import { applyTypedEstimateConstraintsStep } from "./steps/apply-typed-estimate-constraints-step.js";
+import { combineStudiesWithSourcesStep } from "./steps/combine-studies-with-sources-step.js";
+import { combineEstimatesWithStudiesStep } from "./steps/combine-estimates-with-studies-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -94,7 +95,8 @@ const runEtlMain = async () => {
     etlStep(fetchCountryPopulationDataStep),
     etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
-    etlStep(combineEstimatesWithSourcesStep),
+    etlStep(combineStudiesWithSourcesStep),
+    etlStep(combineEstimatesWithStudiesStep),
     etlStep(addCountryAndRegionInformationStep),
   );
 

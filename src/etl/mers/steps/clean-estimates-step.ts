@@ -21,8 +21,6 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   state: string | undefined;
   countryId: string | undefined;
   studyId: string | undefined;
-  studyInclusionCriteria: string | undefined;
-  studyExclusionCriteria: string | undefined;
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies | undefined;
   sensitivity: number | undefined;
@@ -86,8 +84,6 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       studyId: estimate['Study']
         .filter((element): element is NonNullable<typeof element> => !!element)
         .at(0),
-      studyInclusionCriteria: 'Test Inclusion Criteria',
-      studyExclusionCriteria: 'Test Exclusion Criteria',
       animalSpecies: MersAnimalSpecies.CAMEL,
       animalType: estimate['Animal type']
         .filter((animalType): animalType is NonNullable<typeof animalType> => !!animalType)

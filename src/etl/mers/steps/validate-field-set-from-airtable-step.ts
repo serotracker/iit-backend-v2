@@ -147,6 +147,9 @@ const parseStudy = (study: FieldSet): AirtableStudyFields => {
     id: z.string(),
     'Inclusion Criteria': z.optional(z.string().nullable()).transform((value => value ?? null)),
     'Exclusion Criteria': z.optional(z.string().nullable()).transform((value => value ?? null)),
+    'Source Sheet': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
   })
 
   return zodMersStudyFieldsObject.parse(study);
