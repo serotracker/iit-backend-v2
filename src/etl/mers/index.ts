@@ -42,24 +42,33 @@ const runEtlMain = async () => {
 
   const airtable = new Airtable({ apiKey: airtableApiKey });
   const base = new Airtable.Base(airtable, airtableMERSBaseId);
-  //const estimateSheet = base.table("...");
+  const estimateSheet = base.table("Estimates");
   const sourceSheet = base.table("Source");
+  const studySheet = base.table("Study")
 
-  const allSourcesUnformatted: (FieldSet & { id: string })[] =
-    await sourceSheet
+  const allEstimatesUnformatted: (FieldSet & { id: string })[] =
+    await estimateSheet
       .select()
       .all()
       .then((estimateSheet) =>
         estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
-  const allEstimatesUnformatted: (FieldSet & { id: string })[] = Array(5).fill(0).map(() => ({ id: new ObjectId().toString() }))
+  const allSourcesUnformatted: (FieldSet & { id: string })[] =
+    await sourceSheet
+      .select()
+      .all()
+      .then((sourceSheet) =>
+        sourceSheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
 
-  const allStudiesUnformatted = [{
-    id: new ObjectId().toString(),
-    'Inclusion Criteria': 'Inclusion Criteria',
-    'Exclusion Criteria': 'Exclusion Criteria',
-  }]
+  const allStudiesUnformatted: (FieldSet & { id: string })[] =
+    await studySheet
+      .select()
+      .all()
+      .then((studySheet) =>
+        studySheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
 
   //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
   const outputFromFirstPipeHalf = await pipe(

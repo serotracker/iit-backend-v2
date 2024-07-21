@@ -53,6 +53,8 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
             city: undefined,
             state: undefined,
             estimateId: 'Test Data',
+            countryId: 'a',
+            studyId: 'b',
             firstAuthorFullName: source.firstAuthorFullName,
             sourceUrl: source.sourceUrl,
             sourceType: source.sourceType,
@@ -90,7 +92,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 positivePrevalence: 0.5,
                 positivePrevalence95CILower: 0.3,
                 positivePrevalence95CIUpper: 0.8,
-                ageGroup: undefined,
+                ageGroup: [],
               };
             }
             if( num === 2 ) {
@@ -102,7 +104,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 positivePrevalence: 0.5,
                 positivePrevalence95CILower: 0.3,
                 positivePrevalence95CIUpper: 0.8,
-                ageGroup: undefined,
+                ageGroup: [],
               };
             }
           }
@@ -113,7 +115,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 type: MersEstimateType.HUMAN_SEROPREVALENCE as const,
                 animalSpecies: undefined,
                 animalType: [],
-                ageGroup: 'Test Age Group',
+                ageGroup: ['Test Age Group'],
                 positivePrevalence: 0.5,
                 positivePrevalence95CILower: 0.3,
                 positivePrevalence95CIUpper: 0.8,
@@ -125,7 +127,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
               type: MersEstimateType.HUMAN_VIRAL as const,
               animalSpecies: undefined,
               animalType: [],
-              ageGroup: 'Test Age Group',
+              ageGroup: ['Test Age Group'],
               positivePrevalence: 0.5,
               positivePrevalence95CILower: 0.3,
               positivePrevalence95CIUpper: 0.8,

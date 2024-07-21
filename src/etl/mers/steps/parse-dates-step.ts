@@ -13,7 +13,13 @@ import {
   YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep
 } from "./generate-camel-data-per-capita-step";
 
-export type EstimateFieldsAfterParsingDatesStep = EstimateFieldsAfterGeneratingCamelDataPerCapitaStep;
+export type EstimateFieldsAfterParsingDatesStep = Omit<
+  EstimateFieldsAfterGeneratingCamelDataPerCapitaStep, 'samplingStartDate'|'samplingEndDate'
+> & {
+  samplingStartDate: Date | undefined;
+  samplingEndDate: Date | undefined;
+  samplingMidDate: Date | undefined;
+};
 export type SourceFieldsAfterParsingDatesStep = SourceFieldsAfterGeneratingCamelDataPerCapitaStep;
 export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterGeneratingCamelDataPerCapitaStep;
 // Intentionally from a type a few steps back. This is because the individual parts of the union type are not carried through the steps,
@@ -56,7 +62,18 @@ export const parseDatesStep = (
   console.log(`Running step: parseDatesStep. Remaining estimates: ${input.allEstimates.length}`);
 
   return {
-    allEstimates: input.allEstimates,
+    allEstimates: input.allEstimates.map((estimate) => {
+      const samplingStartDate = estimate.samplingStartDate ? parse(estimate.samplingStartDate, 'yyyy-MM-dd', new Date()) : undefined;
+      const samplingEndDate = estimate.samplingEndDate ? parse(estimate.samplingEndDate, 'yyyy-MM-dd', new Date()) : undefined;
+      const samplingMidDate = samplingEndDate && samplingStartDate ? new Date((samplingStartDate.getTime() + samplingEndDate.getTime()) / 2) : undefined;
+
+      return {
+        ...estimate,
+        samplingStartDate,
+        samplingEndDate,
+        samplingMidDate
+      }
+    }),
     allSources: input.allSources,
     allStudies: input.allStudies,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => ({

@@ -125,6 +125,8 @@ export const makeGeocodingApiRequest = async (
     mapboxAccessToken,
   });
 
+  console.error("DID NOT HIT CACHE");
+
   const rawApiResponse = await Undici.request(queryUrl, { method: "GET" });
   const parsedApiResponse = await parseGeocodingApiResponse(rawApiResponse);
 

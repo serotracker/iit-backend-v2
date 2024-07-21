@@ -21,7 +21,7 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
 }
@@ -36,7 +36,7 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
 }
@@ -51,7 +51,7 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
-  ageGroup: undefined;
+  ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
 }
@@ -66,7 +66,7 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  ageGroup: undefined;
+  ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
 }
@@ -150,7 +150,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       positivePrevalence: undefined,
       positivePrevalence95CILower: undefined,
       positivePrevalence95CIUpper: undefined,
-      ageGroup: undefined,
+      ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
     }
@@ -172,7 +172,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
-      ageGroup: undefined,
+      ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
     }

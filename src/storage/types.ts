@@ -153,6 +153,9 @@ export enum MersAnimalType {
   WILD = "WILD",
 }
 
+export const isMersAnimalType = (animalType: string): animalType is MersAnimalType =>
+  Object.values(MersAnimalType).some((element) => element === animalType);
+
 export interface MersEstimateDocumentBase {
   _id: ObjectId;
   estimateId: string;
@@ -198,7 +201,7 @@ export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase &
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
 }
 
 export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -206,7 +209,7 @@ export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
 }
 
 export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {

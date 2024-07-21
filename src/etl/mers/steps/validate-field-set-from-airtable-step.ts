@@ -33,6 +33,82 @@ interface ValidateFieldSetFromAirtableStepOutput {
 const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
   const zodMersEstimateFieldsObject = z.object({
     id: z.string(),
+    'Prevalence Estimate Name': z
+      .string(),
+    'Age Group': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'State/Province': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'City': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Country': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Study': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Specimen Type': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Sex': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Positive Prevalence': z
+      .number(),
+    'Denominator': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Numerator': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Positive Prevalence 95% CI Lower': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Positive Prevalence 95% CI Upper': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Sensitivity': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Sensitivity, 95% CI Lower': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Sensitivity, 95% CI Upper': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Sensitivity Denominator': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Specificity': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Specificity, 95% CI Lower': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Specificity, 95% CI Upper': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Specificity Denominator': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Isotype(s)': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Assay Type': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Animal type': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Sample End Date': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Sample Start Date': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
   })
 
   return zodMersEstimateFieldsObject.parse(estimate);
@@ -82,6 +158,8 @@ export const validateFieldSetFromAirtableStep = (
   console.log(
     `Running step: validateFieldSetFromAirtableStep. Remaining estimates: ${input.allEstimates.length}`
   );
+
+  console.log(input.allEstimates.at(0));
 
   return {
     allEstimates: input.allEstimates.map((estimate) => parseEstimate(estimate)),
