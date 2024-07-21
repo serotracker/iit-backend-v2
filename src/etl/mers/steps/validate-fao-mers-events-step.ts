@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterFetchingFaoMersEventsStep,
   CountryPopulationDataAfterFetchingFaoMersEventsStep,
   EstimateFieldsAfterFetchingFaoMersEventsStep,
   FaoMersEventAfterFetchingFaoMersEventsStep,
@@ -61,6 +62,7 @@ type HumanFaoMersEventAfterValidatingFaoMersEventsStep = FaoMersEventAfterValida
 export type EstimateFieldsAfterValidatingFaoMersEventsStep = EstimateFieldsAfterFetchingFaoMersEventsStep;
 export type SourceFieldsAfterValidatingFaoMersEventsStep = SourceFieldsAfterFetchingFaoMersEventsStep;
 export type StudyFieldsAfterValidatingFaoMersEventsStep = StudyFieldsAfterFetchingFaoMersEventsStep;
+export type CountryFieldsAfterValidatingFaoMersEventsStep = CountryFieldsAfterFetchingFaoMersEventsStep;
 export type FaoMersEventAfterValidatingFaoMersEventsStep = 
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
@@ -71,6 +73,7 @@ interface ValidateFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterFetchingFaoMersEventsStep[];
   allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterFetchingFaoMersEventsStep[];
+  allCountries: CountryFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -81,6 +84,7 @@ interface ValidateFaoMersEventsStepOutput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterValidatingFaoMersEventsStep[];
+  allCountries: CountryFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -164,6 +168,7 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

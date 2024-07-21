@@ -1,6 +1,7 @@
 import { assertNever } from "assert-never";
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterValidatingFaoMersEventsStep,
   CountryPopulationDataAfterValidatingFaoMersEventsStep,
   EstimateFieldsAfterValidatingFaoMersEventsStep,
   FaoMersEventAfterValidatingFaoMersEventsStep,
@@ -71,6 +72,7 @@ export type HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep = FaoMersEventA
 export type EstimateFieldsAfterCleaningFaoMersEventFieldsStep = EstimateFieldsAfterValidatingFaoMersEventsStep;
 export type SourceFieldsAfterCleaningFaoMersEventFieldsStep = SourceFieldsAfterValidatingFaoMersEventsStep;
 export type StudyFieldsAfterCleaningFaoMersEventFieldsStep = StudyFieldsAfterValidatingFaoMersEventsStep;
+export type CountryFieldsAfterCleaningFaoMersEventFieldsStep = CountryFieldsAfterValidatingFaoMersEventsStep;
 export type FaoMersEventAfterCleaningFaoMersEventFieldsStep = 
   | AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep
   | HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep;
@@ -82,6 +84,7 @@ interface CleanFaoMersEventFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
   allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterValidatingFaoMersEventsStep[];
+  allCountries: CountryFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -92,6 +95,7 @@ interface CleanFaoMersEventFieldsStepOutput {
   allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
   allSources: SourceFieldsAfterCleaningFaoMersEventFieldsStep[];
   allStudies: StudyFieldsAfterCleaningFaoMersEventFieldsStep[];
+  allCountries: CountryFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
@@ -117,6 +121,7 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => {
       if(event.type === MersEventType.HUMAN) {
         return {

@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterValidatingFieldSetFromAirtableStep,
   CountryPopulationDataAfterValidatingFieldSetFromAirtableStep,
   EstimateFieldsAfterValidatingFieldSetFromAirtableStep,
   FaoMersEventAfterValidatingFieldSetFromAirtableStep,
@@ -12,14 +13,15 @@ export type EstimateFieldsAfterCleaningSourcesStep = EstimateFieldsAfterValidati
 export type SourceFieldsAfterCleaningSourcesStep = {
   id: string;
   firstAuthorFullName: string;
-  sourceUrl: string;
-  sourceType: string;
-  sourceTitle: string;
+  url: string;
+  type: string;
+  title: string;
   insitutution: string | undefined;
   country: string[];
   populationType: string[];
 };
 export type StudyFieldsAfterCleaningSourcesStep = StudyFieldsAfterValidatingFieldSetFromAirtableStep;
+export type CountryFieldsAfterCleaningSourcesStep = CountryFieldsAfterValidatingFieldSetFromAirtableStep;
 export type FaoMersEventAfterCleaningSourcesStep = FaoMersEventAfterValidatingFieldSetFromAirtableStep;
 export type YearlyCamelPopulationDataAfterCleaningSourcesStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
 export type CountryPopulationDataAfterCleaningSourcesStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -28,6 +30,7 @@ interface CleanSourcesStepInput {
   allEstimates: EstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -38,6 +41,7 @@ interface CleanSourcesStepOutput {
   allEstimates: EstimateFieldsAfterCleaningSourcesStep[];
   allSources: SourceFieldsAfterCleaningSourcesStep[];
   allStudies: StudyFieldsAfterCleaningSourcesStep[];
+  allCountries: CountryFieldsAfterCleaningSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
@@ -50,14 +54,15 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
     allSources: input.allSources.map((source) => ({
       id: source['id'],
       firstAuthorFullName: source['First author name'],
-      sourceUrl: source['DOI/url'],
-      sourceType: source['Source type'],
-      sourceTitle: source['Source title'],
+      url: source['DOI/url'],
+      type: source['Source type'],
+      title: source['Source title'],
       insitutution: source['Institution'] ?? undefined,
       country: source['Country'],
       populationType: source['Population type']
     })),
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

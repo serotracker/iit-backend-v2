@@ -259,7 +259,7 @@ export enum GbdSuperRegion {
 
 export type HumanMersEstimate = MersEstimateInterface & {
   __typename?: 'HumanMersEstimate';
-  ageGroup?: Maybe<Scalars['String']['output']>;
+  ageGroup: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
@@ -322,7 +322,7 @@ export type HumanMersEvent = MersEventInterface & {
 
 export type HumanMersViralEstimate = MersEstimateInterface & {
   __typename?: 'HumanMersViralEstimate';
-  ageGroup?: Maybe<Scalars['String']['output']>;
+  ageGroup: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
   country: Scalars['String']['output'];
@@ -1117,7 +1117,7 @@ export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType ext
 };
 
 export type HumanMersEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersEstimate'] = ResolversParentTypes['HumanMersEstimate']> = {
-  ageGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1180,7 +1180,7 @@ export type HumanMersEventResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type HumanMersViralEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersViralEstimate'] = ResolversParentTypes['HumanMersViralEstimate']> = {
-  ageGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

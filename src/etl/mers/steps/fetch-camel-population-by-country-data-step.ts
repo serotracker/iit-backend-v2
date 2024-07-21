@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import { readFileSync } from "fs";
 import {
+  CountryFieldsAfterCleaningFaoMersEventFieldsStep,
   CountryPopulationDataAfterCleaningFaoMersEventFieldsStep,
   EstimateFieldsAfterCleaningFaoMersEventFieldsStep,
   FaoMersEventAfterCleaningFaoMersEventFieldsStep,
@@ -12,6 +13,7 @@ import {
 export type EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep = EstimateFieldsAfterCleaningFaoMersEventFieldsStep;
 export type SourceFieldsAfterFetchingCamelPopulationByCountryDataStep = SourceFieldsAfterCleaningFaoMersEventFieldsStep;
 export type StudyFieldsAfterFetchingCamelPopulationByCountryDataStep = StudyFieldsAfterCleaningFaoMersEventFieldsStep;
+export type CountryFieldsAfterFetchingCamelPopulationByCountryDataStep = CountryFieldsAfterCleaningFaoMersEventFieldsStep;
 export type FaoMersEventAfterFetchingCamelPopulationByCountryDataStep = FaoMersEventAfterCleaningFaoMersEventFieldsStep;
 export type YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep = Record<string, string | undefined>;
 export type CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep = CountryPopulationDataAfterCleaningFaoMersEventFieldsStep;
@@ -20,6 +22,7 @@ interface FetchCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterCleaningFaoMersEventFieldsStep[];
   allSources: SourceFieldsAfterCleaningFaoMersEventFieldsStep[];
   allStudies: StudyFieldsAfterCleaningFaoMersEventFieldsStep[];
+  allCountries: CountryFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
@@ -30,6 +33,7 @@ interface FetchCamelPopulationByCountryDataStepOutput {
   allEstimates: EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allSources: SourceFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterFetchingCamelPopulationByCountryDataStep[];
+  allCountries: CountryFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
@@ -52,6 +56,7 @@ export const fetchCamelPopulationByCountryDataStep = (
       allEstimates: input.allEstimates,
       allSources: input.allSources,
       allStudies: input.allStudies,
+      allCountries: input.allCountries,
       allFaoMersEvents: input.allFaoMersEvents,
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: input.countryPopulationData,
@@ -86,6 +91,7 @@ export const fetchCamelPopulationByCountryDataStep = (
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: data,
     countryPopulationData: input.countryPopulationData,

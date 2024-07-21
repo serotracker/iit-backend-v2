@@ -3,44 +3,48 @@ import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib
 import { WHORegion, getWHORegionFromAlphaTwoCode } from "../../../lib/who-regions.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
 import {
-  CountryPopulationDataAfterCombiningEstimatesWithSourcesStep,
-  EstimateFieldsAfterCombiningEstimatesWithSourcesStep,
-  FaoMersEventAfterCombiningEstimatesWithSourcesStep,
-  SourceFieldsAfterCombiningEstimatesWithSourcesStep,
-  StudyFieldsAfterCombiningEstimatesWithSourcesStep,
-  YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep
-} from "./combine-estimates-with-sources-step";
+  EstimateFieldsAfterCombiningEstimatesWithStudiesStep,
+  SourceFieldsAfterCombiningEstimatesWithStudiesStep,
+  StudyFieldsAfterCombiningEstimatesWithStudiesStep,
+  FaoMersEventAfterCombiningEstimatesWithStudiesStep,
+  YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep,
+  CountryPopulationDataAfterCombiningEstimatesWithStudiesStep,
+  CountryFieldsAfterCombiningEstimatesWithStudiesStep,
+} from "./combine-estimates-with-studies-step";
 
-export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithSourcesStep & {
+export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithStudiesStep & {
+  country: string;
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
 };
 
-export type SourceFieldsAfterAddingCountryAndRegionInformationStep = SourceFieldsAfterCombiningEstimatesWithSourcesStep;
-export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCombiningEstimatesWithSourcesStep;
+export type SourceFieldsAfterAddingCountryAndRegionInformationStep = SourceFieldsAfterCombiningEstimatesWithStudiesStep;
+export type StudyFieldsAfterAddingCountryAndRegionInformationStep = StudyFieldsAfterCombiningEstimatesWithStudiesStep;
+export type CountryFieldsAfterAddingCountryAndRegionInformationStep = CountryFieldsAfterCombiningEstimatesWithStudiesStep;
 
-export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterCombiningEstimatesWithSourcesStep & {
+export type FaoMersEventAfterAddingCountryAndRegionInformationStep = FaoMersEventAfterCombiningEstimatesWithStudiesStep & {
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
 };
 
-export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep & {
+export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep = YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep & {
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
 };
-export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterCombiningEstimatesWithSourcesStep;
+export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterCombiningEstimatesWithStudiesStep;
 
 interface AddCountryAndRegionInformationStepInput {
-  allEstimates: EstimateFieldsAfterCombiningEstimatesWithSourcesStep[];
-  allSources: SourceFieldsAfterCombiningEstimatesWithSourcesStep[];
-  allStudies: StudyFieldsAfterCombiningEstimatesWithSourcesStep[];
-  allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithSourcesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithSourcesStep[];
-  countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithSourcesStep[];
+  allEstimates: EstimateFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allSources: SourceFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allStudies: StudyFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allCountries: CountryFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithStudiesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep[];
+  countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithStudiesStep[];
   mongoClient: MongoClient;
 }
 
@@ -48,6 +52,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
+  allCountries: CountryFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -91,27 +96,6 @@ const faoMersEventCountryToAlphaTwoAndAlphaThreeCode: Record<string, {
   "Yemen": { countryAlphaTwoCode: 'YE', countryAlphaThreeCode: 'YEM' }
 }
 
-const sourceCountryToAlphaTwoAndAlphaThreeCode: Record<string, {
-  countryAlphaTwoCode: TwoLetterIsoCountryCode;
-  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
-} | undefined> = {
-  "Czech Republic": { countryAlphaTwoCode: 'CZ', countryAlphaThreeCode: 'CZE' },
-  "Egypt": { countryAlphaTwoCode: 'EG', countryAlphaThreeCode: 'EGY' },
-  "Ethiopia": { countryAlphaTwoCode: 'ET', countryAlphaThreeCode: 'ETH' },
-  "Kenya": { countryAlphaTwoCode: 'KE', countryAlphaThreeCode: 'KEN' },
-  "Turkey": { countryAlphaTwoCode: 'TR', countryAlphaThreeCode: 'TUR' },
-  "Nigeria": { countryAlphaTwoCode: 'NG', countryAlphaThreeCode: 'NGA' },
-  "Saudi Arabia": { countryAlphaTwoCode: 'SA', countryAlphaThreeCode: 'SAU' },
-  "KSA": { countryAlphaTwoCode: 'SA', countryAlphaThreeCode: 'SAU' },
-  "Jordan": { countryAlphaTwoCode: 'JO', countryAlphaThreeCode: 'JOR' },
-  "Pakistan": { countryAlphaTwoCode: 'PK', countryAlphaThreeCode: 'PAK' },
-  "India": { countryAlphaTwoCode: 'IN', countryAlphaThreeCode: 'IND' },
-  "Indonesia": { countryAlphaTwoCode: 'ID', countryAlphaThreeCode: 'IDN' },
-  "USA": { countryAlphaTwoCode: 'US', countryAlphaThreeCode: 'USA' },
-  "UAE": { countryAlphaTwoCode: 'AE', countryAlphaThreeCode: 'ARE' },
-  "Qatar": { countryAlphaTwoCode: 'QA', countryAlphaThreeCode: 'QAT' },
-}
-
 export const addCountryAndRegionInformationStep = (
   input: AddCountryAndRegionInformationStepInput
 ): AddCountryAndRegionInformationStepOutput => {
@@ -120,21 +104,24 @@ export const addCountryAndRegionInformationStep = (
   return {
     allEstimates: input.allEstimates
       .map((estimate) => {
-        const countryCodes = sourceCountryToAlphaTwoAndAlphaThreeCode[estimate.country]
-
-        if(!countryCodes) {
+        if(!estimate.countryId) {
           return undefined;
         }
 
-        const { countryAlphaTwoCode, countryAlphaThreeCode } = countryCodes;
+        const country = input.allCountries.find((country) => country.id === estimate.countryId);
 
-        const whoRegion = getWHORegionFromAlphaTwoCode(countryAlphaTwoCode);
-        const unRegion = getUNRegionFromAlphaTwoCode(countryAlphaTwoCode);
+        if(!country) {
+          return undefined;
+        }
+
+        const whoRegion = getWHORegionFromAlphaTwoCode(country.countryAlphaTwoCode);
+        const unRegion = getUNRegionFromAlphaTwoCode(country.countryAlphaTwoCode);
 
         return {
           ...estimate,
-          countryAlphaTwoCode,
-          countryAlphaThreeCode,
+          country: country.countryName,
+          countryAlphaTwoCode: country.countryAlphaTwoCode,
+          countryAlphaThreeCode: country.countryAlphaThreeCode,
           whoRegion,
           unRegion,
         }
@@ -142,6 +129,7 @@ export const addCountryAndRegionInformationStep = (
       .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents
       .map((event) => {
         const countryCodes = faoMersEventCountryToAlphaTwoAndAlphaThreeCode[event.country]

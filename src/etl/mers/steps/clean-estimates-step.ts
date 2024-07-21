@@ -5,22 +5,25 @@ import {
   FaoMersEventAfterCleaningStudiesStep,
   SourceFieldsAfterCleaningStudiesStep,
   StudyFieldsAfterCleaningStudiesStep,
-  YearlyCamelPopulationDataAfterCleaningStudiesStep
+  YearlyCamelPopulationDataAfterCleaningStudiesStep,
+  CountryFieldsAfterCleaningStudiesStep
 } from "./clean-studies-step";
-import { MersAnimalSpecies, MersAnimalType, MersEstimateType } from "../../../storage/types.js";
+import { MersAnimalSpecies, MersAnimalType, MersEstimateType, isMersAnimalType } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   type: MersEstimateType;
+  populationType: string;
+  estimateType: string;
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
   estimateId: string;
   city: string | undefined;
   state: string | undefined;
-  studyInclusionCriteria: string | undefined;
-  studyExclusionCriteria: string | undefined;
+  countryId: string | undefined;
+  studyId: string | undefined;
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies | undefined;
   sensitivity: number | undefined;
@@ -33,9 +36,8 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   specificityDenominator: number | undefined;
   sampleDenominator: number | undefined;
   sampleNumerator: number | undefined;
-  samplingStartDate: Date | undefined;
-  samplingEndDate: Date | undefined;
-  samplingMidDate: Date | undefined;
+  samplingStartDate: string | undefined;
+  samplingEndDate: string | undefined;
   assay: string[];
   specimenType: string | undefined;
   sex: string | undefined;
@@ -43,14 +45,33 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
+export type CountryFieldsAfterCleaningEstimatesStep = CountryFieldsAfterCleaningStudiesStep;
 export type FaoMersEventAfterCleaningEstimatesStep = FaoMersEventAfterCleaningStudiesStep;
 export type YearlyCamelPopulationDataAfterCleaningEstimatesStep = YearlyCamelPopulationDataAfterCleaningStudiesStep;
 export type CountryPopulationDataAfterCleaningEstimatesStep = CountryPopulationDataAfterCleaningStudiesStep;
+
+export const deriveTypeFromCleanedEstimate = (estimate: Omit<EstimateFieldsAfterCleaningEstimatesStep, 'type'>): EstimateFieldsAfterCleaningEstimatesStep['type'] | undefined => {
+  if(estimate.populationType === 'Human' && estimate.estimateType === 'Serological testing') {
+    return MersEstimateType.HUMAN_SEROPREVALENCE;
+  }
+  if(estimate.populationType === 'Human' && estimate.estimateType === 'Viral testing') {
+    return MersEstimateType.HUMAN_VIRAL;
+  }
+  if(estimate.populationType === 'Animal' && estimate.estimateType === 'Viral testing') {
+    return MersEstimateType.ANIMAL_VIRAL;
+  }
+  if(estimate.populationType === 'Animal' && estimate.estimateType === 'Serological testing') {
+    return MersEstimateType.ANIMAL_SEROPREVALENCE;
+  }
+
+  return undefined;
+}
 
 interface CleanEstimatesStepInput {
   allEstimates: EstimateFieldsAfterCleaningStudiesStep[];
   allSources: SourceFieldsAfterCleaningStudiesStep[];
   allStudies: StudyFieldsAfterCleaningStudiesStep[];
+  allCountries: CountryFieldsAfterCleaningStudiesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningStudiesStep[];
@@ -61,6 +82,7 @@ interface CleanEstimatesStepOutput {
   allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
   allSources: SourceFieldsAfterCleaningEstimatesStep[];
   allStudies: StudyFieldsAfterCleaningEstimatesStep[];
+  allCountries: CountryFieldsAfterCleaningEstimatesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
@@ -69,40 +91,54 @@ interface CleanEstimatesStepOutput {
 
 export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimatesStepOutput => {
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      id: estimate.id,
-      type: MersEstimateType.HUMAN_SEROPREVALENCE,
-      positivePrevalence: 0.5,
-      positivePrevalence95CILower: 0.3,
-      positivePrevalence95CIUpper: 0.8,
-      ageGroup: 'Test Age Group',
-      estimateId: 'Test Data',
-      city: undefined,
-      state: undefined,
-      studyInclusionCriteria: 'Test Inclusion Criteria',
-      studyExclusionCriteria: 'Test Exclusion Criteria',
-      animalSpecies: MersAnimalSpecies.CAMEL,
-      animalType: [ MersAnimalType.DOMESTIC ],
-      sensitivity: 0.2,
-      sensitivity95CILower: 0.1,
-      sensitivity95CIUpper: 0.3,
-      sensitivityDenominator: 200,
-      specificity: 0.2,
-      specificity95CILower: 0.1,
-      specificity95CIUpper: 0.3,
-      specificityDenominator: 100,
-      sampleDenominator: 3000,
-      sampleNumerator: 1500,
-      assay: ['ELISA'],
-      specimenType: 'Serum',
-      sex: 'Male',
-      isotypes: ['IgG'],
-      samplingStartDate: new Date(),
-      samplingEndDate: new Date(),
-      samplingMidDate: new Date()
-    })),
+    allEstimates: input.allEstimates
+      .map((estimate) => ({
+        id: estimate['id'],
+        populationType: estimate['Population Type'],
+        estimateType: estimate['Estimate Type'],
+        positivePrevalence: estimate['Positive Prevalence'],
+        positivePrevalence95CILower: estimate['Positive Prevalence 95% CI Lower'] !== null ? estimate['Positive Prevalence 95% CI Lower'] : undefined,
+        positivePrevalence95CIUpper: estimate['Positive Prevalence 95% CI Upper'] !== null ? estimate['Positive Prevalence 95% CI Upper'] : undefined,
+        ageGroup: estimate['Age Group'].filter((element): element is NonNullable<typeof element> => !!element),
+        estimateId: estimate['Prevalence Estimate Name'],
+        city: estimate['City'] ?? undefined,
+        state: estimate['State/Province'] ?? undefined,
+        countryId: estimate['Country']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .at(0),
+        studyId: estimate['Study']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .at(0),
+        animalSpecies: MersAnimalSpecies.CAMEL,
+        animalType: estimate['Animal type']
+          .filter((animalType): animalType is NonNullable<typeof animalType> => !!animalType)
+          .map((animalType) => animalType.toUpperCase())
+          .filter((animalType): animalType is MersAnimalType => isMersAnimalType(animalType)),
+        sensitivity: estimate['Sensitivity'] !== null ? estimate['Sensitivity'] : undefined,
+        sensitivity95CILower: estimate['Sensitivity, 95% CI Lower'] !== null ? estimate['Sensitivity, 95% CI Lower'] : undefined,
+        sensitivity95CIUpper: estimate['Sensitivity, 95% CI Upper'] !== null ? estimate['Sensitivity, 95% CI Upper'] : undefined,
+        sensitivityDenominator: estimate['Sensitivity Denominator'] !== null ? estimate['Sensitivity Denominator'] : undefined,
+        specificity: estimate['Specificity'] !== null ? estimate['Specificity'] : undefined,
+        specificity95CILower: estimate['Specificity, 95% CI Lower'] !== null ? estimate['Specificity, 95% CI Lower'] : undefined,
+        specificity95CIUpper: estimate['Specificity, 95% CI Upper'] !== null ? estimate['Specificity, 95% CI Upper'] : undefined,
+        specificityDenominator: estimate['Specificity Denominator'] !== null ? estimate['Specificity Denominator'] : undefined,
+        sampleDenominator: estimate['Denominator'] !== null ? estimate['Denominator'] : undefined,
+        sampleNumerator: estimate['Numerator'] !== null ? estimate['Numerator'] : undefined,
+        assay: estimate['Assay Type'].filter((element): element is NonNullable<typeof element> => !!element),
+        specimenType: estimate['Specimen Type'] ?? undefined,
+        sex: estimate['Sex'] ?? undefined,
+        isotypes: estimate['Isotype(s)'].filter((element): element is NonNullable<typeof element> => !!element),
+        samplingStartDate: estimate['Sample Start Date'] ?? undefined,
+        samplingEndDate: estimate['Sample End Date'] ?? undefined
+      }))
+      .map((estimate) => ({
+        ...estimate,
+        type: deriveTypeFromCleanedEstimate(estimate)
+      }))
+      .filter((estimate): estimate is Omit<typeof estimate, 'type'> & {type: NonNullable<typeof estimate['type']>} => !!estimate.type),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

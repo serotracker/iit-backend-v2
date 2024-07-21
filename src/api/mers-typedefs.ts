@@ -108,7 +108,7 @@ export const mersTypedefs = `
     positivePrevalence: Float!
     positivePrevalence95CILower: Float
     positivePrevalence95CIUpper: Float
-    ageGroup: String
+    ageGroup: [String!]!
   }
 
   type AnimalMersViralEstimate implements MersEstimateInterface {
@@ -201,7 +201,7 @@ export const mersTypedefs = `
     seroprevalence: Float!
     seroprevalence95CILower: Float
     seroprevalence95CIUpper: Float
-    ageGroup: String
+    ageGroup: [String!]!
   }
 
   type AnimalMersEstimate implements MersEstimateInterface {

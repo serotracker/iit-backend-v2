@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterAssigningPartitionsStep,
   CountryPopulationDataAfterAssigningPartitionsStep,
   EstimateFieldsAfterAssigningPartitionsStep,
   FaoMersEventAfterAssigningPartitionsStep,
@@ -21,7 +22,7 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
 }
@@ -36,7 +37,7 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  ageGroup: string | undefined;
+  ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
 }
@@ -51,7 +52,7 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
-  ageGroup: undefined;
+  ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
 }
@@ -66,7 +67,7 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  ageGroup: undefined;
+  ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
 }
@@ -78,6 +79,7 @@ export type EstimateFieldsAfterApplyingTypedEstimateConstraintsStep =
   | AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type SourceFieldsAfterApplyingTypedEstimateConstraintsStep = SourceFieldsAfterAssigningPartitionsStep;
 export type StudyFieldsAfterApplyingTypedEstimateConstraintsStep = StudyFieldsAfterAssigningPartitionsStep;
+export type CountryFieldsAfterApplyingTypedEstimateConstraintsStep = CountryFieldsAfterAssigningPartitionsStep;
 export type FaoMersEventAfterApplyingTypedEstimateConstraintsStep = FaoMersEventAfterAssigningPartitionsStep;
 export type YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep = YearlyCamelPopulationDataAfterAssigningPartitionsStep;
 export type CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep = CountryPopulationDataAfterAssigningPartitionsStep;
@@ -86,6 +88,7 @@ interface ApplyTypedEstimateConstraintsStepInput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
   allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allStudies: StudyFieldsAfterAssigningPartitionsStep[];
+  allCountries: CountryFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -96,6 +99,7 @@ interface ApplyTypedEstimateConstraintsStepOutput {
   allEstimates: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allCountries: CountryFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
   countryPopulationData: CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
@@ -150,7 +154,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       positivePrevalence: undefined,
       positivePrevalence95CILower: undefined,
       positivePrevalence95CIUpper: undefined,
-      ageGroup: undefined,
+      ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
     }
@@ -172,7 +176,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
-      ageGroup: undefined,
+      ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
     }
@@ -188,6 +192,7 @@ export const applyTypedEstimateConstraintsStep = (input: ApplyTypedEstimateConst
       .filter((estimate): estimate is NonNullable<typeof estimate> => !!estimate),
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

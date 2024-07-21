@@ -21,11 +21,13 @@ import { writeFaoYearlyCamelPopulationDataToMongoDbStep } from "./steps/write-fa
 import { fetchCountryPopulationDataStep } from "./steps/fetch-country-population-data-step.js";
 import { generateCamelDataPerCapitaStep } from "./steps/generate-camel-data-per-capita-step.js";
 import { addDatabaseIndexesStep } from "./steps/add-database-indexes-step.js";
-import { combineEstimatesWithSourcesStep } from "./steps/combine-estimates-with-sources-step.js";
 import { cleanSourcesStep } from "./steps/clean-sources-step.js";
 import { cleanEstimatesStep } from "./steps/clean-estimates-step.js";
 import { cleanStudiesStep } from "./steps/clean-studies-step.js";
 import { applyTypedEstimateConstraintsStep } from "./steps/apply-typed-estimate-constraints-step.js";
+import { combineStudiesWithSourcesStep } from "./steps/combine-studies-with-sources-step.js";
+import { combineEstimatesWithStudiesStep } from "./steps/combine-estimates-with-studies-step.js";
+import { cleanCountriesStep } from "./steps/clean-countries-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -42,24 +44,42 @@ const runEtlMain = async () => {
 
   const airtable = new Airtable({ apiKey: airtableApiKey });
   const base = new Airtable.Base(airtable, airtableMERSBaseId);
-  //const estimateSheet = base.table("...");
+  const estimateSheet = base.table("Estimates");
   const sourceSheet = base.table("Source");
+  const studySheet = base.table("Study");
+  const countrySheet = base.table("Selectable Countries & Territories");
 
-  const allSourcesUnformatted: (FieldSet & { id: string })[] =
-    await sourceSheet
+  const allEstimatesUnformatted: (FieldSet & { id: string })[] =
+    await estimateSheet
       .select()
       .all()
       .then((estimateSheet) =>
         estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
-  const allEstimatesUnformatted: (FieldSet & { id: string })[] = Array(5).fill(0).map(() => ({ id: new ObjectId().toString() }))
+  const allSourcesUnformatted: (FieldSet & { id: string })[] =
+    await sourceSheet
+      .select()
+      .all()
+      .then((sourceSheet) =>
+        sourceSheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
 
-  const allStudiesUnformatted = [{
-    id: new ObjectId().toString(),
-    'Inclusion Criteria': 'Inclusion Criteria',
-    'Exclusion Criteria': 'Exclusion Criteria',
-  }]
+  const allStudiesUnformatted: (FieldSet & { id: string })[] =
+    await studySheet
+      .select()
+      .all()
+      .then((studySheet) =>
+        studySheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
+
+  const allCountriesUnformatted: (FieldSet & { id: string })[] =
+    await countrySheet
+      .select()
+      .all()
+      .then((countrySheet) =>
+        countrySheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
 
   //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
   const outputFromFirstPipeHalf = await pipe(
@@ -67,6 +87,7 @@ const runEtlMain = async () => {
       allEstimates: allEstimatesUnformatted,
       allSources: allSourcesUnformatted,
       allStudies: allStudiesUnformatted,
+      allCountries: allCountriesUnformatted,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: [],
@@ -76,6 +97,7 @@ const runEtlMain = async () => {
     etlStep(cleanSourcesStep),
     etlStep(cleanStudiesStep),
     etlStep(cleanEstimatesStep),
+    etlStep(cleanCountriesStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),
     etlStep(cleanFaoMersEventFieldsStep),
@@ -85,7 +107,8 @@ const runEtlMain = async () => {
     etlStep(fetchCountryPopulationDataStep),
     etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
-    etlStep(combineEstimatesWithSourcesStep),
+    etlStep(combineStudiesWithSourcesStep),
+    etlStep(combineEstimatesWithStudiesStep),
     etlStep(addCountryAndRegionInformationStep),
   );
 

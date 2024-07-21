@@ -1,5 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
+  CountryFieldsAfterJitteringPinLatLngStep,
   CountryPopulationDataAfterJitteringPinLatLngStep,
   EstimateFieldsAfterJitteringPinLatLngStep,
   FaoMersEventAfterJitteringPinLatLngStep,
@@ -11,6 +12,7 @@ import {
 export type EstimateFieldsAfterAssigningPartitionsStep = EstimateFieldsAfterJitteringPinLatLngStep;
 export type SourceFieldsAfterAssigningPartitionsStep = SourceFieldsAfterJitteringPinLatLngStep;
 export type StudyFieldsAfterAssigningPartitionsStep = StudyFieldsAfterJitteringPinLatLngStep;
+export type CountryFieldsAfterAssigningPartitionsStep = CountryFieldsAfterJitteringPinLatLngStep;
 export type FaoMersEventAfterAssigningPartitionsStep = FaoMersEventAfterJitteringPinLatLngStep & {
   partitionKey: number;
 };
@@ -23,6 +25,7 @@ interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: SourceFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
+  allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
@@ -33,6 +36,7 @@ interface AssignPartitionsStepOutput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
   allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allStudies: StudyFieldsAfterAssigningPartitionsStep[];
+  allCountries: CountryFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -50,6 +54,7 @@ export const assignPartitionsStep = (
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
+    allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents.map((event, index) => ({
       ...event,
       partitionKey: Math.floor(index / faoMersEventPartitionSize)
