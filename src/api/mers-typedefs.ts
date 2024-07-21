@@ -16,7 +16,7 @@ export const mersTypedefs = `
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
-    insitutution: String!
+    insitutution: String
   }
 
   enum MersEstimateType {
@@ -43,7 +43,7 @@ export const mersTypedefs = `
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
-    insitutution: String!
+    insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     sensitivity: Float
@@ -80,7 +80,7 @@ export const mersTypedefs = `
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
-    insitutution: String!
+    insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     sensitivity: Float
@@ -123,7 +123,7 @@ export const mersTypedefs = `
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
-    insitutution: String!
+    insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     sensitivity: Float
@@ -167,7 +167,7 @@ export const mersTypedefs = `
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
-    insitutution: String!
+    insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     sensitivity: Float
@@ -210,7 +210,7 @@ export const mersTypedefs = `
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
-    insitutution: String!
+    insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
     sensitivity: Float

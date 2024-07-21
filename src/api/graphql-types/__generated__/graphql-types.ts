@@ -34,7 +34,7 @@ export type AnimalMersEstimate = MersEstimateInterface & {
   estimateId: Scalars['String']['output'];
   firstAuthorFullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  insitutution: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
@@ -95,7 +95,7 @@ export type AnimalMersViralEstimate = MersEstimateInterface & {
   estimateId: Scalars['String']['output'];
   firstAuthorFullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  insitutution: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
@@ -262,7 +262,7 @@ export type HumanMersEstimate = MersEstimateInterface & {
   estimateId: Scalars['String']['output'];
   firstAuthorFullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  insitutution: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
@@ -322,7 +322,7 @@ export type HumanMersViralEstimate = MersEstimateInterface & {
   estimateId: Scalars['String']['output'];
   firstAuthorFullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  insitutution: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
@@ -385,7 +385,7 @@ export type MersEstimate = {
   estimateId: Scalars['String']['output'];
   firstAuthorFullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  insitutution: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
   seroprevalence: Scalars['Float']['output'];
@@ -411,7 +411,7 @@ export type MersEstimateInterface = {
   estimateId: Scalars['String']['output'];
   firstAuthorFullName: Scalars['String']['output'];
   id: Scalars['String']['output'];
-  insitutution: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
   longitude: Scalars['Float']['output'];
@@ -920,7 +920,7 @@ export type AnimalMersEstimateResolvers<ContextType = any, ParentType extends Re
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  insitutution?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -981,7 +981,7 @@ export type AnimalMersViralEstimateResolvers<ContextType = any, ParentType exten
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  insitutution?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1105,7 +1105,7 @@ export type HumanMersEstimateResolvers<ContextType = any, ParentType extends Res
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  insitutution?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1165,7 +1165,7 @@ export type HumanMersViralEstimateResolvers<ContextType = any, ParentType extend
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  insitutution?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1204,7 +1204,7 @@ export type MersEstimateResolvers<ContextType = any, ParentType extends Resolver
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  insitutution?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1232,7 +1232,7 @@ export type MersEstimateInterfaceResolvers<ContextType = any, ParentType extends
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  insitutution?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;

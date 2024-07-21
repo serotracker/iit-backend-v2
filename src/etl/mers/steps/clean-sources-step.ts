@@ -15,7 +15,7 @@ export type SourceFieldsAfterCleaningSourcesStep = {
   sourceUrl: string;
   sourceType: string;
   sourceTitle: string;
-  insitutution: string;
+  insitutution: string | undefined;
   country: string[];
   populationType: string[];
 };
@@ -53,7 +53,7 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
       sourceUrl: source['DOI/url'],
       sourceType: source['Source type'],
       sourceTitle: source['Source title'],
-      insitutution: source['Institution'],
+      insitutution: source['Institution'] ?? undefined,
       country: source['Country'],
       populationType: source['Population type']
     })),
