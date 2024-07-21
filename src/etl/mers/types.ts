@@ -29,6 +29,8 @@ export interface AirtableMersEstimateFields {
   id: string;
   'Sex': string | null;
   'Prevalence Estimate Name': string;
+  'Population Type': string;
+  'Estimate Type': string;
   'Age Group': Array<string | null>;
   'State/Province': string | null;
   'City': string | null;

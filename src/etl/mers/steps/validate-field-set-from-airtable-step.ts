@@ -38,6 +38,10 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     id: z.string(),
     'Prevalence Estimate Name': z
       .string(),
+    'Population Type': z
+      .string(),
+    'Estimate Type': z
+      .string(),
     'Age Group': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),

@@ -13,6 +13,8 @@ import { MersAnimalSpecies, MersAnimalType, MersEstimateType, isMersAnimalType }
 export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   type: MersEstimateType;
+  populationType: string;
+  estimateType: string;
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
@@ -48,6 +50,23 @@ export type FaoMersEventAfterCleaningEstimatesStep = FaoMersEventAfterCleaningSt
 export type YearlyCamelPopulationDataAfterCleaningEstimatesStep = YearlyCamelPopulationDataAfterCleaningStudiesStep;
 export type CountryPopulationDataAfterCleaningEstimatesStep = CountryPopulationDataAfterCleaningStudiesStep;
 
+export const deriveTypeFromCleanedEstimate = (estimate: Omit<EstimateFieldsAfterCleaningEstimatesStep, 'type'>): EstimateFieldsAfterCleaningEstimatesStep['type'] | undefined => {
+  if(estimate.populationType === 'Human' && estimate.estimateType === 'Serological testing') {
+    return MersEstimateType.HUMAN_SEROPREVALENCE;
+  }
+  if(estimate.populationType === 'Human' && estimate.estimateType === 'Viral testing') {
+    return MersEstimateType.HUMAN_VIRAL;
+  }
+  if(estimate.populationType === 'Animal' && estimate.estimateType === 'Viral testing') {
+    return MersEstimateType.ANIMAL_VIRAL;
+  }
+  if(estimate.populationType === 'Animal' && estimate.estimateType === 'Serological testing') {
+    return MersEstimateType.ANIMAL_SEROPREVALENCE;
+  }
+
+  return undefined;
+}
+
 interface CleanEstimatesStepInput {
   allEstimates: EstimateFieldsAfterCleaningStudiesStep[];
   allSources: SourceFieldsAfterCleaningStudiesStep[];
@@ -72,44 +91,51 @@ interface CleanEstimatesStepOutput {
 
 export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimatesStepOutput => {
   return {
-    allEstimates: input.allEstimates.map((estimate) => ({
-      id: estimate['id'],
-      type: MersEstimateType.HUMAN_SEROPREVALENCE,
-      positivePrevalence: estimate['Positive Prevalence'],
-      positivePrevalence95CILower: estimate['Positive Prevalence 95% CI Lower'] !== null ? estimate['Positive Prevalence 95% CI Lower'] : undefined,
-      positivePrevalence95CIUpper: estimate['Positive Prevalence 95% CI Upper'] !== null ? estimate['Positive Prevalence 95% CI Upper'] : undefined,
-      ageGroup: estimate['Age Group'].filter((element): element is NonNullable<typeof element> => !!element),
-      estimateId: estimate['Prevalence Estimate Name'],
-      city: estimate['City'] ?? undefined,
-      state: estimate['State/Province'] ?? undefined,
-      countryId: estimate['Country']
-        .filter((element): element is NonNullable<typeof element> => !!element)
-        .at(0),
-      studyId: estimate['Study']
-        .filter((element): element is NonNullable<typeof element> => !!element)
-        .at(0),
-      animalSpecies: MersAnimalSpecies.CAMEL,
-      animalType: estimate['Animal type']
-        .filter((animalType): animalType is NonNullable<typeof animalType> => !!animalType)
-        .map((animalType) => animalType.toUpperCase())
-        .filter((animalType): animalType is MersAnimalType => isMersAnimalType(animalType)),
-      sensitivity: estimate['Sensitivity'] !== null ? estimate['Sensitivity'] : undefined,
-      sensitivity95CILower: estimate['Sensitivity, 95% CI Lower'] !== null ? estimate['Sensitivity, 95% CI Lower'] : undefined,
-      sensitivity95CIUpper: estimate['Sensitivity, 95% CI Upper'] !== null ? estimate['Sensitivity, 95% CI Upper'] : undefined,
-      sensitivityDenominator: estimate['Sensitivity Denominator'] !== null ? estimate['Sensitivity Denominator'] : undefined,
-      specificity: estimate['Specificity'] !== null ? estimate['Specificity'] : undefined,
-      specificity95CILower: estimate['Specificity, 95% CI Lower'] !== null ? estimate['Specificity, 95% CI Lower'] : undefined,
-      specificity95CIUpper: estimate['Specificity, 95% CI Upper'] !== null ? estimate['Specificity, 95% CI Upper'] : undefined,
-      specificityDenominator: estimate['Specificity Denominator'] !== null ? estimate['Specificity Denominator'] : undefined,
-      sampleDenominator: estimate['Denominator'] !== null ? estimate['Denominator'] : undefined,
-      sampleNumerator: estimate['Numerator'] !== null ? estimate['Numerator'] : undefined,
-      assay: estimate['Assay Type'].filter((element): element is NonNullable<typeof element> => !!element),
-      specimenType: estimate['Specimen Type'] ?? undefined,
-      sex: estimate['Sex'] ?? undefined,
-      isotypes: estimate['Isotype(s)'].filter((element): element is NonNullable<typeof element> => !!element),
-      samplingStartDate: estimate['Sample Start Date'] ?? undefined,
-      samplingEndDate: estimate['Sample End Date'] ?? undefined
-    })),
+    allEstimates: input.allEstimates
+      .map((estimate) => ({
+        id: estimate['id'],
+        populationType: estimate['Population Type'],
+        estimateType: estimate['Estimate Type'],
+        positivePrevalence: estimate['Positive Prevalence'],
+        positivePrevalence95CILower: estimate['Positive Prevalence 95% CI Lower'] !== null ? estimate['Positive Prevalence 95% CI Lower'] : undefined,
+        positivePrevalence95CIUpper: estimate['Positive Prevalence 95% CI Upper'] !== null ? estimate['Positive Prevalence 95% CI Upper'] : undefined,
+        ageGroup: estimate['Age Group'].filter((element): element is NonNullable<typeof element> => !!element),
+        estimateId: estimate['Prevalence Estimate Name'],
+        city: estimate['City'] ?? undefined,
+        state: estimate['State/Province'] ?? undefined,
+        countryId: estimate['Country']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .at(0),
+        studyId: estimate['Study']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .at(0),
+        animalSpecies: MersAnimalSpecies.CAMEL,
+        animalType: estimate['Animal type']
+          .filter((animalType): animalType is NonNullable<typeof animalType> => !!animalType)
+          .map((animalType) => animalType.toUpperCase())
+          .filter((animalType): animalType is MersAnimalType => isMersAnimalType(animalType)),
+        sensitivity: estimate['Sensitivity'] !== null ? estimate['Sensitivity'] : undefined,
+        sensitivity95CILower: estimate['Sensitivity, 95% CI Lower'] !== null ? estimate['Sensitivity, 95% CI Lower'] : undefined,
+        sensitivity95CIUpper: estimate['Sensitivity, 95% CI Upper'] !== null ? estimate['Sensitivity, 95% CI Upper'] : undefined,
+        sensitivityDenominator: estimate['Sensitivity Denominator'] !== null ? estimate['Sensitivity Denominator'] : undefined,
+        specificity: estimate['Specificity'] !== null ? estimate['Specificity'] : undefined,
+        specificity95CILower: estimate['Specificity, 95% CI Lower'] !== null ? estimate['Specificity, 95% CI Lower'] : undefined,
+        specificity95CIUpper: estimate['Specificity, 95% CI Upper'] !== null ? estimate['Specificity, 95% CI Upper'] : undefined,
+        specificityDenominator: estimate['Specificity Denominator'] !== null ? estimate['Specificity Denominator'] : undefined,
+        sampleDenominator: estimate['Denominator'] !== null ? estimate['Denominator'] : undefined,
+        sampleNumerator: estimate['Numerator'] !== null ? estimate['Numerator'] : undefined,
+        assay: estimate['Assay Type'].filter((element): element is NonNullable<typeof element> => !!element),
+        specimenType: estimate['Specimen Type'] ?? undefined,
+        sex: estimate['Sex'] ?? undefined,
+        isotypes: estimate['Isotype(s)'].filter((element): element is NonNullable<typeof element> => !!element),
+        samplingStartDate: estimate['Sample Start Date'] ?? undefined,
+        samplingEndDate: estimate['Sample End Date'] ?? undefined
+      }))
+      .map((estimate) => ({
+        ...estimate,
+        type: deriveTypeFromCleanedEstimate(estimate)
+      }))
+      .filter((estimate): estimate is Omit<typeof estimate, 'type'> & {type: NonNullable<typeof estimate['type']>} => !!estimate.type),
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
