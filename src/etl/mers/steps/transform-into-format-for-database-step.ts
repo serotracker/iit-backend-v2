@@ -130,6 +130,20 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
   insitutution: input.estimate.insitutution,
   studyInclusionCriteria: input.estimate.studyInclusionCriteria,
   studyExclusionCriteria: input.estimate.studyExclusionCriteria,
+  sensitivity: input.estimate.sensitivity,
+  sensitivity95CILower: input.estimate.sensitivity95CILower,
+  sensitivity95CIUpper: input.estimate.sensitivity95CIUpper,
+  sensitivityDenominator: input.estimate.sensitivityDenominator,
+  specificity: input.estimate.specificity,
+  specificity95CILower: input.estimate.specificity95CILower,
+  specificity95CIUpper: input.estimate.specificity95CIUpper,
+  specificityDenominator: input.estimate.specificityDenominator,
+  sampleDenominator: input.estimate.sampleDenominator,
+  sampleNumerator: input.estimate.sampleNumerator,
+  assay: input.estimate.assay,
+  specimenType: input.estimate.specimenType,
+  sex: input.estimate.sex,
+  isotypes: input.estimate.isotypes,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 })
@@ -148,6 +162,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
       type: MersEstimateType.HUMAN_SEROPREVALENCE,
       seroprevalence: estimate.seroprevalence,
+      seroprevalence95CILower: estimate.seroprevalence95CILower,
+      seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
       ageGroup: estimate.ageGroup
     }
   }
@@ -157,6 +173,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
       type: MersEstimateType.HUMAN_VIRAL,
       positivePrevalence: estimate.positivePrevalence,
+      positivePrevalence95CILower: estimate.positivePrevalence95CILower,
+      positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
       ageGroup: estimate.ageGroup
     }
   }
@@ -166,6 +184,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
       type: MersEstimateType.ANIMAL_SEROPREVALENCE,
       seroprevalence: estimate.seroprevalence,
+      seroprevalence95CILower: estimate.seroprevalence95CILower,
+      seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
       animalSpecies: estimate.animalSpecies,
       animalType: estimate.animalType,
     }
@@ -176,6 +196,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       ...transformMersEstimateBaseForDatabase({ estimate, createdAtForAllRecords, updatedAtForAllRecords }),
       type: MersEstimateType.ANIMAL_VIRAL,
       positivePrevalence: estimate.positivePrevalence,
+      positivePrevalence95CILower: estimate.positivePrevalence95CILower,
+      positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
       animalSpecies: estimate.animalSpecies,
       animalType: estimate.animalType,
     }
