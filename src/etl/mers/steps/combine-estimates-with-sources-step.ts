@@ -14,7 +14,7 @@ export type EstimateFieldsAfterCombiningEstimatesWithSourcesStep = EstimateField
   sourceUrl: string;
   sourceType: string;
   sourceTitle: string;
-  insitutution: string;
+  insitutution: string | undefined;
   country: string;
 };
 export type SourceFieldsAfterCombiningEstimatesWithSourcesStep = SourceFieldsAfterParsingDatesStep;

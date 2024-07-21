@@ -4,7 +4,7 @@ export interface AirtableSourceFields {
   "DOI/url": string,
   "Source type": string,
   "Source title": string,
-  "Institution": string,
+  "Institution": string | null,
   "Country": string[],
   "Population type": string[],
   "seropositive (1/0)": string | null,

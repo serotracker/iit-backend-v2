@@ -49,7 +49,7 @@ const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
     "DOI/url": z.string(),
     "Source type": z.string(),
     "Source title": z.string(),
-    "Institution": z.string(),
+    "Institution": z.optional(z.string().nullable()).transform((value => value ?? null)),
     "Country": z.string().array(),
     "Population type": z.string().array()
   });
@@ -57,13 +57,6 @@ const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
   const sourceWithBaseParsed = {
     ...source,
     ...zodMersSourceFieldsObjectBase.parse(source)
-  }
-
-  if(
-    sourceWithBaseParsed['seropositive (1/0)'] === 'NA'
-    || sourceWithBaseParsed['PCR positive (1/0)'] === 'NA'
-  ) {
-    return undefined;
   }
 
   return {

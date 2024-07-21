@@ -169,7 +169,7 @@ export interface MersEstimateDocumentBase {
   sourceUrl: string;
   sourceType: string;
   sourceTitle: string;
-  insitutution: string;
+  insitutution: string | undefined;
   studyInclusionCriteria: string | undefined;
   studyExclusionCriteria: string | undefined;
   sensitivity: number | undefined;
