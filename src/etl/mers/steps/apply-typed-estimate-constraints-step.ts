@@ -52,7 +52,7 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
   ageGroup: undefined;
-  animalType: MersAnimalType;
+  animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
 }
 type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
@@ -67,7 +67,7 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
   ageGroup: undefined;
-  animalType: MersAnimalType;
+  animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
 }
 

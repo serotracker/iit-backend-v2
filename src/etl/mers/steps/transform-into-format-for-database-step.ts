@@ -144,6 +144,9 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
   specimenType: input.estimate.specimenType,
   sex: input.estimate.sex,
   isotypes: input.estimate.isotypes,
+  samplingStartDate: input.estimate.samplingStartDate,
+  samplingEndDate: input.estimate.samplingEndDate,
+  samplingMidDate: input.estimate.samplingMidDate,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 })

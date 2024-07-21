@@ -74,7 +74,10 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
             assay: ['ELISA'],
             specimenType: 'Serum',
             sex: 'Male',
-            isotypes: ['IgG']
+            isotypes: ['IgG'],
+            samplingStartDate: new Date(),
+            samplingEndDate: new Date(),
+            samplingMidDate: new Date()
           }
 
           if(source.populationType.includes('Animal')) {
@@ -83,7 +86,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 ...base,
                 type: MersEstimateType.ANIMAL_SEROPREVALENCE as const,
                 animalSpecies: MersAnimalSpecies.CAMEL,
-                animalType: MersAnimalType.DOMESTIC,
+                animalType: [ MersAnimalType.DOMESTIC ],
                 positivePrevalence: 0.5,
                 positivePrevalence95CILower: 0.3,
                 positivePrevalence95CIUpper: 0.8,
@@ -95,7 +98,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 ...base,
                 type: MersEstimateType.ANIMAL_VIRAL as const,
                 animalSpecies: MersAnimalSpecies.CAMEL,
-                animalType: MersAnimalType.DOMESTIC,
+                animalType: [ MersAnimalType.DOMESTIC ],
                 positivePrevalence: 0.5,
                 positivePrevalence95CILower: 0.3,
                 positivePrevalence95CIUpper: 0.8,
@@ -109,7 +112,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 ...base,
                 type: MersEstimateType.HUMAN_SEROPREVALENCE as const,
                 animalSpecies: undefined,
-                animalType: undefined,
+                animalType: [],
                 ageGroup: 'Test Age Group',
                 positivePrevalence: 0.5,
                 positivePrevalence95CILower: 0.3,
@@ -121,7 +124,7 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
               ...base,
               type: MersEstimateType.HUMAN_VIRAL as const,
               animalSpecies: undefined,
-              animalType: undefined,
+              animalType: [],
               ageGroup: 'Test Age Group',
               positivePrevalence: 0.5,
               positivePrevalence95CILower: 0.3,

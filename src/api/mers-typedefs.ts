@@ -60,6 +60,9 @@ export const mersTypedefs = `
     specimenType: String
     sex: String
     isotypes: [String!]!
+    samplingStartDate: String
+    samplingEndDate: String
+    samplingMidDate: String
   }
 
   type HumanMersViralEstimate implements MersEstimateInterface {
@@ -97,6 +100,9 @@ export const mersTypedefs = `
     specimenType: String
     sex: String
     isotypes: [String!]!
+    samplingStartDate: String
+    samplingEndDate: String
+    samplingMidDate: String
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
@@ -140,12 +146,15 @@ export const mersTypedefs = `
     specimenType: String
     sex: String
     isotypes: [String!]!
+    samplingStartDate: String
+    samplingEndDate: String
+    samplingMidDate: String
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
     positivePrevalence95CILower: Float
     positivePrevalence95CIUpper: Float
-    animalType: MersAnimalType!
+    animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
   }
 
@@ -184,6 +193,9 @@ export const mersTypedefs = `
     specimenType: String
     sex: String
     isotypes: [String!]!
+    samplingStartDate: String
+    samplingEndDate: String
+    samplingMidDate: String
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
@@ -227,12 +239,15 @@ export const mersTypedefs = `
     specimenType: String
     sex: String
     isotypes: [String!]!
+    samplingStartDate: String
+    samplingEndDate: String
+    samplingMidDate: String
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
     seroprevalence95CILower: Float
     seroprevalence95CIUpper: Float
-    animalType: MersAnimalType!
+    animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
   }
 
