@@ -60,9 +60,8 @@ const mersAnimalTypeMapForApi = {
 const mapMersAnimalTypeForApi = (animalType: MersAnimalType): MersAnimalTypeForApi => mersAnimalTypeMapForApi[animalType];
 
 const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument): MersEstimate_V2 => {
-  const base: MersEstimateInterface = {
+  const base: Omit<MersEstimateInterface, 'type'> = {
     id: document._id.toHexString(),
-    type: MersEstimateTypeForApi.HumanSeroprevalence,
     estimateId: document.estimateId,
     city: document.city,
     state: document.state,
@@ -362,12 +361,27 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
 
     const [
       sourceType,
+      ageGroup,
+      assay,
+      specimenType,
+      sex,
+      isotypes
     ] = await Promise.all([
       estimateCollection.distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('assay').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('specimenType').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     return {
-      sourceType
+      sourceType,
+      ageGroup,
+      assay,
+      specimenType,
+      sex,
+      isotypes
     }
   }
 
