@@ -172,6 +172,20 @@ export interface MersEstimateDocumentBase {
   insitutution: string;
   studyInclusionCriteria: string | undefined;
   studyExclusionCriteria: string | undefined;
+  sensitivity: number | undefined;
+  sensitivity95CILower: number | undefined;
+  sensitivity95CIUpper: number | undefined;
+  sensitivityDenominator: number | undefined;
+  specificity: number | undefined;
+  specificity95CILower: number | undefined;
+  specificity95CIUpper: number | undefined;
+  specificityDenominator: number | undefined;
+  sampleDenominator: number | undefined;
+  sampleNumerator: number | undefined;
+  assay: string[];
+  specimenType: string | undefined;
+  sex: string | undefined;
+  isotypes: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -179,18 +193,24 @@ export interface MersEstimateDocumentBase {
 export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
   type: MersEstimateType.HUMAN_SEROPREVALENCE;
   seroprevalence: number;
+  seroprevalence95CILower: number | undefined;
+  seroprevalence95CIUpper: number | undefined;
   ageGroup: string | undefined;
 }
 
 export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   type: MersEstimateType.HUMAN_VIRAL;
   positivePrevalence: number;
+  positivePrevalence95CILower: number | undefined;
+  positivePrevalence95CIUpper: number | undefined;
   ageGroup: string | undefined;
 }
 
 export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
   type: MersEstimateType.ANIMAL_SEROPREVALENCE;
   seroprevalence: number;
+  seroprevalence95CILower: number | undefined;
+  seroprevalence95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies;
   animalType: MersAnimalType;
 }
@@ -198,6 +218,8 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   type: MersEstimateType.ANIMAL_VIRAL;
   positivePrevalence: number;
+  positivePrevalence95CILower: number | undefined;
+  positivePrevalence95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies;
   animalType: MersAnimalType;
 }

@@ -61,6 +61,20 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
             studyInclusionCriteria: 'Test Inclusion Criteria',
             studyExclusionCriteria: 'Test Exclusion Criteria',
             country: country,
+            sensitivity: 0.2,
+            sensitivity95CILower: 0.1,
+            sensitivity95CIUpper: 0.3,
+            sensitivityDenominator: 200,
+            specificity: 0.2,
+            specificity95CILower: 0.1,
+            specificity95CIUpper: 0.3,
+            specificityDenominator: 100,
+            sampleDenominator: 3000,
+            sampleNumerator: 1500,
+            assay: ['ELISA'],
+            specimenType: 'Serum',
+            sex: 'Male',
+            isotypes: ['IgG']
           }
 
           if(source.populationType.includes('Animal')) {
@@ -70,7 +84,9 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 type: MersEstimateType.ANIMAL_SEROPREVALENCE as const,
                 animalSpecies: MersAnimalSpecies.CAMEL,
                 animalType: MersAnimalType.DOMESTIC,
-                positivePrevalence: 0.1,
+                positivePrevalence: 0.5,
+                positivePrevalence95CILower: 0.3,
+                positivePrevalence95CIUpper: 0.8,
                 ageGroup: undefined,
               };
             }
@@ -80,7 +96,9 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 type: MersEstimateType.ANIMAL_VIRAL as const,
                 animalSpecies: MersAnimalSpecies.CAMEL,
                 animalType: MersAnimalType.DOMESTIC,
-                positivePrevalence: 0.1,
+                positivePrevalence: 0.5,
+                positivePrevalence95CILower: 0.3,
+                positivePrevalence95CIUpper: 0.8,
                 ageGroup: undefined,
               };
             }
@@ -93,7 +111,9 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
                 animalSpecies: undefined,
                 animalType: undefined,
                 ageGroup: 'Test Age Group',
-                positivePrevalence: 0.1,
+                positivePrevalence: 0.5,
+                positivePrevalence95CILower: 0.3,
+                positivePrevalence95CIUpper: 0.8,
               };
             }
 
@@ -103,7 +123,9 @@ export const combineEstimatesWithSourcesStep = (input: CombineEstimatesWithSourc
               animalSpecies: undefined,
               animalType: undefined,
               ageGroup: 'Test Age Group',
-              positivePrevalence: 0.1,
+              positivePrevalence: 0.5,
+              positivePrevalence95CILower: 0.3,
+              positivePrevalence95CIUpper: 0.8,
             };
         }))
     ),

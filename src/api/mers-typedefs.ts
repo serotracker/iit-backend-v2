@@ -46,6 +46,20 @@ export const mersTypedefs = `
     insitutution: String!
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    sensitivity: Float
+    sensitivity95CILower: Float
+    sensitivity95CIUpper: Float
+    sensitivityDenominator: Int
+    specificity: Float
+    specificity95CILower: Float
+    specificity95CIUpper: Float
+    specificityDenominator: Int
+    sampleDenominator: Int
+    sampleNumerator: Int
+    assay: [String!]!
+    specimenType: String
+    sex: String
+    isotypes: [String!]!
   }
 
   type HumanMersViralEstimate implements MersEstimateInterface {
@@ -69,9 +83,25 @@ export const mersTypedefs = `
     insitutution: String!
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    sensitivity: Float
+    sensitivity95CILower: Float
+    sensitivity95CIUpper: Float
+    sensitivityDenominator: Int
+    specificity: Float
+    specificity95CILower: Float
+    specificity95CIUpper: Float
+    specificityDenominator: Int
+    sampleDenominator: Int
+    sampleNumerator: Int
+    assay: [String!]!
+    specimenType: String
+    sex: String
+    isotypes: [String!]!
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
+    positivePrevalence95CILower: Float
+    positivePrevalence95CIUpper: Float
     ageGroup: String
   }
 
@@ -96,9 +126,25 @@ export const mersTypedefs = `
     insitutution: String!
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    sensitivity: Float
+    sensitivity95CILower: Float
+    sensitivity95CIUpper: Float
+    sensitivityDenominator: Int
+    specificity: Float
+    specificity95CILower: Float
+    specificity95CIUpper: Float
+    specificityDenominator: Int
+    sampleDenominator: Int
+    sampleNumerator: Int
+    assay: [String!]!
+    specimenType: String
+    sex: String
+    isotypes: [String!]!
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
+    positivePrevalence95CILower: Float
+    positivePrevalence95CIUpper: Float
     animalType: MersAnimalType!
     animalSpecies: MersAnimalSpecies!
   }
@@ -124,9 +170,25 @@ export const mersTypedefs = `
     insitutution: String!
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    sensitivity: Float
+    sensitivity95CILower: Float
+    sensitivity95CIUpper: Float
+    sensitivityDenominator: Int
+    specificity: Float
+    specificity95CILower: Float
+    specificity95CIUpper: Float
+    specificityDenominator: Int
+    sampleDenominator: Int
+    sampleNumerator: Int
+    assay: [String!]!
+    specimenType: String
+    sex: String
+    isotypes: [String!]!
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
+    seroprevalence95CILower: Float
+    seroprevalence95CIUpper: Float
     ageGroup: String
   }
 
@@ -151,9 +213,25 @@ export const mersTypedefs = `
     insitutution: String!
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    sensitivity: Float
+    sensitivity95CILower: Float
+    sensitivity95CIUpper: Float
+    sensitivityDenominator: Int
+    specificity: Float
+    specificity95CILower: Float
+    specificity95CIUpper: Float
+    specificityDenominator: Int
+    sampleDenominator: Int
+    sampleNumerator: Int
+    assay: [String!]!
+    specimenType: String
+    sex: String
+    isotypes: [String!]!
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
+    seroprevalence95CILower: Float
+    seroprevalence95CIUpper: Float
     animalType: MersAnimalType!
     animalSpecies: MersAnimalSpecies!
   }

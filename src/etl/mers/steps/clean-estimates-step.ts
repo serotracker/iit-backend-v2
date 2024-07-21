@@ -13,6 +13,8 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   type: MersEstimateType;
   positivePrevalence: number;
+  positivePrevalence95CILower: number | undefined;
+  positivePrevalence95CIUpper: number | undefined;
   ageGroup: string | undefined;
   estimateId: string;
   city: string | undefined;
@@ -21,6 +23,20 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   studyExclusionCriteria: string | undefined;
   animalType: MersAnimalType | undefined;
   animalSpecies: MersAnimalSpecies | undefined;
+  sensitivity: number | undefined;
+  sensitivity95CILower: number | undefined;
+  sensitivity95CIUpper: number | undefined;
+  sensitivityDenominator: number | undefined;
+  specificity: number | undefined;
+  specificity95CILower: number | undefined;
+  specificity95CIUpper: number | undefined;
+  specificityDenominator: number | undefined;
+  sampleDenominator: number | undefined;
+  sampleNumerator: number | undefined;
+  assay: string[];
+  specimenType: string | undefined;
+  sex: string | undefined;
+  isotypes: string[];
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
@@ -53,7 +69,9 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
     allEstimates: input.allEstimates.map((estimate) => ({
       id: estimate.id,
       type: MersEstimateType.HUMAN_SEROPREVALENCE,
-      positivePrevalence: 0.1,
+      positivePrevalence: 0.5,
+      positivePrevalence95CILower: 0.3,
+      positivePrevalence95CIUpper: 0.8,
       ageGroup: 'Test Age Group',
       estimateId: 'Test Data',
       city: undefined,
@@ -62,6 +80,20 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       studyExclusionCriteria: 'Test Exclusion Criteria',
       animalSpecies: MersAnimalSpecies.CAMEL,
       animalType: MersAnimalType.DOMESTIC,
+      sensitivity: 0.2,
+      sensitivity95CILower: 0.1,
+      sensitivity95CIUpper: 0.3,
+      sensitivityDenominator: 200,
+      specificity: 0.2,
+      specificity95CILower: 0.1,
+      specificity95CIUpper: 0.3,
+      specificityDenominator: 100,
+      sampleDenominator: 3000,
+      sampleNumerator: 1500,
+      assay: ['ELISA'],
+      specimenType: 'Serum',
+      sex: 'Male',
+      isotypes: ['IgG']
     })),
     allSources: input.allSources,
     allStudies: input.allStudies,
