@@ -140,6 +140,9 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Sample Start Date': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
+    'Species': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
   })
 
   return zodMersEstimateFieldsObject.parse(estimate);

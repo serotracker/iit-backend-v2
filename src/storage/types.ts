@@ -145,6 +145,9 @@ export enum MersEstimateType {
 
 export enum MersAnimalSpecies {
   CAMEL = "CAMEL",
+  SHEEP = "SHEEP",
+  GOAT = "GOAT",
+  CATTLE = "CATTLE",
   BAT = "BAT",
 }
 

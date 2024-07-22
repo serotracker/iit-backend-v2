@@ -97,6 +97,38 @@ interface CleanEstimatesStepOutput {
   mongoClient: MongoClient;
 }
 
+const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterCleaningStudiesStep, 'Species'>): MersAnimalSpecies | undefined => {
+  const speciesString = estimate['Species'];
+
+  if(!speciesString) {
+    return undefined;
+  }
+
+  const speciesStringNoCapitalization = speciesString.toLowerCase();
+
+  if(speciesStringNoCapitalization?.includes('camel')) {
+    return MersAnimalSpecies.CAMEL;
+  }
+
+  if(speciesStringNoCapitalization?.includes('bat')) {
+    return MersAnimalSpecies.BAT;
+  }
+
+  if(speciesStringNoCapitalization?.includes('goat')) {
+    return MersAnimalSpecies.GOAT;
+  }
+
+  if(speciesStringNoCapitalization?.includes('cattle')) {
+    return MersAnimalSpecies.CATTLE;
+  }
+
+  if(speciesStringNoCapitalization?.includes('sheep')) {
+    return MersAnimalSpecies.SHEEP;
+  }
+
+  return undefined;
+}
+
 export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimatesStepOutput => {
   return {
     allEstimates: input.allEstimates
@@ -117,7 +149,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         studyId: estimate['Study']
           .filter((element): element is NonNullable<typeof element> => !!element)
           .at(0),
-        animalSpecies: MersAnimalSpecies.CAMEL,
+        animalSpecies: deriveAnimalSpeciesFromEstimate(estimate),
         animalType: estimate['Animal type']
           .filter((animalType): animalType is NonNullable<typeof animalType> => !!animalType)
           .map((animalType) => animalType.toUpperCase())
