@@ -272,7 +272,10 @@ export enum MersEventAnimalType {
 
 export enum MersEventAnimalSpecies {
   CAMEL = "CAMEL",
-  BAT = "BAT"
+  BAT = "BAT",
+  GOAT = "GOAT",
+  CATTLE = "CATTLE",
+  SHEEP = "SHEEP",
 }
 
 export enum MersEventType {
