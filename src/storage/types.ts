@@ -192,6 +192,10 @@ export interface MersEstimateDocumentBase {
   samplingStartDate: Date | undefined;
   samplingEndDate: Date | undefined;
   samplingMidDate: Date | undefined;
+  samplingMethod: string | undefined;
+  geographicScope: string | undefined;
+  testProducer: string[];
+  testValidation: string[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -202,6 +206,7 @@ export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase &
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
   ageGroup: string[];
+  sampleFrame: string | undefined;
 }
 
 export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -210,6 +215,7 @@ export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
   ageGroup: string[];
+  sampleFrame: string | undefined;
 }
 
 export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
@@ -219,6 +225,9 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   seroprevalence95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies;
   animalType: MersAnimalType[];
+  animalDetectionSettings: string[];
+  animalPurpose: string | undefined;
+  animalImportedOrLocal: string | undefined;
 }
 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -228,6 +237,9 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies;
   animalType: MersAnimalType[];
+  animalDetectionSettings: string[];
+  animalPurpose: string | undefined;
+  animalImportedOrLocal: string | undefined;
 }
 
 export type MersEstimateDocument = 

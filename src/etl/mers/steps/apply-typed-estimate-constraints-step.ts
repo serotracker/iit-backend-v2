@@ -25,6 +25,10 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
+  sampleFrame: string | undefined;
+  animalDetectionSettings: never[];
+  animalPurpose: undefined;
+  animalImportedOrLocal: undefined;
 }
 type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
@@ -40,6 +44,10 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
+  sampleFrame: string | undefined;
+  animalDetectionSettings: never[];
+  animalPurpose: undefined;
+  animalImportedOrLocal: undefined;
 }
 type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
@@ -55,6 +63,10 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
+  sampleFrame: undefined;
+  animalDetectionSettings: string[];
+  animalPurpose: string | undefined;
+  animalImportedOrLocal: string | undefined;
 }
 type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
@@ -70,6 +82,10 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
+  sampleFrame: undefined;
+  animalDetectionSettings: string[];
+  animalPurpose: string | undefined;
+  animalImportedOrLocal: string | undefined;
 }
 
 export type EstimateFieldsAfterApplyingTypedEstimateConstraintsStep = 
@@ -120,6 +136,10 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       ageGroup: estimate.ageGroup,
       animalType: undefined,
       animalSpecies: undefined,
+      sampleFrame: estimate.sampleFrame,
+      animalDetectionSettings: [],
+      animalPurpose: undefined,
+      animalImportedOrLocal: undefined,
     }
   }
   if(estimate.type === MersEstimateType.HUMAN_VIRAL) {
@@ -135,6 +155,10 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       ageGroup: estimate.ageGroup,
       animalType: undefined,
       animalSpecies: undefined,
+      sampleFrame: estimate.sampleFrame,
+      animalDetectionSettings: [],
+      animalPurpose: undefined,
+      animalImportedOrLocal: undefined,
     }
   }
   if(estimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE) {
@@ -157,6 +181,10 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
+      sampleFrame: undefined,
+      animalDetectionSettings: estimate.animalDetectionSettings,
+      animalPurpose: estimate.animalPurpose,
+      animalImportedOrLocal: estimate.animalImportedOrLocal,
     }
   }
   if(estimate.type === MersEstimateType.ANIMAL_VIRAL) {
@@ -179,6 +207,10 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
+      sampleFrame: undefined,
+      animalDetectionSettings: estimate.animalDetectionSettings,
+      animalPurpose: estimate.animalPurpose,
+      animalImportedOrLocal: estimate.animalImportedOrLocal,
     }
   }
 
