@@ -49,7 +49,10 @@ const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => arr
 
 const mersAnimalSpeciesMapForApi = {
   [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
+  [MersAnimalSpecies.GOAT]: MersAnimalSpeciesForApi.Goat,
   [MersAnimalSpecies.CAMEL]: MersAnimalSpeciesForApi.Camel,
+  [MersAnimalSpecies.CATTLE]: MersAnimalSpeciesForApi.Cattle,
+  [MersAnimalSpecies.SHEEP]: MersAnimalSpeciesForApi.Sheep
 }
 const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesMapForApi[animalSpecies];
 
@@ -477,21 +480,27 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
   
   const faoMersEventFilterOptions = async () => {
     const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
+    const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
 
     const [
       diagnosisSource,
       animalType,
-      animalSpecies
+      animalSpeciesFromEvents,
+      animalSpeciesFromEstimates,
     ] = await Promise.all([
       faoMersEventsCollection.distinct('diagnosisSource').then((element) => filterUndefinedValuesFromArray(element)),
       faoMersEventsCollection.distinct('animalType').then((element) => filterUndefinedValuesFromArray(element)),
       faoMersEventsCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
+      estimateCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
     ])
 
     return {
       diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
       animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
-      animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
+      animalSpecies: [
+        ...animalSpeciesFromEvents.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
+        ...animalSpeciesFromEstimates.map((element) => transformFaoMersEventAnimalSpeciesForApi(element))
+      ],
     }
   }
 

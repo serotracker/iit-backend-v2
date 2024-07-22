@@ -63,6 +63,7 @@ export interface AirtableMersEstimateFields {
   'Specimen Type': string | null;
   'Sample End Date': string | null;
   'Sample Start Date': string | null;
+  'Species': string | null;
 }
 
 export type StructuredYearlyCamelPopulationByCountryData = Array<{

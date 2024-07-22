@@ -303,6 +303,9 @@ export const mersTypedefs = `
   enum MersAnimalSpecies {
     CAMEL
     BAT
+    GOAT
+    SHEEP
+    CATTLE
   }
 
   enum MersEventAnimalType {
@@ -313,6 +316,9 @@ export const mersTypedefs = `
   enum MersEventAnimalSpecies {
     CAMEL
     BAT
+    GOAT
+    SHEEP
+    CATTLE
   }
 
   enum MersEventType {

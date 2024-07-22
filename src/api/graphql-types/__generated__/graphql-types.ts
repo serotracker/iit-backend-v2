@@ -390,7 +390,10 @@ export type HumanMersViralEstimate = MersEstimateInterface & {
 
 export enum MersAnimalSpecies {
   Bat = 'BAT',
-  Camel = 'CAMEL'
+  Camel = 'CAMEL',
+  Cattle = 'CATTLE',
+  Goat = 'GOAT',
+  Sheep = 'SHEEP'
 }
 
 export enum MersAnimalType {
@@ -507,7 +510,10 @@ export type MersEvent = AnimalMersEvent | HumanMersEvent;
 
 export enum MersEventAnimalSpecies {
   Bat = 'BAT',
-  Camel = 'CAMEL'
+  Camel = 'CAMEL',
+  Cattle = 'CATTLE',
+  Goat = 'GOAT',
+  Sheep = 'SHEEP'
 }
 
 export enum MersEventAnimalType {
