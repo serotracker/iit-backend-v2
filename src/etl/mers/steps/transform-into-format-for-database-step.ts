@@ -151,6 +151,10 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
   samplingStartDate: input.estimate.samplingStartDate,
   samplingEndDate: input.estimate.samplingEndDate,
   samplingMidDate: input.estimate.samplingMidDate,
+  samplingMethod: input.estimate.samplingMethod,
+  geographicScope: input.estimate.geographicScope,
+  testProducer: input.estimate.testProducer,
+  testValidation: input.estimate.testValidation,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 })
@@ -171,7 +175,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       seroprevalence: estimate.seroprevalence,
       seroprevalence95CILower: estimate.seroprevalence95CILower,
       seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
-      ageGroup: estimate.ageGroup
+      ageGroup: estimate.ageGroup,
+      sampleFrame: estimate.sampleFrame,
     }
   }
 
@@ -182,7 +187,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
-      ageGroup: estimate.ageGroup
+      ageGroup: estimate.ageGroup,
+      sampleFrame: estimate.sampleFrame,
     }
   }
 
@@ -195,6 +201,9 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
       animalSpecies: estimate.animalSpecies,
       animalType: estimate.animalType,
+      animalDetectionSettings: estimate.animalDetectionSettings,
+      animalPurpose: estimate.animalPurpose,
+      animalImportedOrLocal: estimate.animalImportedOrLocal
     }
   }
 
@@ -207,6 +216,9 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
       animalSpecies: estimate.animalSpecies,
       animalType: estimate.animalType,
+      animalDetectionSettings: estimate.animalDetectionSettings,
+      animalPurpose: estimate.animalPurpose,
+      animalImportedOrLocal: estimate.animalImportedOrLocal
     }
   }
 

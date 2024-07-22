@@ -42,6 +42,14 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   specimenType: string | undefined;
   sex: string | undefined;
   isotypes: string[];
+  samplingMethod: string | undefined;
+  geographicScope: string | undefined;
+  testProducer: string[];
+  testValidation: string[];
+  sampleFrame: string | undefined;
+  animalDetectionSettings: string[];
+  animalPurpose: string | undefined;
+  animalImportedOrLocal: string | undefined;
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
@@ -129,7 +137,15 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         sex: estimate['Sex'] ?? undefined,
         isotypes: estimate['Isotype(s)'].filter((element): element is NonNullable<typeof element> => !!element),
         samplingStartDate: estimate['Sample Start Date'] ?? undefined,
-        samplingEndDate: estimate['Sample End Date'] ?? undefined
+        samplingEndDate: estimate['Sample End Date'] ?? undefined,
+        samplingMethod: estimate['Sampling Method'] ?? undefined,
+        geographicScope: estimate['Geographic scope'] ?? undefined,
+        testProducer: estimate['Producer'].filter((element): element is NonNullable<typeof element> => !!element),
+        testValidation: estimate['Test Validation'].filter((element): element is NonNullable<typeof element> => !!element),
+        animalDetectionSettings: estimate['Detection Settings'].filter((element): element is NonNullable<typeof element> => !!element),
+        animalPurpose: estimate['Animal purpose'] ?? undefined,
+        animalImportedOrLocal: estimate['Imported or Local'] ?? undefined,
+        sampleFrame: estimate['Sample Frame'] ?? undefined,
       }))
       .map((estimate) => ({
         ...estimate,

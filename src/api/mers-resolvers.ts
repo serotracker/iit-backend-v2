@@ -96,6 +96,10 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
     samplingStartDate: document.samplingStartDate ? document.samplingStartDate.toISOString() : undefined,
     samplingEndDate: document.samplingEndDate ? document.samplingEndDate.toISOString() : undefined,
     samplingMidDate: document.samplingMidDate ? document.samplingMidDate.toISOString() : undefined,
+    samplingMethod: document.samplingMethod,
+    geographicScope: document.geographicScope,
+    testProducer: document.testProducer,
+    testValidation: document.testValidation,
   }
 
   if(document.type === MersEstimateType.HUMAN_SEROPREVALENCE) {
@@ -107,6 +111,7 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       seroprevalence95CIUpper: document.seroprevalence95CIUpper,
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
+      sampleFrame: document.sampleFrame
     }
   }
 
@@ -119,7 +124,10 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       seroprevalence95CIUpper: document.seroprevalence95CIUpper,
       type: MersEstimateTypeForApi.AnimalSeroprevalence,
       animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
-      animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType)))
+      animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
+      animalDetectionSettings: document.animalDetectionSettings,
+      animalPurpose: document.animalPurpose,
+      animalImportedOrLocal: document.animalImportedOrLocal
     }
   }
 
@@ -131,7 +139,8 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       positivePrevalence95CILower: document.positivePrevalence95CILower,
       positivePrevalence95CIUpper: document.positivePrevalence95CIUpper,
       type: MersEstimateTypeForApi.HumanViral,
-      ageGroup: document.ageGroup
+      ageGroup: document.ageGroup,
+      sampleFrame: document.sampleFrame
     }
   }
 
@@ -144,7 +153,10 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       positivePrevalence95CIUpper: document.positivePrevalence95CIUpper,
       type: MersEstimateTypeForApi.AnimalViral,
       animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
-      animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType)))
+      animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
+      animalDetectionSettings: document.animalDetectionSettings,
+      animalPurpose: document.animalPurpose,
+      animalImportedOrLocal: document.animalImportedOrLocal
     }
   }
 
@@ -365,7 +377,15 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       assay,
       specimenType,
       sex,
-      isotypes
+      isotypes,
+      samplingMethod,
+      geographicScope,
+      animalDetectionSettings,
+      animalPurpose,
+      animalImportedOrLocal,
+      sampleFrame,
+      testProducer,
+      testValidation
     ] = await Promise.all([
       estimateCollection.distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -373,6 +393,14 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       estimateCollection.distinct('specimenType').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('samplingMethod').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('geographicScope').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('animalDetectionSettings').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('animalPurpose').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('animalImportedOrLocal').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('testProducer').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('testValidation').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     return {
@@ -381,7 +409,15 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
       assay,
       specimenType,
       sex,
-      isotypes
+      isotypes,
+      samplingMethod,
+      geographicScope,
+      animalDetectionSettings,
+      animalPurpose,
+      animalImportedOrLocal,
+      sampleFrame,
+      testProducer,
+      testValidation
     }
   }
 

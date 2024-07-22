@@ -52,6 +52,14 @@ export interface AirtableMersEstimateFields {
   'Isotype(s)': Array<string | null>;
   'Assay Type': Array<string | null>;
   'Animal type': Array<string | null>;
+  'Detection Settings': Array<string | null>;
+  'Animal purpose': string | null;
+  'Imported or Local': string | null;
+  'Sample Frame': string | null;
+  'Producer': Array<string | null>;
+  'Test Validation': Array<string | null>;
+  'Geographic scope': string | null;
+  'Sampling Method': string | null;
   'Specimen Type': string | null;
   'Sample End Date': string | null;
   'Sample Start Date': string | null;

@@ -110,6 +110,30 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Animal type': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Detection Settings': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Animal purpose': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Imported or Local': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Sample Frame': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Producer': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Test Validation': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    'Geographic scope': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Sampling Method': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Sample End Date': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),

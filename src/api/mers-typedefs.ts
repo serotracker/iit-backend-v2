@@ -63,6 +63,10 @@ export const mersTypedefs = `
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
+    samplingMethod: String
+    geographicScope: String
+    testProducer: [String!]!
+    testValidation: [String!]!
   }
 
   type HumanMersViralEstimate implements MersEstimateInterface {
@@ -103,12 +107,17 @@ export const mersTypedefs = `
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
+    samplingMethod: String
+    geographicScope: String
+    testProducer: [String!]!
+    testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
     positivePrevalence95CILower: Float
     positivePrevalence95CIUpper: Float
     ageGroup: [String!]!
+    sampleFrame: String
   }
 
   type AnimalMersViralEstimate implements MersEstimateInterface {
@@ -149,6 +158,10 @@ export const mersTypedefs = `
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
+    samplingMethod: String
+    geographicScope: String
+    testProducer: [String!]!
+    testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
@@ -156,6 +169,9 @@ export const mersTypedefs = `
     positivePrevalence95CIUpper: Float
     animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
+    animalDetectionSettings: [String!]!
+    animalPurpose: String
+    animalImportedOrLocal: String
   }
 
   type HumanMersEstimate implements MersEstimateInterface {
@@ -196,12 +212,17 @@ export const mersTypedefs = `
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
+    samplingMethod: String
+    geographicScope: String
+    testProducer: [String!]!
+    testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
     seroprevalence95CILower: Float
     seroprevalence95CIUpper: Float
     ageGroup: [String!]!
+    sampleFrame: String
   }
 
   type AnimalMersEstimate implements MersEstimateInterface {
@@ -242,6 +263,10 @@ export const mersTypedefs = `
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
+    samplingMethod: String
+    geographicScope: String
+    testProducer: [String!]!
+    testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
@@ -249,6 +274,9 @@ export const mersTypedefs = `
     seroprevalence95CIUpper: Float
     animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
+    animalDetectionSettings: [String!]!
+    animalPurpose: String
+    animalImportedOrLocal: String
   }
 
   union MersEstimate_V2 = HumanMersEstimate | AnimalMersEstimate | HumanMersViralEstimate |  AnimalMersViralEstimate
@@ -368,6 +396,14 @@ export const mersTypedefs = `
     specimenType: [String!]!
     sex: [String!]!
     isotypes: [String!]!
+    samplingMethod: [String!]!
+    geographicScope: [String!]!
+    animalDetectionSettings: [String!]!
+    animalPurpose: [String!]!
+    animalImportedOrLocal: [String!]!
+    sampleFrame: [String!]!
+    testProducer: [String!]!
+    testValidation: [String!]!
   }
 
   type MersFilterOptions {
