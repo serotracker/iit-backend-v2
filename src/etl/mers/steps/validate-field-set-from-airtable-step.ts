@@ -110,7 +110,7 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Animal type': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
-    'Detection Settings': z
+    'Detection settings': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     'Animal purpose': z

@@ -142,7 +142,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         geographicScope: estimate['Geographic scope'] ?? undefined,
         testProducer: estimate['Producer'].filter((element): element is NonNullable<typeof element> => !!element),
         testValidation: estimate['Test Validation'].filter((element): element is NonNullable<typeof element> => !!element),
-        animalDetectionSettings: estimate['Detection Settings'].filter((element): element is NonNullable<typeof element> => !!element),
+        animalDetectionSettings: estimate['Detection settings'].filter((element): element is NonNullable<typeof element> => !!element),
         animalPurpose: estimate['Animal purpose'] ?? undefined,
         animalImportedOrLocal: estimate['Imported or Local'] ?? undefined,
         sampleFrame: estimate['Sample Frame'] ?? undefined,
