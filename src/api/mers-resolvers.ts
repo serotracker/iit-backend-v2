@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import uniqBy from "lodash/uniqBy.js";
 import uniq from "lodash/uniq.js";
+import { pipe } from "fp-ts/lib/function.js";
 import {
   CountryIdentifiers,
   MersEstimate,
@@ -220,6 +221,9 @@ const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): Me
 const faoMersEventAnimalSpeciesMap = {
   [MersEventAnimalSpecies.BAT]: MersEventAnimalSpeciesForApi.Bat,
   [MersEventAnimalSpecies.CAMEL]: MersEventAnimalSpeciesForApi.Camel,
+  [MersEventAnimalSpecies.GOAT]: MersEventAnimalSpeciesForApi.Goat,
+  [MersEventAnimalSpecies.CATTLE]: MersEventAnimalSpeciesForApi.Cattle,
+  [MersEventAnimalSpecies.SHEEP]: MersEventAnimalSpeciesForApi.Sheep,
 }
 
 const transformFaoMersEventAnimalSpeciesForApi = (animalSpecies: MersEventAnimalSpecies): MersEventAnimalSpeciesForApi => 
@@ -497,10 +501,14 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
     return {
       diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
       animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
-      animalSpecies: [
-        ...animalSpeciesFromEvents.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
-        ...animalSpeciesFromEstimates.map((element) => transformFaoMersEventAnimalSpeciesForApi(element))
-      ],
+      animalSpecies: pipe(
+        [
+          ...animalSpeciesFromEvents.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)), 
+          ...animalSpeciesFromEstimates.map((element) => transformFaoMersEventAnimalSpeciesForApi(element))
+        ],
+        uniq,
+        filterUndefinedValuesFromArray
+      )
     }
   }
 
