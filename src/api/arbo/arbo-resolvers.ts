@@ -1,9 +1,9 @@
 import { MongoClient } from "mongodb";
-import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "./graphql-types/__generated__/graphql-types";
-import { Arbovirus, ArbovirusEstimateDocument } from '../storage/types.js';
-import { Arbovirus as ArbovirusForApi } from "./graphql-types/__generated__/graphql-types.js";
-import { mapUnRegionForApi } from "./shared-mappers.js";
-import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
+import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "../graphql-types/__generated__/graphql-types.js";
+import { Arbovirus, ArbovirusEstimateDocument } from '../../storage/types.js';
+import { Arbovirus as ArbovirusForApi } from "../graphql-types/__generated__/graphql-types.js";
+import { mapUnRegionForApi } from "../shared/shared-mappers.js";
+import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 
 const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.ZIKV]: ArbovirusForApi.Zikv,

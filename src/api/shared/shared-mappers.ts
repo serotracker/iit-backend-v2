@@ -4,11 +4,11 @@ import {
   GbdSubRegion as GBDSubRegionForApi,
   GbdSuperRegion as GBDSuperRegionForApi,
   Month as MonthForApi
-} from "./graphql-types/__generated__/graphql-types.js";
-import { UNRegion } from "../lib/un-regions.js";
-import { WHORegion } from "../lib/who-regions.js";
-import { GBDSuperRegion, GBDSubRegion } from "../lib/gbd-regions.js";
-import { Month } from "../storage/types.js";
+} from "../graphql-types/__generated__/graphql-types.js";
+import { UNRegion } from "../../lib/un-regions.js";
+import { WHORegion } from "../../lib/who-regions.js";
+import { GBDSuperRegion, GBDSubRegion } from "../../lib/gbd-regions.js";
+import { Month } from "../../storage/types.js";
 
 const unRegionMap: {[key in UNRegion]: UnRegionForApi} = {
   [UNRegion.NORTHERN_AFRICA]: UnRegionForApi.NorthernAfrica,

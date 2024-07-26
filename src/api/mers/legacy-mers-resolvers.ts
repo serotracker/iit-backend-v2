@@ -19,7 +19,7 @@ import {
   MersAnimalSpecies as MersAnimalSpeciesForApi,
   MersAnimalType as MersAnimalTypeForApi,
   MersEstimateType as MersEstimateTypeForApi
-} from "./graphql-types/__generated__/graphql-types.js";
+} from "../graphql-types/__generated__/graphql-types.js";
 import {
   FaoMersEventDocument,
   FaoMersEventDocumentBase,
@@ -33,17 +33,17 @@ import {
   MersEstimateType,
   MersAnimalSpecies,
   MersAnimalType
-} from '../storage/types.js';
-import { mapUnRegionForApi, mapWhoRegionForApi } from "./shared-mappers.js";
-import { runCountryIdentifierAggregation } from "./aggregations/country-identifier-aggregation.js";
+} from '../../storage/types.js';
+import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.js";
+import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 import assertNever from "assert-never";
 
-interface GenerateMersResolversInput {
+interface GenerateLegacyMersResolversInput {
   mongoClient: MongoClient;
 }
 
-interface GenerateMersResolversOutput {
-  mersResolvers: { Query: QueryResolvers }
+interface GenerateLegacyMersResolversOutput {
+  legacyMersResolvers: { Query: QueryResolvers }
 }
 
 const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
@@ -314,7 +314,7 @@ const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearly
   note: document.note
 })
 
-export const generateMersResolvers = (input: GenerateMersResolversInput): GenerateMersResolversOutput => {
+export const generateLegacyMersResolvers = (input: GenerateLegacyMersResolversInput): GenerateLegacyMersResolversOutput => {
   const { mongoClient } = input;
 
   const databaseName = process.env.DATABASE_NAME;
@@ -513,7 +513,7 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
   }
 
   return {
-    mersResolvers: {
+    legacyMersResolvers: {
       Query: {
         mersEstimates,
         mersEstimates_V2,

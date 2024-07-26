@@ -3,15 +3,15 @@ import { ApolloServer } from "apollo-server-micro";
 import { mergeTypeDefs } from "@graphql-tools/merge";
 import { MongoClient } from "mongodb";
 import { send } from 'micro';
-import { arboTypedefs } from "../public/dist/src/api/arbo-typedefs.js";
-import { sarsCov2Typedefs } from "../public/dist/src/api/sars-cov-2-typedefs.js";
-import { teamTypedefs } from "../public/dist/src/api/team-typedefs.js";
-import { mersTypedefs } from "../public/dist/src/api/mers-typedefs.js";
-import { sharedTypedefs } from "../public/dist/src/api/shared-typedefs.js";
-import { generateArboResolvers } from "../public/dist/src/api/arbo-resolvers.js";
-import { generateTeamResolvers } from "../public/dist/src/api/team-resolvers.js";
-import { generateSarsCov2Resolvers } from "../public/dist/src/api/sars-cov-2-resolvers.js";
-import { generateMersResolvers } from "../public/dist/src/api/mers-resolvers.js";
+import { arboTypedefs } from "../public/dist/src/api/arbo/arbo-typedefs.js";
+import { sarsCov2Typedefs } from "../public/dist/src/api/sarscov2/sars-cov-2-typedefs.js";
+import { teamTypedefs } from "../public/dist/src/api/team/team-typedefs.js";
+import { mersTypedefs } from "../public/dist/src/api/mers/mers-typedefs.js";
+import { sharedTypedefs } from "../public/dist/src/api/shared/shared-typedefs.js";
+import { generateArboResolvers } from "../public/dist/src/api/arbo/arbo-resolvers.js";
+import { generateTeamResolvers } from "../public/dist/src/api/team/team-resolvers.js";
+import { generateSarsCov2Resolvers } from "../public/dist/src/api/sarscov2/sars-cov-2-resolvers.js";
+import { generateMersResolvers } from "../public/dist/src/api/mers/mers-resolvers.js";
 
 const mongoUrl = process.env.MONGODB_URI;
 
