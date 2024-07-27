@@ -126,6 +126,7 @@ const runEtlMain = async () => {
     asyncEtlStep(writeEstimateDataToMongoDbStep),
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
     asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
+    asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
     asyncEtlStep(addDatabaseIndexesStep)
   );
 

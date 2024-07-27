@@ -296,6 +296,26 @@ export enum MersEventType {
   ANIMAL = "ANIMAL"
 }
 
+export interface MersEstimateFilterOptionsDocument {
+  _id: ObjectId;
+  sourceType: string[];
+  ageGroup: string[];
+  assay: string[];
+  specimenType: string[];
+  sex: string[];
+  isotypes: string[];
+  samplingMethod: string[];
+  geographicScope: string[];
+  animalDetectionSettings: string[];
+  animalPurpose: string[];
+  animalImportedOrLocal: string[];
+  sampleFrame: string[];
+  testProducer: string[];
+  testValidation: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface SarsCov2CountryDataDocument {
   _id: ObjectId;
   population: number | undefined;
