@@ -37,6 +37,7 @@ import {
 import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.js";
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 import assertNever from "assert-never";
+import { filterUndefinedValuesFromArray } from "../../lib/lib.js";
 
 interface GenerateLegacyMersResolversInput {
   mongoClient: MongoClient;
@@ -46,7 +47,6 @@ interface GenerateLegacyMersResolversOutput {
   legacyMersResolvers: { Query: QueryResolvers }
 }
 
-const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
 
 const mersAnimalSpeciesMapForApi = {
   [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
@@ -218,102 +218,6 @@ const transformMersEstimateDocumentForApi = (document: MersEstimateDocument): Me
   assertNever(document);
 }
 
-const faoMersEventAnimalSpeciesMap = {
-  [MersEventAnimalSpecies.BAT]: MersEventAnimalSpeciesForApi.Bat,
-  [MersEventAnimalSpecies.CAMEL]: MersEventAnimalSpeciesForApi.Camel,
-  [MersEventAnimalSpecies.GOAT]: MersEventAnimalSpeciesForApi.Goat,
-  [MersEventAnimalSpecies.CATTLE]: MersEventAnimalSpeciesForApi.Cattle,
-  [MersEventAnimalSpecies.SHEEP]: MersEventAnimalSpeciesForApi.Sheep,
-}
-
-const transformFaoMersEventAnimalSpeciesForApi = (animalSpecies: MersEventAnimalSpecies): MersEventAnimalSpeciesForApi => 
-  faoMersEventAnimalSpeciesMap[animalSpecies];
-
-const faoMersEventAnimalTypeMap = {
-  [MersEventAnimalType.DOMESTIC]: MersEventAnimalTypeForApi.Domestic,
-  [MersEventAnimalType.WILD]: MersEventAnimalTypeForApi.Wild
-}
-
-const transformFaoMersEventAnimalTypeForApi = (animalType: MersEventAnimalType): MersEventAnimalTypeForApi => 
-  faoMersEventAnimalTypeMap[animalType];
-
-const faoMersEventDiagnosisStatusMap = {
-  [MersDiagnosisStatus.CONFIRMED]: MersDiagnosisStatusForApi.Confirmed,
-  [MersDiagnosisStatus.DENIED]: MersDiagnosisStatusForApi.Denied,
-}
-
-const transformFaoMersEventDiagnosisStatusForApi = (diagnosisStatus: MersDiagnosisStatus): MersDiagnosisStatusForApi => 
-  faoMersEventDiagnosisStatusMap[diagnosisStatus];
-
-const faoMersEventDiagnosisSourceMap = {
-  [MersDiagnosisSource.MEDIA]: MersDiagnosisSourceForApi.Media,
-  [MersDiagnosisSource.PUBLICATIONS]: MersDiagnosisSourceForApi.Publications,
-  [MersDiagnosisSource.FAO_FIELD_OFFICER]: MersDiagnosisSourceForApi.FaoFieldOfficer,
-  [MersDiagnosisSource.NATIONAL_AUTHORITIES]: MersDiagnosisSourceForApi.NationalAuthorities,
-  [MersDiagnosisSource.WORLD_ORGANISATION_FOR_ANIMAL_HEALTH]: MersDiagnosisSourceForApi.WorldOrganisationForAnimalHealth,
-  [MersDiagnosisSource.WORLD_HEALTH_ORGANIZATION]: MersDiagnosisSourceForApi.WorldHealthOrganization,
-}
-
-const transformFaoMersEventDiagnosisSourceForApi = (diagnosisSource: MersDiagnosisSource): MersDiagnosisSourceForApi => 
-  faoMersEventDiagnosisSourceMap[diagnosisSource];
-
-const transformFaoMersEventDocumentBaseForApi = (document: FaoMersEventDocumentBase): Omit<MersEventInterface, 'type'> => ({
-  id: document._id.toHexString(),
-  country: {
-    name: document.country,
-    alphaTwoCode: document.countryAlphaTwoCode,
-    alphaThreeCode: document.countryAlphaThreeCode
-  },
-  state: document.state,
-  city: document.city,
-  latitude: document.latitude,
-  longitude: document.longitude,
-  diagnosisStatus: transformFaoMersEventDiagnosisStatusForApi(document.diagnosisStatus),
-  diagnosisSource: transformFaoMersEventDiagnosisSourceForApi(document.diagnosisSource),
-  reportDate: document.reportDate.toISOString(),
-  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
-  unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined
-})
-
-const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): MersEvent => {
-  if(document.type === MersEventType.ANIMAL) {
-    return {
-      ...transformFaoMersEventDocumentBaseForApi(document),
-      __typename: "AnimalMersEvent",
-      type: MersEventTypeForApi.Animal,
-      animalSpecies: transformFaoMersEventAnimalSpeciesForApi(document.animalSpecies),
-      animalType: transformFaoMersEventAnimalTypeForApi(document.animalType),
-    }
-  }
-  if(document.type === MersEventType.HUMAN) {
-    return {
-      ...transformFaoMersEventDocumentBaseForApi(document),
-      __typename: "HumanMersEvent",
-      type: MersEventTypeForApi.Human,
-      humanDeaths: document.humanDeaths,
-      humansAffected: document.humansAffected,
-    }
-  }
-
-  assertNever(document);
-}
-
-const transformFaoYearlyCamelPopulationDataDocumentForApi = (document: FaoYearlyCamelPopulationDataDocument): YearlyFaoCamelPopulationDataEntry => ({
-  id: document._id.toHexString(),
-  countryAlphaThreeCode: document.countryAlphaThreeCode,
-  country: {
-    alphaThreeCode: document.countryAlphaThreeCode,
-    alphaTwoCode: document.countryAlphaTwoCode,
-    name: document.countryName
-  },
-  whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
-  unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
-  year: document.year,
-  camelCount: document.camelCount,
-  camelCountPerCapita: document.camelCountPerCapita,
-  note: document.note
-})
-
 export const generateLegacyMersResolvers = (input: GenerateLegacyMersResolversInput): GenerateLegacyMersResolversOutput => {
   const { mongoClient } = input;
 
@@ -375,101 +279,12 @@ export const generateLegacyMersResolvers = (input: GenerateLegacyMersResolversIn
     }
   }
   
-  const allFaoMersEventPartitionKeys = async () => {
-    const [
-      partitionKeys
-    ] = await Promise.all([
-      mongoClient
-        .db(databaseName)
-        .collection<FaoMersEventDocument>('mersFaoEventData')
-        .distinct('partitionKey')
-    ])
-
-    return partitionKeys;
-  }
-  
-  const partitionedFaoMersEvents: QueryResolvers['partitionedFaoMersEvents'] = async (_, variables) => {
-    const { partitionKey } = variables.input;
-
-    const databaseEstimates = await mongoClient.db(databaseName)
-      .collection<FaoMersEventDocument>('mersFaoEventData')
-      .find({ partitionKey })
-      .toArray();
-
-    return {
-      partitionKey,
-      mersEvents: databaseEstimates.map((estimate) => transformFaoMersEventDocumentForApi(estimate))
-    }
-  }
-
-  const yearlyFaoCamelPopulationDataPartitionKeys = async () => {
-    const [
-      partitionKeys
-    ] = await Promise.all([
-      mongoClient
-        .db(databaseName)
-        .collection<FaoYearlyCamelPopulationDataDocument>('mersFaoYearlyCamelPopulationData')
-        .distinct('partitionKey')
-    ])
-
-    return partitionKeys;
-  }
-
-  const partitionedYearlyFaoCamelPopulationData: QueryResolvers['partitionedYearlyFaoCamelPopulationData'] = async (_, variables) => {
-    const { partitionKey } = variables.input;
-
-    const yearlyFaoCamelPopulationData = await mongoClient.db(databaseName)
-      .collection<FaoYearlyCamelPopulationDataDocument>('mersFaoYearlyCamelPopulationData')
-      .find({ partitionKey })
-      .toArray();
-
-    return {
-      partitionKey,
-      yearlyFaoCamelPopulationData: yearlyFaoCamelPopulationData.map((document) => transformFaoYearlyCamelPopulationDataDocumentForApi(document))
-    }
-  }
-  
-  const faoMersEventFilterOptions = async () => {
-    const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
-    const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
-
-    const [
-      diagnosisSource,
-      animalType,
-      animalSpeciesFromEvents,
-      animalSpeciesFromEstimates,
-    ] = await Promise.all([
-      faoMersEventsCollection.distinct('diagnosisSource').then((element) => filterUndefinedValuesFromArray(element)),
-      faoMersEventsCollection.distinct('animalType').then((element) => filterUndefinedValuesFromArray(element)),
-      faoMersEventsCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
-      estimateCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
-    ])
-
-    return {
-      diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
-      animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
-      animalSpecies: pipe(
-        [
-          ...animalSpeciesFromEvents.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)), 
-          ...animalSpeciesFromEstimates.map((element) => transformFaoMersEventAnimalSpeciesForApi(element))
-        ],
-        uniq,
-        filterUndefinedValuesFromArray
-      )
-    }
-  }
-
   return {
     legacyMersResolvers: {
       Query: {
         mersEstimates,
         mersEstimates_V2,
         mersFilterOptions,
-        allFaoMersEventPartitionKeys,
-        partitionedFaoMersEvents,
-        faoMersEventFilterOptions,
-        yearlyFaoCamelPopulationDataPartitionKeys,
-        partitionedYearlyFaoCamelPopulationData,
       }
     }
   }
