@@ -1,10 +1,10 @@
 import { MongoClient } from "mongodb";
 import { QueryResolvers } from "../graphql-types/__generated__/graphql-types";
-import { generateLegacyMersResolvers } from "./legacy-mers-resolvers";
-import { generateMersCamelPopulationDataResolvers } from "./mers-camel-population-data-resolvers";
-import { generateMersEventResolvers } from "./mers-event-resolvers";
-import { generateMersEstimateResolvers } from "./mers-estimate-resolvers";
-import { generateSharedMersResolvers } from "./shared-mers-resolvers";
+import { generateLegacyMersResolvers } from "./legacy-mers-resolvers.js";
+import { generateMersCamelPopulationDataResolvers } from "./mers-camel-population-data-resolvers.js";
+import { generateMersEventResolvers } from "./mers-event-resolvers.js";
+import { generateMersEstimateResolvers } from "./mers-estimate-resolvers.js";
+import { generateSharedMersResolvers } from "./shared-mers-resolvers.js";
 
 interface GenerateMersResolversInput {
   mongoClient: MongoClient;
