@@ -143,6 +143,18 @@ export enum MersEstimateType {
   ANIMAL_SEROPREVALENCE = 'ANIMAL_SEROPREVALENCE',
 }
 
+export enum MersSubGroupingVariable {
+  PRIMARY = 'PRIMARY',
+  ANIMAL_SPECIES = 'ANIMAL_SPECIES',
+  TEST_USED = 'TEST_USED',
+  GEOGRAPHICAL_AREA = 'GEOGRAPHICAL_AREA',
+  AGE = 'AGE',
+  SEX = 'SEX',
+}
+
+export const isMersSubGroupingVariable = (subGroupingVariable: string): subGroupingVariable is MersSubGroupingVariable => 
+  Object.values(MersSubGroupingVariable).some((element) => element === subGroupingVariable);
+
 export enum MersAnimalSpecies {
   CAMEL = "CAMEL",
   SHEEP = "SHEEP",
@@ -162,6 +174,7 @@ export const isMersAnimalType = (animalType: string): animalType is MersAnimalTy
 export interface MersEstimateDocumentBase {
   _id: ObjectId;
   estimateId: string;
+  subGroupingVariable: MersSubGroupingVariable;
   city: string | undefined;
   state: string | undefined;
   country: string;

@@ -5,6 +5,7 @@ import {
   CountryPopulationDataAfterWritingEstimateToMongodbStep,
   EstimateFieldsAfterWritingEstimateToMongodbStep,
   FaoMersEventAfterWritingEstimateToMongodbStep,
+  GroupedEstimateFieldsAfterWritingEstimateToMongodbStep,
   SourceFieldsAfterWritingEstimateToMongodbStep,
   StudyFieldsAfterWritingEstimateToMongodbStep,
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep
@@ -12,6 +13,8 @@ import {
 
 export type EstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
   EstimateFieldsAfterWritingEstimateToMongodbStep;
+export type GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
+  GroupedEstimateFieldsAfterWritingEstimateToMongodbStep;
 export type SourceFieldsAfterWritingFaoMersEventsToMongodbStep =
   SourceFieldsAfterWritingEstimateToMongodbStep;
 export type StudyFieldsAfterWritingFaoMersEventsToMongodbStep =
@@ -27,6 +30,7 @@ export type CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep =
 
 interface WriteFaoMersEventDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterWritingEstimateToMongodbStep[];
   allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
   allStudies: StudyFieldsAfterWritingEstimateToMongodbStep[];
   allCountries: CountryFieldsAfterWritingEstimateToMongodbStep[];
@@ -38,6 +42,7 @@ interface WriteFaoMersEventDataToMongoDbStepInput {
 
 interface WriteFaoMersEventDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allStudies: StudyFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoMersEventsToMongodbStep[];
@@ -63,6 +68,7 @@ export const writeFaoMersEventDataToMongoDbStep = async(
 
   return {
     allEstimates: input.allEstimates,
+    allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,

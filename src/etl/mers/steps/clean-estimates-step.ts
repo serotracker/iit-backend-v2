@@ -8,11 +8,12 @@ import {
   YearlyCamelPopulationDataAfterCleaningStudiesStep,
   CountryFieldsAfterCleaningStudiesStep
 } from "./clean-studies-step";
-import { MersAnimalSpecies, MersAnimalType, MersEstimateType, isMersAnimalType } from "../../../storage/types.js";
+import { MersAnimalSpecies, MersAnimalType, MersEstimateType, MersSubGroupingVariable, isMersAnimalType, isMersSubGroupingVariable } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   type: MersEstimateType;
+  subGroupingVariable: MersSubGroupingVariable;
   populationType: string;
   estimateType: string;
   positivePrevalence: number;
@@ -97,6 +98,18 @@ interface CleanEstimatesStepOutput {
   mongoClient: MongoClient;
 }
 
+const deriveSubgroupingVariableFromEstimate = (estimate: Pick<EstimateFieldsAfterCleaningStudiesStep, 'Sub-grouping variable'>): MersSubGroupingVariable | undefined => {
+  const subGroupingVariableString = estimate['Sub-grouping variable'];
+
+  const formattedSubGroupingVariableString = subGroupingVariableString.replaceAll(" ", "_").toUpperCase();
+
+  if (isMersSubGroupingVariable(formattedSubGroupingVariableString)) {
+    return formattedSubGroupingVariableString;
+  }
+
+  return undefined;
+}
+
 const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterCleaningStudiesStep, 'Species'>): MersAnimalSpecies | undefined => {
   const speciesString = estimate['Species'];
 
@@ -134,6 +147,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
     allEstimates: input.allEstimates
       .map((estimate) => ({
         id: estimate['id'],
+        subGroupingVariable: deriveSubgroupingVariableFromEstimate(estimate),
         populationType: estimate['Population Type'],
         estimateType: estimate['Estimate Type'],
         positivePrevalence: estimate['Positive Prevalence'],
@@ -179,6 +193,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         animalImportedOrLocal: estimate['Imported or Local'] ?? undefined,
         sampleFrame: estimate['Sample Frame'] ?? undefined,
       }))
+      .filter((estimate): estimate is Omit<typeof estimate, 'subGroupingVariable'> & {subGroupingVariable: NonNullable<typeof estimate['subGroupingVariable']>} => !!estimate.subGroupingVariable)
       .map((estimate) => ({
         ...estimate,
         type: deriveTypeFromCleanedEstimate(estimate)
