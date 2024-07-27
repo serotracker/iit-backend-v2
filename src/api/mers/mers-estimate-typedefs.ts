@@ -185,7 +185,7 @@ export const mersEstimateTypedefs = `
     animalAgeGroup: [String!]!
   }
 
-  type PrimaryHumanMersEstimateInformation implements PrimaryMersEstimateInformationInterface {
+  type PrimaryHumanMersSeroprevalenceEstimateInformation implements PrimaryMersEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
@@ -236,7 +236,7 @@ export const mersEstimateTypedefs = `
     sampleFrame: String
   }
 
-  type PrimaryAnimalMersEstimateInformation implements PrimaryMersEstimateInformationInterface {
+  type PrimaryAnimalMersSeroprevalenceEstimateInformation implements PrimaryMersEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
@@ -291,7 +291,7 @@ export const mersEstimateTypedefs = `
     animalAgeGroup: [String!]!
   }
 
-  union PrimaryMersEstimateInformation = PrimaryAnimalMersEstimateInformation | PrimaryHumanMersEstimateInformation | PrimaryAnimalMersViralEstimateInformation |  PrimaryHumanMersViralEstimateInformation
+  union PrimaryMersEstimateInformation = PrimaryAnimalMersSeroprevalenceEstimateInformation | PrimaryHumanMersSeroprevalenceEstimateInformation | PrimaryAnimalMersViralEstimateInformation |  PrimaryHumanMersViralEstimateInformation
 
   interface MersSubEstimateInformationInterface {
     sampleDenominator: Int

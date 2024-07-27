@@ -225,7 +225,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       animalType: estimate.animalType,
       animalDetectionSettings: estimate.animalDetectionSettings,
       animalPurpose: estimate.animalPurpose,
-      animalImportedOrLocal: estimate.animalImportedOrLocal
+      animalImportedOrLocal: estimate.animalImportedOrLocal,
+      animalAgeGroup: estimate.animalAgeGroup
     }
   }
 
@@ -240,7 +241,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       animalType: estimate.animalType,
       animalDetectionSettings: estimate.animalDetectionSettings,
       animalPurpose: estimate.animalPurpose,
-      animalImportedOrLocal: estimate.animalImportedOrLocal
+      animalImportedOrLocal: estimate.animalImportedOrLocal,
+      animalAgeGroup: estimate.animalAgeGroup
     }
   }
 

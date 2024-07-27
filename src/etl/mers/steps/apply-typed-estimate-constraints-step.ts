@@ -29,6 +29,7 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
   animalDetectionSettings: never[];
   animalPurpose: undefined;
   animalImportedOrLocal: undefined;
+  animalAgeGroup: never[];
 }
 type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
@@ -48,6 +49,7 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   animalDetectionSettings: never[];
   animalPurpose: undefined;
   animalImportedOrLocal: undefined;
+  animalAgeGroup: never[];
 }
 type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
@@ -67,6 +69,7 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
+  animalAgeGroup: string[];
 }
 type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
@@ -86,6 +89,7 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
+  animalAgeGroup: string[];
 }
 
 export type EstimateFieldsAfterApplyingTypedEstimateConstraintsStep = 
@@ -140,6 +144,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       animalDetectionSettings: [],
       animalPurpose: undefined,
       animalImportedOrLocal: undefined,
+      animalAgeGroup: [],
     }
   }
   if(estimate.type === MersEstimateType.HUMAN_VIRAL) {
@@ -159,6 +164,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       animalDetectionSettings: [],
       animalPurpose: undefined,
       animalImportedOrLocal: undefined,
+      animalAgeGroup: [],
     }
   }
   if(estimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE) {
@@ -185,6 +191,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       animalDetectionSettings: estimate.animalDetectionSettings,
       animalPurpose: estimate.animalPurpose,
       animalImportedOrLocal: estimate.animalImportedOrLocal,
+      animalAgeGroup: estimate.animalAgeGroup,
     }
   }
   if(estimate.type === MersEstimateType.ANIMAL_VIRAL) {
@@ -211,6 +218,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       animalDetectionSettings: estimate.animalDetectionSettings,
       animalPurpose: estimate.animalPurpose,
       animalImportedOrLocal: estimate.animalImportedOrLocal,
+      animalAgeGroup: estimate.animalAgeGroup,
     }
   }
 

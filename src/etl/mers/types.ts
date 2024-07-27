@@ -33,6 +33,7 @@ export interface AirtableMersEstimateFields {
   'Population Type': string;
   'Estimate Type': string;
   'Age Group (Human)': Array<string | null>;
+  'Age Group (Animal)': Array<string | null>;
   'State/Province': string | null;
   'City': string | null;
   'Country': Array<string | null>;

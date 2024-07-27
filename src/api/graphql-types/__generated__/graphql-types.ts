@@ -722,8 +722,8 @@ export type PartitionedYearlyFaoCamelPopulationDataOutput = {
   yearlyFaoCamelPopulationData: Array<YearlyFaoCamelPopulationDataEntry>;
 };
 
-export type PrimaryAnimalMersEstimateInformation = PrimaryMersEstimateInformationInterface & {
-  __typename?: 'PrimaryAnimalMersEstimateInformation';
+export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEstimateInformationInterface & {
+  __typename?: 'PrimaryAnimalMersSeroprevalenceEstimateInformation';
   animalAgeGroup: Array<Scalars['String']['output']>;
   animalDetectionSettings: Array<Scalars['String']['output']>;
   animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
@@ -828,8 +828,8 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   whoRegion?: Maybe<WhoRegion>;
 };
 
-export type PrimaryHumanMersEstimateInformation = PrimaryMersEstimateInformationInterface & {
-  __typename?: 'PrimaryHumanMersEstimateInformation';
+export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstimateInformationInterface & {
+  __typename?: 'PrimaryHumanMersSeroprevalenceEstimateInformation';
   ageGroup: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
@@ -926,7 +926,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   whoRegion?: Maybe<WhoRegion>;
 };
 
-export type PrimaryMersEstimateInformation = PrimaryAnimalMersEstimateInformation | PrimaryAnimalMersViralEstimateInformation | PrimaryHumanMersEstimateInformation | PrimaryHumanMersViralEstimateInformation;
+export type PrimaryMersEstimateInformation = PrimaryAnimalMersSeroprevalenceEstimateInformation | PrimaryAnimalMersViralEstimateInformation | PrimaryHumanMersSeroprevalenceEstimateInformation | PrimaryHumanMersViralEstimateInformation;
 
 export type PrimaryMersEstimateInformationInterface = {
   assay: Array<Scalars['String']['output']>;
@@ -1213,7 +1213,7 @@ export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
   MersEstimate_V2: ( AnimalMersEstimate ) | ( AnimalMersViralEstimate ) | ( HumanMersEstimate ) | ( HumanMersViralEstimate );
   MersEvent: ( AnimalMersEvent ) | ( HumanMersEvent );
   MersSubEstimateInformation: ( MersSeroprevalenceSubEstimateInformation ) | ( MersViralSubEstimateInformation );
-  PrimaryMersEstimateInformation: ( PrimaryAnimalMersEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
+  PrimaryMersEstimateInformation: ( PrimaryAnimalMersSeroprevalenceEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersSeroprevalenceEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
 };
 
 /** Mapping of interface types */
@@ -1222,7 +1222,7 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
   MersEventInterface: ( AnimalMersEvent ) | ( HumanMersEvent );
   MersSubEstimateInformationInterface: ( MersSeroprevalenceSubEstimateInformation ) | ( MersViralSubEstimateInformation );
   MersSubEstimateInterface: ( Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } );
-  PrimaryMersEstimateInformationInterface: ( PrimaryAnimalMersEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
+  PrimaryMersEstimateInformationInterface: ( PrimaryAnimalMersSeroprevalenceEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersSeroprevalenceEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
 };
 
 /** Mapping between all available schema types and the resolvers types */
@@ -1283,9 +1283,9 @@ export type ResolversTypes = {
   PartitionedSarsCov2EstimatesOutput: ResolverTypeWrapper<PartitionedSarsCov2EstimatesOutput>;
   PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
   PartitionedYearlyFaoCamelPopulationDataOutput: ResolverTypeWrapper<PartitionedYearlyFaoCamelPopulationDataOutput>;
-  PrimaryAnimalMersEstimateInformation: ResolverTypeWrapper<PrimaryAnimalMersEstimateInformation>;
+  PrimaryAnimalMersSeroprevalenceEstimateInformation: ResolverTypeWrapper<PrimaryAnimalMersSeroprevalenceEstimateInformation>;
   PrimaryAnimalMersViralEstimateInformation: ResolverTypeWrapper<PrimaryAnimalMersViralEstimateInformation>;
-  PrimaryHumanMersEstimateInformation: ResolverTypeWrapper<PrimaryHumanMersEstimateInformation>;
+  PrimaryHumanMersSeroprevalenceEstimateInformation: ResolverTypeWrapper<PrimaryHumanMersSeroprevalenceEstimateInformation>;
   PrimaryHumanMersViralEstimateInformation: ResolverTypeWrapper<PrimaryHumanMersViralEstimateInformation>;
   PrimaryMersEstimateInformation: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['PrimaryMersEstimateInformation']>;
   PrimaryMersEstimateInformationInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['PrimaryMersEstimateInformationInterface']>;
@@ -1347,9 +1347,9 @@ export type ResolversParentTypes = {
   PartitionedSarsCov2EstimatesOutput: PartitionedSarsCov2EstimatesOutput;
   PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
   PartitionedYearlyFaoCamelPopulationDataOutput: PartitionedYearlyFaoCamelPopulationDataOutput;
-  PrimaryAnimalMersEstimateInformation: PrimaryAnimalMersEstimateInformation;
+  PrimaryAnimalMersSeroprevalenceEstimateInformation: PrimaryAnimalMersSeroprevalenceEstimateInformation;
   PrimaryAnimalMersViralEstimateInformation: PrimaryAnimalMersViralEstimateInformation;
-  PrimaryHumanMersEstimateInformation: PrimaryHumanMersEstimateInformation;
+  PrimaryHumanMersSeroprevalenceEstimateInformation: PrimaryHumanMersSeroprevalenceEstimateInformation;
   PrimaryHumanMersViralEstimateInformation: PrimaryHumanMersViralEstimateInformation;
   PrimaryMersEstimateInformation: ResolversUnionTypes<ResolversParentTypes>['PrimaryMersEstimateInformation'];
   PrimaryMersEstimateInformationInterface: ResolversInterfaceTypes<ResolversParentTypes>['PrimaryMersEstimateInformationInterface'];
@@ -1953,7 +1953,7 @@ export type PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType =
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PrimaryAnimalMersEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryAnimalMersEstimateInformation'] = ResolversParentTypes['PrimaryAnimalMersEstimateInformation']> = {
+export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryAnimalMersSeroprevalenceEstimateInformation'] = ResolversParentTypes['PrimaryAnimalMersSeroprevalenceEstimateInformation']> = {
   animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2059,7 +2059,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type PrimaryHumanMersEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryHumanMersEstimateInformation'] = ResolversParentTypes['PrimaryHumanMersEstimateInformation']> = {
+export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryHumanMersSeroprevalenceEstimateInformation'] = ResolversParentTypes['PrimaryHumanMersSeroprevalenceEstimateInformation']> = {
   ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2158,11 +2158,11 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
 };
 
 export type PrimaryMersEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryMersEstimateInformation'] = ResolversParentTypes['PrimaryMersEstimateInformation']> = {
-  __resolveType: TypeResolveFn<'PrimaryAnimalMersEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'PrimaryAnimalMersSeroprevalenceEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersSeroprevalenceEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
 };
 
 export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryMersEstimateInformationInterface'] = ResolversParentTypes['PrimaryMersEstimateInformationInterface']> = {
-  __resolveType: TypeResolveFn<'PrimaryAnimalMersEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'PrimaryAnimalMersSeroprevalenceEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersSeroprevalenceEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2353,9 +2353,9 @@ export type Resolvers<ContextType = any> = {
   PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;
   PartitionedSarsCov2EstimatesOutput?: PartitionedSarsCov2EstimatesOutputResolvers<ContextType>;
   PartitionedYearlyFaoCamelPopulationDataOutput?: PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType>;
-  PrimaryAnimalMersEstimateInformation?: PrimaryAnimalMersEstimateInformationResolvers<ContextType>;
+  PrimaryAnimalMersSeroprevalenceEstimateInformation?: PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextType>;
   PrimaryAnimalMersViralEstimateInformation?: PrimaryAnimalMersViralEstimateInformationResolvers<ContextType>;
-  PrimaryHumanMersEstimateInformation?: PrimaryHumanMersEstimateInformationResolvers<ContextType>;
+  PrimaryHumanMersSeroprevalenceEstimateInformation?: PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextType>;
   PrimaryHumanMersViralEstimateInformation?: PrimaryHumanMersViralEstimateInformationResolvers<ContextType>;
   PrimaryMersEstimateInformation?: PrimaryMersEstimateInformationResolvers<ContextType>;
   PrimaryMersEstimateInformationInterface?: PrimaryMersEstimateInformationInterfaceResolvers<ContextType>;
