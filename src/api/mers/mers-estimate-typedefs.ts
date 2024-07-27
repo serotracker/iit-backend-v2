@@ -1,24 +1,4 @@
-export const mersTypedefs = `
-  type MersEstimate {
-    id: String!
-    seroprevalence: Float!
-    estimateId: String!
-    city: String
-    state: String
-    country: String!
-    countryAlphaTwoCode: String!
-    countryAlphaThreeCode: String!
-    latitude: Float!
-    longitude: Float!
-    whoRegion: WHORegion
-    unRegion: UNRegion
-    firstAuthorFullName: String!
-    sourceUrl: String!
-    sourceType: String!
-    sourceTitle: String!
-    insitutution: String
-  }
-
+export const mersEstimateTypedefs = `
   enum MersEstimateType {
     HUMAN_SEROPREVALENCE
     ANIMAL_SEROPREVALENCE
@@ -26,7 +6,7 @@ export const mersTypedefs = `
     ANIMAL_VIRAL
   }
 
-  interface MersEstimateInterface {
+  interface PrimaryMersEstimateInformationInterface {
     id: String!
     type: MersEstimateType!
     estimateId: String!
@@ -69,7 +49,7 @@ export const mersTypedefs = `
     testValidation: [String!]!
   }
 
-  type HumanMersViralEstimate implements MersEstimateInterface {
+  type PrimaryHumanMersViralEstimateInformation implements PrimaryMersEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
@@ -120,7 +100,7 @@ export const mersTypedefs = `
     sampleFrame: String
   }
 
-  type AnimalMersViralEstimate implements MersEstimateInterface {
+  type PrimaryAnimalMersViralEstimateInformation implements PrimaryMersEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
@@ -172,9 +152,10 @@ export const mersTypedefs = `
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
+    animalAgeGroup: [String!]!
   }
 
-  type HumanMersEstimate implements MersEstimateInterface {
+  type PrimaryHumanMersEstimateInformation implements PrimaryMersEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
@@ -225,7 +206,7 @@ export const mersTypedefs = `
     sampleFrame: String
   }
 
-  type AnimalMersEstimate implements MersEstimateInterface {
+  type PrimaryAnimalMersEstimateInformation implements PrimaryMersEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
     type: MersEstimateType!
@@ -277,183 +258,129 @@ export const mersTypedefs = `
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
+    animalAgeGroup: [String!]!
   }
 
-  union MersEstimate_V2 = HumanMersEstimate | AnimalMersEstimate | HumanMersViralEstimate |  AnimalMersViralEstimate
+  union PrimaryMersEstimateInformation = PrimaryAnimalMersEstimateInformation | PrimaryHumanMersEstimateInformation | PrimaryAnimalMersViralEstimateInformation |  PrimaryHumanMersViralEstimateInformation
 
-  enum MersDiagnosisStatus {
-    CONFIRMED
-    DENIED
+  interface MersSubEstimateInformationInterface {
+    sampleDenominator: Int
+    sampleNumerator: Int
   }
 
-  enum MersDiagnosisSource {
-    WORLD_ORGANISATION_FOR_ANIMAL_HEALTH
-    WORLD_HEALTH_ORGANIZATION
-    NATIONAL_AUTHORITIES
-    PUBLICATIONS
-    MEDIA
-    FAO_FIELD_OFFICER
-  }
-
-  enum MersAnimalType {
-    DOMESTIC
-    WILD
-  }
-
-  enum MersAnimalSpecies {
-    CAMEL
-    BAT
-    GOAT
-    SHEEP
-    CATTLE
-  }
-
-  enum MersEventAnimalType {
-    DOMESTIC
-    WILD
-  }
-
-  enum MersEventAnimalSpecies {
-    CAMEL
-    BAT
-    GOAT
-    SHEEP
-    CATTLE
-  }
-
-  enum MersEventType {
-    HUMAN
-    ANIMAL
-  }
-
-  interface MersEventInterface {
-    id: String!
-    type: MersEventType!
-    diagnosisStatus: MersDiagnosisStatus!
-    diagnosisSource: MersDiagnosisSource!
-    country: CountryIdentifiers!
-    state: String!
-    city: String!
-    latitude: Float!
-    longitude: Float!
-    whoRegion: WHORegion
-    unRegion: UNRegion
-    observationDate: String
-    reportDate: String!
-  }
-
-  type AnimalMersEvent implements MersEventInterface {
+  type MersViralSubEstimateInformation implements MersSubEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
-    id: String!
-    type: MersEventType!
-    diagnosisStatus: MersDiagnosisStatus!
-    diagnosisSource: MersDiagnosisSource!
-    country: CountryIdentifiers!
-    state: String!
-    city: String!
-    latitude: Float!
-    longitude: Float!
-    whoRegion: WHORegion
-    unRegion: UNRegion
-    observationDate: String
-    reportDate: String!
+    sampleDenominator: Int
+    sampleNumerator: Int
     ####### END INTERFACE FIELDS #######
 
-    animalType: MersEventAnimalType!
-    animalSpecies: MersEventAnimalSpecies!
+    positivePrevalence: Float!
+    positivePrevalence95CILower: Float
+    positivePrevalence95CIUpper: Float
   }
 
-  type HumanMersEvent implements MersEventInterface {
+  type MersSeroprevalenceSubEstimateInformation implements MersSubEstimateInformationInterface {
     ####### START INTERFACE FIELDS #######
-    id: String!
-    type: MersEventType!
-    diagnosisStatus: MersDiagnosisStatus!
-    diagnosisSource: MersDiagnosisSource!
-    country: CountryIdentifiers!
-    state: String!
-    city: String!
-    latitude: Float!
-    longitude: Float!
-    whoRegion: WHORegion
-    unRegion: UNRegion
-    observationDate: String
-    reportDate: String!
+    sampleDenominator: Int
+    sampleNumerator: Int
     ####### END INTERFACE FIELDS #######
 
-    humansAffected: Int!
-    humanDeaths: Int!
+    seroprevalence: Float!
+    seroprevalence95CILower: Float
+    seroprevalence95CIUpper: Float
   }
 
-  union MersEvent = AnimalMersEvent | HumanMersEvent
+  union MersSubEstimateInformation = MersViralSubEstimateInformation | MersSeroprevalenceSubEstimateInformation
 
-  input PartitionedFaoMersEventsInput {
-    partitionKey: Int!
-  }
-
-  type PartitionedFeoMersEventsOutput {
-    partitionKey: Int!
-    mersEvents: [MersEvent!]!
-  }
-
-  type MersEstimateFilterOptions {
-    sourceType: [String!]!
-    ageGroup: [String!]!
-    assay: [String!]!
-    specimenType: [String!]!
-    sex: [String!]!
-    isotypes: [String!]!
-    samplingMethod: [String!]!
-    geographicScope: [String!]!
-    animalDetectionSettings: [String!]!
-    animalPurpose: [String!]!
-    animalImportedOrLocal: [String!]!
-    sampleFrame: [String!]!
-    testProducer: [String!]!
-    testValidation: [String!]!
-  }
-
-  type MersFilterOptions {
-    countryIdentifiers: [CountryIdentifiers!]!
-    whoRegion: [WHORegion!]!
-    unRegion: [UNRegion!]!
-  }
-
-  type YearlyFaoCamelPopulationDataEntry {
+  interface MersSubEstimateInterface {
     id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+  }
+
+  type MersGeographicalAreaSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
-    country: CountryIdentifiers!
-    year: Int!
-    camelCount: Int!
-    camelCountPerCapita: Float
+    latitude: Float!
+    longitude: Float!
     whoRegion: WHORegion
     unRegion: UNRegion
-    note: String!
+    geographicScope: String
   }
 
-  input PartitionedYearlyFaoCamelPopulationDataInput {
-    partitionKey: Int!
-  }
-  
-  type PartitionedYearlyFaoCamelPopulationDataOutput {
-    partitionKey: Int!
-    yearlyFaoCamelPopulationData: [YearlyFaoCamelPopulationDataEntry!]!
+  type HumanMersAgeGroupSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    ageGroup: [String!]!
   }
 
-  type FaoMersEventFilterOptions {
-    diagnosisSource: [MersDiagnosisSource!]!
-    animalType: [MersEventAnimalType!]!
-    animalSpecies: [MersEventAnimalSpecies!]!
+  type AnimalMersAgeGroupSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    animalAgeGroup: [String!]!
+  }
+
+  union MersAgeGroupSubEstimate = HumanMersAgeGroupSubEstimate | AnimalMersAgeGroupSubEstimate
+
+  type MersTestUsedSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    assay: [String!]!
+  }
+
+  type MersAnimalSpeciesSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    animalSpecies: MersAnimalSpecies!
+  }
+
+  type MersSexSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    sex: String
+  }
+
+  type MersPrimaryEstimate {
+    id: String!
+    estimateId: String!
+    primaryEstimateInfo: PrimaryMersEstimateInformation!
+    geographicalAreaSubestimates: [MersGeographicalAreaSubEstimate!]!
+    ageGroupSubestimates: [MersAgeGroupSubEstimate!]!
+    testUsedSubestimates: [MersTestUsedSubEstimate!]!
+    animalSpeciesSubestimates: [MersAnimalSpeciesSubEstimate!]!
+    sexSubestimates: [MersSexSubEstimate!]!
   }
 
   type Query {
-    mersEstimates: [MersEstimate!]!
-    mersEstimates_V2: [MersEstimate_V2!]!
-    mersFilterOptions: MersFilterOptions!
-    mersEstimatesFilterOptions: MersEstimateFilterOptions!
-    allFaoMersEventPartitionKeys: [Int!]!
-    partitionedFaoMersEvents(input: PartitionedFaoMersEventsInput!): PartitionedFeoMersEventsOutput!
-    faoMersEventFilterOptions: FaoMersEventFilterOptions!
-    yearlyFaoCamelPopulationDataPartitionKeys: [Int!]!
-    partitionedYearlyFaoCamelPopulationData(input: PartitionedYearlyFaoCamelPopulationDataInput!): PartitionedYearlyFaoCamelPopulationDataOutput!
+    mersPrimaryEstimates: [MersPrimaryEstimate!]!
   }
 `
