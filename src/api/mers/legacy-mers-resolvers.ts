@@ -375,59 +375,6 @@ export const generateLegacyMersResolvers = (input: GenerateLegacyMersResolversIn
     }
   }
   
-  const mersEstimatesFilterOptions = async () => {
-    const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
-
-    const [
-      sourceType,
-      ageGroup,
-      assay,
-      specimenType,
-      sex,
-      isotypes,
-      samplingMethod,
-      geographicScope,
-      animalDetectionSettings,
-      animalPurpose,
-      animalImportedOrLocal,
-      sampleFrame,
-      testProducer,
-      testValidation
-    ] = await Promise.all([
-      estimateCollection.distinct('sourceType').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('assay').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('specimenType').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('isotypes').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('samplingMethod').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('geographicScope').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('animalDetectionSettings').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('animalPurpose').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('animalImportedOrLocal').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('testProducer').then((elements) => filterUndefinedValuesFromArray(elements)),
-      estimateCollection.distinct('testValidation').then((elements) => filterUndefinedValuesFromArray(elements)),
-    ])
-
-    return {
-      sourceType,
-      ageGroup,
-      assay,
-      specimenType,
-      sex,
-      isotypes,
-      samplingMethod,
-      geographicScope,
-      animalDetectionSettings,
-      animalPurpose,
-      animalImportedOrLocal,
-      sampleFrame,
-      testProducer,
-      testValidation
-    }
-  }
-
   const allFaoMersEventPartitionKeys = async () => {
     const [
       partitionKeys
@@ -518,7 +465,6 @@ export const generateLegacyMersResolvers = (input: GenerateLegacyMersResolversIn
         mersEstimates,
         mersEstimates_V2,
         mersFilterOptions,
-        mersEstimatesFilterOptions,
         allFaoMersEventPartitionKeys,
         partitionedFaoMersEvents,
         faoMersEventFilterOptions,

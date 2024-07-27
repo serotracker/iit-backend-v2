@@ -1,5 +1,14 @@
 import { MongoClient, ObjectId } from "mongodb";
-import { MersEstimateDocument, MersEventType, FaoMersEventDocumentBase, FaoMersEventDocument, FaoYearlyCamelPopulationDataDocument, MersEstimateType, MersEstimateDocumentBase } from "../../../storage/types.js";
+import {
+  MersEstimateDocument,
+  MersEventType,
+  FaoMersEventDocumentBase,
+  FaoMersEventDocument,
+  FaoYearlyCamelPopulationDataDocument,
+  MersEstimateType,
+  MersEstimateDocumentBase,
+  MersEstimateFilterOptionsDocument
+} from "../../../storage/types.js";
 import assertNever from "assert-never";
 import {
   CountryFieldsAfterApplyingTypedEstimateConstraintsStep,
@@ -10,12 +19,15 @@ import {
   StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
   YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
 } from "./apply-typed-estimate-constraints-step.js";
-import { EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep, GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep } from "./group-estimates-under-primary-estimates-step.js";
+import {
+  EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep,
+  GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep
+} from "./group-estimates-under-primary-estimates-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
 export type GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep = GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
-export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = MersEstimateFilterOptionsDocument;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
@@ -233,6 +245,32 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
   assertNever(estimate);
 }
 
+interface TransformMersEstimateFilterOptionsForDatabaseInput {
+  estimateFilterOptions: EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+export const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstimateFilterOptionsForDatabaseInput): MersEstimateFilterOptionsDocument => ({
+  _id: new ObjectId(),
+  sourceType: input.estimateFilterOptions.sourceType,
+  ageGroup: input.estimateFilterOptions.ageGroup,
+  assay: input.estimateFilterOptions.assay,
+  specimenType: input.estimateFilterOptions.specimenType,
+  sex: input.estimateFilterOptions.sex,
+  isotypes: input.estimateFilterOptions.isotypes,
+  samplingMethod: input.estimateFilterOptions.samplingMethod,
+  geographicScope: input.estimateFilterOptions.geographicScope,
+  animalDetectionSettings: input.estimateFilterOptions.animalDetectionSettings,
+  animalPurpose: input.estimateFilterOptions.animalPurpose,
+  animalImportedOrLocal: input.estimateFilterOptions.animalImportedOrLocal,
+  sampleFrame: input.estimateFilterOptions.sampleFrame,
+  testProducer: input.estimateFilterOptions.testProducer,
+  testValidation: input.estimateFilterOptions.testValidation,
+  createdAt: input.createdAtForAllRecords,
+  updatedAt: input.updatedAtForAllRecords,
+});
+
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
@@ -249,7 +287,11 @@ export const transformIntoFormatForDatabaseStep = (
     })),
     allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
-    estimateFilterOptions: input.estimateFilterOptions,
+    estimateFilterOptions: transformMersEstimateFilterOptionsForDatabase({
+      estimateFilterOptions: input.estimateFilterOptions,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
+    }),
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => transformFaoMersEventForDatabase({
