@@ -22,6 +22,14 @@ export type Affiliation = {
   label: Scalars['String']['output'];
 };
 
+export type AnimalMersAgeGroupSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'AnimalMersAgeGroupSubEstimate';
+  animalAgeGroup: Array<Scalars['String']['output']>;
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
+
 export type AnimalMersEstimate = MersEstimateInterface & {
   __typename?: 'AnimalMersEstimate';
   animalDetectionSettings: Array<Scalars['String']['output']>;
@@ -271,6 +279,14 @@ export enum GbdSuperRegion {
   SubSaharanAfrica = 'SUB_SAHARAN_AFRICA'
 }
 
+export type HumanMersAgeGroupSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'HumanMersAgeGroupSubEstimate';
+  ageGroup: Array<Scalars['String']['output']>;
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
+
 export type HumanMersEstimate = MersEstimateInterface & {
   __typename?: 'HumanMersEstimate';
   ageGroup: Array<Scalars['String']['output']>;
@@ -388,6 +404,8 @@ export type HumanMersViralEstimate = MersEstimateInterface & {
   whoRegion?: Maybe<WhoRegion>;
 };
 
+export type MersAgeGroupSubEstimate = AnimalMersAgeGroupSubEstimate | HumanMersAgeGroupSubEstimate;
+
 export enum MersAnimalSpecies {
   Bat = 'BAT',
   Camel = 'CAMEL',
@@ -395,6 +413,14 @@ export enum MersAnimalSpecies {
   Goat = 'GOAT',
   Sheep = 'SHEEP'
 }
+
+export type MersAnimalSpeciesSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersAnimalSpeciesSubEstimate';
+  animalSpecies: MersAnimalSpecies;
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
 
 export enum MersAnimalType {
   Domestic = 'DOMESTIC',
@@ -549,6 +575,82 @@ export type MersFilterOptions = {
   whoRegion: Array<WhoRegion>;
 };
 
+export type MersGeographicalAreaSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersGeographicalAreaSubEstimate';
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  geographicScope?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  state?: Maybe<Scalars['String']['output']>;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type MersPrimaryEstimate = {
+  __typename?: 'MersPrimaryEstimate';
+  ageGroupSubestimates: Array<MersAgeGroupSubEstimate>;
+  animalSpeciesSubestimates: Array<MersAnimalSpeciesSubEstimate>;
+  estimateId: Scalars['String']['output'];
+  geographicalAreaSubestimates: Array<MersGeographicalAreaSubEstimate>;
+  id: Scalars['String']['output'];
+  primaryEstimateInfo: PrimaryMersEstimateInformation;
+  sexSubestimates: Array<MersSexSubEstimate>;
+  testUsedSubestimates: Array<MersTestUsedSubEstimate>;
+};
+
+export type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformationInterface & {
+  __typename?: 'MersSeroprevalenceSubEstimateInformation';
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  seroprevalence: Scalars['Float']['output'];
+  seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+};
+
+export type MersSexSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersSexSubEstimate';
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+  sex?: Maybe<Scalars['String']['output']>;
+};
+
+export type MersSubEstimateInformation = MersSeroprevalenceSubEstimateInformation | MersViralSubEstimateInformation;
+
+export type MersSubEstimateInformationInterface = {
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+};
+
+export type MersSubEstimateInterface = {
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
+
+export type MersTestUsedSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersTestUsedSubEstimate';
+  assay: Array<Scalars['String']['output']>;
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
+
+export type MersViralSubEstimateInformation = MersSubEstimateInformationInterface & {
+  __typename?: 'MersViralSubEstimateInformation';
+  positivePrevalence: Scalars['Float']['output'];
+  positivePrevalence95CILower?: Maybe<Scalars['Float']['output']>;
+  positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+};
+
 export enum Month {
   April = 'APRIL',
   August = 'AUGUST',
@@ -620,6 +722,255 @@ export type PartitionedYearlyFaoCamelPopulationDataOutput = {
   yearlyFaoCamelPopulationData: Array<YearlyFaoCamelPopulationDataEntry>;
 };
 
+export type PrimaryAnimalMersEstimateInformation = PrimaryMersEstimateInformationInterface & {
+  __typename?: 'PrimaryAnimalMersEstimateInformation';
+  animalAgeGroup: Array<Scalars['String']['output']>;
+  animalDetectionSettings: Array<Scalars['String']['output']>;
+  animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
+  animalPurpose?: Maybe<Scalars['String']['output']>;
+  animalSpecies: MersAnimalSpecies;
+  animalType: Array<MersAnimalType>;
+  assay: Array<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  firstAuthorFullName: Scalars['String']['output'];
+  geographicScope?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMethod?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
+  sensitivity?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  seroprevalence: Scalars['Float']['output'];
+  seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  sourceTitle: Scalars['String']['output'];
+  sourceType: Scalars['String']['output'];
+  sourceUrl: Scalars['String']['output'];
+  specificity?: Maybe<Scalars['Float']['output']>;
+  specificity95CILower?: Maybe<Scalars['Float']['output']>;
+  specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  specificityDenominator?: Maybe<Scalars['Int']['output']>;
+  specimenType?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
+  testProducer: Array<Scalars['String']['output']>;
+  testValidation: Array<Scalars['String']['output']>;
+  type: MersEstimateType;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInformationInterface & {
+  __typename?: 'PrimaryAnimalMersViralEstimateInformation';
+  animalAgeGroup: Array<Scalars['String']['output']>;
+  animalDetectionSettings: Array<Scalars['String']['output']>;
+  animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
+  animalPurpose?: Maybe<Scalars['String']['output']>;
+  animalSpecies: MersAnimalSpecies;
+  animalType: Array<MersAnimalType>;
+  assay: Array<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  firstAuthorFullName: Scalars['String']['output'];
+  geographicScope?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  positivePrevalence: Scalars['Float']['output'];
+  positivePrevalence95CILower?: Maybe<Scalars['Float']['output']>;
+  positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMethod?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
+  sensitivity?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  sourceTitle: Scalars['String']['output'];
+  sourceType: Scalars['String']['output'];
+  sourceUrl: Scalars['String']['output'];
+  specificity?: Maybe<Scalars['Float']['output']>;
+  specificity95CILower?: Maybe<Scalars['Float']['output']>;
+  specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  specificityDenominator?: Maybe<Scalars['Int']['output']>;
+  specimenType?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
+  testProducer: Array<Scalars['String']['output']>;
+  testValidation: Array<Scalars['String']['output']>;
+  type: MersEstimateType;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type PrimaryHumanMersEstimateInformation = PrimaryMersEstimateInformationInterface & {
+  __typename?: 'PrimaryHumanMersEstimateInformation';
+  ageGroup: Array<Scalars['String']['output']>;
+  assay: Array<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  firstAuthorFullName: Scalars['String']['output'];
+  geographicScope?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMethod?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
+  sensitivity?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  seroprevalence: Scalars['Float']['output'];
+  seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  sourceTitle: Scalars['String']['output'];
+  sourceType: Scalars['String']['output'];
+  sourceUrl: Scalars['String']['output'];
+  specificity?: Maybe<Scalars['Float']['output']>;
+  specificity95CILower?: Maybe<Scalars['Float']['output']>;
+  specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  specificityDenominator?: Maybe<Scalars['Int']['output']>;
+  specimenType?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
+  testProducer: Array<Scalars['String']['output']>;
+  testValidation: Array<Scalars['String']['output']>;
+  type: MersEstimateType;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInformationInterface & {
+  __typename?: 'PrimaryHumanMersViralEstimateInformation';
+  ageGroup: Array<Scalars['String']['output']>;
+  assay: Array<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  firstAuthorFullName: Scalars['String']['output'];
+  geographicScope?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  positivePrevalence: Scalars['Float']['output'];
+  positivePrevalence95CILower?: Maybe<Scalars['Float']['output']>;
+  positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMethod?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
+  sensitivity?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  sourceTitle: Scalars['String']['output'];
+  sourceType: Scalars['String']['output'];
+  sourceUrl: Scalars['String']['output'];
+  specificity?: Maybe<Scalars['Float']['output']>;
+  specificity95CILower?: Maybe<Scalars['Float']['output']>;
+  specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  specificityDenominator?: Maybe<Scalars['Int']['output']>;
+  specimenType?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
+  testProducer: Array<Scalars['String']['output']>;
+  testValidation: Array<Scalars['String']['output']>;
+  type: MersEstimateType;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type PrimaryMersEstimateInformation = PrimaryAnimalMersEstimateInformation | PrimaryAnimalMersViralEstimateInformation | PrimaryHumanMersEstimateInformation | PrimaryHumanMersViralEstimateInformation;
+
+export type PrimaryMersEstimateInformationInterface = {
+  assay: Array<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  firstAuthorFullName: Scalars['String']['output'];
+  geographicScope?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  insitutution?: Maybe<Scalars['String']['output']>;
+  isotypes: Array<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  sampleDenominator?: Maybe<Scalars['Int']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  samplingEndDate?: Maybe<Scalars['String']['output']>;
+  samplingMethod?: Maybe<Scalars['String']['output']>;
+  samplingMidDate?: Maybe<Scalars['String']['output']>;
+  samplingStartDate?: Maybe<Scalars['String']['output']>;
+  sensitivity?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
+  sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sex?: Maybe<Scalars['String']['output']>;
+  sourceTitle: Scalars['String']['output'];
+  sourceType: Scalars['String']['output'];
+  sourceUrl: Scalars['String']['output'];
+  specificity?: Maybe<Scalars['Float']['output']>;
+  specificity95CILower?: Maybe<Scalars['Float']['output']>;
+  specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
+  specificityDenominator?: Maybe<Scalars['Int']['output']>;
+  specimenType?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
+  studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
+  testProducer: Array<Scalars['String']['output']>;
+  testValidation: Array<Scalars['String']['output']>;
+  type: MersEstimateType;
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
 export type Query = {
   __typename?: 'Query';
   allFaoMersEventPartitionKeys: Array<Scalars['Int']['output']>;
@@ -634,6 +985,7 @@ export type Query = {
   mersEstimatesFilterOptions: MersEstimateFilterOptions;
   mersEstimates_V2: Array<MersEstimate_V2>;
   mersFilterOptions: MersFilterOptions;
+  mersPrimaryEstimates: Array<MersPrimaryEstimate>;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
   partitionedMonthlySarsCov2CountryInformation: PartitionedMonthlySarsCov2CountryInformationOutput;
@@ -857,19 +1209,26 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping of union types */
 export type ResolversUnionTypes<_RefType extends Record<string, unknown>> = {
+  MersAgeGroupSubEstimate: ( Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } );
   MersEstimate_V2: ( AnimalMersEstimate ) | ( AnimalMersViralEstimate ) | ( HumanMersEstimate ) | ( HumanMersViralEstimate );
   MersEvent: ( AnimalMersEvent ) | ( HumanMersEvent );
+  MersSubEstimateInformation: ( MersSeroprevalenceSubEstimateInformation ) | ( MersViralSubEstimateInformation );
+  PrimaryMersEstimateInformation: ( PrimaryAnimalMersEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
 };
 
 /** Mapping of interface types */
 export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = {
   MersEstimateInterface: ( AnimalMersEstimate ) | ( AnimalMersViralEstimate ) | ( HumanMersEstimate ) | ( HumanMersViralEstimate );
   MersEventInterface: ( AnimalMersEvent ) | ( HumanMersEvent );
+  MersSubEstimateInformationInterface: ( MersSeroprevalenceSubEstimateInformation ) | ( MersViralSubEstimateInformation );
+  MersSubEstimateInterface: ( Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } );
+  PrimaryMersEstimateInformationInterface: ( PrimaryAnimalMersEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
 };
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Affiliation: ResolverTypeWrapper<Affiliation>;
+  AnimalMersAgeGroupSubEstimate: ResolverTypeWrapper<Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   AnimalMersEstimate: ResolverTypeWrapper<AnimalMersEstimate>;
   AnimalMersEvent: ResolverTypeWrapper<AnimalMersEvent>;
   AnimalMersViralEstimate: ResolverTypeWrapper<AnimalMersViralEstimate>;
@@ -883,11 +1242,14 @@ export type ResolversTypes = {
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   GBDSubRegion: GbdSubRegion;
   GBDSuperRegion: GbdSuperRegion;
+  HumanMersAgeGroupSubEstimate: ResolverTypeWrapper<Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   HumanMersEstimate: ResolverTypeWrapper<HumanMersEstimate>;
   HumanMersEvent: ResolverTypeWrapper<HumanMersEvent>;
   HumanMersViralEstimate: ResolverTypeWrapper<HumanMersViralEstimate>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  MersAgeGroupSubEstimate: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['MersAgeGroupSubEstimate']>;
   MersAnimalSpecies: MersAnimalSpecies;
+  MersAnimalSpeciesSubEstimate: ResolverTypeWrapper<Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersAnimalType: MersAnimalType;
   MersDiagnosisSource: MersDiagnosisSource;
   MersDiagnosisStatus: MersDiagnosisStatus;
@@ -902,6 +1264,15 @@ export type ResolversTypes = {
   MersEventInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['MersEventInterface']>;
   MersEventType: MersEventType;
   MersFilterOptions: ResolverTypeWrapper<MersFilterOptions>;
+  MersGeographicalAreaSubEstimate: ResolverTypeWrapper<Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersPrimaryEstimate: ResolverTypeWrapper<Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSpeciesSubestimates' | 'geographicalAreaSubestimates' | 'primaryEstimateInfo' | 'sexSubestimates' | 'testUsedSubestimates'> & { ageGroupSubestimates: Array<ResolversTypes['MersAgeGroupSubEstimate']>, animalSpeciesSubestimates: Array<ResolversTypes['MersAnimalSpeciesSubEstimate']>, geographicalAreaSubestimates: Array<ResolversTypes['MersGeographicalAreaSubEstimate']>, primaryEstimateInfo: ResolversTypes['PrimaryMersEstimateInformation'], sexSubestimates: Array<ResolversTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversTypes['MersTestUsedSubEstimate']> }>;
+  MersSeroprevalenceSubEstimateInformation: ResolverTypeWrapper<MersSeroprevalenceSubEstimateInformation>;
+  MersSexSubEstimate: ResolverTypeWrapper<Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersSubEstimateInformation: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['MersSubEstimateInformation']>;
+  MersSubEstimateInformationInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['MersSubEstimateInformationInterface']>;
+  MersSubEstimateInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['MersSubEstimateInterface']>;
+  MersTestUsedSubEstimate: ResolverTypeWrapper<Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersViralSubEstimateInformation: ResolverTypeWrapper<MersViralSubEstimateInformation>;
   Month: Month;
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
@@ -912,6 +1283,12 @@ export type ResolversTypes = {
   PartitionedSarsCov2EstimatesOutput: ResolverTypeWrapper<PartitionedSarsCov2EstimatesOutput>;
   PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
   PartitionedYearlyFaoCamelPopulationDataOutput: ResolverTypeWrapper<PartitionedYearlyFaoCamelPopulationDataOutput>;
+  PrimaryAnimalMersEstimateInformation: ResolverTypeWrapper<PrimaryAnimalMersEstimateInformation>;
+  PrimaryAnimalMersViralEstimateInformation: ResolverTypeWrapper<PrimaryAnimalMersViralEstimateInformation>;
+  PrimaryHumanMersEstimateInformation: ResolverTypeWrapper<PrimaryHumanMersEstimateInformation>;
+  PrimaryHumanMersViralEstimateInformation: ResolverTypeWrapper<PrimaryHumanMersViralEstimateInformation>;
+  PrimaryMersEstimateInformation: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['PrimaryMersEstimateInformation']>;
+  PrimaryMersEstimateInformationInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['PrimaryMersEstimateInformationInterface']>;
   Query: ResolverTypeWrapper<{}>;
   SarsCov2Estimate: ResolverTypeWrapper<SarsCov2Estimate>;
   SarsCov2FilterOptions: ResolverTypeWrapper<SarsCov2FilterOptions>;
@@ -927,6 +1304,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Affiliation: Affiliation;
+  AnimalMersAgeGroupSubEstimate: Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   AnimalMersEstimate: AnimalMersEstimate;
   AnimalMersEvent: AnimalMersEvent;
   AnimalMersViralEstimate: AnimalMersViralEstimate;
@@ -937,10 +1315,13 @@ export type ResolversParentTypes = {
   CountryIdentifiers: CountryIdentifiers;
   FaoMersEventFilterOptions: FaoMersEventFilterOptions;
   Float: Scalars['Float']['output'];
+  HumanMersAgeGroupSubEstimate: Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   HumanMersEstimate: HumanMersEstimate;
   HumanMersEvent: HumanMersEvent;
   HumanMersViralEstimate: HumanMersViralEstimate;
   Int: Scalars['Int']['output'];
+  MersAgeGroupSubEstimate: ResolversUnionTypes<ResolversParentTypes>['MersAgeGroupSubEstimate'];
+  MersAnimalSpeciesSubEstimate: Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersEstimate: MersEstimate;
   MersEstimateFilterOptions: MersEstimateFilterOptions;
   MersEstimateInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersEstimateInterface'];
@@ -948,6 +1329,15 @@ export type ResolversParentTypes = {
   MersEvent: ResolversUnionTypes<ResolversParentTypes>['MersEvent'];
   MersEventInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersEventInterface'];
   MersFilterOptions: MersFilterOptions;
+  MersGeographicalAreaSubEstimate: Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersPrimaryEstimate: Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSpeciesSubestimates' | 'geographicalAreaSubestimates' | 'primaryEstimateInfo' | 'sexSubestimates' | 'testUsedSubestimates'> & { ageGroupSubestimates: Array<ResolversParentTypes['MersAgeGroupSubEstimate']>, animalSpeciesSubestimates: Array<ResolversParentTypes['MersAnimalSpeciesSubEstimate']>, geographicalAreaSubestimates: Array<ResolversParentTypes['MersGeographicalAreaSubEstimate']>, primaryEstimateInfo: ResolversParentTypes['PrimaryMersEstimateInformation'], sexSubestimates: Array<ResolversParentTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversParentTypes['MersTestUsedSubEstimate']> };
+  MersSeroprevalenceSubEstimateInformation: MersSeroprevalenceSubEstimateInformation;
+  MersSexSubEstimate: Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersSubEstimateInformation: ResolversUnionTypes<ResolversParentTypes>['MersSubEstimateInformation'];
+  MersSubEstimateInformationInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersSubEstimateInformationInterface'];
+  MersSubEstimateInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersSubEstimateInterface'];
+  MersTestUsedSubEstimate: Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersViralSubEstimateInformation: MersViralSubEstimateInformation;
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversParentTypes['MersEvent']> };
@@ -957,6 +1347,12 @@ export type ResolversParentTypes = {
   PartitionedSarsCov2EstimatesOutput: PartitionedSarsCov2EstimatesOutput;
   PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
   PartitionedYearlyFaoCamelPopulationDataOutput: PartitionedYearlyFaoCamelPopulationDataOutput;
+  PrimaryAnimalMersEstimateInformation: PrimaryAnimalMersEstimateInformation;
+  PrimaryAnimalMersViralEstimateInformation: PrimaryAnimalMersViralEstimateInformation;
+  PrimaryHumanMersEstimateInformation: PrimaryHumanMersEstimateInformation;
+  PrimaryHumanMersViralEstimateInformation: PrimaryHumanMersViralEstimateInformation;
+  PrimaryMersEstimateInformation: ResolversUnionTypes<ResolversParentTypes>['PrimaryMersEstimateInformation'];
+  PrimaryMersEstimateInformationInterface: ResolversInterfaceTypes<ResolversParentTypes>['PrimaryMersEstimateInformationInterface'];
   Query: {};
   SarsCov2Estimate: SarsCov2Estimate;
   SarsCov2FilterOptions: SarsCov2FilterOptions;
@@ -968,6 +1364,14 @@ export type ResolversParentTypes = {
 
 export type AffiliationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Affiliation'] = ResolversParentTypes['Affiliation']> = {
   label?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AnimalMersAgeGroupSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AnimalMersAgeGroupSubEstimate'] = ResolversParentTypes['AnimalMersAgeGroupSubEstimate']> = {
+  animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1177,6 +1581,14 @@ export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type HumanMersAgeGroupSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersAgeGroupSubEstimate'] = ResolversParentTypes['HumanMersAgeGroupSubEstimate']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type HumanMersEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersEstimate'] = ResolversParentTypes['HumanMersEstimate']> = {
   ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1291,6 +1703,18 @@ export type HumanMersViralEstimateResolvers<ContextType = any, ParentType extend
   type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersAgeGroupSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAgeGroupSubEstimate'] = ResolversParentTypes['MersAgeGroupSubEstimate']> = {
+  __resolveType: TypeResolveFn<'AnimalMersAgeGroupSubEstimate' | 'HumanMersAgeGroupSubEstimate', ParentType, ContextType>;
+};
+
+export type MersAnimalSpeciesSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAnimalSpeciesSubEstimate'] = ResolversParentTypes['MersAnimalSpeciesSubEstimate']> = {
+  animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1409,6 +1833,86 @@ export type MersFilterOptionsResolvers<ContextType = any, ParentType extends Res
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MersGeographicalAreaSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersGeographicalAreaSubEstimate'] = ResolversParentTypes['MersGeographicalAreaSubEstimate']> = {
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersPrimaryEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersPrimaryEstimate'] = ResolversParentTypes['MersPrimaryEstimate']> = {
+  ageGroupSubestimates?: Resolver<Array<ResolversTypes['MersAgeGroupSubEstimate']>, ParentType, ContextType>;
+  animalSpeciesSubestimates?: Resolver<Array<ResolversTypes['MersAnimalSpeciesSubEstimate']>, ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  geographicalAreaSubestimates?: Resolver<Array<ResolversTypes['MersGeographicalAreaSubEstimate']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  primaryEstimateInfo?: Resolver<ResolversTypes['PrimaryMersEstimateInformation'], ParentType, ContextType>;
+  sexSubestimates?: Resolver<Array<ResolversTypes['MersSexSubEstimate']>, ParentType, ContextType>;
+  testUsedSubestimates?: Resolver<Array<ResolversTypes['MersTestUsedSubEstimate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersSeroprevalenceSubEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSeroprevalenceSubEstimateInformation'] = ResolversParentTypes['MersSeroprevalenceSubEstimateInformation']> = {
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersSexSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSexSubEstimate'] = ResolversParentTypes['MersSexSubEstimate']> = {
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersSubEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSubEstimateInformation'] = ResolversParentTypes['MersSubEstimateInformation']> = {
+  __resolveType: TypeResolveFn<'MersSeroprevalenceSubEstimateInformation' | 'MersViralSubEstimateInformation', ParentType, ContextType>;
+};
+
+export type MersSubEstimateInformationInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSubEstimateInformationInterface'] = ResolversParentTypes['MersSubEstimateInformationInterface']> = {
+  __resolveType: TypeResolveFn<'MersSeroprevalenceSubEstimateInformation' | 'MersViralSubEstimateInformation', ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+};
+
+export type MersSubEstimateInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSubEstimateInterface'] = ResolversParentTypes['MersSubEstimateInterface']> = {
+  __resolveType: TypeResolveFn<'AnimalMersAgeGroupSubEstimate' | 'HumanMersAgeGroupSubEstimate' | 'MersAnimalSpeciesSubEstimate' | 'MersGeographicalAreaSubEstimate' | 'MersSexSubEstimate' | 'MersTestUsedSubEstimate', ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+};
+
+export type MersTestUsedSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersTestUsedSubEstimate'] = ResolversParentTypes['MersTestUsedSubEstimate']> = {
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersViralSubEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersViralSubEstimateInformation'] = ResolversParentTypes['MersViralSubEstimateInformation']> = {
+  positivePrevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MonthlySarsCov2CountryInformationEntry'] = ResolversParentTypes['MonthlySarsCov2CountryInformationEntry']> = {
   alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1449,6 +1953,258 @@ export type PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType =
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PrimaryAnimalMersEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryAnimalMersEstimateInformation'] = ResolversParentTypes['PrimaryAnimalMersEstimateInformation']> = {
+  animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  animalPurpose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
+  animalType?: Resolver<Array<ResolversTypes['MersAnimalType']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specificity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  testProducer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  testValidation?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryAnimalMersViralEstimateInformation'] = ResolversParentTypes['PrimaryAnimalMersViralEstimateInformation']> = {
+  animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  animalPurpose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
+  animalType?: Resolver<Array<ResolversTypes['MersAnimalType']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specificity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  testProducer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  testValidation?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PrimaryHumanMersEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryHumanMersEstimateInformation'] = ResolversParentTypes['PrimaryHumanMersEstimateInformation']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specificity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  testProducer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  testValidation?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryHumanMersViralEstimateInformation'] = ResolversParentTypes['PrimaryHumanMersViralEstimateInformation']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specificity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  testProducer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  testValidation?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type PrimaryMersEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryMersEstimateInformation'] = ResolversParentTypes['PrimaryMersEstimateInformation']> = {
+  __resolveType: TypeResolveFn<'PrimaryAnimalMersEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
+};
+
+export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryMersEstimateInformationInterface'] = ResolversParentTypes['PrimaryMersEstimateInformationInterface']> = {
+  __resolveType: TypeResolveFn<'PrimaryAnimalMersEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingMidDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  samplingStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sensitivity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specificity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  testProducer?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  testValidation?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['MersEstimateType'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   allFaoMersEventPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allMonthlySarsCov2CountryInformationPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -1462,6 +2218,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mersEstimatesFilterOptions?: Resolver<ResolversTypes['MersEstimateFilterOptions'], ParentType, ContextType>;
   mersEstimates_V2?: Resolver<Array<ResolversTypes['MersEstimate_V2']>, ParentType, ContextType>;
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
+  mersPrimaryEstimates?: Resolver<Array<ResolversTypes['MersPrimaryEstimate']>, ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
   partitionedMonthlySarsCov2CountryInformation?: Resolver<ResolversTypes['PartitionedMonthlySarsCov2CountryInformationOutput'], ParentType, ContextType, RequireFields<QueryPartitionedMonthlySarsCov2CountryInformationArgs, 'input'>>;
@@ -1560,6 +2317,7 @@ export type YearlyFaoCamelPopulationDataEntryResolvers<ContextType = any, Parent
 
 export type Resolvers<ContextType = any> = {
   Affiliation?: AffiliationResolvers<ContextType>;
+  AnimalMersAgeGroupSubEstimate?: AnimalMersAgeGroupSubEstimateResolvers<ContextType>;
   AnimalMersEstimate?: AnimalMersEstimateResolvers<ContextType>;
   AnimalMersEvent?: AnimalMersEventResolvers<ContextType>;
   AnimalMersViralEstimate?: AnimalMersViralEstimateResolvers<ContextType>;
@@ -1568,9 +2326,12 @@ export type Resolvers<ContextType = any> = {
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;
   FaoMersEventFilterOptions?: FaoMersEventFilterOptionsResolvers<ContextType>;
+  HumanMersAgeGroupSubEstimate?: HumanMersAgeGroupSubEstimateResolvers<ContextType>;
   HumanMersEstimate?: HumanMersEstimateResolvers<ContextType>;
   HumanMersEvent?: HumanMersEventResolvers<ContextType>;
   HumanMersViralEstimate?: HumanMersViralEstimateResolvers<ContextType>;
+  MersAgeGroupSubEstimate?: MersAgeGroupSubEstimateResolvers<ContextType>;
+  MersAnimalSpeciesSubEstimate?: MersAnimalSpeciesSubEstimateResolvers<ContextType>;
   MersEstimate?: MersEstimateResolvers<ContextType>;
   MersEstimateFilterOptions?: MersEstimateFilterOptionsResolvers<ContextType>;
   MersEstimateInterface?: MersEstimateInterfaceResolvers<ContextType>;
@@ -1578,11 +2339,26 @@ export type Resolvers<ContextType = any> = {
   MersEvent?: MersEventResolvers<ContextType>;
   MersEventInterface?: MersEventInterfaceResolvers<ContextType>;
   MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
+  MersGeographicalAreaSubEstimate?: MersGeographicalAreaSubEstimateResolvers<ContextType>;
+  MersPrimaryEstimate?: MersPrimaryEstimateResolvers<ContextType>;
+  MersSeroprevalenceSubEstimateInformation?: MersSeroprevalenceSubEstimateInformationResolvers<ContextType>;
+  MersSexSubEstimate?: MersSexSubEstimateResolvers<ContextType>;
+  MersSubEstimateInformation?: MersSubEstimateInformationResolvers<ContextType>;
+  MersSubEstimateInformationInterface?: MersSubEstimateInformationInterfaceResolvers<ContextType>;
+  MersSubEstimateInterface?: MersSubEstimateInterfaceResolvers<ContextType>;
+  MersTestUsedSubEstimate?: MersTestUsedSubEstimateResolvers<ContextType>;
+  MersViralSubEstimateInformation?: MersViralSubEstimateInformationResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;
   PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;
   PartitionedSarsCov2EstimatesOutput?: PartitionedSarsCov2EstimatesOutputResolvers<ContextType>;
   PartitionedYearlyFaoCamelPopulationDataOutput?: PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType>;
+  PrimaryAnimalMersEstimateInformation?: PrimaryAnimalMersEstimateInformationResolvers<ContextType>;
+  PrimaryAnimalMersViralEstimateInformation?: PrimaryAnimalMersViralEstimateInformationResolvers<ContextType>;
+  PrimaryHumanMersEstimateInformation?: PrimaryHumanMersEstimateInformationResolvers<ContextType>;
+  PrimaryHumanMersViralEstimateInformation?: PrimaryHumanMersViralEstimateInformationResolvers<ContextType>;
+  PrimaryMersEstimateInformation?: PrimaryMersEstimateInformationResolvers<ContextType>;
+  PrimaryMersEstimateInformationInterface?: PrimaryMersEstimateInformationInterfaceResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   SarsCov2Estimate?: SarsCov2EstimateResolvers<ContextType>;
   SarsCov2FilterOptions?: SarsCov2FilterOptionsResolvers<ContextType>;

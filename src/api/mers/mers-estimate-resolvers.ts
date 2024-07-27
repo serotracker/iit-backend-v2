@@ -12,7 +12,9 @@ interface GenerateMersEstimateResolversOutput {
 export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolversInput): GenerateMersEstimateResolversOutput => {
   return {
     mersEstimateResolvers: {
-      Query: {}
+      Query: {
+        mersPrimaryEstimates: () => []
+      }
     }
   }
 }
