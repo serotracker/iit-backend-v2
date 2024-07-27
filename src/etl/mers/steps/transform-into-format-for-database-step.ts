@@ -7,7 +7,9 @@ import {
   FaoYearlyCamelPopulationDataDocument,
   MersEstimateType,
   MersEstimateDocumentBase,
-  MersEstimateFilterOptionsDocument
+  MersEstimateFilterOptionsDocument,
+  MersPrimaryEstimateDocument,
+  MersSubEstimateBase
 } from "../../../storage/types.js";
 import assertNever from "assert-never";
 import {
@@ -25,7 +27,7 @@ import {
 } from "./group-estimates-under-primary-estimates-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
-export type GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep = GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+export type GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep = MersPrimaryEstimateDocument;
 export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = MersEstimateFilterOptionsDocument;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
@@ -251,7 +253,7 @@ interface TransformMersEstimateFilterOptionsForDatabaseInput {
   updatedAtForAllRecords: Date;
 }
 
-export const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstimateFilterOptionsForDatabaseInput): MersEstimateFilterOptionsDocument => ({
+const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstimateFilterOptionsForDatabaseInput): MersEstimateFilterOptionsDocument => ({
   _id: new ObjectId(),
   sourceType: input.estimateFilterOptions.sourceType,
   ageGroup: input.estimateFilterOptions.ageGroup,
@@ -271,6 +273,87 @@ export const transformMersEstimateFilterOptionsForDatabase = (input: TransformMe
   updatedAt: input.updatedAtForAllRecords,
 });
 
+const transformMersSubEstimateBaseForDatabaseInput = (estimate: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep): MersSubEstimateBase => ({
+  id: estimate.id,
+  estimateId: estimate.estimateId,
+  estimateInfo: estimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE || estimate.type === MersEstimateType.HUMAN_SEROPREVALENCE ? {
+    sampleDenominator: estimate.sampleDenominator,
+    sampleNumerator: estimate.sampleNumerator,
+    seroprevalence: estimate.seroprevalence,
+    seroprevalence95CILower: estimate.seroprevalence95CILower,
+    seroprevalence95CIUpper: estimate.seroprevalence95CIUpper
+  } : {
+    sampleDenominator: estimate.sampleDenominator,
+    sampleNumerator: estimate.sampleNumerator,
+    positivePrevalence: estimate.positivePrevalence,
+    positivePrevalence95CILower: estimate.positivePrevalence95CILower,
+    positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper
+  }
+})
+
+interface TransformGroupedMersEstimatesForDatabaseInput {
+  groupedEstimates: GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEstimatesForDatabaseInput): GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep => ({
+  _id: new ObjectId(),
+  estimateId: input.groupedEstimates.primaryEstimate.estimateId,
+  primaryEstimateInfo: {
+    ...transformMersEstimateForDatabase({
+      estimate: input.groupedEstimates.primaryEstimate,
+      createdAtForAllRecords: input.createdAtForAllRecords,
+      updatedAtForAllRecords: input.updatedAtForAllRecords,
+    }),
+    id: new ObjectId(),
+    createdAt: undefined,
+    updatedAt: undefined,
+  },
+  geographicalAreaSubestimates: input.groupedEstimates.geographicalAreaSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      city: subestimate.city,
+      state: subestimate.state,
+      country: subestimate.country,
+      countryAlphaTwoCode: subestimate.countryAlphaTwoCode,
+      countryAlphaThreeCode: subestimate.countryAlphaThreeCode,
+      latitude: subestimate.latitude,
+      longitude: subestimate.longitude,
+      whoRegion: subestimate.whoRegion,
+      unRegion: subestimate.unRegion,
+      geographicScope: subestimate.geographicScope
+    })),
+  ageGroupSubestimates: input.groupedEstimates.ageGroupSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      ageGroup: subestimate.ageGroup
+    })),
+  testUsedSubestimates: input.groupedEstimates.testUsedSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      assay: subestimate.assay
+    })),
+  animalSpeciesSubestimates: input.groupedEstimates.animalSpeciesSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      animalSpecies: subestimate.animalSpecies
+    }))
+    .filter((subestimate): subestimate is Omit<typeof subestimate, 'animalSpecies'> & {
+      animalSpecies: NonNullable<typeof subestimate['animalSpecies']>
+    } => !!subestimate.animalSpecies),
+  sexSubestimates: input.groupedEstimates.sexSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      sex: subestimate.sex
+    }))
+    .filter((subestimate): subestimate is Omit<typeof subestimate, 'sex'> & {
+      sex: NonNullable<typeof subestimate['sex']>
+    } => !!subestimate.sex),
+  createdAt: input.createdAtForAllRecords,
+  updatedAt: input.updatedAtForAllRecords
+})
+
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
@@ -285,7 +368,11 @@ export const transformIntoFormatForDatabaseStep = (
       createdAtForAllRecords,
       updatedAtForAllRecords
     })),
-    allGroupedEstimates: input.allGroupedEstimates,
+    allGroupedEstimates: input.allGroupedEstimates.map((groupedEstimates) => transformGroupedMersEstimatesForDatabase({
+      groupedEstimates,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
+    })),
     allSources: input.allSources,
     estimateFilterOptions: transformMersEstimateFilterOptionsForDatabase({
       estimateFilterOptions: input.estimateFilterOptions,

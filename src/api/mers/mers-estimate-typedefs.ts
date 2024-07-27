@@ -396,7 +396,7 @@ export const mersEstimateTypedefs = `
     estimateInfo: MersSubEstimateInformation!
     ####### END INTERFACE FIELDS #######
 
-    sex: String
+    sex: String!
   }
 
   type MersPrimaryEstimate {

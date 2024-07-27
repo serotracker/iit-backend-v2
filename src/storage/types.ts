@@ -264,6 +264,87 @@ export type MersEstimateDocument =
   | AnimalMersSeroprevalenceEstimateDocument
   | AnimalMersViralEstimateDocument;
 
+type PrimaryMersEstimateInformation = Omit<MersEstimateDocument, '_id'|'createdAt'|'updatedAt'> & {
+  id: ObjectId;
+  createdAt: undefined;
+  updatedAt: undefined;
+};
+
+interface MersSubEstimateInformationBase {
+  sampleDenominator: number | undefined;
+  sampleNumerator: number | undefined;
+}
+
+type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformationBase & {
+  seroprevalence: number;
+  seroprevalence95CILower: number | undefined;
+  seroprevalence95CIUpper: number | undefined;
+}
+
+type MersViralSubEstimateInformation = MersSubEstimateInformationBase & {
+  positivePrevalence: number;
+  positivePrevalence95CILower: number | undefined;
+  positivePrevalence95CIUpper: number | undefined;
+}
+
+type MersSubEstimateInformation = 
+  | MersSeroprevalenceSubEstimateInformation
+  | MersViralSubEstimateInformation;
+
+export interface MersSubEstimateBase {
+  id: string;
+  estimateId: string;
+  estimateInfo: MersSubEstimateInformation;
+}
+
+type MersGeographicalAreaSubEstimate = MersSubEstimateBase & {
+  city: string | undefined;
+  state: string | undefined;
+  country: string;
+  countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
+  latitude: number;
+  longitude: number;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+  geographicScope: string | undefined;
+}
+
+type HumanMersAgeGroupSubEstimate = MersSubEstimateBase & {
+  ageGroup: string[];
+}
+
+type AnimalMersAgeGroupSubEstimate = MersSubEstimateBase & {
+  animalAgeGroup: string[];
+}
+
+type MersAgeGroupSubEstimate = HumanMersAgeGroupSubEstimate | AnimalMersAgeGroupSubEstimate;
+
+type MersTestUsedSubEstimate = MersSubEstimateBase & {
+  assay: string[];
+}
+
+type MersAnimalSpeciesSubEstimate = MersSubEstimateBase & {
+  animalSpecies: MersAnimalSpecies;
+}
+
+type MersSexSubEstimate = MersSubEstimateBase & {
+  sex: string;
+}
+
+export interface MersPrimaryEstimateDocument {
+  _id: ObjectId;
+  estimateId: string;
+  primaryEstimateInfo: PrimaryMersEstimateInformation;
+  geographicalAreaSubestimates: MersGeographicalAreaSubEstimate[];
+  ageGroupSubestimates: MersAgeGroupSubEstimate[];
+  testUsedSubestimates: MersTestUsedSubEstimate[];
+  animalSpeciesSubestimates: MersAnimalSpeciesSubEstimate[];
+  sexSubestimates: MersSexSubEstimate[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export enum MersDiagnosisStatus {
   CONFIRMED = "CONFIRMED",
   DENIED = "DENIED"

@@ -618,7 +618,7 @@ export type MersSexSubEstimate = MersSubEstimateInterface & {
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   id: Scalars['String']['output'];
-  sex?: Maybe<Scalars['String']['output']>;
+  sex: Scalars['String']['output'];
 };
 
 export type MersSubEstimateInformation = MersSeroprevalenceSubEstimateInformation | MersViralSubEstimateInformation;
@@ -1875,7 +1875,7 @@ export type MersSexSubEstimateResolvers<ContextType = any, ParentType extends Re
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
