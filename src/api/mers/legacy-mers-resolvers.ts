@@ -38,6 +38,7 @@ import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 import assertNever from "assert-never";
 import { filterUndefinedValuesFromArray } from "../../lib/lib.js";
+import { mapMersAnimalSpeciesForApi, mapMersAnimalTypeForApi } from "./mers-estimate-resolvers.js";
 
 interface GenerateLegacyMersResolversInput {
   mongoClient: MongoClient;
@@ -47,21 +48,6 @@ interface GenerateLegacyMersResolversOutput {
   legacyMersResolvers: { Query: QueryResolvers }
 }
 
-
-const mersAnimalSpeciesMapForApi = {
-  [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
-  [MersAnimalSpecies.GOAT]: MersAnimalSpeciesForApi.Goat,
-  [MersAnimalSpecies.CAMEL]: MersAnimalSpeciesForApi.Camel,
-  [MersAnimalSpecies.CATTLE]: MersAnimalSpeciesForApi.Cattle,
-  [MersAnimalSpecies.SHEEP]: MersAnimalSpeciesForApi.Sheep
-}
-const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesMapForApi[animalSpecies];
-
-const mersAnimalTypeMapForApi = {
-  [MersAnimalType.WILD]: MersAnimalTypeForApi.Wild,
-  [MersAnimalType.DOMESTIC]: MersAnimalTypeForApi.Domestic,
-}
-const mapMersAnimalTypeForApi = (animalType: MersAnimalType): MersAnimalTypeForApi => mersAnimalTypeMapForApi[animalType];
 
 const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument): MersEstimate_V2 => {
   const base: Omit<MersEstimateInterface, 'type'> = {

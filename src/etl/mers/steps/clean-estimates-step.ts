@@ -20,6 +20,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
   ageGroup: string[];
+  animalAgeGroup: string[];
   estimateId: string;
   city: string | undefined;
   state: string | undefined;
@@ -154,6 +155,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         positivePrevalence95CILower: estimate['Positive Prevalence 95% CI Lower'] !== null ? estimate['Positive Prevalence 95% CI Lower'] : undefined,
         positivePrevalence95CIUpper: estimate['Positive Prevalence 95% CI Upper'] !== null ? estimate['Positive Prevalence 95% CI Upper'] : undefined,
         ageGroup: estimate['Age Group (Human)'].filter((element): element is NonNullable<typeof element> => !!element),
+        animalAgeGroup: estimate['Age Group (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         estimateId: estimate['Prevalence Estimate Name'],
         city: estimate['City'] ?? undefined,
         state: estimate['State/Province'] ?? undefined,

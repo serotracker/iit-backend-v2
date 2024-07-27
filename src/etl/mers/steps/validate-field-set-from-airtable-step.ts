@@ -45,6 +45,9 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Age Group (Human)': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Age Group (Animal)': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     'State/Province': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),

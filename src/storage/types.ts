@@ -244,6 +244,7 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
+  animalAgeGroup: string[];
 }
 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -256,6 +257,7 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
+  animalAgeGroup: string[];
 }
 
 export type MersEstimateDocument = 
@@ -263,6 +265,109 @@ export type MersEstimateDocument =
   | HumanMersViralEstimateDocument
   | AnimalMersSeroprevalenceEstimateDocument
   | AnimalMersViralEstimateDocument;
+
+type PrimaryMersEstimateInformation = (
+  | Omit<HumanMersSeroprevalenceEstimateDocument, '_id'|'createdAt'|'updatedAt'>
+  | Omit<HumanMersViralEstimateDocument, '_id'|'createdAt'|'updatedAt'>
+  | Omit<AnimalMersSeroprevalenceEstimateDocument, '_id'|'createdAt'|'updatedAt'>
+  | Omit<AnimalMersViralEstimateDocument, '_id'|'createdAt'|'updatedAt'>
+) & {
+  id: ObjectId;
+  createdAt: undefined;
+  updatedAt: undefined;
+};
+
+interface MersSubEstimateInformationBase {
+  sampleDenominator: number | undefined;
+  sampleNumerator: number | undefined;
+}
+
+type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformationBase & {
+  seroprevalence: number;
+  seroprevalence95CILower: number | undefined;
+  seroprevalence95CIUpper: number | undefined;
+}
+
+
+type MersViralSubEstimateInformation = MersSubEstimateInformationBase & {
+  positivePrevalence: number;
+  positivePrevalence95CILower: number | undefined;
+  positivePrevalence95CIUpper: number | undefined;
+}
+
+type MersSubEstimateInformation = 
+  | MersSeroprevalenceSubEstimateInformation
+  | MersViralSubEstimateInformation;
+
+export const isMersSeroprevalenceSubEstimateInformation = (subestimate: MersSubEstimateInformation): subestimate is Extract<typeof subestimate, { seroprevalence: number} > => {
+  return 'seroprevalence' in subestimate && typeof subestimate['seroprevalence'] === 'number';
+}
+
+export const isMersViralSubEstimateInformation = (subestimate: MersSubEstimateInformation): subestimate is Extract<typeof subestimate, { positivePrevalence: number} > => {
+  return 'positivePrevalence' in subestimate && typeof subestimate['positivePrevalence'] === 'number';
+}
+
+export interface MersSubEstimateBase {
+  id: string;
+  estimateId: string;
+  estimateInfo: MersSubEstimateInformation;
+}
+
+type MersGeographicalAreaSubEstimate = MersSubEstimateBase & {
+  city: string | undefined;
+  state: string | undefined;
+  country: string;
+  countryAlphaTwoCode: string;
+  countryAlphaThreeCode: string;
+  latitude: number;
+  longitude: number;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+  geographicScope: string | undefined;
+}
+
+type HumanMersAgeGroupSubEstimate = MersSubEstimateBase & {
+  ageGroup: string[];
+}
+
+type AnimalMersAgeGroupSubEstimate = MersSubEstimateBase & {
+  animalAgeGroup: string[];
+}
+
+type MersAgeGroupSubEstimate = HumanMersAgeGroupSubEstimate | AnimalMersAgeGroupSubEstimate;
+
+export const isHumanMersAgeGroupSubEstimate = (subestimate: MersAgeGroupSubEstimate): subestimate is Extract<MersAgeGroupSubEstimate, { ageGroup: string[] }> => {
+  return 'ageGroup' in subestimate && Array.isArray(subestimate['ageGroup'])
+}
+
+export const isAnimalMersAgeGroupSubEstimate = (subestimate: MersAgeGroupSubEstimate): subestimate is Extract<MersAgeGroupSubEstimate, { animalAgeGroup: string[] }> => {
+  return 'animalAgeGroup' in subestimate && Array.isArray(subestimate['animalAgeGroup'])
+}
+
+type MersTestUsedSubEstimate = MersSubEstimateBase & {
+  assay: string[];
+}
+
+type MersAnimalSpeciesSubEstimate = MersSubEstimateBase & {
+  animalSpecies: MersAnimalSpecies;
+}
+
+type MersSexSubEstimate = MersSubEstimateBase & {
+  sex: string;
+}
+
+export interface MersPrimaryEstimateDocument {
+  _id: ObjectId;
+  estimateId: string;
+  primaryEstimateInfo: PrimaryMersEstimateInformation;
+  geographicalAreaSubestimates: MersGeographicalAreaSubEstimate[];
+  ageGroupSubestimates: MersAgeGroupSubEstimate[];
+  testUsedSubestimates: MersTestUsedSubEstimate[];
+  animalSpeciesSubestimates: MersAnimalSpeciesSubEstimate[];
+  sexSubestimates: MersSexSubEstimate[];
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 export enum MersDiagnosisStatus {
   CONFIRMED = "CONFIRMED",

@@ -1,46 +1,46 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 import {
-  CountryFieldsAfterWritingEstimateToMongodbStep,
-  CountryPopulationDataAfterWritingEstimateToMongodbStep,
-  EstimateFieldsAfterWritingEstimateToMongodbStep,
-  EstimateFilterOptionsAfterWritingEstimateToMongodbStep,
-  FaoMersEventAfterWritingEstimateToMongodbStep,
-  GroupedEstimateFieldsAfterWritingEstimateToMongodbStep,
-  SourceFieldsAfterWritingEstimateToMongodbStep,
-  StudyFieldsAfterWritingEstimateToMongodbStep,
-  YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep
-} from "./write-estimate-data-to-mongodb-step.js";
+  CountryFieldsAfterWritingGroupedEstimateDataToMongodbStep,
+  CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep,
+  EstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep,
+  EstimateFilterOptionsAfterWritingGroupedEstimateDataToMongodbStep,
+  FaoMersEventAfterWritingGroupedEstimateDataToMongodbStep,
+  GroupedEstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep,
+  SourceFieldsAfterWritingGroupedEstimateDataToMongodbStep,
+  StudyFieldsAfterWritingGroupedEstimateDataToMongodbStep,
+  YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep
+} from "./write-grouped-estimate-data-to-mongodb-step.js";
 
 export type EstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
-  EstimateFieldsAfterWritingEstimateToMongodbStep;
+  EstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep;
 export type GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
-  GroupedEstimateFieldsAfterWritingEstimateToMongodbStep;
+  GroupedEstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep;
 export type SourceFieldsAfterWritingFaoMersEventsToMongodbStep =
-  SourceFieldsAfterWritingEstimateToMongodbStep;
+  SourceFieldsAfterWritingGroupedEstimateDataToMongodbStep;
 export type EstimateFilterOptionsAfterWritingFaoMersEventsToMongodbStep =
-  EstimateFilterOptionsAfterWritingEstimateToMongodbStep;
+  EstimateFilterOptionsAfterWritingGroupedEstimateDataToMongodbStep;
 export type StudyFieldsAfterWritingFaoMersEventsToMongodbStep =
-  StudyFieldsAfterWritingEstimateToMongodbStep;
+  StudyFieldsAfterWritingGroupedEstimateDataToMongodbStep;
 export type CountryFieldsAfterWritingFaoMersEventsToMongodbStep =
-  CountryFieldsAfterWritingEstimateToMongodbStep;
+  CountryFieldsAfterWritingGroupedEstimateDataToMongodbStep;
 export type FaoMersEventAfterWritingFaoMersEventsToMongodbStep =
-  FaoMersEventAfterWritingEstimateToMongodbStep;
+  FaoMersEventAfterWritingGroupedEstimateDataToMongodbStep;
 export type YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep =
-  YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep;
+  YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep;
 export type CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep =
-  CountryPopulationDataAfterWritingEstimateToMongodbStep;
+  CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep;
 
 interface WriteFaoMersEventDataToMongoDbStepInput {
-  allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
-  allGroupedEstimates: GroupedEstimateFieldsAfterWritingEstimateToMongodbStep[];
-  allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
-  estimateFilterOptions: EstimateFilterOptionsAfterWritingEstimateToMongodbStep;
-  allStudies: StudyFieldsAfterWritingEstimateToMongodbStep[];
-  allCountries: CountryFieldsAfterWritingEstimateToMongodbStep[];
-  allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
-  countryPopulationData: CountryPopulationDataAfterWritingEstimateToMongodbStep[];
+  allEstimates: EstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep[];
+  allSources: SourceFieldsAfterWritingGroupedEstimateDataToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingGroupedEstimateDataToMongodbStep;
+  allStudies: StudyFieldsAfterWritingGroupedEstimateDataToMongodbStep[];
+  allCountries: CountryFieldsAfterWritingGroupedEstimateDataToMongodbStep[];
+  allFaoMersEvents: FaoMersEventAfterWritingGroupedEstimateDataToMongodbStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep[];
+  countryPopulationData: CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
