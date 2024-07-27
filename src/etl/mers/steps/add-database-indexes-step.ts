@@ -3,6 +3,7 @@ import {
   CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
+  EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
@@ -17,6 +18,8 @@ export type GroupedEstimateFieldsAfterAddingDatabaseIndexesStep =
   GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type SourceFieldsAfterAddingDatabaseIndexesStep =
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
+export type EstimateFilterOptionsAfterAddingDatabaseIndexesStep =
+  EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type StudyFieldsAfterAddingDatabaseIndexesStep =
   StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type CountryFieldsAfterAddingDatabaseIndexesStep =
@@ -32,6 +35,7 @@ interface AddDatabaseIndexesStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
   allStudies: StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -44,6 +48,7 @@ interface AddDatabaseIndexesStepOutput {
   allEstimates: EstimateFieldsAfterAddingDatabaseIndexesStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterAddingDatabaseIndexesStep[];
   allSources: SourceFieldsAfterAddingDatabaseIndexesStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterAddingDatabaseIndexesStep;
   allStudies: StudyFieldsAfterAddingDatabaseIndexesStep[];
   allCountries: CountryFieldsAfterAddingDatabaseIndexesStep[];
   allFaoMersEvents: FaoMersEventAfterAddingDatabaseIndexesStep[];
@@ -70,6 +75,7 @@ export const addDatabaseIndexesStep = async(
     allEstimates: input.allEstimates,
     allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
+    estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,

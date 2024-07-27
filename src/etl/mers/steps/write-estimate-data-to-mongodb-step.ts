@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
-import { CountryFieldsAfterTransformingFormatForDatabaseStep, CountryPopulationDataAfterTransformingFormatForDatabaseStep, EstimateFieldsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep, GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep, SourceFieldsAfterTransformingFormatForDatabaseStep, StudyFieldsAfterTransformingFormatForDatabaseStep, YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
+import { CountryFieldsAfterTransformingFormatForDatabaseStep, CountryPopulationDataAfterTransformingFormatForDatabaseStep, EstimateFieldsAfterTransformingFormatForDatabaseStep, EstimateFilterOptionsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep, GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep, SourceFieldsAfterTransformingFormatForDatabaseStep, StudyFieldsAfterTransformingFormatForDatabaseStep, YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
 
 export type EstimateFieldsAfterWritingEstimateToMongodbStep =
   EstimateFieldsAfterTransformingFormatForDatabaseStep;
@@ -8,6 +8,8 @@ export type GroupedEstimateFieldsAfterWritingEstimateToMongodbStep =
   GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep;
 export type SourceFieldsAfterWritingEstimateToMongodbStep =
   SourceFieldsAfterTransformingFormatForDatabaseStep;
+export type EstimateFilterOptionsAfterWritingEstimateToMongodbStep =
+  EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
 export type StudyFieldsAfterWritingEstimateToMongodbStep =
   StudyFieldsAfterTransformingFormatForDatabaseStep;
 export type CountryFieldsAfterWritingEstimateToMongodbStep =
@@ -23,6 +25,7 @@ interface WriteEstimateDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
@@ -35,6 +38,7 @@ interface WriteEstimateDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingEstimateToMongodbStep[];
   allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingEstimateToMongodbStep;
   allStudies: StudyFieldsAfterWritingEstimateToMongodbStep[];
   allCountries: CountryFieldsAfterWritingEstimateToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
@@ -61,6 +65,7 @@ export const writeEstimateDataToMongoDbStep = async(
     allEstimates: input.allEstimates,
     allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
+    estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,
