@@ -4,6 +4,7 @@ import {
   CountryFieldsAfterWritingFaoMersEventsToMongodbStep,
   CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep,
   EstimateFieldsAfterWritingFaoMersEventsToMongodbStep,
+  EstimateFilterOptionsAfterWritingFaoMersEventsToMongodbStep,
   FaoMersEventAfterWritingFaoMersEventsToMongodbStep,
   GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep,
   SourceFieldsAfterWritingFaoMersEventsToMongodbStep,
@@ -17,6 +18,8 @@ export type GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongo
   GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep;
 export type SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
   SourceFieldsAfterWritingFaoMersEventsToMongodbStep;
+export type EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
+  EstimateFilterOptionsAfterWritingFaoMersEventsToMongodbStep;
 export type StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
   StudyFieldsAfterWritingFaoMersEventsToMongodbStep;
 export type CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
@@ -32,6 +35,7 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoMersEventsToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingFaoMersEventsToMongodbStep;
   allStudies: StudyFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
@@ -44,6 +48,7 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
   allStudies: StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -70,6 +75,7 @@ export const writeFaoYearlyCamelPopulationDataToMongoDbStep = async(
     allEstimates: input.allEstimates,
     allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
+    estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,

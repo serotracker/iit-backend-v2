@@ -1,4 +1,34 @@
 export const mersEstimateTypedefs = `
+  enum MersAnimalType {
+    DOMESTIC
+    WILD
+  }
+
+  enum MersAnimalSpecies {
+    CAMEL
+    BAT
+    GOAT
+    SHEEP
+    CATTLE
+  }
+
+  type MersEstimateFilterOptions {
+    sourceType: [String!]!
+    ageGroup: [String!]!
+    assay: [String!]!
+    specimenType: [String!]!
+    sex: [String!]!
+    isotypes: [String!]!
+    samplingMethod: [String!]!
+    geographicScope: [String!]!
+    animalDetectionSettings: [String!]!
+    animalPurpose: [String!]!
+    animalImportedOrLocal: [String!]!
+    sampleFrame: [String!]!
+    testProducer: [String!]!
+    testValidation: [String!]!
+  }
+
   enum MersEstimateType {
     HUMAN_SEROPREVALENCE
     ANIMAL_SEROPREVALENCE
@@ -382,5 +412,6 @@ export const mersEstimateTypedefs = `
 
   type Query {
     mersPrimaryEstimates: [MersPrimaryEstimate!]!
+    mersEstimatesFilterOptions: MersEstimateFilterOptions!
   }
 `

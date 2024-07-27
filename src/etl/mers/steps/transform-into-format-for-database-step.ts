@@ -10,11 +10,12 @@ import {
   StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
   YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
 } from "./apply-typed-estimate-constraints-step.js";
-import { GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep } from "./group-estimates-under-primary-estimates-step.js";
+import { EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep, GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep } from "./group-estimates-under-primary-estimates-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
 export type GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep = GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
+export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
@@ -25,6 +26,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
   allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allCountries: CountryFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
@@ -37,6 +39,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
@@ -246,6 +249,7 @@ export const transformIntoFormatForDatabaseStep = (
     })),
     allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
+    estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => transformFaoMersEventForDatabase({

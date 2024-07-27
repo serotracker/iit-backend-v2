@@ -4,6 +4,7 @@ import {
   CountryFieldsAfterWritingEstimateToMongodbStep,
   CountryPopulationDataAfterWritingEstimateToMongodbStep,
   EstimateFieldsAfterWritingEstimateToMongodbStep,
+  EstimateFilterOptionsAfterWritingEstimateToMongodbStep,
   FaoMersEventAfterWritingEstimateToMongodbStep,
   GroupedEstimateFieldsAfterWritingEstimateToMongodbStep,
   SourceFieldsAfterWritingEstimateToMongodbStep,
@@ -17,6 +18,8 @@ export type GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep =
   GroupedEstimateFieldsAfterWritingEstimateToMongodbStep;
 export type SourceFieldsAfterWritingFaoMersEventsToMongodbStep =
   SourceFieldsAfterWritingEstimateToMongodbStep;
+export type EstimateFilterOptionsAfterWritingFaoMersEventsToMongodbStep =
+  EstimateFilterOptionsAfterWritingEstimateToMongodbStep;
 export type StudyFieldsAfterWritingFaoMersEventsToMongodbStep =
   StudyFieldsAfterWritingEstimateToMongodbStep;
 export type CountryFieldsAfterWritingFaoMersEventsToMongodbStep =
@@ -32,6 +35,7 @@ interface WriteFaoMersEventDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingEstimateToMongodbStep[];
   allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingEstimateToMongodbStep;
   allStudies: StudyFieldsAfterWritingEstimateToMongodbStep[];
   allCountries: CountryFieldsAfterWritingEstimateToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
@@ -44,6 +48,7 @@ interface WriteFaoMersEventDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoMersEventsToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingFaoMersEventsToMongodbStep;
   allStudies: StudyFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoMersEventsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
@@ -70,6 +75,7 @@ export const writeFaoMersEventDataToMongoDbStep = async(
     allEstimates: input.allEstimates,
     allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
+    estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
     allFaoMersEvents: input.allFaoMersEvents,

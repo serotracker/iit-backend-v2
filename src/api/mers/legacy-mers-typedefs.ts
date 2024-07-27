@@ -274,39 +274,8 @@ export const legacyMersTypedefs = `
 
   union MersEstimate_V2 = HumanMersEstimate | AnimalMersEstimate | HumanMersViralEstimate |  AnimalMersViralEstimate
 
-  enum MersAnimalType {
-    DOMESTIC
-    WILD
-  }
-
-  enum MersAnimalSpecies {
-    CAMEL
-    BAT
-    GOAT
-    SHEEP
-    CATTLE
-  }
-
-  type MersEstimateFilterOptions {
-    sourceType: [String!]!
-    ageGroup: [String!]!
-    assay: [String!]!
-    specimenType: [String!]!
-    sex: [String!]!
-    isotypes: [String!]!
-    samplingMethod: [String!]!
-    geographicScope: [String!]!
-    animalDetectionSettings: [String!]!
-    animalPurpose: [String!]!
-    animalImportedOrLocal: [String!]!
-    sampleFrame: [String!]!
-    testProducer: [String!]!
-    testValidation: [String!]!
-  }
-
   type Query {
     mersEstimates: [MersEstimate!]!
     mersEstimates_V2: [MersEstimate_V2!]!
-    mersEstimatesFilterOptions: MersEstimateFilterOptions!
   }
 `
