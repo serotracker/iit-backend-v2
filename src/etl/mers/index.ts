@@ -30,6 +30,7 @@ import { combineEstimatesWithStudiesStep } from "./steps/combine-estimates-with-
 import { cleanCountriesStep } from "./steps/clean-countries-step.js";
 import { groupEstimatesUnderPrimaryEstimatesStep } from "./steps/group-estimates-under-primary-estimates-step.js";
 import { generateMersEstimateFilterOptionsStep } from "./steps/generate-mers-estimate-filter-options-step.js";
+import { writeMersEstimateFilterOptionsToMongoDbStep } from "./steps/write-mers-estimate-filter-options-to-mongodb-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -126,7 +127,7 @@ const runEtlMain = async () => {
     asyncEtlStep(writeEstimateDataToMongoDbStep),
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
     asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
-    asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
+    asyncEtlStep(writeMersEstimateFilterOptionsToMongoDbStep),
     asyncEtlStep(addDatabaseIndexesStep)
   );
 

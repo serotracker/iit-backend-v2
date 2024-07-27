@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import uniq from "lodash/uniq.js";
 import {
   CountryFieldsAfterApplyingTypedEstimateConstraintsStep,
   CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep,
@@ -62,48 +63,48 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
   return {
     allEstimates: input.allEstimates,
     estimateFilterOptions: {
-      sourceType: input.allEstimates
+      sourceType: uniq(input.allEstimates
         .map((estimate) => estimate.study.source.type)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      ageGroup: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      ageGroup: uniq(input.allEstimates
         .flatMap((estimate) => estimate.ageGroup)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      assay: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      assay: uniq(input.allEstimates
         .flatMap((estimate) => estimate.assay)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      specimenType: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      specimenType: uniq(input.allEstimates
         .map((estimate) => estimate.specimenType)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      sex: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      sex: uniq(input.allEstimates
         .map((estimate) => estimate.sex)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      isotypes: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      isotypes: uniq(input.allEstimates
         .flatMap((estimate) => estimate.isotypes)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      samplingMethod: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      samplingMethod: uniq(input.allEstimates
         .map((estimate) => estimate.samplingMethod)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      geographicScope: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      geographicScope: uniq(input.allEstimates
         .map((estimate) => estimate.geographicScope)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      animalDetectionSettings: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      animalDetectionSettings: uniq(input.allEstimates
         .flatMap((estimate) => estimate.animalDetectionSettings)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      animalPurpose: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      animalPurpose: uniq(input.allEstimates
         .map((estimate) => estimate.animalPurpose)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      animalImportedOrLocal: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      animalImportedOrLocal: uniq(input.allEstimates
         .map((estimate) => estimate.animalImportedOrLocal)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      sampleFrame: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      sampleFrame: uniq(input.allEstimates
         .map((estimate) => estimate.sampleFrame)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      testProducer: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      testProducer: uniq(input.allEstimates
         .flatMap((estimate) => estimate.testProducer)
-        .filter((element): element is NonNullable<typeof element> => !!element),
-      testValidation: input.allEstimates
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      testValidation: uniq(input.allEstimates
         .flatMap((estimate) => estimate.testValidation)
-        .filter((element): element is NonNullable<typeof element> => !!element),
+        .filter((element): element is NonNullable<typeof element> => !!element)),
     },
     allSources: input.allSources,
     allStudies: input.allStudies,

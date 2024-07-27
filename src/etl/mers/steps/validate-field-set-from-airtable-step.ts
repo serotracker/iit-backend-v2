@@ -42,7 +42,7 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
       .string(),
     'Estimate Type': z
       .string(),
-    'Age Group': z
+    'Age Group (Human)': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     'State/Province': z
@@ -112,7 +112,7 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Animal type': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
-    'Detection settings': z
+    'Sample Frame (Animal)': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     'Animal purpose': z
@@ -121,7 +121,7 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Imported or Local': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
-    'Sample Frame': z
+    'Sample Frame (Human)': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
     'Producer': z

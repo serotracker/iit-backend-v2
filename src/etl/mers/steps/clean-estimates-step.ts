@@ -153,7 +153,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         positivePrevalence: estimate['Positive Prevalence'],
         positivePrevalence95CILower: estimate['Positive Prevalence 95% CI Lower'] !== null ? estimate['Positive Prevalence 95% CI Lower'] : undefined,
         positivePrevalence95CIUpper: estimate['Positive Prevalence 95% CI Upper'] !== null ? estimate['Positive Prevalence 95% CI Upper'] : undefined,
-        ageGroup: estimate['Age Group'].filter((element): element is NonNullable<typeof element> => !!element),
+        ageGroup: estimate['Age Group (Human)'].filter((element): element is NonNullable<typeof element> => !!element),
         estimateId: estimate['Prevalence Estimate Name'],
         city: estimate['City'] ?? undefined,
         state: estimate['State/Province'] ?? undefined,
@@ -188,10 +188,10 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         geographicScope: estimate['Geographic scope'] ?? undefined,
         testProducer: estimate['Producer'].filter((element): element is NonNullable<typeof element> => !!element),
         testValidation: estimate['Test Validation'].filter((element): element is NonNullable<typeof element> => !!element),
-        animalDetectionSettings: estimate['Detection settings'].filter((element): element is NonNullable<typeof element> => !!element),
+        animalDetectionSettings: estimate['Sample Frame (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         animalPurpose: estimate['Animal purpose'] ?? undefined,
         animalImportedOrLocal: estimate['Imported or Local'] ?? undefined,
-        sampleFrame: estimate['Sample Frame'] ?? undefined,
+        sampleFrame: estimate['Sample Frame (Human)'] ?? undefined,
       }))
       .filter((estimate): estimate is Omit<typeof estimate, 'subGroupingVariable'> & {subGroupingVariable: NonNullable<typeof estimate['subGroupingVariable']>} => !!estimate.subGroupingVariable)
       .map((estimate) => ({

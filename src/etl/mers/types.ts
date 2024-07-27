@@ -32,7 +32,7 @@ export interface AirtableMersEstimateFields {
   'Prevalence Estimate Name': string;
   'Population Type': string;
   'Estimate Type': string;
-  'Age Group': Array<string | null>;
+  'Age Group (Human)': Array<string | null>;
   'State/Province': string | null;
   'City': string | null;
   'Country': Array<string | null>;
@@ -53,10 +53,10 @@ export interface AirtableMersEstimateFields {
   'Isotype(s)': Array<string | null>;
   'Assay Type': Array<string | null>;
   'Animal type': Array<string | null>;
-  'Detection settings': Array<string | null>;
+  'Sample Frame (Animal)': Array<string | null>;
   'Animal purpose': string | null;
   'Imported or Local': string | null;
-  'Sample Frame': string | null;
+  'Sample Frame (Human)': string | null;
   'Producer': Array<string | null>;
   'Test Validation': Array<string | null>;
   'Geographic scope': string | null;

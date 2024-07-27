@@ -31,7 +31,7 @@ export type YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMong
 export type CountryPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep =
   CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 
-interface WriteFaoYearlyCamelPopulationDataToMongoDbStepInput {
+interface WriteMersEstimateFilterOptionsToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -44,7 +44,7 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepInput {
   mongoClient: MongoClient;
 }
 
-interface WriteFaoYearlyCamelPopulationDataToMongoDbStepOutput {
+interface WriteMersEstimateFilterOptionsToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   allSources: SourceFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
@@ -58,9 +58,9 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepOutput {
 }
 
 export const writeMersEstimateFilterOptionsToMongoDbStep = async(
-  input: WriteFaoYearlyCamelPopulationDataToMongoDbStepInput
-): Promise<WriteFaoYearlyCamelPopulationDataToMongoDbStepOutput> => {
-  console.log(`Running step: writeFaoYearlyCamelPopulationDataToMongoDbStep. Remaining estimates: ${input.allEstimates.length}.`);
+  input: WriteMersEstimateFilterOptionsToMongoDbStepInput
+): Promise<WriteMersEstimateFilterOptionsToMongoDbStepOutput> => {
+  console.log(`Running step: writeMersEstimateFilterOptionsToMongoDbStep. Remaining estimates: ${input.allEstimates.length}.`);
 
   const databaseName = getEnvironmentVariableOrThrow({ key: "DATABASE_NAME" });
 
