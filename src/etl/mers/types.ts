@@ -27,6 +27,7 @@ export interface AirtableCountryFields {
 
 export interface AirtableMersEstimateFields {
   id: string;
+  'Sub-grouping variable': string;
   'Sex': string | null;
   'Prevalence Estimate Name': string;
   'Population Type': string;

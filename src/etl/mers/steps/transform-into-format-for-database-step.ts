@@ -10,8 +10,10 @@ import {
   StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
   YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
 } from "./apply-typed-estimate-constraints-step.js";
+import { GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep } from "./group-estimates-under-primary-estimates-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
+export type GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep = GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
@@ -21,6 +23,7 @@ export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = Countr
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allCountries: CountryFieldsAfterApplyingTypedEstimateConstraintsStep[];
@@ -32,6 +35,7 @@ interface TransformIntoFormatForDatabaseStepInput {
 
 interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
@@ -118,6 +122,7 @@ interface TransformMersEstimateBaseForDatabaseInput {
 const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseForDatabaseInput): MersEstimateDocumentBase => ({
   _id: new ObjectId(),
   estimateId: input.estimate.estimateId,
+  subGroupingVariable: input.estimate.subGroupingVariable,
   city: input.estimate.city,
   state: input.estimate.state,
   country: input.estimate.country,
@@ -239,6 +244,7 @@ export const transformIntoFormatForDatabaseStep = (
       createdAtForAllRecords,
       updatedAtForAllRecords
     })),
+    allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,

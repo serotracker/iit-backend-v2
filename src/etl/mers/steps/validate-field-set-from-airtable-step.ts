@@ -54,6 +54,8 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Country': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Sub-grouping variable': z
+      .string(),
     'Study': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),

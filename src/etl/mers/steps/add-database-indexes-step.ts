@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
+  GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep
@@ -12,6 +13,8 @@ import { getEnvironmentVariableOrThrow } from "../../helpers.js";
 
 export type EstimateFieldsAfterAddingDatabaseIndexesStep =
   EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
+export type GroupedEstimateFieldsAfterAddingDatabaseIndexesStep =
+  GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type SourceFieldsAfterAddingDatabaseIndexesStep =
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type StudyFieldsAfterAddingDatabaseIndexesStep =
@@ -27,6 +30,7 @@ export type CountryPopulationDataAfterAddingDatabaseIndexesStep =
 
 interface AddDatabaseIndexesStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allSources: SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allStudies: StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -38,6 +42,7 @@ interface AddDatabaseIndexesStepInput {
 
 interface AddDatabaseIndexesStepOutput {
   allEstimates: EstimateFieldsAfterAddingDatabaseIndexesStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterAddingDatabaseIndexesStep[];
   allSources: SourceFieldsAfterAddingDatabaseIndexesStep[];
   allStudies: StudyFieldsAfterAddingDatabaseIndexesStep[];
   allCountries: CountryFieldsAfterAddingDatabaseIndexesStep[];
@@ -63,6 +68,7 @@ export const addDatabaseIndexesStep = async(
 
   return {
     allEstimates: input.allEstimates,
+    allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,

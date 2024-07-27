@@ -1,9 +1,11 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
-import { CountryFieldsAfterTransformingFormatForDatabaseStep, CountryPopulationDataAfterTransformingFormatForDatabaseStep, EstimateFieldsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep, SourceFieldsAfterTransformingFormatForDatabaseStep, StudyFieldsAfterTransformingFormatForDatabaseStep, YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
+import { CountryFieldsAfterTransformingFormatForDatabaseStep, CountryPopulationDataAfterTransformingFormatForDatabaseStep, EstimateFieldsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep, GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep, SourceFieldsAfterTransformingFormatForDatabaseStep, StudyFieldsAfterTransformingFormatForDatabaseStep, YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
 
 export type EstimateFieldsAfterWritingEstimateToMongodbStep =
   EstimateFieldsAfterTransformingFormatForDatabaseStep;
+export type GroupedEstimateFieldsAfterWritingEstimateToMongodbStep =
+  GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep;
 export type SourceFieldsAfterWritingEstimateToMongodbStep =
   SourceFieldsAfterTransformingFormatForDatabaseStep;
 export type StudyFieldsAfterWritingEstimateToMongodbStep =
@@ -19,6 +21,7 @@ export type CountryPopulationDataAfterWritingEstimateToMongodbStep =
 
 interface WriteEstimateDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep[];
   allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
@@ -30,6 +33,7 @@ interface WriteEstimateDataToMongoDbStepInput {
 
 interface WriteEstimateDataToMongoDbStepOutput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterWritingEstimateToMongodbStep[];
   allSources: SourceFieldsAfterWritingEstimateToMongodbStep[];
   allStudies: StudyFieldsAfterWritingEstimateToMongodbStep[];
   allCountries: CountryFieldsAfterWritingEstimateToMongodbStep[];
@@ -55,6 +59,7 @@ export const writeEstimateDataToMongoDbStep = async(
 
   return {
     allEstimates: input.allEstimates,
+    allGroupedEstimates: input.allGroupedEstimates,
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
