@@ -4,6 +4,8 @@ export const isArrayOfUnknownType = (input: unknown): input is unknown[] => {
   return Array.isArray(input);
 }
 
+export const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => array.filter((element): element is T => !!element);
+
 export const typedObjectKeys = <TKey extends string>(input: Record<TKey, unknown>): Array<TKey> => {
   return Object.keys(input) as TKey[];
 }
