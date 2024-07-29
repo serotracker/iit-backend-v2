@@ -329,7 +329,10 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
   ageGroupSubestimates: input.groupedEstimates.ageGroupSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
-      ageGroup: subestimate.ageGroup
+      ...( input.groupedEstimates.primaryEstimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || input.groupedEstimates.primaryEstimate.type === MersEstimateType.HUMAN_VIRAL
+        ? { ageGroup: subestimate.ageGroup }
+        : { animalAgeGroup: subestimate.animalAgeGroup }
+      ),
     })),
   testUsedSubestimates: input.groupedEstimates.testUsedSubestimates
     .map((subestimate) => ({

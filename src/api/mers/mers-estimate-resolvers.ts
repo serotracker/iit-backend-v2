@@ -142,11 +142,15 @@ export const mapMersSubEstimateBaseForApi = (subestimate: MersSubEstimateBase): 
   estimateId: subestimate.estimateId,
   estimateInfo: isMersViralSubEstimateInformation(subestimate.estimateInfo) ? {
     __typename: 'MersViralSubEstimateInformation',
+    sampleDenominator: subestimate.estimateInfo.sampleDenominator,
+    sampleNumerator: subestimate.estimateInfo.sampleNumerator,
     positivePrevalence: subestimate.estimateInfo.positivePrevalence,
     positivePrevalence95CILower: subestimate.estimateInfo.positivePrevalence95CILower,
     positivePrevalence95CIUpper: subestimate.estimateInfo.positivePrevalence95CIUpper,
   } : {
     __typename: 'MersSeroprevalenceSubEstimateInformation',
+    sampleDenominator: subestimate.estimateInfo.sampleDenominator,
+    sampleNumerator: subestimate.estimateInfo.sampleNumerator,
     seroprevalence: subestimate.estimateInfo.seroprevalence,
     seroprevalence95CILower: subestimate.estimateInfo.seroprevalence95CILower,
     seroprevalence95CIUpper: subestimate.estimateInfo.seroprevalence95CIUpper,
