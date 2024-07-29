@@ -329,7 +329,8 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
   ageGroupSubestimates: input.groupedEstimates.ageGroupSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
-      ageGroup: subestimate.ageGroup
+      ageGroup: subestimate.ageGroup,
+      animalAgeGroup: subestimate.animalAgeGroup
     })),
   testUsedSubestimates: input.groupedEstimates.testUsedSubestimates
     .map((subestimate) => ({
