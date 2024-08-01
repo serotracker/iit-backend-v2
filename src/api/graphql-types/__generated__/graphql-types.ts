@@ -25,6 +25,7 @@ export type Affiliation = {
 export type AnimalMersAgeGroupSubEstimate = MersSubEstimateInterface & {
   __typename?: 'AnimalMersAgeGroupSubEstimate';
   animalAgeGroup: Array<Scalars['String']['output']>;
+  animalAgeGroupLabel: Scalars['String']['output'];
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   id: Scalars['String']['output'];
@@ -282,6 +283,7 @@ export enum GbdSuperRegion {
 export type HumanMersAgeGroupSubEstimate = MersSubEstimateInterface & {
   __typename?: 'HumanMersAgeGroupSubEstimate';
   ageGroup: Array<Scalars['String']['output']>;
+  ageGroupLabel: Scalars['String']['output'];
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   id: Scalars['String']['output'];
@@ -1428,6 +1430,7 @@ export type AffiliationResolvers<ContextType = any, ParentType extends Resolvers
 
 export type AnimalMersAgeGroupSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['AnimalMersAgeGroupSubEstimate'] = ResolversParentTypes['AnimalMersAgeGroupSubEstimate']> = {
   animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  animalAgeGroupLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1642,6 +1645,7 @@ export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType ext
 
 export type HumanMersAgeGroupSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['HumanMersAgeGroupSubEstimate'] = ResolversParentTypes['HumanMersAgeGroupSubEstimate']> = {
   ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  ageGroupLabel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

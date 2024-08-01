@@ -330,8 +330,14 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       ...( input.groupedEstimates.primaryEstimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || input.groupedEstimates.primaryEstimate.type === MersEstimateType.HUMAN_VIRAL
-        ? { ageGroup: subestimate.ageGroup }
-        : { animalAgeGroup: subestimate.animalAgeGroup }
+        ? {
+          ageGroup: subestimate.ageGroup,
+          ageGroupLabel: subestimate.subGroupingCategory ? subestimate.subGroupingCategory : subestimate.ageGroup.join(',')
+        }
+        : {
+          animalAgeGroup: subestimate.animalAgeGroup,
+          animalAgeGroupLabel: subestimate.subGroupingCategory ? subestimate.subGroupingCategory : subestimate.animalAgeGroup.join(',')
+        }
       ),
     })),
   testUsedSubestimates: input.groupedEstimates.testUsedSubestimates

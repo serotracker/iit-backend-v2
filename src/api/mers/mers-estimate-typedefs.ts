@@ -355,6 +355,7 @@ export const mersEstimateTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     ageGroup: [String!]!
+    ageGroupLabel: String!
   }
 
   type AnimalMersAgeGroupSubEstimate implements MersSubEstimateInterface {
@@ -365,6 +366,7 @@ export const mersEstimateTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     animalAgeGroup: [String!]!
+    animalAgeGroupLabel: String!
   }
 
   union MersAgeGroupSubEstimate = HumanMersAgeGroupSubEstimate | AnimalMersAgeGroupSubEstimate
