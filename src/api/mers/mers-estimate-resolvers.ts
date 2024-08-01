@@ -201,9 +201,11 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         ...(isHumanMersAgeGroupSubEstimate(subestimate) ? {
           __typename: 'HumanMersAgeGroupSubEstimate' as const,
           ageGroup: subestimate.ageGroup,
+          ageGroupLabel: subestimate.ageGroupLabel
         } : {
           __typename: 'AnimalMersAgeGroupSubEstimate' as const,
           animalAgeGroup: subestimate.animalAgeGroup,
+          animalAgeGroupLabel: subestimate.animalAgeGroupLabel
         })
       })),
       testUsedSubestimates: primaryEstimate.testUsedSubestimates.map((subestimate) => ({
