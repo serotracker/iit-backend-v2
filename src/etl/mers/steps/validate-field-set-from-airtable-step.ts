@@ -125,8 +125,8 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
     'Imported or Local': z
-      .optional(z.string().nullable())
-      .transform((value => value ?? null)),
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     'Country of Import': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),

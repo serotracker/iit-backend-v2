@@ -195,7 +195,9 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         testValidation: estimate['Test Validation'].filter((element): element is NonNullable<typeof element> => !!element),
         animalDetectionSettings: estimate['Sample Frame (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         animalPurpose: estimate['Animal purpose'] ?? undefined,
-        animalImportedOrLocal: estimate['Imported or Local'] ?? undefined,
+        animalImportedOrLocal: estimate['Imported or Local']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .at(0),
         animalCountryOfImportId: estimate['Country of Import']
           .filter((element): element is NonNullable<typeof element> => !!element)
           .at(0),
