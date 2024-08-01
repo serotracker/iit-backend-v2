@@ -33,7 +33,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   mongoClient: MongoClient;
 }
 
-const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
+const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefined => {
   const zodMersEstimateFieldsObject = z.object({
     id: z.string(),
     'Prevalence Estimate Name': z
@@ -59,6 +59,9 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
       .transform((field) => field ?? []),
     'Sub-grouping variable': z
       .string(),
+    'Sub-group specific category': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Study': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
@@ -68,7 +71,7 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Sex': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
-    'Positive Prevalence': z
+    'Prevalence': z
       .number(),
     'Denominator': z
       .optional(z.number().nullable())
@@ -76,10 +79,10 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Numerator': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
-    'Positive Prevalence 95% CI Lower': z
+    'Prevalence 95% CI Lower': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
-    'Positive Prevalence 95% CI Upper': z
+    'Prevalence 95% CI Upper': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
     'Sensitivity': z
@@ -124,6 +127,9 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
     'Imported or Local': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
+    'Country of Import': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     'Sample Frame (Human)': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
@@ -150,7 +156,13 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields => {
       .transform((value => value ?? null)),
   })
 
-  return zodMersEstimateFieldsObject.parse(estimate);
+  try {
+    return zodMersEstimateFieldsObject.parse(estimate);
+  } catch (error) {
+    console.error(error);
+
+    return undefined;
+  }
 }
 
 const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
@@ -213,7 +225,9 @@ export const validateFieldSetFromAirtableStep = (
   );
 
   return {
-    allEstimates: input.allEstimates.map((estimate) => parseEstimate(estimate)),
+    allEstimates: input.allEstimates
+      .map((estimate) => parseEstimate(estimate))
+      .filter((estimate): estimate is NonNullable<typeof estimate> => !!estimate),
     allSources: input.allSources
       .map((source) => parseSource(source))
       .filter((source): source is NonNullable<typeof source> => !!source),

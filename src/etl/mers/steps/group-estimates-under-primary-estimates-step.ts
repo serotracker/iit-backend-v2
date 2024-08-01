@@ -19,6 +19,11 @@ export type GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep
   testUsedSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   animalSpeciesSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   sexSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  timeFrameSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  sampleTypeSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  occupationSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  animalSourceLocationSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  animalSamplingContextSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
 }
 export type EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep = EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep;
 export type SourceFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep = SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep;
@@ -76,6 +81,21 @@ export const groupEstimatesUnderPrimaryEstimatesStep = (input: GroupEstimatesUnd
           .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
         sexSubestimates: input.allEstimates
           .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.SEX)
+          .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
+        timeFrameSubestimates: input.allEstimates
+          .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.TIME_FRAME)
+          .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
+        sampleTypeSubestimates: input.allEstimates
+          .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.SAMPLE_TYPE)
+          .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
+        occupationSubestimates: input.allEstimates
+          .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.OCCUPATION)
+          .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
+        animalSourceLocationSubestimates: input.allEstimates
+          .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.ANIMAL_SOURCE_LOCATION)
+          .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
+        animalSamplingContextSubestimates: input.allEstimates
+          .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.ANIMAL_SAMPLING_CONTEXT)
           .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
       })),
     allSources: input.allSources,

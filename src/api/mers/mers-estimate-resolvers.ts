@@ -221,6 +221,35 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         __typename: 'MersSexSubEstimate' as const,
         sex: subestimate.sex
       })),
+      timeFrameSubestimates: primaryEstimate.timeFrameSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersTimeFrameSubEstimate' as const,
+        samplingStartDate: subestimate.samplingStartDate.toISOString(),
+        samplingEndDate: subestimate.samplingEndDate.toISOString()
+      })),
+      sampleTypeSubestimates: primaryEstimate.sampleTypeSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersSampleTypeSubEstimate' as const,
+        specimenType: subestimate.specimenType
+      })),
+      occupationSubestimates: primaryEstimate.occupationSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersOccupationSubEstimate' as const,
+        occupation: subestimate.occupation
+      })),
+      animalSourceLocationSubestimates: primaryEstimate.animalSourceLocationSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersAnimalSourceLocationSubEstimate' as const,
+        animalImportedOrLocal: subestimate.animalImportedOrLocal,
+        animalCountryOfImport: subestimate.animalCountryOfImport,
+        animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImportAlphaTwoCode,
+        animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImportAlphaThreeCode,
+      })),
+      animalSamplingContextSubestimates: primaryEstimate.animalSamplingContextSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersAnimalSamplingContextSubEstimate' as const,
+        animalDetectionSettings: subestimate.animalDetectionSettings,
+      })),
     }));
   }
 
