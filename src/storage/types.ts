@@ -333,10 +333,12 @@ type MersGeographicalAreaSubEstimate = MersSubEstimateBase & {
 
 type HumanMersAgeGroupSubEstimate = MersSubEstimateBase & {
   ageGroup: string[];
+  ageGroupLabel: string;
 }
 
 type AnimalMersAgeGroupSubEstimate = MersSubEstimateBase & {
   animalAgeGroup: string[];
+  animalAgeGroupLabel: string;
 }
 
 type MersAgeGroupSubEstimate = HumanMersAgeGroupSubEstimate | AnimalMersAgeGroupSubEstimate;
