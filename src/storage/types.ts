@@ -148,6 +148,11 @@ export enum MersSubGroupingVariable {
   ANIMAL_SPECIES = 'ANIMAL_SPECIES',
   TEST_USED = 'TEST_USED',
   GEOGRAPHICAL_AREA = 'GEOGRAPHICAL_AREA',
+  TIME_FRAME = 'TIME_FRAME',
+  SAMPLE_TYPE = 'SAMPLE_TYPE',
+  OCCUPATION = 'OCCUPATION',
+  ANIMAL_SOURCE_LOCATION = 'ANIMAL_SOURCE_LOCATION',
+  ANIMAL_SAMPLING_CONTEXT = 'ANIMAL_SAMPLING_CONTEXT',
   AGE = 'AGE',
   SEX = 'SEX',
 }
@@ -356,6 +361,30 @@ type MersSexSubEstimate = MersSubEstimateBase & {
   sex: string;
 }
 
+type MersTimeFrameSubEstimate = MersSubEstimateBase & {
+  samplingStartDate: Date;
+  samplingEndDate: Date;
+}
+
+type MersSampleTypeSubEstimate = MersSubEstimateBase & {
+  specimenType: string;
+}
+
+type MersOccupationSubEstimate = MersSubEstimateBase & {
+  occupation: string;
+}
+
+type MersAnimalSourceLocationSubEstimate = MersSubEstimateBase & {
+  animalImportedOrLocal: string;
+  animalCountryOfImport: string;
+  animalCountryOfImportAlphaTwoCode: string;
+  animalCountryOfImportAlphaThreeCode: string;
+}
+
+type MersAnimalSamplingContextSubEstimate = MersSubEstimateBase & {
+  animalDetectionSettings: string[];
+}
+
 export interface MersPrimaryEstimateDocument {
   _id: ObjectId;
   estimateId: string;
@@ -365,6 +394,11 @@ export interface MersPrimaryEstimateDocument {
   testUsedSubestimates: MersTestUsedSubEstimate[];
   animalSpeciesSubestimates: MersAnimalSpeciesSubEstimate[];
   sexSubestimates: MersSexSubEstimate[];
+  timeFrameSubestimates: MersTimeFrameSubEstimate[];
+  sampleTypeSubestimates: MersSampleTypeSubEstimate[];
+  occupationSubestimates: MersOccupationSubEstimate[];
+  animalSourceLocationSubestimates: MersAnimalSourceLocationSubEstimate[];
+  animalSamplingContextSubestimates: MersAnimalSamplingContextSubEstimate[];
   createdAt: Date;
   updatedAt: Date;
 }

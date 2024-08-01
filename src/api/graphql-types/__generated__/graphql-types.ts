@@ -406,6 +406,25 @@ export type HumanMersViralEstimate = MersEstimateInterface & {
 
 export type MersAgeGroupSubEstimate = AnimalMersAgeGroupSubEstimate | HumanMersAgeGroupSubEstimate;
 
+export type MersAnimalSamplingContextSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersAnimalSamplingContextSubEstimate';
+  animalDetectionSettings: Array<Scalars['String']['output']>;
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
+
+export type MersAnimalSourceLocationSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersAnimalSourceLocationSubEstimate';
+  animalCountryOfImport: Scalars['String']['output'];
+  animalCountryOfImportAlphaThreeCode: Scalars['String']['output'];
+  animalCountryOfImportAlphaTwoCode: Scalars['String']['output'];
+  animalImportedOrLocal: Scalars['String']['output'];
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+};
+
 export enum MersAnimalSpecies {
   Bat = 'BAT',
   Camel = 'CAMEL',
@@ -592,16 +611,37 @@ export type MersGeographicalAreaSubEstimate = MersSubEstimateInterface & {
   whoRegion?: Maybe<WhoRegion>;
 };
 
+export type MersOccupationSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersOccupationSubEstimate';
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+  occupation: Scalars['String']['output'];
+};
+
 export type MersPrimaryEstimate = {
   __typename?: 'MersPrimaryEstimate';
   ageGroupSubestimates: Array<MersAgeGroupSubEstimate>;
+  animalSamplingContextSubestimates: Array<MersAnimalSamplingContextSubEstimate>;
+  animalSourceLocationSubestimates: Array<MersAnimalSourceLocationSubEstimate>;
   animalSpeciesSubestimates: Array<MersAnimalSpeciesSubEstimate>;
   estimateId: Scalars['String']['output'];
   geographicalAreaSubestimates: Array<MersGeographicalAreaSubEstimate>;
   id: Scalars['String']['output'];
+  occupationSubestimates: Array<MersOccupationSubEstimate>;
   primaryEstimateInfo: PrimaryMersEstimateInformation;
+  sampleTypeSubestimates: Array<MersSampleTypeSubEstimate>;
   sexSubestimates: Array<MersSexSubEstimate>;
   testUsedSubestimates: Array<MersTestUsedSubEstimate>;
+  timeFrameSubestimates: Array<MersTimeFrameSubEstimate>;
+};
+
+export type MersSampleTypeSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersSampleTypeSubEstimate';
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+  specimenType: Scalars['String']['output'];
 };
 
 export type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformationInterface & {
@@ -640,6 +680,15 @@ export type MersTestUsedSubEstimate = MersSubEstimateInterface & {
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   id: Scalars['String']['output'];
+};
+
+export type MersTimeFrameSubEstimate = MersSubEstimateInterface & {
+  __typename?: 'MersTimeFrameSubEstimate';
+  estimateId: Scalars['String']['output'];
+  estimateInfo: MersSubEstimateInformation;
+  id: Scalars['String']['output'];
+  samplingEndDate: Scalars['String']['output'];
+  samplingStartDate: Scalars['String']['output'];
 };
 
 export type MersViralSubEstimateInformation = MersSubEstimateInformationInterface & {
@@ -1221,7 +1270,7 @@ export type ResolversInterfaceTypes<_RefType extends Record<string, unknown>> = 
   MersEstimateInterface: ( AnimalMersEstimate ) | ( AnimalMersViralEstimate ) | ( HumanMersEstimate ) | ( HumanMersViralEstimate );
   MersEventInterface: ( AnimalMersEvent ) | ( HumanMersEvent );
   MersSubEstimateInformationInterface: ( MersSeroprevalenceSubEstimateInformation ) | ( MersViralSubEstimateInformation );
-  MersSubEstimateInterface: ( Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } );
+  MersSubEstimateInterface: ( Omit<AnimalMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersAnimalSamplingContextSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersAnimalSourceLocationSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersOccupationSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersSampleTypeSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } ) | ( Omit<MersTimeFrameSubEstimate, 'estimateInfo'> & { estimateInfo: _RefType['MersSubEstimateInformation'] } );
   PrimaryMersEstimateInformationInterface: ( PrimaryAnimalMersSeroprevalenceEstimateInformation ) | ( PrimaryAnimalMersViralEstimateInformation ) | ( PrimaryHumanMersSeroprevalenceEstimateInformation ) | ( PrimaryHumanMersViralEstimateInformation );
 };
 
@@ -1248,6 +1297,8 @@ export type ResolversTypes = {
   HumanMersViralEstimate: ResolverTypeWrapper<HumanMersViralEstimate>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   MersAgeGroupSubEstimate: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['MersAgeGroupSubEstimate']>;
+  MersAnimalSamplingContextSubEstimate: ResolverTypeWrapper<Omit<MersAnimalSamplingContextSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersAnimalSourceLocationSubEstimate: ResolverTypeWrapper<Omit<MersAnimalSourceLocationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersAnimalSpecies: MersAnimalSpecies;
   MersAnimalSpeciesSubEstimate: ResolverTypeWrapper<Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersAnimalType: MersAnimalType;
@@ -1265,13 +1316,16 @@ export type ResolversTypes = {
   MersEventType: MersEventType;
   MersFilterOptions: ResolverTypeWrapper<MersFilterOptions>;
   MersGeographicalAreaSubEstimate: ResolverTypeWrapper<Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
-  MersPrimaryEstimate: ResolverTypeWrapper<Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSpeciesSubestimates' | 'geographicalAreaSubestimates' | 'primaryEstimateInfo' | 'sexSubestimates' | 'testUsedSubestimates'> & { ageGroupSubestimates: Array<ResolversTypes['MersAgeGroupSubEstimate']>, animalSpeciesSubestimates: Array<ResolversTypes['MersAnimalSpeciesSubEstimate']>, geographicalAreaSubestimates: Array<ResolversTypes['MersGeographicalAreaSubEstimate']>, primaryEstimateInfo: ResolversTypes['PrimaryMersEstimateInformation'], sexSubestimates: Array<ResolversTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversTypes['MersTestUsedSubEstimate']> }>;
+  MersOccupationSubEstimate: ResolverTypeWrapper<Omit<MersOccupationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersPrimaryEstimate: ResolverTypeWrapper<Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSamplingContextSubestimates' | 'animalSourceLocationSubestimates' | 'animalSpeciesSubestimates' | 'geographicalAreaSubestimates' | 'occupationSubestimates' | 'primaryEstimateInfo' | 'sampleTypeSubestimates' | 'sexSubestimates' | 'testUsedSubestimates' | 'timeFrameSubestimates'> & { ageGroupSubestimates: Array<ResolversTypes['MersAgeGroupSubEstimate']>, animalSamplingContextSubestimates: Array<ResolversTypes['MersAnimalSamplingContextSubEstimate']>, animalSourceLocationSubestimates: Array<ResolversTypes['MersAnimalSourceLocationSubEstimate']>, animalSpeciesSubestimates: Array<ResolversTypes['MersAnimalSpeciesSubEstimate']>, geographicalAreaSubestimates: Array<ResolversTypes['MersGeographicalAreaSubEstimate']>, occupationSubestimates: Array<ResolversTypes['MersOccupationSubEstimate']>, primaryEstimateInfo: ResolversTypes['PrimaryMersEstimateInformation'], sampleTypeSubestimates: Array<ResolversTypes['MersSampleTypeSubEstimate']>, sexSubestimates: Array<ResolversTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversTypes['MersTestUsedSubEstimate']>, timeFrameSubestimates: Array<ResolversTypes['MersTimeFrameSubEstimate']> }>;
+  MersSampleTypeSubEstimate: ResolverTypeWrapper<Omit<MersSampleTypeSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersSeroprevalenceSubEstimateInformation: ResolverTypeWrapper<MersSeroprevalenceSubEstimateInformation>;
   MersSexSubEstimate: ResolverTypeWrapper<Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersSubEstimateInformation: ResolverTypeWrapper<ResolversUnionTypes<ResolversTypes>['MersSubEstimateInformation']>;
   MersSubEstimateInformationInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['MersSubEstimateInformationInterface']>;
   MersSubEstimateInterface: ResolverTypeWrapper<ResolversInterfaceTypes<ResolversTypes>['MersSubEstimateInterface']>;
   MersTestUsedSubEstimate: ResolverTypeWrapper<Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersTimeFrameSubEstimate: ResolverTypeWrapper<Omit<MersTimeFrameSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersViralSubEstimateInformation: ResolverTypeWrapper<MersViralSubEstimateInformation>;
   Month: Month;
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
@@ -1321,6 +1375,8 @@ export type ResolversParentTypes = {
   HumanMersViralEstimate: HumanMersViralEstimate;
   Int: Scalars['Int']['output'];
   MersAgeGroupSubEstimate: ResolversUnionTypes<ResolversParentTypes>['MersAgeGroupSubEstimate'];
+  MersAnimalSamplingContextSubEstimate: Omit<MersAnimalSamplingContextSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersAnimalSourceLocationSubEstimate: Omit<MersAnimalSourceLocationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersAnimalSpeciesSubEstimate: Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersEstimate: MersEstimate;
   MersEstimateFilterOptions: MersEstimateFilterOptions;
@@ -1330,13 +1386,16 @@ export type ResolversParentTypes = {
   MersEventInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersEventInterface'];
   MersFilterOptions: MersFilterOptions;
   MersGeographicalAreaSubEstimate: Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
-  MersPrimaryEstimate: Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSpeciesSubestimates' | 'geographicalAreaSubestimates' | 'primaryEstimateInfo' | 'sexSubestimates' | 'testUsedSubestimates'> & { ageGroupSubestimates: Array<ResolversParentTypes['MersAgeGroupSubEstimate']>, animalSpeciesSubestimates: Array<ResolversParentTypes['MersAnimalSpeciesSubEstimate']>, geographicalAreaSubestimates: Array<ResolversParentTypes['MersGeographicalAreaSubEstimate']>, primaryEstimateInfo: ResolversParentTypes['PrimaryMersEstimateInformation'], sexSubestimates: Array<ResolversParentTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversParentTypes['MersTestUsedSubEstimate']> };
+  MersOccupationSubEstimate: Omit<MersOccupationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersPrimaryEstimate: Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSamplingContextSubestimates' | 'animalSourceLocationSubestimates' | 'animalSpeciesSubestimates' | 'geographicalAreaSubestimates' | 'occupationSubestimates' | 'primaryEstimateInfo' | 'sampleTypeSubestimates' | 'sexSubestimates' | 'testUsedSubestimates' | 'timeFrameSubestimates'> & { ageGroupSubestimates: Array<ResolversParentTypes['MersAgeGroupSubEstimate']>, animalSamplingContextSubestimates: Array<ResolversParentTypes['MersAnimalSamplingContextSubEstimate']>, animalSourceLocationSubestimates: Array<ResolversParentTypes['MersAnimalSourceLocationSubEstimate']>, animalSpeciesSubestimates: Array<ResolversParentTypes['MersAnimalSpeciesSubEstimate']>, geographicalAreaSubestimates: Array<ResolversParentTypes['MersGeographicalAreaSubEstimate']>, occupationSubestimates: Array<ResolversParentTypes['MersOccupationSubEstimate']>, primaryEstimateInfo: ResolversParentTypes['PrimaryMersEstimateInformation'], sampleTypeSubestimates: Array<ResolversParentTypes['MersSampleTypeSubEstimate']>, sexSubestimates: Array<ResolversParentTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversParentTypes['MersTestUsedSubEstimate']>, timeFrameSubestimates: Array<ResolversParentTypes['MersTimeFrameSubEstimate']> };
+  MersSampleTypeSubEstimate: Omit<MersSampleTypeSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersSeroprevalenceSubEstimateInformation: MersSeroprevalenceSubEstimateInformation;
   MersSexSubEstimate: Omit<MersSexSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersSubEstimateInformation: ResolversUnionTypes<ResolversParentTypes>['MersSubEstimateInformation'];
   MersSubEstimateInformationInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersSubEstimateInformationInterface'];
   MersSubEstimateInterface: ResolversInterfaceTypes<ResolversParentTypes>['MersSubEstimateInterface'];
   MersTestUsedSubEstimate: Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersTimeFrameSubEstimate: Omit<MersTimeFrameSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersViralSubEstimateInformation: MersViralSubEstimateInformation;
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
@@ -1710,6 +1769,25 @@ export type MersAgeGroupSubEstimateResolvers<ContextType = any, ParentType exten
   __resolveType: TypeResolveFn<'AnimalMersAgeGroupSubEstimate' | 'HumanMersAgeGroupSubEstimate', ParentType, ContextType>;
 };
 
+export type MersAnimalSamplingContextSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAnimalSamplingContextSubEstimate'] = ResolversParentTypes['MersAnimalSamplingContextSubEstimate']> = {
+  animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersAnimalSourceLocationSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAnimalSourceLocationSubEstimate'] = ResolversParentTypes['MersAnimalSourceLocationSubEstimate']> = {
+  animalCountryOfImport?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  animalCountryOfImportAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  animalCountryOfImportAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  animalImportedOrLocal?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MersAnimalSpeciesSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAnimalSpeciesSubEstimate'] = ResolversParentTypes['MersAnimalSpeciesSubEstimate']> = {
   animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1850,15 +1928,36 @@ export type MersGeographicalAreaSubEstimateResolvers<ContextType = any, ParentTy
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MersOccupationSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersOccupationSubEstimate'] = ResolversParentTypes['MersOccupationSubEstimate']> = {
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  occupation?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MersPrimaryEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersPrimaryEstimate'] = ResolversParentTypes['MersPrimaryEstimate']> = {
   ageGroupSubestimates?: Resolver<Array<ResolversTypes['MersAgeGroupSubEstimate']>, ParentType, ContextType>;
+  animalSamplingContextSubestimates?: Resolver<Array<ResolversTypes['MersAnimalSamplingContextSubEstimate']>, ParentType, ContextType>;
+  animalSourceLocationSubestimates?: Resolver<Array<ResolversTypes['MersAnimalSourceLocationSubEstimate']>, ParentType, ContextType>;
   animalSpeciesSubestimates?: Resolver<Array<ResolversTypes['MersAnimalSpeciesSubEstimate']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   geographicalAreaSubestimates?: Resolver<Array<ResolversTypes['MersGeographicalAreaSubEstimate']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  occupationSubestimates?: Resolver<Array<ResolversTypes['MersOccupationSubEstimate']>, ParentType, ContextType>;
   primaryEstimateInfo?: Resolver<ResolversTypes['PrimaryMersEstimateInformation'], ParentType, ContextType>;
+  sampleTypeSubestimates?: Resolver<Array<ResolversTypes['MersSampleTypeSubEstimate']>, ParentType, ContextType>;
   sexSubestimates?: Resolver<Array<ResolversTypes['MersSexSubEstimate']>, ParentType, ContextType>;
   testUsedSubestimates?: Resolver<Array<ResolversTypes['MersTestUsedSubEstimate']>, ParentType, ContextType>;
+  timeFrameSubestimates?: Resolver<Array<ResolversTypes['MersTimeFrameSubEstimate']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersSampleTypeSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSampleTypeSubEstimate'] = ResolversParentTypes['MersSampleTypeSubEstimate']> = {
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specimenType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1890,7 +1989,7 @@ export type MersSubEstimateInformationInterfaceResolvers<ContextType = any, Pare
 };
 
 export type MersSubEstimateInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersSubEstimateInterface'] = ResolversParentTypes['MersSubEstimateInterface']> = {
-  __resolveType: TypeResolveFn<'AnimalMersAgeGroupSubEstimate' | 'HumanMersAgeGroupSubEstimate' | 'MersAnimalSpeciesSubEstimate' | 'MersGeographicalAreaSubEstimate' | 'MersSexSubEstimate' | 'MersTestUsedSubEstimate', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'AnimalMersAgeGroupSubEstimate' | 'HumanMersAgeGroupSubEstimate' | 'MersAnimalSamplingContextSubEstimate' | 'MersAnimalSourceLocationSubEstimate' | 'MersAnimalSpeciesSubEstimate' | 'MersGeographicalAreaSubEstimate' | 'MersOccupationSubEstimate' | 'MersSampleTypeSubEstimate' | 'MersSexSubEstimate' | 'MersTestUsedSubEstimate' | 'MersTimeFrameSubEstimate', ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1901,6 +2000,15 @@ export type MersTestUsedSubEstimateResolvers<ContextType = any, ParentType exten
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersTimeFrameSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersTimeFrameSubEstimate'] = ResolversParentTypes['MersTimeFrameSubEstimate']> = {
+  estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  samplingEndDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  samplingStartDate?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2331,6 +2439,8 @@ export type Resolvers<ContextType = any> = {
   HumanMersEvent?: HumanMersEventResolvers<ContextType>;
   HumanMersViralEstimate?: HumanMersViralEstimateResolvers<ContextType>;
   MersAgeGroupSubEstimate?: MersAgeGroupSubEstimateResolvers<ContextType>;
+  MersAnimalSamplingContextSubEstimate?: MersAnimalSamplingContextSubEstimateResolvers<ContextType>;
+  MersAnimalSourceLocationSubEstimate?: MersAnimalSourceLocationSubEstimateResolvers<ContextType>;
   MersAnimalSpeciesSubEstimate?: MersAnimalSpeciesSubEstimateResolvers<ContextType>;
   MersEstimate?: MersEstimateResolvers<ContextType>;
   MersEstimateFilterOptions?: MersEstimateFilterOptionsResolvers<ContextType>;
@@ -2340,13 +2450,16 @@ export type Resolvers<ContextType = any> = {
   MersEventInterface?: MersEventInterfaceResolvers<ContextType>;
   MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
   MersGeographicalAreaSubEstimate?: MersGeographicalAreaSubEstimateResolvers<ContextType>;
+  MersOccupationSubEstimate?: MersOccupationSubEstimateResolvers<ContextType>;
   MersPrimaryEstimate?: MersPrimaryEstimateResolvers<ContextType>;
+  MersSampleTypeSubEstimate?: MersSampleTypeSubEstimateResolvers<ContextType>;
   MersSeroprevalenceSubEstimateInformation?: MersSeroprevalenceSubEstimateInformationResolvers<ContextType>;
   MersSexSubEstimate?: MersSexSubEstimateResolvers<ContextType>;
   MersSubEstimateInformation?: MersSubEstimateInformationResolvers<ContextType>;
   MersSubEstimateInformationInterface?: MersSubEstimateInformationInterfaceResolvers<ContextType>;
   MersSubEstimateInterface?: MersSubEstimateInterfaceResolvers<ContextType>;
   MersTestUsedSubEstimate?: MersTestUsedSubEstimateResolvers<ContextType>;
+  MersTimeFrameSubEstimate?: MersTimeFrameSubEstimateResolvers<ContextType>;
   MersViralSubEstimateInformation?: MersViralSubEstimateInformationResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;

@@ -28,6 +28,7 @@ export interface AirtableCountryFields {
 export interface AirtableMersEstimateFields {
   id: string;
   'Sub-grouping variable': string;
+  'Sub-group specific category': string | null;
   'Sex': string | null;
   'Prevalence Estimate Name': string;
   'Population Type': string;
@@ -38,11 +39,11 @@ export interface AirtableMersEstimateFields {
   'City': string | null;
   'Country': Array<string | null>;
   'Study': Array<string | null>;
-  'Positive Prevalence': number;
+  'Prevalence': number;
   'Denominator': number | null;
   'Numerator': number | null;
-  'Positive Prevalence 95% CI Lower': number | null;
-  'Positive Prevalence 95% CI Upper': number | null;
+  'Prevalence 95% CI Lower': number | null;
+  'Prevalence 95% CI Upper': number | null;
   'Sensitivity': number | null;
   'Sensitivity, 95% CI Lower': number | null;
   'Sensitivity, 95% CI Upper': number | null;
@@ -57,6 +58,7 @@ export interface AirtableMersEstimateFields {
   'Sample Frame (Animal)': Array<string | null>;
   'Animal purpose': string | null;
   'Imported or Local': string | null;
+  'Country of Import': Array<string | null>;
   'Sample Frame (Human)': string | null;
   'Producer': Array<string | null>;
   'Test Validation': Array<string | null>;

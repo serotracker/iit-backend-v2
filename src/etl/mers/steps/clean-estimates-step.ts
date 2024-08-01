@@ -14,6 +14,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
   type: MersEstimateType;
   subGroupingVariable: MersSubGroupingVariable;
+  subGroupingCategory: string | undefined;
   populationType: string;
   estimateType: string;
   positivePrevalence: number;
@@ -52,6 +53,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
+  animalCountryOfImportId: string | undefined;
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
@@ -149,11 +151,12 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
       .map((estimate) => ({
         id: estimate['id'],
         subGroupingVariable: deriveSubgroupingVariableFromEstimate(estimate),
+        subGroupingCategory: estimate['Sub-group specific category'] ?? undefined,
         populationType: estimate['Population Type'],
         estimateType: estimate['Estimate Type'],
-        positivePrevalence: estimate['Positive Prevalence'],
-        positivePrevalence95CILower: estimate['Positive Prevalence 95% CI Lower'] !== null ? estimate['Positive Prevalence 95% CI Lower'] : undefined,
-        positivePrevalence95CIUpper: estimate['Positive Prevalence 95% CI Upper'] !== null ? estimate['Positive Prevalence 95% CI Upper'] : undefined,
+        positivePrevalence: estimate['Prevalence'],
+        positivePrevalence95CILower: estimate['Prevalence 95% CI Lower'] !== null ? estimate['Prevalence 95% CI Lower'] : undefined,
+        positivePrevalence95CIUpper: estimate['Prevalence 95% CI Upper'] !== null ? estimate['Prevalence 95% CI Upper'] : undefined,
         ageGroup: estimate['Age Group (Human)'].filter((element): element is NonNullable<typeof element> => !!element),
         animalAgeGroup: estimate['Age Group (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         estimateId: estimate['Prevalence Estimate Name'],
@@ -193,6 +196,9 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         animalDetectionSettings: estimate['Sample Frame (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         animalPurpose: estimate['Animal purpose'] ?? undefined,
         animalImportedOrLocal: estimate['Imported or Local'] ?? undefined,
+        animalCountryOfImportId: estimate['Country of Import']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .at(0),
         sampleFrame: estimate['Sample Frame (Human)'] ?? undefined,
       }))
       .filter((estimate): estimate is Omit<typeof estimate, 'subGroupingVariable'> & {subGroupingVariable: NonNullable<typeof estimate['subGroupingVariable']>} => !!estimate.subGroupingVariable)

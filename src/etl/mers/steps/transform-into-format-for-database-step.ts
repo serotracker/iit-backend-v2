@@ -355,6 +355,58 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .filter((subestimate): subestimate is Omit<typeof subestimate, 'sex'> & {
       sex: NonNullable<typeof subestimate['sex']>
     } => !!subestimate.sex),
+  timeFrameSubestimates: input.groupedEstimates.timeFrameSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      samplingStartDate: subestimate.samplingStartDate,
+      samplingEndDate: subestimate.samplingEndDate
+    }))
+    .filter((subestimate): subestimate is Omit<typeof subestimate, 'samplingStartDate'|'samplingEndDate'> & {
+      samplingStartDate: NonNullable<typeof subestimate['samplingStartDate']>;
+      samplingEndDate: NonNullable<typeof subestimate['samplingEndDate']>;
+    } => !!subestimate.samplingStartDate && !!subestimate.samplingEndDate),
+  sampleTypeSubestimates: input.groupedEstimates.sampleTypeSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      specimenType: subestimate.specimenType,
+    }))
+    .filter((subestimate): subestimate is Omit<typeof subestimate, 'specimenType'> & {
+      specimenType: NonNullable<typeof subestimate['specimenType']>;
+    } => !!subestimate.specimenType),
+  occupationSubestimates: input.groupedEstimates.occupationSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      occupation: subestimate.subGroupingCategory,
+    }))
+    .filter((subestimate): subestimate is Omit<typeof subestimate, 'occupation'> & {
+      occupation: NonNullable<typeof subestimate['occupation']>;
+    } => !!subestimate.occupation),
+  animalSourceLocationSubestimates: input.groupedEstimates.animalSourceLocationSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      animalImportedOrLocal: subestimate.animalImportedOrLocal,
+      animalCountryOfImport: subestimate.animalCountryOfImport?.country,
+      animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImport?.countryAlphaTwoCode,
+      animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImport?.countryAlphaThreeCode
+    }))
+    .filter((subestimate): subestimate is Omit<typeof subestimate,
+      'animalImportedOrLocal'|'animalCountryOfImport'|'animalCountryOfImportAlphaTwoCode'|'animalCountryOfImportAlphaThreeCode'
+    > & {
+      animalImportedOrLocal: NonNullable<typeof subestimate['animalImportedOrLocal']>,
+      animalCountryOfImport: NonNullable<typeof subestimate['animalCountryOfImport']>,
+      animalCountryOfImportAlphaTwoCode: NonNullable<typeof subestimate['animalCountryOfImportAlphaTwoCode']>,
+      animalCountryOfImportAlphaThreeCode: NonNullable<typeof subestimate['animalCountryOfImportAlphaThreeCode']>,
+    } => 
+      !!subestimate.animalImportedOrLocal &&
+      !!subestimate.animalCountryOfImport &&
+      !!subestimate.animalCountryOfImportAlphaTwoCode &&
+      !!subestimate.animalCountryOfImportAlphaThreeCode
+    ),
+  animalSamplingContextSubestimates: input.groupedEstimates.animalSamplingContextSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      animalDetectionSettings: subestimate.animalDetectionSettings
+    })),
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords
 })

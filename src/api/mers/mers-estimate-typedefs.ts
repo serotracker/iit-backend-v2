@@ -399,6 +399,60 @@ export const mersEstimateTypedefs = `
     sex: String!
   }
 
+  type MersTimeFrameSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    samplingStartDate: String!
+    samplingEndDate: String!
+  }
+
+  type MersSampleTypeSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    specimenType: String!
+  }
+
+  type MersOccupationSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    occupation: String!
+  }
+
+  type MersAnimalSourceLocationSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    animalImportedOrLocal: String!
+    animalCountryOfImport: String!
+    animalCountryOfImportAlphaTwoCode: String!
+    animalCountryOfImportAlphaThreeCode: String!
+  }
+
+  type MersAnimalSamplingContextSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    animalDetectionSettings: [String!]!
+  }
+
   type MersPrimaryEstimate {
     id: String!
     estimateId: String!
@@ -408,6 +462,11 @@ export const mersEstimateTypedefs = `
     testUsedSubestimates: [MersTestUsedSubEstimate!]!
     animalSpeciesSubestimates: [MersAnimalSpeciesSubEstimate!]!
     sexSubestimates: [MersSexSubEstimate!]!
+    timeFrameSubestimates: [MersTimeFrameSubEstimate!]!
+    sampleTypeSubestimates: [MersSampleTypeSubEstimate!]!
+    occupationSubestimates: [MersOccupationSubEstimate!]!
+    animalSourceLocationSubestimates: [MersAnimalSourceLocationSubEstimate!]!
+    animalSamplingContextSubestimates: [MersAnimalSamplingContextSubEstimate!]!
   }
 
   type Query {
