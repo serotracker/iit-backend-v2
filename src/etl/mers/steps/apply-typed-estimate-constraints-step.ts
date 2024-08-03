@@ -226,6 +226,8 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
 }
 
 export const applyTypedEstimateConstraintsStep = (input: ApplyTypedEstimateConstraintsStepInput): ApplyTypedEstimateConstraintsStepOutput => {
+  console.log(`Running step: applyTypedEstimateConstraintsStep. Remaining estimates: ${input.allEstimates.length}`);
+
   return {
     allEstimates: input.allEstimates
       .map((estimate) => applyTypedEstimateConstraintToEstimate(estimate))
