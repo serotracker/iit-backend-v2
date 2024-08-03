@@ -177,7 +177,7 @@ export const addAnimalCountryOfImportInformationToEstimate = <
     }
   }
 
-  const countryOfImport = input.allCountries.find((country) => country.id === input.estimate.countryId);
+  const countryOfImport = input.allCountries.find((country) => country.id === input.estimate.animalCountryOfImportId);
 
   if(!countryOfImport) {
     return {
