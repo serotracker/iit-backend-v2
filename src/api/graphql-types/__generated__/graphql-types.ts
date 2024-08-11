@@ -662,7 +662,7 @@ export type MersSampleTypeSubEstimate = MersSubEstimateInterface & {
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   id: Scalars['String']['output'];
-  specimenType: Scalars['String']['output'];
+  specimenType: Array<Scalars['String']['output']>;
 };
 
 export type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformationInterface & {
@@ -834,7 +834,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   specificity95CILower?: Maybe<Scalars['Float']['output']>;
   specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
-  specimenType?: Maybe<Scalars['String']['output']>;
+  specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
@@ -887,7 +887,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   specificity95CILower?: Maybe<Scalars['Float']['output']>;
   specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
-  specimenType?: Maybe<Scalars['String']['output']>;
+  specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
@@ -936,7 +936,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   specificity95CILower?: Maybe<Scalars['Float']['output']>;
   specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
-  specimenType?: Maybe<Scalars['String']['output']>;
+  specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
@@ -985,7 +985,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   specificity95CILower?: Maybe<Scalars['Float']['output']>;
   specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
-  specimenType?: Maybe<Scalars['String']['output']>;
+  specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
@@ -1030,7 +1030,7 @@ export type PrimaryMersEstimateInformationInterface = {
   specificity95CILower?: Maybe<Scalars['Float']['output']>;
   specificity95CIUpper?: Maybe<Scalars['Float']['output']>;
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
-  specimenType?: Maybe<Scalars['String']['output']>;
+  specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
@@ -2004,7 +2004,7 @@ export type MersSampleTypeSubEstimateResolvers<ContextType = any, ParentType ext
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  specimenType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2149,7 +2149,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2202,7 +2202,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2251,7 +2251,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2300,7 +2300,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2349,7 +2349,7 @@ export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, 
   specificity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  specimenType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

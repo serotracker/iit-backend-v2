@@ -80,7 +80,7 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
     sampleDenominator: document.sampleDenominator,
     sampleNumerator: document.sampleNumerator,
     assay: document.assay,
-    specimenType: document.specimenType,
+    specimenType: document.specimenType.at(0),
     sex: document.sex,
     isotypes: document.isotypes,
     samplingStartDate: document.samplingStartDate ? document.samplingStartDate.toISOString() : undefined,

@@ -73,7 +73,7 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
         .flatMap((estimate) => estimate.assay)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       specimenType: uniq(input.allEstimates
-        .map((estimate) => estimate.specimenType)
+        .flatMap((estimate) => estimate.specimenType)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       sex: uniq(input.allEstimates
         .map((estimate) => estimate.sex)

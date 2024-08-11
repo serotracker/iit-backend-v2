@@ -66,8 +66,8 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     'Specimen Type': z
-      .optional(z.string().nullable())
-      .transform((value => value ?? null)),
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     'Sex': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),

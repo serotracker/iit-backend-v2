@@ -67,7 +67,7 @@ export const mersEstimateTypedefs = `
     sampleDenominator: Int
     sampleNumerator: Int
     assay: [String!]!
-    specimenType: String
+    specimenType: [String!]!
     sex: String
     isotypes: [String!]!
     samplingStartDate: String
@@ -111,7 +111,7 @@ export const mersEstimateTypedefs = `
     sampleDenominator: Int
     sampleNumerator: Int
     assay: [String!]!
-    specimenType: String
+    specimenType: [String!]!
     sex: String
     isotypes: [String!]!
     samplingStartDate: String
@@ -162,7 +162,7 @@ export const mersEstimateTypedefs = `
     sampleDenominator: Int
     sampleNumerator: Int
     assay: [String!]!
-    specimenType: String
+    specimenType: [String!]!
     sex: String
     isotypes: [String!]!
     samplingStartDate: String
@@ -217,7 +217,7 @@ export const mersEstimateTypedefs = `
     sampleDenominator: Int
     sampleNumerator: Int
     assay: [String!]!
-    specimenType: String
+    specimenType: [String!]!
     sex: String
     isotypes: [String!]!
     samplingStartDate: String
@@ -268,7 +268,7 @@ export const mersEstimateTypedefs = `
     sampleDenominator: Int
     sampleNumerator: Int
     assay: [String!]!
-    specimenType: String
+    specimenType: [String!]!
     sex: String
     isotypes: [String!]!
     samplingStartDate: String
@@ -419,7 +419,7 @@ export const mersEstimateTypedefs = `
     estimateInfo: MersSubEstimateInformation!
     ####### END INTERFACE FIELDS #######
 
-    specimenType: String!
+    specimenType: [String!]!
   }
 
   type MersOccupationSubEstimate implements MersSubEstimateInterface {

@@ -42,7 +42,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   samplingStartDate: string | undefined;
   samplingEndDate: string | undefined;
   assay: string[];
-  specimenType: string | undefined;
+  specimenType: string[];
   sex: string | undefined;
   isotypes: string[];
   samplingMethod: string | undefined;
@@ -184,7 +184,8 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         sampleDenominator: estimate['Denominator'] !== null ? estimate['Denominator'] : undefined,
         sampleNumerator: estimate['Numerator'] !== null ? estimate['Numerator'] : undefined,
         assay: estimate['Assay Type'].filter((element): element is NonNullable<typeof element> => !!element),
-        specimenType: estimate['Specimen Type'] ?? undefined,
+        specimenType: estimate['Specimen Type']
+          .filter((element): element is NonNullable<typeof element> => !!element),
         sex: estimate['Sex'] ?? undefined,
         isotypes: estimate['Isotype(s)'].filter((element): element is NonNullable<typeof element> => !!element),
         samplingStartDate: estimate['Sample Start Date'] ?? undefined,
