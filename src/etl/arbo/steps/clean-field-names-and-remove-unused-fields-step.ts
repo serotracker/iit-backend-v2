@@ -1,7 +1,11 @@
 import { MongoClient } from "mongodb";
-import { AirtableEstimateFields, AirtableSourceFields } from "../types.js";
-import { AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep, AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep, AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
+import {
+  AirtableCountryFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
+  AirtableEstimateFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
+  AirtableSourceFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep
+} from "./fetch-environmental-suitability-stats-by-country-step.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
   sourceSheetId: string[] | undefined;
@@ -51,10 +55,27 @@ export interface AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFiel
   alphaTwoCode: TwoLetterIsoCountryCode;
 }
 
+interface EnviromnentalSuitabilityDataCollection {
+  minimumValue: number;
+  maximumValue: number;
+  valueRange: number;
+  meanValue: number;
+  medianValue: number;
+  ninetyPercentOfValuesAreBelowThisValue: number;
+}
+
+export interface EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
+  countryAlphaThreeCode: string;
+  zikaData: EnviromnentalSuitabilityDataCollection;
+  dengue2015Data: EnviromnentalSuitabilityDataCollection;
+  dengue2050Data: EnviromnentalSuitabilityDataCollection;
+}
+
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
-  allEstimates: AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
-  allSources: AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep[];
-  allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allEstimates: AirtableEstimateFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  allSources: AirtableSourceFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  allCountries: AirtableCountryFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   mongoClient: MongoClient;
 }
 
@@ -62,6 +83,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,16 +109,16 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       antigen: estimate["Antigen"],
       assay: estimate["Assay"],
       assayOther: estimate["Assay - Other"],
-      sampleSize: estimate["Sample Size"],
+      sampleSize: estimate["Sample Size (Denominator)"],
       sampleNumerator: estimate["Sample Numerator"],
       sampleFrame: estimate["Sample Frame"],
-      sampleFrameTargetGroup: estimate["Sample Frame - Target Group"],
+      sampleFrameTargetGroup: estimate["Sample Frame - Description"],
       seroprevalence: estimate["Seroprevalence"],
       seroprevalenceStudy95CILower: estimate["Seroprevalence 95% CI Lower"],
       seroprevalenceStudy95CIUpper: estimate["Seroprevalence 95% CI Upper"],
       seroprevalenceCalculated95CILower: estimate["Seroprevalence 95% CI Lower (formula)"],
       seroprevalenceCalculated95CIUpper: estimate["Seroprevalence 95% CI Upper (formula)"],
-      state: estimate["State"],
+      state: estimate["State/Province"],
       city: estimate["City"],
       url: estimate["URL"],
       ageGroup: estimate["Age group"],
@@ -117,6 +139,33 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       name: country["Country"],
       alphaThreeCode: country["Alpha3 Code"] as ThreeLetterIsoCountryCode,
       alphaTwoCode: country["Alpha2 Code"] as TwoLetterIsoCountryCode
+    })),
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry.map((dataPoint) => ({
+      countryAlphaThreeCode: dataPoint['color_code'],
+      zikaData: {
+        minimumValue: dataPoint['MIN_zika'],
+        maximumValue: dataPoint['MAX_zika'],
+        valueRange: dataPoint['RANGE_zika'],
+        meanValue: dataPoint['MEAN_zika'],
+        medianValue: dataPoint['MEDIAN_zika'],
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint['PCT90_zika']
+      },
+      dengue2015Data: {
+        minimumValue: dataPoint['MIN_dengue2015'],
+        maximumValue: dataPoint['MAX_dengue2015'],
+        valueRange: dataPoint['RANGE_dengue2015'],
+        meanValue: dataPoint['MEAN_dengue2015'],
+        medianValue: dataPoint['MEDIAN_dengue2015'],
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint['PCT90_dengue2015']
+      },
+      dengue2050Data: {
+        minimumValue: dataPoint['MIN_dengue2050'],
+        maximumValue: dataPoint['MAX_dengue2050'],
+        valueRange: dataPoint['RANGE_dengue2050'],
+        meanValue: dataPoint['MEAN_dengue2050'],
+        medianValue: dataPoint['MEDIAN_dengue2050'],
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint['PCT90_dengue2050']
+      }
     })),
     mongoClient: input.mongoClient
   };

@@ -3,6 +3,7 @@ import {
   AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
 } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep = Omit<
@@ -21,10 +22,14 @@ export type AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep =
 export type AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep =
   AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
 
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep =
+  EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
+
 interface CleanSingleElementArrayFieldsStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -32,6 +37,7 @@ interface CleanSingleElementArrayFieldsStepOutput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -54,6 +60,7 @@ export const cleanSingleElementArrayFieldsStep = (
     }),
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     mongoClient: input.mongoClient
   };
 };

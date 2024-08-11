@@ -3,6 +3,7 @@ import {
   AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step.js";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
@@ -14,17 +15,18 @@ export type AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep =
     countryAlphaThreeCode: ThreeLetterIsoCountryCode;
     unRegion: UNRegion | undefined;
   };
-
 export type AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep =
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
-
 export type AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep =
   AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep =
+  EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allSources: AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allCountries: AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   mongoClient: MongoClient;
 }
 
@@ -32,6 +34,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allCountries: AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -75,6 +78,7 @@ export const addCountryAndRegionInformationStep = (
       .filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     mongoClient: input.mongoClient
   };
 };

@@ -6,11 +6,13 @@ import { AirtableEstimateFields, AirtableSourceFields, AirtableCountryFields } f
 export type AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableEstimateFields;
 export type AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep = AirtableSourceFields;
 export type AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep = AirtableCountryFields;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep = never;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: AirtableEstimateFields[];
   allSources: AirtableSourceFields[];
   allCountries: Array<FieldSet & {id: string}>;
+  environmentalSuitabilityStatsByCountry: never[];
   mongoClient: MongoClient;
 }
 
@@ -18,6 +20,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allEstimates: AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -39,6 +42,7 @@ export const validateFieldSetFromAirtableStep = (
     allEstimates: input.allEstimates,
     allSources: input.allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     mongoClient: input.mongoClient
   };
 };

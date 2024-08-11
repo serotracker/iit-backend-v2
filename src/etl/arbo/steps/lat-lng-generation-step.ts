@@ -7,6 +7,7 @@ import {
   AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep,
 } from "./merge-estimates-and-sources-step.js";
 
 export type AirtableEstimateFieldsAfterLatLngGenerationStep =
@@ -14,17 +15,18 @@ export type AirtableEstimateFieldsAfterLatLngGenerationStep =
     latitude: number;
     longitude: number;
   };
-
 export type AirtableSourceFieldsAfterLatLngGenerationStep =
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep;
-
 export type AirtableCountryFieldsAfterLatLngGenerationStep =
   AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep =
+  EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
   allCountries: AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -32,6 +34,7 @@ interface LatLngGenerationStepOutput {
   allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
   allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -81,6 +84,7 @@ export const latLngGenerationStep = async(
     allEstimates: estimatesWithLatitudesAndLongitudes,
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     mongoClient: input.mongoClient
   };
 };

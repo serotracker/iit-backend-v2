@@ -74,6 +74,37 @@ export interface ArbovirusEstimateDocument {
   updatedAt: Date;
 }
 
+export interface ArbovirusEnvironmentalSuitabilityStatsEntryDocument {
+  _id: ObjectId;
+  countryAlphaThreeCode: string;
+  zikaData: {
+    minimumValue: number;
+    maximumValue: number;
+    valueRange: number;
+    meanValue: number;
+    medianValue: number;
+    ninetyPercentOfValuesAreBelowThisValue: number;
+  },
+  dengue2015Data: {
+    minimumValue: number;
+    maximumValue: number;
+    valueRange: number;
+    meanValue: number;
+    medianValue: number;
+    ninetyPercentOfValuesAreBelowThisValue: number;
+  },
+  dengue2050Data: {
+    minimumValue: number;
+    maximumValue: number;
+    valueRange: number;
+    meanValue: number;
+    medianValue: number;
+    ninetyPercentOfValuesAreBelowThisValue: number;
+  },
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface TeamMemberDocument {
   _id: ObjectId;
   firstName: string;
