@@ -107,7 +107,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       pediatricAgeGroup: estimate["Pediatric age group"],
       antibodies: estimate["Antibody"],
       antigen: estimate["Antigen"],
-      assay: estimate["Assay"],
+      assay: estimate["Assay Type"],
       assayOther: estimate["Assay - Other"],
       sampleSize: estimate["Sample Size (Denominator)"],
       sampleNumerator: estimate["Sample Numerator"],

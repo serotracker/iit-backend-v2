@@ -18,7 +18,7 @@ export type AirtableEstimateFields = {
   "Pediatric age group": string | undefined;
   Producer: string | undefined;
   "Producer - Other": string | undefined;
-  Assay: string | undefined;
+  "Assay Type": string | undefined;
   "Assay - Other": string | undefined;
   "Sample Start Date": `${number}-${number}-${number}` | undefined;
   "Sample End Date": `${number}-${number}-${number}` | undefined;
