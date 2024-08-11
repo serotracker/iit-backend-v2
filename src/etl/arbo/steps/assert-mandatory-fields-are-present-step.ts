@@ -2,7 +2,8 @@ import { MongoClient } from "mongodb";
 import {
   AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep,
   AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
-  AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep
+  AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep
 } from "./transform-not-reported-values-to-undefined-step.js";
 import { Arbovirus, isArbovirus } from "../../../storage/types.js";
 
@@ -15,17 +16,18 @@ export type AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep =
     pathogen: Arbovirus;
     seroprevalence: number;
   };
-
 export type AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep =
   AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep;
-
 export type AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep =
   AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep =
+  EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep;
 
 interface AssertMandatoryFieldsArePresentStepInput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
@@ -33,6 +35,7 @@ interface AssertMandatoryFieldsAreStepOutput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep[];
   mongoClient: MongoClient;
 }
 
@@ -53,6 +56,26 @@ export const assertMandatoryFieldsArePresentStep = (
     }),
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry.filter((dataPoint) => 
+      !Number.isNaN(dataPoint.zikaData.minimumValue) &&
+      !Number.isNaN(dataPoint.zikaData.maximumValue) &&
+      !Number.isNaN(dataPoint.zikaData.valueRange) &&
+      !Number.isNaN(dataPoint.zikaData.meanValue) &&
+      !Number.isNaN(dataPoint.zikaData.medianValue) &&
+      !Number.isNaN(dataPoint.zikaData.ninetyPercentOfValuesAreBelowThisValue) &&
+      !Number.isNaN(dataPoint.dengue2015Data.minimumValue) &&
+      !Number.isNaN(dataPoint.dengue2015Data.maximumValue) &&
+      !Number.isNaN(dataPoint.dengue2015Data.valueRange) &&
+      !Number.isNaN(dataPoint.dengue2015Data.meanValue) &&
+      !Number.isNaN(dataPoint.dengue2015Data.medianValue) &&
+      !Number.isNaN(dataPoint.dengue2015Data.ninetyPercentOfValuesAreBelowThisValue) &&
+      !Number.isNaN(dataPoint.dengue2050Data.minimumValue) &&
+      !Number.isNaN(dataPoint.dengue2050Data.maximumValue) &&
+      !Number.isNaN(dataPoint.dengue2050Data.valueRange) &&
+      !Number.isNaN(dataPoint.dengue2050Data.meanValue) &&
+      !Number.isNaN(dataPoint.dengue2050Data.medianValue) &&
+      !Number.isNaN(dataPoint.dengue2050Data.ninetyPercentOfValuesAreBelowThisValue)
+    ),
     mongoClient: input.mongoClient
   };
 };

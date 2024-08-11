@@ -9,7 +9,7 @@ export type AirtableEstimateFields = {
   "Age Maximum": number | undefined;
   Sex: string | undefined;
   "Sample Frame": string | undefined;
-  "Sample Frame - Target Group": string | undefined;
+  "Sample Frame - Description": string | undefined;
   "Sampling Method": string | undefined;
   Pathogen: string;
   Antibody: string[] | undefined;
@@ -18,11 +18,11 @@ export type AirtableEstimateFields = {
   "Pediatric age group": string | undefined;
   Producer: string | undefined;
   "Producer - Other": string | undefined;
-  Assay: string | undefined;
+  "Assay Type": string | undefined;
   "Assay - Other": string | undefined;
   "Sample Start Date": `${number}-${number}-${number}` | undefined;
   "Sample End Date": `${number}-${number}-${number}` | undefined;
-  "Sample Size": number | undefined;
+  "Sample Size (Denominator)": number | undefined;
   "Serotype": string[] | undefined;
   Seroprevalence: number | undefined;
   "Seroprevalence 95% CI Lower": number | undefined;
@@ -36,7 +36,7 @@ export type AirtableEstimateFields = {
   URL: string[] | undefined;
   "Age group": string | undefined;
   City: string | undefined;
-  State: string | undefined;
+  "State/Province": string | undefined;
   "ETL Included": 0 | 1 | undefined;
   "Publication Date": unknown[] | undefined;
   "First Author Last Name": unknown[] | undefined;

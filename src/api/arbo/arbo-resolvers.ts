@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "../graphql-types/__generated__/graphql-types.js";
-import { Arbovirus, ArbovirusEstimateDocument } from '../../storage/types.js';
+import { Arbovirus, ArbovirusEnvironmentalSuitabilityStatsEntryDocument, ArbovirusEstimateDocument } from '../../storage/types.js';
 import { Arbovirus as ArbovirusForApi } from "../graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi } from "../shared/shared-mappers.js";
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
@@ -84,6 +84,43 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     const databaseEstimates = await mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').find({}).toArray();
 
     return databaseEstimates.map((estimate) => transformArbovirusEstimateDocumentForApi(estimate));
+  }
+  
+  const arbovirusEnviromentalSuitabilityData = async () => {
+    const databaseEnvironmentalSuitabilityData = await mongoClient
+      .db(databaseName)
+      .collection<ArbovirusEnvironmentalSuitabilityStatsEntryDocument>('arbovirusEnviromentalSuitabilityStats')
+      .find({})
+      .toArray();
+    
+    return databaseEnvironmentalSuitabilityData.map((dataPoint) => ({
+      id: dataPoint._id.toHexString(),
+      countryAlphaThreeCode: dataPoint.countryAlphaThreeCode,
+      zikaData: {
+        minimumValue: dataPoint.zikaData.minimumValue,
+        maximumValue: dataPoint.zikaData.maximumValue,
+        valueRange: dataPoint.zikaData.valueRange,
+        meanValue: dataPoint.zikaData.meanValue,
+        medianValue: dataPoint.zikaData.medianValue,
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint.zikaData.ninetyPercentOfValuesAreBelowThisValue,
+      },
+      dengue2015Data: {
+        minimumValue: dataPoint.dengue2015Data.minimumValue,
+        maximumValue: dataPoint.dengue2015Data.maximumValue,
+        valueRange: dataPoint.dengue2015Data.valueRange,
+        meanValue: dataPoint.dengue2015Data.meanValue,
+        medianValue: dataPoint.dengue2015Data.medianValue,
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint.dengue2015Data.ninetyPercentOfValuesAreBelowThisValue,
+      },
+      dengue2050Data: {
+        minimumValue: dataPoint.dengue2050Data.minimumValue,
+        maximumValue: dataPoint.dengue2050Data.maximumValue,
+        valueRange: dataPoint.dengue2050Data.valueRange,
+        meanValue: dataPoint.dengue2050Data.meanValue,
+        medianValue: dataPoint.dengue2050Data.medianValue,
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint.dengue2050Data.ninetyPercentOfValuesAreBelowThisValue,
+      },
+    }))
   }
 
   const arbovirusFilterOptions = async () => {
@@ -173,6 +210,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     arboResolvers: {
       Query: {
         arbovirusEstimates,
+        arbovirusEnviromentalSuitabilityData,
         arbovirusFilterOptions,
         arbovirusDataStatistics
       }

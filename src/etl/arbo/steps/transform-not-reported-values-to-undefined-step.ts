@@ -4,21 +4,23 @@ import {
   AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep,
 } from "./clean-single-element-array-fields-step.js";
 
 export type AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep =
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep;
-
 export type AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep =
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep;
-
 export type AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep =
   AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep =
+  EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep;
 
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -26,6 +28,7 @@ interface TransformNotReportedValuesToUndefinedStepOutput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
@@ -70,6 +73,7 @@ export const transformNotReportedValuesToUndefinedStep = (
     ),
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     mongoClient: input.mongoClient
   };
 };

@@ -2,12 +2,18 @@ import { MongoClient } from "mongodb";
 import {
   AirtableCountryFieldsAfterLatLngGenerationStep,
   AirtableEstimateFieldsAfterLatLngGenerationStep,
-  AirtableSourceFieldsAfterLatLngGenerationStep
+  AirtableSourceFieldsAfterLatLngGenerationStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep
 } from "./lat-lng-generation-step.js";
 
-export type AirtableEstimateFieldsAfterJitteringPinLatLngStep = AirtableEstimateFieldsAfterLatLngGenerationStep;
-export type AirtableSourceFieldsAfterJitteringPinLatLngStep = AirtableSourceFieldsAfterLatLngGenerationStep
-export type AirtableCountryFieldsAfterJitteringPinLatLngStep = AirtableCountryFieldsAfterLatLngGenerationStep
+export type AirtableEstimateFieldsAfterJitteringPinLatLngStep =
+  AirtableEstimateFieldsAfterLatLngGenerationStep;
+export type AirtableSourceFieldsAfterJitteringPinLatLngStep =
+  AirtableSourceFieldsAfterLatLngGenerationStep;
+export type AirtableCountryFieldsAfterJitteringPinLatLngStep =
+  AirtableCountryFieldsAfterLatLngGenerationStep;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep =
+  EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -27,6 +33,7 @@ interface JitterPinLatLngStepInput {
   allEstimates: AirtableEstimateFieldsAfterLatLngGenerationStep[];
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
   allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -34,6 +41,7 @@ interface JitterPinLatLngStepOutput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
   allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -53,6 +61,7 @@ export const jitterPinLatLngStep = (
     })),
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     mongoClient: input.mongoClient
   };
 };

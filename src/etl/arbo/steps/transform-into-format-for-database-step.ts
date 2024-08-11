@@ -1,19 +1,29 @@
 import { ObjectId, MongoClient } from "mongodb";
-import { ArbovirusEstimateDocument } from "../../../storage/types.js";
+import {
+  ArbovirusEnvironmentalSuitabilityStatsEntryDocument,
+  ArbovirusEstimateDocument
+} from "../../../storage/types.js";
 import {
   AirtableCountryFieldsAfterJitteringPinLatLngStep,
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
   AirtableSourceFieldsAfterJitteringPinLatLngStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep,
 } from "./jitter-pin-lat-lng-step.js";
 
-export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep = ArbovirusEstimateDocument;
-export type AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep = AirtableSourceFieldsAfterJitteringPinLatLngStep;
-export type AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep = AirtableCountryFieldsAfterJitteringPinLatLngStep;
+export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep =
+  ArbovirusEstimateDocument;
+export type AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep =
+  AirtableSourceFieldsAfterJitteringPinLatLngStep;
+export type AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep =
+  AirtableCountryFieldsAfterJitteringPinLatLngStep;
+export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep =
+  ArbovirusEnvironmentalSuitabilityStatsEntryDocument;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
   allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -21,6 +31,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allEstimates: AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep[];
   allSources: AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep[];
   allCountries: AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -80,6 +91,36 @@ export const transformIntoFormatForDatabaseStep = (
     })),
     allSources: allSources,
     allCountries: allCountries,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry.map((dataPoint) => ({
+      _id: new ObjectId(),
+      countryAlphaThreeCode: dataPoint.countryAlphaThreeCode,
+      zikaData: {
+        minimumValue: dataPoint.zikaData.minimumValue,
+        maximumValue: dataPoint.zikaData.maximumValue,
+        valueRange: dataPoint.zikaData.valueRange,
+        meanValue: dataPoint.zikaData.meanValue,
+        medianValue: dataPoint.zikaData.medianValue,
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint.zikaData.ninetyPercentOfValuesAreBelowThisValue,
+      },
+      dengue2015Data: {
+        minimumValue: dataPoint.dengue2015Data.minimumValue,
+        maximumValue: dataPoint.dengue2015Data.maximumValue,
+        valueRange: dataPoint.dengue2015Data.valueRange,
+        meanValue: dataPoint.dengue2015Data.meanValue,
+        medianValue: dataPoint.dengue2015Data.medianValue,
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint.dengue2015Data.ninetyPercentOfValuesAreBelowThisValue,
+      },
+      dengue2050Data: {
+        minimumValue: dataPoint.dengue2050Data.minimumValue,
+        maximumValue: dataPoint.dengue2050Data.maximumValue,
+        valueRange: dataPoint.dengue2050Data.valueRange,
+        meanValue: dataPoint.dengue2050Data.meanValue,
+        medianValue: dataPoint.dengue2050Data.medianValue,
+        ninetyPercentOfValuesAreBelowThisValue: dataPoint.dengue2050Data.ninetyPercentOfValuesAreBelowThisValue,
+      },
+      createdAt: createdAtForAllRecords,
+      updatedAt: updatedAtForAllRecords
+    })),
     mongoClient: input.mongoClient
   };
 };
