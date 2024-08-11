@@ -64,7 +64,7 @@ export interface AirtableMersEstimateFields {
   'Test Validation': Array<string | null>;
   'Geographic scope': string | null;
   'Sampling Method': string | null;
-  'Specimen Type': string | null;
+  'Specimen Type': Array<string | null>;
   'Sample End Date': string | null;
   'Sample Start Date': string | null;
   'Species': string | null;
