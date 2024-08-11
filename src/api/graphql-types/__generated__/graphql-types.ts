@@ -171,6 +171,25 @@ export type ArbovirusDataStatistics = {
   sourceCount: Scalars['Int']['output'];
 };
 
+export type ArbovirusEnvironmentalSuitabilityDataEntry = {
+  __typename?: 'ArbovirusEnvironmentalSuitabilityDataEntry';
+  countryAlphaThreeCode: Scalars['String']['output'];
+  dengue2015Data: ArbovirusEnvironmentalSuitabilityDataSubEntry;
+  dengue2050Data: ArbovirusEnvironmentalSuitabilityDataSubEntry;
+  id: Scalars['String']['output'];
+  zikaData: ArbovirusEnvironmentalSuitabilityDataSubEntry;
+};
+
+export type ArbovirusEnvironmentalSuitabilityDataSubEntry = {
+  __typename?: 'ArbovirusEnvironmentalSuitabilityDataSubEntry';
+  maximumValue: Scalars['Float']['output'];
+  meanValue: Scalars['Float']['output'];
+  medianValue: Scalars['Float']['output'];
+  minimumValue: Scalars['Float']['output'];
+  ninetyPercentOfValuesAreBelowThisValue: Scalars['Float']['output'];
+  valueRange: Scalars['Float']['output'];
+};
+
 export type ArbovirusEstimate = {
   __typename?: 'ArbovirusEstimate';
   ageGroup?: Maybe<Scalars['String']['output']>;
@@ -1028,6 +1047,7 @@ export type Query = {
   allMonthlySarsCov2CountryInformationPartitionKeys: Array<Scalars['Int']['output']>;
   allSarsCov2EstimatePartitionKeys: Array<Scalars['Int']['output']>;
   arbovirusDataStatistics: ArbovirusDataStatistics;
+  arbovirusEnviromentalSuitabilityData: Array<ArbovirusEnvironmentalSuitabilityDataEntry>;
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
   faoMersEventFilterOptions: FaoMersEventFilterOptions;
@@ -1285,6 +1305,8 @@ export type ResolversTypes = {
   AnimalMersViralEstimate: ResolverTypeWrapper<AnimalMersViralEstimate>;
   Arbovirus: Arbovirus;
   ArbovirusDataStatistics: ResolverTypeWrapper<ArbovirusDataStatistics>;
+  ArbovirusEnvironmentalSuitabilityDataEntry: ResolverTypeWrapper<ArbovirusEnvironmentalSuitabilityDataEntry>;
+  ArbovirusEnvironmentalSuitabilityDataSubEntry: ResolverTypeWrapper<ArbovirusEnvironmentalSuitabilityDataSubEntry>;
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -1365,6 +1387,8 @@ export type ResolversParentTypes = {
   AnimalMersEvent: AnimalMersEvent;
   AnimalMersViralEstimate: AnimalMersViralEstimate;
   ArbovirusDataStatistics: ArbovirusDataStatistics;
+  ArbovirusEnvironmentalSuitabilityDataEntry: ArbovirusEnvironmentalSuitabilityDataEntry;
+  ArbovirusEnvironmentalSuitabilityDataSubEntry: ArbovirusEnvironmentalSuitabilityDataSubEntry;
   ArbovirusEstimate: ArbovirusEstimate;
   ArbovirusFilterOptions: ArbovirusFilterOptions;
   Boolean: Scalars['Boolean']['output'];
@@ -1565,6 +1589,25 @@ export type ArbovirusDataStatisticsResolvers<ContextType = any, ParentType exten
   estimateCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   patricipantCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sourceCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArbovirusEnvironmentalSuitabilityDataEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArbovirusEnvironmentalSuitabilityDataEntry'] = ResolversParentTypes['ArbovirusEnvironmentalSuitabilityDataEntry']> = {
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  dengue2015Data?: Resolver<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry'], ParentType, ContextType>;
+  dengue2050Data?: Resolver<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  zikaData?: Resolver<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ArbovirusEnvironmentalSuitabilityDataSubEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry'] = ResolversParentTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry']> = {
+  maximumValue?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  meanValue?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  medianValue?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  minimumValue?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  ninetyPercentOfValuesAreBelowThisValue?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  valueRange?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2322,6 +2365,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   allMonthlySarsCov2CountryInformationPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allSarsCov2EstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
+  arbovirusEnviromentalSuitabilityData?: Resolver<Array<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataEntry']>, ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
   faoMersEventFilterOptions?: Resolver<ResolversTypes['FaoMersEventFilterOptions'], ParentType, ContextType>;
@@ -2434,6 +2478,8 @@ export type Resolvers<ContextType = any> = {
   AnimalMersEvent?: AnimalMersEventResolvers<ContextType>;
   AnimalMersViralEstimate?: AnimalMersViralEstimateResolvers<ContextType>;
   ArbovirusDataStatistics?: ArbovirusDataStatisticsResolvers<ContextType>;
+  ArbovirusEnvironmentalSuitabilityDataEntry?: ArbovirusEnvironmentalSuitabilityDataEntryResolvers<ContextType>;
+  ArbovirusEnvironmentalSuitabilityDataSubEntry?: ArbovirusEnvironmentalSuitabilityDataSubEntryResolvers<ContextType>;
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;

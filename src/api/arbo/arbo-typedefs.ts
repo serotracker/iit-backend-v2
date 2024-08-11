@@ -74,8 +74,26 @@ export const arboTypedefs = `
     countryCount: Int!
   }
 
+  type ArbovirusEnvironmentalSuitabilityDataSubEntry {
+    minimumValue: Float!
+    maximumValue: Float!
+    valueRange: Float!
+    meanValue: Float!
+    medianValue: Float!
+    ninetyPercentOfValuesAreBelowThisValue: Float!
+  }
+
+  type ArbovirusEnvironmentalSuitabilityDataEntry {
+    id: String!
+    countryAlphaThreeCode: String!    
+    zikaData: ArbovirusEnvironmentalSuitabilityDataSubEntry!
+    dengue2015Data: ArbovirusEnvironmentalSuitabilityDataSubEntry!
+    dengue2050Data: ArbovirusEnvironmentalSuitabilityDataSubEntry!
+  }
+
   type Query {
     arbovirusEstimates: [ArbovirusEstimate!]!
+    arbovirusEnviromentalSuitabilityData: [ArbovirusEnvironmentalSuitabilityDataEntry!]!
     arbovirusFilterOptions: ArbovirusFilterOptions!
     arbovirusDataStatistics: ArbovirusDataStatistics!
   }
