@@ -52,6 +52,8 @@ export interface AirtableMersEstimateFields {
   'Specificity, 95% CI Lower': number | null;
   'Specificity, 95% CI Upper': number | null;
   'Specificity Denominator': number | null;
+  'Age Minimum': number | null;
+  'Age Maximum': number | null;
   'Isotype(s)': Array<string | null>;
   'Assay Type': Array<string | null>;
   'Animal type': Array<string | null>;

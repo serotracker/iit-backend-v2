@@ -39,6 +39,8 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   specificityDenominator: number | undefined;
   sampleDenominator: number | undefined;
   sampleNumerator: number | undefined;
+  ageMinimum: number | undefined;
+  ageMaximum: number | undefined;
   samplingStartDate: string | undefined;
   samplingEndDate: string | undefined;
   assay: string[];
@@ -181,6 +183,8 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         specificity95CILower: estimate['Specificity, 95% CI Lower'] !== null ? estimate['Specificity, 95% CI Lower'] : undefined,
         specificity95CIUpper: estimate['Specificity, 95% CI Upper'] !== null ? estimate['Specificity, 95% CI Upper'] : undefined,
         specificityDenominator: estimate['Specificity Denominator'] !== null ? estimate['Specificity Denominator'] : undefined,
+        ageMaximum: estimate['Age Maximum'] ?? undefined,
+        ageMinimum: estimate['Age Minimum'] ?? undefined,
         sampleDenominator: estimate['Denominator'] !== null ? estimate['Denominator'] : undefined,
         sampleNumerator: estimate['Numerator'] !== null ? estimate['Numerator'] : undefined,
         assay: estimate['Assay Type'].filter((element): element is NonNullable<typeof element> => !!element),

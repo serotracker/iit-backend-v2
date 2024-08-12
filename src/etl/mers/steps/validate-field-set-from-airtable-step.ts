@@ -109,6 +109,12 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Specificity Denominator': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
+    'Age Minimum': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Age Maximum': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
     'Isotype(s)': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
