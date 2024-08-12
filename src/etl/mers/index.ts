@@ -32,6 +32,8 @@ import { groupEstimatesUnderPrimaryEstimatesStep } from "./steps/group-estimates
 import { generateMersEstimateFilterOptionsStep } from "./steps/generate-mers-estimate-filter-options-step.js";
 import { writeMersEstimateFilterOptionsToMongoDbStep } from "./steps/write-mers-estimate-filter-options-to-mongodb-step.js";
 import { writeGroupedEstimateDataToMongodbStep } from "./steps/write-grouped-estimate-data-to-mongodb-step.js";
+import { filterInvalidSubestimatesStep } from "./steps/filter-invalid-subestimates-step.js";
+import { sortSubestimatesStep } from "./steps/sort-subestimates-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -124,6 +126,8 @@ const runEtlMain = async () => {
     etlStep(applyTypedEstimateConstraintsStep),
     etlStep(generateMersEstimateFilterOptionsStep),
     etlStep(groupEstimatesUnderPrimaryEstimatesStep),
+    etlStep(filterInvalidSubestimatesStep),
+    etlStep(sortSubestimatesStep),
     etlStep(transformIntoFormatForDatabaseStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
     asyncEtlStep(writeGroupedEstimateDataToMongodbStep),

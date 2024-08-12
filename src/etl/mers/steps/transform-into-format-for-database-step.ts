@@ -1,4 +1,5 @@
 import { MongoClient, ObjectId } from "mongodb";
+import assertNever from "assert-never";
 import {
   MersEstimateDocument,
   MersEventType,
@@ -11,41 +12,38 @@ import {
   MersPrimaryEstimateDocument,
   MersSubEstimateBase
 } from "../../../storage/types.js";
-import assertNever from "assert-never";
 import {
-  CountryFieldsAfterApplyingTypedEstimateConstraintsStep,
-  CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep,
-  EstimateFieldsAfterApplyingTypedEstimateConstraintsStep,
-  FaoMersEventAfterApplyingTypedEstimateConstraintsStep,
-  SourceFieldsAfterApplyingTypedEstimateConstraintsStep,
-  StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
-  YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
-} from "./apply-typed-estimate-constraints-step.js";
-import {
-  EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep,
-  GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep
-} from "./group-estimates-under-primary-estimates-step.js";
+  CountryFieldsAfterSortingSubestimatesStep,
+  CountryPopulationDataAfterSortingSubestimatesStep,
+  EstimateFieldsAfterSortingSubestimatesStep,
+  EstimateFilterOptionsAfterSortingSubestimatesStep,
+  FaoMersEventAfterSortingSubestimatesStep,
+  GroupedEstimateFieldsAfterSortingSubestimatesStep,
+  SourceFieldsAfterSortingSubestimatesStep,
+  StudyFieldsAfterSortingSubestimatesStep,
+  YearlyCamelPopulationDataAfterSortingSubestimatesStep
+} from "./sort-subestimates-step.js";
 
 export type EstimateFieldsAfterTransformingFormatForDatabaseStep = MersEstimateDocument;
 export type GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep = MersPrimaryEstimateDocument;
-export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
+export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAfterSortingSubestimatesStep;
 export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = MersEstimateFilterOptionsDocument;
-export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
-export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
+export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterSortingSubestimatesStep;
+export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterSortingSubestimatesStep;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
-export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep;
+export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterSortingSubestimatesStep;
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep[];
-  allGroupedEstimates: GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
-  allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
-  estimateFilterOptions: EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
-  allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
-  allCountries: CountryFieldsAfterApplyingTypedEstimateConstraintsStep[];
-  allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
-  countryPopulationData: CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
+  allEstimates: EstimateFieldsAfterSortingSubestimatesStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterSortingSubestimatesStep[];
+  allSources: SourceFieldsAfterSortingSubestimatesStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterSortingSubestimatesStep;
+  allStudies: StudyFieldsAfterSortingSubestimatesStep[];
+  allCountries: CountryFieldsAfterSortingSubestimatesStep[];
+  allFaoMersEvents: FaoMersEventAfterSortingSubestimatesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterSortingSubestimatesStep[];
+  countryPopulationData: CountryPopulationDataAfterSortingSubestimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -63,7 +61,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
 }
 
 interface TransformFaoMersEventBaseForDatabaseInput {
-  event: FaoMersEventAfterApplyingTypedEstimateConstraintsStep;
+  event: FaoMersEventAfterSortingSubestimatesStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -89,7 +87,7 @@ const transformFaoMersEventBaseForDatabase = (input: TransformFaoMersEventBaseFo
 })
 
 interface TransformFaoMersEventForDatabaseInput {
-  event: FaoMersEventAfterApplyingTypedEstimateConstraintsStep;
+  event: FaoMersEventAfterSortingSubestimatesStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -131,7 +129,7 @@ const transformFaoMersEventForDatabase = (input: TransformFaoMersEventForDatabas
 }
 
 interface TransformMersEstimateBaseForDatabaseInput {
-  estimate: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
+  estimate: EstimateFieldsAfterSortingSubestimatesStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -182,7 +180,7 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
 })
 
 interface TransformMersEstimateForDatabaseInput {
-  estimate: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
+  estimate: EstimateFieldsAfterSortingSubestimatesStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -250,7 +248,7 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
 }
 
 interface TransformMersEstimateFilterOptionsForDatabaseInput {
-  estimateFilterOptions: EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+  estimateFilterOptions: EstimateFilterOptionsAfterSortingSubestimatesStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -275,7 +273,12 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
   updatedAt: input.updatedAtForAllRecords,
 });
 
-const transformMersSubEstimateBaseForDatabaseInput = (estimate: EstimateFieldsAfterApplyingTypedEstimateConstraintsStep): MersSubEstimateBase => ({
+const transformMersSubEstimateBaseForDatabaseInput = (estimate: 
+  Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_SEROPREVALENCE }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'>
+  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.HUMAN_SEROPREVALENCE }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'>
+  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_VIRAL }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'>
+  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.HUMAN_VIRAL }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'>
+): MersSubEstimateBase => ({
   id: estimate.id,
   estimateId: estimate.estimateId,
   estimateInfo: estimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE || estimate.type === MersEstimateType.HUMAN_SEROPREVALENCE ? {
@@ -294,7 +297,7 @@ const transformMersSubEstimateBaseForDatabaseInput = (estimate: EstimateFieldsAf
 })
 
 interface TransformGroupedMersEstimatesForDatabaseInput {
-  groupedEstimates: GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+  groupedEstimates: GroupedEstimateFieldsAfterSortingSubestimatesStep;
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -349,65 +352,36 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       animalSpecies: subestimate.animalSpecies
-    }))
-    .filter((subestimate): subestimate is Omit<typeof subestimate, 'animalSpecies'> & {
-      animalSpecies: NonNullable<typeof subestimate['animalSpecies']>
-    } => !!subestimate.animalSpecies),
+    })),
   sexSubestimates: input.groupedEstimates.sexSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       sex: subestimate.sex
-    }))
-    .filter((subestimate): subestimate is Omit<typeof subestimate, 'sex'> & {
-      sex: NonNullable<typeof subestimate['sex']>
-    } => !!subestimate.sex),
+    })),
   timeFrameSubestimates: input.groupedEstimates.timeFrameSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       samplingStartDate: subestimate.samplingStartDate,
       samplingEndDate: subestimate.samplingEndDate
-    }))
-    .filter((subestimate): subestimate is Omit<typeof subestimate, 'samplingStartDate'|'samplingEndDate'> & {
-      samplingStartDate: NonNullable<typeof subestimate['samplingStartDate']>;
-      samplingEndDate: NonNullable<typeof subestimate['samplingEndDate']>;
-    } => !!subestimate.samplingStartDate && !!subestimate.samplingEndDate),
+    })),
   sampleTypeSubestimates: input.groupedEstimates.sampleTypeSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       specimenType: subestimate.specimenType,
-    }))
-    .filter((subestimate): subestimate is Omit<typeof subestimate, 'specimenType'> & {
-      specimenType: NonNullable<typeof subestimate['specimenType']>;
-    } => !!subestimate.specimenType),
+    })),
   occupationSubestimates: input.groupedEstimates.occupationSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
-      occupation: subestimate.subGroupingCategory,
-    }))
-    .filter((subestimate): subestimate is Omit<typeof subestimate, 'occupation'> & {
-      occupation: NonNullable<typeof subestimate['occupation']>;
-    } => !!subestimate.occupation),
+      occupation: subestimate.occupation,
+    })),
   animalSourceLocationSubestimates: input.groupedEstimates.animalSourceLocationSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       animalImportedOrLocal: subestimate.animalImportedOrLocal,
-      animalCountryOfImport: subestimate.animalCountryOfImport?.country,
-      animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImport?.countryAlphaTwoCode,
-      animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImport?.countryAlphaThreeCode
-    }))
-    .filter((subestimate): subestimate is Omit<typeof subestimate,
-      'animalImportedOrLocal'|'animalCountryOfImport'|'animalCountryOfImportAlphaTwoCode'|'animalCountryOfImportAlphaThreeCode'
-    > & {
-      animalImportedOrLocal: NonNullable<typeof subestimate['animalImportedOrLocal']>,
-      animalCountryOfImport: NonNullable<typeof subestimate['animalCountryOfImport']>,
-      animalCountryOfImportAlphaTwoCode: NonNullable<typeof subestimate['animalCountryOfImportAlphaTwoCode']>,
-      animalCountryOfImportAlphaThreeCode: NonNullable<typeof subestimate['animalCountryOfImportAlphaThreeCode']>,
-    } => 
-      !!subestimate.animalImportedOrLocal &&
-      !!subestimate.animalCountryOfImport &&
-      !!subestimate.animalCountryOfImportAlphaTwoCode &&
-      !!subestimate.animalCountryOfImportAlphaThreeCode
-    ),
+      animalCountryOfImport: subestimate.animalCountryOfImport,
+      animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImport,
+      animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImport
+    })),
   animalSamplingContextSubestimates: input.groupedEstimates.animalSamplingContextSubestimates
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
