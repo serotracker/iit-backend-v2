@@ -25,6 +25,8 @@ export const mersEstimateTypedefs = `
     animalPurpose: [String!]!
     animalImportedOrLocal: [String!]!
     sampleFrame: [String!]!
+    exposureToCamels: [String!]!
+    antigen: [String!]!
     testProducer: [String!]!
     testValidation: [String!]!
   }
@@ -470,6 +472,8 @@ export const mersEstimateTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     occupation: String!
+    sampleFrame: String
+    exposureToCamels: String
   }
 
   type MersAnimalSourceLocationSubEstimate implements MersSubEstimateInterface {

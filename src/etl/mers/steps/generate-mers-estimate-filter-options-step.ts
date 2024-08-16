@@ -27,6 +27,8 @@ export type EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep = 
   sampleFrame: string[];
   testProducer: string[];
   testValidation: string[];
+  exposureToCamels: string[];
+  antigen: string[];
 }
 export type StudyFieldsAfterGeneratingMersEstimateFilterOptionsStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type CountryFieldsAfterGeneratingMersEstimateFilterOptionsStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
@@ -104,6 +106,12 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
         .filter((element): element is NonNullable<typeof element> => !!element)),
       testValidation: uniq(input.allEstimates
         .flatMap((estimate) => estimate.testValidation)
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      exposureToCamels: uniq(input.allEstimates
+        .map((estimate) => estimate.exposureToCamels)
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      antigen: uniq(input.allEstimates
+        .flatMap((estimate) => estimate.antigen)
         .filter((element): element is NonNullable<typeof element> => !!element)),
     },
     allSources: input.allSources,
