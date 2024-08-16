@@ -46,16 +46,24 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   assay: string[];
   specimenType: string[];
   sex: string | undefined;
+  socioeconomicStatus: string | undefined;
+  exposureToCamels: string | undefined;
   isotypes: string[];
+  antigen: string[];
   samplingMethod: string | undefined;
   geographicScope: string | undefined;
   testProducer: string[];
+  testProducerOther: string | undefined;
   testValidation: string[];
+  testValidatedOn: string | undefined;
+  positiveCutoff: string | undefined;
   sampleFrame: string | undefined;
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
   animalCountryOfImportId: string | undefined;
+  symptomPrevalenceOfPositives: number | undefined;
+  symptomDefinition: string | undefined;
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
@@ -191,13 +199,19 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         specimenType: estimate['Specimen Type']
           .filter((element): element is NonNullable<typeof element> => !!element),
         sex: estimate['Sex'] ?? undefined,
+        socioeconomicStatus: estimate['Socioeconomic status'] ?? undefined,
+        exposureToCamels: estimate['Exposure to camels'] ?? undefined,
         isotypes: estimate['Isotype(s)'].filter((element): element is NonNullable<typeof element> => !!element),
+        antigen: estimate['Antigen or gene'].filter((element): element is NonNullable<typeof element> => !!element),
         samplingStartDate: estimate['Sample Start Date'] ?? undefined,
         samplingEndDate: estimate['Sample End Date'] ?? undefined,
         samplingMethod: estimate['Sampling Method'] ?? undefined,
         geographicScope: estimate['Geographic scope'] ?? undefined,
         testProducer: estimate['Producer'].filter((element): element is NonNullable<typeof element> => !!element),
+        testProducerOther: estimate['Producer - Other'] ?? undefined,
         testValidation: estimate['Test Validation'].filter((element): element is NonNullable<typeof element> => !!element),
+        testValidatedOn: estimate['Species Test Validated On'] ?? undefined,
+        positiveCutoff: estimate['Positive Cut-off'] ?? undefined,
         animalDetectionSettings: estimate['Sample Frame (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         animalPurpose: estimate['Animal purpose'] ?? undefined,
         animalImportedOrLocal: estimate['Imported or Local']
@@ -207,6 +221,8 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
           .filter((element): element is NonNullable<typeof element> => !!element)
           .at(0),
         sampleFrame: estimate['Sample Frame (Human)'] ?? undefined,
+        symptomPrevalenceOfPositives: estimate['Symptom Prevalence of Positives'] ?? undefined,
+        symptomDefinition: estimate['Symptom definition'] ?? undefined,
       }))
       .filter((estimate): estimate is Omit<typeof estimate, 'subGroupingVariable'> & {subGroupingVariable: NonNullable<typeof estimate['subGroupingVariable']>} => !!estimate.subGroupingVariable)
       .map((estimate) => ({

@@ -30,6 +30,8 @@ export interface AirtableMersEstimateFields {
   'Sub-grouping variable': string;
   'Sub-group specific category': string | null;
   'Sex': string | null;
+  'Socioeconomic status': string | null;
+  'Exposure to camels': string | null;
   'Prevalence Estimate Name': string;
   'Population Type': string;
   'Estimate Type': string;
@@ -55,6 +57,7 @@ export interface AirtableMersEstimateFields {
   'Age Minimum': number | null;
   'Age Maximum': number | null;
   'Isotype(s)': Array<string | null>;
+  'Antigen or gene': Array<string | null>;
   'Assay Type': Array<string | null>;
   'Animal type': Array<string | null>;
   'Sample Frame (Animal)': Array<string | null>;
@@ -63,12 +66,17 @@ export interface AirtableMersEstimateFields {
   'Country of Import': Array<string | null>;
   'Sample Frame (Human)': string | null;
   'Producer': Array<string | null>;
+  'Producer - Other': string | null;
   'Test Validation': Array<string | null>;
+  'Species Test Validated On': string | null;
+  'Positive Cut-off': string | null;
   'Geographic scope': string | null;
   'Sampling Method': string | null;
   'Specimen Type': Array<string | null>;
   'Sample End Date': string | null;
   'Sample Start Date': string | null;
+  'Symptom Prevalence of Positives': number | null;
+  'Symptom definition': string | null;
   'Species': string | null;
 }
 

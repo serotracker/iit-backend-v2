@@ -71,6 +71,12 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Sex': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
+    'Socioeconomic status': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Exposure to camels': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Prevalence': z
       .number(),
     'Denominator': z
@@ -118,6 +124,9 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Isotype(s)': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Antigen or gene': z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     'Assay Type': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
@@ -142,9 +151,18 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Producer': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Producer - Other': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Test Validation': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Species Test Validated On': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Positive Cut-off': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Geographic scope': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
@@ -155,6 +173,12 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
     'Sample Start Date': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Symptom Prevalence of Positives': z
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
+    'Symptom definition': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
     'Species': z
