@@ -69,13 +69,21 @@ export const mersEstimateTypedefs = `
     assay: [String!]!
     specimenType: [String!]!
     sex: String
+    socioeconomicStatus: String
+    exposureToCamels: String
     isotypes: [String!]!
+    antigen: [String!]!
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
     samplingMethod: String
     geographicScope: String
     testProducer: [String!]!
+    testProducerOther: String
+    testValidatedOn: String
+    positiveCutoff: String
+    symptomPrevalenceOfPositives: Float
+    symptomDefinition: String
     testValidation: [String!]!
   }
 
@@ -113,13 +121,21 @@ export const mersEstimateTypedefs = `
     assay: [String!]!
     specimenType: [String!]!
     sex: String
+    socioeconomicStatus: String
+    exposureToCamels: String
     isotypes: [String!]!
+    antigen: [String!]!
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
     samplingMethod: String
     geographicScope: String
     testProducer: [String!]!
+    testProducerOther: String
+    testValidatedOn: String
+    positiveCutoff: String
+    symptomPrevalenceOfPositives: Float
+    symptomDefinition: String
     testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
@@ -164,13 +180,21 @@ export const mersEstimateTypedefs = `
     assay: [String!]!
     specimenType: [String!]!
     sex: String
+    socioeconomicStatus: String
+    exposureToCamels: String
     isotypes: [String!]!
+    antigen: [String!]!
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
     samplingMethod: String
     geographicScope: String
     testProducer: [String!]!
+    testProducerOther: String
+    testValidatedOn: String
+    positiveCutoff: String
+    symptomPrevalenceOfPositives: Float
+    symptomDefinition: String
     testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
@@ -219,13 +243,21 @@ export const mersEstimateTypedefs = `
     assay: [String!]!
     specimenType: [String!]!
     sex: String
+    socioeconomicStatus: String
+    exposureToCamels: String
     isotypes: [String!]!
+    antigen: [String!]!
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
     samplingMethod: String
     geographicScope: String
     testProducer: [String!]!
+    testProducerOther: String
+    testValidatedOn: String
+    positiveCutoff: String
+    symptomPrevalenceOfPositives: Float
+    symptomDefinition: String
     testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
@@ -270,13 +302,21 @@ export const mersEstimateTypedefs = `
     assay: [String!]!
     specimenType: [String!]!
     sex: String
+    socioeconomicStatus: String
+    exposureToCamels: String
     isotypes: [String!]!
+    antigen: [String!]!
     samplingStartDate: String
     samplingEndDate: String
     samplingMidDate: String
     samplingMethod: String
     geographicScope: String
     testProducer: [String!]!
+    testProducerOther: String
+    testValidatedOn: String
+    positiveCutoff: String
+    symptomPrevalenceOfPositives: Float
+    symptomDefinition: String
     testValidation: [String!]!
     ####### END INTERFACE FIELDS #######
 
