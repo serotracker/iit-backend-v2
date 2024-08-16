@@ -277,6 +277,8 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
   sampleFrame: input.estimateFilterOptions.sampleFrame,
   testProducer: input.estimateFilterOptions.testProducer,
   testValidation: input.estimateFilterOptions.testValidation,
+  exposureToCamels: input.estimateFilterOptions.exposureToCamels,
+  antigen: input.estimateFilterOptions.antigen,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 });
@@ -381,6 +383,8 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       occupation: subestimate.occupation,
+      sampleFrame: subestimate.sampleFrame,
+      exposureToCamels: subestimate.exposureToCamels
     })),
   animalSourceLocationSubestimates: input.groupedEstimates.animalSourceLocationSubestimates
     .map((subestimate) => ({

@@ -508,7 +508,9 @@ export type MersEstimateFilterOptions = {
   animalDetectionSettings: Array<Scalars['String']['output']>;
   animalImportedOrLocal: Array<Scalars['String']['output']>;
   animalPurpose: Array<Scalars['String']['output']>;
+  antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
+  exposureToCamels: Array<Scalars['String']['output']>;
   geographicScope: Array<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
   sampleFrame: Array<Scalars['String']['output']>;
@@ -636,8 +638,10 @@ export type MersOccupationSubEstimate = MersSubEstimateInterface & {
   __typename?: 'MersOccupationSubEstimate';
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
+  exposureToCamels?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   occupation: Scalars['String']['output'];
+  sampleFrame?: Maybe<Scalars['String']['output']>;
 };
 
 export type MersPrimaryEstimate = {
@@ -1909,7 +1913,9 @@ export type MersEstimateFilterOptionsResolvers<ContextType = any, ParentType ext
   animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalImportedOrLocal?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalPurpose?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  exposureToCamels?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   geographicScope?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2018,8 +2024,10 @@ export type MersGeographicalAreaSubEstimateResolvers<ContextType = any, ParentTy
 export type MersOccupationSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersOccupationSubEstimate'] = ResolversParentTypes['MersOccupationSubEstimate']> = {
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
+  exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   occupation?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

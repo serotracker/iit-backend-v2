@@ -245,7 +245,9 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       occupationSubestimates: primaryEstimate.occupationSubestimates.map((subestimate) => ({
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersOccupationSubEstimate' as const,
-        occupation: subestimate.occupation
+        occupation: subestimate.occupation,
+        sampleFrame: subestimate.sampleFrame,
+        exposureToCamels: subestimate.exposureToCamels
       })),
       animalSourceLocationSubestimates: primaryEstimate.animalSourceLocationSubestimates.map((subestimate) => ({
         ...mapMersSubEstimateBaseForApi(subestimate),
@@ -280,6 +282,8 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       animalPurpose: mersEstimateFilterOptions?.animalPurpose ?? [],
       animalImportedOrLocal: mersEstimateFilterOptions?.animalImportedOrLocal ?? [],
       sampleFrame: mersEstimateFilterOptions?.sampleFrame ?? [],
+      exposureToCamels: mersEstimateFilterOptions?.exposureToCamels ?? [],
+      antigen: mersEstimateFilterOptions?.antigen ?? [],
       testProducer: mersEstimateFilterOptions?.testProducer ?? [],
       testValidation: mersEstimateFilterOptions?.testValidation ?? []
     }

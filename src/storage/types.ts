@@ -413,6 +413,8 @@ type MersSampleTypeSubEstimate = MersSubEstimateBase & {
 
 type MersOccupationSubEstimate = MersSubEstimateBase & {
   occupation: string;
+  sampleFrame: string | undefined;
+  exposureToCamels: string | undefined;
 }
 
 type MersAnimalSourceLocationSubEstimate = MersSubEstimateBase & {
@@ -490,6 +492,8 @@ export interface MersEstimateFilterOptionsDocument {
   animalPurpose: string[];
   animalImportedOrLocal: string[];
   sampleFrame: string[];
+  exposureToCamels: string[];
+  antigen: string[];
   testProducer: string[];
   testValidation: string[];
   createdAt: Date;
