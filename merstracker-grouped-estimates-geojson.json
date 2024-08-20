@@ -1,0 +1,1531 @@
+{
+  "type": "GeometryCollection",
+  "geometries": [
+    {
+      "type": "Point",
+      "coordinates": [37.81440875149764, 0.5763392484926684],
+      "properties": {
+        "estimateId": "210311_MarsabitCounty_WashingtonStateUniversity_Humans",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12b3",
+          "estimateId": "210311_MarsabitCounty_WashingtonStateUniversity_Humans",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Kenya",
+          "countryAlphaTwoCode": "KE",
+          "countryAlphaThreeCode": "KEN",
+          "whoRegion": "AFR",
+          "unRegion": "EASTERN_AFRICA",
+          "latitude": 0.5763392484926684,
+          "longitude": 37.81440875149764,
+          "firstAuthorFullName": "Peninah Munyua",
+          "sourceUrl": "https://wwwnc.cdc.gov/eid/article/27/4/20-4458_article",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Low-Level Middle East Respiratory Syndrome Coronavirus among Camel Handlers, Kenya, 2019",
+          "insitutution": "Washington State University",
+          "studyInclusionCriteria": "We enrolled participants on a rolling basis from 32 camel-owning households in Marsabit County, northern Kenya. We defined a camel handler as any person in the household who had contact with camels.",
+          "sampleDenominator": 262,
+          "sampleNumerator": 3,
+          "assay": ["RT-PCR"],
+          "specimenType": ["Nasal Swab or NP", "Throat swab or OP"],
+          "sex": "All",
+          "exposureToCamels": "Direct exposure",
+          "isotypes": [],
+          "antigen": ["UpE", "N"],
+          "samplingStartDate": "2018-04-15T06:00:00.000Z",
+          "samplingEndDate": "2020-03-15T06:00:00.000Z",
+          "samplingMidDate": "2019-03-31T06:00:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "Regional",
+          "testProducer": ["Altona Diagnostics"],
+          "testValidation": ["Validated by independent authors"],
+          "positiveCutoff": "5.3 copies/reaction",
+          "symptomPrevalenceOfPositives": 0,
+          "symptomDefinition": "Respiratory symptoms (fever, running nose, cough, nasal stuffiness, sore throat, chest pain)",
+          "type": "HUMAN_VIRAL",
+          "positivePrevalence": 0.011,
+          "ageGroup": [
+            "Children and youth (0-17 years)",
+            "Adults (18-45 years)",
+            "Adults (46-59 years)",
+            "Seniors (≥60 years)"
+          ],
+          "sampleFrame": "Livestock handlers",
+          "id": "66c4c85ef75b6d8941ad12b4"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [44.698342980394884, 33.719428153672006],
+      "properties": {
+        "estimateId": "220810_Diyala_UniversityofDiyala_Humans",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12b6",
+          "estimateId": "220810_Diyala_UniversityofDiyala_Humans",
+          "subGroupingVariable": "PRIMARY",
+          "state": "Diyala Province",
+          "country": "Iraq",
+          "countryAlphaTwoCode": "IQ",
+          "countryAlphaThreeCode": "IRQ",
+          "whoRegion": "EMR",
+          "unRegion": "WESTERN_ASIA",
+          "latitude": 33.719428153672006,
+          "longitude": 44.698342980394884,
+          "firstAuthorFullName": "Abdulrazak Hasan",
+          "sourceUrl": "https://journals.tubitak.gov.tr/medical/vol52/iss4/5/",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Cross-sectional study of Middle East respiratory syndrome coronavirus in humans and dromedary camels in Diyala, Iraq",
+          "insitutution": "University of Diyala",
+          "studyInclusionCriteria": " Human subjects included 90 participants who were subdivided into 3 groups; 40 individuals had close contact with camels, 20 were normal healthy individuals, and 30 were individuals who had visited KSA for Hajj or Umrah.",
+          "sampleDenominator": 90,
+          "sampleNumerator": 46,
+          "assay": ["ELISA"],
+          "specimenType": ["Serum"],
+          "sex": "All",
+          "exposureToCamels": "Mixed exposure",
+          "isotypes": ["IgG"],
+          "antigen": ["Not reported"],
+          "samplingStartDate": "2017-08-15T06:00:00.000Z",
+          "samplingEndDate": "2018-10-31T06:00:00.000Z",
+          "samplingMidDate": "2018-03-24T06:00:00.000Z",
+          "samplingMethod": "Unclear",
+          "geographicScope": "Regional",
+          "testProducer": ["Other"],
+          "testProducerOther": "Alpha Diagnostic International, USA",
+          "testValidation": ["Not reported"],
+          "positiveCutoff": "Not reported",
+          "symptomPrevalenceOfPositives": 0.478,
+          "symptomDefinition": "Flu-like symptoms",
+          "type": "HUMAN_SEROPREVALENCE",
+          "seroprevalence": 0.511,
+          "seroprevalence95CILower": 0.409,
+          "seroprevalence95CIUpper": 0.613,
+          "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
+          "sampleFrame": "Multiple populations",
+          "id": "66c4c85ef75b6d8941ad12b7"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [
+          {
+            "id": "recDf35Hr48IcPszv",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_<40",
+            "estimateInfo": {
+              "sampleDenominator": 30,
+              "sampleNumerator": 12,
+              "seroprevalence": 0.4,
+              "seroprevalence95CILower": 0.24,
+              "seroprevalence95CIUpper": 0.578
+            },
+            "ageGroup": ["Adults (18-45 years)"],
+            "ageGroupLabel": "<40"
+          },
+          {
+            "id": "rec5aH2bdmEsEwz8z",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_40-49",
+            "estimateInfo": {
+              "sampleDenominator": 26,
+              "sampleNumerator": 18,
+              "seroprevalence": 0.692,
+              "seroprevalence95CILower": 0.502,
+              "seroprevalence95CIUpper": 0.842
+            },
+            "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
+            "ageGroupLabel": "40-49"
+          },
+          {
+            "id": "recenYFYlTpiaY8il",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_40-49 copy",
+            "estimateInfo": {
+              "sampleDenominator": 34,
+              "sampleNumerator": 16,
+              "seroprevalence": 0.471,
+              "seroprevalence95CILower": 0.311,
+              "seroprevalence95CIUpper": 0.635
+            },
+            "ageGroup": ["Adults (46-59 years)"],
+            "ageGroupLabel": "50-59"
+          }
+        ],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [
+          {
+            "id": "recUc4uGzid4DQnRu",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_Female",
+            "estimateInfo": {
+              "sampleDenominator": 34,
+              "sampleNumerator": 21,
+              "seroprevalence": 0.618,
+              "seroprevalence95CILower": 0.45,
+              "seroprevalence95CIUpper": 0.766
+            },
+            "sex": "Female"
+          },
+          {
+            "id": "recXVEMN639cTXEdH",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_Male",
+            "estimateInfo": {
+              "sampleDenominator": 56,
+              "sampleNumerator": 25,
+              "seroprevalence": 0.446,
+              "seroprevalence95CILower": 0.323,
+              "seroprevalence95CIUpper": 0.577
+            },
+            "sex": "Male"
+          }
+        ],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [
+          {
+            "id": "reclAwBIXdNAfb5ib",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_CamelContacts",
+            "estimateInfo": {
+              "sampleDenominator": 40,
+              "sampleNumerator": 11,
+              "seroprevalence": 0.275,
+              "seroprevalence95CILower": 0.156,
+              "seroprevalence95CIUpper": 0.425
+            },
+            "occupation": "Camels close contacts",
+            "sampleFrame": "Close contacts of camels",
+            "exposureToCamels": "Direct exposure"
+          },
+          {
+            "id": "reciLoa8zINnNzpI9",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_Pilgrims",
+            "estimateInfo": {
+              "sampleDenominator": 30,
+              "sampleNumerator": 28,
+              "seroprevalence": 0.933,
+              "seroprevalence95CILower": 0.803,
+              "seroprevalence95CIUpper": 0.986
+            },
+            "occupation": "Hajj or Umrah pilgrims",
+            "sampleFrame": "Pilgrims",
+            "exposureToCamels": "Direct exposure"
+          },
+          {
+            "id": "recXIuWIg6J77u4SU",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Humans_Healthy",
+            "estimateInfo": {
+              "sampleDenominator": 20,
+              "sampleNumerator": 7,
+              "seroprevalence": 0.35,
+              "seroprevalence95CILower": 0.172,
+              "seroprevalence95CIUpper": 0.568
+            },
+            "occupation": "Normal healthy individuals",
+            "sampleFrame": "Household and community sample",
+            "exposureToCamels": "No exposure"
+          }
+        ],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [44.61075640304477, 23.467918000406147],
+      "properties": {
+        "estimateId": "180507_SaudiArabia_UniversityofHongKong_Serum",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12b9",
+          "estimateId": "180507_SaudiArabia_UniversityofHongKong_Serum",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Saudi Arabia",
+          "countryAlphaTwoCode": "SA",
+          "countryAlphaThreeCode": "SAU",
+          "whoRegion": "EMR",
+          "unRegion": "WESTERN_ASIA",
+          "latitude": 23.467918000406147,
+          "longitude": 44.61075640304477,
+          "firstAuthorFullName": "Samy Kasem",
+          "sourceUrl": "https://doi.org/10.1016/j.jiph.2017.09.022",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Cross-sectional study of MERS-CoV-specific RNA and antibodies in animals that have had contact with MERS patients in Saudi Arabia",
+          "insitutution": "The University of Hong Kong",
+          "studyInclusionCriteria": "This was part of a cooperative epidemiological response to the confirmed human cases of MERS with a history of animal contact. Notifications were issued by the Ministry of Health (MOH) associated with animals with a history of contact with MERS-patients",
+          "sensitivity": 0.9598,
+          "specificity": 1,
+          "sampleDenominator": 595,
+          "sampleNumerator": 422,
+          "assay": ["ELISA"],
+          "specimenType": ["Serum"],
+          "sex": "All",
+          "isotypes": ["IgG"],
+          "antigen": ["S1"],
+          "samplingStartDate": "2014-07-15T06:00:00.000Z",
+          "samplingEndDate": "2016-07-15T06:00:00.000Z",
+          "samplingMidDate": "2015-07-15T18:00:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "National",
+          "testProducer": ["Euroimmun"],
+          "testValidation": ["Validated by independent authors"],
+          "testValidatedOn": "Dromedary camel",
+          "positiveCutoff": "Not reported",
+          "type": "ANIMAL_SEROPREVALENCE",
+          "seroprevalence": 0.709,
+          "animalSpecies": "CAMEL",
+          "animalType": ["DOMESTIC"],
+          "animalDetectionSettings": ["Animal contacts of human cases"],
+          "animalPurpose": "Not reported",
+          "animalImportedOrLocal": "Local",
+          "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
+          "id": "66c4c85ef75b6d8941ad12ba"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [67.65161461172606, 28.15231768146076],
+      "properties": {
+        "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12bc",
+          "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Pakistan",
+          "countryAlphaTwoCode": "PK",
+          "countryAlphaThreeCode": "PAK",
+          "whoRegion": "EMR",
+          "unRegion": "SOUTHERN_ASIA",
+          "latitude": 28.15231768146076,
+          "longitude": 67.65161461172606,
+          "firstAuthorFullName": "Ali Zohaib",
+          "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Countrywide Survey for MERS-Coronavirus Antibodies in Dromedaries and Humans in Pakistan",
+          "insitutution": "Wuhan Institute of Virology",
+          "studyInclusionCriteria": "Human serum samples were obtained from hospitals, primary health care centres and blood banks from people older than 15 years of age\nDromedary camels",
+          "sensitivity": 1,
+          "specificity": 1,
+          "sampleDenominator": 1050,
+          "sampleNumerator": 794,
+          "assay": ["ELISA"],
+          "specimenType": ["Serum"],
+          "sex": "All",
+          "isotypes": ["IgG"],
+          "antigen": ["S1"],
+          "samplingStartDate": "2015-11-15T07:00:00.000Z",
+          "samplingEndDate": "2018-02-15T07:00:00.000Z",
+          "samplingMidDate": "2016-12-30T19:00:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "National",
+          "testProducer": ["In-house"],
+          "testValidation": ["Validated by developers"],
+          "testValidatedOn": "Not reported",
+          "positiveCutoff": "0.15",
+          "type": "ANIMAL_SEROPREVALENCE",
+          "seroprevalence": 0.756,
+          "animalSpecies": "CAMEL",
+          "animalType": ["DOMESTIC", "WILD"],
+          "animalDetectionSettings": [
+            "Livestock markets",
+            "Abattoirs",
+            "Free-roaming herds"
+          ],
+          "animalPurpose": "Multiple purposes",
+          "animalImportedOrLocal": "Local",
+          "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
+          "id": "66c4c85ef75b6d8941ad12bd"
+        },
+        "geographicalAreaSubestimates": [
+          {
+            "id": "recVRDk3HMvFYWzUW",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_Balochistan",
+            "estimateInfo": {
+              "sampleDenominator": 188,
+              "sampleNumerator": 145,
+              "seroprevalence": 0.7713,
+              "seroprevalence95CILower": 0.7033,
+              "seroprevalence95CIUpper": 0.828
+            },
+            "state": "Balochistan",
+            "country": "Pakistan",
+            "countryAlphaTwoCode": "PK",
+            "countryAlphaThreeCode": "PAK",
+            "latitude": 30.2560042957729,
+            "longitude": 66.93371749228652,
+            "whoRegion": "EMR",
+            "unRegion": "SOUTHERN_ASIA",
+            "geographicScope": "Regional"
+          },
+          {
+            "id": "rech8xwv4dR1Z8BnY",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_KhyberPakhtunkhwa",
+            "estimateInfo": {
+              "sampleDenominator": 168,
+              "sampleNumerator": 134,
+              "seroprevalence": 0.7976,
+              "seroprevalence95CILower": 0.7272,
+              "seroprevalence95CIUpper": 0.854
+            },
+            "state": "Khyber Pakhtunkhwa",
+            "country": "Pakistan",
+            "countryAlphaTwoCode": "PK",
+            "countryAlphaThreeCode": "PAK",
+            "latitude": 33.92362654724383,
+            "longitude": 71.57197012274128,
+            "whoRegion": "EMR",
+            "unRegion": "SOUTHERN_ASIA",
+            "geographicScope": "Regional"
+          },
+          {
+            "id": "rec8Ot0F7yyC8bZvD",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_Punjab",
+            "estimateInfo": {
+              "sampleDenominator": 600,
+              "sampleNumerator": 447,
+              "seroprevalence": 0.745,
+              "seroprevalence95CILower": 0.7077,
+              "seroprevalence95CIUpper": 0.779
+            },
+            "state": "Punjab",
+            "country": "Pakistan",
+            "countryAlphaTwoCode": "PK",
+            "countryAlphaThreeCode": "PAK",
+            "latitude": 31.48858204369543,
+            "longitude": 74.3567151727553,
+            "whoRegion": "EMR",
+            "unRegion": "SOUTHERN_ASIA",
+            "geographicScope": "Regional"
+          },
+          {
+            "id": "recLtXzxJEpZUzYOP",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_Sindh",
+            "estimateInfo": {
+              "sampleDenominator": 94,
+              "sampleNumerator": 68,
+              "seroprevalence": 0.7234,
+              "seroprevalence95CILower": 0.6195,
+              "seroprevalence95CIUpper": 0.5054
+            },
+            "state": "Sindh",
+            "country": "Pakistan",
+            "countryAlphaTwoCode": "PK",
+            "countryAlphaThreeCode": "PAK",
+            "latitude": 24.761859637541267,
+            "longitude": 67.11400428584633,
+            "whoRegion": "EMR",
+            "unRegion": "SOUTHERN_ASIA",
+            "geographicScope": "Regional"
+          }
+        ],
+        "ageGroupSubestimates": [
+          {
+            "id": "rec5JcdEenpWrncE0",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_<3Y",
+            "estimateInfo": {
+              "sampleDenominator": 177,
+              "sampleNumerator": 103,
+              "seroprevalence": 0.5819,
+              "seroprevalence95CILower": 0.5054,
+              "seroprevalence95CIUpper": 0.6548
+            },
+            "animalAgeGroup": ["Juvenile (6 months-2 years)"],
+            "animalAgeGroupLabel": "≤ 3 Y"
+          },
+          {
+            "id": "recxQbfmivwGOK9Uj",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_3.1-10Y",
+            "estimateInfo": {
+              "sampleDenominator": 712,
+              "sampleNumerator": 560,
+              "seroprevalence": 0.7865,
+              "seroprevalence95CILower": 0.7542,
+              "seroprevalence95CIUpper": 0.8157
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "3.1-10 Y"
+          },
+          {
+            "id": "recNubD0tFH2HWYCx",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_>10Y",
+            "estimateInfo": {
+              "sampleDenominator": 161,
+              "sampleNumerator": 131,
+              "seroprevalence": 0.8137,
+              "seroprevalence95CILower": 0.7431,
+              "seroprevalence95CIUpper": 0.8689
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": ">10 Y"
+          }
+        ],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [
+          {
+            "id": "rec56Jrak0M3f0otn",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_Female",
+            "estimateInfo": {
+              "sampleDenominator": 695,
+              "sampleNumerator": 543,
+              "seroprevalence": 0.7813,
+              "seroprevalence95CILower": 0.7483,
+              "seroprevalence95CIUpper": 0.8111
+            },
+            "sex": "Female"
+          },
+          {
+            "id": "recWCExaKaZRDcmTJ",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum_Male",
+            "estimateInfo": {
+              "sampleDenominator": 355,
+              "sampleNumerator": 251,
+              "seroprevalence": 0.707,
+              "seroprevalence95CILower": 0.6562,
+              "seroprevalence95CIUpper": 0.7533
+            },
+            "sex": "Male"
+          }
+        ],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [44.5711450569662, 23.31001280486208],
+      "properties": {
+        "estimateId": "171211_Dhahran_JohnsHopkinsAramcoHealthcare",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12bf",
+          "estimateId": "171211_Dhahran_JohnsHopkinsAramcoHealthcare",
+          "subGroupingVariable": "PRIMARY",
+          "city": "Dhahran",
+          "country": "Saudi Arabia",
+          "countryAlphaTwoCode": "SA",
+          "countryAlphaThreeCode": "SAU",
+          "whoRegion": "EMR",
+          "unRegion": "WESTERN_ASIA",
+          "latitude": 23.31001280486208,
+          "longitude": 44.5711450569662,
+          "firstAuthorFullName": "Jaffar A. Al-Tawfiq",
+          "sourceUrl": "https://doi.org/10.1016%2Fj.tmaid.2017.10.004",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Influenza is more common than Middle East Respiratory Syndrome Coronavirus (MERS-CoV) among hospitalized adult Saudi patients",
+          "insitutution": "Johns Hopkins Aramco Healthcare",
+          "studyInclusionCriteria": "The case definition of suspected MERS-CoV was an acute febrile respiratory illness (fever, cough, or dyspnea) with radiographic evidence of pneumonia. We collected data for all suspected patients.",
+          "sampleDenominator": 2736,
+          "sampleNumerator": 20,
+          "assay": ["RT-PCR"],
+          "specimenType": ["Nasal Swab or NP", "Saliva"],
+          "sex": "All",
+          "exposureToCamels": "No exposure",
+          "isotypes": [],
+          "antigen": ["UpE", "ORF1a"],
+          "samplingStartDate": "2013-04-15T06:00:00.000Z",
+          "samplingEndDate": "2016-12-15T07:00:00.000Z",
+          "samplingMidDate": "2015-02-14T06:30:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "Local",
+          "testProducer": ["In-house"],
+          "testValidation": ["Not reported"],
+          "type": "HUMAN_VIRAL",
+          "positivePrevalence": 0.0074,
+          "ageGroup": [
+            "Adults (18-45 years)",
+            "Adults (46-59 years)",
+            "Seniors (≥60 years)"
+          ],
+          "sampleFrame": "Suspected cases",
+          "id": "66c4c85ef75b6d8941ad12c0"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [
+          {
+            "id": "recr1tyFMopQuLVRL",
+            "estimateId": "171211_Dhahran_JohnsHopkinsAramcoHealthcare_Time1",
+            "estimateInfo": {
+              "sampleDenominator": 1092,
+              "sampleNumerator": 20,
+              "positivePrevalence": 0.018
+            },
+            "samplingStartDate": "2013-04-15T06:00:00.000Z",
+            "samplingEndDate": "2015-03-15T06:00:00.000Z"
+          },
+          {
+            "id": "recf479tND3b2fYc2",
+            "estimateId": "171211_Dhahran_JohnsHopkinsAramcoHealthcare_Time2",
+            "estimateInfo": {
+              "sampleDenominator": 1644,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "samplingStartDate": "2015-04-15T06:00:00.000Z",
+            "samplingEndDate": "2016-12-15T07:00:00.000Z"
+          }
+        ],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [31.213780687108777, 30.031988438531545],
+      "properties": {
+        "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_Overall",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12c2",
+          "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_Overall",
+          "subGroupingVariable": "PRIMARY",
+          "city": "Cairo",
+          "country": "Egypt",
+          "countryAlphaTwoCode": "EG",
+          "countryAlphaThreeCode": "EGY",
+          "whoRegion": "EMR",
+          "unRegion": "NORTHERN_AFRICA",
+          "latitude": 30.031988438531545,
+          "longitude": 31.213780687108777,
+          "firstAuthorFullName": "Samir Refaey",
+          "sourceUrl": "https://doi.org/10.1111/irv.12429",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Cross-sectional survey and surveillance for influenza viruses and MERS-CoV among Egyptian pilgrims returning from Hajj during 2012-2015",
+          "insitutution": "Egyptian Ministry of Health and Population",
+          "studyInclusionCriteria": "A cross-sectional survey was conducted at Cairo International Airport among Egyptians returning from Hajj during the week following the end of Hajj each year from 2012 to 2015 (Table 1). A team from the MOHP sought to enroll a convenience sample of approximately 10% of pilgrims from each flight returning from Hajj and congregating at the airport carousels, regardless of age, sex, and illness status.",
+          "studyExclusionCriteria": "N/A",
+          "sampleDenominator": 2201,
+          "sampleNumerator": 0,
+          "assay": ["RT-PCR"],
+          "specimenType": ["Nasal Swab or NP", "Throat swab or OP"],
+          "sex": "All",
+          "exposureToCamels": "Direct exposure",
+          "isotypes": ["N/A"],
+          "antigen": ["Not reported"],
+          "samplingStartDate": "2012-10-28T06:00:00.000Z",
+          "samplingEndDate": "2015-10-03T06:00:00.000Z",
+          "samplingMidDate": "2014-04-16T06:00:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "Local",
+          "testProducer": ["Not reported"],
+          "testValidation": ["Not reported"],
+          "type": "HUMAN_VIRAL",
+          "positivePrevalence": 0,
+          "ageGroup": [
+            "Children and youth (0-17 years)",
+            "Adults (18-45 years)",
+            "Adults (46-59 years)",
+            "Seniors (≥60 years)"
+          ],
+          "sampleFrame": "Pilgrims",
+          "id": "66c4c85ef75b6d8941ad12c3"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [
+          {
+            "id": "rec723At2u8fkNVJy",
+            "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_2012",
+            "estimateInfo": {
+              "sampleDenominator": 212,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "samplingStartDate": "2012-10-28T06:00:00.000Z",
+            "samplingEndDate": "2012-11-04T06:00:00.000Z"
+          },
+          {
+            "id": "recTNCv365edCbaZT",
+            "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_2013",
+            "estimateInfo": {
+              "sampleDenominator": 800,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "samplingStartDate": "2013-10-17T06:00:00.000Z",
+            "samplingEndDate": "2013-10-24T06:00:00.000Z"
+          },
+          {
+            "id": "recGSLsMJhMrDHPJo",
+            "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_2014",
+            "estimateInfo": {
+              "sampleDenominator": 923,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "samplingStartDate": "2014-10-07T06:00:00.000Z",
+            "samplingEndDate": "2014-10-14T06:00:00.000Z"
+          },
+          {
+            "id": "reckDVrqQUtZhIcjn",
+            "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_2015",
+            "estimateInfo": {
+              "sampleDenominator": 266,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "samplingStartDate": "2015-09-26T06:00:00.000Z",
+            "samplingEndDate": "2015-10-03T06:00:00.000Z"
+          }
+        ],
+        "sampleTypeSubestimates": [
+          {
+            "id": "recKOGMM4VNVVQ3se",
+            "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_NP/OP",
+            "estimateInfo": {
+              "sampleDenominator": 1937,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "specimenType": ["Nasal Swab or NP", "Throat swab or OP"]
+          },
+          {
+            "id": "recFq1etWE8h2lWDh",
+            "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_Sputum",
+            "estimateInfo": {
+              "sampleDenominator": 264,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "specimenType": ["Saliva"]
+          }
+        ],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [37.78166792054935, 0.4346045419583475],
+      "properties": {
+        "estimateId": "201201_MarsabitCounty_USCDC_Camels",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12c5",
+          "estimateId": "201201_MarsabitCounty_USCDC_Camels",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Kenya",
+          "countryAlphaTwoCode": "KE",
+          "countryAlphaThreeCode": "KEN",
+          "whoRegion": "AFR",
+          "unRegion": "EASTERN_AFRICA",
+          "latitude": 0.4346045419583475,
+          "longitude": 37.78166792054935,
+          "firstAuthorFullName": "I. Ngere",
+          "sourceUrl": "https://doi.org/10.1017/s0950268820002939",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "High MERS-CoV seropositivity associated with camel herd profile, husbandry practices and household socio-demographic characteristics in Northern Kenya",
+          "insitutution": "US Centers for Disease Control and Prevention-Kenya",
+          "studyInclusionCriteria": "29 camel-owning households living in nine settlements/villages",
+          "sampleDenominator": 493,
+          "sampleNumerator": 376,
+          "assay": ["Microneutralization"],
+          "specimenType": ["Whole Blood"],
+          "sex": "All",
+          "isotypes": ["Neutralizing"],
+          "antigen": [],
+          "samplingStartDate": "2018-07-15T06:00:00.000Z",
+          "samplingEndDate": "2018-08-15T06:00:00.000Z",
+          "samplingMidDate": "2018-07-30T18:00:00.000Z",
+          "samplingMethod": "Stratified probability",
+          "geographicScope": "Regional",
+          "testProducer": ["Not reported"],
+          "testValidation": ["Not reported"],
+          "type": "ANIMAL_SEROPREVALENCE",
+          "seroprevalence": 0.763,
+          "animalSpecies": "CAMEL",
+          "animalType": ["DOMESTIC"],
+          "animalDetectionSettings": ["Farms"],
+          "animalImportedOrLocal": "Local",
+          "animalAgeGroup": [
+            "Juvenile (6 months-2 years)",
+            "Adult (>2 years)",
+            "Neonatal (≤6 months)"
+          ],
+          "id": "66c4c85ef75b6d8941ad12c6"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [
+          {
+            "id": "recTBfACjIs4nvCzl",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_<1",
+            "estimateInfo": {
+              "sampleDenominator": 14,
+              "sampleNumerator": 9,
+              "seroprevalence": 0.643
+            },
+            "animalAgeGroup": ["Juvenile (6 months-2 years)"],
+            "animalAgeGroupLabel": "<1"
+          },
+          {
+            "id": "recDQFp9W3faVVpuS",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_1-2",
+            "estimateInfo": {
+              "sampleDenominator": 59,
+              "sampleNumerator": 21,
+              "seroprevalence": 0.356
+            },
+            "animalAgeGroup": ["Juvenile (6 months-2 years)"],
+            "animalAgeGroupLabel": "1-2"
+          },
+          {
+            "id": "recL5MELFk67oLP5r",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_3-5",
+            "estimateInfo": {
+              "sampleDenominator": 106,
+              "sampleNumerator": 78,
+              "seroprevalence": 0.736
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "3-5"
+          },
+          {
+            "id": "rec3xO8FjDUBQRmfT",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_6-10",
+            "estimateInfo": {
+              "sampleDenominator": 195,
+              "sampleNumerator": 170,
+              "seroprevalence": 0.872
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "6-10"
+          },
+          {
+            "id": "recJQwyMFmQQmOYJY",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_11-15",
+            "estimateInfo": {
+              "sampleDenominator": 73,
+              "sampleNumerator": 65,
+              "seroprevalence": 0.89
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "11-15"
+          },
+          {
+            "id": "recGui1KkEL7TMIDF",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_16+",
+            "estimateInfo": {
+              "sampleDenominator": 33,
+              "sampleNumerator": 23,
+              "seroprevalence": 0.697
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "16+"
+          }
+        ],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [
+          {
+            "id": "recN8XLViyDSml7WV",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_Female",
+            "estimateInfo": {
+              "sampleDenominator": 404,
+              "sampleNumerator": 320,
+              "seroprevalence": 0.792
+            },
+            "sex": "Female"
+          },
+          {
+            "id": "reckpm9thxbx5pq5d",
+            "estimateId": "201201_MarsabitCounty_USCDC_Camels_Male",
+            "estimateInfo": {
+              "sampleDenominator": 83,
+              "sampleNumerator": 51,
+              "seroprevalence": 0.614
+            },
+            "sex": "Male"
+          }
+        ],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [67.75529688575519, 28.27078396849823],
+      "properties": {
+        "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Humans_Serum",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12c8",
+          "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Humans_Serum",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Pakistan",
+          "countryAlphaTwoCode": "PK",
+          "countryAlphaThreeCode": "PAK",
+          "whoRegion": "EMR",
+          "unRegion": "SOUTHERN_ASIA",
+          "latitude": 28.27078396849823,
+          "longitude": 67.75529688575519,
+          "firstAuthorFullName": "Ali Zohaib",
+          "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Countrywide Survey for MERS-Coronavirus Antibodies in Dromedaries and Humans in Pakistan",
+          "insitutution": "Wuhan Institute of Virology",
+          "studyInclusionCriteria": "Human serum samples were obtained from hospitals, primary health care centres and blood banks from people older than 15 years of age\nDromedary camels",
+          "sensitivity": 1,
+          "specificity": 1,
+          "sampleDenominator": 2409,
+          "sampleNumerator": 36,
+          "assay": ["ELISA"],
+          "specimenType": ["Serum"],
+          "sex": "All",
+          "exposureToCamels": "Direct exposure",
+          "isotypes": ["IgG"],
+          "antigen": ["S1"],
+          "samplingStartDate": "2016-07-01T06:00:00.000Z",
+          "samplingEndDate": "2017-07-01T06:00:00.000Z",
+          "samplingMidDate": "2016-12-30T18:00:00.000Z",
+          "samplingMethod": "Stratified probability",
+          "geographicScope": "National",
+          "testProducer": ["In-house", "Euroimmun"],
+          "testValidation": ["Validated by developers"],
+          "testValidatedOn": "Not reported",
+          "positiveCutoff": "0.15",
+          "type": "HUMAN_SEROPREVALENCE",
+          "seroprevalence": 0.015,
+          "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
+          "sampleFrame": "Livestock handlers",
+          "id": "66c4c85ef75b6d8941ad12c9"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [
+          {
+            "id": "recSDZ3fSoy3LoL63",
+            "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Humans_Serum_Neutralization",
+            "estimateInfo": {
+              "sampleDenominator": 2409,
+              "sampleNumerator": 0,
+              "seroprevalence": 0
+            },
+            "assay": ["ELISA", "Virus Neutralization"]
+          }
+        ],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [44.68327485894961, 23.390524038282056],
+      "properties": {
+        "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_OverallNasal",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12cb",
+          "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_OverallNasal",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Saudi Arabia",
+          "countryAlphaTwoCode": "SA",
+          "countryAlphaThreeCode": "SAU",
+          "whoRegion": "EMR",
+          "unRegion": "WESTERN_ASIA",
+          "latitude": 23.390524038282056,
+          "longitude": 44.68327485894961,
+          "firstAuthorFullName": "Jamal S. M. Sabir",
+          "sourceUrl": "https://doi.org/10.1126/science.aac8608",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Co-circulation of three camel coronavirus species and recombination of MERS-CoVs in Saudi Arabia",
+          "insitutution": "King Abdulaziz University",
+          "studyInclusionCriteria": "Paired nasal and rectal swabs were collected from imported and indigenous camels at slaughterhouses, farms or wholesale markets in Jeddah and Riyadh from May to July 2014.",
+          "studyExclusionCriteria": "N/A",
+          "sampleDenominator": 1309,
+          "sampleNumerator": 159,
+          "assay": ["RT-PCR"],
+          "specimenType": ["Nasal Swab or NP"],
+          "sex": "All",
+          "isotypes": ["N/A"],
+          "antigen": [],
+          "samplingStartDate": "2014-05-15T06:00:00.000Z",
+          "samplingEndDate": "2015-04-15T06:00:00.000Z",
+          "samplingMidDate": "2014-10-29T18:00:00.000Z",
+          "samplingMethod": "Unclear",
+          "geographicScope": "National",
+          "testProducer": ["In-house"],
+          "testValidation": ["Validated by independent authors"],
+          "testValidatedOn": "Test validated by authors, in human sample. ",
+          "type": "ANIMAL_VIRAL",
+          "positivePrevalence": 0.121,
+          "animalSpecies": "CAMEL",
+          "animalType": [],
+          "animalDetectionSettings": [],
+          "animalImportedOrLocal": "Mixed",
+          "animalAgeGroup": [],
+          "id": "66c4c85ef75b6d8941ad12cc"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [
+          {
+            "id": "recPTMk3kcfF2daZY",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_unknownage",
+            "estimateInfo": {
+              "sampleDenominator": 43,
+              "sampleNumerator": 10,
+              "positivePrevalence": 0.14
+            },
+            "animalAgeGroup": [],
+            "animalAgeGroupLabel": "Unknown"
+          },
+          {
+            "id": "reccdXKSqEm6pWADn",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_<0.5",
+            "estimateInfo": {
+              "sampleDenominator": 190,
+              "sampleNumerator": 28,
+              "positivePrevalence": 0.147
+            },
+            "animalAgeGroup": [],
+            "animalAgeGroupLabel": "Under 6 months old"
+          },
+          {
+            "id": "recf1bRs6RJMk9ecN",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_0.5-1",
+            "estimateInfo": {
+              "sampleDenominator": 315,
+              "sampleNumerator": 58,
+              "positivePrevalence": 0.184
+            },
+            "animalAgeGroup": [],
+            "animalAgeGroupLabel": "6 months old up to 1 year old"
+          },
+          {
+            "id": "recpuvFxsh0zj0BJa",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_1-2yo",
+            "estimateInfo": {
+              "sampleDenominator": 509,
+              "sampleNumerator": 42,
+              "positivePrevalence": 0.083
+            },
+            "animalAgeGroup": [],
+            "animalAgeGroupLabel": "1 year up to 2 years old"
+          },
+          {
+            "id": "recMYFrsKUcMJFJ37",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_2-4yo",
+            "estimateInfo": {
+              "sampleDenominator": 206,
+              "sampleNumerator": 20,
+              "positivePrevalence": 0.097
+            },
+            "animalAgeGroup": [],
+            "animalAgeGroupLabel": "2 years up to 4 years old"
+          },
+          {
+            "id": "recgm8D2K7grwyWlk",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_4+yo",
+            "estimateInfo": {
+              "sampleDenominator": 46,
+              "sampleNumerator": 5,
+              "positivePrevalence": 0.109
+            },
+            "animalAgeGroup": [],
+            "animalAgeGroupLabel": "over 4 years old"
+          }
+        ],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [
+          {
+            "id": "reckDvnEEjHoZkN1C",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_May14",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 1,
+              "positivePrevalence": 0.01
+            },
+            "samplingStartDate": "2014-05-15T06:00:00.000Z",
+            "samplingEndDate": "2014-06-15T06:00:00.000Z"
+          },
+          {
+            "id": "recP16ZbYUh9giSD6",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Jun14",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 1,
+              "positivePrevalence": 0.01
+            },
+            "samplingStartDate": "2014-06-15T06:00:00.000Z",
+            "samplingEndDate": "2014-07-15T06:00:00.000Z"
+          },
+          {
+            "id": "recj7omuEJMdtQYk2",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Jul14",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 2,
+              "positivePrevalence": 0.02
+            },
+            "samplingStartDate": "2014-07-15T06:00:00.000Z",
+            "samplingEndDate": "2014-09-15T06:00:00.000Z"
+          },
+          {
+            "id": "recxERxCWOQDhF1Ef",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Sep14",
+            "estimateInfo": {
+              "sampleDenominator": 102,
+              "sampleNumerator": 15,
+              "positivePrevalence": 0.147
+            },
+            "samplingStartDate": "2014-09-15T06:00:00.000Z",
+            "samplingEndDate": "2014-10-15T06:00:00.000Z"
+          },
+          {
+            "id": "recP0HygO8pxRrurP",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Oct14",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 5,
+              "positivePrevalence": 0.05
+            },
+            "samplingStartDate": "2014-10-15T06:00:00.000Z",
+            "samplingEndDate": "2014-11-15T07:00:00.000Z"
+          },
+          {
+            "id": "rec7yooxNcTEVtz5j",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Nov14",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 11,
+              "positivePrevalence": 0.11
+            },
+            "samplingStartDate": "2014-11-15T07:00:00.000Z",
+            "samplingEndDate": "2015-12-15T07:00:00.000Z"
+          },
+          {
+            "id": "rect12SihkP4RP8fc",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Dec14",
+            "estimateInfo": {
+              "sampleDenominator": 101,
+              "sampleNumerator": 23,
+              "positivePrevalence": 0.228
+            },
+            "samplingStartDate": "2014-12-15T07:00:00.000Z",
+            "samplingEndDate": "2015-01-15T07:00:00.000Z"
+          },
+          {
+            "id": "receT19vc6WSEfQc3",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Jan15",
+            "estimateInfo": {
+              "sampleDenominator": 102,
+              "sampleNumerator": 22,
+              "positivePrevalence": 0.216
+            },
+            "samplingStartDate": "2015-01-15T07:00:00.000Z",
+            "samplingEndDate": "2015-02-15T07:00:00.000Z"
+          },
+          {
+            "id": "recImbWy4vSVRUHOS",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_feb15",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 12,
+              "positivePrevalence": 0.12
+            },
+            "samplingStartDate": "2015-02-15T07:00:00.000Z",
+            "samplingEndDate": "2015-03-15T06:00:00.000Z"
+          },
+          {
+            "id": "recSj73LREXHfriT5",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Mar15",
+            "estimateInfo": {
+              "sampleDenominator": 304,
+              "sampleNumerator": 56,
+              "positivePrevalence": 0.184
+            },
+            "samplingStartDate": "2015-03-15T06:00:00.000Z",
+            "samplingEndDate": "2015-04-15T06:00:00.000Z"
+          },
+          {
+            "id": "recnwmK2uG2mhN0M1",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Apr15",
+            "estimateInfo": {
+              "sampleDenominator": 100,
+              "sampleNumerator": 11,
+              "positivePrevalence": 0.11
+            },
+            "samplingStartDate": "2015-04-15T06:00:00.000Z",
+            "samplingEndDate": "2015-05-15T06:00:00.000Z"
+          }
+        ],
+        "sampleTypeSubestimates": [
+          {
+            "id": "reciIzjvg0SAPw59l",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Rectal",
+            "estimateInfo": {
+              "sampleDenominator": 304,
+              "sampleNumerator": 159,
+              "positivePrevalence": 0.121
+            },
+            "specimenType": ["Rectal swab"]
+          }
+        ],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [
+          {
+            "id": "recjAcmRtYynu6Gdl",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_SomaliaSource",
+            "estimateInfo": {
+              "sampleDenominator": 291,
+              "sampleNumerator": 19,
+              "positivePrevalence": 0.065
+            },
+            "animalImportedOrLocal": "Imported",
+            "animalCountryOfImport": "Somalia",
+            "animalCountryOfImportAlphaTwoCode": "Somalia",
+            "animalCountryOfImportAlphaThreeCode": "Somalia"
+          },
+          {
+            "id": "recoYMJeJEjrJG22f",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_SudanSource",
+            "estimateInfo": {
+              "sampleDenominator": 116,
+              "sampleNumerator": 7,
+              "positivePrevalence": 0.06
+            },
+            "animalImportedOrLocal": "Imported",
+            "animalCountryOfImport": "Sudan",
+            "animalCountryOfImportAlphaTwoCode": "Sudan",
+            "animalCountryOfImportAlphaThreeCode": "Sudan"
+          }
+        ],
+        "animalSamplingContextSubestimates": [
+          {
+            "id": "recrWYZP4oHLahuVV",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Farm",
+            "estimateInfo": {
+              "sampleDenominator": 133,
+              "sampleNumerator": 14,
+              "positivePrevalence": 0.105
+            },
+            "animalDetectionSettings": ["Farms"]
+          },
+          {
+            "id": "recxWGATIWLuHyISo",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_Market",
+            "estimateInfo": {
+              "sampleDenominator": 1162,
+              "sampleNumerator": 145,
+              "positivePrevalence": 0.125
+            },
+            "animalDetectionSettings": ["Livestock markets"]
+          }
+        ]
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [67.71505017807526, 28.142696896733977],
+      "properties": {
+        "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Nasal",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12ce",
+          "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Nasal",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Pakistan",
+          "countryAlphaTwoCode": "PK",
+          "countryAlphaThreeCode": "PAK",
+          "whoRegion": "EMR",
+          "unRegion": "SOUTHERN_ASIA",
+          "latitude": 28.142696896733977,
+          "longitude": 67.71505017807526,
+          "firstAuthorFullName": "Ali Zohaib",
+          "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Countrywide Survey for MERS-Coronavirus Antibodies in Dromedaries and Humans in Pakistan",
+          "insitutution": "Wuhan Institute of Virology",
+          "studyInclusionCriteria": "Human serum samples were obtained from hospitals, primary health care centres and blood banks from people older than 15 years of age\nDromedary camels",
+          "sampleDenominator": 776,
+          "sampleNumerator": 22,
+          "assay": ["N2 RT-qPCR", "N3 RT-qPCR"],
+          "specimenType": ["Nasal Swab or NP"],
+          "sex": "All",
+          "isotypes": [],
+          "antigen": [],
+          "samplingStartDate": "2015-11-15T07:00:00.000Z",
+          "samplingEndDate": "2018-02-15T07:00:00.000Z",
+          "samplingMidDate": "2016-12-30T19:00:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "National",
+          "testProducer": ["Not reported"],
+          "testValidation": [],
+          "type": "ANIMAL_VIRAL",
+          "positivePrevalence": 0.284,
+          "animalSpecies": "CAMEL",
+          "animalType": ["DOMESTIC", "WILD"],
+          "animalDetectionSettings": [
+            "Livestock markets",
+            "Abattoirs",
+            "Free-roaming herds"
+          ],
+          "animalPurpose": "Multiple purposes",
+          "animalImportedOrLocal": "Local",
+          "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
+          "id": "66c4c85ef75b6d8941ad12cf"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [44.55776335207108, 33.83163945339289],
+      "properties": {
+        "estimateId": "220810_Diyala_UniversityofDiyala_Camels",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12d1",
+          "estimateId": "220810_Diyala_UniversityofDiyala_Camels",
+          "subGroupingVariable": "PRIMARY",
+          "state": "Diyala Province",
+          "country": "Iraq",
+          "countryAlphaTwoCode": "IQ",
+          "countryAlphaThreeCode": "IRQ",
+          "whoRegion": "EMR",
+          "unRegion": "WESTERN_ASIA",
+          "latitude": 33.83163945339289,
+          "longitude": 44.55776335207108,
+          "firstAuthorFullName": "Abdulrazak Hasan",
+          "sourceUrl": "https://journals.tubitak.gov.tr/medical/vol52/iss4/5/",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Cross-sectional study of Middle East respiratory syndrome coronavirus in humans and dromedary camels in Diyala, Iraq",
+          "insitutution": "University of Diyala",
+          "studyInclusionCriteria": "Dromedary camels",
+          "sampleDenominator": 90,
+          "sampleNumerator": 81,
+          "assay": ["ELISA"],
+          "specimenType": ["Serum"],
+          "sex": "All",
+          "isotypes": ["IgG"],
+          "antigen": ["Not reported"],
+          "samplingStartDate": "2017-08-15T06:00:00.000Z",
+          "samplingEndDate": "2018-10-31T06:00:00.000Z",
+          "samplingMidDate": "2018-03-24T06:00:00.000Z",
+          "samplingMethod": "Unclear",
+          "geographicScope": "Regional",
+          "testProducer": ["Other"],
+          "testProducerOther": "Alpha Diagnostic International, USA",
+          "testValidation": ["Not reported"],
+          "positiveCutoff": "Not reported",
+          "type": "ANIMAL_SEROPREVALENCE",
+          "seroprevalence": 0.9,
+          "seroprevalence95CILower": 0.825,
+          "seroprevalence95CIUpper": 0.949,
+          "animalSpecies": "CAMEL",
+          "animalType": [],
+          "animalDetectionSettings": ["Not reported"],
+          "animalPurpose": "Not reported",
+          "animalImportedOrLocal": "Not reported",
+          "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
+          "id": "66c4c85ef75b6d8941ad12d2"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [
+          {
+            "id": "recVsl1L4Ry7PgJCX",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Camels_<5",
+            "estimateInfo": {
+              "sampleDenominator": 18,
+              "sampleNumerator": 16,
+              "seroprevalence": 0.889,
+              "seroprevalence95CILower": 0.689,
+              "seroprevalence95CIUpper": 0.976
+            },
+            "animalAgeGroup": [
+              "Juvenile (6 months-2 years)",
+              "Adult (>2 years)"
+            ],
+            "animalAgeGroupLabel": "<5"
+          },
+          {
+            "id": "rec9PU14rOu3teJBp",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Camels_5-9",
+            "estimateInfo": {
+              "sampleDenominator": 35,
+              "sampleNumerator": 31,
+              "seroprevalence": 0.886,
+              "seroprevalence95CILower": 0.751,
+              "seroprevalence95CIUpper": 0.96
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "5-9"
+          },
+          {
+            "id": "rec5USLlUFxiUvxaW",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Camels_10-15",
+            "estimateInfo": {
+              "sampleDenominator": 37,
+              "sampleNumerator": 34,
+              "seroprevalence": 0.919,
+              "seroprevalence95CILower": 0.799,
+              "seroprevalence95CIUpper": 0.977
+            },
+            "animalAgeGroup": ["Adult (>2 years)"],
+            "animalAgeGroupLabel": "10-15"
+          }
+        ],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [],
+        "sexSubestimates": [
+          {
+            "id": "recZi83MTYVOi2R1d",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Camels_Female",
+            "estimateInfo": {
+              "sampleDenominator": 40,
+              "sampleNumerator": 36,
+              "seroprevalence": 0.9,
+              "seroprevalence95CILower": 0.78,
+              "seroprevalence95CIUpper": 0.965
+            },
+            "sex": "Female"
+          },
+          {
+            "id": "recvz2OE8NcBfLdT7",
+            "estimateId": "220810_Diyala_UniversityofDiyala_Camels_Male",
+            "estimateInfo": {
+              "sampleDenominator": 50,
+              "sampleNumerator": 45,
+              "seroprevalence": 0.9,
+              "seroprevalence95CILower": 0.795,
+              "seroprevalence95CIUpper": 0.961
+            },
+            "sex": "Male"
+          }
+        ],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    },
+    {
+      "type": "Point",
+      "coordinates": [44.65227363575245, 23.300491896469495],
+      "properties": {
+        "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal",
+        "primaryEstimateInfo": {
+          "_id": "66c4c85ef75b6d8941ad12d4",
+          "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal",
+          "subGroupingVariable": "PRIMARY",
+          "country": "Saudi Arabia",
+          "countryAlphaTwoCode": "SA",
+          "countryAlphaThreeCode": "SAU",
+          "whoRegion": "EMR",
+          "unRegion": "WESTERN_ASIA",
+          "latitude": 23.300491896469495,
+          "longitude": 44.65227363575245,
+          "firstAuthorFullName": "Samy Kasem",
+          "sourceUrl": "https://doi.org/10.1016/j.jiph.2017.09.022",
+          "sourceType": "Journal Article (Peer-Reviewed)",
+          "sourceTitle": "Cross-sectional study of MERS-CoV-specific RNA and antibodies in animals that have had contact with MERS patients in Saudi Arabia",
+          "insitutution": "The University of Hong Kong",
+          "studyInclusionCriteria": "This was part of a cooperative epidemiological response to the confirmed human cases of MERS with a history of animal contact. Notifications were issued by the Ministry of Health (MOH) associated with animals with a history of contact with MERS-patients",
+          "sampleDenominator": 595,
+          "sampleNumerator": 75,
+          "assay": ["RT-PCR"],
+          "specimenType": ["Nasal Swab or NP"],
+          "sex": "All",
+          "isotypes": [],
+          "antigen": [],
+          "samplingStartDate": "2014-07-15T06:00:00.000Z",
+          "samplingEndDate": "2016-07-15T06:00:00.000Z",
+          "samplingMidDate": "2015-07-15T18:00:00.000Z",
+          "samplingMethod": "Convenience",
+          "geographicScope": "National",
+          "testProducer": ["Roche"],
+          "testValidation": [],
+          "type": "ANIMAL_VIRAL",
+          "positivePrevalence": 0.126,
+          "animalSpecies": "CAMEL",
+          "animalType": ["DOMESTIC"],
+          "animalDetectionSettings": ["Animal contacts of human cases"],
+          "animalPurpose": "Not reported",
+          "animalImportedOrLocal": "Local",
+          "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
+          "id": "66c4c85ef75b6d8941ad12d5"
+        },
+        "geographicalAreaSubestimates": [],
+        "ageGroupSubestimates": [],
+        "testUsedSubestimates": [],
+        "animalSpeciesSubestimates": [
+          {
+            "id": "reciQPSSjiJFHFLfv",
+            "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal_Cattle",
+            "estimateInfo": {
+              "sampleDenominator": 2,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "animalSpecies": "CATTLE"
+          },
+          {
+            "id": "recp9YbD5YjdQgXJd",
+            "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal_Goat",
+            "estimateInfo": {
+              "sampleDenominator": 90,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "animalSpecies": "GOAT"
+          },
+          {
+            "id": "recNYIgE37mzZeJSz",
+            "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal_Sheep",
+            "estimateInfo": {
+              "sampleDenominator": 93,
+              "sampleNumerator": 0,
+              "positivePrevalence": 0
+            },
+            "animalSpecies": "SHEEP"
+          }
+        ],
+        "sexSubestimates": [],
+        "timeFrameSubestimates": [],
+        "sampleTypeSubestimates": [],
+        "occupationSubestimates": [],
+        "animalSourceLocationSubestimates": [],
+        "animalSamplingContextSubestimates": []
+      }
+    }
+  ]
+}
