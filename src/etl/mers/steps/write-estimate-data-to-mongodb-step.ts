@@ -1,36 +1,46 @@
 import { MongoClient } from "mongodb";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
-import { CountryFieldsAfterTransformingFormatForDatabaseStep, CountryPopulationDataAfterTransformingFormatForDatabaseStep, EstimateFieldsAfterTransformingFormatForDatabaseStep, EstimateFilterOptionsAfterTransformingFormatForDatabaseStep, FaoMersEventAfterTransformingFormatForDatabaseStep, GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep, SourceFieldsAfterTransformingFormatForDatabaseStep, StudyFieldsAfterTransformingFormatForDatabaseStep, YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep } from "./transform-into-format-for-database-step";
+import {
+  CountryFieldsAfterGeneratingEstimateGeoJSONFileStep,
+  CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep,
+  EstimateFieldsAfterGeneratingEstimateGeoJSONFileStep,
+  EstimateFilterOptionsAfterGeneratingEstimateGeoJSONFileStep,
+  FaoMersEventAfterGeneratingEstimateGeoJSONFileStep,
+  GroupedEstimateFieldsAfterGeneratingEstimateGeoJSONFileStep,
+  SourceFieldsAfterGeneratingEstimateGeoJSONFileStep,
+  StudyFieldsAfterGeneratingEstimateGeoJSONFileStep,
+  YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep
+} from "./generate-estimate-geojson-file-step.js";
 
 export type EstimateFieldsAfterWritingEstimateToMongodbStep =
-  EstimateFieldsAfterTransformingFormatForDatabaseStep;
+  EstimateFieldsAfterGeneratingEstimateGeoJSONFileStep;
 export type GroupedEstimateFieldsAfterWritingEstimateToMongodbStep =
-  GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep;
+  GroupedEstimateFieldsAfterGeneratingEstimateGeoJSONFileStep;
 export type SourceFieldsAfterWritingEstimateToMongodbStep =
-  SourceFieldsAfterTransformingFormatForDatabaseStep;
+  SourceFieldsAfterGeneratingEstimateGeoJSONFileStep;
 export type EstimateFilterOptionsAfterWritingEstimateToMongodbStep =
-  EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
+  EstimateFilterOptionsAfterGeneratingEstimateGeoJSONFileStep;
 export type StudyFieldsAfterWritingEstimateToMongodbStep =
-  StudyFieldsAfterTransformingFormatForDatabaseStep;
+  StudyFieldsAfterGeneratingEstimateGeoJSONFileStep;
 export type CountryFieldsAfterWritingEstimateToMongodbStep =
-  CountryFieldsAfterTransformingFormatForDatabaseStep;
+  CountryFieldsAfterGeneratingEstimateGeoJSONFileStep;
 export type FaoMersEventAfterWritingEstimateToMongodbStep =
-  FaoMersEventAfterTransformingFormatForDatabaseStep;
+  FaoMersEventAfterGeneratingEstimateGeoJSONFileStep;
 export type YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep =
-  YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep;
+  YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep;
 export type CountryPopulationDataAfterWritingEstimateToMongodbStep =
-  CountryPopulationDataAfterTransformingFormatForDatabaseStep;
+  CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep;
 
 interface WriteEstimateDataToMongoDbStepInput {
-  allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
-  allGroupedEstimates: GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep[];
-  allSources: SourceFieldsAfterTransformingFormatForDatabaseStep[];
-  estimateFilterOptions: EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
-  allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
-  allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
-  allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
-  countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
+  allEstimates: EstimateFieldsAfterGeneratingEstimateGeoJSONFileStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterGeneratingEstimateGeoJSONFileStep[];
+  allSources: SourceFieldsAfterGeneratingEstimateGeoJSONFileStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterGeneratingEstimateGeoJSONFileStep;
+  allStudies: StudyFieldsAfterGeneratingEstimateGeoJSONFileStep[];
+  allCountries: CountryFieldsAfterGeneratingEstimateGeoJSONFileStep[];
+  allFaoMersEvents: FaoMersEventAfterGeneratingEstimateGeoJSONFileStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
+  countryPopulationData: CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
   mongoClient: MongoClient;
 }
 

@@ -34,6 +34,7 @@ import { writeMersEstimateFilterOptionsToMongoDbStep } from "./steps/write-mers-
 import { writeGroupedEstimateDataToMongodbStep } from "./steps/write-grouped-estimate-data-to-mongodb-step.js";
 import { filterInvalidSubestimatesStep } from "./steps/filter-invalid-subestimates-step.js";
 import { sortSubestimatesStep } from "./steps/sort-subestimates-step.js";
+import { generateEstimateGeoJSONFileStep } from "./steps/generate-estimate-geojson-file-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -129,6 +130,7 @@ const runEtlMain = async () => {
     etlStep(filterInvalidSubestimatesStep),
     etlStep(sortSubestimatesStep),
     etlStep(transformIntoFormatForDatabaseStep),
+    asyncEtlStep(generateEstimateGeoJSONFileStep),
     asyncEtlStep(writeEstimateDataToMongoDbStep),
     asyncEtlStep(writeGroupedEstimateDataToMongodbStep),
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
