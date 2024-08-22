@@ -20,7 +20,10 @@ export type AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep =
 export type AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep =
   AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep =
-  EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
+  EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep & {
+    countryName: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  };
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
@@ -78,7 +81,21 @@ export const addCountryAndRegionInformationStep = (
       .filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
     allSources: allSources,
     allCountries: allCountries,
-    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry
+      .map((esmStats) => {
+        const country = allCountries.find(({ alphaThreeCode }) => alphaThreeCode === esmStats.countryAlphaThreeCode);
+
+        if(!country) {
+          return undefined;
+        }
+
+        return {
+          ...esmStats,
+          countryName: country.name,
+          countryAlphaTwoCode: country.alphaTwoCode
+        }
+      })
+      .filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
     mongoClient: input.mongoClient
   };
 };

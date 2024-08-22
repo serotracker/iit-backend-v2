@@ -94,6 +94,8 @@ export const transformIntoFormatForDatabaseStep = (
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry.map((dataPoint) => ({
       _id: new ObjectId(),
       countryAlphaThreeCode: dataPoint.countryAlphaThreeCode,
+      countryAlphaTwoCode: dataPoint.countryAlphaTwoCode,
+      countryName: dataPoint.countryName,
       zikaData: {
         minimumValue: dataPoint.zikaData.minimumValue,
         maximumValue: dataPoint.zikaData.maximumValue,
