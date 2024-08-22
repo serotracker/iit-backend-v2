@@ -174,6 +174,8 @@ export type ArbovirusDataStatistics = {
 export type ArbovirusEnvironmentalSuitabilityDataEntry = {
   __typename?: 'ArbovirusEnvironmentalSuitabilityDataEntry';
   countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  countryName: Scalars['String']['output'];
   dengue2015Data: ArbovirusEnvironmentalSuitabilityDataSubEntry;
   dengue2050Data: ArbovirusEnvironmentalSuitabilityDataSubEntry;
   id: Scalars['String']['output'];
@@ -1638,6 +1640,8 @@ export type ArbovirusDataStatisticsResolvers<ContextType = any, ParentType exten
 
 export type ArbovirusEnvironmentalSuitabilityDataEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArbovirusEnvironmentalSuitabilityDataEntry'] = ResolversParentTypes['ArbovirusEnvironmentalSuitabilityDataEntry']> = {
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   dengue2015Data?: Resolver<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry'], ParentType, ContextType>;
   dengue2050Data?: Resolver<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataSubEntry'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

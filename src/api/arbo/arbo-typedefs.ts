@@ -86,6 +86,8 @@ export const arboTypedefs = `
   type ArbovirusEnvironmentalSuitabilityDataEntry {
     id: String!
     countryAlphaThreeCode: String!    
+    countryAlphaTwoCode: String!
+    countryName: String!
     zikaData: ArbovirusEnvironmentalSuitabilityDataSubEntry!
     dengue2015Data: ArbovirusEnvironmentalSuitabilityDataSubEntry!
     dengue2050Data: ArbovirusEnvironmentalSuitabilityDataSubEntry!

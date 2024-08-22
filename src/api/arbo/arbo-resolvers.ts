@@ -96,6 +96,8 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     return databaseEnvironmentalSuitabilityData.map((dataPoint) => ({
       id: dataPoint._id.toHexString(),
       countryAlphaThreeCode: dataPoint.countryAlphaThreeCode,
+      countryAlphaTwoCode: dataPoint.countryAlphaTwoCode,
+      countryName: dataPoint.countryName,
       zikaData: {
         minimumValue: dataPoint.zikaData.minimumValue,
         maximumValue: dataPoint.zikaData.maximumValue,

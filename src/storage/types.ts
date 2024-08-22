@@ -77,6 +77,8 @@ export interface ArbovirusEstimateDocument {
 export interface ArbovirusEnvironmentalSuitabilityStatsEntryDocument {
   _id: ObjectId;
   countryAlphaThreeCode: string;
+  countryAlphaTwoCode: string;
+  countryName: string;
   zikaData: {
     minimumValue: number;
     maximumValue: number;
