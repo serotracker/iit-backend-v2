@@ -44,6 +44,7 @@ export const mersEstimateTypedefs = `
     estimateId: String!
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -96,6 +97,7 @@ export const mersEstimateTypedefs = `
     estimateId: String!
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -155,6 +157,7 @@ export const mersEstimateTypedefs = `
     estimateId: String!
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -218,6 +221,7 @@ export const mersEstimateTypedefs = `
     estimateId: String!
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -277,6 +281,7 @@ export const mersEstimateTypedefs = `
     estimateId: String!
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -379,6 +384,7 @@ export const mersEstimateTypedefs = `
 
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!

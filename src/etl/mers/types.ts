@@ -38,6 +38,7 @@ export interface AirtableMersEstimateFields {
   'Age Group (Human)': Array<string | null>;
   'Age Group (Animal)': Array<string | null>;
   'State/Province': string | null;
+  'District': string | null;
   'City': string | null;
   'Country': Array<string | null>;
   'Study': Array<string | null>;

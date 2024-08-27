@@ -51,6 +51,9 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'State/Province': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
+    'District': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'City': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),

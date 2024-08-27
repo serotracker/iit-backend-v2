@@ -215,6 +215,7 @@ export interface MersEstimateDocumentBase {
   subGroupingVariable: MersSubGroupingVariable;
   city: string | undefined;
   state: string | undefined;
+  district: string | undefined;
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
@@ -362,6 +363,7 @@ export interface MersSubEstimateBase {
 type MersGeographicalAreaSubEstimate = MersSubEstimateBase & {
   city: string | undefined;
   state: string | undefined;
+  district: string | undefined;
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
