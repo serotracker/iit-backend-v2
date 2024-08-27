@@ -625,6 +625,7 @@ export type MersGeographicalAreaSubEstimate = MersSubEstimateInterface & {
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   geographicScope?: Maybe<Scalars['String']['output']>;
@@ -812,6 +813,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
@@ -873,6 +875,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
@@ -929,6 +932,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
@@ -986,6 +990,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
@@ -1043,6 +1048,7 @@ export type PrimaryMersEstimateInformationInterface = {
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
@@ -2013,6 +2019,7 @@ export type MersGeographicalAreaSubEstimateResolvers<ContextType = any, ParentTy
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2173,6 +2180,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2234,6 +2242,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2290,6 +2299,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2347,6 +2357,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2408,6 +2419,7 @@ export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, 
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

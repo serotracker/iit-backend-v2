@@ -25,6 +25,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   estimateId: string;
   city: string | undefined;
   state: string | undefined;
+  district: string | undefined;
   countryId: string | undefined;
   studyId: string | undefined;
   animalType: MersAnimalType[];
@@ -171,6 +172,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         animalAgeGroup: estimate['Age Group (Animal)'].filter((element): element is NonNullable<typeof element> => !!element),
         estimateId: estimate['Prevalence Estimate Name'],
         city: estimate['City'] ?? undefined,
+        district: estimate['District'] ?? undefined,
         state: estimate['State/Province'] ?? undefined,
         countryId: estimate['Country']
           .filter((element): element is NonNullable<typeof element> => !!element)
