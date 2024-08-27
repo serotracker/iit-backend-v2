@@ -625,6 +625,7 @@ export type MersGeographicalAreaSubEstimate = MersSubEstimateInterface & {
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   geographicScope?: Maybe<Scalars['String']['output']>;
@@ -2018,6 +2019,7 @@ export type MersGeographicalAreaSubEstimateResolvers<ContextType = any, ParentTy
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
