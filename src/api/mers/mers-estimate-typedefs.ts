@@ -505,6 +505,28 @@ export const mersEstimateTypedefs = `
     animalDetectionSettings: [String!]!
   }
 
+  type MersCamelExposureLevelSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    details: String!
+    sampleFrame: String!
+    exposureToCamels: String!
+  }
+
+  type MersNomadismSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    details: String!
+  }
+
   type MersPrimaryEstimate {
     id: String!
     estimateId: String!
@@ -519,6 +541,8 @@ export const mersEstimateTypedefs = `
     occupationSubestimates: [MersOccupationSubEstimate!]!
     animalSourceLocationSubestimates: [MersAnimalSourceLocationSubEstimate!]!
     animalSamplingContextSubestimates: [MersAnimalSamplingContextSubEstimate!]!
+    camelExposureLevelSubestimates: [MersCamelExposureLevelSubEstimate!]!
+    nomadismSubestimates: [MersNomadismSubEstimate!]!
   }
 
   type Query {

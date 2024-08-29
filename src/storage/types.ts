@@ -184,6 +184,8 @@ export enum MersSubGroupingVariable {
   TIME_FRAME = 'TIME_FRAME',
   SAMPLE_TYPE = 'SAMPLE_TYPE',
   OCCUPATION = 'OCCUPATION',
+  EXPOSURE_LEVEL = 'EXPOSURE_LEVEL',
+  NOMADISM = 'NOMADISM',
   ANIMAL_SOURCE_LOCATION = 'ANIMAL_SOURCE_LOCATION',
   ANIMAL_SAMPLING_CONTEXT = 'ANIMAL_SAMPLING_CONTEXT',
   AGE = 'AGE',
@@ -432,6 +434,16 @@ type MersAnimalSamplingContextSubEstimate = MersSubEstimateBase & {
   animalDetectionSettings: string[];
 }
 
+type MersCamelExposureLevelSubEstimate = MersSubEstimateBase & {
+  details: string;
+  sampleFrame: string;
+  exposureToCamels: string;
+}
+
+type MersNomadismSubEstimate = MersSubEstimateBase & {
+  details: string;
+}
+
 export interface MersPrimaryEstimateDocument {
   _id: ObjectId;
   estimateId: string;
@@ -446,6 +458,8 @@ export interface MersPrimaryEstimateDocument {
   occupationSubestimates: MersOccupationSubEstimate[];
   animalSourceLocationSubestimates: MersAnimalSourceLocationSubEstimate[];
   animalSamplingContextSubestimates: MersAnimalSamplingContextSubEstimate[];
+  camelExposureLevelSubestimates: MersCamelExposureLevelSubEstimate[];
+  nomadismSubestimates: MersNomadismSubEstimate[];
   createdAt: Date;
   updatedAt: Date;
 }
