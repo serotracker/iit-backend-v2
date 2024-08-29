@@ -401,6 +401,18 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       animalDetectionSettings: subestimate.animalDetectionSettings
     })),
+  camelExposureLevelSubestimates: input.groupedEstimates.camelExposureLevelSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      details: subestimate.details,
+      sampleFrame: subestimate.sampleFrame,
+      exposureToCamels: subestimate.exposureToCamels,
+    })),
+  nomadismSubestimates: input.groupedEstimates.nomadismSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      details: subestimate.details
+    })),
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords
 })

@@ -140,7 +140,29 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
           return 0;
         }),
       animalSamplingContextSubestimates: groupedEstimate.animalSamplingContextSubestimates
-        .sort((subestimateA, subestimateB) => subestimateA.animalDetectionSettings.join(',') > subestimateB.animalDetectionSettings.join(',') ? 1 : -1)
+        .sort((subestimateA, subestimateB) => subestimateA.animalDetectionSettings.join(',') > subestimateB.animalDetectionSettings.join(',') ? 1 : -1),
+      camelExposureLevelSubestimates: groupedEstimate.camelExposureLevelSubestimates
+        .sort((subestimateA, subestimateB) => {
+          if(subestimateA.details !== subestimateB.details) {
+            return subestimateA.details > subestimateB.details ? 1 : -1;
+          }
+          if(subestimateA.sampleFrame !== subestimateB.sampleFrame) {
+            return subestimateA.sampleFrame > subestimateB.sampleFrame ? 1 : -1;
+          }
+          if(subestimateA.exposureToCamels !== subestimateB.exposureToCamels) {
+            return subestimateA.exposureToCamels > subestimateB.exposureToCamels ? 1 : -1;
+          }
+
+          return 0;
+        }),
+      nomadismSubestimates: groupedEstimate.nomadismSubestimates
+        .sort((subestimateA, subestimateB) => {
+          if(subestimateA.details !== subestimateB.details) {
+            return subestimateA.details > subestimateB.details ? 1 : -1;
+          }
+
+          return 0;
+        })
     })),
     allSources: input.allSources,
     estimateFilterOptions: input.estimateFilterOptions,

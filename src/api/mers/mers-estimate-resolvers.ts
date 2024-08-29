@@ -264,6 +264,18 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         __typename: 'MersAnimalSamplingContextSubEstimate' as const,
         animalDetectionSettings: subestimate.animalDetectionSettings,
       })),
+      camelExposureLevelSubestimates: primaryEstimate.camelExposureLevelSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersCamelExposureLevelSubEstimate' as const,
+        details: subestimate.details,
+        sampleFrame: subestimate.sampleFrame,
+        exposureToCamels: subestimate.exposureToCamels
+      })),
+      nomadismSubestimates: primaryEstimate.nomadismSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersNomadismSubEstimate' as const,
+        details: subestimate.details,
+      }))
     }));
   }
 
