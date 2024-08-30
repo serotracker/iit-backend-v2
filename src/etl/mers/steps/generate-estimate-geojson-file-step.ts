@@ -58,33 +58,34 @@ interface GenerateEstimateGeoJSONFileStepOutput {
 }
 
 interface GeoJSONOutput {
-  type: "GeometryCollection",
-  geometries: GroupedEstimateGeometryEntry[]
-}
-
-interface GroupedEstimateGeometryEntry {
-  type: "Point",
-  coordinates: [number, number],
-  "properties": Omit<
-    GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep,
-    '_id'|'createdAt'|'updatedAt'|'primaryEstimateInfo'|'timeFrameSubestimates'
-  > & {
-    primaryEstimateInfo: Omit<
-      GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep['primaryEstimateInfo'],
-      '_id'|'createdAt'|'updatedAt'|'samplingStartDate'|'samplingEndDate'|'samplingMidDate'
-    > & {
-      samplingStartDate: string | undefined;
-      samplingEndDate: string | undefined;
-      samplingMidDate: string | undefined;
+  type: 'FeatureCollection',
+  features: Array<{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [number, number]
     }
-    timeFrameSubestimates: Array<
-      Omit<GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep['timeFrameSubestimates'][number],
-      'samplingStartDate'|'samplingEndDate'
+    properties: Omit<
+      GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep,
+      '_id'|'createdAt'|'updatedAt'|'primaryEstimateInfo'|'timeFrameSubestimates'
     > & {
-      samplingStartDate: string;
-      samplingEndDate: string;
+      primaryEstimateInfo: Omit<
+        GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep['primaryEstimateInfo'],
+        '_id'|'createdAt'|'updatedAt'|'samplingStartDate'|'samplingEndDate'|'samplingMidDate'
+      > & {
+        samplingStartDate: string | undefined;
+        samplingEndDate: string | undefined;
+        samplingMidDate: string | undefined;
+      }
+      timeFrameSubestimates: Array<
+        Omit<GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep['timeFrameSubestimates'][number],
+        'samplingStartDate'|'samplingEndDate'
+      > & {
+        samplingStartDate: string;
+        samplingEndDate: string;
+      }>
+    }
     }>
-  }
 }
 
 export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJSONFileStepInput): Promise<GenerateEstimateGeoJSONFileStepOutput> => {
@@ -93,18 +94,21 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
   console.log(`Running step: writeEstimateDataToMongoDbStep. Remaining estimates: ${input.allEstimates.length}.`);
 
   const geoJSON: GeoJSONOutput = {
-    type: 'GeometryCollection',
-    geometries: input.allGroupedEstimates.map((groupedEstimate) => {
+    type: 'FeatureCollection',
+    features: input.allGroupedEstimates.map((groupedEstimate) => {
       const { _id: _, createdAt: __, updatedAt: ___, ...cleanedGroupedEstimate } = groupedEstimate;
 
       const coordinates: [number, number] = [
         groupedEstimate.primaryEstimateInfo.longitude,
         groupedEstimate.primaryEstimateInfo.latitude
       ];
-
+      
       return {
-        type: "Point",
-        coordinates,
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: coordinates
+        },
         properties: {
           ...cleanedGroupedEstimate,
           primaryEstimateInfo: {
@@ -122,6 +126,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
       }
     })
   }
+
   const geoJSONString = JSON.stringify(geoJSON);
 
   await writeFile(`./${outputFilename}`, geoJSONString, 'utf-8');
