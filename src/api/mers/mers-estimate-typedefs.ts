@@ -10,6 +10,7 @@ export const mersEstimateTypedefs = `
     GOAT
     SHEEP
     CATTLE
+    DONKEY
   }
 
   type MersEstimateFilterOptions {

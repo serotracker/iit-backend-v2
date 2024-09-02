@@ -10,6 +10,7 @@ export const mersEventTypedefs = `
     GOAT
     SHEEP
     CATTLE
+    DONKEY
   }
 
   enum MersEventType {
