@@ -153,6 +153,10 @@ const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterClean
     return MersAnimalSpecies.SHEEP;
   }
 
+  if(speciesStringNoCapitalization?.includes('donkey')) {
+    return MersAnimalSpecies.DONKEY;
+  }
+
   return undefined;
 }
 

@@ -91,7 +91,7 @@ interface GeoJSONOutput {
 export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJSONFileStepInput): Promise<GenerateEstimateGeoJSONFileStepOutput> => {
   const outputFilename = 'merstracker-grouped-estimates-geojson.json';
 
-  console.log(`Running step: writeEstimateDataToMongoDbStep. Remaining estimates: ${input.allEstimates.length}.`);
+  console.log(`Running step: generateEstimateGeoJSONFileStep. Remaining estimates: ${input.allEstimates.length}.`);
 
   const geoJSON: GeoJSONOutput = {
     type: 'FeatureCollection',

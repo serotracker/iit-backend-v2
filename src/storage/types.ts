@@ -201,6 +201,7 @@ export enum MersAnimalSpecies {
   GOAT = "GOAT",
   CATTLE = "CATTLE",
   BAT = "BAT",
+  DONKEY = "DONKEY"
 }
 
 export enum MersAnimalType {
@@ -489,6 +490,7 @@ export enum MersEventAnimalSpecies {
   GOAT = "GOAT",
   CATTLE = "CATTLE",
   SHEEP = "SHEEP",
+  DONKEY = "DONKEY"
 }
 
 export enum MersEventType {
