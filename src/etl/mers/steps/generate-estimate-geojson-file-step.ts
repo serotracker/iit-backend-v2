@@ -97,6 +97,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
     type: 'FeatureCollection',
     features: input.allGroupedEstimates.map((groupedEstimate) => {
       const { _id: _, createdAt: __, updatedAt: ___, ...cleanedGroupedEstimate } = groupedEstimate;
+      const { _id: ____, ...cleanedPrimaryEstimateInfo } = groupedEstimate.primaryEstimateInfo;
 
       const coordinates: [number, number] = [
         groupedEstimate.primaryEstimateInfo.longitude,
@@ -112,7 +113,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
         properties: {
           ...cleanedGroupedEstimate,
           primaryEstimateInfo: {
-            ...groupedEstimate.primaryEstimateInfo,
+            ...cleanedPrimaryEstimateInfo,
             samplingStartDate: groupedEstimate.primaryEstimateInfo.samplingStartDate?.toISOString(),
             samplingEndDate: groupedEstimate.primaryEstimateInfo.samplingEndDate?.toISOString(),
             samplingMidDate: groupedEstimate.primaryEstimateInfo.samplingMidDate?.toISOString(),
