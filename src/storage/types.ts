@@ -317,10 +317,10 @@ export type MersEstimateDocument =
   | AnimalMersViralEstimateDocument;
 
 type PrimaryMersEstimateInformation = (
-  | Omit<HumanMersSeroprevalenceEstimateDocument, '_id'|'createdAt'|'updatedAt'>
-  | Omit<HumanMersViralEstimateDocument, '_id'|'createdAt'|'updatedAt'>
-  | Omit<AnimalMersSeroprevalenceEstimateDocument, '_id'|'createdAt'|'updatedAt'>
-  | Omit<AnimalMersViralEstimateDocument, '_id'|'createdAt'|'updatedAt'>
+  | Omit<HumanMersSeroprevalenceEstimateDocument, 'createdAt'|'updatedAt'>
+  | Omit<HumanMersViralEstimateDocument, 'createdAt'|'updatedAt'>
+  | Omit<AnimalMersSeroprevalenceEstimateDocument, 'createdAt'|'updatedAt'>
+  | Omit<AnimalMersViralEstimateDocument, 'createdAt'|'updatedAt'>
 ) & {
   id: ObjectId;
   createdAt: undefined;

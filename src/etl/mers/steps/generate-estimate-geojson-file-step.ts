@@ -97,6 +97,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
     type: 'FeatureCollection',
     features: input.allGroupedEstimates.map((groupedEstimate) => {
       const { _id: _, createdAt: __, updatedAt: ___, ...cleanedGroupedEstimate } = groupedEstimate;
+      const { _id: ____, ...cleanedPrimaryEstimateInfo } = groupedEstimate.primaryEstimateInfo;
 
       const coordinates: [number, number] = [
         groupedEstimate.primaryEstimateInfo.longitude,
