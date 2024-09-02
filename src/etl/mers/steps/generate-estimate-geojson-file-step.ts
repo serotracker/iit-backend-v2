@@ -113,7 +113,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
         properties: {
           ...cleanedGroupedEstimate,
           primaryEstimateInfo: {
-            ...groupedEstimate.primaryEstimateInfo,
+            ...cleanedPrimaryEstimateInfo,
             samplingStartDate: groupedEstimate.primaryEstimateInfo.samplingStartDate?.toISOString(),
             samplingEndDate: groupedEstimate.primaryEstimateInfo.samplingEndDate?.toISOString(),
             samplingMidDate: groupedEstimate.primaryEstimateInfo.samplingMidDate?.toISOString(),
