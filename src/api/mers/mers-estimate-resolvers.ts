@@ -1,14 +1,25 @@
 import { MongoClient } from "mongodb";
 import { assertNever } from "assert-never";
-import { MersEstimateFilterOptionsDocument, MersEstimateType, MersPrimaryEstimateDocument, MersSubEstimateBase, isHumanMersAgeGroupSubEstimate, isMersViralSubEstimateInformation } from "../../storage/types.js";
+import {
+  Clade,
+  GenomeSequenced,
+  MersEstimateFilterOptionsDocument,
+  MersEstimateType,
+  MersPrimaryEstimateDocument,
+  MersSubEstimateBase,
+  isHumanMersAgeGroupSubEstimate,
+  isMersViralSubEstimateInformation
+} from "../../storage/types.js";
 import {
   QueryResolvers,
   MersAnimalSpecies as MersAnimalSpeciesForApi,
   MersAnimalType as MersAnimalTypeForApi,
   MersEstimateType as MersEstimateTypeForApi,
+  Clade as CladeForApi,
+  GenomeSequenced as GenomeSequencedForApi,
   PrimaryMersEstimateInformation,
   PrimaryMersEstimateInformationInterface,
-  MersSubEstimateInterface
+  MersSubEstimateInterface,
 } from "../graphql-types/__generated__/graphql-types.js";
 import {
   MersAnimalSpecies,
@@ -31,6 +42,22 @@ const mersAnimalTypeMapForApi = {
   [MersAnimalType.DOMESTIC]: MersAnimalTypeForApi.Domestic,
 }
 export const mapMersAnimalTypeForApi = (animalType: MersAnimalType): MersAnimalTypeForApi => mersAnimalTypeMapForApi[animalType];
+
+const cladeMapForApi = {
+  [Clade.A]: CladeForApi.A,
+  [Clade.B]: CladeForApi.B,
+  [Clade.C1]: CladeForApi.C1,
+  [Clade.C2]: CladeForApi.C2,
+  [Clade.C]: CladeForApi.C,
+}
+export const mapCladeForApi = (clade: Clade): CladeForApi => cladeMapForApi[clade];
+
+const genomeSequencedMapForApi = {
+  [GenomeSequenced.FULL_LENGTH]: GenomeSequencedForApi.FullLength,
+  [GenomeSequenced.PARTIAL_S_GENE]: GenomeSequencedForApi.PartialSGene,
+  [GenomeSequenced.PARTIAL_N_GENE]: GenomeSequencedForApi.PartialNGene,
+}
+export const mapGenomeSequencedForApi = (genomeSequenced: GenomeSequenced): GenomeSequencedForApi => genomeSequencedMapForApi[genomeSequenced];
 
 const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstimateDocument['primaryEstimateInfo']): PrimaryMersEstimateInformation => {
   const base: Omit<PrimaryMersEstimateInformationInterface, 'type'> = {
@@ -82,6 +109,12 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
     symptomPrevalenceOfPositives: document.symptomPrevalenceOfPositives,
     symptomDefinition: document.symptomDefinition,
     testValidation: document.testValidation,
+    sequencingDone: document.sequencingDone,
+    clade: document.clade
+      .map((clade) => mapCladeForApi(clade)),
+    accessionNumbers: document.accessionNumbers,
+    genomeSequenced: document.genomeSequenced
+      .map((genomeSequenced) => mapGenomeSequencedForApi(genomeSequenced)),
   }
 
   if(document.type === MersEstimateType.HUMAN_SEROPREVALENCE) {

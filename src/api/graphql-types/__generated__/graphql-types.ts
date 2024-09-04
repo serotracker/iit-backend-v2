@@ -253,6 +253,14 @@ export type ArbovirusFilterOptions = {
   whoRegion: Array<Scalars['String']['output']>;
 };
 
+export enum Clade {
+  A = 'A',
+  B = 'B',
+  C = 'C',
+  C1 = 'C1',
+  C2 = 'C2'
+}
+
 export type CountryIdentifiers = {
   __typename?: 'CountryIdentifiers';
   alphaThreeCode: Scalars['String']['output'];
@@ -299,6 +307,12 @@ export enum GbdSuperRegion {
   SouthAsia = 'SOUTH_ASIA',
   SouthEastAsiaEastAsiaAndOceania = 'SOUTH_EAST_ASIA_EAST_ASIA_AND_OCEANIA',
   SubSaharanAfrica = 'SUB_SAHARAN_AFRICA'
+}
+
+export enum GenomeSequenced {
+  FullLength = 'FULL_LENGTH',
+  PartialNGene = 'PARTIAL_N_GENE',
+  PartialSGene = 'PARTIAL_S_GENE'
 }
 
 export type HumanMersAgeGroupSubEstimate = MersSubEstimateInterface & {
@@ -823,6 +837,7 @@ export type PartitionedYearlyFaoCamelPopulationDataOutput = {
 
 export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEstimateInformationInterface & {
   __typename?: 'PrimaryAnimalMersSeroprevalenceEstimateInformation';
+  accessionNumbers?: Maybe<Scalars['String']['output']>;
   animalAgeGroup: Array<Scalars['String']['output']>;
   animalDetectionSettings: Array<Scalars['String']['output']>;
   animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
@@ -832,6 +847,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
+  clade: Array<Clade>;
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
@@ -839,6 +855,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
+  genomeSequenced: Array<GenomeSequenced>;
   geographicScope?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   insitutution?: Maybe<Scalars['String']['output']>;
@@ -856,6 +873,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
   sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sequencingDone: Scalars['Boolean']['output'];
   seroprevalence: Scalars['Float']['output'];
   seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
   seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -885,6 +903,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
 
 export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInformationInterface & {
   __typename?: 'PrimaryAnimalMersViralEstimateInformation';
+  accessionNumbers?: Maybe<Scalars['String']['output']>;
   animalAgeGroup: Array<Scalars['String']['output']>;
   animalDetectionSettings: Array<Scalars['String']['output']>;
   animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
@@ -894,6 +913,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
+  clade: Array<Clade>;
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
@@ -901,6 +921,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
+  genomeSequenced: Array<GenomeSequenced>;
   geographicScope?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   insitutution?: Maybe<Scalars['String']['output']>;
@@ -921,6 +942,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
   sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sequencingDone: Scalars['Boolean']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
   sourceTitle: Scalars['String']['output'];
@@ -947,10 +969,12 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
 
 export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstimateInformationInterface & {
   __typename?: 'PrimaryHumanMersSeroprevalenceEstimateInformation';
+  accessionNumbers?: Maybe<Scalars['String']['output']>;
   ageGroup: Array<Scalars['String']['output']>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
+  clade: Array<Clade>;
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
@@ -958,6 +982,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
+  genomeSequenced: Array<GenomeSequenced>;
   geographicScope?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   insitutution?: Maybe<Scalars['String']['output']>;
@@ -976,6 +1001,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
   sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sequencingDone: Scalars['Boolean']['output'];
   seroprevalence: Scalars['Float']['output'];
   seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
   seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
@@ -1005,10 +1031,12 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
 
 export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInformationInterface & {
   __typename?: 'PrimaryHumanMersViralEstimateInformation';
+  accessionNumbers?: Maybe<Scalars['String']['output']>;
   ageGroup: Array<Scalars['String']['output']>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
+  clade: Array<Clade>;
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
@@ -1016,6 +1044,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
+  genomeSequenced: Array<GenomeSequenced>;
   geographicScope?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   insitutution?: Maybe<Scalars['String']['output']>;
@@ -1037,6 +1066,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
   sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sequencingDone: Scalars['Boolean']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
   sourceTitle: Scalars['String']['output'];
@@ -1064,9 +1094,11 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
 export type PrimaryMersEstimateInformation = PrimaryAnimalMersSeroprevalenceEstimateInformation | PrimaryAnimalMersViralEstimateInformation | PrimaryHumanMersSeroprevalenceEstimateInformation | PrimaryHumanMersViralEstimateInformation;
 
 export type PrimaryMersEstimateInformationInterface = {
+  accessionNumbers?: Maybe<Scalars['String']['output']>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   city?: Maybe<Scalars['String']['output']>;
+  clade: Array<Clade>;
   country: Scalars['String']['output'];
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
@@ -1074,6 +1106,7 @@ export type PrimaryMersEstimateInformationInterface = {
   estimateId: Scalars['String']['output'];
   exposureToCamels?: Maybe<Scalars['String']['output']>;
   firstAuthorFullName: Scalars['String']['output'];
+  genomeSequenced: Array<GenomeSequenced>;
   geographicScope?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   insitutution?: Maybe<Scalars['String']['output']>;
@@ -1091,6 +1124,7 @@ export type PrimaryMersEstimateInformationInterface = {
   sensitivity95CILower?: Maybe<Scalars['Float']['output']>;
   sensitivity95CIUpper?: Maybe<Scalars['Float']['output']>;
   sensitivityDenominator?: Maybe<Scalars['Int']['output']>;
+  sequencingDone: Scalars['Boolean']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
   sourceTitle: Scalars['String']['output'];
@@ -1384,11 +1418,13 @@ export type ResolversTypes = {
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Clade: Clade;
   CountryIdentifiers: ResolverTypeWrapper<CountryIdentifiers>;
   FaoMersEventFilterOptions: ResolverTypeWrapper<FaoMersEventFilterOptions>;
   Float: ResolverTypeWrapper<Scalars['Float']['output']>;
   GBDSubRegion: GbdSubRegion;
   GBDSuperRegion: GbdSuperRegion;
+  GenomeSequenced: GenomeSequenced;
   HumanMersAgeGroupSubEstimate: ResolverTypeWrapper<Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   HumanMersEstimate: ResolverTypeWrapper<HumanMersEstimate>;
   HumanMersEvent: ResolverTypeWrapper<HumanMersEvent>;
@@ -2214,6 +2250,7 @@ export type PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType =
 };
 
 export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryAnimalMersSeroprevalenceEstimateInformation'] = ResolversParentTypes['PrimaryAnimalMersSeroprevalenceEstimateInformation']> = {
+  accessionNumbers?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2223,6 +2260,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2230,6 +2268,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  genomeSequenced?: Resolver<Array<ResolversTypes['GenomeSequenced']>, ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2247,6 +2286,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -2276,6 +2316,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
 };
 
 export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryAnimalMersViralEstimateInformation'] = ResolversParentTypes['PrimaryAnimalMersViralEstimateInformation']> = {
+  accessionNumbers?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animalAgeGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2285,6 +2326,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2292,6 +2334,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  genomeSequenced?: Resolver<Array<ResolversTypes['GenomeSequenced']>, ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2312,6 +2355,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2338,10 +2382,12 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
 };
 
 export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryHumanMersSeroprevalenceEstimateInformation'] = ResolversParentTypes['PrimaryHumanMersSeroprevalenceEstimateInformation']> = {
+  accessionNumbers?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2349,6 +2395,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  genomeSequenced?: Resolver<Array<ResolversTypes['GenomeSequenced']>, ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2367,6 +2414,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -2396,10 +2444,12 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
 };
 
 export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryHumanMersViralEstimateInformation'] = ResolversParentTypes['PrimaryHumanMersViralEstimateInformation']> = {
+  accessionNumbers?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2407,6 +2457,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  genomeSequenced?: Resolver<Array<ResolversTypes['GenomeSequenced']>, ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2428,6 +2479,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2459,9 +2511,11 @@ export type PrimaryMersEstimateInformationResolvers<ContextType = any, ParentTyp
 
 export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, ParentType extends ResolversParentTypes['PrimaryMersEstimateInformationInterface'] = ResolversParentTypes['PrimaryMersEstimateInformationInterface']> = {
   __resolveType: TypeResolveFn<'PrimaryAnimalMersSeroprevalenceEstimateInformation' | 'PrimaryAnimalMersViralEstimateInformation' | 'PrimaryHumanMersSeroprevalenceEstimateInformation' | 'PrimaryHumanMersViralEstimateInformation', ParentType, ContextType>;
+  accessionNumbers?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2469,6 +2523,7 @@ export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, 
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   exposureToCamels?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   firstAuthorFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  genomeSequenced?: Resolver<Array<ResolversTypes['GenomeSequenced']>, ParentType, ContextType>;
   geographicScope?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   insitutution?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2486,6 +2541,7 @@ export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, 
   sensitivity95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivity95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   sensitivityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

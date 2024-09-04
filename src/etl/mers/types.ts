@@ -79,6 +79,10 @@ export interface AirtableMersEstimateFields {
   'Symptom Prevalence of Positives': number | null;
   'Symptom definition': string | null;
   'Species': string | null;
+  'Sequencing done': boolean;
+  'Clade': Array<string | null>;
+  'Accession numbers': string | null;
+  'Genome sequenced': Array<string | null>;
 }
 
 export type StructuredYearlyCamelPopulationByCountryData = Array<{

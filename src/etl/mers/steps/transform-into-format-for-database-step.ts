@@ -184,6 +184,10 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
   positiveCutoff: input.estimate.positiveCutoff,
   symptomPrevalenceOfPositives: input.estimate.symptomPrevalenceOfPositives,
   symptomDefinition: input.estimate.symptomDefinition,
+  sequencingDone: input.estimate.sequencingDone,
+  clade: input.estimate.clade,
+  accessionNumbers: input.estimate.accessionNumbers,
+  genomeSequenced: input.estimate.genomeSequenced,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 })
