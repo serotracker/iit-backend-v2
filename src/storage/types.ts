@@ -212,6 +212,26 @@ export enum MersAnimalType {
 export const isMersAnimalType = (animalType: string): animalType is MersAnimalType =>
   Object.values(MersAnimalType).some((element) => element === animalType);
 
+export enum Clade {
+  A = 'A',
+  B = 'B',
+  C1 = 'C1',
+  C2 = 'C2',
+  C = 'C'
+}
+
+const isClade = (clade: string): clade is Clade =>
+  Object.values(Clade).some((value) => value === clade);
+
+export enum GenomeSequenced {
+  FULL_LENGTH = 'FULL_LENGTH',
+  PARTIAL_S_GENE = 'PARTIAL_S_GENE',
+  PARTIAL_N_GENE = 'PARTIAL_N_GENE'
+}
+
+const isGenomeSequenced = (genomeSequenced: string): genomeSequenced is GenomeSequenced =>
+  Object.values(GenomeSequenced).some((value) => value === genomeSequenced);
+
 export interface MersEstimateDocumentBase {
   _id: ObjectId;
   estimateId: string;
@@ -262,6 +282,10 @@ export interface MersEstimateDocumentBase {
   positiveCutoff: string | undefined;
   symptomPrevalenceOfPositives: number | undefined;
   symptomDefinition: string | undefined;
+  sequencingDone: boolean;
+  clade: Clade[];
+  accessionNumbers: string | undefined;
+  genomeSequenced: GenomeSequenced[];
   createdAt: Date;
   updatedAt: Date;
 }

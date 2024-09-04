@@ -13,6 +13,20 @@ export const mersEstimateTypedefs = `
     DONKEY
   }
 
+  enum Clade {
+    A
+    B
+    C1
+    C2
+    C
+  }
+
+  enum GenomeSequenced {
+    FULL_LENGTH
+    PARTIAL_S_GENE
+    PARTIAL_N_GENE
+  }
+
   type MersEstimateFilterOptions {
     sourceType: [String!]!
     ageGroup: [String!]!
@@ -89,6 +103,10 @@ export const mersEstimateTypedefs = `
     symptomPrevalenceOfPositives: Float
     symptomDefinition: String
     testValidation: [String!]!
+    sequencingDone: Boolean!
+    clade: [Clade!]!
+    accessionNumbers: String
+    genomeSequenced: [GenomeSequenced!]!
   }
 
   type PrimaryHumanMersViralEstimateInformation implements PrimaryMersEstimateInformationInterface {
@@ -142,6 +160,10 @@ export const mersEstimateTypedefs = `
     symptomPrevalenceOfPositives: Float
     symptomDefinition: String
     testValidation: [String!]!
+    sequencingDone: Boolean!
+    clade: [Clade!]!
+    accessionNumbers: String
+    genomeSequenced: [GenomeSequenced!]!
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
@@ -202,6 +224,10 @@ export const mersEstimateTypedefs = `
     symptomPrevalenceOfPositives: Float
     symptomDefinition: String
     testValidation: [String!]!
+    sequencingDone: Boolean!
+    clade: [Clade!]!
+    accessionNumbers: String
+    genomeSequenced: [GenomeSequenced!]!
     ####### END INTERFACE FIELDS #######
 
     positivePrevalence: Float!
@@ -266,6 +292,10 @@ export const mersEstimateTypedefs = `
     symptomPrevalenceOfPositives: Float
     symptomDefinition: String
     testValidation: [String!]!
+    sequencingDone: Boolean!
+    clade: [Clade!]!
+    accessionNumbers: String
+    genomeSequenced: [GenomeSequenced!]!
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!
@@ -326,6 +356,10 @@ export const mersEstimateTypedefs = `
     symptomPrevalenceOfPositives: Float
     symptomDefinition: String
     testValidation: [String!]!
+    sequencingDone: Boolean!
+    clade: [Clade!]!
+    accessionNumbers: String
+    genomeSequenced: [GenomeSequenced!]!
     ####### END INTERFACE FIELDS #######
 
     seroprevalence: Float!

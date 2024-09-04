@@ -187,6 +187,18 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Species': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
+    'Sequencing done': z
+      .optional(z.boolean())
+      .transform((value) => value ?? false),
+    'Clade': z
+      .optional(z.string().nullable().array())
+      .transform((value) => value ?? []),
+    'Accession numbers': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Genome sequenced': z
+      .optional(z.string().nullable().array())
+      .transform((value) => value ?? []),
   })
 
   try {

@@ -8,7 +8,16 @@ import {
   YearlyCamelPopulationDataAfterCleaningStudiesStep,
   CountryFieldsAfterCleaningStudiesStep
 } from "./clean-studies-step";
-import { MersAnimalSpecies, MersAnimalType, MersEstimateType, MersSubGroupingVariable, isMersAnimalType, isMersSubGroupingVariable } from "../../../storage/types.js";
+import {
+  Clade,
+  GenomeSequenced,
+  MersAnimalSpecies,
+  MersAnimalType,
+  MersEstimateType,
+  MersSubGroupingVariable,
+  isMersAnimalType,
+  isMersSubGroupingVariable
+} from "../../../storage/types.js";
 
 export type EstimateFieldsAfterCleaningEstimatesStep = {
   id: string;
@@ -65,6 +74,10 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   animalCountryOfImportId: string | undefined;
   symptomPrevalenceOfPositives: number | undefined;
   symptomDefinition: string | undefined;
+  sequencingDone: boolean;
+  clade: Clade[];
+  accessionNumbers: string | undefined;
+  genomeSequenced: GenomeSequenced[];
 }
 export type SourceFieldsAfterCleaningEstimatesStep = SourceFieldsAfterCleaningStudiesStep;
 export type StudyFieldsAfterCleaningEstimatesStep = StudyFieldsAfterCleaningStudiesStep;
@@ -160,6 +173,20 @@ const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterClean
   return undefined;
 }
 
+const textCladeToEnumCladeMap: Record<string, Clade | undefined> = {
+  ['A']: Clade.A,
+  ['B']: Clade.B,
+  ['C1']: Clade.C1,
+  ['C2']: Clade.C2,
+  ['C']: Clade.C
+}
+
+const textGenomeSequencedToEnumGenomeSequencedMap: Record<string, GenomeSequenced | undefined> = {
+  ['Full length']: GenomeSequenced.FULL_LENGTH,
+  ['Partial S gene']: GenomeSequenced.PARTIAL_S_GENE,
+  ['Partial N gene']: GenomeSequenced.PARTIAL_N_GENE,
+}
+
 export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimatesStepOutput => {
   return {
     allEstimates: input.allEstimates
@@ -229,6 +256,16 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         sampleFrame: estimate['Sample Frame (Human)'] ?? undefined,
         symptomPrevalenceOfPositives: estimate['Symptom Prevalence of Positives'] ?? undefined,
         symptomDefinition: estimate['Symptom definition'] ?? undefined,
+        sequencingDone: estimate['Sequencing done'],
+        clade: estimate['Clade']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .map((element): Clade | undefined => textCladeToEnumCladeMap[element])
+          .filter((element): element is NonNullable<typeof element> => !!element),
+        accessionNumbers: estimate['Accession numbers'] ?? undefined,
+        genomeSequenced: estimate['Genome sequenced']
+          .filter((element): element is NonNullable<typeof element> => !!element)
+          .map((element): GenomeSequenced | undefined => textGenomeSequencedToEnumGenomeSequencedMap[element])
+          .filter((element): element is NonNullable<typeof element> => !!element),
       }))
       .filter((estimate): estimate is Omit<typeof estimate, 'subGroupingVariable'> & {subGroupingVariable: NonNullable<typeof estimate['subGroupingVariable']>} => !!estimate.subGroupingVariable)
       .map((estimate) => ({
