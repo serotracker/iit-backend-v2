@@ -196,7 +196,7 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Accession numbers': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
-    'Genome sequenced': z
+    'Genome coverage': z
       .optional(z.string().nullable().array())
       .transform((value) => value ?? []),
   })

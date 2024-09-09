@@ -82,7 +82,7 @@ export interface AirtableMersEstimateFields {
   'Sequencing done': boolean;
   'Clade': Array<string | null>;
   'Accession numbers': string | null;
-  'Genome sequenced': Array<string | null>;
+  'Genome coverage': Array<string | null>;
 }
 
 export type StructuredYearlyCamelPopulationByCountryData = Array<{
