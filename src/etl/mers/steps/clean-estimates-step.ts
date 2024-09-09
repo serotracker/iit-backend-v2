@@ -262,7 +262,7 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
           .map((element): Clade | undefined => textCladeToEnumCladeMap[element])
           .filter((element): element is NonNullable<typeof element> => !!element),
         accessionNumbers: estimate['Accession numbers'] ?? undefined,
-        genomeSequenced: estimate['Genome sequenced']
+        genomeSequenced: estimate['Genome coverage']
           .filter((element): element is NonNullable<typeof element> => !!element)
           .map((element): GenomeSequenced | undefined => textGenomeSequencedToEnumGenomeSequencedMap[element])
           .filter((element): element is NonNullable<typeof element> => !!element),
