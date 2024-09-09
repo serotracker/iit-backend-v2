@@ -158,7 +158,7 @@ const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterClean
     return MersAnimalSpecies.GOAT;
   }
 
-  if(speciesStringNoCapitalization?.includes('cattle')) {
+  if(speciesStringNoCapitalization?.includes('cattle') || speciesStringNoCapitalization?.includes('cow')) {
     return MersAnimalSpecies.CATTLE;
   }
 
@@ -168,6 +168,14 @@ const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterClean
 
   if(speciesStringNoCapitalization?.includes('donkey')) {
     return MersAnimalSpecies.DONKEY;
+  }
+
+  if(speciesStringNoCapitalization?.includes('water buffalo')) {
+    return MersAnimalSpecies.WATER_BUFFALO;
+  }
+
+  if(speciesStringNoCapitalization?.includes('baboon')) {
+    return MersAnimalSpecies.BABOON;
   }
 
   return undefined;

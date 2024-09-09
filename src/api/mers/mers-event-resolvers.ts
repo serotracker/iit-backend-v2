@@ -43,6 +43,8 @@ const faoMersEventAnimalSpeciesMap = {
   [MersEventAnimalSpecies.CATTLE]: MersEventAnimalSpeciesForApi.Cattle,
   [MersEventAnimalSpecies.SHEEP]: MersEventAnimalSpeciesForApi.Sheep,
   [MersEventAnimalSpecies.DONKEY]: MersEventAnimalSpeciesForApi.Donkey,
+  [MersEventAnimalSpecies.WATER_BUFFALO]: MersEventAnimalSpeciesForApi.WaterBuffalo,
+  [MersEventAnimalSpecies.BABOON]: MersEventAnimalSpeciesForApi.Baboon
 }
 
 

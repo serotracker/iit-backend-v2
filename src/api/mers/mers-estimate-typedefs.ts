@@ -11,6 +11,8 @@ export const mersEstimateTypedefs = `
     SHEEP
     CATTLE
     DONKEY
+    WATER_BUFFALO
+    BABOON
   }
 
   enum Clade {
