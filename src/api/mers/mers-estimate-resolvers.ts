@@ -33,7 +33,9 @@ export const mersAnimalSpeciesMapForApi = {
   [MersAnimalSpecies.CAMEL]: MersAnimalSpeciesForApi.Camel,
   [MersAnimalSpecies.CATTLE]: MersAnimalSpeciesForApi.Cattle,
   [MersAnimalSpecies.SHEEP]: MersAnimalSpeciesForApi.Sheep,
-  [MersAnimalSpecies.DONKEY]: MersAnimalSpeciesForApi.Donkey
+  [MersAnimalSpecies.DONKEY]: MersAnimalSpeciesForApi.Donkey,
+  [MersAnimalSpecies.WATER_BUFFALO]: MersAnimalSpeciesForApi.WaterBuffalo,
+  [MersAnimalSpecies.BABOON]: MersAnimalSpeciesForApi.Baboon
 }
 export const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesMapForApi[animalSpecies];
 
