@@ -171,6 +171,8 @@ export const mersEstimateTypedefs = `
     positivePrevalence: Float!
     positivePrevalence95CILower: Float
     positivePrevalence95CIUpper: Float
+    positivePrevalenceCalculated95CILower: Float!
+    positivePrevalenceCalculated95CIUpper: Float!
     ageGroup: [String!]!
     sampleFrame: String
   }
@@ -235,6 +237,8 @@ export const mersEstimateTypedefs = `
     positivePrevalence: Float!
     positivePrevalence95CILower: Float
     positivePrevalence95CIUpper: Float
+    positivePrevalenceCalculated95CILower: Float!
+    positivePrevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
     animalDetectionSettings: [String!]!
@@ -303,6 +307,8 @@ export const mersEstimateTypedefs = `
     seroprevalence: Float!
     seroprevalence95CILower: Float
     seroprevalence95CIUpper: Float
+    seroprevalenceCalculated95CILower: Float!
+    seroprevalenceCalculated95CIUpper: Float!
     ageGroup: [String!]!
     sampleFrame: String
   }
@@ -367,6 +373,8 @@ export const mersEstimateTypedefs = `
     seroprevalence: Float!
     seroprevalence95CILower: Float
     seroprevalence95CIUpper: Float
+    seroprevalenceCalculated95CILower: Float!
+    seroprevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
     animalDetectionSettings: [String!]!
@@ -391,6 +399,8 @@ export const mersEstimateTypedefs = `
     positivePrevalence: Float!
     positivePrevalence95CILower: Float
     positivePrevalence95CIUpper: Float
+    positivePrevalenceCalculated95CILower: Float!
+    positivePrevalenceCalculated95CIUpper: Float!
   }
 
   type MersSeroprevalenceSubEstimateInformation implements MersSubEstimateInformationInterface {
@@ -402,6 +412,8 @@ export const mersEstimateTypedefs = `
     seroprevalence: Float!
     seroprevalence95CILower: Float
     seroprevalence95CIUpper: Float
+    seroprevalenceCalculated95CILower: Float!
+    seroprevalenceCalculated95CIUpper: Float!
   }
 
   union MersSubEstimateInformation = MersViralSubEstimateInformation | MersSeroprevalenceSubEstimateInformation

@@ -13,15 +13,22 @@ import assertNever from "assert-never";
 
 type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
-  'type'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'
+  'type'|'positivePrevalence'|'positivePrevalence95CILower'|
+  'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|
+  'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'|
+  'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'
 > & {
   type: MersEstimateType.HUMAN_SEROPREVALENCE;
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
+  seroprevalenceCalculated95CILower: number;
+  seroprevalenceCalculated95CIUpper: number;
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
+  positivePrevalenceCalculated95CILower: undefined;
+  positivePrevalenceCalculated95CIUpper: undefined;
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
@@ -33,15 +40,22 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
 }
 type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
-  'type'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'
+  'type'|'positivePrevalence'|'positivePrevalence95CILower'|
+  'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|
+  'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'|
+  'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'
 > & {
   type: MersEstimateType.HUMAN_VIRAL;
   seroprevalence: undefined;
   seroprevalence95CILower: undefined;
   seroprevalence95CIUpper: undefined;
+  seroprevalenceCalculated95CILower: undefined;
+  seroprevalenceCalculated95CIUpper: undefined;
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
+  positivePrevalenceCalculated95CILower: number;
+  positivePrevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
@@ -53,15 +67,22 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
 }
 type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
-  'type'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'
+  'type'|'positivePrevalence'|'positivePrevalence95CILower'|
+  'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|
+  'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'|
+  'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'
 > & {
   type: MersEstimateType.ANIMAL_SEROPREVALENCE;
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
+  seroprevalenceCalculated95CILower: number;
+  seroprevalenceCalculated95CIUpper: number;
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
+  positivePrevalenceCalculated95CILower: undefined;
+  positivePrevalenceCalculated95CIUpper: undefined;
   ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
@@ -73,15 +94,22 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
 }
 type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   EstimateFieldsAfterAssigningPartitionsStep,
-  'type'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'
+  'type'|'positivePrevalence'|'positivePrevalence95CILower'|
+  'positivePrevalence95CIUpper'|'seroprevalence'|'seroprevalence95CILower'|
+  'seroprevalence95CIUpper'|'animalType'|'animalSpecies'|'ageGroup'|
+  'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'
 > & {
   type: MersEstimateType.ANIMAL_VIRAL;
   seroprevalence: undefined;
   seroprevalence95CILower: undefined;
   seroprevalence95CIUpper: undefined;
+  seroprevalenceCalculated95CILower: undefined;
+  seroprevalenceCalculated95CIUpper: undefined;
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
+  positivePrevalenceCalculated95CILower: number;
+  positivePrevalenceCalculated95CIUpper: number;
   ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies;
@@ -134,9 +162,13 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       seroprevalence: estimate.positivePrevalence,
       seroprevalence95CILower: estimate.positivePrevalence95CILower,
       seroprevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+      seroprevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+      seroprevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       positivePrevalence: undefined,
       positivePrevalence95CILower: undefined,
       positivePrevalence95CIUpper: undefined,
+      positivePrevalenceCalculated95CILower: undefined,
+      positivePrevalenceCalculated95CIUpper: undefined,
       ageGroup: estimate.ageGroup,
       animalType: undefined,
       animalSpecies: undefined,
@@ -154,9 +186,13 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       seroprevalence: undefined,
       seroprevalence95CILower: undefined,
       seroprevalence95CIUpper: undefined,
+      seroprevalenceCalculated95CILower: undefined,
+      seroprevalenceCalculated95CIUpper: undefined,
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+      positivePrevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+      positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
       animalType: undefined,
       animalSpecies: undefined,
@@ -181,9 +217,13 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       seroprevalence: estimate.positivePrevalence,
       seroprevalence95CILower: estimate.positivePrevalence95CILower,
       seroprevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+      seroprevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+      seroprevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       positivePrevalence: undefined,
       positivePrevalence95CILower: undefined,
       positivePrevalence95CIUpper: undefined,
+      positivePrevalenceCalculated95CILower: undefined,
+      positivePrevalenceCalculated95CIUpper: undefined,
       ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,
@@ -208,9 +248,13 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       seroprevalence: undefined,
       seroprevalence95CILower: undefined,
       seroprevalence95CIUpper: undefined,
+      seroprevalenceCalculated95CILower: undefined,
+      seroprevalenceCalculated95CIUpper: undefined,
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+      positivePrevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+      positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       ageGroup: [],
       animalType: animalType,
       animalSpecies: animalSpecies,

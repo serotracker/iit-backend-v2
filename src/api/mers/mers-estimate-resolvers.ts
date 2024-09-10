@@ -126,6 +126,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       seroprevalence: document.seroprevalence,
       seroprevalence95CILower: document.seroprevalence95CILower,
       seroprevalence95CIUpper: document.seroprevalence95CIUpper,
+      seroprevalenceCalculated95CILower: document.seroprevalenceCalculated95CILower,
+      seroprevalenceCalculated95CIUpper: document.seroprevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
       sampleFrame: document.sampleFrame
@@ -139,6 +141,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       seroprevalence: document.seroprevalence,
       seroprevalence95CILower: document.seroprevalence95CILower,
       seroprevalence95CIUpper: document.seroprevalence95CIUpper,
+      seroprevalenceCalculated95CILower: document.seroprevalenceCalculated95CILower,
+      seroprevalenceCalculated95CIUpper: document.seroprevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.AnimalSeroprevalence,
       animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
       animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
@@ -156,6 +160,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       positivePrevalence: document.positivePrevalence,
       positivePrevalence95CILower: document.positivePrevalence95CILower,
       positivePrevalence95CIUpper: document.positivePrevalence95CIUpper,
+      positivePrevalenceCalculated95CILower: document.positivePrevalenceCalculated95CILower,
+      positivePrevalenceCalculated95CIUpper: document.positivePrevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.HumanViral,
       ageGroup: document.ageGroup,
       sampleFrame: document.sampleFrame
@@ -169,6 +175,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       positivePrevalence: document.positivePrevalence,
       positivePrevalence95CILower: document.positivePrevalence95CILower,
       positivePrevalence95CIUpper: document.positivePrevalence95CIUpper,
+      positivePrevalenceCalculated95CILower: document.positivePrevalenceCalculated95CILower,
+      positivePrevalenceCalculated95CIUpper: document.positivePrevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.AnimalViral,
       animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies),
       animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
@@ -192,6 +200,8 @@ export const mapMersSubEstimateBaseForApi = (subestimate: MersSubEstimateBase): 
     positivePrevalence: subestimate.estimateInfo.positivePrevalence,
     positivePrevalence95CILower: subestimate.estimateInfo.positivePrevalence95CILower,
     positivePrevalence95CIUpper: subestimate.estimateInfo.positivePrevalence95CIUpper,
+    positivePrevalenceCalculated95CILower: subestimate.estimateInfo.positivePrevalenceCalculated95CILower,
+    positivePrevalenceCalculated95CIUpper: subestimate.estimateInfo.positivePrevalenceCalculated95CIUpper,
   } : {
     __typename: 'MersSeroprevalenceSubEstimateInformation',
     sampleDenominator: subestimate.estimateInfo.sampleDenominator,
@@ -199,6 +209,8 @@ export const mapMersSubEstimateBaseForApi = (subestimate: MersSubEstimateBase): 
     seroprevalence: subestimate.estimateInfo.seroprevalence,
     seroprevalence95CILower: subestimate.estimateInfo.seroprevalence95CILower,
     seroprevalence95CIUpper: subestimate.estimateInfo.seroprevalence95CIUpper,
+    seroprevalenceCalculated95CILower: subestimate.estimateInfo.seroprevalenceCalculated95CILower,
+    seroprevalenceCalculated95CIUpper: subestimate.estimateInfo.seroprevalenceCalculated95CIUpper,
   }
 })
 
