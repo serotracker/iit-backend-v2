@@ -46,7 +46,9 @@ export interface AirtableMersEstimateFields {
   'Denominator': number | null;
   'Numerator': number | null;
   'Prevalence 95% CI Lower': number | null;
+  'Prevalence 95% CI Lower (calculated)': number;
   'Prevalence 95% CI Upper': number | null;
+  'Prevalence 95% CI Upper (calculated)': number;
   'Sensitivity': number | null;
   'Sensitivity, 95% CI Lower': number | null;
   'Sensitivity, 95% CI Upper': number | null;

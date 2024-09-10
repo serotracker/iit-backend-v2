@@ -208,6 +208,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       seroprevalence: estimate.seroprevalence,
       seroprevalence95CILower: estimate.seroprevalence95CILower,
       seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
+      seroprevalenceCalculated95CILower: estimate.seroprevalenceCalculated95CILower,
+      seroprevalenceCalculated95CIUpper: estimate.seroprevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
       sampleFrame: estimate.sampleFrame,
     }
@@ -220,6 +222,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+      positivePrevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+      positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
       sampleFrame: estimate.sampleFrame,
     }
@@ -232,6 +236,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       seroprevalence: estimate.seroprevalence,
       seroprevalence95CILower: estimate.seroprevalence95CILower,
       seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
+      seroprevalenceCalculated95CILower: estimate.seroprevalenceCalculated95CILower,
+      seroprevalenceCalculated95CIUpper: estimate.seroprevalenceCalculated95CIUpper,
       animalSpecies: estimate.animalSpecies,
       animalType: estimate.animalType,
       animalDetectionSettings: estimate.animalDetectionSettings,
@@ -248,6 +254,8 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       positivePrevalence: estimate.positivePrevalence,
       positivePrevalence95CILower: estimate.positivePrevalence95CILower,
       positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+      positivePrevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+      positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       animalSpecies: estimate.animalSpecies,
       animalType: estimate.animalType,
       animalDetectionSettings: estimate.animalDetectionSettings,
@@ -289,10 +297,26 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
 });
 
 const transformMersSubEstimateBaseForDatabaseInput = (estimate: 
-  Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_SEROPREVALENCE }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'>
-  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.HUMAN_SEROPREVALENCE }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'>
-  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_VIRAL }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'>
-  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.HUMAN_VIRAL }>, 'id'|'estimateId'|'type'|'sampleDenominator'|'sampleNumerator'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'>
+  Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_SEROPREVALENCE }>,
+    'id'|'estimateId'|'type'|'sampleDenominator'|
+    'sampleNumerator'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'|
+    'seroprevalenceCalculated95CILower'|'seroprevalenceCalculated95CIUpper'
+  >
+  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.HUMAN_SEROPREVALENCE }>,
+    'id'|'estimateId'|'type'|'sampleDenominator'|
+    'sampleNumerator'|'seroprevalence'|'seroprevalence95CILower'|'seroprevalence95CIUpper'|
+    'seroprevalenceCalculated95CILower'|'seroprevalenceCalculated95CIUpper'
+  >
+  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_VIRAL }>,
+    'id'|'estimateId'|'type'|'sampleDenominator'|
+    'sampleNumerator'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'|
+    'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'
+  >
+  | Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.HUMAN_VIRAL }>,
+    'id'|'estimateId'|'type'|'sampleDenominator'|
+    'sampleNumerator'|'positivePrevalence'|'positivePrevalence95CILower'|'positivePrevalence95CIUpper'|
+    'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'
+  >
 ): MersSubEstimateBase => ({
   id: estimate.id,
   estimateId: estimate.estimateId,
@@ -301,13 +325,17 @@ const transformMersSubEstimateBaseForDatabaseInput = (estimate:
     sampleNumerator: estimate.sampleNumerator,
     seroprevalence: estimate.seroprevalence,
     seroprevalence95CILower: estimate.seroprevalence95CILower,
-    seroprevalence95CIUpper: estimate.seroprevalence95CIUpper
+    seroprevalence95CIUpper: estimate.seroprevalence95CIUpper,
+    seroprevalenceCalculated95CILower: estimate.seroprevalenceCalculated95CILower,
+    seroprevalenceCalculated95CIUpper: estimate.seroprevalenceCalculated95CIUpper
   } : {
     sampleDenominator: estimate.sampleDenominator,
     sampleNumerator: estimate.sampleNumerator,
     positivePrevalence: estimate.positivePrevalence,
     positivePrevalence95CILower: estimate.positivePrevalence95CILower,
-    positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper
+    positivePrevalence95CIUpper: estimate.positivePrevalence95CIUpper,
+    positivePrevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
+    positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper
   }
 })
 

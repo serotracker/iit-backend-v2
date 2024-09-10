@@ -91,9 +91,13 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
     'Prevalence 95% CI Lower': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
+    'Prevalence 95% CI Lower (calculated)': z
+      .number(),
     'Prevalence 95% CI Upper': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
+    'Prevalence 95% CI Upper (calculated)': z
+      .number(),
     'Sensitivity': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),

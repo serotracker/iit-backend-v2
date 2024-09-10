@@ -719,6 +719,8 @@ export type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformatio
   seroprevalence: Scalars['Float']['output'];
   seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
   seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CILower: Scalars['Float']['output'];
+  seroprevalenceCalculated95CIUpper: Scalars['Float']['output'];
 };
 
 export type MersSexSubEstimate = MersSubEstimateInterface & {
@@ -764,6 +766,8 @@ export type MersViralSubEstimateInformation = MersSubEstimateInformationInterfac
   positivePrevalence: Scalars['Float']['output'];
   positivePrevalence95CILower?: Maybe<Scalars['Float']['output']>;
   positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  positivePrevalenceCalculated95CILower: Scalars['Float']['output'];
+  positivePrevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
 };
@@ -881,6 +885,8 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   seroprevalence: Scalars['Float']['output'];
   seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
   seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CILower: Scalars['Float']['output'];
+  seroprevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
   sourceTitle: Scalars['String']['output'];
@@ -936,6 +942,8 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   positivePrevalence: Scalars['Float']['output'];
   positivePrevalence95CILower?: Maybe<Scalars['Float']['output']>;
   positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  positivePrevalenceCalculated95CILower: Scalars['Float']['output'];
+  positivePrevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
   samplingEndDate?: Maybe<Scalars['String']['output']>;
@@ -1009,6 +1017,8 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   seroprevalence: Scalars['Float']['output'];
   seroprevalence95CILower?: Maybe<Scalars['Float']['output']>;
   seroprevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CILower: Scalars['Float']['output'];
+  seroprevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
   sourceTitle: Scalars['String']['output'];
@@ -1059,6 +1069,8 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   positivePrevalence: Scalars['Float']['output'];
   positivePrevalence95CILower?: Maybe<Scalars['Float']['output']>;
   positivePrevalence95CIUpper?: Maybe<Scalars['Float']['output']>;
+  positivePrevalenceCalculated95CILower: Scalars['Float']['output'];
+  positivePrevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleFrame?: Maybe<Scalars['String']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
@@ -2159,6 +2171,8 @@ export type MersSeroprevalenceSubEstimateInformationResolvers<ContextType = any,
   seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2208,6 +2222,8 @@ export type MersViralSubEstimateInformationResolvers<ContextType = any, ParentTy
   positivePrevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   positivePrevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  positivePrevalenceCalculated95CILower?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -2294,6 +2310,8 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2349,6 +2367,8 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   positivePrevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   positivePrevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  positivePrevalenceCalculated95CILower?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2422,6 +2442,8 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   seroprevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   seroprevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2472,6 +2494,8 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   positivePrevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   positivePrevalence95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   positivePrevalence95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  positivePrevalenceCalculated95CILower?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  positivePrevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
