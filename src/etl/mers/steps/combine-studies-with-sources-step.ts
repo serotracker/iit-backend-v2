@@ -1,32 +1,32 @@
 import { MongoClient } from "mongodb";
 import {
-  CountryFieldsAfterParsingDatesStep,
-    CountryPopulationDataAfterParsingDatesStep,
-  EstimateFieldsAfterParsingDatesStep,
-  FaoMersEventAfterParsingDatesStep,
-  SourceFieldsAfterParsingDatesStep,
-  StudyFieldsAfterParsingDatesStep,
-  YearlyCamelPopulationDataAfterParsingDatesStep
-} from "./parse-dates-step";
+  CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
+  CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep,
+  EstimateFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
+  FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep,
+  SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
+  StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
+  YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep
+} from "./derive-sample-denominator-and-numerator-step";
 
-export type EstimateFieldsAfterCombiningStudiesWithSourcesStep = EstimateFieldsAfterParsingDatesStep;
-export type SourceFieldsAfterCombiningStudiesWithSourcesStep = SourceFieldsAfterParsingDatesStep;
-export type StudyFieldsAfterCombiningStudiesWithSourcesStep = StudyFieldsAfterParsingDatesStep & {
-  source: SourceFieldsAfterParsingDatesStep;
+export type EstimateFieldsAfterCombiningStudiesWithSourcesStep = EstimateFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
+export type SourceFieldsAfterCombiningStudiesWithSourcesStep = SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
+export type StudyFieldsAfterCombiningStudiesWithSourcesStep = StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep & {
+  source: SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
 };
-export type CountryFieldsAfterCombiningStudiesWithSourcesStep = CountryFieldsAfterParsingDatesStep;
-export type FaoMersEventAfterCombiningStudiesWithSourcesStep = FaoMersEventAfterParsingDatesStep;
-export type YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep = YearlyCamelPopulationDataAfterParsingDatesStep;
-export type CountryPopulationDataAfterCombiningStudiesWithSourcesStep = CountryPopulationDataAfterParsingDatesStep;
+export type CountryFieldsAfterCombiningStudiesWithSourcesStep = CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
+export type FaoMersEventAfterCombiningStudiesWithSourcesStep = FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep;
+export type YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep = YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep;
+export type CountryPopulationDataAfterCombiningStudiesWithSourcesStep = CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep;
 
 interface CombineStudiesWithSourcesStepInput {
-  allEstimates: EstimateFieldsAfterParsingDatesStep[];
-  allSources: SourceFieldsAfterParsingDatesStep[];
-  allStudies: StudyFieldsAfterParsingDatesStep[];
-  allCountries: CountryFieldsAfterParsingDatesStep[];
-  allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
-  countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
+  allEstimates: EstimateFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
+  allSources: SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
+  allStudies: StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
+  allCountries: CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
+  allFaoMersEvents: FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
+  countryPopulationData: CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   mongoClient: MongoClient;
 }
 
