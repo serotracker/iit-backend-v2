@@ -35,6 +35,7 @@ import { writeGroupedEstimateDataToMongodbStep } from "./steps/write-grouped-est
 import { filterInvalidSubestimatesStep } from "./steps/filter-invalid-subestimates-step.js";
 import { sortSubestimatesStep } from "./steps/sort-subestimates-step.js";
 import { generateEstimateGeoJSONFileStep } from "./steps/generate-estimate-geojson-file-step.js";
+import { deriveSampleDenominatorAndNumeratorStep } from "./steps/derive-sample-denominator-and-numerator-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -114,6 +115,7 @@ const runEtlMain = async () => {
     etlStep(fetchCountryPopulationDataStep),
     etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
+    etlStep(deriveSampleDenominatorAndNumeratorStep),
     etlStep(combineStudiesWithSourcesStep),
     etlStep(combineEstimatesWithStudiesStep),
     etlStep(addCountryAndRegionInformationStep),
