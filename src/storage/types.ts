@@ -465,9 +465,11 @@ type MersOccupationSubEstimate = MersSubEstimateBase & {
 
 type MersAnimalSourceLocationSubEstimate = MersSubEstimateBase & {
   animalImportedOrLocal: string;
-  animalCountryOfImport: string;
-  animalCountryOfImportAlphaTwoCode: string;
-  animalCountryOfImportAlphaThreeCode: string;
+  animalCountriesOfImport: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 type MersAnimalSamplingContextSubEstimate = MersSubEstimateBase & {

@@ -304,9 +304,14 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersAnimalSourceLocationSubEstimate' as const,
         animalImportedOrLocal: subestimate.animalImportedOrLocal,
-        animalCountryOfImport: subestimate.animalCountryOfImport,
-        animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImportAlphaTwoCode,
-        animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImportAlphaThreeCode,
+        animalCountryOfImport: subestimate.animalCountriesOfImport.at(0)?.country ?? 'Unknown',
+        animalCountryOfImportAlphaTwoCode: subestimate.animalCountriesOfImport.at(0)?.countryAlphaTwoCode ?? 'CA',
+        animalCountryOfImportAlphaThreeCode: subestimate.animalCountriesOfImport.at(0)?.countryAlphaThreeCode ?? 'CAN',
+        animalCountriesOfImport: subestimate.animalCountriesOfImport.map((element) => ({
+          name: element.country,
+          alphaTwoCode: element.countryAlphaTwoCode,
+          alphaThreeCode: element.countryAlphaThreeCode
+        }))
       })),
       animalSamplingContextSubestimates: primaryEstimate.animalSamplingContextSubestimates.map((subestimate) => ({
         ...mapMersSubEstimateBaseForApi(subestimate),

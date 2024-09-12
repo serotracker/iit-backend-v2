@@ -68,6 +68,7 @@ export interface AirtableMersEstimateFields {
   'Animal purpose': string | null;
   'Imported or Local': Array<string | null>;
   'Country of Import': Array<string | null>;
+  'Country of travel': Array<string | null>;
   'Sample Frame (Human)': string | null;
   'Producer': Array<string | null>;
   'Producer - Other': string | null;

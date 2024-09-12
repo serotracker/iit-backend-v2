@@ -18,13 +18,20 @@ export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateF
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   whoRegion: WHORegion | undefined;
   unRegion: UNRegion | undefined;
-  animalCountryOfImport: {
+  animalCountriesOfImport: Array<{
     country: string;
     countryAlphaTwoCode: TwoLetterIsoCountryCode;
     countryAlphaThreeCode: ThreeLetterIsoCountryCode;
     whoRegion: WHORegion | undefined;
     unRegion: UNRegion | undefined;
-  } | undefined;
+  }>;
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+    whoRegion: WHORegion | undefined;
+    unRegion: UNRegion | undefined;
+  }>;
 };
 
 export type SourceFieldsAfterAddingCountryAndRegionInformationStep = SourceFieldsAfterCombiningEstimatesWithStudiesStep;
@@ -155,49 +162,94 @@ interface AddAnimalCountryOfImportInformationToEstimateInput<TMersEstimate exten
   allCountries: CountryFieldsAfterCombiningEstimatesWithStudiesStep[];
 }
 
-export const addAnimalCountryOfImportInformationToEstimate = <
+export const addAnimalCountriesOfImportInformationToEstimate = <
   TMersEstimate extends EstimateFieldsAfterCombiningEstimatesWithStudiesStep
 >(input: AddAnimalCountryOfImportInformationToEstimateInput<TMersEstimate>): TMersEstimate & ({
-  animalCountryOfImport: {
+  animalCountriesOfImport: Array<{
     country: string;
     countryAlphaTwoCode: TwoLetterIsoCountryCode;
     countryAlphaThreeCode: ThreeLetterIsoCountryCode;
     whoRegion: WHORegion | undefined;
     unRegion: UNRegion | undefined;
-  }
-} | {
-  animalCountryOfImport: undefined;
+  }>
 }) => {
-  const countryOfImportId = input.estimate.animalCountryOfImportId;
+  const animalCountriesOfImport = input.estimate.animalCountryOfImportIds
+    .map((countryOfImportId) => {
+      if(!countryOfImportId) {
+        return undefined;
+      }
 
-  if(!countryOfImportId) {
-    return {
-      ...input.estimate,
-      animalCountryOfImport: undefined
-    }
-  }
+      const countryOfImport = input.allCountries.find((country) => country.id === countryOfImportId);
 
-  const countryOfImport = input.allCountries.find((country) => country.id === input.estimate.animalCountryOfImportId);
+      if(!countryOfImport) {
+        return undefined;
+      }
 
-  if(!countryOfImport) {
-    return {
-      ...input.estimate,
-      animalCountryOfImport: undefined
-    }
-  }
+      const whoRegion = getWHORegionFromAlphaTwoCode(countryOfImport.countryAlphaTwoCode);
+      const unRegion = getUNRegionFromAlphaTwoCode(countryOfImport.countryAlphaTwoCode);
 
-  const whoRegion = getWHORegionFromAlphaTwoCode(countryOfImport.countryAlphaTwoCode);
-  const unRegion = getUNRegionFromAlphaTwoCode(countryOfImport.countryAlphaTwoCode);
-
+      return {
+        country: countryOfImport.countryName,
+        countryAlphaTwoCode: countryOfImport.countryAlphaTwoCode,
+        countryAlphaThreeCode: countryOfImport.countryAlphaThreeCode,
+        whoRegion,
+        unRegion,
+      }
+    })
+    .filter((element): element is NonNullable<typeof element> => !!element)
+    .sort((countryA, countryB) => countryA.country > countryB.country ? 1 : -1);
+  
   return {
     ...input.estimate,
-    animalCountryOfImport: {
-      country: countryOfImport.countryName,
-      countryAlphaTwoCode: countryOfImport.countryAlphaTwoCode,
-      countryAlphaThreeCode: countryOfImport.countryAlphaThreeCode,
-      whoRegion,
-      unRegion,
-    }
+    animalCountriesOfImport
+  }
+}
+
+interface AddHumanCountriesOfTravelInformationToEstimateInput<TMersEstimate extends EstimateFieldsAfterCombiningEstimatesWithStudiesStep> {
+  estimate: TMersEstimate;
+  allCountries: CountryFieldsAfterCombiningEstimatesWithStudiesStep[];
+}
+
+export const addHumanCountriesOfTravelInformationToEstimate = <
+  TMersEstimate extends EstimateFieldsAfterCombiningEstimatesWithStudiesStep
+>(input: AddHumanCountriesOfTravelInformationToEstimateInput<TMersEstimate>): TMersEstimate & ({
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+    whoRegion: WHORegion | undefined;
+    unRegion: UNRegion | undefined;
+  }>
+}) => {
+  const humanCountriesOfTravel = input.estimate.humanCountryOfTravelIds
+    .map((countryOfTravelId) => {
+      if(!countryOfTravelId) {
+        return undefined;
+      }
+
+      const countryOfTravel = input.allCountries.find((country) => country.id === countryOfTravelId);
+
+      if(!countryOfTravel) {
+        return undefined;
+      }
+
+      const whoRegion = getWHORegionFromAlphaTwoCode(countryOfTravel.countryAlphaTwoCode);
+      const unRegion = getUNRegionFromAlphaTwoCode(countryOfTravel.countryAlphaTwoCode);
+
+      return {
+        country: countryOfTravel.countryName,
+        countryAlphaTwoCode: countryOfTravel.countryAlphaTwoCode,
+        countryAlphaThreeCode: countryOfTravel.countryAlphaThreeCode,
+        whoRegion,
+        unRegion,
+      }
+    })
+    .filter((element): element is NonNullable<typeof element> => !!element)
+    .sort((countryA, countryB) => countryA.country > countryB.country ? 1 : -1);
+  
+  return {
+    ...input.estimate,
+    humanCountriesOfTravel
   }
 }
 
@@ -210,7 +262,8 @@ export const addCountryAndRegionInformationStep = (
     allEstimates: input.allEstimates
       .map((estimate) => addCountryInformationToEstimate({ estimate, allCountries: input.allCountries }))
       .filter((estimate): estimate is Extract<typeof estimate, { country: string }> => !!estimate.country && typeof estimate.country === 'string')
-      .map((estimate) => addAnimalCountryOfImportInformationToEstimate({ estimate, allCountries: input.allCountries })),
+      .map((estimate) => addAnimalCountriesOfImportInformationToEstimate({ estimate, allCountries: input.allCountries }))
+      .map((estimate) => addHumanCountriesOfTravelInformationToEstimate({ estimate, allCountries: input.allCountries })),
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,

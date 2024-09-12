@@ -453,8 +453,12 @@ export type MersAnimalSamplingContextSubEstimate = MersSubEstimateInterface & {
 
 export type MersAnimalSourceLocationSubEstimate = MersSubEstimateInterface & {
   __typename?: 'MersAnimalSourceLocationSubEstimate';
+  animalCountriesOfImport: Array<CountryIdentifiers>;
+  /** @deprecated use animalCountriesOfImport instead */
   animalCountryOfImport: Scalars['String']['output'];
+  /** @deprecated use animalCountriesOfImport instead */
   animalCountryOfImportAlphaThreeCode: Scalars['String']['output'];
+  /** @deprecated use animalCountriesOfImport instead */
   animalCountryOfImportAlphaTwoCode: Scalars['String']['output'];
   animalImportedOrLocal: Scalars['String']['output'];
   estimateId: Scalars['String']['output'];
@@ -1962,6 +1966,7 @@ export type MersAnimalSamplingContextSubEstimateResolvers<ContextType = any, Par
 };
 
 export type MersAnimalSourceLocationSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAnimalSourceLocationSubEstimate'] = ResolversParentTypes['MersAnimalSourceLocationSubEstimate']> = {
+  animalCountriesOfImport?: Resolver<Array<ResolversTypes['CountryIdentifiers']>, ParentType, ContextType>;
   animalCountryOfImport?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   animalCountryOfImportAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   animalCountryOfImportAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
