@@ -5,7 +5,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.91931098921117, 40.596986593667964]
+        "coordinates": [34.92761486029304, 40.48825105692209]
       },
       "properties": {
         "estimateId": "091021_Turkey_HITITUniversity_Patients_Overall",
@@ -18,8 +18,8 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 40.596986593667964,
-          "longitude": 34.91931098921117,
+          "latitude": 40.48825105692209,
+          "longitude": 34.92761486029304,
           "firstAuthorFullName": "Ayşe Güreser",
           "sourcePublicationYear": 2021,
           "sourceUrl": "https://dergipark.org.tr/en/pub/omujecm/issue/64795/886425",
@@ -58,7 +58,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e25149af5232d430c9692e"
+          "id": "66e3760fbc67fecb5403a2a4"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -103,7 +103,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.203951213967635, 25.251203896616417]
+        "coordinates": [51.24448531098576, 25.357076094548763]
       },
       "properties": {
         "estimateId": "180219_Qatar_QatarUniversity_Humans_blooddonors_primary",
@@ -115,8 +115,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.251203896616417,
-          "longitude": 51.203951213967635,
+          "latitude": 25.357076094548763,
+          "longitude": 51.24448531098576,
           "firstAuthorFullName": "Reham A Al Kahlout",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.1155/2019/1386740",
@@ -154,7 +154,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Blood donors",
-          "id": "66e25149af5232d430c96931"
+          "id": "66e3760fbc67fecb5403a2a7"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -240,7 +240,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.948971289686575, 29.445089198586953]
+        "coordinates": [34.971245859502375, 29.44900383206865]
       },
       "properties": {
         "estimateId": "210915_Jordan_RoyalVeterinaryCollege_2014-2015_Serum",
@@ -253,8 +253,8 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 29.445089198586953,
-          "longitude": 34.948971289686575,
+          "latitude": 29.44900383206865,
+          "longitude": 34.971245859502375,
           "firstAuthorFullName": "Peter Holloway",
           "sourcePublicationYear": 2021,
           "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8386791/",
@@ -295,7 +295,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e25149af5232d430c96934"
+          "id": "66e3760fbc67fecb5403a2aa"
         },
         "geographicalAreaSubestimates": [
           {
@@ -312,8 +312,8 @@
             "country": "Jordan",
             "countryAlphaTwoCode": "JO",
             "countryAlphaThreeCode": "JOR",
-            "latitude": 30.217264585440738,
-            "longitude": 35.77430694758489,
+            "latitude": 30.199584452789928,
+            "longitude": 35.790982527302795,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -332,8 +332,8 @@
             "country": "Jordan",
             "countryAlphaTwoCode": "JO",
             "countryAlphaThreeCode": "JOR",
-            "latitude": 29.558558673333742,
-            "longitude": 35.02596543106904,
+            "latitude": 29.534759328790596,
+            "longitude": 35.038095140516795,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -460,7 +460,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.627784628319226, 23.392063359664167]
+        "coordinates": [44.603151044008456, 23.435068528088244]
       },
       "properties": {
         "estimateId": "211022_SaudiArabia_CHULille_Primary",
@@ -472,8 +472,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.392063359664167,
-          "longitude": 44.627784628319226,
+          "latitude": 23.435068528088244,
+          "longitude": 44.603151044008456,
           "firstAuthorFullName": "Ambroise Mercier",
           "sourcePublicationYear": 2023,
           "sourceUrl": "https://doi.org/10.1016/j.tmaid.2022.102482",
@@ -513,7 +513,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c96937"
+          "id": "66e3760fbc67fecb5403a2ad"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -601,7 +601,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [54.37299980336076, 24.523129125572257]
+        "coordinates": [54.38131411725747, 24.401308394867414]
       },
       "properties": {
         "estimateId": "160629_AbuDhabi_AbuDhabiFoodControlAuthority_Camels",
@@ -614,8 +614,8 @@
           "countryAlphaThreeCode": "ARE",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.523129125572257,
-          "longitude": 54.37299980336076,
+          "latitude": 24.401308394867414,
+          "longitude": 54.38131411725747,
           "firstAuthorFullName": "Salama Al Muhairi",
           "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1007/s11262-016-1367-1",
@@ -650,7 +650,7 @@
           "animalDetectionSettings": ["Farms"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c9693a"
+          "id": "66e3760fbc67fecb5403a2b0"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -683,7 +683,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [31.176353611116262, 30.00545022208554]
+        "coordinates": [31.284637210921506, 29.984044057989408]
       },
       "properties": {
         "estimateId": "130905_Egypt_StJudeChildrensResearchHospital_Camels",
@@ -696,8 +696,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 30.00545022208554,
-          "longitude": 31.176353611116262,
+          "latitude": 29.984044057989408,
+          "longitude": 31.284637210921506,
           "firstAuthorFullName": "R A Perera",
           "sourcePublicationYear": 2013,
           "sourceUrl": "https://doi.org/10.2807/1560-7917.es2013.18.36.20574",
@@ -732,7 +732,7 @@
           "animalDetectionSettings": ["Abattoirs"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c9693d"
+          "id": "66e3760fbc67fecb5403a2b3"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -814,7 +814,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.95232718793151, 0.5625817506288626]
+        "coordinates": [37.84710076975, 0.5870302077056344]
       },
       "properties": {
         "estimateId": "181220_Kenya_ ChineseAcademyofSciences_Camels_OverallSeroprev",
@@ -826,8 +826,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5625817506288626,
-          "longitude": 37.95232718793151,
+          "latitude": 0.5870302077056344,
+          "longitude": 37.84710076975,
           "firstAuthorFullName": "Sheila Ommeh",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0076-4",
@@ -869,7 +869,7 @@
           "animalDetectionSettings": ["Free-roaming herds"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c96940"
+          "id": "66e3760fbc67fecb5403a2b6"
         },
         "geographicalAreaSubestimates": [
           {
@@ -888,8 +888,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.43959144714033116,
-            "longitude": 37.90876100202168,
+            "latitude": 0.47208877025129126,
+            "longitude": 37.93719700115805,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -910,8 +910,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5079307459336003,
-            "longitude": 37.94518758831097,
+            "latitude": 0.5678132903941724,
+            "longitude": 37.86929162277528,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -932,8 +932,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.6089360597404267,
-            "longitude": 37.91353101414121,
+            "latitude": 0.5698063561067628,
+            "longitude": 37.94021187932984,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -954,8 +954,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5342696924093098,
-            "longitude": 37.791081379456706,
+            "latitude": 0.5529086671323508,
+            "longitude": 37.865414140139315,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -976,8 +976,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.6292723692221168,
-            "longitude": 37.89561527575606,
+            "latitude": 0.5002195075561157,
+            "longitude": 37.88404212980917,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -998,8 +998,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.43559038229538294,
-            "longitude": 37.853282499456824,
+            "latitude": 0.5896992024449866,
+            "longitude": 37.784872668711905,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1020,8 +1020,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.6203657800561293,
-            "longitude": 37.772029436521834,
+            "latitude": 0.4362277408557593,
+            "longitude": 37.90153578135954,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1042,8 +1042,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5394897406755325,
-            "longitude": 37.81076467654079,
+            "latitude": 0.5105886696173959,
+            "longitude": 37.898829353759105,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1064,8 +1064,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.4571000576880395,
-            "longitude": 37.776891072904114,
+            "latitude": 0.48305675994104524,
+            "longitude": 37.91730799503941,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1086,8 +1086,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.4519226486907739,
-            "longitude": 37.87785334942793,
+            "latitude": 0.5689789904251903,
+            "longitude": 37.89780290608142,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1108,8 +1108,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5197081373048648,
-            "longitude": 37.801062134576355,
+            "latitude": 0.5465764341361241,
+            "longitude": 37.93160964581726,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1130,8 +1130,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5839495563323415,
-            "longitude": 37.92659676415063,
+            "latitude": 0.4528048115087091,
+            "longitude": 37.86606340925284,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1152,8 +1152,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5379459464129798,
-            "longitude": 37.780218299263545,
+            "latitude": 0.4927777286872472,
+            "longitude": 37.953110119817346,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1257,7 +1257,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.06109878340922, 11.755268884204703]
+        "coordinates": [41.0741099214157, 11.723455959198573]
       },
       "properties": {
         "estimateId": "190618_Afar_NihonUniversity_Serum",
@@ -1270,8 +1270,8 @@
           "countryAlphaThreeCode": "ETH",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 11.755268884204703,
-          "longitude": 41.06109878340922,
+          "latitude": 11.723455959198573,
+          "longitude": 41.0741099214157,
           "firstAuthorFullName": "Kazuya Shirato",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.3389/fmicb.2019.01326",
@@ -1306,7 +1306,7 @@
           "animalDetectionSettings": ["Not reported"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)", "Juvenile (6 months-2 years)"],
-          "id": "66e25149af5232d430c96943"
+          "id": "66e3760fbc67fecb5403a2b9"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1326,7 +1326,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.33224165877737, 14.88119601929971]
+        "coordinates": [33.45064274015245, 14.955963310284634]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Humans_2015",
@@ -1339,8 +1339,8 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.88119601929971,
-          "longitude": 33.33224165877737,
+          "latitude": 14.955963310284634,
+          "longitude": 33.45064274015245,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -1373,7 +1373,7 @@
           "seroprevalenceCalculated95CIUpper": 0.2849141529,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Multiple populations",
-          "id": "66e25149af5232d430c96946"
+          "id": "66e3760fbc67fecb5403a2bc"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1407,7 +1407,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.28988202101836, 25.320197894198422]
+        "coordinates": [51.1698214240407, 25.347770031312187]
       },
       "properties": {
         "estimateId": "140606_Qatar_ErasmusMedicalCenter_Camels_Nasal",
@@ -1420,8 +1420,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.320197894198422,
-          "longitude": 51.28988202101836,
+          "latitude": 25.347770031312187,
+          "longitude": 51.1698214240407,
           "firstAuthorFullName": "C B Reusken",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES2014.19.23.20829 ",
@@ -1456,7 +1456,7 @@
           "animalPurpose": "Milking",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c96949"
+          "id": "66e3760fbc67fecb5403a2bf"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1489,7 +1489,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.92561286231413, 0.6074816721852826]
+        "coordinates": [37.896386586171005, 0.5324525114430434]
       },
       "properties": {
         "estimateId": "210311_MarsabitCounty_WashingtonStateUniversity_Humans",
@@ -1502,8 +1502,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.6074816721852826,
-          "longitude": 37.92561286231413,
+          "latitude": 0.5324525114430434,
+          "longitude": 37.896386586171005,
           "firstAuthorFullName": "Peninah Munyua",
           "sourcePublicationYear": 2021,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/27/4/20-4458_article",
@@ -1543,7 +1543,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e25149af5232d430c9694c"
+          "id": "66e3760fbc67fecb5403a2c2"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1563,7 +1563,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [90.02138263924675, 24.32861421534313]
+        "coordinates": [90.08868566656756, 24.281418703941014]
       },
       "properties": {
         "estimateId": "160118_Bangladesh_DiseaseControlandResearch_primary",
@@ -1575,8 +1575,8 @@
           "countryAlphaThreeCode": "BGD",
           "whoRegion": "SEAR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 24.32861421534313,
-          "longitude": 90.02138263924675,
+          "latitude": 24.281418703941014,
+          "longitude": 90.08868566656756,
           "firstAuthorFullName": "A. K. M. Muraduzzaman",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1371/journal.pone.0189914",
@@ -1620,7 +1620,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e25149af5232d430c9694f"
+          "id": "66e3760fbc67fecb5403a2c5"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -1710,7 +1710,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.3577055197297, 14.906458983274396]
+        "coordinates": [33.522496206777525, 14.901520549548971]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Slaughterhouse_Nasal",
@@ -1723,8 +1723,8 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.906458983274396,
-          "longitude": 33.3577055197297,
+          "latitude": 14.901520549548971,
+          "longitude": 33.522496206777525,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -1759,7 +1759,7 @@
           "animalPurpose": "Meat",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c96952"
+          "id": "66e3760fbc67fecb5403a2c8"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1779,7 +1779,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-119.7178046893465, 36.98146535788031]
+        "coordinates": [-119.74628404688046, 37.10486316523412]
       },
       "properties": {
         "estimateId": "210915_California_CaliforniaDepartmentofPublicHealth_Mol",
@@ -1792,8 +1792,8 @@
           "countryAlphaThreeCode": "USA",
           "whoRegion": "AMR",
           "unRegion": "NORTHERN_AMERICA",
-          "latitude": 36.98146535788031,
-          "longitude": -119.7178046893465,
+          "latitude": 37.10486316523412,
+          "longitude": -119.74628404688046,
           "firstAuthorFullName": "Mahtab Shahkarami",
           "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.3201%2Feid2109.150476",
@@ -1834,7 +1834,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c96955"
+          "id": "66e3760fbc67fecb5403a2cb"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1854,7 +1854,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.328056919275426, 15.002703575207596]
+        "coordinates": [33.37263273629749, 14.909357052546763]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Market_Nasal",
@@ -1867,8 +1867,8 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 15.002703575207596,
-          "longitude": 33.328056919275426,
+          "latitude": 14.909357052546763,
+          "longitude": 33.37263273629749,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -1903,7 +1903,7 @@
           "animalPurpose": "Meat and milk",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c96958"
+          "id": "66e3760fbc67fecb5403a2ce"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1923,7 +1923,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [46.80423507505654, 24.671845714896826]
+        "coordinates": [46.6587816571515, 24.69125259498067]
       },
       "properties": {
         "estimateId": "301018_SaudiArabia_KingSaudUniversity_BloodDonors",
@@ -1937,8 +1937,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.671845714896826,
-          "longitude": 46.80423507505654,
+          "latitude": 24.69125259498067,
+          "longitude": 46.6587816571515,
           "firstAuthorFullName": "Abeer N Alshukairi",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1128/mbio.01985-18",
@@ -1972,7 +1972,7 @@
           "seroprevalenceCalculated95CIUpper": 0.1543725128,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Blood donors",
-          "id": "66e25149af5232d430c9695b"
+          "id": "66e3760fbc67fecb5403a2d1"
         },
         "geographicalAreaSubestimates": [
           {
@@ -1989,8 +1989,8 @@
             "country": "Saudi Arabia",
             "countryAlphaTwoCode": "SA",
             "countryAlphaThreeCode": "SAU",
-            "latitude": 24.585739736449984,
-            "longitude": 46.744858809369646,
+            "latitude": 24.65755251737066,
+            "longitude": 46.620152551459434,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -2009,8 +2009,8 @@
             "country": "United States of America",
             "countryAlphaTwoCode": "US",
             "countryAlphaThreeCode": "USA",
-            "latitude": 42.018584234044226,
-            "longitude": -93.41978617833207,
+            "latitude": 42.169182732496,
+            "longitude": -93.58062596746213,
             "whoRegion": "AMR",
             "unRegion": "NORTHERN_AMERICA",
             "geographicScope": "Regional"
@@ -2033,7 +2033,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.610537960840695, 33.78353280255899]
+        "coordinates": [44.55394734489567, 33.687135613198606]
       },
       "properties": {
         "estimateId": "220810_Diyala_UniversityofDiyala_Humans",
@@ -2046,8 +2046,8 @@
           "countryAlphaThreeCode": "IRQ",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 33.78353280255899,
-          "longitude": 44.610537960840695,
+          "latitude": 33.687135613198606,
+          "longitude": 44.55394734489567,
           "firstAuthorFullName": "Abdulrazak Hasan",
           "sourcePublicationYear": 2022,
           "sourceUrl": "https://journals.tubitak.gov.tr/medical/vol52/iss4/5/",
@@ -2085,7 +2085,7 @@
           "seroprevalenceCalculated95CIUpper": 0.6180125137,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Multiple populations",
-          "id": "66e25149af5232d430c9695e"
+          "id": "66e3760fbc67fecb5403a2d4"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -2229,7 +2229,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.4328006229298, 15.015795880022553]
+        "coordinates": [33.469954674433666, 14.958217512355468]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Slaughterhouse_Serum",
@@ -2242,8 +2242,8 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 15.015795880022553,
-          "longitude": 33.4328006229298,
+          "latitude": 14.958217512355468,
+          "longitude": 33.469954674433666,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -2279,7 +2279,7 @@
           "animalPurpose": "Meat",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c96961"
+          "id": "66e3760fbc67fecb5403a2d7"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -2362,7 +2362,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.665737865273876, 23.338312899986335]
+        "coordinates": [44.612167336863386, 23.32367114885412]
       },
       "properties": {
         "estimateId": "010520_SaudiArabia_KingAbdulazizUniversity_Primary",
@@ -2375,8 +2375,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.338312899986335,
-          "longitude": 44.665737865273876,
+          "latitude": 23.32367114885412,
+          "longitude": 44.612167336863386,
           "firstAuthorFullName": "Afnan A Degnah",
           "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1016/j.jiph.2020.01.001",
@@ -2422,7 +2422,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Blood donors",
-          "id": "66e25149af5232d430c96964"
+          "id": "66e3760fbc67fecb5403a2da"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -2620,7 +2620,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.54932901683901, 25.34563745119204]
+        "coordinates": [51.45528752376721, 25.344991428167642]
       },
       "properties": {
         "estimateId": "150715_Doha_ErasmusMedicalCenter_Nasal",
@@ -2633,8 +2633,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.34563745119204,
-          "longitude": 51.54932901683901,
+          "latitude": 25.344991428167642,
+          "longitude": 51.45528752376721,
           "firstAuthorFullName": "Elmoubasher A. B. A. Farag",
           "sourcePublicationYear": 2015,
           "sourceUrl": "https://www.tandfonline.com/doi/full/10.3402/iee.v5.28305 ",
@@ -2673,7 +2673,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e25149af5232d430c96967"
+          "id": "66e3760fbc67fecb5403a2dd"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -2785,7 +2785,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.940601939643614, 29.456732578180674]
+        "coordinates": [35.094769814745625, 29.54457977871075]
       },
       "properties": {
         "estimateId": "210915_Jordan_RoyalVeterinaryCollege_2017-2018_Nasal",
@@ -2798,8 +2798,8 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 29.456732578180674,
-          "longitude": 34.940601939643614,
+          "latitude": 29.54457977871075,
+          "longitude": 35.094769814745625,
           "firstAuthorFullName": "Peter Holloway",
           "sourcePublicationYear": 2021,
           "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8386791/",
@@ -2839,7 +2839,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e25149af5232d430c9696a"
+          "id": "66e3760fbc67fecb5403a2e0"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -2859,7 +2859,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.656323759111956, 23.43696660260381]
+        "coordinates": [44.61016738837899, 23.433725077373964]
       },
       "properties": {
         "estimateId": "180507_SaudiArabia_UniversityofHongKong_Serum",
@@ -2871,8 +2871,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.43696660260381,
-          "longitude": 44.656323759111956,
+          "latitude": 23.433725077373964,
+          "longitude": 44.61016738837899,
           "firstAuthorFullName": "Samy Kasem",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1016/j.jiph.2017.09.022",
@@ -2911,7 +2911,7 @@
           "animalPurpose": "Not reported",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c9696d"
+          "id": "66e3760fbc67fecb5403a2e3"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -2931,7 +2931,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.56903756212613, 23.397881197146035]
+        "coordinates": [44.66822574722529, 23.400869200926792]
       },
       "properties": {
         "estimateId": "131214_SaudiArabia_GlobalCentreforMassGatheringsMedicine_Patients_primary",
@@ -2943,8 +2943,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.397881197146035,
-          "longitude": 44.56903756212613,
+          "latitude": 23.400869200926792,
+          "longitude": 44.66822574722529,
           "firstAuthorFullName": "Z.A. Memish",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://doi.org/10.1111/1469-0691.12562",
@@ -2985,7 +2985,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c96970"
+          "id": "66e3760fbc67fecb5403a2e6"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -3067,7 +3067,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.76973390757384, 28.187273574397775]
+        "coordinates": [67.62990755404691, 28.241696034813888]
       },
       "properties": {
         "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum",
@@ -3079,8 +3079,8 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.187273574397775,
-          "longitude": 67.76973390757384,
+          "latitude": 28.241696034813888,
+          "longitude": 67.62990755404691,
           "firstAuthorFullName": "Ali Zohaib",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
@@ -3123,7 +3123,7 @@
           "animalPurpose": "Multiple purposes",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c96973"
+          "id": "66e3760fbc67fecb5403a2e9"
         },
         "geographicalAreaSubestimates": [
           {
@@ -3142,8 +3142,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 30.20331449321104,
-            "longitude": 66.92494234167536,
+            "latitude": 30.128700194318316,
+            "longitude": 66.92878617214639,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3164,8 +3164,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 33.97710620245406,
-            "longitude": 71.52228402669778,
+            "latitude": 33.91390689529407,
+            "longitude": 71.60655781461931,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3186,8 +3186,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 31.553631257282202,
-            "longitude": 74.40428471367271,
+            "latitude": 31.6103817497605,
+            "longitude": 74.27302254212319,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3208,8 +3208,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 24.767544172404776,
-            "longitude": 66.99498024964454,
+            "latitude": 24.834816912597027,
+            "longitude": 67.06106896942414,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3307,7 +3307,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.76454367272589, 0.5748643389762809]
+        "coordinates": [37.885794048348814, 0.4851459439286673]
       },
       "properties": {
         "estimateId": "181220_Kenya_ ChineseAcademyofSciences_Camels_OverallMolecular",
@@ -3319,8 +3319,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5748643389762809,
-          "longitude": 37.76454367272589,
+          "latitude": 0.4851459439286673,
+          "longitude": 37.885794048348814,
           "firstAuthorFullName": "Sheila Ommeh",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0076-4",
@@ -3361,7 +3361,7 @@
           "animalDetectionSettings": ["Free-roaming herds"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c96976"
+          "id": "66e3760fbc67fecb5403a2ec"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -3427,7 +3427,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [46.69868325262924, 24.65093723552044]
+        "coordinates": [46.81376241798759, 24.608274366406597]
       },
       "properties": {
         "estimateId": "301018_SaudiArabia_KingSaudUniversity_CamelWorkers_Primary",
@@ -3441,8 +3441,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.65093723552044,
-          "longitude": 46.69868325262924,
+          "latitude": 24.608274366406597,
+          "longitude": 46.81376241798759,
           "firstAuthorFullName": "Abeer N Alshukairi",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1128/mbio.01985-18",
@@ -3476,7 +3476,7 @@
           "seroprevalenceCalculated95CIUpper": 0.6870297141,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e25149af5232d430c96979"
+          "id": "66e3760fbc67fecb5403a2ef"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -3509,7 +3509,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.938891322941153, 26.520327800037204]
+        "coordinates": [29.83589414042987, 26.426098811818377]
       },
       "properties": {
         "estimateId": "191001_Egypt_AssiutUniversity_Humans",
@@ -3522,8 +3522,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 26.520327800037204,
-          "longitude": 29.938891322941153,
+          "latitude": 26.426098811818377,
+          "longitude": 29.83589414042987,
           "firstAuthorFullName": "Amal SM Saye",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://jidc.org/index.php/journal/article/view/32146454/2206 ",
@@ -3559,7 +3559,7 @@
           "seroprevalenceCalculated95CIUpper": 0.4487154515,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Camel traders",
-          "id": "66e25149af5232d430c9697c"
+          "id": "66e3760fbc67fecb5403a2f2"
         },
         "geographicalAreaSubestimates": [
           {
@@ -3576,8 +3576,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 26.526634395418853,
-            "longitude": 29.804175170291597,
+            "latitude": 26.54094925406698,
+            "longitude": 29.857981298148555,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -3596,8 +3596,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 27.222464447121993,
-            "longitude": 31.19918183790423,
+            "latitude": 27.178430817488277,
+            "longitude": 31.119397860621277,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -3672,7 +3672,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.908202561508894, 29.4432473741709]
+        "coordinates": [35.00870657627767, 29.62794687524574]
       },
       "properties": {
         "estimateId": "210915_Jordan_RoyalVeterinaryCollege_2014-2015_Nasal",
@@ -3685,8 +3685,8 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 29.4432473741709,
-          "longitude": 34.908202561508894,
+          "latitude": 29.62794687524574,
+          "longitude": 35.00870657627767,
           "firstAuthorFullName": "Peter Holloway",
           "sourcePublicationYear": 2021,
           "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8386791/",
@@ -3726,7 +3726,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e25149af5232d430c9697f"
+          "id": "66e3760fbc67fecb5403a2f5"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -3746,7 +3746,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [42.48198047941737, 16.84544200138681]
+        "coordinates": [42.48416452107663, 16.944845795913203]
       },
       "properties": {
         "estimateId": "301214_SaudiArabia_UniversityofFlorida_Primary",
@@ -3759,8 +3759,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 16.84544200138681,
-          "longitude": 42.48198047941737,
+          "latitude": 16.944845795913203,
+          "longitude": 42.48416452107663,
           "firstAuthorFullName": "Ziad A Memish",
           "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.1111/irv.12287",
@@ -3800,7 +3800,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Residual sera",
-          "id": "66e25149af5232d430c96982"
+          "id": "66e3760fbc67fecb5403a2f8"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -3862,7 +3862,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.836007587528236, 0.4784382923911662]
+        "coordinates": [37.76407059799278, 0.4512907275668701]
       },
       "properties": {
         "estimateId": "201111_Kenya_FAOUN",
@@ -3875,8 +3875,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.4784382923911662,
-          "longitude": 37.836007587528236,
+          "latitude": 0.4512907275668701,
+          "longitude": 37.76407059799278,
           "firstAuthorFullName": "Rinah Sitawa",
           "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1016%2Fj.prevetmed.2020.105197",
@@ -3915,7 +3915,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e25149af5232d430c96985"
+          "id": "66e3760fbc67fecb5403a2fb"
         },
         "geographicalAreaSubestimates": [
           {
@@ -3934,8 +3934,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5644602335833707,
-            "longitude": 37.8636668219998,
+            "latitude": 0.50110134392688,
+            "longitude": 37.77451530216485,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -3956,8 +3956,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5052278492379062,
-            "longitude": 37.945449986668265,
+            "latitude": 0.5078168622241478,
+            "longitude": 37.923101817542985,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -3978,8 +3978,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.47127788537657095,
-            "longitude": 37.884083133625865,
+            "latitude": 0.5017268881034657,
+            "longitude": 37.77730895770668,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -4000,8 +4000,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5401016430350584,
-            "longitude": 37.81310454619984,
+            "latitude": 0.47038435560098835,
+            "longitude": 37.76506908667899,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -4022,8 +4022,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.4325734399532839,
-            "longitude": 37.92257377556422,
+            "latitude": 0.5639700729073845,
+            "longitude": 37.792802788063575,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -4046,7 +4046,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.90740607710343, 40.637044822024144]
+        "coordinates": [34.933957666951905, 40.50899987429825]
       },
       "properties": {
         "estimateId": "091021_Turkey_HITITUniversity_Controls_Overall",
@@ -4059,8 +4059,8 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 40.637044822024144,
-          "longitude": 34.90740607710343,
+          "latitude": 40.50899987429825,
+          "longitude": 34.933957666951905,
           "firstAuthorFullName": "Ayşe Güreser",
           "sourcePublicationYear": 2021,
           "sourceUrl": "https://dergipark.org.tr/en/pub/omujecm/issue/64795/886425",
@@ -4098,7 +4098,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e25149af5232d430c96988"
+          "id": "66e3760fbc67fecb5403a2fe"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4143,7 +4143,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.75145914337767, 23.4147250828384]
+        "coordinates": [44.617681759297724, 23.458114139173208]
       },
       "properties": {
         "estimateId": "171211_Dhahran_JohnsHopkinsAramcoHealthcare",
@@ -4156,8 +4156,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.4147250828384,
-          "longitude": 44.75145914337767,
+          "latitude": 23.458114139173208,
+          "longitude": 44.617681759297724,
           "firstAuthorFullName": "Jaffar A. Al-Tawfiq",
           "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.1016%2Fj.tmaid.2017.10.004",
@@ -4193,7 +4193,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c9698b"
+          "id": "66e3760fbc67fecb5403a301"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4240,7 +4240,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.97763093926541, 31.289120870610283]
+        "coordinates": [29.868168384060912, 31.218964566086736]
       },
       "properties": {
         "estimateId": "140516_Egypt_StJudeChildrensResearchHospital_Humans",
@@ -4253,8 +4253,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 31.289120870610283,
-          "longitude": 29.97763093926541,
+          "latitude": 31.218964566086736,
+          "longitude": 29.868168384060912,
           "firstAuthorFullName": "Daniel K.W. Chu",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/20/6/14-0299_article ",
@@ -4287,7 +4287,7 @@
           "seroprevalenceCalculated95CIUpper": 0.02039736605,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Slaughterhouse workers",
-          "id": "66e25149af5232d430c9698e"
+          "id": "66e3760fbc67fecb5403a304"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4307,7 +4307,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.5724545204892, 23.335069399117764]
+        "coordinates": [44.587553006907996, 23.459754019894508]
       },
       "properties": {
         "estimateId": "150722_AlHasa_UniversityofHongKong",
@@ -4320,8 +4320,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.335069399117764,
-          "longitude": 44.5724545204892,
+          "latitude": 23.459754019894508,
+          "longitude": 44.587553006907996,
           "firstAuthorFullName": "Maged G. Hemid",
           "sourcePublicationYear": 2015,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/21/4/14-1949_article",
@@ -4353,7 +4353,7 @@
           "seroprevalenceCalculated95CIUpper": 0.01912819418,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Multiple populations",
-          "id": "66e25149af5232d430c96991"
+          "id": "66e3760fbc67fecb5403a307"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4444,7 +4444,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [31.151125702363856, 29.96191882021497]
+        "coordinates": [31.16069023172686, 30.078601161967487]
       },
       "properties": {
         "estimateId": "130905_Egypt_StJudeChildrensResearchHospital_Humans",
@@ -4457,8 +4457,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 29.96191882021497,
-          "longitude": 31.151125702363856,
+          "latitude": 30.078601161967487,
+          "longitude": 31.16069023172686,
           "firstAuthorFullName": "R A Perera",
           "sourcePublicationYear": 2013,
           "sourceUrl": "https://doi.org/10.2807/1560-7917.es2013.18.36.20574",
@@ -4497,7 +4497,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e25149af5232d430c96994"
+          "id": "66e3760fbc67fecb5403a30a"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4530,7 +4530,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-119.63802611390432, 36.993424642659335]
+        "coordinates": [-119.64324299907825, 37.0121843833627]
       },
       "properties": {
         "estimateId": "210915_California_CaliforniaDepartmentofPublicHealth_Sero",
@@ -4543,8 +4543,8 @@
           "countryAlphaThreeCode": "USA",
           "whoRegion": "AMR",
           "unRegion": "NORTHERN_AMERICA",
-          "latitude": 36.993424642659335,
-          "longitude": -119.63802611390432,
+          "latitude": 37.0121843833627,
+          "longitude": -119.64324299907825,
           "firstAuthorFullName": "Mahtab Shahkarami",
           "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.3201%2Feid2109.150476",
@@ -4585,7 +4585,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c96997"
+          "id": "66e3760fbc67fecb5403a30d"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4605,7 +4605,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.62612755079157, 23.32716017707548]
+        "coordinates": [44.611010107693296, 23.38029741952568]
       },
       "properties": {
         "estimateId": "131214_SaudiArabia_GlobalCentreforMassGatheringsMedicine_FamilyContacts_Primary",
@@ -4617,8 +4617,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.32716017707548,
-          "longitude": 44.62612755079157,
+          "latitude": 23.38029741952568,
+          "longitude": 44.611010107693296,
           "firstAuthorFullName": "Z.A. Memish",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://doi.org/10.1111/1469-0691.12562",
@@ -4659,7 +4659,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of cases",
-          "id": "66e25149af5232d430c9699a"
+          "id": "66e3760fbc67fecb5403a310"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -4741,7 +4741,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.64777054058761, 23.343146519890162]
+        "coordinates": [44.58421519337288, 23.363927116174242]
       },
       "properties": {
         "estimateId": "111113_SaudiArabia_UniversityofBonnMedicalCenter_Slaughterhouse_primary",
@@ -4754,8 +4754,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.343146519890162,
-          "longitude": 44.64777054058761,
+          "latitude": 23.363927116174242,
+          "longitude": 44.58421519337288,
           "firstAuthorFullName": "Asad S. Aburizaiza",
           "sourcePublicationYear": 2012,
           "sourceUrl": "https://doi.org/10.1093/infdis/jit589",
@@ -4795,7 +4795,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Slaughterhouse workers",
-          "id": "66e25149af5232d430c9699d"
+          "id": "66e3760fbc67fecb5403a313"
         },
         "geographicalAreaSubestimates": [
           {
@@ -4812,8 +4812,8 @@
             "country": "Saudi Arabia",
             "countryAlphaTwoCode": "SA",
             "countryAlphaThreeCode": "SAU",
-            "latitude": 21.59906604285678,
-            "longitude": 39.09961876261474,
+            "latitude": 21.595105134376656,
+            "longitude": 39.17206062288447,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -4832,8 +4832,8 @@
             "country": "Saudi Arabia",
             "countryAlphaTwoCode": "SA",
             "countryAlphaThreeCode": "SAU",
-            "latitude": 21.32157142739561,
-            "longitude": 39.80166918404863,
+            "latitude": 21.449928971409413,
+            "longitude": 39.82309024440725,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -4856,7 +4856,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [40.48249541515976, 21.29061842640149]
+        "coordinates": [40.402774306640886, 21.263430733874586]
       },
       "properties": {
         "estimateId": "170508_Taif_KingSaudUniversity",
@@ -4869,8 +4869,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 21.29061842640149,
-          "longitude": 40.48249541515976,
+          "latitude": 21.263430733874586,
+          "longitude": 40.402774306640886,
           "firstAuthorFullName": "A.O. Olarinmoye",
           "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.1017/s0950268817000905",
@@ -4905,7 +4905,7 @@
           "animalDetectionSettings": ["Free-roaming herds"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969a0"
+          "id": "66e3760fbc67fecb5403a316"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4925,7 +4925,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.88383300525227, 0.44669608435288427]
+        "coordinates": [37.90336981325932, 0.46892029354901577]
       },
       "properties": {
         "estimateId": "181220_Kenya_ ChineseAcademyofSciences_Humans_primary",
@@ -4937,8 +4937,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.44669608435288427,
-          "longitude": 37.88383300525227,
+          "latitude": 0.46892029354901577,
+          "longitude": 37.90336981325932,
           "firstAuthorFullName": "Sheila Ommeh",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0076-4",
@@ -4982,7 +4982,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e25149af5232d430c969a3"
+          "id": "66e3760fbc67fecb5403a319"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5040,7 +5040,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.731058246277264, 23.441320394837692]
+        "coordinates": [44.66149915514568, 23.29265154995483]
       },
       "properties": {
         "estimateId": "230417_SaudiArabia_RiyadhMinistryofHealth_PrimaryMol",
@@ -5052,8 +5052,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.441320394837692,
-          "longitude": 44.731058246277264,
+          "latitude": 23.29265154995483,
+          "longitude": 44.66149915514568,
           "firstAuthorFullName": "Abdulaziz A. Bin Saeed",
           "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.3201%2Feid2304.161793",
@@ -5095,7 +5095,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c969a6"
+          "id": "66e3760fbc67fecb5403a31c"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -5357,7 +5357,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [35.21657145741736, 39.07308670699552]
+        "coordinates": [35.165682137965064, 39.06555363005997]
       },
       "properties": {
         "estimateId": "100316_Turkey_GulhaneMedicalAcademy_Sero",
@@ -5369,8 +5369,8 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 39.07308670699552,
-          "longitude": 35.21657145741736,
+          "latitude": 39.06555363005997,
+          "longitude": 35.165682137965064,
           "firstAuthorFullName": "H. Erdem",
           "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1007/s10096-016-2614-z",
@@ -5410,7 +5410,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e25149af5232d430c969a9"
+          "id": "66e3760fbc67fecb5403a31f"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5430,7 +5430,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.48171946349531, 14.982731022922799]
+        "coordinates": [33.51125097785762, 14.85569880481658]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Market_Serum",
@@ -5443,8 +5443,8 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.982731022922799,
-          "longitude": 33.48171946349531,
+          "latitude": 14.85569880481658,
+          "longitude": 33.51125097785762,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -5480,7 +5480,7 @@
           "animalPurpose": "Meat and milk",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969ac"
+          "id": "66e3760fbc67fecb5403a322"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5500,7 +5500,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.832867108286138, 31.28068144494538]
+        "coordinates": [29.954840622798134, 31.14520819378331]
       },
       "properties": {
         "estimateId": "140516_Egypt_StJudeChildrensResearchHospital_Camels_Serum",
@@ -5513,8 +5513,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 31.28068144494538,
-          "longitude": 29.832867108286138,
+          "latitude": 31.14520819378331,
+          "longitude": 29.954840622798134,
           "firstAuthorFullName": "Daniel K.W. Chu",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/20/6/14-0299_article ",
@@ -5549,7 +5549,7 @@
           "animalDetectionSettings": ["Abattoirs"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969af"
+          "id": "66e3760fbc67fecb5403a325"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5569,7 +5569,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [8.609879659999265, 11.895967434132045]
+        "coordinates": [8.523214729927863, 12.061667040765256]
       },
       "properties": {
         "estimateId": "180618_Kano_UniversityofHongKong_Camels",
@@ -5582,8 +5582,8 @@
           "countryAlphaThreeCode": "NGA",
           "whoRegion": "AFR",
           "unRegion": "WESTERN_AFRICA",
-          "latitude": 11.895967434132045,
-          "longitude": 8.609879659999265,
+          "latitude": 12.061667040765256,
+          "longitude": 8.523214729927863,
           "firstAuthorFullName": "Ray TY So",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.2807%2F1560-7917.ES.2018.23.32.1800175",
@@ -5618,7 +5618,7 @@
           "animalPurpose": "Meat",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c969b2"
+          "id": "66e3760fbc67fecb5403a328"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -5678,7 +5678,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [39.066133459059145, 21.495580396225996]
+        "coordinates": [39.142433945139516, 21.56118741543958]
       },
       "properties": {
         "estimateId": "111113_SaudiArabia_UniversityofBonnMedicalCenter_blooddonors",
@@ -5691,8 +5691,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 21.495580396225996,
-          "longitude": 39.066133459059145,
+          "latitude": 21.56118741543958,
+          "longitude": 39.142433945139516,
           "firstAuthorFullName": "Asad S. Aburizaiza",
           "sourcePublicationYear": 2012,
           "sourceUrl": "https://doi.org/10.1093/infdis/jit589",
@@ -5731,7 +5731,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Blood donors",
-          "id": "66e25149af5232d430c969b5"
+          "id": "66e3760fbc67fecb5403a32b"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5751,7 +5751,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [35.130606651931075, 39.11093308550564]
+        "coordinates": [35.24672603777629, 39.11263281429232]
       },
       "properties": {
         "estimateId": "100316_Turkey_GulhaneMedicalAcademy_Mol",
@@ -5763,8 +5763,8 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 39.11093308550564,
-          "longitude": 35.130606651931075,
+          "latitude": 39.11263281429232,
+          "longitude": 35.24672603777629,
           "firstAuthorFullName": "H. Erdem",
           "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1007/s10096-016-2614-z",
@@ -5804,7 +5804,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e25149af5232d430c969b8"
+          "id": "66e3760fbc67fecb5403a32e"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5824,7 +5824,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [31.27023354018531, 30.055851496621194]
+        "coordinates": [31.260379479912896, 30.03431003166791]
       },
       "properties": {
         "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_Overall",
@@ -5837,8 +5837,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 30.055851496621194,
-          "longitude": 31.27023354018531,
+          "latitude": 30.03431003166791,
+          "longitude": 31.260379479912896,
           "firstAuthorFullName": "Samir Refaey",
           "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1111/irv.12429",
@@ -5876,7 +5876,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Pilgrims",
-          "id": "66e25149af5232d430c969bb"
+          "id": "66e3760fbc67fecb5403a331"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5974,7 +5974,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [54.31147718455694, 24.44426023510387]
+        "coordinates": [54.30425063936879, 24.434402170932973]
       },
       "properties": {
         "estimateId": "150119_UnitedArabEmirates_AbuDhabiFoodControlAuthority_primary",
@@ -5987,8 +5987,8 @@
           "countryAlphaThreeCode": "ARE",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.44426023510387,
-          "longitude": 54.31147718455694,
+          "latitude": 24.434402170932973,
+          "longitude": 54.30425063936879,
           "firstAuthorFullName": "Mohammed Farouk Yusof",
           "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.1038/emi.2017.89",
@@ -6028,7 +6028,7 @@
           "animalDetectionSettings": ["Livestock markets"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c969be"
+          "id": "66e3760fbc67fecb5403a334"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -6095,6 +6095,19 @@
         "occupationSubestimates": [],
         "animalSourceLocationSubestimates": [
           {
+            "id": "rec4a8xFwx7hZEhI5",
+            "estimateId": "150119_UnitedArabEmirates_AbuDhabiFoodControlAuthority_Unknown",
+            "estimateInfo": {
+              "sampleDenominator": 60,
+              "sampleNumerator": 3,
+              "positivePrevalence": 0.05,
+              "positivePrevalenceCalculated95CILower": 0.01043232964,
+              "positivePrevalenceCalculated95CIUpper": 0.1392432467
+            },
+            "animalImportedOrLocal": "Imported",
+            "animalCountriesOfImport": []
+          },
+          {
             "id": "recghHlEEf0qCHtzc",
             "estimateId": "150119_UnitedArabEmirates_AbuDhabiFoodControlAuthority_Oman",
             "estimateInfo": {
@@ -6105,9 +6118,26 @@
               "positivePrevalenceCalculated95CIUpper": 0.5986954898
             },
             "animalImportedOrLocal": "Imported",
-            "animalCountryOfImport": "Oman",
-            "animalCountryOfImportAlphaTwoCode": "Oman",
-            "animalCountryOfImportAlphaThreeCode": "Oman"
+            "animalCountriesOfImport": [
+              {
+                "country": "Oman",
+                "countryAlphaTwoCode": "OM",
+                "countryAlphaThreeCode": "OMN"
+              }
+            ]
+          },
+          {
+            "id": "recH6yjAqxD6KUx0C",
+            "estimateId": "150119_UnitedArabEmirates_AbuDhabiFoodControlAuthority_AbuDhabi",
+            "estimateInfo": {
+              "sampleDenominator": 210,
+              "sampleNumerator": 53,
+              "positivePrevalence": 0.2523,
+              "positivePrevalenceCalculated95CILower": 0.1951286365,
+              "positivePrevalenceCalculated95CIUpper": 0.3167670143
+            },
+            "animalImportedOrLocal": "Local",
+            "animalCountriesOfImport": []
           }
         ],
         "animalSamplingContextSubestimates": [],
@@ -6119,7 +6149,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.15078080415931, 25.38247020065355]
+        "coordinates": [51.20198583186191, 25.373979671043497]
       },
       "properties": {
         "estimateId": "140606_Qatar_ErasmusMedicalCenter_Camels_Serum",
@@ -6132,8 +6162,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.38247020065355,
-          "longitude": 51.15078080415931,
+          "latitude": 25.373979671043497,
+          "longitude": 51.20198583186191,
           "firstAuthorFullName": "C B Reusken",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES2014.19.23.20829 ",
@@ -6170,7 +6200,7 @@
           "animalPurpose": "Milking",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969c1"
+          "id": "66e3760fbc67fecb5403a337"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6203,7 +6233,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [8.441841947120885, 11.97288303294377]
+        "coordinates": [8.575131591146917, 12.06518395055218]
       },
       "properties": {
         "estimateId": "180618_Kano_UniversityofHongKong_Humans",
@@ -6216,8 +6246,8 @@
           "countryAlphaThreeCode": "NGA",
           "whoRegion": "AFR",
           "unRegion": "WESTERN_AFRICA",
-          "latitude": 11.97288303294377,
-          "longitude": 8.441841947120885,
+          "latitude": 12.06518395055218,
+          "longitude": 8.575131591146917,
           "firstAuthorFullName": "Ray TY So",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.2807%2F1560-7917.ES.2018.23.32.1800175",
@@ -6250,7 +6280,7 @@
           "seroprevalenceCalculated95CIUpper": 0.01403422679,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Slaughterhouse workers",
-          "id": "66e25149af5232d430c969c4"
+          "id": "66e3760fbc67fecb5403a33a"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6299,7 +6329,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.88256370500561, 31.258183362673346]
+        "coordinates": [29.869491429493333, 31.268277041268377]
       },
       "properties": {
         "estimateId": "140516_Egypt_StJudeChildrensResearchHospital_Camels",
@@ -6312,8 +6342,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 31.258183362673346,
-          "longitude": 29.88256370500561,
+          "latitude": 31.268277041268377,
+          "longitude": 29.869491429493333,
           "firstAuthorFullName": "Daniel K.W. Chu",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/20/6/14-0299_article ",
@@ -6348,7 +6378,7 @@
           "animalDetectionSettings": ["Abattoirs"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969c7"
+          "id": "66e3760fbc67fecb5403a33d"
         },
         "geographicalAreaSubestimates": [
           {
@@ -6365,8 +6395,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 26.435220841901575,
-            "longitude": 29.927810698231372,
+            "latitude": 26.472119136010324,
+            "longitude": 29.79076222340781,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -6385,8 +6415,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 31.227588447560535,
-            "longitude": 29.92936308658814,
+            "latitude": 31.133916514855603,
+            "longitude": 29.929234075538606,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -6405,8 +6435,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 30.010473572392645,
-            "longitude": 31.259633987867602,
+            "latitude": 30.126861976574915,
+            "longitude": 31.214827324158453,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -6429,7 +6459,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.906025541369125, 0.5720854629108649]
+        "coordinates": [37.8149801717098, 0.5057361557910042]
       },
       "properties": {
         "estimateId": "201201_MarsabitCounty_USCDC_Camels",
@@ -6442,8 +6472,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5720854629108649,
-          "longitude": 37.906025541369125,
+          "latitude": 0.5057361557910042,
+          "longitude": 37.8149801717098,
           "firstAuthorFullName": "I. Ngere",
           "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1017/s0950268820002939",
@@ -6481,7 +6511,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e25149af5232d430c969ca"
+          "id": "66e3760fbc67fecb5403a340"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -6605,7 +6635,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [39.6427397566948, 21.69514804131864]
+        "coordinates": [39.79124226934498, 21.7154601423154]
       },
       "properties": {
         "estimateId": "311020_SaudiArabia_TaifUniversity_Primary",
@@ -6619,8 +6649,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 21.69514804131864,
-          "longitude": 39.6427397566948,
+          "latitude": 21.7154601423154,
+          "longitude": 39.79124226934498,
           "firstAuthorFullName": "Khalaf F. Alsharif",
           "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1002/jmv.26642",
@@ -6661,7 +6691,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c969cd"
+          "id": "66e3760fbc67fecb5403a343"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6760,7 +6790,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.56316277178328, 25.356107633754696]
+        "coordinates": [51.589180803925395, 25.361392529283908]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Imported_Nasal",
@@ -6773,8 +6803,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.356107633754696,
-          "longitude": 51.56316277178328,
+          "latitude": 25.361392529283908,
+          "longitude": 51.589180803925395,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -6809,7 +6839,7 @@
           "animalPurpose": "Meat, milk, racing",
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969d0"
+          "id": "66e3760fbc67fecb5403a346"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6829,7 +6859,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [36.488627398902814, 30.970509640565567]
+        "coordinates": [36.41373041429178, 30.981262275484156]
       },
       "properties": {
         "estimateId": "240722_Jordan_RoyalVeterinaryCollege_Nasal",
@@ -6842,8 +6872,8 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 30.970509640565567,
-          "longitude": 36.488627398902814,
+          "latitude": 30.981262275484156,
+          "longitude": 36.41373041429178,
           "firstAuthorFullName": "Peter M Holloway",
           "sourcePublicationYear": 2024,
           "sourceUrl": "https://doi.org/10.1016/S2666-5247(24)00082-X",
@@ -6881,7 +6911,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e25149af5232d430c969d3"
+          "id": "66e3760fbc67fecb5403a349"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6901,7 +6931,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.20367005760822, 25.270770810373534]
+        "coordinates": [51.201503532097774, 25.273326682369518]
       },
       "properties": {
         "estimateId": "180219_Qatar_QatarUniversity_Humans_closecontacts_primary",
@@ -6913,8 +6943,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.270770810373534,
-          "longitude": 51.20367005760822,
+          "latitude": 25.273326682369518,
+          "longitude": 51.201503532097774,
           "firstAuthorFullName": "Reham A Al Kahlout",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.1155/2019/1386740",
@@ -6951,7 +6981,7 @@
             "Adults (46-59 years)"
           ],
           "sampleFrame": "Close contacts of cases",
-          "id": "66e25149af5232d430c969d6"
+          "id": "66e3760fbc67fecb5403a34c"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7011,7 +7041,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.76159358302685, 28.115254080652253]
+        "coordinates": [67.78319943164388, 28.178268494338674]
       },
       "properties": {
         "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Humans_Serum",
@@ -7023,8 +7053,8 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.115254080652253,
-          "longitude": 67.76159358302685,
+          "latitude": 28.178268494338674,
+          "longitude": 67.78319943164388,
           "firstAuthorFullName": "Ali Zohaib",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
@@ -7060,7 +7090,7 @@
           "seroprevalenceCalculated95CIUpper": 0.02062921532,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Household and community sample",
-          "id": "66e25149af5232d430c969d9"
+          "id": "66e3760fbc67fecb5403a34f"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7093,7 +7123,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.77355932954094, 28.097889431482784]
+        "coordinates": [67.76845294888798, 28.101322732498794]
       },
       "properties": {
         "estimateId": "061119_Cholistan_UniversityofVeterinaryandAnimalSciences_OverallPRNT",
@@ -7107,8 +7137,8 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.097889431482784,
-          "longitude": 67.77355932954094,
+          "latitude": 28.101322732498794,
+          "longitude": 67.76845294888798,
           "firstAuthorFullName": "Jian Zheng",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.3201%2Feid2512.191169",
@@ -7148,7 +7178,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e25149af5232d430c969dc"
+          "id": "66e3760fbc67fecb5403a352"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7230,7 +7260,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.5966504233069, 25.331154037628043]
+        "coordinates": [51.62424164656053, 25.323919329613275]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Imported_Serum",
@@ -7243,8 +7273,8 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.331154037628043,
-          "longitude": 51.5966504233069,
+          "latitude": 25.323919329613275,
+          "longitude": 51.62424164656053,
           "firstAuthorFullName": "Elmoubasher Farag",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
@@ -7280,7 +7310,7 @@
           "animalPurpose": "Meat, milk, racing",
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969df"
+          "id": "66e3760fbc67fecb5403a355"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7300,7 +7330,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [75.7770045651397, 14.906988056605716]
+        "coordinates": [75.86876034473326, 14.88787616773309]
       },
       "properties": {
         "estimateId": "291015_India_ManipalUniversity_overall",
@@ -7313,8 +7343,8 @@
           "countryAlphaThreeCode": "IND",
           "whoRegion": "SEAR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 14.906988056605716,
-          "longitude": 75.7770045651397,
+          "latitude": 14.88787616773309,
+          "longitude": 75.86876034473326,
           "firstAuthorFullName": "Prabhu G. Suresha",
           "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1002/jmv.24296",
@@ -7353,7 +7383,7 @@
             "Adults (46-59 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e25149af5232d430c969e2"
+          "id": "66e3760fbc67fecb5403a358"
         },
         "geographicalAreaSubestimates": [
           {
@@ -7370,8 +7400,8 @@
             "country": "India",
             "countryAlphaTwoCode": "IN",
             "countryAlphaThreeCode": "IND",
-            "latitude": 14.862749378935723,
-            "longitude": 75.80675393944566,
+            "latitude": 14.985399485692087,
+            "longitude": 75.86792381133158,
             "whoRegion": "SEAR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -7390,8 +7420,8 @@
             "country": "India",
             "countryAlphaTwoCode": "IN",
             "countryAlphaThreeCode": "IND",
-            "latitude": 10.153502475097921,
-            "longitude": 76.63676379662634,
+            "latitude": 10.27862905184473,
+            "longitude": 76.49591271238594,
             "whoRegion": "SEAR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -7439,7 +7469,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.59152869623714, 23.4352626202267]
+        "coordinates": [44.63204310866663, 23.29796717822652]
       },
       "properties": {
         "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_OverallNasal",
@@ -7451,8 +7481,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.4352626202267,
-          "longitude": 44.59152869623714,
+          "latitude": 23.29796717822652,
+          "longitude": 44.63204310866663,
           "firstAuthorFullName": "Jamal S. M. Sabir",
           "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.1126/science.aac8608",
@@ -7489,7 +7519,7 @@
           "animalDetectionSettings": ["Farms", "Livestock markets"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": [],
-          "id": "66e25149af5232d430c969e5"
+          "id": "66e3760fbc67fecb5403a35b"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -7737,21 +7767,6 @@
         "occupationSubestimates": [],
         "animalSourceLocationSubestimates": [
           {
-            "id": "recjAcmRtYynu6Gdl",
-            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_SomaliaSource",
-            "estimateInfo": {
-              "sampleDenominator": 291,
-              "sampleNumerator": 19,
-              "positivePrevalence": 0.065,
-              "positivePrevalenceCalculated95CILower": 0.0397645071,
-              "positivePrevalenceCalculated95CIUpper": 0.1000860039
-            },
-            "animalImportedOrLocal": "Imported",
-            "animalCountryOfImport": "Somalia",
-            "animalCountryOfImportAlphaTwoCode": "Somalia",
-            "animalCountryOfImportAlphaThreeCode": "Somalia"
-          },
-          {
             "id": "recoYMJeJEjrJG22f",
             "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_SudanSource",
             "estimateInfo": {
@@ -7762,9 +7777,45 @@
               "positivePrevalenceCalculated95CIUpper": 0.1203848696
             },
             "animalImportedOrLocal": "Imported",
-            "animalCountryOfImport": "Sudan",
-            "animalCountryOfImportAlphaTwoCode": "Sudan",
-            "animalCountryOfImportAlphaThreeCode": "Sudan"
+            "animalCountriesOfImport": [
+              {
+                "country": "Sudan",
+                "countryAlphaTwoCode": "SD",
+                "countryAlphaThreeCode": "SDN"
+              }
+            ]
+          },
+          {
+            "id": "recjAcmRtYynu6Gdl",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_SomaliaSource",
+            "estimateInfo": {
+              "sampleDenominator": 291,
+              "sampleNumerator": 19,
+              "positivePrevalence": 0.065,
+              "positivePrevalenceCalculated95CILower": 0.0397645071,
+              "positivePrevalenceCalculated95CIUpper": 0.1000860039
+            },
+            "animalImportedOrLocal": "Imported",
+            "animalCountriesOfImport": [
+              {
+                "country": "Somalia",
+                "countryAlphaTwoCode": "SO",
+                "countryAlphaThreeCode": "SOM"
+              }
+            ]
+          },
+          {
+            "id": "recYmsPxbAih9En1W",
+            "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_LocalSource",
+            "estimateInfo": {
+              "sampleDenominator": 893,
+              "sampleNumerator": 133,
+              "positivePrevalence": 0.149,
+              "positivePrevalenceCalculated95CILower": 0.1262139807,
+              "positivePrevalenceCalculated95CIUpper": 0.1740016183
+            },
+            "animalImportedOrLocal": "Local",
+            "animalCountriesOfImport": []
           }
         ],
         "animalSamplingContextSubestimates": [
@@ -7801,7 +7852,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.56532905131243, 23.289751582768965]
+        "coordinates": [44.69694135719317, 23.28860589867733]
       },
       "properties": {
         "estimateId": "131214_SaudiArabia_GlobalCentreforMassGatheringsMedicine_HCWcontacts_primary",
@@ -7813,8 +7864,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.289751582768965,
-          "longitude": 44.56532905131243,
+          "latitude": 23.28860589867733,
+          "longitude": 44.69694135719317,
           "firstAuthorFullName": "Z.A. Memish",
           "sourcePublicationYear": 2014,
           "sourceUrl": "https://doi.org/10.1111/1469-0691.12562",
@@ -7854,7 +7905,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Healthcare workers",
-          "id": "66e25149af5232d430c969e8"
+          "id": "66e3760fbc67fecb5403a35e"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7899,7 +7950,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.72855921852768, 28.274075785179917]
+        "coordinates": [67.77980162390865, 28.245621804879097]
       },
       "properties": {
         "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Nasal",
@@ -7911,8 +7962,8 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.274075785179917,
-          "longitude": 67.72855921852768,
+          "latitude": 28.245621804879097,
+          "longitude": 67.77980162390865,
           "firstAuthorFullName": "Ali Zohaib",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
@@ -7951,7 +8002,7 @@
           "animalPurpose": "Multiple purposes",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c969eb"
+          "id": "66e3760fbc67fecb5403a361"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7971,7 +8022,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.87942310858993, 26.434253555373164]
+        "coordinates": [29.78193202324024, 26.524577952768773]
       },
       "properties": {
         "estimateId": "191001_Egypt_AssiutUniversity_Camels",
@@ -7984,8 +8035,8 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 26.434253555373164,
-          "longitude": 29.87942310858993,
+          "latitude": 26.524577952768773,
+          "longitude": 29.78193202324024,
           "firstAuthorFullName": "Amal SM Saye",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://jidc.org/index.php/journal/article/view/32146454/2206 ",
@@ -8024,7 +8075,7 @@
           "animalPurpose": "Slaughter",
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e25149af5232d430c969ee"
+          "id": "66e3760fbc67fecb5403a364"
         },
         "geographicalAreaSubestimates": [
           {
@@ -8041,8 +8092,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 26.495990835167298,
-            "longitude": 29.881895833311788,
+            "latitude": 26.55583893910646,
+            "longitude": 29.833015386501565,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -8061,8 +8112,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 24.135593466200387,
-            "longitude": 32.833142534509534,
+            "latitude": 24.17004075025525,
+            "longitude": 32.91480173575629,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -8081,8 +8132,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 27.212840555063423,
-            "longitude": 31.127550859525126,
+            "latitude": 27.08916256679173,
+            "longitude": 31.225799233779977,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -8157,7 +8208,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.61817841012635, 33.64640613872549]
+        "coordinates": [44.64876983610081, 33.72372990698424]
       },
       "properties": {
         "estimateId": "220810_Diyala_UniversityofDiyala_Camels",
@@ -8170,8 +8221,8 @@
           "countryAlphaThreeCode": "IRQ",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 33.64640613872549,
-          "longitude": 44.61817841012635,
+          "latitude": 33.72372990698424,
+          "longitude": 44.64876983610081,
           "firstAuthorFullName": "Abdulrazak Hasan",
           "sourcePublicationYear": 2022,
           "sourceUrl": "https://journals.tubitak.gov.tr/medical/vol52/iss4/5/",
@@ -8210,7 +8261,7 @@
           "animalPurpose": "Not reported",
           "animalImportedOrLocal": "Not reported",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c969f1"
+          "id": "66e3760fbc67fecb5403a367"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -8308,7 +8359,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.70346725247978, 23.45815497017109]
+        "coordinates": [44.59611573110625, 23.36860745308979]
       },
       "properties": {
         "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal",
@@ -8320,8 +8371,8 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.45815497017109,
-          "longitude": 44.70346725247978,
+          "latitude": 23.36860745308979,
+          "longitude": 44.59611573110625,
           "firstAuthorFullName": "Samy Kasem",
           "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1016/j.jiph.2017.09.022",
@@ -8356,7 +8407,7 @@
           "animalPurpose": "Not reported",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e25149af5232d430c969f4"
+          "id": "66e3760fbc67fecb5403a36a"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -8413,7 +8464,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [40.759441931080765, 10.23769324206641]
+        "coordinates": [40.744922921267, 10.206102777704825]
       },
       "properties": {
         "estimateId": "190618_Afar_NihonUniversity_Nasal",
@@ -8427,8 +8478,8 @@
           "countryAlphaThreeCode": "ETH",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 10.23769324206641,
-          "longitude": 40.759441931080765,
+          "latitude": 10.206102777704825,
+          "longitude": 40.744922921267,
           "firstAuthorFullName": "Kazuya Shirato",
           "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.3389/fmicb.2019.01326",
@@ -8463,7 +8514,7 @@
           "animalDetectionSettings": ["Farms"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)"],
-          "id": "66e25149af5232d430c969f7"
+          "id": "66e3760fbc67fecb5403a36d"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -8483,7 +8534,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.83470460598953, 0.5458742339327329]
+        "coordinates": [37.897172387683014, 0.5105109553070922]
       },
       "properties": {
         "estimateId": "170607_Marsabit_KenyaMedicalResearchInstitute_Humans",
@@ -8496,8 +8547,8 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5458742339327329,
-          "longitude": 37.83470460598953,
+          "latitude": 0.5105109553070922,
+          "longitude": 37.897172387683014,
           "firstAuthorFullName": "Peninah Munyua",
           "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.4269%2Fajtmh.16-0880",
@@ -8537,7 +8588,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e25149af5232d430c969fa"
+          "id": "66e3760fbc67fecb5403a370"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
