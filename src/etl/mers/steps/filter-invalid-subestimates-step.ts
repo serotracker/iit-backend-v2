@@ -90,21 +90,15 @@ type ValidHumanSeroprevalenceOccupationSubestimate = Extract<GroupedEstimateFiel
 }
 type ValidAnimalViralAnimalSourceLocationSubestimate = Omit<
   Extract<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number], { type: MersEstimateType.ANIMAL_VIRAL }>,
-  'animalImportedOrLocal'|'animalCountryOfImport'|'animalCountryOfImportAlphaTwoCode'|'animalCountryOfImportAlphaThreeCode'
+  'animalImportedOrLocal'
 > & {
   animalImportedOrLocal: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalImportedOrLocal']>;
-  animalCountryOfImport: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalCountryOfImport']>['country'];
-  animalCountryOfImportAlphaTwoCode: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalCountryOfImport']>['countryAlphaTwoCode'];
-  animalCountryOfImportAlphaThreeCode: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalCountryOfImport']>['countryAlphaThreeCode'];
 }
 type ValidAnimalSeroprevalenceAnimalSourceLocationSubestimate = Omit<
   Extract<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number], { type: MersEstimateType.ANIMAL_SEROPREVALENCE }>,
-  'animalImportedOrLocal'|'animalCountryOfImport'|'animalCountryOfImportAlphaTwoCode'|'animalCountryOfImportAlphaThreeCode'
+  'animalImportedOrLocal'
 > & {
   animalImportedOrLocal: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalImportedOrLocal']>;
-  animalCountryOfImport: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalCountryOfImport']>['country'];
-  animalCountryOfImportAlphaTwoCode: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalCountryOfImport']>['countryAlphaTwoCode'];
-  animalCountryOfImportAlphaThreeCode: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['animalSourceLocationSubestimates'][number]['animalCountryOfImport']>['countryAlphaThreeCode'];
 }
 type ValidHumanViralCamelExposureLevelSubestimate = Omit<
   Extract<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number], { type: MersEstimateType.HUMAN_VIRAL }>,
@@ -231,12 +225,10 @@ export const filterInvalidSubestimatesStep = (input: FilterInvalidSubestimatesSt
         .map((subestimate) => ({
           ...subestimate,
           animalImportedOrLocal: subestimate.animalImportedOrLocal,
-          animalCountryOfImport: subestimate.animalCountryOfImport?.country,
-          animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImport?.countryAlphaTwoCode,
-          animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImport?.countryAlphaThreeCode
+          animalCountriesOfImport: subestimate.animalCountriesOfImport,
         }))
         .filter((subestimate): subestimate is GroupedEstimateFieldsAfterFilteringInvalidSubestimatesStep['animalSourceLocationSubestimates'][number] =>
-           !!subestimate.animalImportedOrLocal && !!subestimate.animalCountryOfImport && (subestimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE || subestimate.type === MersEstimateType.ANIMAL_VIRAL)
+           !!subestimate.animalImportedOrLocal && (subestimate.type === MersEstimateType.ANIMAL_SEROPREVALENCE || subestimate.type === MersEstimateType.ANIMAL_VIRAL)
         ),
       animalSamplingContextSubestimates: groupedEstimate.animalSamplingContextSubestimates,
       camelExposureLevelSubestimates: groupedEstimate.camelExposureLevelSubestimates

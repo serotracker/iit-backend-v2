@@ -73,7 +73,8 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
-  animalCountryOfImportId: string | undefined;
+  animalCountryOfImportIds: string[];
+  humanCountryOfTravelIds: string[];
   symptomPrevalenceOfPositives: number | undefined;
   symptomDefinition: string | undefined;
   sequencingDone: boolean;
@@ -262,9 +263,10 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         animalImportedOrLocal: estimate['Imported or Local']
           .filter((element): element is NonNullable<typeof element> => !!element)
           .at(0),
-        animalCountryOfImportId: estimate['Country of Import']
-          .filter((element): element is NonNullable<typeof element> => !!element)
-          .at(0),
+        animalCountryOfImportIds: estimate['Country of Import']
+          .filter((element): element is NonNullable<typeof element> => !!element),
+        humanCountryOfTravelIds: estimate['Country of travel']
+          .filter((element): element is NonNullable<typeof element> => !!element),
         sampleFrame: estimate['Sample Frame (Human)'] ?? undefined,
         symptomPrevalenceOfPositives: estimate['Symptom Prevalence of Positives'] ?? undefined,
         symptomDefinition: estimate['Symptom definition'] ?? undefined,

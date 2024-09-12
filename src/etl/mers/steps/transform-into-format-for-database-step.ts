@@ -425,9 +425,11 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       animalImportedOrLocal: subestimate.animalImportedOrLocal,
-      animalCountryOfImport: subestimate.animalCountryOfImport,
-      animalCountryOfImportAlphaTwoCode: subestimate.animalCountryOfImport,
-      animalCountryOfImportAlphaThreeCode: subestimate.animalCountryOfImport
+      animalCountriesOfImport: subestimate.animalCountriesOfImport.map((element) => ({
+        country: element.country,
+        countryAlphaTwoCode: element.countryAlphaTwoCode,
+        countryAlphaThreeCode: element.countryAlphaThreeCode
+      }))
     })),
   animalSamplingContextSubestimates: input.groupedEstimates.animalSamplingContextSubestimates
     .map((subestimate) => ({

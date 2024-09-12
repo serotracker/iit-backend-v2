@@ -544,9 +544,10 @@ export const mersEstimateTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     animalImportedOrLocal: String!
-    animalCountryOfImport: String!
-    animalCountryOfImportAlphaTwoCode: String!
-    animalCountryOfImportAlphaThreeCode: String!
+    animalCountryOfImport: String! @deprecated(reason: "use animalCountriesOfImport instead")
+    animalCountryOfImportAlphaTwoCode: String! @deprecated(reason: "use animalCountriesOfImport instead")
+    animalCountryOfImportAlphaThreeCode: String! @deprecated(reason: "use animalCountriesOfImport instead")
+    animalCountriesOfImport: [CountryIdentifiers!]!
   }
 
   type MersAnimalSamplingContextSubEstimate implements MersSubEstimateInterface {

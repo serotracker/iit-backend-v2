@@ -133,11 +133,20 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
           if(subestimateA.animalImportedOrLocal !== subestimateB.animalImportedOrLocal) {
             return subestimateA.animalImportedOrLocal > subestimateB.animalImportedOrLocal ? 1 : -1;
           }
-          if(subestimateA.animalCountryOfImport !== subestimateB.animalCountryOfImport) {
-            return subestimateA.animalCountryOfImport > subestimateB.animalCountryOfImport ? 1 : -1;
+
+          let index = 0;
+
+          while(index < subestimateA.animalCountriesOfImport.length && index < subestimateB.animalCountriesOfImport.length) {
+            const subestimateACountry = subestimateA.animalCountriesOfImport[index];
+            const subestimateBCountry = subestimateB.animalCountriesOfImport[index];
+
+            if(subestimateACountry !== subestimateBCountry) {
+              return subestimateACountry > subestimateBCountry ? 1 : -1;
+            }
+            index++;
           }
 
-          return 0;
+          return subestimateA.animalCountriesOfImport.length - subestimateB.animalCountriesOfImport.length
         }),
       animalSamplingContextSubestimates: groupedEstimate.animalSamplingContextSubestimates
         .sort((subestimateA, subestimateB) => subestimateA.animalDetectionSettings.join(',') > subestimateB.animalDetectionSettings.join(',') ? 1 : -1),
