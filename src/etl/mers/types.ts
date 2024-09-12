@@ -7,6 +7,7 @@ export interface AirtableSourceFields {
   "Institution": string | null,
   "Country": string[],
   "Population type": string[],
+  "Publication year": number,
   "seropositive (1/0)": string | null,
   "PCR positive (1/0)": string | null
 }

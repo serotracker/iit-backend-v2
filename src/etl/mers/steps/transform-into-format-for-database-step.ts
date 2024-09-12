@@ -149,6 +149,7 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
   latitude: input.estimate.latitude,
   longitude: input.estimate.longitude,
   firstAuthorFullName: input.estimate.study.source.firstAuthorFullName,
+  sourcePublicationYear: input.estimate.study.source.publicationYear,
   sourceUrl: input.estimate.study.source.url,
   sourceType: input.estimate.study.source.type,
   sourceTitle: input.estimate.study.source.title,

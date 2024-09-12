@@ -70,6 +70,7 @@ export const mersEstimateTypedefs = `
     whoRegion: WHORegion
     unRegion: UNRegion
     firstAuthorFullName: String!
+    sourcePublicationYear: Int!
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
@@ -127,6 +128,7 @@ export const mersEstimateTypedefs = `
     whoRegion: WHORegion
     unRegion: UNRegion
     firstAuthorFullName: String!
+    sourcePublicationYear: Int!
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
@@ -193,6 +195,7 @@ export const mersEstimateTypedefs = `
     whoRegion: WHORegion
     unRegion: UNRegion
     firstAuthorFullName: String!
+    sourcePublicationYear: Int!
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
@@ -263,6 +266,7 @@ export const mersEstimateTypedefs = `
     whoRegion: WHORegion
     unRegion: UNRegion
     firstAuthorFullName: String!
+    sourcePublicationYear: Int!
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!
@@ -329,6 +333,7 @@ export const mersEstimateTypedefs = `
     whoRegion: WHORegion
     unRegion: UNRegion
     firstAuthorFullName: String!
+    sourcePublicationYear: Int!
     sourceUrl: String!
     sourceType: String!
     sourceTitle: String!

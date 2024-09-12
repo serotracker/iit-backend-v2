@@ -889,6 +889,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   seroprevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
+  sourcePublicationYear: Scalars['Int']['output'];
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
@@ -957,6 +958,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   sequencingDone: Scalars['Boolean']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
+  sourcePublicationYear: Scalars['Int']['output'];
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
@@ -1021,6 +1023,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   seroprevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
+  sourcePublicationYear: Scalars['Int']['output'];
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
@@ -1085,6 +1088,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   sequencingDone: Scalars['Boolean']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
+  sourcePublicationYear: Scalars['Int']['output'];
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
@@ -1143,6 +1147,7 @@ export type PrimaryMersEstimateInformationInterface = {
   sequencingDone: Scalars['Boolean']['output'];
   sex?: Maybe<Scalars['String']['output']>;
   socioeconomicStatus?: Maybe<Scalars['String']['output']>;
+  sourcePublicationYear: Scalars['Int']['output'];
   sourceTitle: Scalars['String']['output'];
   sourceType: Scalars['String']['output'];
   sourceUrl: Scalars['String']['output'];
@@ -2314,6 +2319,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   seroprevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourcePublicationYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2382,6 +2388,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourcePublicationYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2446,6 +2453,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   seroprevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourcePublicationYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2510,6 +2518,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourcePublicationYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2572,6 +2581,7 @@ export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, 
   sequencingDone?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   sex?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   socioeconomicStatus?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourcePublicationYear?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   sourceTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceType?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sourceUrl?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

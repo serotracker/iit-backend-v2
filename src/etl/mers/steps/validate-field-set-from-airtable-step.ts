@@ -227,7 +227,8 @@ const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
     "Source title": z.string(),
     "Institution": z.optional(z.string().nullable()).transform((value => value ?? null)),
     "Country": z.string().array(),
-    "Population type": z.string().array()
+    "Population type": z.string().array(),
+    "Publication year": z.number()
   });
 
   const sourceWithBaseParsed = {
