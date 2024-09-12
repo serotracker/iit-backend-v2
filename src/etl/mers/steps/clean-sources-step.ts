@@ -19,6 +19,7 @@ export type SourceFieldsAfterCleaningSourcesStep = {
   insitutution: string | undefined;
   country: string[];
   populationType: string[];
+  publicationYear: number;
 };
 export type StudyFieldsAfterCleaningSourcesStep = StudyFieldsAfterValidatingFieldSetFromAirtableStep;
 export type CountryFieldsAfterCleaningSourcesStep = CountryFieldsAfterValidatingFieldSetFromAirtableStep;
@@ -59,7 +60,8 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
       title: source['Source title'],
       insitutution: source['Institution'] ?? undefined,
       country: source['Country'],
-      populationType: source['Population type']
+      populationType: source['Population type'],
+      publicationYear: source['Publication year']
     })),
     allStudies: input.allStudies,
     allCountries: input.allCountries,

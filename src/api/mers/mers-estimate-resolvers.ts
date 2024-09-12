@@ -76,6 +76,7 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
     whoRegion: document.whoRegion ? mapWhoRegionForApi(document.whoRegion) : undefined,
     unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
     firstAuthorFullName: document.firstAuthorFullName,
+    sourcePublicationYear: document.sourcePublicationYear,
     sourceUrl: document.sourceUrl,
     sourceType: document.sourceType,
     sourceTitle: document.sourceTitle,

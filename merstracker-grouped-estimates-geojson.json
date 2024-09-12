@@ -5,7 +5,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.98884842968277, 40.47450162907993]
+        "coordinates": [34.91931098921117, 40.596986593667964]
       },
       "properties": {
         "estimateId": "091021_Turkey_HITITUniversity_Patients_Overall",
@@ -18,9 +18,10 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 40.47450162907993,
-          "longitude": 34.98884842968277,
+          "latitude": 40.596986593667964,
+          "longitude": 34.91931098921117,
           "firstAuthorFullName": "Ayşe Güreser",
+          "sourcePublicationYear": 2021,
           "sourceUrl": "https://dergipark.org.tr/en/pub/omujecm/issue/64795/886425",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Investigation of MERS-CoV seropositivity among Umrah visitors from the Çorum Region of Turkey",
@@ -57,7 +58,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e0bbff9bf192eac657d840"
+          "id": "66e25149af5232d430c9692e"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -102,7 +103,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.178961456194756, 25.220235372722097]
+        "coordinates": [51.203951213967635, 25.251203896616417]
       },
       "properties": {
         "estimateId": "180219_Qatar_QatarUniversity_Humans_blooddonors_primary",
@@ -114,9 +115,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.220235372722097,
-          "longitude": 51.178961456194756,
+          "latitude": 25.251203896616417,
+          "longitude": 51.203951213967635,
           "firstAuthorFullName": "Reham A Al Kahlout",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.1155/2019/1386740",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Comparative Serological Study for the Prevalence of Anti-MERS Coronavirus Antibodies in High- and Low-Risk Groups in Qatar",
@@ -152,7 +154,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Blood donors",
-          "id": "66e0bbff9bf192eac657d843"
+          "id": "66e25149af5232d430c96931"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -238,7 +240,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.96404332797119, 29.50787719072559]
+        "coordinates": [34.948971289686575, 29.445089198586953]
       },
       "properties": {
         "estimateId": "210915_Jordan_RoyalVeterinaryCollege_2014-2015_Serum",
@@ -251,9 +253,10 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 29.50787719072559,
-          "longitude": 34.96404332797119,
+          "latitude": 29.445089198586953,
+          "longitude": 34.948971289686575,
           "firstAuthorFullName": "Peter Holloway",
+          "sourcePublicationYear": 2021,
           "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8386791/",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Risk Factors for Middle East Respiratory Syndrome Coronavirus Infection among Camel Populations, Southern Jordan, 2014-2018",
@@ -292,7 +295,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e0bbff9bf192eac657d846"
+          "id": "66e25149af5232d430c96934"
         },
         "geographicalAreaSubestimates": [
           {
@@ -309,8 +312,8 @@
             "country": "Jordan",
             "countryAlphaTwoCode": "JO",
             "countryAlphaThreeCode": "JOR",
-            "latitude": 30.23739920866883,
-            "longitude": 35.81925216834522,
+            "latitude": 30.217264585440738,
+            "longitude": 35.77430694758489,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -329,8 +332,8 @@
             "country": "Jordan",
             "countryAlphaTwoCode": "JO",
             "countryAlphaThreeCode": "JOR",
-            "latitude": 29.516047322697577,
-            "longitude": 35.00770547632802,
+            "latitude": 29.558558673333742,
+            "longitude": 35.02596543106904,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -457,7 +460,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.59606251523065, 23.4530483832887]
+        "coordinates": [44.627784628319226, 23.392063359664167]
       },
       "properties": {
         "estimateId": "211022_SaudiArabia_CHULille_Primary",
@@ -469,9 +472,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.4530483832887,
-          "longitude": 44.59606251523065,
+          "latitude": 23.392063359664167,
+          "longitude": 44.627784628319226,
           "firstAuthorFullName": "Ambroise Mercier",
+          "sourcePublicationYear": 2023,
           "sourceUrl": "https://doi.org/10.1016/j.tmaid.2022.102482",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Respiratory virus detection in returning travelers and pilgrims from the Middle East",
@@ -509,7 +513,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d849"
+          "id": "66e25149af5232d430c96937"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -597,7 +601,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [54.372204009432494, 24.462257994842766]
+        "coordinates": [54.37299980336076, 24.523129125572257]
       },
       "properties": {
         "estimateId": "160629_AbuDhabi_AbuDhabiFoodControlAuthority_Camels",
@@ -610,9 +614,10 @@
           "countryAlphaThreeCode": "ARE",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.462257994842766,
-          "longitude": 54.372204009432494,
+          "latitude": 24.523129125572257,
+          "longitude": 54.37299980336076,
           "firstAuthorFullName": "Salama Al Muhairi",
+          "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1007/s11262-016-1367-1",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Epidemiological investigation of Middle East respiratory syndrome coronavirus in dromedary camel farms linked with human infection in Abu Dhabi Emirate, United Arab Emirates",
@@ -645,7 +650,7 @@
           "animalDetectionSettings": ["Farms"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d84c"
+          "id": "66e25149af5232d430c9693a"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -678,7 +683,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [31.149811944152034, 30.13842068339953]
+        "coordinates": [31.176353611116262, 30.00545022208554]
       },
       "properties": {
         "estimateId": "130905_Egypt_StJudeChildrensResearchHospital_Camels",
@@ -691,9 +696,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 30.13842068339953,
-          "longitude": 31.149811944152034,
+          "latitude": 30.00545022208554,
+          "longitude": 31.176353611116262,
           "firstAuthorFullName": "R A Perera",
+          "sourcePublicationYear": 2013,
           "sourceUrl": "https://doi.org/10.2807/1560-7917.es2013.18.36.20574",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Seroepidemiology for MERS coronavirus using microneutralisation and pseudoparticle virus neutralisation assays reveal a high prevalence of antibody in dromedary camels in Egypt, June 2013",
@@ -726,7 +732,7 @@
           "animalDetectionSettings": ["Abattoirs"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d84f"
+          "id": "66e25149af5232d430c9693d"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -808,7 +814,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.93721477158395, 0.46323708490812504]
+        "coordinates": [37.95232718793151, 0.5625817506288626]
       },
       "properties": {
         "estimateId": "181220_Kenya_ ChineseAcademyofSciences_Camels_OverallSeroprev",
@@ -820,9 +826,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.46323708490812504,
-          "longitude": 37.93721477158395,
+          "latitude": 0.5625817506288626,
+          "longitude": 37.95232718793151,
           "firstAuthorFullName": "Sheila Ommeh",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0076-4",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Genetic Evidence of Middle East Respiratory Syndrome Coronavirus (MERS-Cov) and Widespread Seroprevalence among Camels in Kenya",
@@ -862,7 +869,7 @@
           "animalDetectionSettings": ["Free-roaming herds"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d852"
+          "id": "66e25149af5232d430c96940"
         },
         "geographicalAreaSubestimates": [
           {
@@ -881,8 +888,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5146063484667123,
-            "longitude": 37.859651921097765,
+            "latitude": 0.43959144714033116,
+            "longitude": 37.90876100202168,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -903,8 +910,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5108894892093924,
-            "longitude": 37.76327669566089,
+            "latitude": 0.5079307459336003,
+            "longitude": 37.94518758831097,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -925,8 +932,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5010899809951613,
-            "longitude": 37.78339028823996,
+            "latitude": 0.6089360597404267,
+            "longitude": 37.91353101414121,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -947,8 +954,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5140881915076085,
-            "longitude": 37.84932630610415,
+            "latitude": 0.5342696924093098,
+            "longitude": 37.791081379456706,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -969,8 +976,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.6218759431070038,
-            "longitude": 37.93623823185026,
+            "latitude": 0.6292723692221168,
+            "longitude": 37.89561527575606,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -991,8 +998,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5632602335652024,
-            "longitude": 37.935395198457854,
+            "latitude": 0.43559038229538294,
+            "longitude": 37.853282499456824,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1013,8 +1020,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.4887445745408876,
-            "longitude": 37.81232137973239,
+            "latitude": 0.6203657800561293,
+            "longitude": 37.772029436521834,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1035,8 +1042,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5200538839513068,
-            "longitude": 37.88950634621522,
+            "latitude": 0.5394897406755325,
+            "longitude": 37.81076467654079,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1057,8 +1064,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5703331547077729,
-            "longitude": 37.76796455090138,
+            "latitude": 0.4571000576880395,
+            "longitude": 37.776891072904114,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1079,8 +1086,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5583114406958649,
-            "longitude": 37.88474780943561,
+            "latitude": 0.4519226486907739,
+            "longitude": 37.87785334942793,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1101,8 +1108,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5279348076972014,
-            "longitude": 37.895755209307914,
+            "latitude": 0.5197081373048648,
+            "longitude": 37.801062134576355,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1123,8 +1130,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.4734437002021263,
-            "longitude": 37.83292330207726,
+            "latitude": 0.5839495563323415,
+            "longitude": 37.92659676415063,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1145,8 +1152,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.6050476094069432,
-            "longitude": 37.95239466504687,
+            "latitude": 0.5379459464129798,
+            "longitude": 37.780218299263545,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Local"
@@ -1250,7 +1257,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [41.00680762180164, 11.754170214843409]
+        "coordinates": [41.06109878340922, 11.755268884204703]
       },
       "properties": {
         "estimateId": "190618_Afar_NihonUniversity_Serum",
@@ -1263,9 +1270,10 @@
           "countryAlphaThreeCode": "ETH",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 11.754170214843409,
-          "longitude": 41.00680762180164,
+          "latitude": 11.755268884204703,
+          "longitude": 41.06109878340922,
           "firstAuthorFullName": "Kazuya Shirato",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.3389/fmicb.2019.01326",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Middle east respiratory syndrome coronavirus in dromedaries in Ethiopia is antigenically different from the Middle East isolate EMC",
@@ -1298,7 +1306,7 @@
           "animalDetectionSettings": ["Not reported"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)", "Juvenile (6 months-2 years)"],
-          "id": "66e0bbff9bf192eac657d855"
+          "id": "66e25149af5232d430c96943"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1318,7 +1326,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.50096656297402, 14.911116704738236]
+        "coordinates": [33.33224165877737, 14.88119601929971]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Humans_2015",
@@ -1331,9 +1339,10 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.911116704738236,
-          "longitude": 33.50096656297402,
+          "latitude": 14.88119601929971,
+          "longitude": 33.33224165877737,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -1364,7 +1373,7 @@
           "seroprevalenceCalculated95CIUpper": 0.2849141529,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Multiple populations",
-          "id": "66e0bbff9bf192eac657d858"
+          "id": "66e25149af5232d430c96946"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1398,7 +1407,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.25491842611152, 25.387882289414524]
+        "coordinates": [51.28988202101836, 25.320197894198422]
       },
       "properties": {
         "estimateId": "140606_Qatar_ErasmusMedicalCenter_Camels_Nasal",
@@ -1411,9 +1420,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.387882289414524,
-          "longitude": 51.25491842611152,
+          "latitude": 25.320197894198422,
+          "longitude": 51.28988202101836,
           "firstAuthorFullName": "C B Reusken",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES2014.19.23.20829 ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Middle East Respiratory Syndrome Coronavirus (MERS-CoV) RNA and Neutralising Antibodies in Milk Collected According to Local Customs from Dromedary Camels, Qatar, April 2014",
@@ -1446,7 +1456,7 @@
           "animalPurpose": "Milking",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d85b"
+          "id": "66e25149af5232d430c96949"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1479,7 +1489,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.80352478658284, 0.4857584116110035]
+        "coordinates": [37.92561286231413, 0.6074816721852826]
       },
       "properties": {
         "estimateId": "210311_MarsabitCounty_WashingtonStateUniversity_Humans",
@@ -1492,9 +1502,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.4857584116110035,
-          "longitude": 37.80352478658284,
+          "latitude": 0.6074816721852826,
+          "longitude": 37.92561286231413,
           "firstAuthorFullName": "Peninah Munyua",
+          "sourcePublicationYear": 2021,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/27/4/20-4458_article",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Low-Level Middle East Respiratory Syndrome Coronavirus among Camel Handlers, Kenya, 2019",
@@ -1532,7 +1543,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e0bbff9bf192eac657d85e"
+          "id": "66e25149af5232d430c9694c"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1552,7 +1563,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [90.15032836604232, 24.38168598877983]
+        "coordinates": [90.02138263924675, 24.32861421534313]
       },
       "properties": {
         "estimateId": "160118_Bangladesh_DiseaseControlandResearch_primary",
@@ -1564,9 +1575,10 @@
           "countryAlphaThreeCode": "BGD",
           "whoRegion": "SEAR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 24.38168598877983,
-          "longitude": 90.15032836604232,
+          "latitude": 24.32861421534313,
+          "longitude": 90.02138263924675,
           "firstAuthorFullName": "A. K. M. Muraduzzaman",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1371/journal.pone.0189914",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Event based surveillance of middle east respiratory syndrome coronavirus (MERS-CoV) in Bangladesh among pilgrims and travelers from the middle east: An update for the period 2013–2016",
@@ -1608,7 +1620,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e0bbff9bf192eac657d861"
+          "id": "66e25149af5232d430c9694f"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -1698,7 +1710,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.50982053245524, 14.846712365174852]
+        "coordinates": [33.3577055197297, 14.906458983274396]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Slaughterhouse_Nasal",
@@ -1711,9 +1723,10 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.846712365174852,
-          "longitude": 33.50982053245524,
+          "latitude": 14.906458983274396,
+          "longitude": 33.3577055197297,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -1746,7 +1759,7 @@
           "animalPurpose": "Meat",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d864"
+          "id": "66e25149af5232d430c96952"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1766,7 +1779,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-119.7913568154421, 37.08978727324908]
+        "coordinates": [-119.7178046893465, 36.98146535788031]
       },
       "properties": {
         "estimateId": "210915_California_CaliforniaDepartmentofPublicHealth_Mol",
@@ -1779,9 +1792,10 @@
           "countryAlphaThreeCode": "USA",
           "whoRegion": "AMR",
           "unRegion": "NORTHERN_AMERICA",
-          "latitude": 37.08978727324908,
-          "longitude": -119.7913568154421,
+          "latitude": 36.98146535788031,
+          "longitude": -119.7178046893465,
           "firstAuthorFullName": "Mahtab Shahkarami",
+          "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.3201%2Feid2109.150476",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Laboratory Testing for Middle East Respiratory Syndrome Coronavirus, California, USA, 2013-2014",
@@ -1820,7 +1834,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d867"
+          "id": "66e25149af5232d430c96955"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1840,7 +1854,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.45860728090616, 14.834689280154358]
+        "coordinates": [33.328056919275426, 15.002703575207596]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Market_Nasal",
@@ -1853,9 +1867,10 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.834689280154358,
-          "longitude": 33.45860728090616,
+          "latitude": 15.002703575207596,
+          "longitude": 33.328056919275426,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -1888,7 +1903,7 @@
           "animalPurpose": "Meat and milk",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d86a"
+          "id": "66e25149af5232d430c96958"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -1908,7 +1923,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [46.67436476899054, 24.573038624331147]
+        "coordinates": [46.80423507505654, 24.671845714896826]
       },
       "properties": {
         "estimateId": "301018_SaudiArabia_KingSaudUniversity_BloodDonors",
@@ -1922,9 +1937,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.573038624331147,
-          "longitude": 46.67436476899054,
+          "latitude": 24.671845714896826,
+          "longitude": 46.80423507505654,
           "firstAuthorFullName": "Abeer N Alshukairi",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1128/mbio.01985-18",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "High Prevalence of MERS-CoV Infection in Camel Workers in Saudi Arabia",
@@ -1956,7 +1972,7 @@
           "seroprevalenceCalculated95CIUpper": 0.1543725128,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Blood donors",
-          "id": "66e0bbff9bf192eac657d86d"
+          "id": "66e25149af5232d430c9695b"
         },
         "geographicalAreaSubestimates": [
           {
@@ -1973,8 +1989,8 @@
             "country": "Saudi Arabia",
             "countryAlphaTwoCode": "SA",
             "countryAlphaThreeCode": "SAU",
-            "latitude": 24.666914158413626,
-            "longitude": 46.6421944640413,
+            "latitude": 24.585739736449984,
+            "longitude": 46.744858809369646,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -1993,8 +2009,8 @@
             "country": "United States of America",
             "countryAlphaTwoCode": "US",
             "countryAlphaThreeCode": "USA",
-            "latitude": 41.99563485382215,
-            "longitude": -93.45340086473756,
+            "latitude": 42.018584234044226,
+            "longitude": -93.41978617833207,
             "whoRegion": "AMR",
             "unRegion": "NORTHERN_AMERICA",
             "geographicScope": "Regional"
@@ -2017,7 +2033,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.688251151552045, 33.768357387064974]
+        "coordinates": [44.610537960840695, 33.78353280255899]
       },
       "properties": {
         "estimateId": "220810_Diyala_UniversityofDiyala_Humans",
@@ -2030,9 +2046,10 @@
           "countryAlphaThreeCode": "IRQ",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 33.768357387064974,
-          "longitude": 44.688251151552045,
+          "latitude": 33.78353280255899,
+          "longitude": 44.610537960840695,
           "firstAuthorFullName": "Abdulrazak Hasan",
+          "sourcePublicationYear": 2022,
           "sourceUrl": "https://journals.tubitak.gov.tr/medical/vol52/iss4/5/",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Cross-sectional study of Middle East respiratory syndrome coronavirus in humans and dromedary camels in Diyala, Iraq",
@@ -2068,7 +2085,7 @@
           "seroprevalenceCalculated95CIUpper": 0.6180125137,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Multiple populations",
-          "id": "66e0bbff9bf192eac657d870"
+          "id": "66e25149af5232d430c9695e"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -2212,7 +2229,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.323627995493815, 15.002572669089849]
+        "coordinates": [33.4328006229298, 15.015795880022553]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Slaughterhouse_Serum",
@@ -2225,9 +2242,10 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 15.002572669089849,
-          "longitude": 33.323627995493815,
+          "latitude": 15.015795880022553,
+          "longitude": 33.4328006229298,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -2261,7 +2279,7 @@
           "animalPurpose": "Meat",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d873"
+          "id": "66e25149af5232d430c96961"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -2344,7 +2362,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.56416917788246, 23.355361137254103]
+        "coordinates": [44.665737865273876, 23.338312899986335]
       },
       "properties": {
         "estimateId": "010520_SaudiArabia_KingAbdulazizUniversity_Primary",
@@ -2357,9 +2375,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.355361137254103,
-          "longitude": 44.56416917788246,
+          "latitude": 23.338312899986335,
+          "longitude": 44.665737865273876,
           "firstAuthorFullName": "Afnan A Degnah",
+          "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1016/j.jiph.2020.01.001",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Seroprevalence of MERS-CoV in healthy adults in western Saudi Arabia, 2011-2016",
@@ -2403,7 +2422,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Blood donors",
-          "id": "66e0bbff9bf192eac657d876"
+          "id": "66e25149af5232d430c96964"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -2601,7 +2620,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.43416431017159, 25.24553788296167]
+        "coordinates": [51.54932901683901, 25.34563745119204]
       },
       "properties": {
         "estimateId": "150715_Doha_ErasmusMedicalCenter_Nasal",
@@ -2614,9 +2633,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.24553788296167,
-          "longitude": 51.43416431017159,
+          "latitude": 25.34563745119204,
+          "longitude": 51.54932901683901,
           "firstAuthorFullName": "Elmoubasher A. B. A. Farag",
+          "sourcePublicationYear": 2015,
           "sourceUrl": "https://www.tandfonline.com/doi/full/10.3402/iee.v5.28305 ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "High proportion of MERS-CoV shedding dromedaries at slaughterhouse with a potential epidemiological link to human cases, Qatar 2014",
@@ -2653,7 +2673,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e0bbff9bf192eac657d879"
+          "id": "66e25149af5232d430c96967"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -2765,7 +2785,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [35.039828853019436, 29.465692161567922]
+        "coordinates": [34.940601939643614, 29.456732578180674]
       },
       "properties": {
         "estimateId": "210915_Jordan_RoyalVeterinaryCollege_2017-2018_Nasal",
@@ -2778,9 +2798,10 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 29.465692161567922,
-          "longitude": 35.039828853019436,
+          "latitude": 29.456732578180674,
+          "longitude": 34.940601939643614,
           "firstAuthorFullName": "Peter Holloway",
+          "sourcePublicationYear": 2021,
           "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8386791/",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Risk Factors for Middle East Respiratory Syndrome Coronavirus Infection among Camel Populations, Southern Jordan, 2014-2018",
@@ -2818,7 +2839,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e0bbff9bf192eac657d87c"
+          "id": "66e25149af5232d430c9696a"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -2838,7 +2859,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.623027782400584, 23.43233690351333]
+        "coordinates": [44.656323759111956, 23.43696660260381]
       },
       "properties": {
         "estimateId": "180507_SaudiArabia_UniversityofHongKong_Serum",
@@ -2850,9 +2871,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.43233690351333,
-          "longitude": 44.623027782400584,
+          "latitude": 23.43696660260381,
+          "longitude": 44.656323759111956,
           "firstAuthorFullName": "Samy Kasem",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1016/j.jiph.2017.09.022",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Cross-sectional study of MERS-CoV-specific RNA and antibodies in animals that have had contact with MERS patients in Saudi Arabia",
@@ -2889,7 +2911,7 @@
           "animalPurpose": "Not reported",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d87f"
+          "id": "66e25149af5232d430c9696d"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -2909,7 +2931,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.6792363024651, 23.30029689699535]
+        "coordinates": [44.56903756212613, 23.397881197146035]
       },
       "properties": {
         "estimateId": "131214_SaudiArabia_GlobalCentreforMassGatheringsMedicine_Patients_primary",
@@ -2921,9 +2943,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.30029689699535,
-          "longitude": 44.6792363024651,
+          "latitude": 23.397881197146035,
+          "longitude": 44.56903756212613,
           "firstAuthorFullName": "Z.A. Memish",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://doi.org/10.1111/1469-0691.12562",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Screening for Middle East respiratory syndrome coronavirus infection in hospital patients and their healthcare worker and family contacts: a prospective descriptive study",
@@ -2962,7 +2985,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d882"
+          "id": "66e25149af5232d430c96970"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -3044,7 +3067,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.68615917049478, 28.205604420805493]
+        "coordinates": [67.76973390757384, 28.187273574397775]
       },
       "properties": {
         "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Serum",
@@ -3056,9 +3079,10 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.205604420805493,
-          "longitude": 67.68615917049478,
+          "latitude": 28.187273574397775,
+          "longitude": 67.76973390757384,
           "firstAuthorFullName": "Ali Zohaib",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Countrywide Survey for MERS-Coronavirus Antibodies in Dromedaries and Humans in Pakistan",
@@ -3099,7 +3123,7 @@
           "animalPurpose": "Multiple purposes",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d885"
+          "id": "66e25149af5232d430c96973"
         },
         "geographicalAreaSubestimates": [
           {
@@ -3118,8 +3142,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 30.134934611753472,
-            "longitude": 67.07177888908103,
+            "latitude": 30.20331449321104,
+            "longitude": 66.92494234167536,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3140,8 +3164,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 33.916400349809685,
-            "longitude": 71.53727735304501,
+            "latitude": 33.97710620245406,
+            "longitude": 71.52228402669778,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3162,8 +3186,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 31.6562378203374,
-            "longitude": 74.33019664436671,
+            "latitude": 31.553631257282202,
+            "longitude": 74.40428471367271,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3184,8 +3208,8 @@
             "country": "Pakistan",
             "countryAlphaTwoCode": "PK",
             "countryAlphaThreeCode": "PAK",
-            "latitude": 24.866720724145782,
-            "longitude": 67.11921991785566,
+            "latitude": 24.767544172404776,
+            "longitude": 66.99498024964454,
             "whoRegion": "EMR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -3283,7 +3307,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.816119330800085, 0.5149592294399606]
+        "coordinates": [37.76454367272589, 0.5748643389762809]
       },
       "properties": {
         "estimateId": "181220_Kenya_ ChineseAcademyofSciences_Camels_OverallMolecular",
@@ -3295,9 +3319,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5149592294399606,
-          "longitude": 37.816119330800085,
+          "latitude": 0.5748643389762809,
+          "longitude": 37.76454367272589,
           "firstAuthorFullName": "Sheila Ommeh",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0076-4",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Genetic Evidence of Middle East Respiratory Syndrome Coronavirus (MERS-Cov) and Widespread Seroprevalence among Camels in Kenya",
@@ -3336,7 +3361,7 @@
           "animalDetectionSettings": ["Free-roaming herds"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d888"
+          "id": "66e25149af5232d430c96976"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -3402,7 +3427,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [46.62453358429972, 24.574854598702135]
+        "coordinates": [46.69868325262924, 24.65093723552044]
       },
       "properties": {
         "estimateId": "301018_SaudiArabia_KingSaudUniversity_CamelWorkers_Primary",
@@ -3416,9 +3441,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.574854598702135,
-          "longitude": 46.62453358429972,
+          "latitude": 24.65093723552044,
+          "longitude": 46.69868325262924,
           "firstAuthorFullName": "Abeer N Alshukairi",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1128/mbio.01985-18",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "High Prevalence of MERS-CoV Infection in Camel Workers in Saudi Arabia",
@@ -3450,7 +3476,7 @@
           "seroprevalenceCalculated95CIUpper": 0.6870297141,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e0bbff9bf192eac657d88b"
+          "id": "66e25149af5232d430c96979"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -3483,7 +3509,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.92341200879452, 26.556752202276066]
+        "coordinates": [29.938891322941153, 26.520327800037204]
       },
       "properties": {
         "estimateId": "191001_Egypt_AssiutUniversity_Humans",
@@ -3496,9 +3522,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 26.556752202276066,
-          "longitude": 29.92341200879452,
+          "latitude": 26.520327800037204,
+          "longitude": 29.938891322941153,
           "firstAuthorFullName": "Amal SM Saye",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://jidc.org/index.php/journal/article/view/32146454/2206 ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Seroprevalence of Middle East Respiratory Syndrome Corona Virus in dromedaries and their traders in upper Egypt",
@@ -3532,7 +3559,7 @@
           "seroprevalenceCalculated95CIUpper": 0.4487154515,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Camel traders",
-          "id": "66e0bbff9bf192eac657d88e"
+          "id": "66e25149af5232d430c9697c"
         },
         "geographicalAreaSubestimates": [
           {
@@ -3549,8 +3576,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 26.41931229548114,
-            "longitude": 29.933311497679494,
+            "latitude": 26.526634395418853,
+            "longitude": 29.804175170291597,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -3569,8 +3596,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 27.09975576584768,
-            "longitude": 31.09814394707529,
+            "latitude": 27.222464447121993,
+            "longitude": 31.19918183790423,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -3645,7 +3672,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [35.036412326902756, 29.4581396054004]
+        "coordinates": [34.908202561508894, 29.4432473741709]
       },
       "properties": {
         "estimateId": "210915_Jordan_RoyalVeterinaryCollege_2014-2015_Nasal",
@@ -3658,9 +3685,10 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 29.4581396054004,
-          "longitude": 35.036412326902756,
+          "latitude": 29.4432473741709,
+          "longitude": 34.908202561508894,
           "firstAuthorFullName": "Peter Holloway",
+          "sourcePublicationYear": 2021,
           "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8386791/",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Risk Factors for Middle East Respiratory Syndrome Coronavirus Infection among Camel Populations, Southern Jordan, 2014-2018",
@@ -3698,7 +3726,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e0bbff9bf192eac657d891"
+          "id": "66e25149af5232d430c9697f"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -3718,7 +3746,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [42.645593433679316, 16.92008887529775]
+        "coordinates": [42.48198047941737, 16.84544200138681]
       },
       "properties": {
         "estimateId": "301214_SaudiArabia_UniversityofFlorida_Primary",
@@ -3731,9 +3759,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 16.92008887529775,
-          "longitude": 42.645593433679316,
+          "latitude": 16.84544200138681,
+          "longitude": 42.48198047941737,
           "firstAuthorFullName": "Ziad A Memish",
+          "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.1111/irv.12287",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Sparse evidence of MERS-CoV infection among animal workers living in Southern Saudi Arabia during 2012",
@@ -3771,7 +3800,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Residual sera",
-          "id": "66e0bbff9bf192eac657d894"
+          "id": "66e25149af5232d430c96982"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -3833,7 +3862,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.885698347261695, 0.5495774947435823]
+        "coordinates": [37.836007587528236, 0.4784382923911662]
       },
       "properties": {
         "estimateId": "201111_Kenya_FAOUN",
@@ -3846,9 +3875,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5495774947435823,
-          "longitude": 37.885698347261695,
+          "latitude": 0.4784382923911662,
+          "longitude": 37.836007587528236,
           "firstAuthorFullName": "Rinah Sitawa",
+          "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1016%2Fj.prevetmed.2020.105197",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Risk factors for serological evidence of MERS-CoV in camels, Kenya, 2016-2017",
@@ -3885,7 +3915,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e0bbff9bf192eac657d897"
+          "id": "66e25149af5232d430c96985"
         },
         "geographicalAreaSubestimates": [
           {
@@ -3904,8 +3934,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5368286759075286,
-            "longitude": 37.89417045540203,
+            "latitude": 0.5644602335833707,
+            "longitude": 37.8636668219998,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -3926,8 +3956,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5915232177873654,
-            "longitude": 37.766132343931595,
+            "latitude": 0.5052278492379062,
+            "longitude": 37.945449986668265,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -3948,8 +3978,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5604120756914066,
-            "longitude": 37.92916725792602,
+            "latitude": 0.47127788537657095,
+            "longitude": 37.884083133625865,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -3970,8 +4000,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.48032904565801726,
-            "longitude": 37.84585424344201,
+            "latitude": 0.5401016430350584,
+            "longitude": 37.81310454619984,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -3992,8 +4022,8 @@
             "country": "Kenya",
             "countryAlphaTwoCode": "KE",
             "countryAlphaThreeCode": "KEN",
-            "latitude": 0.5015136526543441,
-            "longitude": 37.857200908019536,
+            "latitude": 0.4325734399532839,
+            "longitude": 37.92257377556422,
             "whoRegion": "AFR",
             "unRegion": "EASTERN_AFRICA",
             "geographicScope": "Regional"
@@ -4016,7 +4046,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [34.96339307002839, 40.51505318063479]
+        "coordinates": [34.90740607710343, 40.637044822024144]
       },
       "properties": {
         "estimateId": "091021_Turkey_HITITUniversity_Controls_Overall",
@@ -4029,9 +4059,10 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 40.51505318063479,
-          "longitude": 34.96339307002839,
+          "latitude": 40.637044822024144,
+          "longitude": 34.90740607710343,
           "firstAuthorFullName": "Ayşe Güreser",
+          "sourcePublicationYear": 2021,
           "sourceUrl": "https://dergipark.org.tr/en/pub/omujecm/issue/64795/886425",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Investigation of MERS-CoV seropositivity among Umrah visitors from the Çorum Region of Turkey",
@@ -4067,7 +4098,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e0bbff9bf192eac657d89a"
+          "id": "66e25149af5232d430c96988"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4112,7 +4143,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.6977558551139, 23.459157269558048]
+        "coordinates": [44.75145914337767, 23.4147250828384]
       },
       "properties": {
         "estimateId": "171211_Dhahran_JohnsHopkinsAramcoHealthcare",
@@ -4125,9 +4156,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.459157269558048,
-          "longitude": 44.6977558551139,
+          "latitude": 23.4147250828384,
+          "longitude": 44.75145914337767,
           "firstAuthorFullName": "Jaffar A. Al-Tawfiq",
+          "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.1016%2Fj.tmaid.2017.10.004",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Influenza is more common than Middle East Respiratory Syndrome Coronavirus (MERS-CoV) among hospitalized adult Saudi patients",
@@ -4161,7 +4193,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d89d"
+          "id": "66e25149af5232d430c9698b"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4208,7 +4240,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.86976210480749, 31.181793338391433]
+        "coordinates": [29.97763093926541, 31.289120870610283]
       },
       "properties": {
         "estimateId": "140516_Egypt_StJudeChildrensResearchHospital_Humans",
@@ -4221,9 +4253,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 31.181793338391433,
-          "longitude": 29.86976210480749,
+          "latitude": 31.289120870610283,
+          "longitude": 29.97763093926541,
           "firstAuthorFullName": "Daniel K.W. Chu",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/20/6/14-0299_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS Coronaviruses in Dromedary Camels, Egypt",
@@ -4254,7 +4287,7 @@
           "seroprevalenceCalculated95CIUpper": 0.02039736605,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Slaughterhouse workers",
-          "id": "66e0bbff9bf192eac657d8a0"
+          "id": "66e25149af5232d430c9698e"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4274,7 +4307,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.57656350391649, 23.40944891240561]
+        "coordinates": [44.5724545204892, 23.335069399117764]
       },
       "properties": {
         "estimateId": "150722_AlHasa_UniversityofHongKong",
@@ -4287,9 +4320,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.40944891240561,
-          "longitude": 44.57656350391649,
+          "latitude": 23.335069399117764,
+          "longitude": 44.5724545204892,
           "firstAuthorFullName": "Maged G. Hemid",
+          "sourcePublicationYear": 2015,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/21/4/14-1949_article",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Lack of middle east respiratory syndrome coronavirus transmission from infected camels",
@@ -4319,7 +4353,7 @@
           "seroprevalenceCalculated95CIUpper": 0.01912819418,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Multiple populations",
-          "id": "66e0bbff9bf192eac657d8a3"
+          "id": "66e25149af5232d430c96991"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4410,7 +4444,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [31.17462366597891, 30.032246830226175]
+        "coordinates": [31.151125702363856, 29.96191882021497]
       },
       "properties": {
         "estimateId": "130905_Egypt_StJudeChildrensResearchHospital_Humans",
@@ -4423,9 +4457,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 30.032246830226175,
-          "longitude": 31.17462366597891,
+          "latitude": 29.96191882021497,
+          "longitude": 31.151125702363856,
           "firstAuthorFullName": "R A Perera",
+          "sourcePublicationYear": 2013,
           "sourceUrl": "https://doi.org/10.2807/1560-7917.es2013.18.36.20574",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Seroepidemiology for MERS coronavirus using microneutralisation and pseudoparticle virus neutralisation assays reveal a high prevalence of antibody in dromedary camels in Egypt, June 2013",
@@ -4462,7 +4497,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e0bbff9bf192eac657d8a6"
+          "id": "66e25149af5232d430c96994"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4495,7 +4530,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [-119.68494890650884, 37.094939891036894]
+        "coordinates": [-119.63802611390432, 36.993424642659335]
       },
       "properties": {
         "estimateId": "210915_California_CaliforniaDepartmentofPublicHealth_Sero",
@@ -4508,9 +4543,10 @@
           "countryAlphaThreeCode": "USA",
           "whoRegion": "AMR",
           "unRegion": "NORTHERN_AMERICA",
-          "latitude": 37.094939891036894,
-          "longitude": -119.68494890650884,
+          "latitude": 36.993424642659335,
+          "longitude": -119.63802611390432,
           "firstAuthorFullName": "Mahtab Shahkarami",
+          "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.3201%2Feid2109.150476",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Laboratory Testing for Middle East Respiratory Syndrome Coronavirus, California, USA, 2013-2014",
@@ -4549,7 +4585,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d8a9"
+          "id": "66e25149af5232d430c96997"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4569,7 +4605,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.6275252887672, 23.301819848953972]
+        "coordinates": [44.62612755079157, 23.32716017707548]
       },
       "properties": {
         "estimateId": "131214_SaudiArabia_GlobalCentreforMassGatheringsMedicine_FamilyContacts_Primary",
@@ -4581,9 +4617,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.301819848953972,
-          "longitude": 44.6275252887672,
+          "latitude": 23.32716017707548,
+          "longitude": 44.62612755079157,
           "firstAuthorFullName": "Z.A. Memish",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://doi.org/10.1111/1469-0691.12562",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Screening for Middle East respiratory syndrome coronavirus infection in hospital patients and their healthcare worker and family contacts: a prospective descriptive study",
@@ -4622,7 +4659,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of cases",
-          "id": "66e0bbff9bf192eac657d8ac"
+          "id": "66e25149af5232d430c9699a"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -4704,7 +4741,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.57010500826083, 23.36910667612245]
+        "coordinates": [44.64777054058761, 23.343146519890162]
       },
       "properties": {
         "estimateId": "111113_SaudiArabia_UniversityofBonnMedicalCenter_Slaughterhouse_primary",
@@ -4717,9 +4754,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.36910667612245,
-          "longitude": 44.57010500826083,
+          "latitude": 23.343146519890162,
+          "longitude": 44.64777054058761,
           "firstAuthorFullName": "Asad S. Aburizaiza",
+          "sourcePublicationYear": 2012,
           "sourceUrl": "https://doi.org/10.1093/infdis/jit589",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Investigation of anti-middle east respiratory syndrome antibodies in blood donors and slaughterhouse workers in Jeddah and Makkah, Saudi Arabia, Fall 2012",
@@ -4757,7 +4795,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Slaughterhouse workers",
-          "id": "66e0bbff9bf192eac657d8af"
+          "id": "66e25149af5232d430c9699d"
         },
         "geographicalAreaSubestimates": [
           {
@@ -4774,8 +4812,8 @@
             "country": "Saudi Arabia",
             "countryAlphaTwoCode": "SA",
             "countryAlphaThreeCode": "SAU",
-            "latitude": 21.57756931902789,
-            "longitude": 39.23975113503992,
+            "latitude": 21.59906604285678,
+            "longitude": 39.09961876261474,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -4794,8 +4832,8 @@
             "country": "Saudi Arabia",
             "countryAlphaTwoCode": "SA",
             "countryAlphaThreeCode": "SAU",
-            "latitude": 21.397478636458512,
-            "longitude": 39.86893418233456,
+            "latitude": 21.32157142739561,
+            "longitude": 39.80166918404863,
             "whoRegion": "EMR",
             "unRegion": "WESTERN_ASIA",
             "geographicScope": "Local"
@@ -4818,7 +4856,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [40.438256009296275, 21.336586634904382]
+        "coordinates": [40.48249541515976, 21.29061842640149]
       },
       "properties": {
         "estimateId": "170508_Taif_KingSaudUniversity",
@@ -4831,9 +4869,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 21.336586634904382,
-          "longitude": 40.438256009296275,
+          "latitude": 21.29061842640149,
+          "longitude": 40.48249541515976,
           "firstAuthorFullName": "A.O. Olarinmoye",
+          "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.1017/s0950268817000905",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Serological evidence of coronavirus infections in native hamadryas baboons (Papio hamadryas hamadryas) of the Kingdom of Saudi Arabia",
@@ -4866,7 +4905,7 @@
           "animalDetectionSettings": ["Free-roaming herds"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8b2"
+          "id": "66e25149af5232d430c969a0"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -4886,7 +4925,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.936853193266295, 0.5852797292636984]
+        "coordinates": [37.88383300525227, 0.44669608435288427]
       },
       "properties": {
         "estimateId": "181220_Kenya_ ChineseAcademyofSciences_Humans_primary",
@@ -4898,9 +4937,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5852797292636984,
-          "longitude": 37.936853193266295,
+          "latitude": 0.44669608435288427,
+          "longitude": 37.88383300525227,
           "firstAuthorFullName": "Sheila Ommeh",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0076-4",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Genetic Evidence of Middle East Respiratory Syndrome Coronavirus (MERS-Cov) and Widespread Seroprevalence among Camels in Kenya",
@@ -4942,7 +4982,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e0bbff9bf192eac657d8b5"
+          "id": "66e25149af5232d430c969a3"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5000,7 +5040,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.73723404278567, 23.44769188222978]
+        "coordinates": [44.731058246277264, 23.441320394837692]
       },
       "properties": {
         "estimateId": "230417_SaudiArabia_RiyadhMinistryofHealth_PrimaryMol",
@@ -5012,9 +5052,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.44769188222978,
-          "longitude": 44.73723404278567,
+          "latitude": 23.441320394837692,
+          "longitude": 44.731058246277264,
           "firstAuthorFullName": "Abdulaziz A. Bin Saeed",
+          "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.3201%2Feid2304.161793",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Surveillance and Testing for Middle East Respiratory Syndrome Coronavirus, Saudi Arabia, April 2015-February 2016",
@@ -5054,7 +5095,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d8b8"
+          "id": "66e25149af5232d430c969a6"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -5316,7 +5357,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [35.164055341758036, 39.03953185584628]
+        "coordinates": [35.21657145741736, 39.07308670699552]
       },
       "properties": {
         "estimateId": "100316_Turkey_GulhaneMedicalAcademy_Sero",
@@ -5328,9 +5369,10 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 39.03953185584628,
-          "longitude": 35.164055341758036,
+          "latitude": 39.07308670699552,
+          "longitude": 35.21657145741736,
           "firstAuthorFullName": "H. Erdem",
+          "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1007/s10096-016-2614-z",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Infections in travellers returning to Turkey from the Arabian peninsula: a retrospective cross-sectional multicenter study",
@@ -5368,7 +5410,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e0bbff9bf192eac657d8bb"
+          "id": "66e25149af5232d430c969a9"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5388,7 +5430,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [33.453287398398615, 14.954198487084636]
+        "coordinates": [33.48171946349531, 14.982731022922799]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Market_Serum",
@@ -5401,9 +5443,10 @@
           "countryAlphaThreeCode": "SDN",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 14.954198487084636,
-          "longitude": 33.453287398398615,
+          "latitude": 14.982731022922799,
+          "longitude": 33.48171946349531,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -5437,7 +5480,7 @@
           "animalPurpose": "Meat and milk",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8be"
+          "id": "66e25149af5232d430c969ac"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5457,7 +5500,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.86224040283885, 31.2421090819681]
+        "coordinates": [29.832867108286138, 31.28068144494538]
       },
       "properties": {
         "estimateId": "140516_Egypt_StJudeChildrensResearchHospital_Camels_Serum",
@@ -5470,9 +5513,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 31.2421090819681,
-          "longitude": 29.86224040283885,
+          "latitude": 31.28068144494538,
+          "longitude": 29.832867108286138,
           "firstAuthorFullName": "Daniel K.W. Chu",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/20/6/14-0299_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS Coronaviruses in Dromedary Camels, Egypt",
@@ -5505,7 +5549,7 @@
           "animalDetectionSettings": ["Abattoirs"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8c1"
+          "id": "66e25149af5232d430c969af"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5525,7 +5569,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [8.628470227441596, 11.971310224300128]
+        "coordinates": [8.609879659999265, 11.895967434132045]
       },
       "properties": {
         "estimateId": "180618_Kano_UniversityofHongKong_Camels",
@@ -5538,9 +5582,10 @@
           "countryAlphaThreeCode": "NGA",
           "whoRegion": "AFR",
           "unRegion": "WESTERN_AFRICA",
-          "latitude": 11.971310224300128,
-          "longitude": 8.628470227441596,
+          "latitude": 11.895967434132045,
+          "longitude": 8.609879659999265,
           "firstAuthorFullName": "Ray TY So",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.2807%2F1560-7917.ES.2018.23.32.1800175",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Lack of serological evidence of middle east respiratory syndrome coronavirus infection in virus exposed camel abattoir workers in Nigeria, 2016",
@@ -5573,7 +5618,7 @@
           "animalPurpose": "Meat",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8c4"
+          "id": "66e25149af5232d430c969b2"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -5633,7 +5678,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [39.23174256957337, 21.49773137122207]
+        "coordinates": [39.066133459059145, 21.495580396225996]
       },
       "properties": {
         "estimateId": "111113_SaudiArabia_UniversityofBonnMedicalCenter_blooddonors",
@@ -5646,9 +5691,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 21.49773137122207,
-          "longitude": 39.23174256957337,
+          "latitude": 21.495580396225996,
+          "longitude": 39.066133459059145,
           "firstAuthorFullName": "Asad S. Aburizaiza",
+          "sourcePublicationYear": 2012,
           "sourceUrl": "https://doi.org/10.1093/infdis/jit589",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Investigation of anti-middle east respiratory syndrome antibodies in blood donors and slaughterhouse workers in Jeddah and Makkah, Saudi Arabia, Fall 2012",
@@ -5685,7 +5731,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Blood donors",
-          "id": "66e0bbff9bf192eac657d8c7"
+          "id": "66e25149af5232d430c969b5"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5705,7 +5751,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [35.27705316032084, 39.15393312909559]
+        "coordinates": [35.130606651931075, 39.11093308550564]
       },
       "properties": {
         "estimateId": "100316_Turkey_GulhaneMedicalAcademy_Mol",
@@ -5717,9 +5763,10 @@
           "countryAlphaThreeCode": "TUR",
           "whoRegion": "EUR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 39.15393312909559,
-          "longitude": 35.27705316032084,
+          "latitude": 39.11093308550564,
+          "longitude": 35.130606651931075,
           "firstAuthorFullName": "H. Erdem",
+          "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1007/s10096-016-2614-z",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Infections in travellers returning to Turkey from the Arabian peninsula: a retrospective cross-sectional multicenter study",
@@ -5757,7 +5804,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Travellers/tourism",
-          "id": "66e0bbff9bf192eac657d8ca"
+          "id": "66e25149af5232d430c969b8"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5777,7 +5824,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [31.196061385460233, 30.045087289564947]
+        "coordinates": [31.27023354018531, 30.055851496621194]
       },
       "properties": {
         "estimateId": "070916_Egypt_EgyptianMinistryofHealthandPopulation_Humans_Overall",
@@ -5790,9 +5837,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 30.045087289564947,
-          "longitude": 31.196061385460233,
+          "latitude": 30.055851496621194,
+          "longitude": 31.27023354018531,
           "firstAuthorFullName": "Samir Refaey",
+          "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1111/irv.12429",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Cross-sectional survey and surveillance for influenza viruses and MERS-CoV among Egyptian pilgrims returning from Hajj during 2012-2015",
@@ -5828,7 +5876,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Pilgrims",
-          "id": "66e0bbff9bf192eac657d8cd"
+          "id": "66e25149af5232d430c969bb"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -5926,7 +5974,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [54.31074040875821, 24.477880362498283]
+        "coordinates": [54.31147718455694, 24.44426023510387]
       },
       "properties": {
         "estimateId": "150119_UnitedArabEmirates_AbuDhabiFoodControlAuthority_primary",
@@ -5939,9 +5987,10 @@
           "countryAlphaThreeCode": "ARE",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 24.477880362498283,
-          "longitude": 54.31074040875821,
+          "latitude": 24.44426023510387,
+          "longitude": 54.31147718455694,
           "firstAuthorFullName": "Mohammed Farouk Yusof",
+          "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.1038/emi.2017.89",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Diversity of Middle East respiratory syndrome coronaviruses in 109 dromedary camels based on full-genome sequencing, Abu Dhabi, United Arab Emirates",
@@ -5979,7 +6028,7 @@
           "animalDetectionSettings": ["Livestock markets"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8d0"
+          "id": "66e25149af5232d430c969be"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -6070,7 +6119,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.156871523760366, 25.468109115012254]
+        "coordinates": [51.15078080415931, 25.38247020065355]
       },
       "properties": {
         "estimateId": "140606_Qatar_ErasmusMedicalCenter_Camels_Serum",
@@ -6083,9 +6132,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.468109115012254,
-          "longitude": 51.156871523760366,
+          "latitude": 25.38247020065355,
+          "longitude": 51.15078080415931,
           "firstAuthorFullName": "C B Reusken",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://www.eurosurveillance.org/content/10.2807/1560-7917.ES2014.19.23.20829 ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Middle East Respiratory Syndrome Coronavirus (MERS-CoV) RNA and Neutralising Antibodies in Milk Collected According to Local Customs from Dromedary Camels, Qatar, April 2014",
@@ -6120,7 +6170,7 @@
           "animalPurpose": "Milking",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8d3"
+          "id": "66e25149af5232d430c969c1"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6153,7 +6203,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [8.472429161931007, 11.914733959946037]
+        "coordinates": [8.441841947120885, 11.97288303294377]
       },
       "properties": {
         "estimateId": "180618_Kano_UniversityofHongKong_Humans",
@@ -6166,9 +6216,10 @@
           "countryAlphaThreeCode": "NGA",
           "whoRegion": "AFR",
           "unRegion": "WESTERN_AFRICA",
-          "latitude": 11.914733959946037,
-          "longitude": 8.472429161931007,
+          "latitude": 11.97288303294377,
+          "longitude": 8.441841947120885,
           "firstAuthorFullName": "Ray TY So",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.2807%2F1560-7917.ES.2018.23.32.1800175",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Lack of serological evidence of middle east respiratory syndrome coronavirus infection in virus exposed camel abattoir workers in Nigeria, 2016",
@@ -6199,7 +6250,7 @@
           "seroprevalenceCalculated95CIUpper": 0.01403422679,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Slaughterhouse workers",
-          "id": "66e0bbff9bf192eac657d8d6"
+          "id": "66e25149af5232d430c969c4"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6248,7 +6299,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.96591047343279, 31.259732219683794]
+        "coordinates": [29.88256370500561, 31.258183362673346]
       },
       "properties": {
         "estimateId": "140516_Egypt_StJudeChildrensResearchHospital_Camels",
@@ -6261,9 +6312,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 31.259732219683794,
-          "longitude": 29.96591047343279,
+          "latitude": 31.258183362673346,
+          "longitude": 29.88256370500561,
           "firstAuthorFullName": "Daniel K.W. Chu",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/20/6/14-0299_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS Coronaviruses in Dromedary Camels, Egypt",
@@ -6296,7 +6348,7 @@
           "animalDetectionSettings": ["Abattoirs"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8d9"
+          "id": "66e25149af5232d430c969c7"
         },
         "geographicalAreaSubestimates": [
           {
@@ -6313,8 +6365,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 26.50493468935089,
-            "longitude": 29.85235018717745,
+            "latitude": 26.435220841901575,
+            "longitude": 29.927810698231372,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -6333,8 +6385,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 31.21943200294854,
-            "longitude": 29.823121924468204,
+            "latitude": 31.227588447560535,
+            "longitude": 29.92936308658814,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -6353,8 +6405,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 30.030161451871102,
-            "longitude": 31.335788802731102,
+            "latitude": 30.010473572392645,
+            "longitude": 31.259633987867602,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -6377,7 +6429,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.8728374719317, 0.4378984708686832]
+        "coordinates": [37.906025541369125, 0.5720854629108649]
       },
       "properties": {
         "estimateId": "201201_MarsabitCounty_USCDC_Camels",
@@ -6390,9 +6442,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.4378984708686832,
-          "longitude": 37.8728374719317,
+          "latitude": 0.5720854629108649,
+          "longitude": 37.906025541369125,
           "firstAuthorFullName": "I. Ngere",
+          "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1017/s0950268820002939",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "High MERS-CoV seropositivity associated with camel herd profile, husbandry practices and household socio-demographic characteristics in Northern Kenya",
@@ -6428,7 +6481,7 @@
             "Adult (>2 years)",
             "Neonatal (≤6 months)"
           ],
-          "id": "66e0bbff9bf192eac657d8dc"
+          "id": "66e25149af5232d430c969ca"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -6552,7 +6605,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [39.79329563372929, 21.686919928110527]
+        "coordinates": [39.6427397566948, 21.69514804131864]
       },
       "properties": {
         "estimateId": "311020_SaudiArabia_TaifUniversity_Primary",
@@ -6566,9 +6619,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 21.686919928110527,
-          "longitude": 39.79329563372929,
+          "latitude": 21.69514804131864,
+          "longitude": 39.6427397566948,
           "firstAuthorFullName": "Khalaf F. Alsharif",
+          "sourcePublicationYear": 2020,
           "sourceUrl": "https://doi.org/10.1002/jmv.26642",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "The prevalence of MERS-CoV among military personnel and their families: A single-center study",
@@ -6607,7 +6661,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d8df"
+          "id": "66e25149af5232d430c969cd"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6706,7 +6760,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.48979963023413, 25.26921475109869]
+        "coordinates": [51.56316277178328, 25.356107633754696]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Imported_Nasal",
@@ -6719,9 +6773,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.26921475109869,
-          "longitude": 51.48979963023413,
+          "latitude": 25.356107633754696,
+          "longitude": 51.56316277178328,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -6754,7 +6809,7 @@
           "animalPurpose": "Meat, milk, racing",
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8e2"
+          "id": "66e25149af5232d430c969d0"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6774,7 +6829,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [36.43083327691529, 31.084173711585485]
+        "coordinates": [36.488627398902814, 30.970509640565567]
       },
       "properties": {
         "estimateId": "240722_Jordan_RoyalVeterinaryCollege_Nasal",
@@ -6787,9 +6842,10 @@
           "countryAlphaThreeCode": "JOR",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 31.084173711585485,
-          "longitude": 36.43083327691529,
+          "latitude": 30.970509640565567,
+          "longitude": 36.488627398902814,
           "firstAuthorFullName": "Peter M Holloway",
+          "sourcePublicationYear": 2024,
           "sourceUrl": "https://doi.org/10.1016/S2666-5247(24)00082-X",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV exposure and risk factors for MERS-CoV ELISA seropositivity among members of livestock-owning households in southern Jordan: a population based cross-sectional study",
@@ -6825,7 +6881,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e0bbff9bf192eac657d8e5"
+          "id": "66e25149af5232d430c969d3"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6845,7 +6901,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.157558751550965, 25.32316435478038]
+        "coordinates": [51.20367005760822, 25.270770810373534]
       },
       "properties": {
         "estimateId": "180219_Qatar_QatarUniversity_Humans_closecontacts_primary",
@@ -6857,9 +6913,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.32316435478038,
-          "longitude": 51.157558751550965,
+          "latitude": 25.270770810373534,
+          "longitude": 51.20367005760822,
           "firstAuthorFullName": "Reham A Al Kahlout",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.1155/2019/1386740",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Comparative Serological Study for the Prevalence of Anti-MERS Coronavirus Antibodies in High- and Low-Risk Groups in Qatar",
@@ -6894,7 +6951,7 @@
             "Adults (46-59 years)"
           ],
           "sampleFrame": "Close contacts of cases",
-          "id": "66e0bbff9bf192eac657d8e8"
+          "id": "66e25149af5232d430c969d6"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -6954,7 +7011,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.68056563102135, 28.14367542108386]
+        "coordinates": [67.76159358302685, 28.115254080652253]
       },
       "properties": {
         "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Humans_Serum",
@@ -6966,9 +7023,10 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.14367542108386,
-          "longitude": 67.68056563102135,
+          "latitude": 28.115254080652253,
+          "longitude": 67.76159358302685,
           "firstAuthorFullName": "Ali Zohaib",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Countrywide Survey for MERS-Coronavirus Antibodies in Dromedaries and Humans in Pakistan",
@@ -7002,7 +7060,7 @@
           "seroprevalenceCalculated95CIUpper": 0.02062921532,
           "ageGroup": ["Adults (18-45 years)", "Adults (46-59 years)"],
           "sampleFrame": "Household and community sample",
-          "id": "66e0bbff9bf192eac657d8eb"
+          "id": "66e25149af5232d430c969d9"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7035,7 +7093,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.78191730302255, 28.22416898419336]
+        "coordinates": [67.77355932954094, 28.097889431482784]
       },
       "properties": {
         "estimateId": "061119_Cholistan_UniversityofVeterinaryandAnimalSciences_OverallPRNT",
@@ -7049,9 +7107,10 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.22416898419336,
-          "longitude": 67.78191730302255,
+          "latitude": 28.097889431482784,
+          "longitude": 67.77355932954094,
           "firstAuthorFullName": "Jian Zheng",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.3201%2Feid2512.191169",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Middle East Respiratory Syndrome Coronavirus Seropositivity in Camel Handlers and Their Families, Pakistan",
@@ -7089,7 +7148,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Close contacts of camels",
-          "id": "66e0bbff9bf192eac657d8ee"
+          "id": "66e25149af5232d430c969dc"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7171,7 +7230,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [51.44167714185392, 25.293385664399764]
+        "coordinates": [51.5966504233069, 25.331154037628043]
       },
       "properties": {
         "estimateId": "191118_Tamboul_UniversityofGezira_Camels_Imported_Serum",
@@ -7184,9 +7243,10 @@
           "countryAlphaThreeCode": "QAT",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 25.293385664399764,
-          "longitude": 51.44167714185392,
+          "latitude": 25.331154037628043,
+          "longitude": 51.5966504233069,
           "firstAuthorFullName": "Elmoubasher Farag",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://wwwnc.cdc.gov/eid/article/25/12/19-0882_article ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "MERS-CoV in Camels but Not Camel Handlers, Sudan, 2015 and 2017",
@@ -7220,7 +7280,7 @@
           "animalPurpose": "Meat, milk, racing",
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8f1"
+          "id": "66e25149af5232d430c969df"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7240,7 +7300,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [75.87088164877268, 15.022923529252234]
+        "coordinates": [75.7770045651397, 14.906988056605716]
       },
       "properties": {
         "estimateId": "291015_India_ManipalUniversity_overall",
@@ -7253,9 +7313,10 @@
           "countryAlphaThreeCode": "IND",
           "whoRegion": "SEAR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 15.022923529252234,
-          "longitude": 75.87088164877268,
+          "latitude": 14.906988056605716,
+          "longitude": 75.7770045651397,
           "firstAuthorFullName": "Prabhu G. Suresha",
+          "sourcePublicationYear": 2016,
           "sourceUrl": "https://doi.org/10.1002/jmv.24296",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Human coronaviruses in severe acute respiratory infection (SARI) cases in southwest India",
@@ -7292,7 +7353,7 @@
             "Adults (46-59 years)"
           ],
           "sampleFrame": "Suspected cases",
-          "id": "66e0bbff9bf192eac657d8f4"
+          "id": "66e25149af5232d430c969e2"
         },
         "geographicalAreaSubestimates": [
           {
@@ -7309,8 +7370,8 @@
             "country": "India",
             "countryAlphaTwoCode": "IN",
             "countryAlphaThreeCode": "IND",
-            "latitude": 14.871983561561485,
-            "longitude": 75.7442929042882,
+            "latitude": 14.862749378935723,
+            "longitude": 75.80675393944566,
             "whoRegion": "SEAR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -7329,8 +7390,8 @@
             "country": "India",
             "countryAlphaTwoCode": "IN",
             "countryAlphaThreeCode": "IND",
-            "latitude": 10.277781576419468,
-            "longitude": 76.54697168512826,
+            "latitude": 10.153502475097921,
+            "longitude": 76.63676379662634,
             "whoRegion": "SEAR",
             "unRegion": "SOUTHERN_ASIA",
             "geographicScope": "Regional"
@@ -7378,7 +7439,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.65800523298407, 23.317100585956865]
+        "coordinates": [44.59152869623714, 23.4352626202267]
       },
       "properties": {
         "estimateId": "151217_SaudiArabia_KingAbdulazizUniversity_Camels_OverallNasal",
@@ -7390,9 +7451,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.317100585956865,
-          "longitude": 44.65800523298407,
+          "latitude": 23.4352626202267,
+          "longitude": 44.59152869623714,
           "firstAuthorFullName": "Jamal S. M. Sabir",
+          "sourcePublicationYear": 2015,
           "sourceUrl": "https://doi.org/10.1126/science.aac8608",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Co-circulation of three camel coronavirus species and recombination of MERS-CoVs in Saudi Arabia",
@@ -7427,7 +7489,7 @@
           "animalDetectionSettings": ["Farms", "Livestock markets"],
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": [],
-          "id": "66e0bbff9bf192eac657d8f7"
+          "id": "66e25149af5232d430c969e5"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -7739,7 +7801,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.70988882051942, 23.35281683472938]
+        "coordinates": [44.56532905131243, 23.289751582768965]
       },
       "properties": {
         "estimateId": "131214_SaudiArabia_GlobalCentreforMassGatheringsMedicine_HCWcontacts_primary",
@@ -7751,9 +7813,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.35281683472938,
-          "longitude": 44.70988882051942,
+          "latitude": 23.289751582768965,
+          "longitude": 44.56532905131243,
           "firstAuthorFullName": "Z.A. Memish",
+          "sourcePublicationYear": 2014,
           "sourceUrl": "https://doi.org/10.1111/1469-0691.12562",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Screening for Middle East respiratory syndrome coronavirus infection in hospital patients and their healthcare worker and family contacts: a prospective descriptive study",
@@ -7791,7 +7854,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Healthcare workers",
-          "id": "66e0bbff9bf192eac657d8fa"
+          "id": "66e25149af5232d430c969e8"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7836,7 +7899,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [67.72206352104345, 28.122961173237982]
+        "coordinates": [67.72855921852768, 28.274075785179917]
       },
       "properties": {
         "estimateId": "181011_Pakistan_WuhanInstituteofVirology_Camels_Nasal",
@@ -7848,9 +7911,10 @@
           "countryAlphaThreeCode": "PAK",
           "whoRegion": "EMR",
           "unRegion": "SOUTHERN_ASIA",
-          "latitude": 28.122961173237982,
-          "longitude": 67.72206352104345,
+          "latitude": 28.274075785179917,
+          "longitude": 67.72855921852768,
           "firstAuthorFullName": "Ali Zohaib",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1007/s12250-018-0051-0",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Countrywide Survey for MERS-Coronavirus Antibodies in Dromedaries and Humans in Pakistan",
@@ -7887,7 +7951,7 @@
           "animalPurpose": "Multiple purposes",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d8fd"
+          "id": "66e25149af5232d430c969eb"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -7907,7 +7971,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [29.88262325719342, 26.40688484578371]
+        "coordinates": [29.87942310858993, 26.434253555373164]
       },
       "properties": {
         "estimateId": "191001_Egypt_AssiutUniversity_Camels",
@@ -7920,9 +7984,10 @@
           "countryAlphaThreeCode": "EGY",
           "whoRegion": "EMR",
           "unRegion": "NORTHERN_AFRICA",
-          "latitude": 26.40688484578371,
-          "longitude": 29.88262325719342,
+          "latitude": 26.434253555373164,
+          "longitude": 29.87942310858993,
           "firstAuthorFullName": "Amal SM Saye",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://jidc.org/index.php/journal/article/view/32146454/2206 ",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Seroprevalence of Middle East Respiratory Syndrome Corona Virus in dromedaries and their traders in upper Egypt",
@@ -7959,7 +8024,7 @@
           "animalPurpose": "Slaughter",
           "animalImportedOrLocal": "Imported",
           "animalAgeGroup": ["Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d900"
+          "id": "66e25149af5232d430c969ee"
         },
         "geographicalAreaSubestimates": [
           {
@@ -7976,8 +8041,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 26.43549978741136,
-            "longitude": 29.94681735203962,
+            "latitude": 26.495990835167298,
+            "longitude": 29.881895833311788,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -7996,8 +8061,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 24.157049884203115,
-            "longitude": 32.815352060371595,
+            "latitude": 24.135593466200387,
+            "longitude": 32.833142534509534,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -8016,8 +8081,8 @@
             "country": "Egypt",
             "countryAlphaTwoCode": "EG",
             "countryAlphaThreeCode": "EGY",
-            "latitude": 27.271254143011085,
-            "longitude": 31.091186833738174,
+            "latitude": 27.212840555063423,
+            "longitude": 31.127550859525126,
             "whoRegion": "EMR",
             "unRegion": "NORTHERN_AFRICA",
             "geographicScope": "Local"
@@ -8092,7 +8157,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.72778657108439, 33.735950859109415]
+        "coordinates": [44.61817841012635, 33.64640613872549]
       },
       "properties": {
         "estimateId": "220810_Diyala_UniversityofDiyala_Camels",
@@ -8105,9 +8170,10 @@
           "countryAlphaThreeCode": "IRQ",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 33.735950859109415,
-          "longitude": 44.72778657108439,
+          "latitude": 33.64640613872549,
+          "longitude": 44.61817841012635,
           "firstAuthorFullName": "Abdulrazak Hasan",
+          "sourcePublicationYear": 2022,
           "sourceUrl": "https://journals.tubitak.gov.tr/medical/vol52/iss4/5/",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Cross-sectional study of Middle East respiratory syndrome coronavirus in humans and dromedary camels in Diyala, Iraq",
@@ -8144,7 +8210,7 @@
           "animalPurpose": "Not reported",
           "animalImportedOrLocal": "Not reported",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d903"
+          "id": "66e25149af5232d430c969f1"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [
@@ -8242,7 +8308,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [44.66515197275111, 23.396963997350536]
+        "coordinates": [44.70346725247978, 23.45815497017109]
       },
       "properties": {
         "estimateId": "180507_SaudiArabia_UniversityofHongKong_Nasal",
@@ -8254,9 +8320,10 @@
           "countryAlphaThreeCode": "SAU",
           "whoRegion": "EMR",
           "unRegion": "WESTERN_ASIA",
-          "latitude": 23.396963997350536,
-          "longitude": 44.66515197275111,
+          "latitude": 23.45815497017109,
+          "longitude": 44.70346725247978,
           "firstAuthorFullName": "Samy Kasem",
+          "sourcePublicationYear": 2018,
           "sourceUrl": "https://doi.org/10.1016/j.jiph.2017.09.022",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Cross-sectional study of MERS-CoV-specific RNA and antibodies in animals that have had contact with MERS patients in Saudi Arabia",
@@ -8289,7 +8356,7 @@
           "animalPurpose": "Not reported",
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)", "Adult (>2 years)"],
-          "id": "66e0bbff9bf192eac657d906"
+          "id": "66e25149af5232d430c969f4"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -8346,7 +8413,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [40.59733553241837, 10.15040009872789]
+        "coordinates": [40.759441931080765, 10.23769324206641]
       },
       "properties": {
         "estimateId": "190618_Afar_NihonUniversity_Nasal",
@@ -8360,9 +8427,10 @@
           "countryAlphaThreeCode": "ETH",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 10.15040009872789,
-          "longitude": 40.59733553241837,
+          "latitude": 10.23769324206641,
+          "longitude": 40.759441931080765,
           "firstAuthorFullName": "Kazuya Shirato",
+          "sourcePublicationYear": 2019,
           "sourceUrl": "https://doi.org/10.3389/fmicb.2019.01326",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "Middle east respiratory syndrome coronavirus in dromedaries in Ethiopia is antigenically different from the Middle East isolate EMC",
@@ -8395,7 +8463,7 @@
           "animalDetectionSettings": ["Farms"],
           "animalImportedOrLocal": "Local",
           "animalAgeGroup": ["Juvenile (6 months-2 years)"],
-          "id": "66e0bbff9bf192eac657d909"
+          "id": "66e25149af5232d430c969f7"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
@@ -8415,7 +8483,7 @@
       "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [37.77790839776368, 0.5554123542403968]
+        "coordinates": [37.83470460598953, 0.5458742339327329]
       },
       "properties": {
         "estimateId": "170607_Marsabit_KenyaMedicalResearchInstitute_Humans",
@@ -8428,9 +8496,10 @@
           "countryAlphaThreeCode": "KEN",
           "whoRegion": "AFR",
           "unRegion": "EASTERN_AFRICA",
-          "latitude": 0.5554123542403968,
-          "longitude": 37.77790839776368,
+          "latitude": 0.5458742339327329,
+          "longitude": 37.83470460598953,
           "firstAuthorFullName": "Peninah Munyua",
+          "sourcePublicationYear": 2017,
           "sourceUrl": "https://doi.org/10.4269%2Fajtmh.16-0880",
           "sourceType": "Journal Article (Peer-Reviewed)",
           "sourceTitle": "No Serologic Evidence of Middle East Respiratory Syndrome Coronavirus Infection Among Camel Farmers Exposed to Highly Seropositive Camel Herds: A Household Linked Study, Kenya, 2013",
@@ -8468,7 +8537,7 @@
             "Seniors (≥60 years)"
           ],
           "sampleFrame": "Household and community sample",
-          "id": "66e0bbff9bf192eac657d90c"
+          "id": "66e25149af5232d430c969fa"
         },
         "geographicalAreaSubestimates": [],
         "ageGroupSubestimates": [],
