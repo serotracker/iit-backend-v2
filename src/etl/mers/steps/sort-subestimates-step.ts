@@ -171,6 +171,22 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
           }
 
           return 0;
+        }),
+      humanCountriesOfTravelSubestimates: groupedEstimate.humanCountriesOfTravelSubestimates
+        .sort((subestimateA, subestimateB) => {
+          let index = 0;
+
+          while(index < subestimateA.humanCountriesOfTravel.length && index < subestimateB.humanCountriesOfTravel.length) {
+            const subestimateACountry = subestimateA.humanCountriesOfTravel[index];
+            const subestimateBCountry = subestimateB.humanCountriesOfTravel[index];
+
+            if(subestimateACountry !== subestimateBCountry) {
+              return subestimateACountry > subestimateBCountry ? 1 : -1;
+            }
+            index++;
+          }
+
+          return subestimateA.humanCountriesOfTravel.length - subestimateB.humanCountriesOfTravel.length
         })
     })),
     allSources: input.allSources,

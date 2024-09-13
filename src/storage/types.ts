@@ -303,6 +303,7 @@ export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase &
   seroprevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   sampleFrame: string | undefined;
+  humanCountriesOfTravel: string[];
 }
 
 export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -314,6 +315,7 @@ export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   sampleFrame: string | undefined;
+  humanCountriesOfTravel: string[];
 }
 
 export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
@@ -329,6 +331,7 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
   animalAgeGroup: string[];
+  animalCountriesOfImport: string[];
 }
 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -344,6 +347,9 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
   animalAgeGroup: string[];
+  animalCountriesOfImport: Array<{
+
+  }>
 }
 
 export type MersEstimateDocument = 

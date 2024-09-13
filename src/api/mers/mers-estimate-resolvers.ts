@@ -131,7 +131,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       seroprevalenceCalculated95CIUpper: document.seroprevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
-      sampleFrame: document.sampleFrame
+      sampleFrame: document.sampleFrame,
+      humanCountriesOfTravel: document.humanCountriesOfTravel
     }
   }
 
@@ -150,7 +151,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       animalDetectionSettings: document.animalDetectionSettings,
       animalPurpose: document.animalPurpose,
       animalImportedOrLocal: document.animalImportedOrLocal,
-      animalAgeGroup: document.animalAgeGroup
+      animalAgeGroup: document.animalAgeGroup,
+      animalCountriesOfImport: document.animalCountriesOfImport
     }
   }
 
@@ -165,7 +167,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       positivePrevalenceCalculated95CIUpper: document.positivePrevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.HumanViral,
       ageGroup: document.ageGroup,
-      sampleFrame: document.sampleFrame
+      sampleFrame: document.sampleFrame,
+      humanCountriesOfTravel: document.humanCountriesOfTravel
     }
   }
 
@@ -184,7 +187,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       animalDetectionSettings: document.animalDetectionSettings,
       animalPurpose: document.animalPurpose,
       animalImportedOrLocal: document.animalImportedOrLocal,
-      animalAgeGroup: document.animalAgeGroup
+      animalAgeGroup: document.animalAgeGroup,
+      animalCountriesOfImport: document.animalCountriesOfImport
     }
   }
 

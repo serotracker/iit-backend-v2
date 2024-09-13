@@ -448,6 +448,11 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       details: subestimate.details
     })),
+  humanCountriesOfTravelSubestimates: input.groupedEstimates.humanCountriesOfTravelSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      humanCountriesOfTravel: subestimate.humanCountriesOfTravel
+    })),
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords
 })
