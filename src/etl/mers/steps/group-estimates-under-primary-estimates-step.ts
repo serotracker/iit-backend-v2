@@ -26,6 +26,7 @@ export type GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep
   animalSamplingContextSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   camelExposureLevelSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   nomadismSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  humanCountriesOfTravelSubestimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
 }
 export type EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep = EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep;
 export type SourceFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep = SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep;
@@ -104,6 +105,9 @@ export const groupEstimatesUnderPrimaryEstimatesStep = (input: GroupEstimatesUnd
           .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
         nomadismSubestimates: input.allEstimates
           .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.NOMADISM)
+          .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
+        humanCountriesOfTravelSubestimates: input.allEstimates
+          .filter((estimate) => estimate.subGroupingVariable === MersSubGroupingVariable.TRAVEL)
           .filter((estimate) => estimate.studyId === primaryEstimate.studyId && estimate.type === primaryEstimate.type),
       })),
     allSources: input.allSources,
