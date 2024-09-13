@@ -30,7 +30,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
   return {
     ageGroup: document.ageGroup,
     ageMaximum: document.ageMaximum,
-    ageMinimum: document.ageMaximum,
+    ageMinimum: document.ageMinimum,
     antibodies: document.antibodies ?? [],
     antigen: document.antigen,
     assay: document.assay,
