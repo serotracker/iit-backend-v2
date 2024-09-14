@@ -213,6 +213,11 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       seroprevalenceCalculated95CIUpper: estimate.seroprevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
       sampleFrame: estimate.sampleFrame,
+      humanCountriesOfTravel: estimate.humanCountriesOfTravel.map((element) => ({
+        country: element.country,
+        countryAlphaTwoCode: element.countryAlphaTwoCode,
+        countryAlphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -227,6 +232,11 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
       sampleFrame: estimate.sampleFrame,
+      humanCountriesOfTravel: estimate.humanCountriesOfTravel.map((element) => ({
+        country: element.country,
+        countryAlphaTwoCode: element.countryAlphaTwoCode,
+        countryAlphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -244,7 +254,12 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       animalDetectionSettings: estimate.animalDetectionSettings,
       animalPurpose: estimate.animalPurpose,
       animalImportedOrLocal: estimate.animalImportedOrLocal,
-      animalAgeGroup: estimate.animalAgeGroup
+      animalAgeGroup: estimate.animalAgeGroup,
+      animalCountriesOfImport: estimate.animalCountriesOfImport.map((element) => ({
+        country: element.country,
+        countryAlphaTwoCode: element.countryAlphaTwoCode,
+        countryAlphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -262,7 +277,12 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       animalDetectionSettings: estimate.animalDetectionSettings,
       animalPurpose: estimate.animalPurpose,
       animalImportedOrLocal: estimate.animalImportedOrLocal,
-      animalAgeGroup: estimate.animalAgeGroup
+      animalAgeGroup: estimate.animalAgeGroup,
+      animalCountriesOfImport: estimate.animalCountriesOfImport.map((element) => ({
+        country: element.country,
+        countryAlphaTwoCode: element.countryAlphaTwoCode,
+        countryAlphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -447,6 +467,11 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       details: subestimate.details
+    })),
+  humanCountriesOfTravelSubestimates: input.groupedEstimates.humanCountriesOfTravelSubestimates
+    .map((subestimate) => ({
+      ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
+      humanCountriesOfTravel: subestimate.humanCountriesOfTravel
     })),
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords

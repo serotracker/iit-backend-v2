@@ -177,6 +177,7 @@ export const mersEstimateTypedefs = `
     positivePrevalenceCalculated95CIUpper: Float!
     ageGroup: [String!]!
     sampleFrame: String
+    humanCountriesOfTravel: [CountryIdentifiers!]!
   }
 
   type PrimaryAnimalMersViralEstimateInformation implements PrimaryMersEstimateInformationInterface {
@@ -248,6 +249,7 @@ export const mersEstimateTypedefs = `
     animalPurpose: String
     animalImportedOrLocal: String
     animalAgeGroup: [String!]!
+    animalCountriesOfImport: [CountryIdentifiers!]!
   }
 
   type PrimaryHumanMersSeroprevalenceEstimateInformation implements PrimaryMersEstimateInformationInterface {
@@ -315,6 +317,7 @@ export const mersEstimateTypedefs = `
     seroprevalenceCalculated95CIUpper: Float!
     ageGroup: [String!]!
     sampleFrame: String
+    humanCountriesOfTravel: [CountryIdentifiers!]!
   }
 
   type PrimaryAnimalMersSeroprevalenceEstimateInformation implements PrimaryMersEstimateInformationInterface {
@@ -386,6 +389,7 @@ export const mersEstimateTypedefs = `
     animalPurpose: String
     animalImportedOrLocal: String
     animalAgeGroup: [String!]!
+    animalCountriesOfImport: [CountryIdentifiers!]!
   }
 
   union PrimaryMersEstimateInformation = PrimaryAnimalMersSeroprevalenceEstimateInformation | PrimaryHumanMersSeroprevalenceEstimateInformation | PrimaryAnimalMersViralEstimateInformation |  PrimaryHumanMersViralEstimateInformation
@@ -536,6 +540,16 @@ export const mersEstimateTypedefs = `
     exposureToCamels: String
   }
 
+  type MersHumanCountriesOfTravelSubEstimate implements MersSubEstimateInterface {
+    ####### START INTERFACE FIELDS #######
+    id: String!
+    estimateId: String!
+    estimateInfo: MersSubEstimateInformation!
+    ####### END INTERFACE FIELDS #######
+
+    humanCountriesOfTravel: [CountryIdentifiers!]!
+  }
+
   type MersAnimalSourceLocationSubEstimate implements MersSubEstimateInterface {
     ####### START INTERFACE FIELDS #######
     id: String!
@@ -598,6 +612,7 @@ export const mersEstimateTypedefs = `
     animalSamplingContextSubestimates: [MersAnimalSamplingContextSubEstimate!]!
     camelExposureLevelSubestimates: [MersCamelExposureLevelSubEstimate!]!
     nomadismSubestimates: [MersNomadismSubEstimate!]!
+    humanCountriesOfTravelSubestimates: [MersHumanCountriesOfTravelSubEstimate!]!
   }
 
   type Query {

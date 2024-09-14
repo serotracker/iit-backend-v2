@@ -188,6 +188,7 @@ export enum MersSubGroupingVariable {
   NOMADISM = 'NOMADISM',
   ANIMAL_SOURCE_LOCATION = 'ANIMAL_SOURCE_LOCATION',
   ANIMAL_SAMPLING_CONTEXT = 'ANIMAL_SAMPLING_CONTEXT',
+  TRAVEL = 'TRAVEL',
   AGE = 'AGE',
   SEX = 'SEX',
 }
@@ -302,6 +303,11 @@ export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase &
   seroprevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   sampleFrame: string | undefined;
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -313,6 +319,11 @@ export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   sampleFrame: string | undefined;
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
@@ -328,6 +339,11 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
   animalAgeGroup: string[];
+  animalCountriesOfImport: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -343,6 +359,11 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
   animalAgeGroup: string[];
+  animalCountriesOfImport: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type MersEstimateDocument = 
@@ -486,6 +507,14 @@ type MersNomadismSubEstimate = MersSubEstimateBase & {
   details: string;
 }
 
+type MersHumanCountriesOfTravelSubEstimate = MersSubEstimateBase & {
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
+}
+
 export interface MersPrimaryEstimateDocument {
   _id: ObjectId;
   estimateId: string;
@@ -502,6 +531,7 @@ export interface MersPrimaryEstimateDocument {
   animalSamplingContextSubestimates: MersAnimalSamplingContextSubEstimate[];
   camelExposureLevelSubestimates: MersCamelExposureLevelSubEstimate[];
   nomadismSubestimates: MersNomadismSubEstimate[];
+  humanCountriesOfTravelSubestimates: MersHumanCountriesOfTravelSubEstimate[];
   createdAt: Date;
   updatedAt: Date;
 }

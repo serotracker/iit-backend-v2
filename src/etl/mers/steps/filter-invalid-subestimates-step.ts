@@ -240,7 +240,8 @@ export const filterInvalidSubestimatesStep = (input: FilterInvalidSubestimatesSt
         .map((subestimate) => ({ ...subestimate, details: subestimate.subGroupingCategory }))
         .filter((subestimate): subestimate is GroupedEstimateFieldsAfterFilteringInvalidSubestimatesStep['nomadismSubestimates'][number] =>
            !!subestimate.details && (subestimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || subestimate.type === MersEstimateType.HUMAN_VIRAL)
-        )
+        ),
+      humanCountriesOfTravelSubestimates: groupedEstimate.humanCountriesOfTravelSubestimates,
     })),
     allSources: input.allSources,
     estimateFilterOptions: input.estimateFilterOptions,
