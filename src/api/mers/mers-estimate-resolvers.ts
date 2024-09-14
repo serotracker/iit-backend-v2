@@ -132,7 +132,11 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
       sampleFrame: document.sampleFrame,
-      humanCountriesOfTravel: document.humanCountriesOfTravel
+      humanCountriesOfTravel: document.humanCountriesOfTravel.map((element) => ({
+        name: element.country,
+        alphaTwoCode: element.countryAlphaTwoCode,
+        alphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -152,7 +156,11 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       animalPurpose: document.animalPurpose,
       animalImportedOrLocal: document.animalImportedOrLocal,
       animalAgeGroup: document.animalAgeGroup,
-      animalCountriesOfImport: document.animalCountriesOfImport
+      animalCountriesOfImport: document.animalCountriesOfImport.map((element) => ({
+        name: element.country,
+        alphaTwoCode: element.countryAlphaTwoCode,
+        alphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -168,7 +176,11 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       type: MersEstimateTypeForApi.HumanViral,
       ageGroup: document.ageGroup,
       sampleFrame: document.sampleFrame,
-      humanCountriesOfTravel: document.humanCountriesOfTravel
+      humanCountriesOfTravel: document.humanCountriesOfTravel.map((element) => ({
+        name: element.country,
+        alphaTwoCode: element.countryAlphaTwoCode,
+        alphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -188,7 +200,11 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       animalPurpose: document.animalPurpose,
       animalImportedOrLocal: document.animalImportedOrLocal,
       animalAgeGroup: document.animalAgeGroup,
-      animalCountriesOfImport: document.animalCountriesOfImport
+      animalCountriesOfImport: document.animalCountriesOfImport.map((element) => ({
+        name: element.country,
+        alphaTwoCode: element.countryAlphaTwoCode,
+        alphaThreeCode: element.countryAlphaThreeCode,
+      }))
     }
   }
 
@@ -333,6 +349,15 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersNomadismSubEstimate' as const,
         details: subestimate.details,
+      })),
+      humanCountriesOfTravelSubestimates: primaryEstimate.humanCountriesOfTravelSubestimates.map((subestimate) => ({
+        ...mapMersSubEstimateBaseForApi(subestimate),
+        __typename: 'MersHumanCountriesOfTravelSubEstimate' as const,
+        humanCountriesOfTravel: subestimate.humanCountriesOfTravel.map((element) => ({
+          name: element.country,
+          alphaTwoCode: element.countryAlphaTwoCode,
+          alphaThreeCode: element.countryAlphaThreeCode
+        }))
       }))
     }));
   }

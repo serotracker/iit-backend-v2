@@ -303,7 +303,11 @@ export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase &
   seroprevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   sampleFrame: string | undefined;
-  humanCountriesOfTravel: string[];
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -315,7 +319,11 @@ export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalenceCalculated95CIUpper: number;
   ageGroup: string[];
   sampleFrame: string | undefined;
-  humanCountriesOfTravel: string[];
+  humanCountriesOfTravel: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase & {
@@ -331,7 +339,11 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
   animalAgeGroup: string[];
-  animalCountriesOfImport: string[];
+  animalCountriesOfImport: Array<{
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  }>
 }
 
 export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
@@ -348,7 +360,9 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   animalImportedOrLocal: string | undefined;
   animalAgeGroup: string[];
   animalCountriesOfImport: Array<{
-
+    country: string;
+    countryAlphaTwoCode: TwoLetterIsoCountryCode;
+    countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   }>
 }
 
