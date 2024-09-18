@@ -1,5 +1,5 @@
 import Airtable, { FieldSet } from "airtable";
-import { getEnvironmentVariableOrThrow } from "../../../etl/helpers.js";
+import { etlStep, getEnvironmentVariableOrThrow } from "../../../etl/helpers.js";
 import { pipe } from "fp-ts/lib/function.js";
 import { validateEstimatesFromAirtableStep } from "./steps/validate-estimates-from-airtable-step.js";
 import { cleanEstimatesFromAirtableStep } from "./steps/clean-estimates-from-airtable-step.js";
@@ -16,8 +16,6 @@ const generateSarsCov2DataCsv = async () => {
   const airtableSC2BaseId = getEnvironmentVariableOrThrow({
     key: "AIRTABLE_SARSCOV2_BASE_ID",
   });
-  const mongoUri = getEnvironmentVariableOrThrow({ key: "MONGODB_URI" });
-  const databaseName = getEnvironmentVariableOrThrow({ key: "DATABASE_NAME" });
 
   const airtable = new Airtable({ apiKey: airtableApiKey });
   const base = new Airtable.Base(airtable, airtableSC2BaseId);
@@ -35,11 +33,11 @@ const generateSarsCov2DataCsv = async () => {
     {
       allEstimates: allEstimatesUnformatted,
     },
-    validateEstimatesFromAirtableStep,
-    cleanEstimatesFromAirtableStep,
-    cleanBadValuesFromEstimatesStep,
-    filterEstimatesWhichDontMeetDataStructureRequirements,
-    writeEstimatesToCsvStep
+    etlStep(validateEstimatesFromAirtableStep),
+    etlStep(cleanEstimatesFromAirtableStep),
+    etlStep(cleanBadValuesFromEstimatesStep),
+    etlStep(filterEstimatesWhichDontMeetDataStructureRequirements),
+    etlStep(writeEstimatesToCsvStep)
   );
 
   console.log("Exiting");
