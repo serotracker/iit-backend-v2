@@ -46,6 +46,7 @@ export const mersEstimateTypedefs = `
     antigen: [String!]!
     testProducer: [String!]!
     testValidation: [String!]!
+    clade: [Clade!]!
   }
 
   enum MersEstimateType {

@@ -543,6 +543,7 @@ export type MersEstimateFilterOptions = {
   animalPurpose: Array<Scalars['String']['output']>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
+  clade: Array<Clade>;
   exposureToCamels: Array<Scalars['String']['output']>;
   geographicScope: Array<Scalars['String']['output']>;
   isotypes: Array<Scalars['String']['output']>;
@@ -2038,6 +2039,7 @@ export type MersEstimateFilterOptionsResolvers<ContextType = any, ParentType ext
   animalPurpose?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
   exposureToCamels?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   geographicScope?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   isotypes?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;

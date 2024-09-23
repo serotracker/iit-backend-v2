@@ -382,7 +382,8 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       exposureToCamels: mersEstimateFilterOptions?.exposureToCamels ?? [],
       antigen: mersEstimateFilterOptions?.antigen ?? [],
       testProducer: mersEstimateFilterOptions?.testProducer ?? [],
-      testValidation: mersEstimateFilterOptions?.testValidation ?? []
+      testValidation: mersEstimateFilterOptions?.testValidation ?? [],
+      clade: mersEstimateFilterOptions?.clade ?? []
     }
   }
   return {
