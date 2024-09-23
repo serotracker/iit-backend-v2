@@ -10,7 +10,8 @@ import {
   MersEstimateDocumentBase,
   MersEstimateFilterOptionsDocument,
   MersPrimaryEstimateDocument,
-  MersSubEstimateBase
+  MersSubEstimateBase,
+  MersMacroSampleFrameDocument
 } from "../../../storage/types.js";
 import {
   CountryFieldsAfterSortingSubestimatesStep,
@@ -19,6 +20,7 @@ import {
   EstimateFilterOptionsAfterSortingSubestimatesStep,
   FaoMersEventAfterSortingSubestimatesStep,
   GroupedEstimateFieldsAfterSortingSubestimatesStep,
+  MacroSampleFrameFieldsAfterSortingSubestimatesStep,
   SourceFieldsAfterSortingSubestimatesStep,
   StudyFieldsAfterSortingSubestimatesStep,
   YearlyCamelPopulationDataAfterSortingSubestimatesStep
@@ -30,6 +32,7 @@ export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAft
 export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = MersEstimateFilterOptionsDocument;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterSortingSubestimatesStep;
 export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterSortingSubestimatesStep;
+export type MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep = MersMacroSampleFrameDocument;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterSortingSubestimatesStep;
@@ -41,6 +44,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   estimateFilterOptions: EstimateFilterOptionsAfterSortingSubestimatesStep;
   allStudies: StudyFieldsAfterSortingSubestimatesStep[];
   allCountries: CountryFieldsAfterSortingSubestimatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterSortingSubestimatesStep[];
   allFaoMersEvents: FaoMersEventAfterSortingSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterSortingSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterSortingSubestimatesStep[];
@@ -54,6 +58,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   estimateFilterOptions: EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -318,6 +323,18 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
   updatedAt: input.updatedAtForAllRecords,
 });
 
+interface TransformMacroSampleFrameForDatabaseInput {
+  macroSampleFrame: MacroSampleFrameFieldsAfterSortingSubestimatesStep;
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+const transformMacroSampleFrameForDatabase = (input: TransformMacroSampleFrameForDatabaseInput): MersMacroSampleFrameDocument => ({
+  _id: new ObjectId(),
+  createdAt: input.createdAtForAllRecords,
+  updatedAt: input.updatedAtForAllRecords,
+});
+
 const transformMersSubEstimateBaseForDatabaseInput = (estimate: 
   Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_SEROPREVALENCE }>,
     'id'|'estimateId'|'type'|'sampleDenominator'|
@@ -505,6 +522,11 @@ export const transformIntoFormatForDatabaseStep = (
     }),
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames.map((macroSampleFrame) => transformMacroSampleFrameForDatabase({
+      macroSampleFrame,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
+    })),
     allFaoMersEvents: input.allFaoMersEvents.map((event) => transformFaoMersEventForDatabase({
       event,
       createdAtForAllRecords,

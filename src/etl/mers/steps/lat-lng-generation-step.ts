@@ -5,6 +5,7 @@ import {
   CountryPopulationDataAfterAddingCountryAndRegionInformationStep,
   EstimateFieldsAfterAddingCountryAndRegionInformationStep,
   FaoMersEventAfterAddingCountryAndRegionInformationStep,
+  MacroSampleFrameFieldsAfterAddingCountryAndRegionInformationStep,
   SourceFieldsAfterAddingCountryAndRegionInformationStep,
   StudyFieldsAfterAddingCountryAndRegionInformationStep,
   YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep
@@ -20,6 +21,7 @@ export type EstimateFieldsAfterLatLngGenerationStep = EstimateFieldsAfterAddingC
 export type SourceFieldsAfterLatLngGenerationStep = SourceFieldsAfterAddingCountryAndRegionInformationStep;
 export type StudyFieldsAfterLatLngGenerationStep = StudyFieldsAfterAddingCountryAndRegionInformationStep;
 export type CountryFieldsAfterLatLngGenerationStep = CountryFieldsAfterAddingCountryAndRegionInformationStep;
+export type MacroSampleFrameFieldsAfterLatLngGenerationStep = MacroSampleFrameFieldsAfterAddingCountryAndRegionInformationStep;
 export type FaoMersEventAfterLatLngGenerationStep = FaoMersEventAfterAddingCountryAndRegionInformationStep;
 export type YearlyCamelPopulationDataAfterLatLngGenerationStep = YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep;
 export type CountryPopulationDataAfterLatLngGenerationStep = CountryPopulationDataAfterAddingCountryAndRegionInformationStep;
@@ -29,6 +31,7 @@ interface LatLngGenerationStepInput {
   allSources: SourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allStudies: StudyFieldsAfterAddingCountryAndRegionInformationStep[];
   allCountries: CountryFieldsAfterAddingCountryAndRegionInformationStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterAddingCountryAndRegionInformationStep[];
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
@@ -40,6 +43,7 @@ interface LatLngGenerationStepOutput {
   allSources: SourceFieldsAfterLatLngGenerationStep[];
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
   allCountries: CountryFieldsAfterLatLngGenerationStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterLatLngGenerationStep[];
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
@@ -91,6 +95,7 @@ export const latLngGenerationStep = async(
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

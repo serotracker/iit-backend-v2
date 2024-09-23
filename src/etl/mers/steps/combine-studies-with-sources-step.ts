@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep,
   EstimateFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
   FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep,
+  MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
   SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
   StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
   YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep
@@ -15,6 +16,7 @@ export type StudyFieldsAfterCombiningStudiesWithSourcesStep = StudyFieldsAfterDe
   source: SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
 };
 export type CountryFieldsAfterCombiningStudiesWithSourcesStep = CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
+export type MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep = MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep;
 export type FaoMersEventAfterCombiningStudiesWithSourcesStep = FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep;
 export type YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep = YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep;
 export type CountryPopulationDataAfterCombiningStudiesWithSourcesStep = CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep;
@@ -24,6 +26,7 @@ interface CombineStudiesWithSourcesStepInput {
   allSources: SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
   allStudies: StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
   allCountries: CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep[],
   allFaoMersEvents: FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   countryPopulationData: CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
@@ -35,6 +38,7 @@ interface CombineStudiesWithSourcesStepOutput {
   allSources: SourceFieldsAfterCombiningStudiesWithSourcesStep[];
   allStudies: StudyFieldsAfterCombiningStudiesWithSourcesStep[];
   allCountries: CountryFieldsAfterCombiningStudiesWithSourcesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep[],
   allFaoMersEvents: FaoMersEventAfterCombiningStudiesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningStudiesWithSourcesStep[];
@@ -62,6 +66,7 @@ export const combineStudiesWithSourcesStep = (
       }
     }).filter((study): study is NonNullable<typeof study> => !!study),
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

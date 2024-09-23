@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterFetchingCountryPopulationStep,
   EstimateFieldsAfterFetchingCountryPopulationStep,
   FaoMersEventAfterFetchingCountryPopulationStep,
+  MacroSampleFrameFieldsAfterFetchingCountryPopulationStep,
   SourceFieldsAfterFetchingCountryPopulationStep,
   StudyFieldsAfterFetchingCountryPopulationStep,
   YearlyCamelPopulationDataAfterFetchingCountryPopulationStep
@@ -13,6 +14,7 @@ export type EstimateFieldsAfterGeneratingCamelDataPerCapitaStep = EstimateFields
 export type SourceFieldsAfterGeneratingCamelDataPerCapitaStep = SourceFieldsAfterFetchingCountryPopulationStep;
 export type StudyFieldsAfterGeneratingCamelDataPerCapitaStep = StudyFieldsAfterFetchingCountryPopulationStep;
 export type CountryFieldsAfterGeneratingCamelDataPerCapitaStep = CountryFieldsAfterFetchingCountryPopulationStep;
+export type MacroSampleFrameFieldsAfterGeneratingCamelDataPerCapitaStep = MacroSampleFrameFieldsAfterFetchingCountryPopulationStep;
 export type FaoMersEventAfterGeneratingCamelDataPerCapitaStep = FaoMersEventAfterFetchingCountryPopulationStep;
 export type YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep = YearlyCamelPopulationDataAfterFetchingCountryPopulationStep & {
   camelCountPerCapita: number | undefined;
@@ -24,6 +26,7 @@ interface GenerateCamelDataPerCapitaStepInput {
   allSources: SourceFieldsAfterFetchingCountryPopulationStep[];
   allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
   allCountries: CountryFieldsAfterFetchingCountryPopulationStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFetchingCountryPopulationStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCountryPopulationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCountryPopulationStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCountryPopulationStep[];
@@ -35,6 +38,7 @@ interface GenerateCamelDataPerCapitaStepOutput {
   allSources: SourceFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allStudies: StudyFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allCountries: CountryFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
@@ -51,6 +55,7 @@ export const generateCamelDataPerCapitaStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((camelPopulationDataPoint) => {
       const countryPopulationDataForYear = input.countryPopulationData

@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterValidatingFieldSetFromAirtableStep,
   EstimateFieldsAfterValidatingFieldSetFromAirtableStep,
   FaoMersEventAfterValidatingFieldSetFromAirtableStep,
+  MacroSampleFrameFieldsAfterValidatingFieldSetFromAirtableStep,
   SourceFieldsAfterValidatingFieldSetFromAirtableStep,
   StudyFieldsAfterValidatingFieldSetFromAirtableStep,
   YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep
@@ -23,6 +24,7 @@ export type SourceFieldsAfterCleaningSourcesStep = {
 };
 export type StudyFieldsAfterCleaningSourcesStep = StudyFieldsAfterValidatingFieldSetFromAirtableStep;
 export type CountryFieldsAfterCleaningSourcesStep = CountryFieldsAfterValidatingFieldSetFromAirtableStep;
+export type MacroSampleFrameFieldsAfterCleaningSourcesStep = MacroSampleFrameFieldsAfterValidatingFieldSetFromAirtableStep;
 export type FaoMersEventAfterCleaningSourcesStep = FaoMersEventAfterValidatingFieldSetFromAirtableStep;
 export type YearlyCamelPopulationDataAfterCleaningSourcesStep = YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep;
 export type CountryPopulationDataAfterCleaningSourcesStep = CountryPopulationDataAfterValidatingFieldSetFromAirtableStep;
@@ -32,6 +34,7 @@ interface CleanSourcesStepInput {
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -43,6 +46,7 @@ interface CleanSourcesStepOutput {
   allSources: SourceFieldsAfterCleaningSourcesStep[];
   allStudies: StudyFieldsAfterCleaningSourcesStep[];
   allCountries: CountryFieldsAfterCleaningSourcesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
@@ -65,6 +69,7 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
     })),
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

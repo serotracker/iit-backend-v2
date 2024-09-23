@@ -6,6 +6,7 @@ import {
   EstimateFilterOptionsAfterTransformingFormatForDatabaseStep,
   FaoMersEventAfterTransformingFormatForDatabaseStep,
   GroupedEstimateFieldsAfterTransformingFormatForDatabaseStep,
+  MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep,
   SourceFieldsAfterTransformingFormatForDatabaseStep,
   StudyFieldsAfterTransformingFormatForDatabaseStep,
   YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep
@@ -24,6 +25,8 @@ export type StudyFieldsAfterGeneratingEstimateGeoJSONFileStep =
   StudyFieldsAfterTransformingFormatForDatabaseStep;
 export type CountryFieldsAfterGeneratingEstimateGeoJSONFileStep =
   CountryFieldsAfterTransformingFormatForDatabaseStep;
+export type MacroSampleFrameFieldsAfterGeneratingEstimateGeoJSONFileStep =
+  MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep;
 export type FaoMersEventAfterGeneratingEstimateGeoJSONFileStep =
   FaoMersEventAfterTransformingFormatForDatabaseStep;
 export type YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep =
@@ -38,6 +41,7 @@ interface GenerateEstimateGeoJSONFileStepInput {
   estimateFilterOptions: EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -51,6 +55,7 @@ interface GenerateEstimateGeoJSONFileStepOutput {
   estimateFilterOptions: EstimateFilterOptionsAfterGeneratingEstimateGeoJSONFileStep;
   allStudies: StudyFieldsAfterGeneratingEstimateGeoJSONFileStep[];
   allCountries: CountryFieldsAfterGeneratingEstimateGeoJSONFileStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterGeneratingEstimateGeoJSONFileStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingEstimateGeoJSONFileStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
@@ -139,6 +144,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
     estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

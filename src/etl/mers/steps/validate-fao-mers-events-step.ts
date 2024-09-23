@@ -5,6 +5,7 @@ import {
   CountryPopulationDataAfterFetchingFaoMersEventsStep,
   EstimateFieldsAfterFetchingFaoMersEventsStep,
   FaoMersEventAfterFetchingFaoMersEventsStep,
+  MacroSampleFrameFieldsAfterFetchingFaoMersEventsStep,
   SourceFieldsAfterFetchingFaoMersEventsStep,
   StudyFieldsAfterFetchingFaoMersEventsStep,
   YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep
@@ -63,6 +64,7 @@ export type EstimateFieldsAfterValidatingFaoMersEventsStep = EstimateFieldsAfter
 export type SourceFieldsAfterValidatingFaoMersEventsStep = SourceFieldsAfterFetchingFaoMersEventsStep;
 export type StudyFieldsAfterValidatingFaoMersEventsStep = StudyFieldsAfterFetchingFaoMersEventsStep;
 export type CountryFieldsAfterValidatingFaoMersEventsStep = CountryFieldsAfterFetchingFaoMersEventsStep;
+export type MacroSampleFrameFieldsAfterValidatingFaoMersEventsStep = MacroSampleFrameFieldsAfterFetchingFaoMersEventsStep;
 export type FaoMersEventAfterValidatingFaoMersEventsStep = 
   | AnimalFaoMersEventAfterValidatingFaoMersEventsStep
   | HumanFaoMersEventAfterValidatingFaoMersEventsStep;
@@ -74,6 +76,7 @@ interface ValidateFaoMersEventsStepInput {
   allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterFetchingFaoMersEventsStep[];
   allCountries: CountryFieldsAfterFetchingFaoMersEventsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -85,6 +88,7 @@ interface ValidateFaoMersEventsStepOutput {
   allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterValidatingFaoMersEventsStep[];
   allCountries: CountryFieldsAfterValidatingFaoMersEventsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -169,6 +173,7 @@ export const validateFaoMersEventsStep = (input: ValidateFaoMersEventsStepInput)
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

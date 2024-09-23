@@ -658,6 +658,12 @@ export type FaoMersEventDocument =
   | FaoMersAnimalEventDocument
   | FaoMersHumanEventDocument;
 
+export interface MersMacroSampleFrameDocument {
+  _id: ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface FaoYearlyCamelPopulationDataDocument {
   _id: ObjectId;
   partitionKey: number;

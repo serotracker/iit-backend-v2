@@ -5,6 +5,7 @@ import {
   CountryPopulationDataAfterValidatingFaoMersEventsStep,
   EstimateFieldsAfterValidatingFaoMersEventsStep,
   FaoMersEventAfterValidatingFaoMersEventsStep,
+  MacroSampleFrameFieldsAfterValidatingFaoMersEventsStep,
   RawFaoMersEventAnimalSpecies,
   RawFaoMersEventAnimalType,
   RawFaoMersEventDiagnosisSource,
@@ -73,6 +74,7 @@ export type EstimateFieldsAfterCleaningFaoMersEventFieldsStep = EstimateFieldsAf
 export type SourceFieldsAfterCleaningFaoMersEventFieldsStep = SourceFieldsAfterValidatingFaoMersEventsStep;
 export type StudyFieldsAfterCleaningFaoMersEventFieldsStep = StudyFieldsAfterValidatingFaoMersEventsStep;
 export type CountryFieldsAfterCleaningFaoMersEventFieldsStep = CountryFieldsAfterValidatingFaoMersEventsStep;
+export type MacroSampleFrameFieldsAfterCleaningFaoMersEventFieldsStep = MacroSampleFrameFieldsAfterValidatingFaoMersEventsStep;
 export type FaoMersEventAfterCleaningFaoMersEventFieldsStep = 
   | AnimalFaoMersEventAfterCleaningFaoMersEventFieldsStep
   | HumanFaoMersEventAfterCleaningFaoMersEventFieldsStep;
@@ -85,6 +87,7 @@ interface CleanFaoMersEventFieldsStepInput {
   allSources: SourceFieldsAfterValidatingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterValidatingFaoMersEventsStep[];
   allCountries: CountryFieldsAfterValidatingFaoMersEventsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterValidatingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
@@ -96,6 +99,7 @@ interface CleanFaoMersEventFieldsStepOutput {
   allSources: SourceFieldsAfterCleaningFaoMersEventFieldsStep[];
   allStudies: StudyFieldsAfterCleaningFaoMersEventFieldsStep[];
   allCountries: CountryFieldsAfterCleaningFaoMersEventFieldsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningFaoMersEventFieldsStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
@@ -122,6 +126,7 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => {
       if(event.type === MersEventType.HUMAN) {
         return {

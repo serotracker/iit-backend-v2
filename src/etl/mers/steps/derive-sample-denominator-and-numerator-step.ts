@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterParsingDatesStep,
   EstimateFieldsAfterParsingDatesStep,
   FaoMersEventAfterParsingDatesStep,
+  MacroSampleFrameFieldsAfterParsingDatesStep,
   SourceFieldsAfterParsingDatesStep,
   StudyFieldsAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
@@ -13,6 +14,7 @@ export type EstimateFieldsAfterDerivingSampleDenominatorAndNumeratorStep = Estim
 export type SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep = SourceFieldsAfterParsingDatesStep;
 export type StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep = StudyFieldsAfterParsingDatesStep;
 export type CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep = CountryFieldsAfterParsingDatesStep;
+export type MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep = MacroSampleFrameFieldsAfterParsingDatesStep;
 export type FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep = FaoMersEventAfterParsingDatesStep;
 export type YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep = YearlyCamelPopulationDataAfterParsingDatesStep;
 export type CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep = CountryPopulationDataAfterParsingDatesStep;
@@ -22,6 +24,7 @@ interface DeriveSampleDenominatorAndNumeratorStepInput {
   allSources: SourceFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
   allCountries: CountryFieldsAfterParsingDatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterParsingDatesStep[],
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
@@ -33,6 +36,7 @@ interface DeriveSampleDenominatorAndNumeratorStepOutput {
   allSources: SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
   allStudies: StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
   allCountries: CountryFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep[],
   allFaoMersEvents: FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   countryPopulationData: CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
@@ -64,6 +68,7 @@ export const deriveSampleDenominatorAndNumeratorStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

@@ -89,6 +89,13 @@ export interface AirtableMersEstimateFields {
   'Genome coverage': Array<string | null>;
 }
 
+export interface AirtableMacroSampleFrameFields {
+  id: string;
+  Name: string;
+  'Population type': string | null;
+  'Occupationally exposed to dromedaries': boolean;
+}
+
 export type StructuredYearlyCamelPopulationByCountryData = Array<{
   threeLetterCountryCode: string,
   data: Array<{

@@ -6,6 +6,7 @@ import {
     CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep,
   EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep,
   FaoMersEventAfterCleaningCamelPopulationByCountryDataStep,
+  MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep,
   SourceFieldsAfterCleaningCamelPopulationByCountryDataStep,
   StudyFieldsAfterCleaningCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep
@@ -16,6 +17,7 @@ export type EstimateFieldsAfterFetchingCountryPopulationStep = EstimateFieldsAft
 export type SourceFieldsAfterFetchingCountryPopulationStep = SourceFieldsAfterCleaningCamelPopulationByCountryDataStep;
 export type StudyFieldsAfterFetchingCountryPopulationStep = StudyFieldsAfterCleaningCamelPopulationByCountryDataStep;
 export type CountryFieldsAfterFetchingCountryPopulationStep = CountryFieldsAfterCleaningCamelPopulationByCountryDataStep;
+export type MacroSampleFrameFieldsAfterFetchingCountryPopulationStep = MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep;
 export type FaoMersEventAfterFetchingCountryPopulationStep = FaoMersEventAfterCleaningCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterFetchingCountryPopulationStep = YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
 export type CountryPopulationDataAfterFetchingCountryPopulationStep = StructuredCountryPopulationDataPoint;
@@ -25,6 +27,7 @@ interface FetchCountryPopulationDataStepInput {
   allSources: SourceFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allCountries: CountryFieldsAfterCleaningCamelPopulationByCountryDataStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
@@ -36,6 +39,7 @@ interface FetchCountryPopulationDataStepOutput {
   allSources: SourceFieldsAfterFetchingCountryPopulationStep[];
   allStudies: StudyFieldsAfterFetchingCountryPopulationStep[];
   allCountries: CountryFieldsAfterFetchingCountryPopulationStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFetchingCountryPopulationStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCountryPopulationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCountryPopulationStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCountryPopulationStep[];
@@ -56,6 +60,7 @@ export const fetchCountryPopulationDataStep = (
       allSources: input.allSources,
       allStudies: input.allStudies,
       allCountries: input.allCountries,
+      allMacroSampleFrames: input.allMacroSampleFrames,
       allFaoMersEvents: input.allFaoMersEvents,
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: [],
@@ -122,6 +127,7 @@ export const fetchCountryPopulationDataStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: groupByArray(dataRows, 'threeLetterCountryCode') ,
