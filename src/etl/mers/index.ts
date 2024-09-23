@@ -58,7 +58,7 @@ const runEtlMain = async () => {
   const sourceSheet = base.table("Source");
   const studySheet = base.table("Study");
   const countrySheet = base.table("Selectable Countries & Territories");
-  const macroSampleFrameSheet = base.table("Selectable Countries & Territories");
+  const macroSampleFrameSheet = base.table("Sample Frame GOI");
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] =
     await estimateSheet
