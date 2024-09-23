@@ -1,12 +1,13 @@
 import { z } from "zod";
 import { MongoClient } from "mongodb";
 import { FieldSet } from "airtable";
-import { AirtableCountryFields, AirtableMersEstimateFields, AirtableSourceFields, AirtableStudyFields } from "../types";
+import { AirtableCountryFields, AirtableMacroSampleFrameFields, AirtableMersEstimateFields, AirtableSourceFields, AirtableStudyFields } from "../types";
 
 export type EstimateFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMersEstimateFields;
 export type SourceFieldsAfterValidatingFieldSetFromAirtableStep = AirtableSourceFields;
 export type StudyFieldsAfterValidatingFieldSetFromAirtableStep = AirtableStudyFields;
 export type CountryFieldsAfterValidatingFieldSetFromAirtableStep = AirtableCountryFields;
+export type MacroSampleFrameFieldsAfterValidatingFieldSetFromAirtableStep = AirtableMacroSampleFrameFields;
 export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 export type YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
@@ -16,6 +17,7 @@ interface ValidateFieldSetFromAirtableStepInput {
   allSources: FieldSet[];
   allStudies: FieldSet[];
   allCountries: FieldSet[];
+  allMacroSampleFrames: FieldSet[];
   allFaoMersEvents: never[];
   yearlyCamelPopulationByCountryData: never[];
   countryPopulationData: never[];
@@ -27,6 +29,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allSources: SourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allStudies: StudyFieldsAfterValidatingFieldSetFromAirtableStep[];
   allCountries: CountryFieldsAfterValidatingFieldSetFromAirtableStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterValidatingFieldSetFromAirtableStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
@@ -270,6 +273,21 @@ const parseCountry = (country: FieldSet): AirtableCountryFields => {
   return zodMersCountryFieldsObject.parse(country);
 }
 
+const parseMacroSampleFrame = (macroSampleFrame: FieldSet): AirtableMacroSampleFrameFields => {
+  const zodMacroSampleFrameFieldsObject = z.object({
+    id: z.string(),
+    Name: z.string(),
+    'Population type': z
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
+    'Occupationally exposed to dromedaries': z
+      .optional(z.boolean())
+      .transform((value) => value ?? false),
+  });
+
+  return zodMacroSampleFrameFieldsObject.parse(macroSampleFrame);
+}
+
 export const validateFieldSetFromAirtableStep = (
   input: ValidateFieldSetFromAirtableStepInput
 ): ValidateFieldSetFromAirtableStepOutput => {
@@ -284,8 +302,12 @@ export const validateFieldSetFromAirtableStep = (
     allSources: input.allSources
       .map((source) => parseSource(source))
       .filter((source): source is NonNullable<typeof source> => !!source),
-    allStudies: input.allStudies.map((study) => parseStudy(study)),
-    allCountries: input.allCountries.map((country) => parseCountry(country)),
+    allStudies: input.allStudies
+      .map((study) => parseStudy(study)),
+    allCountries: input.allCountries
+      .map((country) => parseCountry(country)),
+    allMacroSampleFrames: input.allMacroSampleFrames
+      .map((macroSampleFrame) => parseMacroSampleFrame(macroSampleFrame)),
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

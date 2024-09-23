@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterCleaningSourcesStep,
   EstimateFieldsAfterCleaningSourcesStep,
   FaoMersEventAfterCleaningSourcesStep,
+  MacroSampleFrameFieldsAfterCleaningSourcesStep,
   SourceFieldsAfterCleaningSourcesStep,
   StudyFieldsAfterCleaningSourcesStep,
   YearlyCamelPopulationDataAfterCleaningSourcesStep
@@ -18,6 +19,7 @@ export interface StudyFieldsAfterCleaningStudiesStep {
   sourceId: string | undefined;
 }
 export type CountryFieldsAfterCleaningStudiesStep = CountryFieldsAfterCleaningSourcesStep;
+export type MacroSampleFrameFieldsAfterCleaningStudiesStep = MacroSampleFrameFieldsAfterCleaningSourcesStep;
 export type FaoMersEventAfterCleaningStudiesStep = FaoMersEventAfterCleaningSourcesStep;
 export type YearlyCamelPopulationDataAfterCleaningStudiesStep = YearlyCamelPopulationDataAfterCleaningSourcesStep;
 export type CountryPopulationDataAfterCleaningStudiesStep = CountryPopulationDataAfterCleaningSourcesStep;
@@ -27,6 +29,7 @@ interface CleanStudiesStepInput {
   allSources: SourceFieldsAfterCleaningSourcesStep[];
   allStudies: StudyFieldsAfterCleaningSourcesStep[];
   allCountries: CountryFieldsAfterCleaningSourcesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
@@ -38,6 +41,7 @@ interface CleanStudiesStepOutput {
   allSources: SourceFieldsAfterCleaningStudiesStep[];
   allStudies: StudyFieldsAfterCleaningStudiesStep[];
   allCountries: CountryFieldsAfterCleaningStudiesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningStudiesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningStudiesStep[];
@@ -57,6 +61,7 @@ export const cleanStudiesStep = (input: CleanStudiesStepInput): CleanStudiesStep
         .at(0)
     })),
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

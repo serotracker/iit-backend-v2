@@ -1,10 +1,11 @@
 import { MongoClient } from "mongodb";
-import { CountryFieldsAfterLatLngGenerationStep, CountryPopulationDataAfterLatLngGenerationStep, EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep, SourceFieldsAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep, YearlyCamelPopulationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { CountryFieldsAfterLatLngGenerationStep, CountryPopulationDataAfterLatLngGenerationStep, EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep, MacroSampleFrameFieldsAfterLatLngGenerationStep, SourceFieldsAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep, YearlyCamelPopulationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep = EstimateFieldsAfterLatLngGenerationStep;
 export type SourceFieldsAfterJitteringPinLatLngStep = SourceFieldsAfterLatLngGenerationStep;
 export type StudyFieldsAfterJitteringPinLatLngStep = StudyFieldsAfterLatLngGenerationStep;
 export type CountryFieldsAfterJitteringPinLatLngStep = CountryFieldsAfterLatLngGenerationStep;
+export type MacroSampleFrameFieldsAfterJitteringPinLatLngStep = MacroSampleFrameFieldsAfterLatLngGenerationStep;
 export type FaoMersEventAfterJitteringPinLatLngStep = FaoMersEventAfterLatLngGenerationStep;
 export type YearlyCamelPopulationDataAfterJitteringPinLatLngStep = YearlyCamelPopulationDataAfterLatLngGenerationStep;
 export type CountryPopulationDataAfterJitteringPinLatLngStep = CountryPopulationDataAfterLatLngGenerationStep;
@@ -32,6 +33,7 @@ interface JitterPinLatLngStepInput {
   allSources: SourceFieldsAfterLatLngGenerationStep[];
   allStudies: StudyFieldsAfterLatLngGenerationStep[];
   allCountries: CountryFieldsAfterLatLngGenerationStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterLatLngGenerationStep[];
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
@@ -43,6 +45,7 @@ interface JitterPinLatLngStepOutput {
   allSources: SourceFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
@@ -73,6 +76,7 @@ export const jitterPinLatLngStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => ({
       ...event,
       latitude: jitterNumberValueByAmount({

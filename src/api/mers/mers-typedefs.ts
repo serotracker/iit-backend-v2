@@ -4,6 +4,7 @@ import { legacyMersTypedefs } from "./legacy-mers-typedefs.js";
 import { mersCamelPopulationDataTypedefs } from "./mers-camel-population-data-typedef.js";
 import { mersEventTypedefs } from "./mers-event-typedefs.js";
 import { mersEstimateTypedefs } from "./mers-estimate-typedefs.js";
+import { mersMacroSampleFramesTypedefs } from "./mers-macro-sample-frames-typedefs.js";
 
 export const mersTypedefs = mergeTypeDefs([
   sharedMersTypedefs,
@@ -11,4 +12,5 @@ export const mersTypedefs = mergeTypeDefs([
   mersCamelPopulationDataTypedefs,
   mersEventTypedefs,
   mersEstimateTypedefs,
+  mersMacroSampleFramesTypedefs
 ])

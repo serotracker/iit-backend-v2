@@ -680,6 +680,20 @@ export type MersHumanCountriesOfTravelSubEstimate = MersSubEstimateInterface & {
   id: Scalars['String']['output'];
 };
 
+export type MersMacroSampleFrame = {
+  __typename?: 'MersMacroSampleFrame';
+  id: Scalars['String']['output'];
+  macroSampleFrame: MersMacroSampleFrameType;
+  sampleFrames: Array<Scalars['String']['output']>;
+};
+
+export enum MersMacroSampleFrameType {
+  GeneralPopulation = 'GENERAL_POPULATION',
+  HighRiskNotOccupationallyExposedToDromedaryCamels = 'HIGH_RISK_NOT_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS',
+  HighRiskOccupationallyExposedToDromedaryCamels = 'HIGH_RISK_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS',
+  Uncategorized = 'UNCATEGORIZED'
+}
+
 export type MersNomadismSubEstimate = MersSubEstimateInterface & {
   __typename?: 'MersNomadismSubEstimate';
   details: Scalars['String']['output'];
@@ -1203,6 +1217,7 @@ export type Query = {
   mersEstimatesFilterOptions: MersEstimateFilterOptions;
   mersEstimates_V2: Array<MersEstimate_V2>;
   mersFilterOptions: MersFilterOptions;
+  mersMacroSampleFrames: Array<MersMacroSampleFrame>;
   mersPrimaryEstimates: Array<MersPrimaryEstimate>;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
@@ -1491,6 +1506,8 @@ export type ResolversTypes = {
   MersFilterOptions: ResolverTypeWrapper<MersFilterOptions>;
   MersGeographicalAreaSubEstimate: ResolverTypeWrapper<Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersHumanCountriesOfTravelSubEstimate: ResolverTypeWrapper<Omit<MersHumanCountriesOfTravelSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersMacroSampleFrame: ResolverTypeWrapper<MersMacroSampleFrame>;
+  MersMacroSampleFrameType: MersMacroSampleFrameType;
   MersNomadismSubEstimate: ResolverTypeWrapper<Omit<MersNomadismSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersOccupationSubEstimate: ResolverTypeWrapper<Omit<MersOccupationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersPrimaryEstimate: ResolverTypeWrapper<Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSamplingContextSubestimates' | 'animalSourceLocationSubestimates' | 'animalSpeciesSubestimates' | 'camelExposureLevelSubestimates' | 'geographicalAreaSubestimates' | 'humanCountriesOfTravelSubestimates' | 'nomadismSubestimates' | 'occupationSubestimates' | 'primaryEstimateInfo' | 'sampleTypeSubestimates' | 'sexSubestimates' | 'testUsedSubestimates' | 'timeFrameSubestimates'> & { ageGroupSubestimates: Array<ResolversTypes['MersAgeGroupSubEstimate']>, animalSamplingContextSubestimates: Array<ResolversTypes['MersAnimalSamplingContextSubEstimate']>, animalSourceLocationSubestimates: Array<ResolversTypes['MersAnimalSourceLocationSubEstimate']>, animalSpeciesSubestimates: Array<ResolversTypes['MersAnimalSpeciesSubEstimate']>, camelExposureLevelSubestimates: Array<ResolversTypes['MersCamelExposureLevelSubEstimate']>, geographicalAreaSubestimates: Array<ResolversTypes['MersGeographicalAreaSubEstimate']>, humanCountriesOfTravelSubestimates: Array<ResolversTypes['MersHumanCountriesOfTravelSubEstimate']>, nomadismSubestimates: Array<ResolversTypes['MersNomadismSubEstimate']>, occupationSubestimates: Array<ResolversTypes['MersOccupationSubEstimate']>, primaryEstimateInfo: ResolversTypes['PrimaryMersEstimateInformation'], sampleTypeSubestimates: Array<ResolversTypes['MersSampleTypeSubEstimate']>, sexSubestimates: Array<ResolversTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversTypes['MersTestUsedSubEstimate']>, timeFrameSubestimates: Array<ResolversTypes['MersTimeFrameSubEstimate']> }>;
@@ -1566,6 +1583,7 @@ export type ResolversParentTypes = {
   MersFilterOptions: MersFilterOptions;
   MersGeographicalAreaSubEstimate: Omit<MersGeographicalAreaSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersHumanCountriesOfTravelSubEstimate: Omit<MersHumanCountriesOfTravelSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
+  MersMacroSampleFrame: MersMacroSampleFrame;
   MersNomadismSubEstimate: Omit<MersNomadismSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersOccupationSubEstimate: Omit<MersOccupationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersPrimaryEstimate: Omit<MersPrimaryEstimate, 'ageGroupSubestimates' | 'animalSamplingContextSubestimates' | 'animalSourceLocationSubestimates' | 'animalSpeciesSubestimates' | 'camelExposureLevelSubestimates' | 'geographicalAreaSubestimates' | 'humanCountriesOfTravelSubestimates' | 'nomadismSubestimates' | 'occupationSubestimates' | 'primaryEstimateInfo' | 'sampleTypeSubestimates' | 'sexSubestimates' | 'testUsedSubestimates' | 'timeFrameSubestimates'> & { ageGroupSubestimates: Array<ResolversParentTypes['MersAgeGroupSubEstimate']>, animalSamplingContextSubestimates: Array<ResolversParentTypes['MersAnimalSamplingContextSubEstimate']>, animalSourceLocationSubestimates: Array<ResolversParentTypes['MersAnimalSourceLocationSubEstimate']>, animalSpeciesSubestimates: Array<ResolversParentTypes['MersAnimalSpeciesSubEstimate']>, camelExposureLevelSubestimates: Array<ResolversParentTypes['MersCamelExposureLevelSubEstimate']>, geographicalAreaSubestimates: Array<ResolversParentTypes['MersGeographicalAreaSubEstimate']>, humanCountriesOfTravelSubestimates: Array<ResolversParentTypes['MersHumanCountriesOfTravelSubEstimate']>, nomadismSubestimates: Array<ResolversParentTypes['MersNomadismSubEstimate']>, occupationSubestimates: Array<ResolversParentTypes['MersOccupationSubEstimate']>, primaryEstimateInfo: ResolversParentTypes['PrimaryMersEstimateInformation'], sampleTypeSubestimates: Array<ResolversParentTypes['MersSampleTypeSubEstimate']>, sexSubestimates: Array<ResolversParentTypes['MersSexSubEstimate']>, testUsedSubestimates: Array<ResolversParentTypes['MersTestUsedSubEstimate']>, timeFrameSubestimates: Array<ResolversParentTypes['MersTimeFrameSubEstimate']> };
@@ -2155,6 +2173,13 @@ export type MersHumanCountriesOfTravelSubEstimateResolvers<ContextType = any, Pa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MersMacroSampleFrameResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersMacroSampleFrame'] = ResolversParentTypes['MersMacroSampleFrame']> = {
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  macroSampleFrame?: Resolver<ResolversTypes['MersMacroSampleFrameType'], ParentType, ContextType>;
+  sampleFrames?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MersNomadismSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersNomadismSubEstimate'] = ResolversParentTypes['MersNomadismSubEstimate']> = {
   details?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2653,6 +2678,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mersEstimatesFilterOptions?: Resolver<ResolversTypes['MersEstimateFilterOptions'], ParentType, ContextType>;
   mersEstimates_V2?: Resolver<Array<ResolversTypes['MersEstimate_V2']>, ParentType, ContextType>;
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
+  mersMacroSampleFrames?: Resolver<Array<ResolversTypes['MersMacroSampleFrame']>, ParentType, ContextType>;
   mersPrimaryEstimates?: Resolver<Array<ResolversTypes['MersPrimaryEstimate']>, ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
@@ -2781,6 +2807,7 @@ export type Resolvers<ContextType = any> = {
   MersFilterOptions?: MersFilterOptionsResolvers<ContextType>;
   MersGeographicalAreaSubEstimate?: MersGeographicalAreaSubEstimateResolvers<ContextType>;
   MersHumanCountriesOfTravelSubEstimate?: MersHumanCountriesOfTravelSubEstimateResolvers<ContextType>;
+  MersMacroSampleFrame?: MersMacroSampleFrameResolvers<ContextType>;
   MersNomadismSubEstimate?: MersNomadismSubEstimateResolvers<ContextType>;
   MersOccupationSubEstimate?: MersOccupationSubEstimateResolvers<ContextType>;
   MersPrimaryEstimate?: MersPrimaryEstimateResolvers<ContextType>;

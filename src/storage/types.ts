@@ -658,6 +658,21 @@ export type FaoMersEventDocument =
   | FaoMersAnimalEventDocument
   | FaoMersHumanEventDocument;
 
+export enum MersMacroSampleFrame {
+  'HIGH_RISK_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS' = 'HIGH_RISK_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS',
+  'HIGH_RISK_NOT_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS' = 'HIGH_RISK_NOT_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS',
+  'GENERAL_POPULATION' = 'GENERAL_POPULATION',
+  'UNCATEGORIZED' = 'UNCATEGORIZED'
+}
+
+export interface MersMacroSampleFrameDocument {
+  _id: ObjectId;
+  macroSampleFrame: MersMacroSampleFrame;
+  sampleFrames: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface FaoYearlyCamelPopulationDataDocument {
   _id: ObjectId;
   partitionKey: number;

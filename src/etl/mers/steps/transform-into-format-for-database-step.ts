@@ -10,7 +10,9 @@ import {
   MersEstimateDocumentBase,
   MersEstimateFilterOptionsDocument,
   MersPrimaryEstimateDocument,
-  MersSubEstimateBase
+  MersSubEstimateBase,
+  MersMacroSampleFrameDocument,
+  MersMacroSampleFrame
 } from "../../../storage/types.js";
 import {
   CountryFieldsAfterSortingSubestimatesStep,
@@ -19,6 +21,7 @@ import {
   EstimateFilterOptionsAfterSortingSubestimatesStep,
   FaoMersEventAfterSortingSubestimatesStep,
   GroupedEstimateFieldsAfterSortingSubestimatesStep,
+  MacroSampleFrameFieldsAfterSortingSubestimatesStep,
   SourceFieldsAfterSortingSubestimatesStep,
   StudyFieldsAfterSortingSubestimatesStep,
   YearlyCamelPopulationDataAfterSortingSubestimatesStep
@@ -30,6 +33,7 @@ export type SourceFieldsAfterTransformingFormatForDatabaseStep = SourceFieldsAft
 export type EstimateFilterOptionsAfterTransformingFormatForDatabaseStep = MersEstimateFilterOptionsDocument;
 export type StudyFieldsAfterTransformingFormatForDatabaseStep = StudyFieldsAfterSortingSubestimatesStep;
 export type CountryFieldsAfterTransformingFormatForDatabaseStep = CountryFieldsAfterSortingSubestimatesStep;
+export type MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep = MersMacroSampleFrameDocument;
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterSortingSubestimatesStep;
@@ -41,6 +45,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   estimateFilterOptions: EstimateFilterOptionsAfterSortingSubestimatesStep;
   allStudies: StudyFieldsAfterSortingSubestimatesStep[];
   allCountries: CountryFieldsAfterSortingSubestimatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterSortingSubestimatesStep[];
   allFaoMersEvents: FaoMersEventAfterSortingSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterSortingSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterSortingSubestimatesStep[];
@@ -54,6 +59,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   estimateFilterOptions: EstimateFilterOptionsAfterTransformingFormatForDatabaseStep;
   allStudies: StudyFieldsAfterTransformingFormatForDatabaseStep[];
   allCountries: CountryFieldsAfterTransformingFormatForDatabaseStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep[];
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
@@ -318,6 +324,51 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
   updatedAt: input.updatedAtForAllRecords,
 });
 
+interface TransformMacroSampleFrameForDatabaseInput {
+  macroSampleFrames: MacroSampleFrameFieldsAfterSortingSubestimatesStep[];
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+const transformMacroSampleFrameForDatabase = (input: TransformMacroSampleFrameForDatabaseInput): MersMacroSampleFrameDocument[] => {
+  const sampleFramesForHighRiskOccupationallyExposed = input.macroSampleFrames
+    .filter((macroSampleFrame) => macroSampleFrame.populationType === 'High-risk' && macroSampleFrame.occupationallyExposedToDromedaries === true)
+    .map((macroSampleFrame) => macroSampleFrame.sampleFrame);
+  const sampleFramesForHighRiskNonOccupationallyExposed = input.macroSampleFrames
+    .filter((macroSampleFrame) => macroSampleFrame.populationType === 'High-risk' && macroSampleFrame.occupationallyExposedToDromedaries === false)
+    .map((macroSampleFrame) => macroSampleFrame.sampleFrame);
+  const sampleFramesForGeneralPopulation = input.macroSampleFrames
+    .filter((macroSampleFrame) => macroSampleFrame.populationType === 'General population')
+    .map((macroSampleFrame) => macroSampleFrame.sampleFrame);
+  const uncategorizedSampleFrames = input.macroSampleFrames
+    .filter((macroSampleFrame) => (
+      !sampleFramesForHighRiskOccupationallyExposed.includes(macroSampleFrame.sampleFrame) &&
+      !sampleFramesForHighRiskNonOccupationallyExposed.includes(macroSampleFrame.sampleFrame) &&
+      !sampleFramesForGeneralPopulation.includes(macroSampleFrame.sampleFrame)
+    ))
+    .map((macroSampleFrame) => macroSampleFrame.sampleFrame);
+
+  return [{
+    macroSampleFrame: MersMacroSampleFrame.HIGH_RISK_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS,
+    sampleFrames: sampleFramesForHighRiskOccupationallyExposed,
+  }, {
+    macroSampleFrame: MersMacroSampleFrame.HIGH_RISK_NOT_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS,
+    sampleFrames: sampleFramesForHighRiskNonOccupationallyExposed,
+  }, {
+    macroSampleFrame: MersMacroSampleFrame.GENERAL_POPULATION,
+    sampleFrames: sampleFramesForGeneralPopulation,
+  }, {
+    macroSampleFrame: MersMacroSampleFrame.UNCATEGORIZED,
+    sampleFrames: uncategorizedSampleFrames,
+  }].map((element) => ({
+    _id: new ObjectId(),
+    macroSampleFrame: element.macroSampleFrame,
+    sampleFrames: element.sampleFrames,
+    createdAt: input.createdAtForAllRecords,
+    updatedAt: input.updatedAtForAllRecords,
+  }))
+};
+
 const transformMersSubEstimateBaseForDatabaseInput = (estimate: 
   Pick<Extract<EstimateFieldsAfterSortingSubestimatesStep, {type: MersEstimateType.ANIMAL_SEROPREVALENCE }>,
     'id'|'estimateId'|'type'|'sampleDenominator'|
@@ -505,6 +556,11 @@ export const transformIntoFormatForDatabaseStep = (
     }),
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: transformMacroSampleFrameForDatabase({
+      macroSampleFrames: input.allMacroSampleFrames,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
+    }),
     allFaoMersEvents: input.allFaoMersEvents.map((event) => transformFaoMersEventForDatabase({
       event,
       createdAtForAllRecords,

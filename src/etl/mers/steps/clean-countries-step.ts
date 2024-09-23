@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterCleaningEstimatesStep,
   EstimateFieldsAfterCleaningEstimatesStep,
   FaoMersEventAfterCleaningEstimatesStep,
+  MacroSampleFrameFieldsAfterCleaningEstimatesStep,
   SourceFieldsAfterCleaningEstimatesStep,
   StudyFieldsAfterCleaningEstimatesStep,
   YearlyCamelPopulationDataAfterCleaningEstimatesStep
@@ -19,6 +20,7 @@ export interface CountryFieldsAfterCleaningCountriesStep {
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
 };
+export type MacroSampleFrameFieldsAfterCleaningCountriesStep = MacroSampleFrameFieldsAfterCleaningEstimatesStep;
 export type FaoMersEventAfterCleaningCountriesStep = FaoMersEventAfterCleaningEstimatesStep;
 export type YearlyCamelPopulationDataAfterCleaningCountriesStep = YearlyCamelPopulationDataAfterCleaningEstimatesStep;
 export type CountryPopulationDataAfterCleaningCountriesStep = CountryPopulationDataAfterCleaningEstimatesStep;
@@ -28,6 +30,7 @@ interface CleanCountriesStepInput {
   allSources: SourceFieldsAfterCleaningEstimatesStep[];
   allStudies: StudyFieldsAfterCleaningEstimatesStep[];
   allCountries: CountryFieldsAfterCleaningEstimatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningEstimatesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
@@ -39,6 +42,7 @@ interface CleanCountriesStepOutput {
   allSources: SourceFieldsAfterCleaningCountriesStep[];
   allStudies: StudyFieldsAfterCleaningCountriesStep[];
   allCountries: CountryFieldsAfterCleaningCountriesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningCountriesStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningCountriesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCountriesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCountriesStep[];
@@ -56,6 +60,7 @@ export const cleanCountriesStep = (input: CleanCountriesStepInput): CleanCountri
       countryAlphaThreeCode: country['Alpha3 Code'] as ThreeLetterIsoCountryCode,
       countryAlphaTwoCode: country['Alpha2 Code'] as TwoLetterIsoCountryCode
     })),
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterJitteringPinLatLngStep,
   EstimateFieldsAfterJitteringPinLatLngStep,
   FaoMersEventAfterJitteringPinLatLngStep,
+  MacroSampleFrameFieldsAfterJitteringPinLatLngStep,
   SourceFieldsAfterJitteringPinLatLngStep,
   StudyFieldsAfterJitteringPinLatLngStep,
   YearlyCamelPopulationDataAfterJitteringPinLatLngStep
@@ -13,6 +14,7 @@ export type EstimateFieldsAfterAssigningPartitionsStep = EstimateFieldsAfterJitt
 export type SourceFieldsAfterAssigningPartitionsStep = SourceFieldsAfterJitteringPinLatLngStep;
 export type StudyFieldsAfterAssigningPartitionsStep = StudyFieldsAfterJitteringPinLatLngStep;
 export type CountryFieldsAfterAssigningPartitionsStep = CountryFieldsAfterJitteringPinLatLngStep;
+export type MacroSampleFrameFieldsAfterAssigningPartitionsStep = MacroSampleFrameFieldsAfterJitteringPinLatLngStep;
 export type FaoMersEventAfterAssigningPartitionsStep = FaoMersEventAfterJitteringPinLatLngStep & {
   partitionKey: number;
 };
@@ -26,6 +28,7 @@ interface AssignPartitionsStepInput {
   allSources: SourceFieldsAfterJitteringPinLatLngStep[];
   allStudies: StudyFieldsAfterJitteringPinLatLngStep[];
   allCountries: CountryFieldsAfterJitteringPinLatLngStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterJitteringPinLatLngStep[];
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
@@ -37,6 +40,7 @@ interface AssignPartitionsStepOutput {
   allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allStudies: StudyFieldsAfterAssigningPartitionsStep[];
   allCountries: CountryFieldsAfterAssigningPartitionsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -55,6 +59,7 @@ export const assignPartitionsStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents.map((event, index) => ({
       ...event,
       partitionKey: Math.floor(index / faoMersEventPartitionSize)

@@ -1,31 +1,34 @@
 import { MongoClient } from "mongodb";
 import { readFileSync } from "fs";
 import {
-  CountryFieldsAfterCleaningCountriesStep,
-  CountryPopulationDataAfterCleaningCountriesStep,
-  EstimateFieldsAfterCleaningCountriesStep,
-  FaoMersEventAfterCleaningCountriesStep,
-  SourceFieldsAfterCleaningCountriesStep,
-  StudyFieldsAfterCleaningCountriesStep,
-  YearlyCamelPopulationDataAfterCleaningCountriesStep
-} from "./clean-countries-step";
+  CountryFieldsAfterCleaningMacroSampleFramesStep,
+  CountryPopulationDataAfterCleaningMacroSampleFramesStep,
+  EstimateFieldsAfterCleaningMacroSampleFramesStep,
+  FaoMersEventAfterCleaningMacroSampleFramesStep,
+  MacroSampleFrameFieldsAfterCleaningMacroSampleFramesStep,
+  SourceFieldsAfterCleaningMacroSampleFramesStep,
+  StudyFieldsAfterCleaningMacroSampleFramesStep,
+  YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep
+} from "./clean-macro-sample-frames-step";
 
-export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterCleaningCountriesStep;
-export type SourceFieldsAfterFetchingFaoMersEventsStep = SourceFieldsAfterCleaningCountriesStep;
-export type StudyFieldsAfterFetchingFaoMersEventsStep = StudyFieldsAfterCleaningCountriesStep;
-export type CountryFieldsAfterFetchingFaoMersEventsStep = CountryFieldsAfterCleaningCountriesStep;
+export type EstimateFieldsAfterFetchingFaoMersEventsStep = EstimateFieldsAfterCleaningMacroSampleFramesStep;
+export type SourceFieldsAfterFetchingFaoMersEventsStep = SourceFieldsAfterCleaningMacroSampleFramesStep;
+export type StudyFieldsAfterFetchingFaoMersEventsStep = StudyFieldsAfterCleaningMacroSampleFramesStep;
+export type CountryFieldsAfterFetchingFaoMersEventsStep = CountryFieldsAfterCleaningMacroSampleFramesStep;
+export type MacroSampleFrameFieldsAfterFetchingFaoMersEventsStep = MacroSampleFrameFieldsAfterCleaningMacroSampleFramesStep;
 export type FaoMersEventAfterFetchingFaoMersEventsStep = Record<string, string | undefined>;
-export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterCleaningCountriesStep;
-export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterCleaningCountriesStep;
+export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep;
+export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterCleaningMacroSampleFramesStep;
 
 interface FetchFaoMersEventsStepInput {
-  allEstimates: EstimateFieldsAfterCleaningCountriesStep[];
-  allSources: SourceFieldsAfterCleaningCountriesStep[];
-  allStudies: StudyFieldsAfterCleaningCountriesStep[];
-  allCountries: CountryFieldsAfterCleaningCountriesStep[];
-  allFaoMersEvents: FaoMersEventAfterCleaningCountriesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCountriesStep[];
-  countryPopulationData: CountryPopulationDataAfterCleaningCountriesStep[];
+  allEstimates: EstimateFieldsAfterCleaningMacroSampleFramesStep[];
+  allSources: SourceFieldsAfterCleaningMacroSampleFramesStep[];
+  allStudies: StudyFieldsAfterCleaningMacroSampleFramesStep[];
+  allCountries: CountryFieldsAfterCleaningMacroSampleFramesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningMacroSampleFramesStep[];
+  allFaoMersEvents: FaoMersEventAfterCleaningMacroSampleFramesStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep[];
+  countryPopulationData: CountryPopulationDataAfterCleaningMacroSampleFramesStep[];
   mongoClient: MongoClient;
 }
 
@@ -34,6 +37,7 @@ interface FetchFaoMersEventsStepOutput {
   allSources: SourceFieldsAfterFetchingFaoMersEventsStep[];
   allStudies: StudyFieldsAfterFetchingFaoMersEventsStep[];
   allCountries: CountryFieldsAfterFetchingFaoMersEventsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFetchingFaoMersEventsStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
@@ -56,6 +60,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
       allSources: input.allSources,
       allStudies: input.allStudies,
       allCountries: input.allCountries,
+      allMacroSampleFrames: input.allMacroSampleFrames,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: input.countryPopulationData,
@@ -79,6 +84,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: data,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

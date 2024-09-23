@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep,
   EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep,
   FaoMersEventAfterValidatingCamelPopulationByCountryDataStep,
+  MacroSampleFrameFieldsAfterValidatingCamelPopulationByCountryDataStep,
   SourceFieldsAfterValidatingCamelPopulationByCountryDataStep,
   StudyFieldsAfterValidatingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep
@@ -14,6 +15,7 @@ export type EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep = Estima
 export type SourceFieldsAfterCleaningCamelPopulationByCountryDataStep = SourceFieldsAfterValidatingCamelPopulationByCountryDataStep;
 export type StudyFieldsAfterCleaningCamelPopulationByCountryDataStep = StudyFieldsAfterValidatingCamelPopulationByCountryDataStep;
 export type CountryFieldsAfterCleaningCamelPopulationByCountryDataStep = CountryFieldsAfterValidatingCamelPopulationByCountryDataStep;
+export type MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep = MacroSampleFrameFieldsAfterValidatingCamelPopulationByCountryDataStep;
 export type FaoMersEventAfterCleaningCamelPopulationByCountryDataStep = FaoMersEventAfterValidatingCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep = {
   threeLetterCountryCode: ThreeLetterIsoCountryCode;
@@ -30,6 +32,7 @@ interface CleanCamelPopulationByCountryDataStepInput {
   allSources: SourceFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allCountries: CountryFieldsAfterValidatingCamelPopulationByCountryDataStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
@@ -41,6 +44,7 @@ interface CleanCamelPopulationByCountryDataStepOutput {
   allSources: SourceFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allCountries: CountryFieldsAfterCleaningCamelPopulationByCountryDataStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
@@ -127,6 +131,7 @@ export const cleanCamelPopulationByCountryDataStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: cleanedDataArray,
     countryPopulationData: input.countryPopulationData,

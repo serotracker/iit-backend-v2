@@ -5,6 +5,7 @@ import {
   CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep,
   EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep,
   FaoMersEventAfterFetchingCamelPopulationByCountryDataStep,
+  MacroSampleFrameFieldsAfterFetchingCamelPopulationByCountryDataStep,
   SourceFieldsAfterFetchingCamelPopulationByCountryDataStep,
   StudyFieldsAfterFetchingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep
@@ -14,6 +15,7 @@ export type EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep = Esti
 export type SourceFieldsAfterValidatingCamelPopulationByCountryDataStep = SourceFieldsAfterFetchingCamelPopulationByCountryDataStep;
 export type StudyFieldsAfterValidatingCamelPopulationByCountryDataStep = StudyFieldsAfterFetchingCamelPopulationByCountryDataStep;
 export type CountryFieldsAfterValidatingCamelPopulationByCountryDataStep = CountryFieldsAfterFetchingCamelPopulationByCountryDataStep;
+export type MacroSampleFrameFieldsAfterValidatingCamelPopulationByCountryDataStep = MacroSampleFrameFieldsAfterFetchingCamelPopulationByCountryDataStep;
 export type FaoMersEventAfterValidatingCamelPopulationByCountryDataStep = FaoMersEventAfterFetchingCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep = {
   Item: string;
@@ -29,6 +31,7 @@ interface ValidateCamelPopulationByCountryDataStepInput {
   allSources: SourceFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allCountries: CountryFieldsAfterFetchingCamelPopulationByCountryDataStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFetchingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterFetchingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
@@ -40,6 +43,7 @@ interface ValidateCamelPopulationByCountryDataStepOutput {
   allSources: SourceFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allStudies: StudyFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allCountries: CountryFieldsAfterValidatingCamelPopulationByCountryDataStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterValidatingCamelPopulationByCountryDataStep[];
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
@@ -69,6 +73,7 @@ export const validateCamelPopulationByCountryDataStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData.map((camelPopulationDataPoint) => 
       zodCamelPopulationByCountryObject.parse(camelPopulationDataPoint)

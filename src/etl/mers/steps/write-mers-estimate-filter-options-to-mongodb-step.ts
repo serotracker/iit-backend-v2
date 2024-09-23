@@ -6,6 +6,7 @@ import {
   EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   GroupedEstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
+  MacroSampleFrameFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep
@@ -24,6 +25,8 @@ export type StudyFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep =
   StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type CountryFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep =
   CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
+export type MacroSampleFrameFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep =
+  MacroSampleFrameFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type FaoMersEventAfterWritingMersEstimateFilterOptionsToMongodbStep =
   FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep =
@@ -38,6 +41,7 @@ interface WriteMersEstimateFilterOptionsToMongoDbStepInput {
   estimateFilterOptions: EstimateFilterOptionsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
   allStudies: StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allCountries: CountryFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -51,6 +55,7 @@ interface WriteMersEstimateFilterOptionsToMongoDbStepOutput {
   estimateFilterOptions: EstimateFilterOptionsAfterWritingMersEstimateFilterOptionsToMongodbStep;
   allStudies: StudyFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   allCountries: CountryFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   allFaoMersEvents: FaoMersEventAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
@@ -78,6 +83,7 @@ export const writeMersEstimateFilterOptionsToMongoDbStep = async(
     estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

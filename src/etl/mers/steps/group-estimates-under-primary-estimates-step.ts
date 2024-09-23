@@ -6,6 +6,7 @@ import {
   EstimateFieldsAfterGeneratingMersEstimateFilterOptionsStep,
   EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep,
   FaoMersEventAfterGeneratingMersEstimateFilterOptionsStep,
+  MacroSampleFrameFieldsAfterGeneratingMersEstimateFilterOptionsStep,
   SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep,
   StudyFieldsAfterGeneratingMersEstimateFilterOptionsStep,
   YearlyCamelPopulationDataAfterGeneratingMersEstimateFilterOptionsStep
@@ -32,6 +33,7 @@ export type EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep
 export type SourceFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep = SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep;
 export type StudyFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep = StudyFieldsAfterGeneratingMersEstimateFilterOptionsStep;
 export type CountryFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep = CountryFieldsAfterGeneratingMersEstimateFilterOptionsStep;
+export type MacroSampleFrameFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep = MacroSampleFrameFieldsAfterGeneratingMersEstimateFilterOptionsStep;
 export type FaoMersEventAfterGroupingEstimatesUnderPrimaryEstimatesStep = FaoMersEventAfterGeneratingMersEstimateFilterOptionsStep;
 export type YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep = YearlyCamelPopulationDataAfterGeneratingMersEstimateFilterOptionsStep;
 export type CountryPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep = CountryPopulationDataAfterGeneratingMersEstimateFilterOptionsStep;
@@ -42,6 +44,7 @@ interface GroupEstimatesUnderPrimaryEstimatesStepInput {
   estimateFilterOptions: EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep;
   allStudies: StudyFieldsAfterGeneratingMersEstimateFilterOptionsStep[];
   allCountries: CountryFieldsAfterGeneratingMersEstimateFilterOptionsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterGeneratingMersEstimateFilterOptionsStep[];
   allFaoMersEvents: FaoMersEventAfterGeneratingMersEstimateFilterOptionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingMersEstimateFilterOptionsStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingMersEstimateFilterOptionsStep[];
@@ -55,6 +58,7 @@ interface GroupEstimatesUnderPrimaryEstimatesStepOutput {
   estimateFilterOptions: EstimateFilterOptionsAfterGroupingEstimatesUnderPrimaryEstimatesStep;
   allStudies: StudyFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   allCountries: CountryFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   allFaoMersEvents: FaoMersEventAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
@@ -114,6 +118,7 @@ export const groupEstimatesUnderPrimaryEstimatesStep = (input: GroupEstimatesUnd
     estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

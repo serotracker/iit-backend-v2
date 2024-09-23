@@ -36,6 +36,8 @@ import { filterInvalidSubestimatesStep } from "./steps/filter-invalid-subestimat
 import { sortSubestimatesStep } from "./steps/sort-subestimates-step.js";
 import { generateEstimateGeoJSONFileStep } from "./steps/generate-estimate-geojson-file-step.js";
 import { deriveSampleDenominatorAndNumeratorStep } from "./steps/derive-sample-denominator-and-numerator-step.js";
+import { cleanMacroSampleFramesStep } from "./steps/clean-macro-sample-frames-step.js";
+import { writeMersMacroSampleFramesToMongoDbStep } from "./steps/write-mers-macro-sample-frames-to-mongodb-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -56,6 +58,7 @@ const runEtlMain = async () => {
   const sourceSheet = base.table("Source");
   const studySheet = base.table("Study");
   const countrySheet = base.table("Selectable Countries & Territories");
+  const macroSampleFrameSheet = base.table("Sample Frame GOI");
 
   const allEstimatesUnformatted: (FieldSet & { id: string })[] =
     await estimateSheet
@@ -89,6 +92,14 @@ const runEtlMain = async () => {
         countrySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
+  const allMacroSampleFramesUnformatted: (FieldSet & { id: string })[] = 
+    await macroSampleFrameSheet
+      .select()
+      .all()
+      .then((countrySheet) =>
+        countrySheet.map((record) => ({ ...record.fields, id: record.id }))
+      );
+
   //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
   const outputFromFirstPipeHalf = await pipe(
     {
@@ -96,6 +107,7 @@ const runEtlMain = async () => {
       allSources: allSourcesUnformatted,
       allStudies: allStudiesUnformatted,
       allCountries: allCountriesUnformatted,
+      allMacroSampleFrames: allMacroSampleFramesUnformatted,
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: [],
@@ -106,6 +118,7 @@ const runEtlMain = async () => {
     etlStep(cleanStudiesStep),
     etlStep(cleanEstimatesStep),
     etlStep(cleanCountriesStep),
+    etlStep(cleanMacroSampleFramesStep),
     etlStep(fetchFaoMersEventsStep),
     etlStep(validateFaoMersEventsStep),
     etlStep(cleanFaoMersEventFieldsStep),
@@ -138,6 +151,7 @@ const runEtlMain = async () => {
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
     asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
     asyncEtlStep(writeMersEstimateFilterOptionsToMongoDbStep),
+    asyncEtlStep(writeMersMacroSampleFramesToMongoDbStep),
     asyncEtlStep(addDatabaseIndexesStep)
   );
 

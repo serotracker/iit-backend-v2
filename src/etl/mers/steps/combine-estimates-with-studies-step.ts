@@ -6,7 +6,8 @@ import {
   FaoMersEventAfterCombiningStudiesWithSourcesStep,
   YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep,
   CountryPopulationDataAfterCombiningStudiesWithSourcesStep,
-  CountryFieldsAfterCombiningStudiesWithSourcesStep
+  CountryFieldsAfterCombiningStudiesWithSourcesStep,
+  MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep
 } from "./combine-studies-with-sources-step";
 
 export type EstimateFieldsAfterCombiningEstimatesWithStudiesStep = EstimateFieldsAfterCombiningStudiesWithSourcesStep & {
@@ -15,6 +16,7 @@ export type EstimateFieldsAfterCombiningEstimatesWithStudiesStep = EstimateField
 export type SourceFieldsAfterCombiningEstimatesWithStudiesStep = SourceFieldsAfterCombiningStudiesWithSourcesStep;
 export type StudyFieldsAfterCombiningEstimatesWithStudiesStep = StudyFieldsAfterCombiningStudiesWithSourcesStep;
 export type CountryFieldsAfterCombiningEstimatesWithStudiesStep = CountryFieldsAfterCombiningStudiesWithSourcesStep;
+export type MacroSampleFrameFieldsAfterCombiningEstimatesWithStudiesStep = MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep;
 export type FaoMersEventAfterCombiningEstimatesWithStudiesStep = FaoMersEventAfterCombiningStudiesWithSourcesStep;
 export type YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep = YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep;
 export type CountryPopulationDataAfterCombiningEstimatesWithStudiesStep = CountryPopulationDataAfterCombiningStudiesWithSourcesStep;
@@ -24,6 +26,7 @@ interface CombineEstimatesWithStudiesStepInput {
   allSources: SourceFieldsAfterCombiningStudiesWithSourcesStep[];
   allStudies: StudyFieldsAfterCombiningStudiesWithSourcesStep[];
   allCountries: CountryFieldsAfterCombiningStudiesWithSourcesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningStudiesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningStudiesWithSourcesStep[];
@@ -35,6 +38,7 @@ interface CombineEstimatesWithStudiesStepOutput {
   allSources: SourceFieldsAfterCombiningEstimatesWithStudiesStep[];
   allStudies: StudyFieldsAfterCombiningEstimatesWithStudiesStep[];
   allCountries: CountryFieldsAfterCombiningEstimatesWithStudiesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCombiningEstimatesWithStudiesStep[];
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithStudiesStep[];
@@ -62,6 +66,7 @@ export const combineEstimatesWithStudiesStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,

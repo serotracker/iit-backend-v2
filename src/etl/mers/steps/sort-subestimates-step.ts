@@ -7,6 +7,7 @@ import {
   EstimateFilterOptionsAfterFilteringInvalidSubestimatesStep,
   FaoMersEventAfterFilteringInvalidSubestimatesStep,
   GroupedEstimateFieldsAfterFilteringInvalidSubestimatesStep,
+  MacroSampleFrameFieldsAfterFilteringInvalidSubestimatesStep,
   SourceFieldsAfterFilteringInvalidSubestimatesStep,
   StudyFieldsAfterFilteringInvalidSubestimatesStep,
   YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep
@@ -18,6 +19,7 @@ export type EstimateFilterOptionsAfterSortingSubestimatesStep = EstimateFilterOp
 export type SourceFieldsAfterSortingSubestimatesStep = SourceFieldsAfterFilteringInvalidSubestimatesStep;
 export type StudyFieldsAfterSortingSubestimatesStep = StudyFieldsAfterFilteringInvalidSubestimatesStep;
 export type CountryFieldsAfterSortingSubestimatesStep = CountryFieldsAfterFilteringInvalidSubestimatesStep;
+export type MacroSampleFrameFieldsAfterSortingSubestimatesStep = MacroSampleFrameFieldsAfterFilteringInvalidSubestimatesStep;
 export type FaoMersEventAfterSortingSubestimatesStep = FaoMersEventAfterFilteringInvalidSubestimatesStep;
 export type YearlyCamelPopulationDataAfterSortingSubestimatesStep = YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep;
 export type CountryPopulationDataAfterSortingSubestimatesStep = CountryPopulationDataAfterFilteringInvalidSubestimatesStep;
@@ -29,6 +31,7 @@ interface SortSubestimatesStepInput {
   estimateFilterOptions: EstimateFilterOptionsAfterFilteringInvalidSubestimatesStep;
   allStudies: StudyFieldsAfterFilteringInvalidSubestimatesStep[];
   allCountries: CountryFieldsAfterFilteringInvalidSubestimatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFilteringInvalidSubestimatesStep[];
   allFaoMersEvents: FaoMersEventAfterFilteringInvalidSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterFilteringInvalidSubestimatesStep[];
@@ -42,6 +45,7 @@ interface SortSubestimatesStepOutput {
   estimateFilterOptions: EstimateFilterOptionsAfterSortingSubestimatesStep;
   allStudies: StudyFieldsAfterSortingSubestimatesStep[];
   allCountries: CountryFieldsAfterSortingSubestimatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterSortingSubestimatesStep[];
   allFaoMersEvents: FaoMersEventAfterSortingSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterSortingSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterSortingSubestimatesStep[];
@@ -193,6 +197,7 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
     estimateFilterOptions: input.estimateFilterOptions,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,

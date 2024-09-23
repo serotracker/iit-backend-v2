@@ -9,6 +9,7 @@ import {
   CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep,
   EstimateFieldsAfterGeneratingCamelDataPerCapitaStep,
   FaoMersEventAfterGeneratingCamelDataPerCapitaStep,
+  MacroSampleFrameFieldsAfterGeneratingCamelDataPerCapitaStep,
   SourceFieldsAfterGeneratingCamelDataPerCapitaStep,
   StudyFieldsAfterGeneratingCamelDataPerCapitaStep,
   YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep
@@ -24,6 +25,7 @@ export type EstimateFieldsAfterParsingDatesStep = Omit<
 export type SourceFieldsAfterParsingDatesStep = SourceFieldsAfterGeneratingCamelDataPerCapitaStep;
 export type StudyFieldsAfterParsingDatesStep = StudyFieldsAfterGeneratingCamelDataPerCapitaStep;
 export type CountryFieldsAfterParsingDatesStep = CountryFieldsAfterGeneratingCamelDataPerCapitaStep;
+export type MacroSampleFrameFieldsAfterParsingDatesStep = MacroSampleFrameFieldsAfterGeneratingCamelDataPerCapitaStep;
 // Intentionally from a type a few steps back. This is because the individual parts of the union type are not carried through the steps,
 // just the union type itself. You could fix this by carrying the individual parts of the union type through the steps.
 export type FaoMersEventAfterParsingDatesStep = (Omit<
@@ -43,6 +45,7 @@ interface ParseDatesStepInput {
   allSources: SourceFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allStudies: StudyFieldsAfterGeneratingCamelDataPerCapitaStep[];
   allCountries: CountryFieldsAfterGeneratingCamelDataPerCapitaStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterGeneratingCamelDataPerCapitaStep[],
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
@@ -54,6 +57,7 @@ interface ParseDatesStepOutput {
   allSources: SourceFieldsAfterParsingDatesStep[];
   allStudies: StudyFieldsAfterParsingDatesStep[];
   allCountries: CountryFieldsAfterParsingDatesStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterParsingDatesStep[],
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
@@ -81,6 +85,7 @@ export const parseDatesStep = (
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents.map((event) => ({
       ...event,
       observationDate: event.observationDate ? parse(event.observationDate, "dd/MM/yyyy", new Date()) : undefined,

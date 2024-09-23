@@ -4,6 +4,7 @@ import {
   CountryPopulationDataAfterAssigningPartitionsStep,
   EstimateFieldsAfterAssigningPartitionsStep,
   FaoMersEventAfterAssigningPartitionsStep,
+  MacroSampleFrameFieldsAfterAssigningPartitionsStep,
   SourceFieldsAfterAssigningPartitionsStep,
   StudyFieldsAfterAssigningPartitionsStep,
   YearlyCamelPopulationDataAfterAssigningPartitionsStep
@@ -128,6 +129,7 @@ export type EstimateFieldsAfterApplyingTypedEstimateConstraintsStep =
 export type SourceFieldsAfterApplyingTypedEstimateConstraintsStep = SourceFieldsAfterAssigningPartitionsStep;
 export type StudyFieldsAfterApplyingTypedEstimateConstraintsStep = StudyFieldsAfterAssigningPartitionsStep;
 export type CountryFieldsAfterApplyingTypedEstimateConstraintsStep = CountryFieldsAfterAssigningPartitionsStep;
+export type MacroSampleFrameFieldsAfterApplyingTypedEstimateConstraintsStep = MacroSampleFrameFieldsAfterAssigningPartitionsStep;
 export type FaoMersEventAfterApplyingTypedEstimateConstraintsStep = FaoMersEventAfterAssigningPartitionsStep;
 export type YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep = YearlyCamelPopulationDataAfterAssigningPartitionsStep;
 export type CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep = CountryPopulationDataAfterAssigningPartitionsStep;
@@ -137,6 +139,7 @@ interface ApplyTypedEstimateConstraintsStepInput {
   allSources: SourceFieldsAfterAssigningPartitionsStep[];
   allStudies: StudyFieldsAfterAssigningPartitionsStep[];
   allCountries: CountryFieldsAfterAssigningPartitionsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterAssigningPartitionsStep[];
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
@@ -148,6 +151,7 @@ interface ApplyTypedEstimateConstraintsStepOutput {
   allSources: SourceFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allStudies: StudyFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allCountries: CountryFieldsAfterApplyingTypedEstimateConstraintsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterApplyingTypedEstimateConstraintsStep[];
   allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
   countryPopulationData: CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
@@ -279,6 +283,7 @@ export const applyTypedEstimateConstraintsStep = (input: ApplyTypedEstimateConst
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
+    allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
