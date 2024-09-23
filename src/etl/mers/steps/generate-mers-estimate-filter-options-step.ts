@@ -9,6 +9,7 @@ import {
   StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
   YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
 } from "./apply-typed-estimate-constraints-step.js";
+import { Clade } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterGeneratingMersEstimateFilterOptionsStep = EstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
@@ -29,6 +30,7 @@ export type EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep = 
   testValidation: string[];
   exposureToCamels: string[];
   antigen: string[];
+  clade: Clade[];
 }
 export type StudyFieldsAfterGeneratingMersEstimateFilterOptionsStep = StudyFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type CountryFieldsAfterGeneratingMersEstimateFilterOptionsStep = CountryFieldsAfterApplyingTypedEstimateConstraintsStep;
@@ -113,6 +115,9 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
       antigen: uniq(input.allEstimates
         .flatMap((estimate) => estimate.antigen)
         .filter((element): element is NonNullable<typeof element> => !!element)),
+      clade: uniq(input.allEstimates
+        .flatMap((estimate) => estimate.clade)
+        .filter((element): element is NonNullable<typeof element> => !!element))
     },
     allSources: input.allSources,
     allStudies: input.allStudies,

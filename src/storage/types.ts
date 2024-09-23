@@ -589,6 +589,7 @@ export interface MersEstimateFilterOptionsDocument {
   antigen: string[];
   testProducer: string[];
   testValidation: string[];
+  clade: Clade[];
   createdAt: Date;
   updatedAt: Date;
 }

@@ -313,6 +313,7 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
   testValidation: input.estimateFilterOptions.testValidation,
   exposureToCamels: input.estimateFilterOptions.exposureToCamels,
   antigen: input.estimateFilterOptions.antigen,
+  clade: input.estimateFilterOptions.clade,
   createdAt: input.createdAtForAllRecords,
   updatedAt: input.updatedAtForAllRecords,
 });
