@@ -47,7 +47,7 @@ export const parseDatesStep = (input: ParseDatesStepInput): ParseDatesStepOutput
   return {
     allEstimates: input.allEstimates.map((estimate) => {
       const samplingStartDate = estimate.samplingStartDate ? parse(estimate.samplingStartDate, "yyyy-MM-dd", new Date()) : undefined;
-      const samplingEndDate = estimate.samplingStartDate ? parse(estimate.samplingStartDate, "yyyy-MM-dd", new Date()) : undefined;
+      const samplingEndDate = estimate.samplingEndDate ? parse(estimate.samplingEndDate, "yyyy-MM-dd", new Date()) : undefined;
       const publicationDate = estimate.publicationDate ? parse(estimate.publicationDate, "yyyy-MM-dd", new Date()) : undefined;
       const samplingMidDate = samplingEndDate && samplingStartDate ? new Date((samplingStartDate.getTime() + samplingEndDate.getTime()) / 2) : undefined;
 
