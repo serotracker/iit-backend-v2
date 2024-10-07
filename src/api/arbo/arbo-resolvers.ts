@@ -9,7 +9,7 @@ const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.ZIKV]: ArbovirusForApi.Zikv,
   [Arbovirus.DENV]: ArbovirusForApi.Denv,
   [Arbovirus.CHIKV]: ArbovirusForApi.Chikv,
-  [Arbovirus.YF]: ArbovirusForApi.Yf,
+  [Arbovirus.YFV]: ArbovirusForApi.Yfv,
   [Arbovirus.WNV]: ArbovirusForApi.Wnv,
   [Arbovirus.MAYV]: ArbovirusForApi.Mayv,
 }
