@@ -46,7 +46,7 @@ export const arboTypedefs = `
     ZIKV
     DENV
     CHIKV
-    YF
+    YFV
     WNV
     MAYV
   }

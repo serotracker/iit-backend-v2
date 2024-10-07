@@ -159,7 +159,7 @@ export enum Arbovirus {
   Denv = 'DENV',
   Mayv = 'MAYV',
   Wnv = 'WNV',
-  Yf = 'YF',
+  Yfv = 'YFV',
   Zikv = 'ZIKV'
 }
 
