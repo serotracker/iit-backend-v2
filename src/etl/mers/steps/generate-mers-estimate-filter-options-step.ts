@@ -10,7 +10,7 @@ import {
   StudyFieldsAfterApplyingTypedEstimateConstraintsStep,
   YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep
 } from "./apply-typed-estimate-constraints-step.js";
-import { Clade } from "../../../storage/types.js";
+import { Clade, MersAnimalSpecies } from "../../../storage/types.js";
 
 export type EstimateFieldsAfterGeneratingMersEstimateFilterOptionsStep = EstimateFieldsAfterApplyingTypedEstimateConstraintsStep;
 export type SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep = SourceFieldsAfterApplyingTypedEstimateConstraintsStep;
@@ -25,6 +25,7 @@ export type EstimateFilterOptionsAfterGeneratingMersEstimateFilterOptionsStep = 
   geographicScope: string[];
   animalDetectionSettings: string[];
   animalPurpose: string[];
+  animalSpecies: MersAnimalSpecies[];
   animalImportedOrLocal: string[];
   sampleFrame: string[];
   testProducer: string[];
@@ -100,6 +101,9 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
         .filter((element): element is NonNullable<typeof element> => !!element)),
       animalPurpose: uniq(input.allEstimates
         .map((estimate) => estimate.animalPurpose)
+        .filter((element): element is NonNullable<typeof element> => !!element)),
+      animalSpecies: uniq(input.allEstimates
+        .map((estimate) => estimate.animalSpecies)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       animalImportedOrLocal: uniq(input.allEstimates
         .map((estimate) => estimate.animalImportedOrLocal)

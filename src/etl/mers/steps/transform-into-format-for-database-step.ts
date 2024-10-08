@@ -313,6 +313,7 @@ const transformMersEstimateFilterOptionsForDatabase = (input: TransformMersEstim
   geographicScope: input.estimateFilterOptions.geographicScope,
   animalDetectionSettings: input.estimateFilterOptions.animalDetectionSettings,
   animalPurpose: input.estimateFilterOptions.animalPurpose,
+  animalSpecies: input.estimateFilterOptions.animalSpecies,
   animalImportedOrLocal: input.estimateFilterOptions.animalImportedOrLocal,
   sampleFrame: input.estimateFilterOptions.sampleFrame,
   testProducer: input.estimateFilterOptions.testProducer,
