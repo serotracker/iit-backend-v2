@@ -1,13 +1,10 @@
 import { MongoClient } from "mongodb";
-import uniq from "lodash/uniq.js";
-import { pipe } from "fp-ts/lib/function.js";
 import assertNever from "assert-never";
 import {
   FaoMersEventDocument,
   FaoMersEventDocumentBase,
   MersDiagnosisSource,
   MersDiagnosisStatus,
-  MersEstimateDocument,
   MersEventAnimalSpecies,
   MersEventAnimalType,
   MersEventType
@@ -20,9 +17,6 @@ import {
   MersDiagnosisStatus as MersDiagnosisStatusForApi,
   MersDiagnosisSource as MersDiagnosisSourceForApi,
   QueryResolvers,
-  MersAnimalSpecies as MersAnimalSpeciesForApi,
-  MersAnimalType as MersAnimalTypeForApi,
-  MersEstimateType as MersEstimateTypeForApi,
   MersEventInterface,
   MersEvent
 } from "../graphql-types/__generated__/graphql-types.js";
@@ -131,31 +125,21 @@ export const generateMersEventResolvers = (input: GenerateMersEventResolversInpu
 
   const faoMersEventFilterOptions = async () => {
     const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
-    const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
 
     const [
       diagnosisSource,
       animalType,
-      animalSpeciesFromEvents,
-      animalSpeciesFromEstimates,
+      animalSpecies,
     ] = await Promise.all([
       faoMersEventsCollection.distinct('diagnosisSource').then((element) => filterUndefinedValuesFromArray(element)),
       faoMersEventsCollection.distinct('animalType').then((element) => filterUndefinedValuesFromArray(element)),
       faoMersEventsCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
-      estimateCollection.distinct('animalSpecies').then((element) => filterUndefinedValuesFromArray(element)),
     ])
 
     return {
       diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
       animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
-      animalSpecies: pipe(
-        [
-          ...animalSpeciesFromEvents.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)), 
-          ...animalSpeciesFromEstimates.map((element) => transformFaoMersEventAnimalSpeciesForApi(element))
-        ],
-        uniq,
-        filterUndefinedValuesFromArray
-      )
+      animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
     }
   }
 
