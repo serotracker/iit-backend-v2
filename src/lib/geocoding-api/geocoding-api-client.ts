@@ -16,6 +16,7 @@ import {
 } from "./geocoding-api-response-cache.js";
 import { parseGeocodingApiResponse } from "./geocoding-api-response-parser.js";
 import { recordGeocodingApiRequestInGeocodingReport } from "./geocoding-api-request-report-generator.js";
+import { lookupInGeocodingApiResponseOverrideValues } from "./geocoding-api-response-overrides.js";
 
 const shouldSaveInGeocodingApiRequestReport = (input: MakeGeocodingApiRequestInput): input is MakeGeocodingApiRequestAndSaveRequestInput => {
   return input.shouldSaveInGeocodingApiRequestReport;
@@ -97,6 +98,18 @@ export const makeGeocodingApiRequest = async (
     console.error('Unable to make request to mapbox API, could not generate API request parameters.');
 
     return "FAILED_RESPONSE";
+  }
+
+  const geocodingApiResponseOverrideValue = lookupInGeocodingApiResponseOverrideValues({
+    geocodingApiRequestParams,
+  })
+
+  if (!!geocodingApiResponseOverrideValue && isGeocodingApiFailureResponse(geocodingApiResponseOverrideValue)) {
+    return "FAILED_RESPONSE";
+  }
+
+  if (!!geocodingApiResponseOverrideValue && isGeocodingApiSuccessResponse(geocodingApiResponseOverrideValue)) {
+    return geocodingApiResponseOverrideValue;
   }
 
   const cachedQueryValue = await lookupInGeocodingApiResponseCache({
