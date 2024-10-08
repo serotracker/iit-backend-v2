@@ -541,6 +541,7 @@ export type MersEstimateFilterOptions = {
   animalDetectionSettings: Array<Scalars['String']['output']>;
   animalImportedOrLocal: Array<Scalars['String']['output']>;
   animalPurpose: Array<Scalars['String']['output']>;
+  animalSpecies: Array<MersAnimalSpecies>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   clade: Array<Clade>;
@@ -2055,6 +2056,7 @@ export type MersEstimateFilterOptionsResolvers<ContextType = any, ParentType ext
   animalDetectionSettings?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalImportedOrLocal?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalPurpose?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  animalSpecies?: Resolver<Array<ResolversTypes['MersAnimalSpecies']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;

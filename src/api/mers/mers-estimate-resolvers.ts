@@ -377,6 +377,8 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       geographicScope: mersEstimateFilterOptions?.geographicScope ?? [],
       animalDetectionSettings: mersEstimateFilterOptions?.animalDetectionSettings ?? [],
       animalPurpose: mersEstimateFilterOptions?.animalPurpose ?? [],
+      animalSpecies: mersEstimateFilterOptions?.animalSpecies
+        .map((element) => mapMersAnimalSpeciesForApi(element)) ?? [],
       animalImportedOrLocal: mersEstimateFilterOptions?.animalImportedOrLocal ?? [],
       sampleFrame: mersEstimateFilterOptions?.sampleFrame ?? [],
       exposureToCamels: mersEstimateFilterOptions?.exposureToCamels ?? [],

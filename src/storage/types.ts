@@ -583,6 +583,7 @@ export interface MersEstimateFilterOptionsDocument {
   geographicScope: string[];
   animalDetectionSettings: string[];
   animalPurpose: string[];
+  animalSpecies: MersAnimalSpecies[];
   animalImportedOrLocal: string[];
   sampleFrame: string[];
   exposureToCamels: string[];
