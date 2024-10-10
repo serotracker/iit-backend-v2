@@ -801,6 +801,25 @@ export type MersViralSubEstimateInformation = MersSubEstimateInformationInterfac
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
 };
 
+export type MersWhoCaseDataEntry = {
+  __typename?: 'MersWhoCaseDataEntry';
+  country: CountryIdentifiers;
+  id: Scalars['String']['output'];
+  positiveCasesReported: Scalars['Int']['output'];
+  unRegion?: Maybe<UnRegion>;
+  whoRegion?: Maybe<WhoRegion>;
+};
+
+export type MersWhoCaseDataInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type MersWhoCaseDataOutput = {
+  __typename?: 'MersWhoCaseDataOutput';
+  mersWhoCaseData: Array<MersWhoCaseDataEntry>;
+  partitionKey: Scalars['Int']['output'];
+};
+
 export enum Month {
   April = 'APRIL',
   August = 'AUGUST',
@@ -1220,6 +1239,8 @@ export type Query = {
   mersFilterOptions: MersFilterOptions;
   mersMacroSampleFrames: Array<MersMacroSampleFrame>;
   mersPrimaryEstimates: Array<MersPrimaryEstimate>;
+  mersWhoCaseData: MersWhoCaseDataOutput;
+  mersWhoCaseDataPartitionKeys: Array<Scalars['Int']['output']>;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
   partitionedMonthlySarsCov2CountryInformation: PartitionedMonthlySarsCov2CountryInformationOutput;
@@ -1228,6 +1249,11 @@ export type Query = {
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
   yearlyFaoCamelPopulationDataPartitionKeys: Array<Scalars['Int']['output']>;
+};
+
+
+export type QueryMersWhoCaseDataArgs = {
+  input: MersWhoCaseDataInput;
 };
 
 
@@ -1521,6 +1547,9 @@ export type ResolversTypes = {
   MersTestUsedSubEstimate: ResolverTypeWrapper<Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersTimeFrameSubEstimate: ResolverTypeWrapper<Omit<MersTimeFrameSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersViralSubEstimateInformation: ResolverTypeWrapper<MersViralSubEstimateInformation>;
+  MersWhoCaseDataEntry: ResolverTypeWrapper<MersWhoCaseDataEntry>;
+  MersWhoCaseDataInput: MersWhoCaseDataInput;
+  MersWhoCaseDataOutput: ResolverTypeWrapper<MersWhoCaseDataOutput>;
   Month: Month;
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
@@ -1597,6 +1626,9 @@ export type ResolversParentTypes = {
   MersTestUsedSubEstimate: Omit<MersTestUsedSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersTimeFrameSubEstimate: Omit<MersTimeFrameSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   MersViralSubEstimateInformation: MersViralSubEstimateInformation;
+  MersWhoCaseDataEntry: MersWhoCaseDataEntry;
+  MersWhoCaseDataInput: MersWhoCaseDataInput;
+  MersWhoCaseDataOutput: MersWhoCaseDataOutput;
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversParentTypes['MersEvent']> };
@@ -2292,6 +2324,21 @@ export type MersViralSubEstimateInformationResolvers<ContextType = any, ParentTy
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MersWhoCaseDataEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersWhoCaseDataEntry'] = ResolversParentTypes['MersWhoCaseDataEntry']> = {
+  country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  positiveCasesReported?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['WHORegion']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MersWhoCaseDataOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersWhoCaseDataOutput'] = ResolversParentTypes['MersWhoCaseDataOutput']> = {
+  mersWhoCaseData?: Resolver<Array<ResolversTypes['MersWhoCaseDataEntry']>, ParentType, ContextType>;
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MonthlySarsCov2CountryInformationEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['MonthlySarsCov2CountryInformationEntry'] = ResolversParentTypes['MonthlySarsCov2CountryInformationEntry']> = {
   alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2682,6 +2729,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mersFilterOptions?: Resolver<ResolversTypes['MersFilterOptions'], ParentType, ContextType>;
   mersMacroSampleFrames?: Resolver<Array<ResolversTypes['MersMacroSampleFrame']>, ParentType, ContextType>;
   mersPrimaryEstimates?: Resolver<Array<ResolversTypes['MersPrimaryEstimate']>, ParentType, ContextType>;
+  mersWhoCaseData?: Resolver<ResolversTypes['MersWhoCaseDataOutput'], ParentType, ContextType, RequireFields<QueryMersWhoCaseDataArgs, 'input'>>;
+  mersWhoCaseDataPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
   partitionedMonthlySarsCov2CountryInformation?: Resolver<ResolversTypes['PartitionedMonthlySarsCov2CountryInformationOutput'], ParentType, ContextType, RequireFields<QueryPartitionedMonthlySarsCov2CountryInformationArgs, 'input'>>;
@@ -2822,6 +2871,8 @@ export type Resolvers<ContextType = any> = {
   MersTestUsedSubEstimate?: MersTestUsedSubEstimateResolvers<ContextType>;
   MersTimeFrameSubEstimate?: MersTimeFrameSubEstimateResolvers<ContextType>;
   MersViralSubEstimateInformation?: MersViralSubEstimateInformationResolvers<ContextType>;
+  MersWhoCaseDataEntry?: MersWhoCaseDataEntryResolvers<ContextType>;
+  MersWhoCaseDataOutput?: MersWhoCaseDataOutputResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;
   PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;

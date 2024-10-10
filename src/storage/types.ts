@@ -674,6 +674,19 @@ export interface MersMacroSampleFrameDocument {
   updatedAt: Date;
 }
 
+export interface MersWhoCaseDataEntryDocument {
+  _id: ObjectId;
+  partitionKey: number;
+  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  countryName: string;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+  positiveCasesReported: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface FaoYearlyCamelPopulationDataDocument {
   _id: ObjectId;
   partitionKey: number;
