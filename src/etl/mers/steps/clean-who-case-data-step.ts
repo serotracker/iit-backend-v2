@@ -10,6 +10,7 @@ import {
   WhoCaseDataAfterValidatingWhoCaseDataStep,
   YearlyCamelPopulationDataAfterValidatingWhoCaseDataStep
 } from "./validate-who-case-data-step";
+import { ThreeLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
 
 export type EstimateFieldsAfterCleaningWhoCaseDataStep = EstimateFieldsAfterValidatingWhoCaseDataStep;
 export type SourceFieldsAfterCleaningWhoCaseDataStep = SourceFieldsAfterValidatingWhoCaseDataStep;
@@ -19,7 +20,10 @@ export type MacroSampleFrameFieldsAfterCleaningWhoCaseDataStep = MacroSampleFram
 export type FaoMersEventAfterCleaningWhoCaseDataStep = FaoMersEventAfterValidatingWhoCaseDataStep;
 export type YearlyCamelPopulationDataAfterCleaningWhoCaseDataStep = YearlyCamelPopulationDataAfterValidatingWhoCaseDataStep;
 export type CountryPopulationDataAfterCleaningWhoCaseDataStep = CountryPopulationDataAfterValidatingWhoCaseDataStep;
-export type WhoCaseDataAfterCleaningWhoCaseDataStep = WhoCaseDataAfterValidatingWhoCaseDataStep;
+export interface WhoCaseDataAfterCleaningWhoCaseDataStep {
+  countryAlphaThreeCode: ThreeLetterIsoCountryCode;
+  positiveCasesReported: number;
+}
 
 interface CleanWhoCaseDataStepInput {
   allEstimates: EstimateFieldsAfterValidatingWhoCaseDataStep[];
@@ -61,7 +65,10 @@ export const cleanWhoCaseDataStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
-    whoCaseData: input.whoCaseData,
+    whoCaseData: input.whoCaseData.map((element) => ({
+      countryAlphaThreeCode: element.countryAlphaThreeCode as ThreeLetterIsoCountryCode,
+      positiveCasesReported: element.positiveCasesReported
+    })),
     mongoClient: input.mongoClient
   };
 }

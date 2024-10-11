@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { MongoClient } from "mongodb";
 import {
   CountryFieldsAfterFetchingWhoCaseDataStep,
@@ -19,7 +20,10 @@ export type MacroSampleFrameFieldsAfterValidatingWhoCaseDataStep = MacroSampleFr
 export type FaoMersEventAfterValidatingWhoCaseDataStep = FaoMersEventAfterFetchingWhoCaseDataStep;
 export type YearlyCamelPopulationDataAfterValidatingWhoCaseDataStep = YearlyCamelPopulationDataAfterFetchingWhoCaseDataStep;
 export type CountryPopulationDataAfterValidatingWhoCaseDataStep = CountryPopulationDataAfterFetchingWhoCaseDataStep;
-export type WhoCaseDataAfterValidatingWhoCaseDataStep = WhoCaseDataAfterFetchingWhoCaseDataStep;
+export interface WhoCaseDataAfterValidatingWhoCaseDataStep {
+  countryAlphaThreeCode: string;
+  positiveCasesReported: number;
+};
 
 interface ValidateWhoCaseDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingWhoCaseDataStep[];
@@ -52,6 +56,14 @@ export const validateWhoCaseDataStep = (
 ): ValidateWhoCaseDataStepOutput => {
   console.log(`Running step: validateWhoCaseDataStep. Remaining estimates: ${input.allEstimates.length}`);
 
+  const zodWhoCaseDataEntrySchema = z.object({
+    "countryAlphaThreeCode": z
+      .string(),
+    "positiveCasesReported": z
+      .string()
+      .transform((value) => Number.parseInt(value)),
+  });
+
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
@@ -61,7 +73,8 @@ export const validateWhoCaseDataStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
-    whoCaseData: input.whoCaseData,
+    whoCaseData: input.whoCaseData
+      .map((element) => zodWhoCaseDataEntrySchema.parse(element)),
     mongoClient: input.mongoClient
   };
 }

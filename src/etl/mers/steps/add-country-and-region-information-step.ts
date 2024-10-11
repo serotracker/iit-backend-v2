@@ -53,7 +53,12 @@ export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep 
   unRegion: UNRegion | undefined;
 };
 export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterCombiningEstimatesWithStudiesStep;
-export type WhoCaseDataAfterAddingCountryAndRegionInformationStep = WhoCaseDataAfterCombiningEstimatesWithStudiesStep;
+export type WhoCaseDataAfterAddingCountryAndRegionInformationStep = WhoCaseDataAfterCombiningEstimatesWithStudiesStep & {
+  countryAlphaTwoCode: TwoLetterIsoCountryCode;
+  countryName: string;
+  whoRegion: WHORegion | undefined;
+  unRegion: UNRegion | undefined;
+};
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesWithStudiesStep[];
@@ -309,7 +314,27 @@ export const addCountryAndRegionInformationStep = (
         unRegion
       }
     }),
-    whoCaseData: input.whoCaseData,
+    whoCaseData: input.whoCaseData
+      .map((element) => {
+        const country = input.allCountries
+          .find((country) => country.countryAlphaThreeCode === element.countryAlphaThreeCode);
+
+        if(!country) {
+          return undefined;
+        }
+
+        const whoRegion = getWHORegionFromAlphaTwoCode(country.countryAlphaTwoCode);
+        const unRegion = getUNRegionFromAlphaTwoCode(country.countryAlphaTwoCode);
+
+        return {
+          ...element,
+          countryAlphaTwoCode: country.countryAlphaTwoCode,
+          countryName: country.countryName,
+          whoRegion,
+          unRegion
+        }
+      })
+      .filter(<T extends unknown>(event: T | undefined): event is T => !!event),
     mongoClient: input.mongoClient
   };
 };

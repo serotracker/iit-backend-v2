@@ -588,7 +588,18 @@ export const transformIntoFormatForDatabaseStep = (
       updatedAt: updatedAtForAllRecords,
     })),
     countryPopulationData: input.countryPopulationData,
-    whoCaseData: input.whoCaseData,
+    whoCaseData: input.whoCaseData.map((element) => ({
+      _id: new ObjectId(),
+      partitionKey: element.partitionKey,
+      countryAlphaThreeCode: element.countryAlphaThreeCode,
+      countryAlphaTwoCode: element.countryAlphaTwoCode,
+      countryName: element.countryName,
+      whoRegion: element.whoRegion,
+      unRegion: element.unRegion,
+      positiveCasesReported: element.positiveCasesReported,
+      createdAt: createdAtForAllRecords,
+      updatedAt: updatedAtForAllRecords,
+    })),
     mongoClient: input.mongoClient
   };
 };

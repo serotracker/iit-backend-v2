@@ -10,6 +10,7 @@ import {
   WhoCaseDataAfterCleaningCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep
 } from "./clean-camel-population-by-country-data-step";
+import { readFileSync } from "fs";
 
 export type EstimateFieldsAfterFetchingWhoCaseDataStep = EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep;
 export type SourceFieldsAfterFetchingWhoCaseDataStep = SourceFieldsAfterCleaningCamelPopulationByCountryDataStep;
@@ -19,7 +20,7 @@ export type MacroSampleFrameFieldsAfterFetchingWhoCaseDataStep = MacroSampleFram
 export type FaoMersEventAfterFetchingWhoCaseDataStep = FaoMersEventAfterCleaningCamelPopulationByCountryDataStep;
 export type YearlyCamelPopulationDataAfterFetchingWhoCaseDataStep = YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
 export type CountryPopulationDataAfterFetchingWhoCaseDataStep = CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
-export type WhoCaseDataAfterFetchingWhoCaseDataStep = WhoCaseDataAfterCleaningCamelPopulationByCountryDataStep;
+export type WhoCaseDataAfterFetchingWhoCaseDataStep = Record<string, string | undefined>;
 
 interface FetchWhoCaseDataStepInput {
   allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
@@ -52,6 +53,38 @@ export const fetchWhoCaseDataStep = (
 ): FetchWhoCaseDataStepOutput => {
   console.log(`Running step: fetchWhoCaseData. Remaining estimates: ${input.allEstimates.length}`);
 
+  const rawFileData = readFileSync('./data/mers/who/mers-case-data.csv').toString();
+  const rowsInFile = rawFileData.split('\n');
+
+  const rawFileDataHeaders = rowsInFile.slice(0,1).at(0);
+  const rawFileDataRows = rowsInFile.slice(1);
+
+  if(rawFileDataRows.length === 0 || rawFileDataHeaders === undefined) {
+    return {
+      allEstimates: input.allEstimates,
+      allSources: input.allSources,
+      allStudies: input.allStudies,
+      allCountries: input.allCountries,
+      allMacroSampleFrames: input.allMacroSampleFrames,
+      allFaoMersEvents: input.allFaoMersEvents,
+      yearlyCamelPopulationByCountryData: [],
+      countryPopulationData: input.countryPopulationData,
+      whoCaseData: input.whoCaseData,
+      mongoClient: input.mongoClient
+    };
+  }
+
+  const indexToHeaderMap = rawFileDataHeaders
+    .split(',')
+    .map((header, index) => ({ [index]: header }))
+    .reduce((accumulator, value) => ({...accumulator, ...value }), {})
+
+  const data = rawFileDataRows.map((row) => row
+    .split(',')
+    .map((value, index): Record<string, string | undefined> => ({[indexToHeaderMap[index]]: value}))
+    .reduce<Record<string, string | undefined>>((accumulator, value) => ({...accumulator, ...value }), {})
+  )
+
   return {
     allEstimates: input.allEstimates,
     allSources: input.allSources,
@@ -61,7 +94,7 @@ export const fetchWhoCaseDataStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
-    whoCaseData: input.whoCaseData,
+    whoCaseData: data,
     mongoClient: input.mongoClient
   };
 }
