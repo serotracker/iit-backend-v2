@@ -2,35 +2,38 @@ import { MongoClient } from "mongodb";
 import { readFileSync } from "fs";
 import { StructuredCountryPopulationDataPoint } from "../types";
 import {
-  CountryFieldsAfterCleaningCamelPopulationByCountryDataStep,
-    CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep,
-  EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep,
-  FaoMersEventAfterCleaningCamelPopulationByCountryDataStep,
-  MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep,
-  SourceFieldsAfterCleaningCamelPopulationByCountryDataStep,
-  StudyFieldsAfterCleaningCamelPopulationByCountryDataStep,
-  YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep
-} from "./clean-camel-population-by-country-data-step";
+  CountryFieldsAfterCleaningWhoCaseDataStep,
+  CountryPopulationDataAfterCleaningWhoCaseDataStep,
+  EstimateFieldsAfterCleaningWhoCaseDataStep,
+  FaoMersEventAfterCleaningWhoCaseDataStep,
+  MacroSampleFrameFieldsAfterCleaningWhoCaseDataStep,
+  SourceFieldsAfterCleaningWhoCaseDataStep,
+  StudyFieldsAfterCleaningWhoCaseDataStep,
+  WhoCaseDataAfterCleaningWhoCaseDataStep,
+  YearlyCamelPopulationDataAfterCleaningWhoCaseDataStep
+} from "./clean-who-case-data-step";
 import { groupByArray } from "../../../lib/lib.js";
 
-export type EstimateFieldsAfterFetchingCountryPopulationStep = EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep;
-export type SourceFieldsAfterFetchingCountryPopulationStep = SourceFieldsAfterCleaningCamelPopulationByCountryDataStep;
-export type StudyFieldsAfterFetchingCountryPopulationStep = StudyFieldsAfterCleaningCamelPopulationByCountryDataStep;
-export type CountryFieldsAfterFetchingCountryPopulationStep = CountryFieldsAfterCleaningCamelPopulationByCountryDataStep;
-export type MacroSampleFrameFieldsAfterFetchingCountryPopulationStep = MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep;
-export type FaoMersEventAfterFetchingCountryPopulationStep = FaoMersEventAfterCleaningCamelPopulationByCountryDataStep;
-export type YearlyCamelPopulationDataAfterFetchingCountryPopulationStep = YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep;
+export type EstimateFieldsAfterFetchingCountryPopulationStep = EstimateFieldsAfterCleaningWhoCaseDataStep;
+export type SourceFieldsAfterFetchingCountryPopulationStep = SourceFieldsAfterCleaningWhoCaseDataStep;
+export type StudyFieldsAfterFetchingCountryPopulationStep = StudyFieldsAfterCleaningWhoCaseDataStep;
+export type CountryFieldsAfterFetchingCountryPopulationStep = CountryFieldsAfterCleaningWhoCaseDataStep;
+export type MacroSampleFrameFieldsAfterFetchingCountryPopulationStep = MacroSampleFrameFieldsAfterCleaningWhoCaseDataStep;
+export type FaoMersEventAfterFetchingCountryPopulationStep = FaoMersEventAfterCleaningWhoCaseDataStep;
+export type YearlyCamelPopulationDataAfterFetchingCountryPopulationStep = YearlyCamelPopulationDataAfterCleaningWhoCaseDataStep;
 export type CountryPopulationDataAfterFetchingCountryPopulationStep = StructuredCountryPopulationDataPoint;
+export type WhoCaseDataAfterFetchingCountryPopulationStep = WhoCaseDataAfterCleaningWhoCaseDataStep;
 
 interface FetchCountryPopulationDataStepInput {
-  allEstimates: EstimateFieldsAfterCleaningCamelPopulationByCountryDataStep[];
-  allSources: SourceFieldsAfterCleaningCamelPopulationByCountryDataStep[];
-  allStudies: StudyFieldsAfterCleaningCamelPopulationByCountryDataStep[];
-  allCountries: CountryFieldsAfterCleaningCamelPopulationByCountryDataStep[];
-  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningCamelPopulationByCountryDataStep[];
-  allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
-  countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
+  allEstimates: EstimateFieldsAfterCleaningWhoCaseDataStep[];
+  allSources: SourceFieldsAfterCleaningWhoCaseDataStep[];
+  allStudies: StudyFieldsAfterCleaningWhoCaseDataStep[];
+  allCountries: CountryFieldsAfterCleaningWhoCaseDataStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningWhoCaseDataStep[];
+  allFaoMersEvents: FaoMersEventAfterCleaningWhoCaseDataStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningWhoCaseDataStep[];
+  countryPopulationData: CountryPopulationDataAfterCleaningWhoCaseDataStep[];
+  whoCaseData: WhoCaseDataAfterCleaningWhoCaseDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -43,6 +46,7 @@ interface FetchCountryPopulationDataStepOutput {
   allFaoMersEvents: FaoMersEventAfterFetchingCountryPopulationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCountryPopulationStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCountryPopulationStep[];
+  whoCaseData: WhoCaseDataAfterFetchingCountryPopulationStep[];
   mongoClient: MongoClient;
 }
 
@@ -64,6 +68,7 @@ export const fetchCountryPopulationDataStep = (
       allFaoMersEvents: input.allFaoMersEvents,
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: [],
+      whoCaseData: input.whoCaseData,
       mongoClient: input.mongoClient
     };
   }
@@ -130,7 +135,8 @@ export const fetchCountryPopulationDataStep = (
     allMacroSampleFrames: input.allMacroSampleFrames,
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
-    countryPopulationData: groupByArray(dataRows, 'threeLetterCountryCode') ,
+    countryPopulationData: groupByArray(dataRows, 'threeLetterCountryCode'),
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

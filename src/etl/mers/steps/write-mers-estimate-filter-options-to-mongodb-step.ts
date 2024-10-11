@@ -9,6 +9,7 @@ import {
   MacroSampleFrameFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   SourceFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   StudyFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
+  WhoCaseDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep
 } from "./write-fao-yearly-camel-population-data-to-mongodb-step";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMong
   YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 export type CountryPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep =
   CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
+export type WhoCaseDataAfterWritingMersEstimateFilterOptionsToMongodbStep =
+  WhoCaseDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep;
 
 interface WriteMersEstimateFilterOptionsToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
@@ -45,6 +48,7 @@ interface WriteMersEstimateFilterOptionsToMongoDbStepInput {
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface WriteMersEstimateFilterOptionsToMongoDbStepOutput {
   allFaoMersEvents: FaoMersEventAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const writeMersEstimateFilterOptionsToMongoDbStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

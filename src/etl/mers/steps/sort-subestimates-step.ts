@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterFilteringInvalidSubestimatesStep,
   SourceFieldsAfterFilteringInvalidSubestimatesStep,
   StudyFieldsAfterFilteringInvalidSubestimatesStep,
+  WhoCaseDataAfterFilteringInvalidSubestimatesStep,
   YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep
 } from "./filter-invalid-subestimates-step";
 
@@ -23,6 +24,7 @@ export type MacroSampleFrameFieldsAfterSortingSubestimatesStep = MacroSampleFram
 export type FaoMersEventAfterSortingSubestimatesStep = FaoMersEventAfterFilteringInvalidSubestimatesStep;
 export type YearlyCamelPopulationDataAfterSortingSubestimatesStep = YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep;
 export type CountryPopulationDataAfterSortingSubestimatesStep = CountryPopulationDataAfterFilteringInvalidSubestimatesStep;
+export type WhoCaseDataAfterSortingSubestimatesStep = WhoCaseDataAfterFilteringInvalidSubestimatesStep;
 
 interface SortSubestimatesStepInput {
   allEstimates: EstimateFieldsAfterFilteringInvalidSubestimatesStep[];
@@ -35,6 +37,7 @@ interface SortSubestimatesStepInput {
   allFaoMersEvents: FaoMersEventAfterFilteringInvalidSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterFilteringInvalidSubestimatesStep[];
+  whoCaseData: WhoCaseDataAfterFilteringInvalidSubestimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -49,6 +52,7 @@ interface SortSubestimatesStepOutput {
   allFaoMersEvents: FaoMersEventAfterSortingSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterSortingSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterSortingSubestimatesStep[];
+  whoCaseData: WhoCaseDataAfterSortingSubestimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -201,6 +205,7 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }

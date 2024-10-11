@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { CountryFieldsAfterLatLngGenerationStep, CountryPopulationDataAfterLatLngGenerationStep, EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep, MacroSampleFrameFieldsAfterLatLngGenerationStep, SourceFieldsAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep, YearlyCamelPopulationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
+import { CountryFieldsAfterLatLngGenerationStep, CountryPopulationDataAfterLatLngGenerationStep, EstimateFieldsAfterLatLngGenerationStep, FaoMersEventAfterLatLngGenerationStep, MacroSampleFrameFieldsAfterLatLngGenerationStep, SourceFieldsAfterLatLngGenerationStep, StudyFieldsAfterLatLngGenerationStep, WhoCaseDataAfterLatLngGenerationStep, YearlyCamelPopulationDataAfterLatLngGenerationStep } from "./lat-lng-generation-step.js";
 
 export type EstimateFieldsAfterJitteringPinLatLngStep = EstimateFieldsAfterLatLngGenerationStep;
 export type SourceFieldsAfterJitteringPinLatLngStep = SourceFieldsAfterLatLngGenerationStep;
@@ -9,6 +9,7 @@ export type MacroSampleFrameFieldsAfterJitteringPinLatLngStep = MacroSampleFrame
 export type FaoMersEventAfterJitteringPinLatLngStep = FaoMersEventAfterLatLngGenerationStep;
 export type YearlyCamelPopulationDataAfterJitteringPinLatLngStep = YearlyCamelPopulationDataAfterLatLngGenerationStep;
 export type CountryPopulationDataAfterJitteringPinLatLngStep = CountryPopulationDataAfterLatLngGenerationStep;
+export type WhoCaseDataAfterJitteringPinLatLngStep = WhoCaseDataAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -37,6 +38,7 @@ interface JitterPinLatLngStepInput {
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
+  whoCaseData: WhoCaseDataAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -49,6 +51,7 @@ interface JitterPinLatLngStepOutput {
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
+  whoCaseData: WhoCaseDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -90,6 +93,7 @@ export const jitterPinLatLngStep = (
     })),
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterJitteringPinLatLngStep,
   SourceFieldsAfterJitteringPinLatLngStep,
   StudyFieldsAfterJitteringPinLatLngStep,
+  WhoCaseDataAfterJitteringPinLatLngStep,
   YearlyCamelPopulationDataAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step.js";
 
@@ -22,6 +23,7 @@ export type YearlyCamelPopulationDataAfterAssigningPartitionsStep = YearlyCamelP
   partitionKey: number;
 };
 export type CountryPopulationDataAfterAssigningPartitionsStep = CountryPopulationDataAfterJitteringPinLatLngStep;
+export type WhoCaseDataAfterAssigningPartitionsStep = WhoCaseDataAfterJitteringPinLatLngStep;
 
 interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
@@ -32,6 +34,7 @@ interface AssignPartitionsStepInput {
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
+  whoCaseData: WhoCaseDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -44,6 +47,7 @@ interface AssignPartitionsStepOutput {
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
+  whoCaseData: WhoCaseDataAfterAssigningPartitionsStep[];
   mongoClient: MongoClient;
 }
 
@@ -69,6 +73,7 @@ export const assignPartitionsStep = (
       partitionKey: Math.floor(index / faoMersEventPartitionSize)
     })),
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

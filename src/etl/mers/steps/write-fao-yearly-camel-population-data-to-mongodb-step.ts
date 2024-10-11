@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterWritingFaoMersEventsToMongodbStep,
   SourceFieldsAfterWritingFaoMersEventsToMongodbStep,
   StudyFieldsAfterWritingFaoMersEventsToMongodbStep,
+  WhoCaseDataAfterWritingFaoMersEventsToMongodbStep,
   YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep
 } from "./write-fao-mers-event-data-to-mongodb-step.js";
 
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToM
   YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep;
 export type CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
   CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep;
+export type WhoCaseDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep =
+  WhoCaseDataAfterWritingFaoMersEventsToMongodbStep;
 
 interface WriteFaoYearlyCamelPopulationDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingFaoMersEventsToMongodbStep[];
@@ -45,6 +48,7 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepInput {
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingFaoMersEventsToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface WriteFaoYearlyCamelPopulationDataToMongoDbStepOutput {
   allFaoMersEvents: FaoMersEventAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingFaoYearlyCamelPopulationDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const writeFaoYearlyCamelPopulationDataToMongoDbStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

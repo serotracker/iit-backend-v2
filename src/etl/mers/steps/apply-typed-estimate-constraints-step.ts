@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterAssigningPartitionsStep,
   SourceFieldsAfterAssigningPartitionsStep,
   StudyFieldsAfterAssigningPartitionsStep,
+  WhoCaseDataAfterAssigningPartitionsStep,
   YearlyCamelPopulationDataAfterAssigningPartitionsStep
 } from "./assign-partitions-step";
 import { MersAnimalSpecies, MersAnimalType, MersEstimateType } from "../../../storage/types.js";
@@ -133,6 +134,7 @@ export type MacroSampleFrameFieldsAfterApplyingTypedEstimateConstraintsStep = Ma
 export type FaoMersEventAfterApplyingTypedEstimateConstraintsStep = FaoMersEventAfterAssigningPartitionsStep;
 export type YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep = YearlyCamelPopulationDataAfterAssigningPartitionsStep;
 export type CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep = CountryPopulationDataAfterAssigningPartitionsStep;
+export type WhoCaseDataAfterApplyingTypedEstimateConstraintsStep = WhoCaseDataAfterAssigningPartitionsStep;
 
 interface ApplyTypedEstimateConstraintsStepInput {
   allEstimates: EstimateFieldsAfterAssigningPartitionsStep[];
@@ -143,6 +145,7 @@ interface ApplyTypedEstimateConstraintsStepInput {
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
+  whoCaseData: WhoCaseDataAfterAssigningPartitionsStep[];
   mongoClient: MongoClient;
 }
 
@@ -155,6 +158,7 @@ interface ApplyTypedEstimateConstraintsStepOutput {
   allFaoMersEvents: FaoMersEventAfterApplyingTypedEstimateConstraintsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
   countryPopulationData: CountryPopulationDataAfterApplyingTypedEstimateConstraintsStep[];
+  whoCaseData: WhoCaseDataAfterApplyingTypedEstimateConstraintsStep[];
   mongoClient: MongoClient;
 }
 
@@ -287,6 +291,7 @@ export const applyTypedEstimateConstraintsStep = (input: ApplyTypedEstimateConst
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }

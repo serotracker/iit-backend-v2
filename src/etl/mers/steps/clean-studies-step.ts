@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterCleaningSourcesStep,
   SourceFieldsAfterCleaningSourcesStep,
   StudyFieldsAfterCleaningSourcesStep,
+  WhoCaseDataAfterCleaningSourcesStep,
   YearlyCamelPopulationDataAfterCleaningSourcesStep
 } from "./clean-sources-step";
 
@@ -23,6 +24,7 @@ export type MacroSampleFrameFieldsAfterCleaningStudiesStep = MacroSampleFrameFie
 export type FaoMersEventAfterCleaningStudiesStep = FaoMersEventAfterCleaningSourcesStep;
 export type YearlyCamelPopulationDataAfterCleaningStudiesStep = YearlyCamelPopulationDataAfterCleaningSourcesStep;
 export type CountryPopulationDataAfterCleaningStudiesStep = CountryPopulationDataAfterCleaningSourcesStep;
+export type WhoCaseDataAfterCleaningStudiesStep = WhoCaseDataAfterCleaningSourcesStep;
 
 interface CleanStudiesStepInput {
   allEstimates: EstimateFieldsAfterCleaningSourcesStep[];
@@ -33,6 +35,7 @@ interface CleanStudiesStepInput {
   allFaoMersEvents: FaoMersEventAfterCleaningSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningSourcesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -45,6 +48,7 @@ interface CleanStudiesStepOutput {
   allFaoMersEvents: FaoMersEventAfterCleaningStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningStudiesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningStudiesStep[];
   mongoClient: MongoClient;
 }
 
@@ -65,6 +69,7 @@ export const cleanStudiesStep = (input: CleanStudiesStepInput): CleanStudiesStep
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }

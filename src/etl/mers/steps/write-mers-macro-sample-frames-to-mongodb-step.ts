@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep,
   SourceFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep,
   StudyFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep,
+  WhoCaseDataAfterWritingMersEstimateFilterOptionsToMongodbStep,
   YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep
 } from "./write-mers-estimate-filter-options-to-mongodb-step";
 
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbS
   YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep;
 export type CountryPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep =
   CountryPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep;
+export type WhoCaseDataAfterWritingMersMacroSampleFramesToMongodbStep =
+  WhoCaseDataAfterWritingMersEstimateFilterOptionsToMongodbStep;
 
 interface WriteMersMacroSampleFramesToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingMersEstimateFilterOptionsToMongodbStep[];
@@ -45,6 +48,7 @@ interface WriteMersMacroSampleFramesToMongoDbStepInput {
   allFaoMersEvents: FaoMersEventAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingMersEstimateFilterOptionsToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface WriteMersMacroSampleFramesToMongoDbStepOutput {
   allFaoMersEvents: FaoMersEventAfterWritingMersMacroSampleFramesToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingMersMacroSampleFramesToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const writeMersMacroSampleFramesToMongoDbStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

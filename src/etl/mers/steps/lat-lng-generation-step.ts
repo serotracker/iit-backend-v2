@@ -8,6 +8,7 @@ import {
   MacroSampleFrameFieldsAfterAddingCountryAndRegionInformationStep,
   SourceFieldsAfterAddingCountryAndRegionInformationStep,
   StudyFieldsAfterAddingCountryAndRegionInformationStep,
+  WhoCaseDataAfterAddingCountryAndRegionInformationStep,
   YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step";
 import { Point } from "../../../lib/geocoding-api/geocoding-api-client-types";
@@ -25,6 +26,7 @@ export type MacroSampleFrameFieldsAfterLatLngGenerationStep = MacroSampleFrameFi
 export type FaoMersEventAfterLatLngGenerationStep = FaoMersEventAfterAddingCountryAndRegionInformationStep;
 export type YearlyCamelPopulationDataAfterLatLngGenerationStep = YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep;
 export type CountryPopulationDataAfterLatLngGenerationStep = CountryPopulationDataAfterAddingCountryAndRegionInformationStep;
+export type WhoCaseDataAfterLatLngGenerationStep = WhoCaseDataAfterAddingCountryAndRegionInformationStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: EstimateFieldsAfterAddingCountryAndRegionInformationStep[];
@@ -35,6 +37,7 @@ interface LatLngGenerationStepInput {
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
+  whoCaseData: WhoCaseDataAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -47,6 +50,7 @@ interface LatLngGenerationStepOutput {
   allFaoMersEvents: FaoMersEventAfterLatLngGenerationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterLatLngGenerationStep[];
   countryPopulationData: CountryPopulationDataAfterLatLngGenerationStep[];
+  whoCaseData: WhoCaseDataAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -99,6 +103,7 @@ export const latLngGenerationStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 }

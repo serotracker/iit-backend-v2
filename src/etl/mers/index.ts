@@ -38,6 +38,9 @@ import { generateEstimateGeoJSONFileStep } from "./steps/generate-estimate-geojs
 import { deriveSampleDenominatorAndNumeratorStep } from "./steps/derive-sample-denominator-and-numerator-step.js";
 import { cleanMacroSampleFramesStep } from "./steps/clean-macro-sample-frames-step.js";
 import { writeMersMacroSampleFramesToMongoDbStep } from "./steps/write-mers-macro-sample-frames-to-mongodb-step.js";
+import { fetchWhoCaseDataStep } from "./steps/fetch-who-case-data-step.js";
+import { validateWhoCaseDataStep } from "./steps/validate-who-case-data-step.js";
+import { cleanWhoCaseDataStep } from "./steps/clean-who-case-data-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -100,8 +103,8 @@ const runEtlMain = async () => {
         countrySheet.map((record) => ({ ...record.fields, id: record.id }))
       );
 
-  //The pipe needs to be divided in half because there is a maximum of 19 functions per pipe sadly.
-  const outputFromFirstPipeHalf = await pipe(
+  //The pipe needs to be divided in three because there is a maximum of 19 functions per pipe sadly.
+  const outputFromFirstPipeThird = await pipe(
     {
       allEstimates: allEstimatesUnformatted,
       allSources: allSourcesUnformatted,
@@ -111,6 +114,7 @@ const runEtlMain = async () => {
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: [],
       countryPopulationData: [],
+      whoCaseData: [],
       mongoClient
     },
     etlStep(validateFieldSetFromAirtableStep),
@@ -125,17 +129,20 @@ const runEtlMain = async () => {
     etlStep(fetchCamelPopulationByCountryDataStep),
     etlStep(validateCamelPopulationByCountryDataStep),
     etlStep(cleanCamelPopulationByCountryDataStep),
+    etlStep(fetchWhoCaseDataStep),
+    etlStep(validateWhoCaseDataStep),
+    etlStep(cleanWhoCaseDataStep),
     etlStep(fetchCountryPopulationDataStep),
     etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
     etlStep(deriveSampleDenominatorAndNumeratorStep),
+  );
+
+  const outputFromSecondPipeThird = await pipe(
+    outputFromFirstPipeThird,
     etlStep(combineStudiesWithSourcesStep),
     etlStep(combineEstimatesWithStudiesStep),
     etlStep(addCountryAndRegionInformationStep),
-  );
-
-  await pipe(
-    outputFromFirstPipeHalf,
     asyncEtlStep(latLngGenerationStep),
     etlStep(jitterPinLatLngStep),
     etlStep(assignPartitionsStep),
@@ -152,6 +159,10 @@ const runEtlMain = async () => {
     asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
     asyncEtlStep(writeMersEstimateFilterOptionsToMongoDbStep),
     asyncEtlStep(writeMersMacroSampleFramesToMongoDbStep),
+  );
+
+  await pipe(
+    outputFromSecondPipeThird,
     asyncEtlStep(addDatabaseIndexesStep)
   );
 

@@ -9,6 +9,7 @@ import {
   MacroSampleFrameFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep,
   SourceFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep,
   StudyFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep,
+  WhoCaseDataAfterGroupingEstimatesUnderPrimaryEstimatesStep,
   YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep
 } from "./group-estimates-under-primary-estimates-step";
 import { MersEstimateType } from "../../../storage/types.js";
@@ -174,6 +175,7 @@ export type MacroSampleFrameFieldsAfterFilteringInvalidSubestimatesStep = MacroS
 export type FaoMersEventAfterFilteringInvalidSubestimatesStep = FaoMersEventAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 export type YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep = YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 export type CountryPopulationDataAfterFilteringInvalidSubestimatesStep = CountryPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep;
+export type WhoCaseDataAfterFilteringInvalidSubestimatesStep = WhoCaseDataAfterGroupingEstimatesUnderPrimaryEstimatesStep;
 
 interface FilterInvalidSubestimatesStepInput {
   allEstimates: EstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
@@ -186,6 +188,7 @@ interface FilterInvalidSubestimatesStepInput {
   allFaoMersEvents: FaoMersEventAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  whoCaseData: WhoCaseDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -200,6 +203,7 @@ interface FilterInvalidSubestimatesStepOutput {
   allFaoMersEvents: FaoMersEventAfterFilteringInvalidSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFilteringInvalidSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterFilteringInvalidSubestimatesStep[];
+  whoCaseData: WhoCaseDataAfterFilteringInvalidSubestimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -255,6 +259,7 @@ export const filterInvalidSubestimatesStep = (input: FilterInvalidSubestimatesSt
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 }

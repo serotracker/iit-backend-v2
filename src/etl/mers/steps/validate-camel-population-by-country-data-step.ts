@@ -8,6 +8,7 @@ import {
   MacroSampleFrameFieldsAfterFetchingCamelPopulationByCountryDataStep,
   SourceFieldsAfterFetchingCamelPopulationByCountryDataStep,
   StudyFieldsAfterFetchingCamelPopulationByCountryDataStep,
+  WhoCaseDataAfterFetchingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep
 } from "./fetch-camel-population-by-country-data-step";
 
@@ -25,6 +26,7 @@ export type YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryData
   "Stocks (Head) flag": string;
 };
 export type CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep = CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep;
+export type WhoCaseDataAfterValidatingCamelPopulationByCountryDataStep = WhoCaseDataAfterFetchingCamelPopulationByCountryDataStep;
 
 interface ValidateCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterFetchingCamelPopulationByCountryDataStep[];
@@ -35,6 +37,7 @@ interface ValidateCamelPopulationByCountryDataStepInput {
   allFaoMersEvents: FaoMersEventAfterFetchingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingCamelPopulationByCountryDataStep[];
+  whoCaseData: WhoCaseDataAfterFetchingCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -47,6 +50,7 @@ interface ValidateCamelPopulationByCountryDataStepOutput {
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
+  whoCaseData: WhoCaseDataAfterValidatingCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -79,6 +83,7 @@ export const validateCamelPopulationByCountryDataStep = (
       zodCamelPopulationByCountryObject.parse(camelPopulationDataPoint)
     ),
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

@@ -11,6 +11,7 @@ import {
   CountryPopulationDataAfterCombiningEstimatesWithStudiesStep,
   CountryFieldsAfterCombiningEstimatesWithStudiesStep,
   MacroSampleFrameFieldsAfterCombiningEstimatesWithStudiesStep,
+  WhoCaseDataAfterCombiningEstimatesWithStudiesStep,
 } from "./combine-estimates-with-studies-step";
 
 export type EstimateFieldsAfterAddingCountryAndRegionInformationStep = EstimateFieldsAfterCombiningEstimatesWithStudiesStep & {
@@ -52,6 +53,7 @@ export type YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep 
   unRegion: UNRegion | undefined;
 };
 export type CountryPopulationDataAfterAddingCountryAndRegionInformationStep = CountryPopulationDataAfterCombiningEstimatesWithStudiesStep;
+export type WhoCaseDataAfterAddingCountryAndRegionInformationStep = WhoCaseDataAfterCombiningEstimatesWithStudiesStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: EstimateFieldsAfterCombiningEstimatesWithStudiesStep[];
@@ -62,6 +64,7 @@ interface AddCountryAndRegionInformationStepInput {
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithStudiesStep[];
+  whoCaseData: WhoCaseDataAfterCombiningEstimatesWithStudiesStep[];
   mongoClient: MongoClient;
 }
 
@@ -74,6 +77,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allFaoMersEvents: FaoMersEventAfterAddingCountryAndRegionInformationStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingCountryAndRegionInformationStep[];
   countryPopulationData: CountryPopulationDataAfterAddingCountryAndRegionInformationStep[];
+  whoCaseData: WhoCaseDataAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -305,6 +309,7 @@ export const addCountryAndRegionInformationStep = (
         unRegion
       }
     }),
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

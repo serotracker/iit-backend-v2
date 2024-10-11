@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterWritingMersMacroSampleFramesToMongodbStep,
   SourceFieldsAfterWritingMersMacroSampleFramesToMongodbStep,
   StudyFieldsAfterWritingMersMacroSampleFramesToMongodbStep,
+  WhoCaseDataAfterWritingMersMacroSampleFramesToMongodbStep,
   YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep
 } from "./write-mers-macro-sample-frames-to-mongodb-step";
 
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterAddingDatabaseIndexesStep =
   YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep;
 export type CountryPopulationDataAfterAddingDatabaseIndexesStep =
   CountryPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep;
+export type WhoCaseDataAfterAddingDatabaseIndexesStep =
+  WhoCaseDataAfterWritingMersMacroSampleFramesToMongodbStep;
 
 interface AddDatabaseIndexesStepInput {
   allEstimates: EstimateFieldsAfterWritingMersMacroSampleFramesToMongodbStep[];
@@ -45,6 +48,7 @@ interface AddDatabaseIndexesStepInput {
   allFaoMersEvents: FaoMersEventAfterWritingMersMacroSampleFramesToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingMersMacroSampleFramesToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface AddDatabaseIndexesStepOutput {
   allFaoMersEvents: FaoMersEventAfterAddingDatabaseIndexesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingDatabaseIndexesStep[];
   countryPopulationData: CountryPopulationDataAfterAddingDatabaseIndexesStep[];
+  whoCaseData: WhoCaseDataAfterAddingDatabaseIndexesStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const addDatabaseIndexesStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }

@@ -8,6 +8,7 @@ import {
   MacroSampleFrameFieldsAfterCleaningMacroSampleFramesStep,
   SourceFieldsAfterCleaningMacroSampleFramesStep,
   StudyFieldsAfterCleaningMacroSampleFramesStep,
+  WhoCaseDataAfterCleaningMacroSampleFramesStep,
   YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep
 } from "./clean-macro-sample-frames-step";
 
@@ -19,6 +20,7 @@ export type MacroSampleFrameFieldsAfterFetchingFaoMersEventsStep = MacroSampleFr
 export type FaoMersEventAfterFetchingFaoMersEventsStep = Record<string, string | undefined>;
 export type YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep = YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep;
 export type CountryPopulationDataAfterFetchingFaoMersEventsStep = CountryPopulationDataAfterCleaningMacroSampleFramesStep;
+export type WhoCaseDataAfterFetchingFaoMersEventsStep = WhoCaseDataAfterCleaningMacroSampleFramesStep;
 
 interface FetchFaoMersEventsStepInput {
   allEstimates: EstimateFieldsAfterCleaningMacroSampleFramesStep[];
@@ -29,6 +31,7 @@ interface FetchFaoMersEventsStepInput {
   allFaoMersEvents: FaoMersEventAfterCleaningMacroSampleFramesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningMacroSampleFramesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningMacroSampleFramesStep[];
   mongoClient: MongoClient;
 }
 
@@ -41,6 +44,7 @@ interface FetchFaoMersEventsStepOutput {
   allFaoMersEvents: FaoMersEventAfterFetchingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFetchingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterFetchingFaoMersEventsStep[];
+  whoCaseData: WhoCaseDataAfterFetchingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -64,6 +68,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
       allFaoMersEvents: [],
       yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
       countryPopulationData: input.countryPopulationData,
+      whoCaseData: input.whoCaseData,
       mongoClient: input.mongoClient
     };
   }
@@ -88,6 +93,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
     allFaoMersEvents: data,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
   SourceFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
   StudyFieldsAfterDerivingSampleDenominatorAndNumeratorStep,
+  WhoCaseDataAfterDerivingSampleDenominatorAndNumeratorStep,
   YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep
 } from "./derive-sample-denominator-and-numerator-step";
 
@@ -20,6 +21,7 @@ export type MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep = MacroSa
 export type FaoMersEventAfterCombiningStudiesWithSourcesStep = FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep;
 export type YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep = YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep;
 export type CountryPopulationDataAfterCombiningStudiesWithSourcesStep = CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep;
+export type WhoCaseDataAfterCombiningStudiesWithSourcesStep = WhoCaseDataAfterDerivingSampleDenominatorAndNumeratorStep;
 
 interface CombineStudiesWithSourcesStepInput {
   allEstimates: EstimateFieldsAfterDerivingSampleDenominatorAndNumeratorStep[];
@@ -30,6 +32,7 @@ interface CombineStudiesWithSourcesStepInput {
   allFaoMersEvents: FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   countryPopulationData: CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
+  whoCaseData: WhoCaseDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   mongoClient: MongoClient;
 }
 
@@ -42,6 +45,7 @@ interface CombineStudiesWithSourcesStepOutput {
   allFaoMersEvents: FaoMersEventAfterCombiningStudiesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningStudiesWithSourcesStep[];
+  whoCaseData: WhoCaseDataAfterCombiningStudiesWithSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -70,6 +74,7 @@ export const combineStudiesWithSourcesStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

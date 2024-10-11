@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterParsingDatesStep,
   SourceFieldsAfterParsingDatesStep,
   StudyFieldsAfterParsingDatesStep,
+  WhoCaseDataAfterParsingDatesStep,
   YearlyCamelPopulationDataAfterParsingDatesStep
 } from "./parse-dates-step";
 
@@ -18,6 +19,7 @@ export type MacroSampleFrameFieldsAfterDerivingSampleDenominatorAndNumeratorStep
 export type FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep = FaoMersEventAfterParsingDatesStep;
 export type YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep = YearlyCamelPopulationDataAfterParsingDatesStep;
 export type CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep = CountryPopulationDataAfterParsingDatesStep;
+export type WhoCaseDataAfterDerivingSampleDenominatorAndNumeratorStep = WhoCaseDataAfterParsingDatesStep;
 
 interface DeriveSampleDenominatorAndNumeratorStepInput {
   allEstimates: EstimateFieldsAfterParsingDatesStep[];
@@ -28,6 +30,7 @@ interface DeriveSampleDenominatorAndNumeratorStepInput {
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
+  whoCaseData: WhoCaseDataAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -40,6 +43,7 @@ interface DeriveSampleDenominatorAndNumeratorStepOutput {
   allFaoMersEvents: FaoMersEventAfterDerivingSampleDenominatorAndNumeratorStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   countryPopulationData: CountryPopulationDataAfterDerivingSampleDenominatorAndNumeratorStep[];
+  whoCaseData: WhoCaseDataAfterDerivingSampleDenominatorAndNumeratorStep[];
   mongoClient: MongoClient;
 }
 
@@ -72,6 +76,7 @@ export const deriveSampleDenominatorAndNumeratorStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 }
