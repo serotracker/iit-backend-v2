@@ -6,6 +6,7 @@ import { generateMersEventResolvers } from "./mers-event-resolvers.js";
 import { generateMersEstimateResolvers } from "./mers-estimate-resolvers.js";
 import { generateSharedMersResolvers } from "./shared-mers-resolvers.js";
 import { generateMersMacroSampleFramesResolvers } from "./mers-macro-sample-frames-resolvers.js";
+import { generateMersWhoCaseDataResolvers } from "./mers-who-case-data-resolvers.js";
 
 interface GenerateMersResolversInput {
   mongoClient: MongoClient;
@@ -22,6 +23,7 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
   const { mersEventResolvers } = generateMersEventResolvers(input);
   const { mersEstimateResolvers } = generateMersEstimateResolvers(input);
   const { mersMacroSampleFramesResolvers } = generateMersMacroSampleFramesResolvers(input);
+  const { mersWhoCaseDataResolvers } = generateMersWhoCaseDataResolvers(input);
 
   return {
     mersResolvers: {
@@ -31,7 +33,8 @@ export const generateMersResolvers = (input: GenerateMersResolversInput): Genera
         ...mersCamelPopulationDataResolvers.Query,
         ...mersEventResolvers.Query,
         ...mersEstimateResolvers.Query,
-        ...mersMacroSampleFramesResolvers.Query
+        ...mersMacroSampleFramesResolvers.Query,
+        ...mersWhoCaseDataResolvers.Query
       }
     }
   }
