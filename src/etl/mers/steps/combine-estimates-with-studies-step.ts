@@ -7,7 +7,8 @@ import {
   YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep,
   CountryPopulationDataAfterCombiningStudiesWithSourcesStep,
   CountryFieldsAfterCombiningStudiesWithSourcesStep,
-  MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep
+  MacroSampleFrameFieldsAfterCombiningStudiesWithSourcesStep,
+  WhoCaseDataAfterCombiningStudiesWithSourcesStep
 } from "./combine-studies-with-sources-step";
 
 export type EstimateFieldsAfterCombiningEstimatesWithStudiesStep = EstimateFieldsAfterCombiningStudiesWithSourcesStep & {
@@ -20,6 +21,7 @@ export type MacroSampleFrameFieldsAfterCombiningEstimatesWithStudiesStep = Macro
 export type FaoMersEventAfterCombiningEstimatesWithStudiesStep = FaoMersEventAfterCombiningStudiesWithSourcesStep;
 export type YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep = YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep;
 export type CountryPopulationDataAfterCombiningEstimatesWithStudiesStep = CountryPopulationDataAfterCombiningStudiesWithSourcesStep;
+export type WhoCaseDataAfterCombiningEstimatesWithStudiesStep = WhoCaseDataAfterCombiningStudiesWithSourcesStep;
 
 interface CombineEstimatesWithStudiesStepInput {
   allEstimates: EstimateFieldsAfterCombiningStudiesWithSourcesStep[];
@@ -30,6 +32,7 @@ interface CombineEstimatesWithStudiesStepInput {
   allFaoMersEvents: FaoMersEventAfterCombiningStudiesWithSourcesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningStudiesWithSourcesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningStudiesWithSourcesStep[];
+  whoCaseData: WhoCaseDataAfterCombiningStudiesWithSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -42,6 +45,7 @@ interface CombineEstimatesWithStudiesStepOutput {
   allFaoMersEvents: FaoMersEventAfterCombiningEstimatesWithStudiesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCombiningEstimatesWithStudiesStep[];
   countryPopulationData: CountryPopulationDataAfterCombiningEstimatesWithStudiesStep[];
+  whoCaseData: WhoCaseDataAfterCombiningEstimatesWithStudiesStep[];
   mongoClient: MongoClient;
 }
 
@@ -70,6 +74,7 @@ export const combineEstimatesWithStudiesStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     countryPopulationData: input.countryPopulationData,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

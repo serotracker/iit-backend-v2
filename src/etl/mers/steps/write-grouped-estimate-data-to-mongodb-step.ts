@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterWritingEstimateToMongodbStep,
   SourceFieldsAfterWritingEstimateToMongodbStep,
   StudyFieldsAfterWritingEstimateToMongodbStep,
+  WhoCaseDataAfterWritingEstimateToMongodbStep,
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep
 } from "./write-estimate-data-to-mongodb-step.js";
 
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbSte
   YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep;
 export type CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep =
   CountryPopulationDataAfterWritingEstimateToMongodbStep;
+export type WhoCaseDataAfterWritingGroupedEstimateDataToMongodbStep =
+  WhoCaseDataAfterWritingEstimateToMongodbStep;
 
 interface WriteGroupedEstimateDataToMongodbStepInput {
   allEstimates: EstimateFieldsAfterWritingEstimateToMongodbStep[];
@@ -45,6 +48,7 @@ interface WriteGroupedEstimateDataToMongodbStepInput {
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingEstimateToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingEstimateToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface WriteGroupedEstimateDataToMongodbStepOutput {
   allFaoMersEvents: FaoMersEventAfterWritingGroupedEstimateDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingGroupedEstimateDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const writeGroupedEstimateDataToMongodbStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 }

@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterJitteringPinLatLngStep,
   SourceFieldsAfterJitteringPinLatLngStep,
   StudyFieldsAfterJitteringPinLatLngStep,
+  WhoCaseDataAfterJitteringPinLatLngStep,
   YearlyCamelPopulationDataAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step.js";
 
@@ -22,6 +23,9 @@ export type YearlyCamelPopulationDataAfterAssigningPartitionsStep = YearlyCamelP
   partitionKey: number;
 };
 export type CountryPopulationDataAfterAssigningPartitionsStep = CountryPopulationDataAfterJitteringPinLatLngStep;
+export type WhoCaseDataAfterAssigningPartitionsStep = WhoCaseDataAfterJitteringPinLatLngStep & {
+  partitionKey: number;
+};
 
 interface AssignPartitionsStepInput {
   allEstimates: EstimateFieldsAfterJitteringPinLatLngStep[];
@@ -32,6 +36,7 @@ interface AssignPartitionsStepInput {
   allFaoMersEvents: FaoMersEventAfterJitteringPinLatLngStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterJitteringPinLatLngStep[];
   countryPopulationData: CountryPopulationDataAfterJitteringPinLatLngStep[];
+  whoCaseData: WhoCaseDataAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -44,6 +49,7 @@ interface AssignPartitionsStepOutput {
   allFaoMersEvents: FaoMersEventAfterAssigningPartitionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAssigningPartitionsStep[];
   countryPopulationData: CountryPopulationDataAfterAssigningPartitionsStep[];
+  whoCaseData: WhoCaseDataAfterAssigningPartitionsStep[];
   mongoClient: MongoClient;
 }
 
@@ -52,7 +58,8 @@ export const assignPartitionsStep = (
 ): AssignPartitionsStepOutput => {
   const faoMersEventPartitionSize = 1000;
   const faoYearlyCamelPopulationPartitionSize = 1000;
-  console.log(`Running step: assignPartitionsStep. Remaining estimates: ${input.allEstimates.length}. faoMersEventPartitionSize: ${faoMersEventPartitionSize}. faoYearlyCamelPopulationPartitionSize: ${faoYearlyCamelPopulationPartitionSize}`);
+  const whoCaseDataPartitionSize = 1000;
+  console.log(`Running step: assignPartitionsStep. Remaining estimates: ${input.allEstimates.length}. faoMersEventPartitionSize: ${faoMersEventPartitionSize}. faoYearlyCamelPopulationPartitionSize: ${faoYearlyCamelPopulationPartitionSize}. whoCaseDataPartitionSize: ${whoCaseDataPartitionSize}`);
 
   return {
     allEstimates: input.allEstimates,
@@ -69,6 +76,10 @@ export const assignPartitionsStep = (
       partitionKey: Math.floor(index / faoMersEventPartitionSize)
     })),
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData.map((element, index) => ({
+      ...element,
+      partitionKey: Math.floor(index / whoCaseDataPartitionSize)
+    })),
     mongoClient: input.mongoClient
   };
 };

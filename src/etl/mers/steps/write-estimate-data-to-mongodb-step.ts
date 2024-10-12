@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterGeneratingEstimateGeoJSONFileStep,
   SourceFieldsAfterGeneratingEstimateGeoJSONFileStep,
   StudyFieldsAfterGeneratingEstimateGeoJSONFileStep,
+  WhoCaseDataAfterGeneratingEstimateGeoJSONFileStep,
   YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep
 } from "./generate-estimate-geojson-file-step.js";
 
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep =
   YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep;
 export type CountryPopulationDataAfterWritingEstimateToMongodbStep =
   CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep;
+export type WhoCaseDataAfterWritingEstimateToMongodbStep =
+  WhoCaseDataAfterGeneratingEstimateGeoJSONFileStep;
 
 interface WriteEstimateDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterGeneratingEstimateGeoJSONFileStep[];
@@ -45,6 +48,7 @@ interface WriteEstimateDataToMongoDbStepInput {
   allFaoMersEvents: FaoMersEventAfterGeneratingEstimateGeoJSONFileStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
+  whoCaseData: WhoCaseDataAfterGeneratingEstimateGeoJSONFileStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface WriteEstimateDataToMongoDbStepOutput {
   allFaoMersEvents: FaoMersEventAfterWritingEstimateToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingEstimateToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingEstimateToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingEstimateToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const writeEstimateDataToMongoDbStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

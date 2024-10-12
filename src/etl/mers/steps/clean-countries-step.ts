@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterCleaningEstimatesStep,
   SourceFieldsAfterCleaningEstimatesStep,
   StudyFieldsAfterCleaningEstimatesStep,
+  WhoCaseDataAfterCleaningEstimatesStep,
   YearlyCamelPopulationDataAfterCleaningEstimatesStep
 } from "./clean-estimates-step";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
@@ -24,6 +25,7 @@ export type MacroSampleFrameFieldsAfterCleaningCountriesStep = MacroSampleFrameF
 export type FaoMersEventAfterCleaningCountriesStep = FaoMersEventAfterCleaningEstimatesStep;
 export type YearlyCamelPopulationDataAfterCleaningCountriesStep = YearlyCamelPopulationDataAfterCleaningEstimatesStep;
 export type CountryPopulationDataAfterCleaningCountriesStep = CountryPopulationDataAfterCleaningEstimatesStep;
+export type WhoCaseDataAfterCleaningCountriesStep = WhoCaseDataAfterCleaningEstimatesStep;
 
 interface CleanCountriesStepInput {
   allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
@@ -34,6 +36,7 @@ interface CleanCountriesStepInput {
   allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningEstimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -46,6 +49,7 @@ interface CleanCountriesStepOutput {
   allFaoMersEvents: FaoMersEventAfterCleaningCountriesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCountriesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCountriesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningCountriesStep[];
   mongoClient: MongoClient;
 }
 
@@ -64,6 +68,7 @@ export const cleanCountriesStep = (input: CleanCountriesStepInput): CleanCountri
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }

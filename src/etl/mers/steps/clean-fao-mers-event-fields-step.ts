@@ -12,6 +12,7 @@ import {
   RawFaoMersEventDiagnosisStatus,
   SourceFieldsAfterValidatingFaoMersEventsStep,
   StudyFieldsAfterValidatingFaoMersEventsStep,
+  WhoCaseDataAfterValidatingFaoMersEventsStep,
   YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep
 } from "./validate-fao-mers-events-step.js";
 import {
@@ -81,6 +82,7 @@ export type FaoMersEventAfterCleaningFaoMersEventFieldsStep =
 
 export type YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep = YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep;
 export type CountryPopulationDataAfterCleaningFaoMersEventFieldsStep = CountryPopulationDataAfterValidatingFaoMersEventsStep;
+export type WhoCaseDataAfterCleaningFaoMersEventFieldsStep = WhoCaseDataAfterValidatingFaoMersEventsStep;
 
 interface CleanFaoMersEventFieldsStepInput {
   allEstimates: EstimateFieldsAfterValidatingFaoMersEventsStep[];
@@ -91,6 +93,7 @@ interface CleanFaoMersEventFieldsStepInput {
   allFaoMersEvents: FaoMersEventAfterValidatingFaoMersEventsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFaoMersEventsStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFaoMersEventsStep[];
+  whoCaseData: WhoCaseDataAfterValidatingFaoMersEventsStep[];
   mongoClient: MongoClient;
 }
 
@@ -103,6 +106,7 @@ interface CleanFaoMersEventFieldsStepOutput {
   allFaoMersEvents: FaoMersEventAfterCleaningFaoMersEventFieldsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningFaoMersEventFieldsStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningFaoMersEventFieldsStep[];
+  whoCaseData: WhoCaseDataAfterCleaningFaoMersEventFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -149,6 +153,7 @@ export const cleanFaoMersEventFieldsStep = (input: CleanFaoMersEventFieldsStepIn
     }),
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

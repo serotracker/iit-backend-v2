@@ -12,7 +12,8 @@ import {
   MersPrimaryEstimateDocument,
   MersSubEstimateBase,
   MersMacroSampleFrameDocument,
-  MersMacroSampleFrame
+  MersMacroSampleFrame,
+  MersWhoCaseDataEntryDocument
 } from "../../../storage/types.js";
 import {
   CountryFieldsAfterSortingSubestimatesStep,
@@ -24,6 +25,7 @@ import {
   MacroSampleFrameFieldsAfterSortingSubestimatesStep,
   SourceFieldsAfterSortingSubestimatesStep,
   StudyFieldsAfterSortingSubestimatesStep,
+  WhoCaseDataAfterSortingSubestimatesStep,
   YearlyCamelPopulationDataAfterSortingSubestimatesStep
 } from "./sort-subestimates-step.js";
 
@@ -37,6 +39,7 @@ export type MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep = MersM
 export type FaoMersEventAfterTransformingFormatForDatabaseStep = FaoMersEventDocument;
 export type YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep = FaoYearlyCamelPopulationDataDocument;
 export type CountryPopulationDataAfterTransformingFormatForDatabaseStep = CountryPopulationDataAfterSortingSubestimatesStep;
+export type WhoCaseDataAfterTransformingFormatForDatabaseStep = MersWhoCaseDataEntryDocument;
 
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: EstimateFieldsAfterSortingSubestimatesStep[];
@@ -49,6 +52,7 @@ interface TransformIntoFormatForDatabaseStepInput {
   allFaoMersEvents: FaoMersEventAfterSortingSubestimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterSortingSubestimatesStep[];
   countryPopulationData: CountryPopulationDataAfterSortingSubestimatesStep[];
+  whoCaseData: WhoCaseDataAfterSortingSubestimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -63,6 +67,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
+  whoCaseData: WhoCaseDataAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -583,6 +588,18 @@ export const transformIntoFormatForDatabaseStep = (
       updatedAt: updatedAtForAllRecords,
     })),
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData.map((element) => ({
+      _id: new ObjectId(),
+      partitionKey: element.partitionKey,
+      countryAlphaThreeCode: element.countryAlphaThreeCode,
+      countryAlphaTwoCode: element.countryAlphaTwoCode,
+      countryName: element.countryName,
+      whoRegion: element.whoRegion,
+      unRegion: element.unRegion,
+      positiveCasesReported: element.positiveCasesReported,
+      createdAt: createdAtForAllRecords,
+      updatedAt: updatedAtForAllRecords,
+    })),
     mongoClient: input.mongoClient
   };
 };

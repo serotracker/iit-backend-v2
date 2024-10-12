@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import { getEnvironmentVariableOrThrow } from "../../helpers.js";
+import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 import {
   CountryFieldsAfterWritingMersMacroSampleFramesToMongodbStep,
   CountryPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep,
@@ -14,30 +14,30 @@ import {
   YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep
 } from "./write-mers-macro-sample-frames-to-mongodb-step";
 
-export type EstimateFieldsAfterAddingDatabaseIndexesStep =
+export type EstimateFieldsAfterWritingMersWhoCaseDataToMongodbStep =
   EstimateFieldsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type GroupedEstimateFieldsAfterAddingDatabaseIndexesStep =
+export type GroupedEstimateFieldsAfterWritingMersWhoCaseDataToMongodbStep =
   GroupedEstimateFieldsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type SourceFieldsAfterAddingDatabaseIndexesStep =
+export type SourceFieldsAfterWritingMersWhoCaseDataToMongodbStep =
   SourceFieldsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type EstimateFilterOptionsAfterAddingDatabaseIndexesStep =
+export type EstimateFilterOptionsAfterWritingMersWhoCaseDataToMongodbStep =
   EstimateFilterOptionsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type StudyFieldsAfterAddingDatabaseIndexesStep =
+export type StudyFieldsAfterWritingMersWhoCaseDataToMongodbStep =
   StudyFieldsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type CountryFieldsAfterAddingDatabaseIndexesStep =
+export type CountryFieldsAfterWritingMersWhoCaseDataToMongodbStep =
   CountryFieldsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type MacroSampleFrameFieldsAfterAddingDatabaseIndexesStep =
+export type MacroSampleFrameFieldsAfterWritingMersWhoCaseDataToMongodbStep =
   MacroSampleFrameFieldsAfterWritingMersMacroSampleFramesToMongodbStep;
-export type FaoMersEventAfterAddingDatabaseIndexesStep =
+export type FaoMersEventAfterWritingMersWhoCaseDataToMongodbStep =
   FaoMersEventAfterWritingMersMacroSampleFramesToMongodbStep;
-export type YearlyCamelPopulationDataAfterAddingDatabaseIndexesStep =
+export type YearlyCamelPopulationDataAfterWritingMersWhoCaseDataToMongodbStep =
   YearlyCamelPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep;
-export type CountryPopulationDataAfterAddingDatabaseIndexesStep =
+export type CountryPopulationDataAfterWritingMersWhoCaseDataToMongodbStep =
   CountryPopulationDataAfterWritingMersMacroSampleFramesToMongodbStep;
-export type WhoCaseDataAfterAddingDatabaseIndexesStep =
+export type WhoCaseDataAfterWritingMersWhoCaseDataToMongodbStep =
   WhoCaseDataAfterWritingMersMacroSampleFramesToMongodbStep;
 
-interface AddDatabaseIndexesStepInput {
+interface WriteMersWhoCaseDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingMersMacroSampleFramesToMongodbStep[];
   allGroupedEstimates: GroupedEstimateFieldsAfterWritingMersMacroSampleFramesToMongodbStep[];
   allSources: SourceFieldsAfterWritingMersMacroSampleFramesToMongodbStep[];
@@ -52,34 +52,34 @@ interface AddDatabaseIndexesStepInput {
   mongoClient: MongoClient;
 }
 
-interface AddDatabaseIndexesStepOutput {
-  allEstimates: EstimateFieldsAfterAddingDatabaseIndexesStep[];
-  allGroupedEstimates: GroupedEstimateFieldsAfterAddingDatabaseIndexesStep[];
-  allSources: SourceFieldsAfterAddingDatabaseIndexesStep[];
-  estimateFilterOptions: EstimateFilterOptionsAfterAddingDatabaseIndexesStep;
-  allStudies: StudyFieldsAfterAddingDatabaseIndexesStep[];
-  allCountries: CountryFieldsAfterAddingDatabaseIndexesStep[];
-  allMacroSampleFrames: MacroSampleFrameFieldsAfterAddingDatabaseIndexesStep[];
-  allFaoMersEvents: FaoMersEventAfterAddingDatabaseIndexesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterAddingDatabaseIndexesStep[];
-  countryPopulationData: CountryPopulationDataAfterAddingDatabaseIndexesStep[];
-  whoCaseData: WhoCaseDataAfterAddingDatabaseIndexesStep[];
+interface WriteMersWhoCaseDataToMongoDbStepOutput {
+  allEstimates: EstimateFieldsAfterWritingMersWhoCaseDataToMongodbStep[];
+  allGroupedEstimates: GroupedEstimateFieldsAfterWritingMersWhoCaseDataToMongodbStep[];
+  allSources: SourceFieldsAfterWritingMersWhoCaseDataToMongodbStep[];
+  estimateFilterOptions: EstimateFilterOptionsAfterWritingMersWhoCaseDataToMongodbStep;
+  allStudies: StudyFieldsAfterWritingMersWhoCaseDataToMongodbStep[];
+  allCountries: CountryFieldsAfterWritingMersWhoCaseDataToMongodbStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterWritingMersWhoCaseDataToMongodbStep[];
+  allFaoMersEvents: FaoMersEventAfterWritingMersWhoCaseDataToMongodbStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingMersWhoCaseDataToMongodbStep[];
+  countryPopulationData: CountryPopulationDataAfterWritingMersWhoCaseDataToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingMersWhoCaseDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
-export const addDatabaseIndexesStep = async(
-  input: AddDatabaseIndexesStepInput
-): Promise<AddDatabaseIndexesStepOutput> => {
-  console.log(`Running step: addDatabaseIndexesStep. Remaining estimates: ${input.allEstimates.length}.`);
+export const writeMersWhoCaseDataToMongoDbStep = async(
+  input: WriteMersWhoCaseDataToMongoDbStepInput
+): Promise<WriteMersWhoCaseDataToMongoDbStepOutput> => {
+  console.log(`Running step: writeMersWhoCaseDataToMongoDbStep. Remaining estimates: ${input.allEstimates.length}.`);
 
-  const databaseName = getEnvironmentVariableOrThrow({ key: "DATABASE_NAME" });
+  const databaseName = getEnvironmentVariableOrThrow({ key: 'DATABASE_NAME' });
 
-  await input.mongoClient.db(databaseName).collection('mersEstimates').dropIndexes()
-  await input.mongoClient.db(databaseName).collection('mersFaoEventData').dropIndexes()
-  await input.mongoClient.db(databaseName).collection('mersFaoYearlyCamelPopulationData').dropIndexes()
-
-  await input.mongoClient.db(databaseName).collection('mersFaoEventData').createIndex({ partitionKey: 1 })
-  await input.mongoClient.db(databaseName).collection('mersFaoYearlyCamelPopulationData').createIndex({ partitionKey: 1 })
+  await writeDataToMongoEtlStep({
+    databaseName,
+    collectionName: 'mersWhoCaseData',
+    data: input.whoCaseData,
+    mongoClient: input.mongoClient,
+  });
 
   return {
     allEstimates: input.allEstimates,

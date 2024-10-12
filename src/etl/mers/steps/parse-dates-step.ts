@@ -12,6 +12,7 @@ import {
   MacroSampleFrameFieldsAfterGeneratingCamelDataPerCapitaStep,
   SourceFieldsAfterGeneratingCamelDataPerCapitaStep,
   StudyFieldsAfterGeneratingCamelDataPerCapitaStep,
+  WhoCaseDataAfterGeneratingCamelDataPerCapitaStep,
   YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep
 } from "./generate-camel-data-per-capita-step";
 
@@ -39,6 +40,7 @@ export type FaoMersEventAfterParsingDatesStep = (Omit<
 
 export type YearlyCamelPopulationDataAfterParsingDatesStep = YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep;
 export type CountryPopulationDataAfterParsingDatesStep = CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep;
+export type WhoCaseDataAfterParsingDatesStep = WhoCaseDataAfterGeneratingCamelDataPerCapitaStep;
 
 interface ParseDatesStepInput {
   allEstimates: EstimateFieldsAfterGeneratingCamelDataPerCapitaStep[];
@@ -49,6 +51,7 @@ interface ParseDatesStepInput {
   allFaoMersEvents: FaoMersEventAfterGeneratingCamelDataPerCapitaStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingCamelDataPerCapitaStep[];
+  whoCaseData: WhoCaseDataAfterGeneratingCamelDataPerCapitaStep[];
   mongoClient: MongoClient;
 }
 
@@ -61,6 +64,7 @@ interface ParseDatesStepOutput {
   allFaoMersEvents: FaoMersEventAfterParsingDatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterParsingDatesStep[];
   countryPopulationData: CountryPopulationDataAfterParsingDatesStep[];
+  whoCaseData: WhoCaseDataAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -93,6 +97,7 @@ export const parseDatesStep = (
     })),
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

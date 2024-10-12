@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterCleaningCountriesStep,
   SourceFieldsAfterCleaningCountriesStep,
   StudyFieldsAfterCleaningCountriesStep,
+  WhoCaseDataAfterCleaningCountriesStep,
   YearlyCamelPopulationDataAfterCleaningCountriesStep
 } from "./clean-countries-step";
 
@@ -23,6 +24,7 @@ export interface MacroSampleFrameFieldsAfterCleaningMacroSampleFramesStep {
 export type FaoMersEventAfterCleaningMacroSampleFramesStep = FaoMersEventAfterCleaningCountriesStep;
 export type YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep = YearlyCamelPopulationDataAfterCleaningCountriesStep;
 export type CountryPopulationDataAfterCleaningMacroSampleFramesStep = CountryPopulationDataAfterCleaningCountriesStep;
+export type WhoCaseDataAfterCleaningMacroSampleFramesStep = WhoCaseDataAfterCleaningCountriesStep;
 
 interface CleanMacroSampleFramesStepInput {
   allEstimates: EstimateFieldsAfterCleaningCountriesStep[];
@@ -33,6 +35,7 @@ interface CleanMacroSampleFramesStepInput {
   allFaoMersEvents: FaoMersEventAfterCleaningCountriesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCountriesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCountriesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningCountriesStep[];
   mongoClient: MongoClient;
 }
 
@@ -45,6 +48,7 @@ interface CleanMacroSampleFramesStepOutput {
   allFaoMersEvents: FaoMersEventAfterCleaningMacroSampleFramesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningMacroSampleFramesStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningMacroSampleFramesStep[];
+  whoCaseData: WhoCaseDataAfterCleaningMacroSampleFramesStep[];
   mongoClient: MongoClient;
 }
 
@@ -65,6 +69,7 @@ export const cleanMacroSampleFramesStep = (input: CleanMacroSampleFramesStepInpu
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }

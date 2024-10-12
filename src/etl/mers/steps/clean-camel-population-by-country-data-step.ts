@@ -7,6 +7,7 @@ import {
   MacroSampleFrameFieldsAfterValidatingCamelPopulationByCountryDataStep,
   SourceFieldsAfterValidatingCamelPopulationByCountryDataStep,
   StudyFieldsAfterValidatingCamelPopulationByCountryDataStep,
+  WhoCaseDataAfterValidatingCamelPopulationByCountryDataStep,
   YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep
 } from "./validate-camel-population-by-country-data-step";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
@@ -26,6 +27,7 @@ export type YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataSt
   note: string;
 };
 export type CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep = CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep;
+export type WhoCaseDataAfterCleaningCamelPopulationByCountryDataStep = WhoCaseDataAfterValidatingCamelPopulationByCountryDataStep;
 
 interface CleanCamelPopulationByCountryDataStepInput {
   allEstimates: EstimateFieldsAfterValidatingCamelPopulationByCountryDataStep[];
@@ -36,6 +38,7 @@ interface CleanCamelPopulationByCountryDataStepInput {
   allFaoMersEvents: FaoMersEventAfterValidatingCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingCamelPopulationByCountryDataStep[];
+  whoCaseData: WhoCaseDataAfterValidatingCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -48,6 +51,7 @@ interface CleanCamelPopulationByCountryDataStepOutput {
   allFaoMersEvents: FaoMersEventAfterCleaningCamelPopulationByCountryDataStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
   countryPopulationData: CountryPopulationDataAfterCleaningCamelPopulationByCountryDataStep[];
+  whoCaseData: WhoCaseDataAfterCleaningCamelPopulationByCountryDataStep[];
   mongoClient: MongoClient;
 }
 
@@ -135,6 +139,7 @@ export const cleanCamelPopulationByCountryDataStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: cleanedDataArray,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

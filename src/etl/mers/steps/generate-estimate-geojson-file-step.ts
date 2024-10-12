@@ -9,6 +9,7 @@ import {
   MacroSampleFrameFieldsAfterTransformingFormatForDatabaseStep,
   SourceFieldsAfterTransformingFormatForDatabaseStep,
   StudyFieldsAfterTransformingFormatForDatabaseStep,
+  WhoCaseDataAfterTransformingFormatForDatabaseStep,
   YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep
 } from "./transform-into-format-for-database-step";
 import { writeFile } from "node:fs/promises";
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep =
   YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep;
 export type CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep =
   CountryPopulationDataAfterTransformingFormatForDatabaseStep;
+export type WhoCaseDataAfterGeneratingEstimateGeoJSONFileStep =
+  WhoCaseDataAfterTransformingFormatForDatabaseStep;
 
 interface GenerateEstimateGeoJSONFileStepInput {
   allEstimates: EstimateFieldsAfterTransformingFormatForDatabaseStep[];
@@ -45,6 +48,7 @@ interface GenerateEstimateGeoJSONFileStepInput {
   allFaoMersEvents: FaoMersEventAfterTransformingFormatForDatabaseStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterTransformingFormatForDatabaseStep[];
   countryPopulationData: CountryPopulationDataAfterTransformingFormatForDatabaseStep[];
+  whoCaseData: WhoCaseDataAfterTransformingFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface GenerateEstimateGeoJSONFileStepOutput {
   allFaoMersEvents: FaoMersEventAfterGeneratingEstimateGeoJSONFileStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingEstimateGeoJSONFileStep[];
+  whoCaseData: WhoCaseDataAfterGeneratingEstimateGeoJSONFileStep[];
   mongoClient: MongoClient;
 }
 
@@ -148,6 +153,7 @@ export const generateEstimateGeoJSONFileStep = async(input: GenerateEstimateGeoJ
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 }

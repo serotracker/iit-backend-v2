@@ -9,6 +9,7 @@ import {
   MacroSampleFrameFieldsAfterGeneratingMersEstimateFilterOptionsStep,
   SourceFieldsAfterGeneratingMersEstimateFilterOptionsStep,
   StudyFieldsAfterGeneratingMersEstimateFilterOptionsStep,
+  WhoCaseDataAfterGeneratingMersEstimateFilterOptionsStep,
   YearlyCamelPopulationDataAfterGeneratingMersEstimateFilterOptionsStep
 } from "./generate-mers-estimate-filter-options-step.js";
 
@@ -37,6 +38,7 @@ export type MacroSampleFrameFieldsAfterGroupingEstimatesUnderPrimaryEstimatesSte
 export type FaoMersEventAfterGroupingEstimatesUnderPrimaryEstimatesStep = FaoMersEventAfterGeneratingMersEstimateFilterOptionsStep;
 export type YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep = YearlyCamelPopulationDataAfterGeneratingMersEstimateFilterOptionsStep;
 export type CountryPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep = CountryPopulationDataAfterGeneratingMersEstimateFilterOptionsStep;
+export type WhoCaseDataAfterGroupingEstimatesUnderPrimaryEstimatesStep = WhoCaseDataAfterGeneratingMersEstimateFilterOptionsStep;
 
 interface GroupEstimatesUnderPrimaryEstimatesStepInput {
   allEstimates: EstimateFieldsAfterGeneratingMersEstimateFilterOptionsStep[];
@@ -48,6 +50,7 @@ interface GroupEstimatesUnderPrimaryEstimatesStepInput {
   allFaoMersEvents: FaoMersEventAfterGeneratingMersEstimateFilterOptionsStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGeneratingMersEstimateFilterOptionsStep[];
   countryPopulationData: CountryPopulationDataAfterGeneratingMersEstimateFilterOptionsStep[];
+  whoCaseData: WhoCaseDataAfterGeneratingMersEstimateFilterOptionsStep[];
   mongoClient: MongoClient;
 }
 
@@ -62,6 +65,7 @@ interface GroupEstimatesUnderPrimaryEstimatesStepOutput {
   allFaoMersEvents: FaoMersEventAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   countryPopulationData: CountryPopulationDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
+  whoCaseData: WhoCaseDataAfterGroupingEstimatesUnderPrimaryEstimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -122,6 +126,7 @@ export const groupEstimatesUnderPrimaryEstimatesStep = (input: GroupEstimatesUnd
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 }

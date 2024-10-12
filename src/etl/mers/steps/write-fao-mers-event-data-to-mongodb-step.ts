@@ -10,6 +10,7 @@ import {
   MacroSampleFrameFieldsAfterWritingGroupedEstimateDataToMongodbStep,
   SourceFieldsAfterWritingGroupedEstimateDataToMongodbStep,
   StudyFieldsAfterWritingGroupedEstimateDataToMongodbStep,
+  WhoCaseDataAfterWritingGroupedEstimateDataToMongodbStep,
   YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep
 } from "./write-grouped-estimate-data-to-mongodb-step.js";
 
@@ -33,6 +34,8 @@ export type YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep =
   YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep;
 export type CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep =
   CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep;
+export type WhoCaseDataAfterWritingFaoMersEventsToMongodbStep =
+  WhoCaseDataAfterWritingGroupedEstimateDataToMongodbStep;
 
 interface WriteFaoMersEventDataToMongoDbStepInput {
   allEstimates: EstimateFieldsAfterWritingGroupedEstimateDataToMongodbStep[];
@@ -45,6 +48,7 @@ interface WriteFaoMersEventDataToMongoDbStepInput {
   allFaoMersEvents: FaoMersEventAfterWritingGroupedEstimateDataToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingGroupedEstimateDataToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingGroupedEstimateDataToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingGroupedEstimateDataToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -59,6 +63,7 @@ interface WriteFaoMersEventDataToMongoDbStepOutput {
   allFaoMersEvents: FaoMersEventAfterWritingFaoMersEventsToMongodbStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
   countryPopulationData: CountryPopulationDataAfterWritingFaoMersEventsToMongodbStep[];
+  whoCaseData: WhoCaseDataAfterWritingFaoMersEventsToMongodbStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,6 +92,7 @@ export const writeFaoMersEventDataToMongoDbStep = async(
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   };
 };

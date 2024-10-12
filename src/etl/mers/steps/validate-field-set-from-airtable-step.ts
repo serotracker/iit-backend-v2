@@ -11,6 +11,7 @@ export type MacroSampleFrameFieldsAfterValidatingFieldSetFromAirtableStep = Airt
 export type FaoMersEventAfterValidatingFieldSetFromAirtableStep = never;
 export type YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
 export type CountryPopulationDataAfterValidatingFieldSetFromAirtableStep = never;
+export type WhoCaseDataAfterValidatingFieldSetFromAirtableStep = never;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: FieldSet[];
@@ -21,6 +22,7 @@ interface ValidateFieldSetFromAirtableStepInput {
   allFaoMersEvents: never[];
   yearlyCamelPopulationByCountryData: never[];
   countryPopulationData: never[];
+  whoCaseData: never[];
   mongoClient: MongoClient;
 }
 
@@ -33,6 +35,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allFaoMersEvents: FaoMersEventAfterValidatingFieldSetFromAirtableStep[];
   yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterValidatingFieldSetFromAirtableStep[];
   countryPopulationData: CountryPopulationDataAfterValidatingFieldSetFromAirtableStep[];
+  whoCaseData: WhoCaseDataAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -311,6 +314,7 @@ export const validateFieldSetFromAirtableStep = (
     allFaoMersEvents: input.allFaoMersEvents,
     yearlyCamelPopulationByCountryData: input.yearlyCamelPopulationByCountryData,
     countryPopulationData: input.countryPopulationData,
+    whoCaseData: input.whoCaseData,
     mongoClient: input.mongoClient
   }
 }
