@@ -41,6 +41,7 @@ import { writeMersMacroSampleFramesToMongoDbStep } from "./steps/write-mers-macr
 import { fetchWhoCaseDataStep } from "./steps/fetch-who-case-data-step.js";
 import { validateWhoCaseDataStep } from "./steps/validate-who-case-data-step.js";
 import { cleanWhoCaseDataStep } from "./steps/clean-who-case-data-step.js";
+import { writeMersWhoCaseDataToMongoDbStep } from "./steps/write-mers-who-case-data-to-mongodb-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -163,6 +164,7 @@ const runEtlMain = async () => {
 
   await pipe(
     outputFromSecondPipeThird,
+    asyncEtlStep(writeMersWhoCaseDataToMongoDbStep),
     asyncEtlStep(addDatabaseIndexesStep)
   );
 
