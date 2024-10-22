@@ -6,11 +6,17 @@ import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../lib/geoco
 
 export enum Arbovirus {
   ZIKV = "ZIKV",
+  OROV = "OROV",
   DENV = "DENV",
   CHIKV = "CHIKV",
   YFV = "YFV",
   WNV = "WNV",
   MAYV = "MAYV"
+}
+
+export enum ArbovirusEstimateType {
+  SEROPREVALENCE = 'SEROPREVALENCE',
+  VIRAL_PREVALENCE = 'VIRAL_PREVALENCE'
 }
 
 export enum Month {

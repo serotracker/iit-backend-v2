@@ -18,6 +18,7 @@ import { validateFieldSetFromAirtableStep } from "./steps/validate-field-set-fro
 import { fetchEnvironmentalSuitabilityStatsByCountryStep } from "./steps/fetch-environmental-suitability-stats-by-country-step.js";
 import { writeEstimatesToMongoDbStep } from "./steps/write-estimates-to-mongodb-step.js";
 import { writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep } from "./steps/write-enviromental-suitability-stats-by-country-to-mongodb-step.js";
+import { assignEstimateTypesStep } from "./steps/assign-estimate-types-step.js";
 
 const runEtlMain = async () => {
   console.log("Running arbo ETL");
@@ -81,6 +82,7 @@ const runEtlMain = async () => {
       etlStep(cleanSingleElementArrayFieldsStep),
       etlStep(transformNotReportedValuesToUndefinedStep),
       etlStep(assertMandatoryFieldsArePresentStep),
+      etlStep(assignEstimateTypesStep),
       etlStep(parseDatesStep),
       etlStep(removeEstimatesWithLowSampleSizeStep),
       etlStep(removeRecordsThatAreFlaggedToNotSaveStep),

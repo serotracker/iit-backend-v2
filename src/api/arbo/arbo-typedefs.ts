@@ -49,6 +49,7 @@ export const arboTypedefs = `
     YFV
     WNV
     MAYV
+    OROV
   }
 
   type ArbovirusFilterOptions {

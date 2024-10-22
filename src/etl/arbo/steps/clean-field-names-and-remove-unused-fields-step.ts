@@ -8,6 +8,7 @@ import {
 } from "./fetch-environmental-suitability-stats-by-country-step.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
+  estimateType: string | undefined;
   sourceSheetId: string[] | undefined;
   estimateId: string | undefined;
   inclusionCriteria: string | undefined;
@@ -96,6 +97,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
 
   return {
     allEstimates: allEstimates.map((estimate) => ({
+      estimateType: estimate['Estimate Type'],
       sourceSheetId: estimate["Source Sheet"],
       estimateId: estimate["Unique ID"],
       inclusionCriteria: estimate["Inclusion Criteria"],
