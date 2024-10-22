@@ -91,7 +91,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     const databaseEstimates = await mongoClient
       .db(databaseName)
       .collection<ArbovirusEstimateDocument>('arbovirusEstimates')
-      .find({ estimateType: ArbovirusEstimateType.SEROPREVALENCE, pathogen: { '$ne': Arbovirus.OROV }})
+      .find({})
       .toArray();
 
     return databaseEstimates.map((estimate) => transformArbovirusEstimateDocumentForApi(estimate));
