@@ -237,6 +237,11 @@ export type ArbovirusEstimate = {
   whoRegion?: Maybe<Scalars['String']['output']>;
 };
 
+export enum ArbovirusEstimateType {
+  Seroprevalence = 'SEROPREVALENCE',
+  ViralPrevalence = 'VIRAL_PREVALENCE'
+}
+
 export type ArbovirusFilterOptions = {
   __typename?: 'ArbovirusFilterOptions';
   ageGroup: Array<Scalars['String']['output']>;
@@ -1498,6 +1503,7 @@ export type ResolversTypes = {
   ArbovirusEnvironmentalSuitabilityDataEntry: ResolverTypeWrapper<ArbovirusEnvironmentalSuitabilityDataEntry>;
   ArbovirusEnvironmentalSuitabilityDataSubEntry: ResolverTypeWrapper<ArbovirusEnvironmentalSuitabilityDataSubEntry>;
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
+  ArbovirusEstimateType: ArbovirusEstimateType;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Clade: Clade;

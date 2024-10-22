@@ -42,6 +42,11 @@ export const arboTypedefs = `
     whoRegion: String
   }
 
+  enum ArbovirusEstimateType {
+    SEROPREVALENCE
+    VIRAL_PREVALENCE
+  }
+
   enum Arbovirus {
     ZIKV
     DENV
