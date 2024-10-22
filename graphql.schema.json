@@ -2387,9 +2387,13 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "ENUM",
-              "name": "ArbovirusEstimateType",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "ArbovirusEstimateType",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null

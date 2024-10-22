@@ -38,6 +38,7 @@ export const isArbovirus = (arbovirus: string): arbovirus is Arbovirus => Object
 
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
+  estimateType: ArbovirusEstimateType;
   sex: string | undefined;
   ageMinimum: number | undefined;
   ageMaximum: number | undefined;

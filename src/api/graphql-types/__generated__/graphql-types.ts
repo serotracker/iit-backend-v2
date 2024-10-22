@@ -208,7 +208,7 @@ export type ArbovirusEstimate = {
   countryAlphaTwoCode: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
   estimateId?: Maybe<Scalars['String']['output']>;
-  estimateType?: Maybe<ArbovirusEstimateType>;
+  estimateType: ArbovirusEstimateType;
   id: Scalars['String']['output'];
   inclusionCriteria?: Maybe<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
@@ -1841,7 +1841,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  estimateType?: Resolver<Maybe<ResolversTypes['ArbovirusEstimateType']>, ParentType, ContextType>;
+  estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
