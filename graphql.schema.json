@@ -2383,6 +2383,18 @@
             "deprecationReason": null
           },
           {
+            "name": "estimateType",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "ENUM",
+              "name": "ArbovirusEstimateType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "id",
             "description": null,
             "args": [],

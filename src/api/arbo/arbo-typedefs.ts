@@ -1,5 +1,6 @@
 export const arboTypedefs = `
   type ArbovirusEstimate {
+    estimateType: ArbovirusEstimateType
     ageGroup: String
     ageMaximum: Int
     ageMinimum: Int
