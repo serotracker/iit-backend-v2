@@ -15,6 +15,7 @@ export type AirtableEstimateFields = {
   Antibody: string[] | undefined;
   Antigen: string | undefined;
   "Source Sheet": string[] | undefined;
+  'Estimate Type': string | undefined;
   "Pediatric age group": string | undefined;
   Producer: string | undefined;
   "Producer - Other": string | undefined;

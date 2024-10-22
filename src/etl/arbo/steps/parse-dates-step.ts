@@ -1,31 +1,31 @@
 import { MongoClient } from "mongodb";
 import { parse } from "date-fns";
 import {
-  AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep,
-  AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
-  AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep
-} from "./assert-mandatory-fields-are-present-step.js";
+  AirtableCountryFieldsAfterAssigningEstimateTypesStep,
+  AirtableEstimateFieldsAfterAssigningEstimateTypesStep,
+  AirtableSourceFieldsAfterAssigningEstimateTypesStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep
+} from "./assign-estimate-types-step.js";
 
 export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
-  AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
+  AirtableEstimateFieldsAfterAssigningEstimateTypesStep,
   "sampleStartDate" | "sampleEndDate"
 > & {
   sampleStartDate: Date | undefined;
   sampleEndDate: Date | undefined;
 };
 export type AirtableSourceFieldsAfterParsingDatesStep =
-  AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep;
+  AirtableSourceFieldsAfterAssigningEstimateTypesStep;
 export type AirtableCountryFieldsAfterParsingDatesStep =
-  AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep;
+  AirtableCountryFieldsAfterAssigningEstimateTypesStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterParsingDatesStep =
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep;
+  EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep;
 
 interface ParseDatesStepInput {
-  allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
-  allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
-  allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
-  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep[];
+  allEstimates: AirtableEstimateFieldsAfterAssigningEstimateTypesStep[];
+  allSources: AirtableSourceFieldsAfterAssigningEstimateTypesStep[];
+  allCountries: AirtableCountryFieldsAfterAssigningEstimateTypesStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep[];
   mongoClient: MongoClient;
 }
 

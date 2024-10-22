@@ -1,5 +1,6 @@
 export const arboTypedefs = `
   type ArbovirusEstimate {
+    estimateType: ArbovirusEstimateType
     ageGroup: String
     ageMaximum: Int
     ageMinimum: Int
@@ -42,6 +43,11 @@ export const arboTypedefs = `
     whoRegion: String
   }
 
+  enum ArbovirusEstimateType {
+    SEROPREVALENCE
+    VIRAL_PREVALENCE
+  }
+
   enum Arbovirus {
     ZIKV
     DENV
@@ -49,6 +55,7 @@ export const arboTypedefs = `
     YFV
     WNV
     MAYV
+    OROV
   }
 
   type ArbovirusFilterOptions {

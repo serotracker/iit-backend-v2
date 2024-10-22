@@ -12,6 +12,7 @@ const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.YFV]: ArbovirusForApi.Yfv,
   [Arbovirus.WNV]: ArbovirusForApi.Wnv,
   [Arbovirus.MAYV]: ArbovirusForApi.Mayv,
+  [Arbovirus.OROV]: ArbovirusForApi.Orov
 }
 
 const mapArbovirusForApi = (arbovirus: Arbovirus): ArbovirusForApi => arbovirusMap[arbovirus];
@@ -81,7 +82,11 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
   }
 
   const arbovirusEstimates = async () => {
-    const databaseEstimates = await mongoClient.db(databaseName).collection<ArbovirusEstimateDocument>('arbovirusEstimates').find({}).toArray();
+    const databaseEstimates = await mongoClient
+      .db(databaseName)
+      .collection<ArbovirusEstimateDocument>('arbovirusEstimates')
+      .find({ estimateType: 'SEROPREVALENCE', pathogen: { '$ne': Arbovirus.OROV }})
+      .toArray();
 
     return databaseEstimates.map((estimate) => transformArbovirusEstimateDocumentForApi(estimate));
   }
@@ -163,7 +168,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       antibody,
       assay,
       country,
-      pathogen,
+      pathogen: pathogen.filter((element) => element !== 'OROV'),
       pediatricAgeGroup,
       producer,
       sampleFrame,
