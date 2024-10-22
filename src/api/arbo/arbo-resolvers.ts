@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "../graphql-types/__generated__/graphql-types.js";
-import { Arbovirus, ArbovirusEnvironmentalSuitabilityStatsEntryDocument, ArbovirusEstimateDocument } from '../../storage/types.js';
-import { Arbovirus as ArbovirusForApi } from "../graphql-types/__generated__/graphql-types.js";
+import { Arbovirus, ArbovirusEnvironmentalSuitabilityStatsEntryDocument, ArbovirusEstimateDocument, ArbovirusEstimateType } from '../../storage/types.js';
+import { Arbovirus as ArbovirusForApi, ArbovirusEstimateType as ArbovirusEstimateTypeForApi } from "../graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi } from "../shared/shared-mappers.js";
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 
@@ -13,6 +13,11 @@ const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.WNV]: ArbovirusForApi.Wnv,
   [Arbovirus.MAYV]: ArbovirusForApi.Mayv,
   [Arbovirus.OROV]: ArbovirusForApi.Orov
+}
+
+const arbovirusEstimateTypeMap: {[key in ArbovirusEstimateType]: ArbovirusEstimateTypeForApi } = {
+  [ArbovirusEstimateType.SEROPREVALENCE]: ArbovirusEstimateTypeForApi.Seroprevalence,
+  [ArbovirusEstimateType.VIRAL_PREVALENCE]: ArbovirusEstimateTypeForApi.ViralPrevalence
 }
 
 const mapArbovirusForApi = (arbovirus: Arbovirus): ArbovirusForApi => arbovirusMap[arbovirus];
@@ -29,6 +34,7 @@ const filterUndefinedValuesFromArray = <T>(array: (T | undefined)[]): T[] => arr
 
 const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDocument): ArbovirusEstimate => {
   return {
+    estimateType: arbovirusEstimateTypeMap[document.estimateType],
     ageGroup: document.ageGroup,
     ageMaximum: document.ageMaximum,
     ageMinimum: document.ageMinimum,
@@ -85,7 +91,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     const databaseEstimates = await mongoClient
       .db(databaseName)
       .collection<ArbovirusEstimateDocument>('arbovirusEstimates')
-      .find({ estimateType: 'SEROPREVALENCE', pathogen: { '$ne': Arbovirus.OROV }})
+      .find({ estimateType: ArbovirusEstimateType.SEROPREVALENCE, pathogen: { '$ne': Arbovirus.OROV }})
       .toArray();
 
     return databaseEstimates.map((estimate) => transformArbovirusEstimateDocumentForApi(estimate));
