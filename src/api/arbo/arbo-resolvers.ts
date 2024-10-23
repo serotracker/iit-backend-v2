@@ -174,7 +174,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       antibody,
       assay,
       country,
-      pathogen: pathogen.filter((element) => element !== 'OROV'),
+      pathogen,
       pediatricAgeGroup,
       producer,
       sampleFrame,
