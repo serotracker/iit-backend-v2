@@ -61,6 +61,7 @@ export const arboTypedefs = `
   type ArbovirusFilterOptions {
     ageGroup: [String!]!
     antibody: [String!]!
+    estimateType: [ArbovirusEstimateType!]!
     assay: [String!]!
     country: [String!]!
     countryIdentifiers: [CountryIdentifiers!]!

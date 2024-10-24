@@ -141,6 +141,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
 
     const [
       ageGroup,
+      estimateType,
       antibody,
       assay,
       country,
@@ -155,6 +156,9 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       countryIdentifiers
     ] = await Promise.all([
       estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('estimateType')
+        .then((estimateTypes) => filterUndefinedValuesFromArray(estimateTypes))
+        .then((estimateTypes) => estimateTypes.map((estimateType) => arbovirusEstimateTypeMap[estimateType])),
       estimateCollection.distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('assay').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('country').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -171,6 +175,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
 
     return {
       ageGroup,
+      estimateType,
       antibody,
       assay,
       country,
