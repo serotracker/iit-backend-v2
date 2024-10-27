@@ -223,7 +223,7 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       seroprevalenceCalculated95CILower: estimate.seroprevalenceCalculated95CILower,
       seroprevalenceCalculated95CIUpper: estimate.seroprevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
-      sampleFrame: estimate.sampleFrame,
+      sampleFrames: estimate.sampleFrames,
       humanCountriesOfTravel: estimate.humanCountriesOfTravel.map((element) => ({
         country: element.country,
         countryAlphaTwoCode: element.countryAlphaTwoCode,
@@ -242,7 +242,7 @@ const transformMersEstimateForDatabase = (input: TransformMersEstimateForDatabas
       positivePrevalenceCalculated95CILower: estimate.positivePrevalenceCalculated95CILower,
       positivePrevalenceCalculated95CIUpper: estimate.positivePrevalenceCalculated95CIUpper,
       ageGroup: estimate.ageGroup,
-      sampleFrame: estimate.sampleFrame,
+      sampleFrames: estimate.sampleFrames,
       humanCountriesOfTravel: estimate.humanCountriesOfTravel.map((element) => ({
         country: element.country,
         countryAlphaTwoCode: element.countryAlphaTwoCode,
@@ -496,7 +496,7 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       occupation: subestimate.occupation,
-      sampleFrame: subestimate.sampleFrame,
+      sampleFrames: subestimate.sampleFrames,
       exposureToCamels: subestimate.exposureToCamels
     })),
   animalSourceLocationSubestimates: input.groupedEstimates.animalSourceLocationSubestimates
@@ -518,7 +518,7 @@ const transformGroupedMersEstimatesForDatabase = (input: TransformGroupedMersEst
     .map((subestimate) => ({
       ...transformMersSubEstimateBaseForDatabaseInput(subestimate),
       details: subestimate.details,
-      sampleFrame: subestimate.sampleFrame,
+      sampleFrames: subestimate.sampleFrames,
       exposureToCamels: subestimate.exposureToCamels,
     })),
   nomadismSubestimates: input.groupedEstimates.nomadismSubestimates

@@ -101,7 +101,7 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       seroprevalence95CIUpper: document.seroprevalence95CIUpper,
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
-      sampleFrame: document.sampleFrame
+      sampleFrame: document.sampleFrames.at(0)
     }
   }
 
@@ -130,7 +130,7 @@ const transformMersEstimateDocumentForApi_V2 = (document: MersEstimateDocument):
       positivePrevalence95CIUpper: document.positivePrevalence95CIUpper,
       type: MersEstimateTypeForApi.HumanViral,
       ageGroup: document.ageGroup,
-      sampleFrame: document.sampleFrame
+      sampleFrame: document.sampleFrames.at(0)
     }
   }
 

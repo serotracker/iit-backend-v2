@@ -131,7 +131,7 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       seroprevalenceCalculated95CIUpper: document.seroprevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
-      sampleFrame: document.sampleFrame,
+      sampleFrame: document.sampleFrames.at(0),
       humanCountriesOfTravel: document.humanCountriesOfTravel.map((element) => ({
         name: element.country,
         alphaTwoCode: element.countryAlphaTwoCode,
@@ -175,7 +175,7 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       positivePrevalenceCalculated95CIUpper: document.positivePrevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.HumanViral,
       ageGroup: document.ageGroup,
-      sampleFrame: document.sampleFrame,
+      sampleFrame: document.sampleFrames.at(0),
       humanCountriesOfTravel: document.humanCountriesOfTravel.map((element) => ({
         name: element.country,
         alphaTwoCode: element.countryAlphaTwoCode,
@@ -317,7 +317,7 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersOccupationSubEstimate' as const,
         occupation: subestimate.occupation,
-        sampleFrame: subestimate.sampleFrame,
+        sampleFrame: subestimate.sampleFrames.at(0),
         exposureToCamels: subestimate.exposureToCamels
       })),
       animalSourceLocationSubestimates: primaryEstimate.animalSourceLocationSubestimates.map((subestimate) => ({
@@ -342,7 +342,7 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersCamelExposureLevelSubEstimate' as const,
         details: subestimate.details,
-        sampleFrame: subestimate.sampleFrame,
+        sampleFrame: subestimate.sampleFrames[0],
         exposureToCamels: subestimate.exposureToCamels
       })),
       nomadismSubestimates: primaryEstimate.nomadismSubestimates.map((subestimate) => ({

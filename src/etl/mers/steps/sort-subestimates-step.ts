@@ -163,8 +163,27 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
           if(subestimateA.details !== subestimateB.details) {
             return subestimateA.details > subestimateB.details ? 1 : -1;
           }
-          if(subestimateA.sampleFrame !== subestimateB.sampleFrame) {
-            return subestimateA.sampleFrame > subestimateB.sampleFrame ? 1 : -1;
+
+          const sortedSubestimateASampleFrames = [...subestimateA.sampleFrames].sort();
+          const sortedSubestimateBSampleFrames = [...subestimateB.sampleFrames].sort();
+          const mostAmountOfSampleFramesBetweenBothSubestimates =
+            Math.max(sortedSubestimateASampleFrames.length, sortedSubestimateBSampleFrames.length);
+
+          let index = 0;
+
+          while(index < mostAmountOfSampleFramesBetweenBothSubestimates) {
+            const sampleFrameA = sortedSubestimateASampleFrames.at(index);
+            const sampleFrameB = sortedSubestimateASampleFrames.at(index);
+            index++;
+
+            if(sampleFrameA === sampleFrameB) {
+              continue;
+            }
+
+            if(!sampleFrameA) return 1;
+            if(!sampleFrameB) return -1;
+
+            return subestimateA.sampleFrames > subestimateB.sampleFrames ? 1 : -1;
           }
           if(subestimateA.exposureToCamels !== subestimateB.exposureToCamels) {
             return subestimateA.exposureToCamels > subestimateB.exposureToCamels ? 1 : -1;
