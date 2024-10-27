@@ -132,6 +132,7 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       type: MersEstimateTypeForApi.HumanSeroprevalence,
       ageGroup: document.ageGroup,
       sampleFrame: document.sampleFrames.at(0),
+      sampleFrames: document.sampleFrames,
       humanCountriesOfTravel: document.humanCountriesOfTravel.map((element) => ({
         name: element.country,
         alphaTwoCode: element.countryAlphaTwoCode,
@@ -176,6 +177,7 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       type: MersEstimateTypeForApi.HumanViral,
       ageGroup: document.ageGroup,
       sampleFrame: document.sampleFrames.at(0),
+      sampleFrames: document.sampleFrames,
       humanCountriesOfTravel: document.humanCountriesOfTravel.map((element) => ({
         name: element.country,
         alphaTwoCode: element.countryAlphaTwoCode,
@@ -318,6 +320,7 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         __typename: 'MersOccupationSubEstimate' as const,
         occupation: subestimate.occupation,
         sampleFrame: subestimate.sampleFrames.at(0),
+        sampleFrames: subestimate.sampleFrames,
         exposureToCamels: subestimate.exposureToCamels
       })),
       animalSourceLocationSubestimates: primaryEstimate.animalSourceLocationSubestimates.map((subestimate) => ({
@@ -343,6 +346,7 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         __typename: 'MersCamelExposureLevelSubEstimate' as const,
         details: subestimate.details,
         sampleFrame: subestimate.sampleFrames[0],
+        sampleFrames: subestimate.sampleFrames,
         exposureToCamels: subestimate.exposureToCamels
       })),
       nomadismSubestimates: primaryEstimate.nomadismSubestimates.map((subestimate) => ({

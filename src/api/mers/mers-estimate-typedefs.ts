@@ -179,6 +179,7 @@ export const mersEstimateTypedefs = `
     positivePrevalenceCalculated95CIUpper: Float!
     ageGroup: [String!]!
     sampleFrame: String
+    sampleFrames: [String!]!
     humanCountriesOfTravel: [CountryIdentifiers!]!
   }
 
@@ -319,6 +320,7 @@ export const mersEstimateTypedefs = `
     seroprevalenceCalculated95CIUpper: Float!
     ageGroup: [String!]!
     sampleFrame: String
+    sampleFrames: [String!]!
     humanCountriesOfTravel: [CountryIdentifiers!]!
   }
 
@@ -539,6 +541,7 @@ export const mersEstimateTypedefs = `
 
     occupation: String!
     sampleFrame: String
+    sampleFrames: [String!]!
     exposureToCamels: String
   }
 
@@ -585,6 +588,7 @@ export const mersEstimateTypedefs = `
 
     details: String!
     sampleFrame: String!
+    sampleFrames: [String!]!
     exposureToCamels: String!
   }
 
