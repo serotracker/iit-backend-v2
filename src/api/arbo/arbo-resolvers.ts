@@ -1,7 +1,17 @@
 import { MongoClient } from "mongodb";
 import { ArbovirusEstimate, CountryIdentifiers, QueryResolvers } from "../graphql-types/__generated__/graphql-types.js";
-import { Arbovirus, ArbovirusEnvironmentalSuitabilityStatsEntryDocument, ArbovirusEstimateDocument, ArbovirusEstimateType } from '../../storage/types.js';
-import { Arbovirus as ArbovirusForApi, ArbovirusEstimateType as ArbovirusEstimateTypeForApi } from "../graphql-types/__generated__/graphql-types.js";
+import {
+  Arbovirus,
+  ArbovirusEnvironmentalSuitabilityStatsEntryDocument,
+  ArbovirusEstimateDocument,
+  ArbovirusEstimateType,
+  ArbovirusStudyPopulation
+} from '../../storage/types.js';
+import {
+  Arbovirus as ArbovirusForApi,
+  ArbovirusEstimateType as ArbovirusEstimateTypeForApi,
+  ArbovirusStudyPopulation as ArbovirusStudyPopulationForApi
+} from "../graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi } from "../shared/shared-mappers.js";
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 
@@ -18,6 +28,12 @@ const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
 const arbovirusEstimateTypeMap: {[key in ArbovirusEstimateType]: ArbovirusEstimateTypeForApi } = {
   [ArbovirusEstimateType.SEROPREVALENCE]: ArbovirusEstimateTypeForApi.Seroprevalence,
   [ArbovirusEstimateType.VIRAL_PREVALENCE]: ArbovirusEstimateTypeForApi.ViralPrevalence
+}
+
+const arbovirusStudyPopulationMap: {[key in ArbovirusStudyPopulation]: ArbovirusStudyPopulationForApi } = {
+  [ArbovirusStudyPopulation.HUMAN]: ArbovirusStudyPopulationForApi.Human,
+  [ArbovirusStudyPopulation.INSECT]: ArbovirusStudyPopulationForApi.Insect,
+  [ArbovirusStudyPopulation.NON_HUMAN_ANIMAL]: ArbovirusStudyPopulationForApi.NonHumanAnimal,
 }
 
 const mapArbovirusForApi = (arbovirus: Arbovirus): ArbovirusForApi => arbovirusMap[arbovirus];
@@ -72,6 +88,8 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     sex: document.sex,
     sourceSheetId: document.sourceSheetId,
     sourceSheetName: document.sourceSheetName,
+    studyPopulation: arbovirusStudyPopulationMap[document.studyPopulation],
+    studySpecies: document.studySpecies,
     unRegion: document.unRegion ? mapUnRegionForApi(document.unRegion) : undefined,
     url: document.url,
     whoRegion: document.whoRegion
@@ -152,7 +170,8 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       sex,
       unRegion,
       whoRegion,
-      countryIdentifiers
+      countryIdentifiers,
+      studyPopulation
     ] = await Promise.all([
       estimateCollection.distinct('ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
@@ -166,7 +185,10 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       estimateCollection.distinct('sex').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      runCountryIdentifierAggregation({ collection: estimateCollection })
+      runCountryIdentifierAggregation({ collection: estimateCollection }),
+      estimateCollection.distinct('studyPopulation')
+        .then((elements) => filterUndefinedValuesFromArray(elements))
+        .then((elements) => elements.map((element) => arbovirusStudyPopulationMap[element]))
     ])
 
     return {
@@ -182,7 +204,8 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       sex,
       unRegion,
       whoRegion,
-      countryIdentifiers: countryIdentifiers as CountryIdentifiers[]
+      countryIdentifiers: countryIdentifiers as CountryIdentifiers[],
+      studyPopulation
     }
   }
 

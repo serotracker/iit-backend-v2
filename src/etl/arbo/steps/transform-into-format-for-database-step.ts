@@ -1,7 +1,9 @@
 import { ObjectId, MongoClient } from "mongodb";
 import {
   ArbovirusEnvironmentalSuitabilityStatsEntryDocument,
-  ArbovirusEstimateDocument
+  ArbovirusEstimateDocument,
+  ArbovirusStudyPopulation,
+  isArbovirusStudyPopulation
 } from "../../../storage/types.js";
 import {
   AirtableCountryFieldsAfterJitteringPinLatLngStep,
@@ -87,6 +89,11 @@ export const transformIntoFormatForDatabaseStep = (
       whoRegion: estimate.whoRegion,
       sourceSheetName: estimate.sourceSheetName,
       estimateId: estimate.estimateId,
+      studyPopulation: !!estimate.studyPopulation && isArbovirusStudyPopulation(estimate.studyPopulation)
+        ? estimate.studyPopulation
+        : ArbovirusStudyPopulation.HUMAN,
+      studySpecies:
+        estimate.studySpecies ?? 'Homo sapiens',
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords
     })),

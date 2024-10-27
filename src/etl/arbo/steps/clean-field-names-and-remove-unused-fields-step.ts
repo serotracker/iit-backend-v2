@@ -42,6 +42,8 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   producerOther: string | undefined;
   whoRegion: string[] | undefined;
   countryId: string[] | undefined;
+  studyPopulation: string | undefined;
+  studySpecies: string | undefined;
 }
 
 export interface AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
@@ -130,7 +132,9 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       producer: estimate["Producer"],
       producerOther: estimate["Producer - Other"],
       includeInEtl: estimate["ETL Included"],
-      countryId: estimate["Country"]
+      countryId: estimate["Country"],
+      studyPopulation: estimate["Study Population (OROV only)"],
+      studySpecies: estimate["Study Species (OROV only)"]
     })),
     allSources: allSources.map((source) => ({
       id: source["id"],
