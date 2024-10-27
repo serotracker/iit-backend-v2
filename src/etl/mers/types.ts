@@ -91,7 +91,7 @@ export interface AirtableMersEstimateFields {
 
 export interface AirtableMacroSampleFrameFields {
   id: string;
-  Name: string;
+  'Sample Frame (Human)': string;
   'Population type': string | null;
   'Occupationally exposed to dromedaries': boolean;
 }

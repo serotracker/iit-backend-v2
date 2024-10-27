@@ -279,7 +279,7 @@ const parseCountry = (country: FieldSet): AirtableCountryFields => {
 const parseMacroSampleFrame = (macroSampleFrame: FieldSet): AirtableMacroSampleFrameFields => {
   const zodMacroSampleFrameFieldsObject = z.object({
     id: z.string(),
-    Name: z.string(),
+    'Sample Frame (Human)': z.string(),
     'Population type': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
