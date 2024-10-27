@@ -21,6 +21,22 @@ export type AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep =
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep =
   ArbovirusEnvironmentalSuitabilityStatsEntryDocument;
 
+const transformStudyPopulationForDatabase = (studyPopulation: string | undefined): ArbovirusStudyPopulation => {
+  if(!studyPopulation) {
+    return ArbovirusStudyPopulation.HUMAN;
+  }
+  if(studyPopulation === 'Human') {
+    return ArbovirusStudyPopulation.HUMAN;
+  }
+  if(studyPopulation === 'Insect') {
+    return ArbovirusStudyPopulation.INSECT;
+  }
+  if(studyPopulation === 'Non-human animal') {
+    return ArbovirusStudyPopulation.NON_HUMAN_ANIMAL;
+  }
+  return ArbovirusStudyPopulation.HUMAN;
+}
+
 interface TransformIntoFormatForDatabaseStepInput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
@@ -89,11 +105,8 @@ export const transformIntoFormatForDatabaseStep = (
       whoRegion: estimate.whoRegion,
       sourceSheetName: estimate.sourceSheetName,
       estimateId: estimate.estimateId,
-      studyPopulation: !!estimate.studyPopulation && isArbovirusStudyPopulation(estimate.studyPopulation)
-        ? estimate.studyPopulation
-        : ArbovirusStudyPopulation.HUMAN,
-      studySpecies:
-        estimate.studySpecies ?? 'Homo sapiens',
+      studyPopulation: transformStudyPopulationForDatabase(estimate.studyPopulation),
+      studySpecies: estimate.studySpecies ?? 'Homo sapiens',
       createdAt: createdAtForAllRecords,
       updatedAt: updatedAtForAllRecords
     })),
