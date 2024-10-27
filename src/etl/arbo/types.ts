@@ -42,6 +42,8 @@ export type AirtableEstimateFields = {
   "Publication Date": unknown[] | undefined;
   "First Author Last Name": unknown[] | undefined;
   "WHO Region": string[] | undefined;
+  "Study Population (OROV only)": string | undefined;
+  "Study Species (OROV only)": string | undefined;
 } & Record<string, never>;
 
 export type AirtableSourceFields = {

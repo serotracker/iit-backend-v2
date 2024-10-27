@@ -34,7 +34,19 @@ export enum Month {
   DECEMBER = "DECEMBER"
 }
 
-export const isArbovirus = (arbovirus: string): arbovirus is Arbovirus => Object.values(Arbovirus).some((element) => element === arbovirus);
+export const isArbovirus = (arbovirus: string): arbovirus is Arbovirus => (
+  Object.values(Arbovirus).some((element) => element === arbovirus)
+);
+
+export const isArbovirusStudyPopulation = (studyPopulation: string): studyPopulation is ArbovirusStudyPopulation => (
+  Object.values(ArbovirusStudyPopulation).some((element) => element === studyPopulation)
+);
+
+export enum ArbovirusStudyPopulation {
+  HUMAN = 'HUMAN',
+  INSECT = 'INSECT',
+  NON_HUMAN_ANIMAL = 'NON_HUMAN_ANIMAL'
+}
 
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
@@ -77,6 +89,8 @@ export interface ArbovirusEstimateDocument {
   whoRegion: string | undefined;
   sourceSheetName: string | undefined;
   estimateId: string | undefined;
+  studyPopulation: ArbovirusStudyPopulation;
+  studySpecies: string;
   createdAt: Date;
   updatedAt: Date;
 }

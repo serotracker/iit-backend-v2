@@ -30,6 +30,8 @@ export const arboTypedefs = `
     sampleSize: Int!
     sampleStartDate: String
     seroprevalence: Float!
+    studyPopulation: ArbovirusStudyPopulation!
+    studySpecies: String!
     seroprevalenceStudy95CILower: Float
     seroprevalenceStudy95CIUpper: Float
     seroprevalenceCalculated95CILower: Float
@@ -58,6 +60,12 @@ export const arboTypedefs = `
     OROV
   }
 
+  enum ArbovirusStudyPopulation {
+    HUMAN
+    INSECT
+    NON_HUMAN_ANIMAL
+  }
+
   type ArbovirusFilterOptions {
     ageGroup: [String!]!
     antibody: [String!]!
@@ -73,6 +81,7 @@ export const arboTypedefs = `
     serotype: [String!]!
     sex: [String!]!
     whoRegion: [String!]!
+    studyPopulation: [ArbovirusStudyPopulation!]!
   }
 
   type ArbovirusDataStatistics {
