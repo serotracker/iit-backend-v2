@@ -515,6 +515,7 @@ export type MersCamelExposureLevelSubEstimate = MersSubEstimateInterface & {
   exposureToCamels: Scalars['String']['output'];
   id: Scalars['String']['output'];
   sampleFrame: Scalars['String']['output'];
+  sampleFrames: Array<Scalars['String']['output']>;
 };
 
 export enum MersDiagnosisSource {
@@ -728,6 +729,7 @@ export type MersOccupationSubEstimate = MersSubEstimateInterface & {
   id: Scalars['String']['output'];
   occupation: Scalars['String']['output'];
   sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleFrames: Array<Scalars['String']['output']>;
 };
 
 export type MersPrimaryEstimate = {
@@ -1074,6 +1076,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   positiveCutoff?: Maybe<Scalars['String']['output']>;
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleFrames: Array<Scalars['String']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
   samplingEndDate?: Maybe<Scalars['String']['output']>;
   samplingMethod?: Maybe<Scalars['String']['output']>;
@@ -1145,6 +1148,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   positivePrevalenceCalculated95CIUpper: Scalars['Float']['output'];
   sampleDenominator?: Maybe<Scalars['Int']['output']>;
   sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleFrames: Array<Scalars['String']['output']>;
   sampleNumerator?: Maybe<Scalars['Int']['output']>;
   samplingEndDate?: Maybe<Scalars['String']['output']>;
   samplingMethod?: Maybe<Scalars['String']['output']>;
@@ -2083,6 +2087,7 @@ export type MersCamelExposureLevelSubEstimateResolvers<ContextType = any, Parent
   exposureToCamels?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sampleFrame?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  sampleFrames?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2253,6 +2258,7 @@ export type MersOccupationSubEstimateResolvers<ContextType = any, ParentType ext
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   occupation?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleFrames?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2568,6 +2574,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   positiveCutoff?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleFrames?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2639,6 +2646,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   positivePrevalenceCalculated95CIUpper?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   sampleDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleFrames?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   samplingEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   samplingMethod?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

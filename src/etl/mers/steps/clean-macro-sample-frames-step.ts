@@ -62,7 +62,7 @@ export const cleanMacroSampleFramesStep = (input: CleanMacroSampleFramesStepInpu
     allCountries: input.allCountries,
     allMacroSampleFrames: input.allMacroSampleFrames.map((macroSampleFrame) => ({
       id: macroSampleFrame['id'],
-      sampleFrame: macroSampleFrame['Name'],
+      sampleFrame: macroSampleFrame['Sample Frame (Human)'],
       populationType: macroSampleFrame['Population type'],
       occupationallyExposedToDromedaries: macroSampleFrame['Occupationally exposed to dromedaries']
     })),

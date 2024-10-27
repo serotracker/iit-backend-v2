@@ -34,7 +34,7 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
-  sampleFrame: string | undefined;
+  sampleFrames: string[];
   animalDetectionSettings: never[];
   animalPurpose: undefined;
   animalImportedOrLocal: undefined;
@@ -61,7 +61,7 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
-  sampleFrame: string | undefined;
+  sampleFrames: string[];
   animalDetectionSettings: never[];
   animalPurpose: undefined;
   animalImportedOrLocal: undefined;
@@ -180,7 +180,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       ageGroup: estimate.ageGroup,
       animalType: undefined,
       animalSpecies: undefined,
-      sampleFrame: estimate.sampleFrame,
+      sampleFrames: estimate.sampleFrames,
       animalDetectionSettings: [],
       animalPurpose: undefined,
       animalImportedOrLocal: undefined,
@@ -204,7 +204,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
       ageGroup: estimate.ageGroup,
       animalType: undefined,
       animalSpecies: undefined,
-      sampleFrame: estimate.sampleFrame,
+      sampleFrames: estimate.sampleFrames,
       animalDetectionSettings: [],
       animalPurpose: undefined,
       animalImportedOrLocal: undefined,

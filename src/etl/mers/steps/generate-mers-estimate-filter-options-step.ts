@@ -113,7 +113,7 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
         .map((estimate) => estimate.animalImportedOrLocal)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       sampleFrame: uniq(input.allEstimates
-        .map((estimate) => estimate.sampleFrame)
+        .flatMap((estimate) => estimate.sampleFrames)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       testProducer: uniq(input.allEstimates
         .flatMap((estimate) => estimate.testProducer)

@@ -69,7 +69,7 @@ export interface AirtableMersEstimateFields {
   'Imported or Local': Array<string | null>;
   'Country of Import': Array<string | null>;
   'Country of travel': Array<string | null>;
-  'Sample Frame (Human)': string | null;
+  'Sample Frame (Human)': Array<string | null>;
   'Producer': Array<string | null>;
   'Producer - Other': string | null;
   'Test Validation': Array<string | null>;
@@ -91,7 +91,7 @@ export interface AirtableMersEstimateFields {
 
 export interface AirtableMacroSampleFrameFields {
   id: string;
-  Name: string;
+  'Sample Frame (Human)': string;
   'Population type': string | null;
   'Occupationally exposed to dromedaries': boolean;
 }

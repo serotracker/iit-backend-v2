@@ -162,8 +162,8 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     'Sample Frame (Human)': z
-      .optional(z.string().nullable())
-      .transform((value => value ?? null)),
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     'Producer': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
@@ -279,7 +279,7 @@ const parseCountry = (country: FieldSet): AirtableCountryFields => {
 const parseMacroSampleFrame = (macroSampleFrame: FieldSet): AirtableMacroSampleFrameFields => {
   const zodMacroSampleFrameFieldsObject = z.object({
     id: z.string(),
-    Name: z.string(),
+    'Sample Frame (Human)': z.string(),
     'Population type': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),

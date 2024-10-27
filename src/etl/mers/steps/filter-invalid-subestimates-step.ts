@@ -104,18 +104,16 @@ type ValidAnimalSeroprevalenceAnimalSourceLocationSubestimate = Omit<
 }
 type ValidHumanViralCamelExposureLevelSubestimate = Omit<
   Extract<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number], { type: MersEstimateType.HUMAN_VIRAL }>,
-  'sampleFrame'|'exposureToCamels'
+  'exposureToCamels'
 > & {
   details: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number]['subGroupingCategory']>;
-  sampleFrame: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number]['sampleFrame']>;
   exposureToCamels: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number]['exposureToCamels']>;
 }
 type ValidHumanSeroprevalenceCamelExposureLevelSubestimate = Omit<
   Extract<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number], { type: MersEstimateType.HUMAN_SEROPREVALENCE }>,
-  'sampleFrame'|'exposureToCamels'
+  'exposureToCamels'
 > & {
   details: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number]['subGroupingCategory']>;
-  sampleFrame: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number]['sampleFrame']>;
   exposureToCamels: NonNullable<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['camelExposureLevelSubestimates'][number]['exposureToCamels']>;
 }
 type ValidHumanViralNomadismSubestimate = Extract<GroupedEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimatesStep['nomadismSubestimates'][number], { type: MersEstimateType.HUMAN_VIRAL }> & {
@@ -242,12 +240,12 @@ export const filterInvalidSubestimatesStep = (input: FilterInvalidSubestimatesSt
       camelExposureLevelSubestimates: groupedEstimate.camelExposureLevelSubestimates
         .map((subestimate) => ({ ...subestimate, details: subestimate.subGroupingCategory }))
         .filter((subestimate): subestimate is GroupedEstimateFieldsAfterFilteringInvalidSubestimatesStep['camelExposureLevelSubestimates'][number] =>
-           !!subestimate.details && !!subestimate.sampleFrame && !!subestimate.exposureToCamels && (subestimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || subestimate.type === MersEstimateType.HUMAN_VIRAL)
+           !!subestimate.details && (subestimate.sampleFrames.length > 0) && !!subestimate.exposureToCamels && (subestimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || subestimate.type === MersEstimateType.HUMAN_VIRAL)
         ),
       nomadismSubestimates: groupedEstimate.nomadismSubestimates
         .map((subestimate) => ({ ...subestimate, details: subestimate.subGroupingCategory }))
         .filter((subestimate): subestimate is GroupedEstimateFieldsAfterFilteringInvalidSubestimatesStep['nomadismSubestimates'][number] =>
-           !!subestimate.details && (subestimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || subestimate.type === MersEstimateType.HUMAN_VIRAL)
+           !!subestimate.details && (subestimate.sampleFrames.length > 0) && (subestimate.type === MersEstimateType.HUMAN_SEROPREVALENCE || subestimate.type === MersEstimateType.HUMAN_VIRAL)
         ),
       humanCountriesOfTravelSubestimates: groupedEstimate.humanCountriesOfTravelSubestimates,
     })),

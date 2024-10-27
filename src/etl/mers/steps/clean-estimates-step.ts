@@ -71,7 +71,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   testValidation: string[];
   testValidatedOn: string | undefined;
   positiveCutoff: string | undefined;
-  sampleFrame: string | undefined;
+  sampleFrames: string[];
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
   animalImportedOrLocal: string | undefined;
@@ -275,7 +275,8 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
           .filter((element): element is NonNullable<typeof element> => !!element),
         humanCountryOfTravelIds: estimate['Country of travel']
           .filter((element): element is NonNullable<typeof element> => !!element),
-        sampleFrame: estimate['Sample Frame (Human)'] ?? undefined,
+        sampleFrames: estimate['Sample Frame (Human)']
+          .filter((element): element is NonNullable<typeof element> => !!element),
         symptomPrevalenceOfPositives: estimate['Symptom Prevalence of Positives'] ?? undefined,
         symptomDefinition: estimate['Symptom definition'] ?? undefined,
         sequencingDone: estimate['Sequencing done'],
