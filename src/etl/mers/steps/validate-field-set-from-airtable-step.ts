@@ -223,6 +223,16 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
   }
 }
 
+const validateSource = (source: Omit<AirtableSourceFields, 'First author name'|'Publication year'> & {
+  'First author name': AirtableSourceFields['First author name'] | null;
+  'Publication year': AirtableSourceFields['Publication year'] | null;
+}): source is AirtableSourceFields => {
+  return (
+    (!!source['First author name']) &&
+    (!!source['Publication year'] || source['Publication year'] !== 0)
+  );
+}
+
 const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
   const zodMersSourceFieldsObjectBase = z.object({
     "seropositive (1/0)": z.optional(z.string().nullable()).transform((value => value ?? null)),
@@ -230,14 +240,14 @@ const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
   })
   const zodMersSourceFieldsObject = z.object({
     id: z.string(),
-    "First author name": z.string(),
+    "First author name": z.optional(z.string().nullable()).transform((value => value ?? null)),
     "DOI/url": z.string(),
     "Source type": z.string(),
     "Source title": z.string(),
     "Institution": z.optional(z.string().nullable()).transform((value => value ?? null)),
     "Country": z.string().array(),
     "Population type": z.string().array(),
-    "Publication year": z.number()
+    "Publication year": z.optional(z.number().nullable()).transform((value => value ?? null)),
   });
 
   const sourceWithBaseParsed = {
@@ -245,11 +255,17 @@ const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
     ...zodMersSourceFieldsObjectBase.parse(source)
   }
 
-  return {
+  const finalSource = {
     ...zodMersSourceFieldsObject.parse(sourceWithBaseParsed),
     "seropositive (1/0)": sourceWithBaseParsed['seropositive (1/0)'],
     "PCR positive (1/0)": sourceWithBaseParsed['PCR positive (1/0)']
   }
+
+  if(!validateSource(finalSource)) {
+    return;
+  }
+
+  return finalSource;
 }
 
 const parseStudy = (study: FieldSet): AirtableStudyFields => {
