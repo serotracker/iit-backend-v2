@@ -218,7 +218,6 @@ export const isMersSubGroupingVariable = (subGroupingVariable: string): subGroup
   Object.values(MersSubGroupingVariable).some((element) => element === subGroupingVariable);
 
 export enum MersAnimalSpecies {
-  CAMEL = "CAMEL",
   SHEEP = "SHEEP",
   GOAT = "GOAT",
   CATTLE = "CATTLE",
@@ -226,6 +225,11 @@ export enum MersAnimalSpecies {
   DONKEY = "DONKEY",
   WATER_BUFFALO = "WATER_BUFFALO",
   BABOON = "BABOON",
+  DROMEDARY_CAMEL = "DROMEDARY_CAMEL",
+  BACTRIAN_CAMEL = "BACTRIAN_CAMEL",
+  HORSE = "HORSE",
+  MULE = "MULE",
+  BUFFALO = "BUFFALO",
 }
 
 export enum MersAnimalType {
@@ -354,7 +358,7 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   seroprevalence95CIUpper: number | undefined;
   seroprevalenceCalculated95CILower: number;
   seroprevalenceCalculated95CIUpper: number;
-  animalSpecies: MersAnimalSpecies;
+  animalSpecies: MersAnimalSpecies[];
   animalType: MersAnimalType[];
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
@@ -374,7 +378,7 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence95CIUpper: number | undefined;
   positivePrevalenceCalculated95CILower: number;
   positivePrevalenceCalculated95CIUpper: number;
-  animalSpecies: MersAnimalSpecies;
+  animalSpecies: MersAnimalSpecies[];
   animalType: MersAnimalType[];
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
@@ -483,7 +487,7 @@ type MersTestUsedSubEstimate = MersSubEstimateBase & {
 }
 
 type MersAnimalSpeciesSubEstimate = MersSubEstimateBase & {
-  animalSpecies: MersAnimalSpecies;
+  animalSpecies: MersAnimalSpecies[];
 }
 
 type MersSexSubEstimate = MersSubEstimateBase & {
