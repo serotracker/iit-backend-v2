@@ -16,13 +16,12 @@ import {
   MersEventAnimalSpecies as MersEventAnimalSpeciesForApi,
   MersDiagnosisStatus as MersDiagnosisStatusForApi,
   MersDiagnosisSource as MersDiagnosisSourceForApi,
-  MersAnimalSpeciesV2 as MersAnimalSpeciesV2ForApi,
+  MersAnimalSpecies as MersAnimalSpeciesForApi,
   QueryResolvers,
   MersEventInterface,
   MersEvent
 } from "../graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.js";
-import { mapMersAnimalSpeciesV2ForApi } from "./mers-estimate-resolvers.js";
 
 interface GenerateMersEventResolversInput {
   mongoClient: MongoClient;
@@ -32,44 +31,20 @@ interface GenerateMersEventResolversOutput {
   mersEventResolvers: { Query: QueryResolvers }
 }
 
-const faoMersEventAnimalSpeciesMap = {
-  [MersEventAnimalSpecies.BAT]: MersEventAnimalSpeciesForApi.Bat,
-  [MersEventAnimalSpecies.GOAT]: MersEventAnimalSpeciesForApi.Goat,
-  [MersEventAnimalSpecies.CATTLE]: MersEventAnimalSpeciesForApi.Cattle,
-  [MersEventAnimalSpecies.SHEEP]: MersEventAnimalSpeciesForApi.Sheep,
-  [MersEventAnimalSpecies.DONKEY]: MersEventAnimalSpeciesForApi.Donkey,
-  [MersEventAnimalSpecies.WATER_BUFFALO]: MersEventAnimalSpeciesForApi.WaterBuffalo,
-  [MersEventAnimalSpecies.BABOON]: MersEventAnimalSpeciesForApi.Baboon,
-  //TODO fix this up Sean.
-  [MersEventAnimalSpecies.HORSE]: MersEventAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersEventAnimalSpecies.MULE]: MersEventAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersEventAnimalSpecies.DROMEDARY_CAMEL]: MersEventAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersEventAnimalSpecies.BACTRIAN_CAMEL]: MersEventAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersEventAnimalSpecies.BUFFALO]: MersEventAnimalSpeciesForApi.WaterBuffalo,
-}
-
 export const mersAnimalSpeciesV2MapForApi = {
-  [MersEventAnimalSpecies.BAT]: MersAnimalSpeciesV2ForApi.Bat,
-  [MersEventAnimalSpecies.GOAT]: MersAnimalSpeciesV2ForApi.Goat,
-  [MersEventAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesV2ForApi.DromedaryCamel,
-  [MersEventAnimalSpecies.BACTRIAN_CAMEL]: MersAnimalSpeciesV2ForApi.BactrianCamel,
-  [MersEventAnimalSpecies.MULE]: MersAnimalSpeciesV2ForApi.Mule,
-  [MersEventAnimalSpecies.BUFFALO]: MersAnimalSpeciesV2ForApi.Buffalo,
-  [MersEventAnimalSpecies.HORSE]: MersAnimalSpeciesV2ForApi.Horse,
-  [MersEventAnimalSpecies.CATTLE]: MersAnimalSpeciesV2ForApi.Cattle,
-  [MersEventAnimalSpecies.SHEEP]: MersAnimalSpeciesV2ForApi.Sheep,
-  [MersEventAnimalSpecies.DONKEY]: MersAnimalSpeciesV2ForApi.Donkey,
-  [MersEventAnimalSpecies.WATER_BUFFALO]: MersAnimalSpeciesV2ForApi.WaterBuffalo,
-  [MersEventAnimalSpecies.BABOON]: MersAnimalSpeciesV2ForApi.Baboon
+  [MersEventAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
+  [MersEventAnimalSpecies.GOAT]: MersAnimalSpeciesForApi.Goat,
+  [MersEventAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesForApi.DromedaryCamel,
+  [MersEventAnimalSpecies.BACTRIAN_CAMEL]: MersAnimalSpeciesForApi.BactrianCamel,
+  [MersEventAnimalSpecies.MULE]: MersAnimalSpeciesForApi.Mule,
+  [MersEventAnimalSpecies.BUFFALO]: MersAnimalSpeciesForApi.Buffalo,
+  [MersEventAnimalSpecies.HORSE]: MersAnimalSpeciesForApi.Horse,
+  [MersEventAnimalSpecies.CATTLE]: MersAnimalSpeciesForApi.Cattle,
+  [MersEventAnimalSpecies.SHEEP]: MersAnimalSpeciesForApi.Sheep,
+  [MersEventAnimalSpecies.DONKEY]: MersAnimalSpeciesForApi.Donkey,
+  [MersEventAnimalSpecies.WATER_BUFFALO]: MersAnimalSpeciesForApi.WaterBuffalo,
+  [MersEventAnimalSpecies.BABOON]: MersAnimalSpeciesForApi.Baboon
 }
-
-
-const transformFaoMersEventAnimalSpeciesForApi = (animalSpecies: MersEventAnimalSpecies): MersEventAnimalSpeciesForApi => 
-  faoMersEventAnimalSpeciesMap[animalSpecies];
 
 const faoMersEventAnimalTypeMap = {
   [MersEventAnimalType.DOMESTIC]: MersEventAnimalTypeForApi.Domestic,
@@ -123,7 +98,7 @@ const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): Me
       ...transformFaoMersEventDocumentBaseForApi(document),
       __typename: "AnimalMersEvent",
       type: MersEventTypeForApi.Animal,
-      animalSpecies: transformFaoMersEventAnimalSpeciesForApi(document.animalSpecies),
+      animalSpecies: mersAnimalSpeciesV2MapForApi[document.animalSpecies],
       animalSpeciesV2: mersAnimalSpeciesV2MapForApi[document.animalSpecies],
       animalType: transformFaoMersEventAnimalTypeForApi(document.animalType),
     }
@@ -166,7 +141,7 @@ export const generateMersEventResolvers = (input: GenerateMersEventResolversInpu
     return {
       diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
       animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
-      animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
+      animalSpecies: animalSpecies.map((element) => mersAnimalSpeciesV2MapForApi[element]),
       animalSpeciesV2: animalSpecies.map((element) => mersAnimalSpeciesV2MapForApi[element]),
     }
   }

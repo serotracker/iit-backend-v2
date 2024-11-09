@@ -13,7 +13,6 @@ import {
 import {
   QueryResolvers,
   MersAnimalSpecies as MersAnimalSpeciesForApi,
-  MersAnimalSpeciesV2 as MersAnimalSpeciesV2ForApi,
   MersAnimalType as MersAnimalTypeForApi,
   MersEstimateType as MersEstimateTypeForApi,
   Clade as CladeForApi,
@@ -29,40 +28,21 @@ import {
 import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.js";
 import uniq from "lodash/uniq.js";
 
-export const mersAnimalSpeciesMapForApi = {
+export const mersAnimalSpeciesV2MapForApi = {
   [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
   [MersAnimalSpecies.GOAT]: MersAnimalSpeciesForApi.Goat,
-  [MersAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesForApi.Camel,
-  [MersAnimalSpecies.BACTRIAN_CAMEL]: MersAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersAnimalSpecies.HORSE]: MersAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersAnimalSpecies.MULE]: MersAnimalSpeciesForApi.Camel,
-  //TODO fix this up Sean.
-  [MersAnimalSpecies.BUFFALO]: MersAnimalSpeciesForApi.WaterBuffalo,
+  [MersAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesForApi.DromedaryCamel,
+  [MersAnimalSpecies.BACTRIAN_CAMEL]: MersAnimalSpeciesForApi.BactrianCamel,
+  [MersAnimalSpecies.MULE]: MersAnimalSpeciesForApi.Mule,
+  [MersAnimalSpecies.BUFFALO]: MersAnimalSpeciesForApi.Buffalo,
+  [MersAnimalSpecies.HORSE]: MersAnimalSpeciesForApi.Horse,
   [MersAnimalSpecies.CATTLE]: MersAnimalSpeciesForApi.Cattle,
   [MersAnimalSpecies.SHEEP]: MersAnimalSpeciesForApi.Sheep,
   [MersAnimalSpecies.DONKEY]: MersAnimalSpeciesForApi.Donkey,
   [MersAnimalSpecies.WATER_BUFFALO]: MersAnimalSpeciesForApi.WaterBuffalo,
   [MersAnimalSpecies.BABOON]: MersAnimalSpeciesForApi.Baboon
 }
-
-export const mersAnimalSpeciesV2MapForApi = {
-  [MersAnimalSpecies.BAT]: MersAnimalSpeciesV2ForApi.Bat,
-  [MersAnimalSpecies.GOAT]: MersAnimalSpeciesV2ForApi.Goat,
-  [MersAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesV2ForApi.DromedaryCamel,
-  [MersAnimalSpecies.BACTRIAN_CAMEL]: MersAnimalSpeciesV2ForApi.BactrianCamel,
-  [MersAnimalSpecies.MULE]: MersAnimalSpeciesV2ForApi.Mule,
-  [MersAnimalSpecies.BUFFALO]: MersAnimalSpeciesV2ForApi.Buffalo,
-  [MersAnimalSpecies.HORSE]: MersAnimalSpeciesV2ForApi.Horse,
-  [MersAnimalSpecies.CATTLE]: MersAnimalSpeciesV2ForApi.Cattle,
-  [MersAnimalSpecies.SHEEP]: MersAnimalSpeciesV2ForApi.Sheep,
-  [MersAnimalSpecies.DONKEY]: MersAnimalSpeciesV2ForApi.Donkey,
-  [MersAnimalSpecies.WATER_BUFFALO]: MersAnimalSpeciesV2ForApi.WaterBuffalo,
-  [MersAnimalSpecies.BABOON]: MersAnimalSpeciesV2ForApi.Baboon
-}
-export const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesMapForApi[animalSpecies];
-export const mapMersAnimalSpeciesV2ForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesV2ForApi => mersAnimalSpeciesV2MapForApi[animalSpecies];
+export const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesV2MapForApi[animalSpecies];
 
 const mersAnimalTypeMapForApi = {
   [MersAnimalType.WILD]: MersAnimalTypeForApi.Wild,
@@ -176,8 +156,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       seroprevalenceCalculated95CILower: document.seroprevalenceCalculated95CILower,
       seroprevalenceCalculated95CIUpper: document.seroprevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.AnimalSeroprevalence,
-      animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies[0]),
-      animalSpeciesV2: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesV2ForApi(animalSpecies)),
+      animalSpecies: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
+      animalSpeciesV2: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
       animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
       animalDetectionSettings: document.animalDetectionSettings,
       animalPurpose: document.animalPurpose,
@@ -222,8 +202,8 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       positivePrevalenceCalculated95CILower: document.positivePrevalenceCalculated95CILower,
       positivePrevalenceCalculated95CIUpper: document.positivePrevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.AnimalViral,
-      animalSpecies: mapMersAnimalSpeciesForApi(document.animalSpecies[0]),
-      animalSpeciesV2: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesV2ForApi(animalSpecies)),
+      animalSpecies: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
+      animalSpeciesV2: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
       animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
       animalDetectionSettings: document.animalDetectionSettings,
       animalPurpose: document.animalPurpose,
@@ -324,8 +304,8 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       animalSpeciesSubestimates: primaryEstimate.animalSpeciesSubestimates.map((subestimate) => ({
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersAnimalSpeciesSubEstimate' as const,
-        animalSpecies: mapMersAnimalSpeciesForApi(subestimate.animalSpecies[0]),
-        animalSpeciesV2: subestimate.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesV2ForApi(animalSpecies)),
+        animalSpecies: subestimate.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
+        animalSpeciesV2: subestimate.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
       })),
       sexSubestimates: primaryEstimate.sexSubestimates.map((subestimate) => ({
         ...mapMersSubEstimateBaseForApi(subestimate),
@@ -412,7 +392,7 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       animalSpecies: uniq(mersEstimateFilterOptions?.animalSpecies
         .map((element) => mapMersAnimalSpeciesForApi(element)) ?? []),
       animalSpeciesV2: uniq(mersEstimateFilterOptions?.animalSpecies
-        .map((element) => mapMersAnimalSpeciesV2ForApi(element)) ?? []),
+        .map((element) => mapMersAnimalSpeciesForApi(element)) ?? []),
       animalImportedOrLocal: mersEstimateFilterOptions?.animalImportedOrLocal ?? [],
       sampleFrame: mersEstimateFilterOptions?.sampleFrame ?? [],
       exposureToCamels: mersEstimateFilterOptions?.exposureToCamels ?? [],
