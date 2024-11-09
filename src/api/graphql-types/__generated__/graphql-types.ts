@@ -289,6 +289,7 @@ export type CountryIdentifiers = {
 export type FaoMersEventFilterOptions = {
   __typename?: 'FaoMersEventFilterOptions';
   animalSpecies: Array<MersEventAnimalSpecies>;
+  animalSpeciesV2: Array<MersAnimalSpeciesV2>;
   animalType: Array<MersEventAnimalType>;
   diagnosisSource: Array<MersDiagnosisSource>;
 };
@@ -1939,6 +1940,7 @@ export type CountryIdentifiersResolvers<ContextType = any, ParentType extends Re
 
 export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FaoMersEventFilterOptions'] = ResolversParentTypes['FaoMersEventFilterOptions']> = {
   animalSpecies?: Resolver<Array<ResolversTypes['MersEventAnimalSpecies']>, ParentType, ContextType>;
+  animalSpeciesV2?: Resolver<Array<ResolversTypes['MersAnimalSpeciesV2']>, ParentType, ContextType>;
   animalType?: Resolver<Array<ResolversTypes['MersEventAnimalType']>, ParentType, ContextType>;
   diagnosisSource?: Resolver<Array<ResolversTypes['MersDiagnosisSource']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
