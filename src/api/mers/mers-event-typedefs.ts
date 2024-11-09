@@ -68,8 +68,8 @@ export const mersEventTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     animalType: MersEventAnimalType!
-    animalSpecies: MersEventAnimalSpecies!
-    animalSpeciesV2: MersAnimalSpeciesV2!
+    animalSpecies: MersAnimalSpecies!
+    animalSpeciesV2: MersAnimalSpecies!
   }
 
   type HumanMersEvent implements MersEventInterface {
@@ -107,8 +107,8 @@ export const mersEventTypedefs = `
   type FaoMersEventFilterOptions {
     diagnosisSource: [MersDiagnosisSource!]!
     animalType: [MersEventAnimalType!]!
-    animalSpecies: [MersEventAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpeciesV2!]!
+    animalSpecies: [MersAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpecies!]!
   }
 
   type Query {

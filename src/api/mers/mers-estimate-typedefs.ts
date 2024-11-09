@@ -5,17 +5,6 @@ export const mersEstimateTypedefs = `
   }
 
   enum MersAnimalSpecies {
-    CAMEL
-    BAT
-    GOAT
-    SHEEP
-    CATTLE
-    DONKEY
-    WATER_BUFFALO
-    BABOON
-  }
-
-  enum MersAnimalSpeciesV2 {
     BAT
     GOAT
     SHEEP
@@ -57,7 +46,7 @@ export const mersEstimateTypedefs = `
     animalPurpose: [String!]!
     animalImportedOrLocal: [String!]!
     animalSpecies: [MersAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpeciesV2!]!
+    animalSpeciesV2: [MersAnimalSpecies!]!
     sampleFrame: [String!]!
     exposureToCamels: [String!]!
     antigen: [String!]!
@@ -263,8 +252,8 @@ export const mersEstimateTypedefs = `
     positivePrevalenceCalculated95CILower: Float!
     positivePrevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
-    animalSpecies: MersAnimalSpecies!
-    animalSpeciesV2: [MersAnimalSpeciesV2!]!
+    animalSpecies: [MersAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpecies!]!
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
@@ -405,8 +394,8 @@ export const mersEstimateTypedefs = `
     seroprevalenceCalculated95CILower: Float!
     seroprevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
-    animalSpecies: MersAnimalSpecies!
-    animalSpeciesV2: [MersAnimalSpeciesV2!]!
+    animalSpecies: [MersAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpecies!]!
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
@@ -516,8 +505,8 @@ export const mersEstimateTypedefs = `
     estimateInfo: MersSubEstimateInformation!
     ####### END INTERFACE FIELDS #######
 
-    animalSpecies: MersAnimalSpecies!
-    animalSpeciesV2: [MersAnimalSpeciesV2!]!
+    animalSpecies: [MersAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpecies!]!
   }
 
   type MersSexSubEstimate implements MersSubEstimateInterface {
