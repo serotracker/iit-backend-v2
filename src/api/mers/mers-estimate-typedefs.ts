@@ -57,6 +57,7 @@ export const mersEstimateTypedefs = `
     animalPurpose: [String!]!
     animalImportedOrLocal: [String!]!
     animalSpecies: [MersAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpeciesV2!]!
     sampleFrame: [String!]!
     exposureToCamels: [String!]!
     antigen: [String!]!

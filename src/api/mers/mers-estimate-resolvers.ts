@@ -27,6 +27,7 @@ import {
   MersAnimalType
 } from '../../storage/types.js';
 import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.js";
+import uniq from "lodash/uniq.js";
 
 export const mersAnimalSpeciesMapForApi = {
   [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
@@ -408,8 +409,10 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       geographicScope: mersEstimateFilterOptions?.geographicScope ?? [],
       animalDetectionSettings: mersEstimateFilterOptions?.animalDetectionSettings ?? [],
       animalPurpose: mersEstimateFilterOptions?.animalPurpose ?? [],
-      animalSpecies: mersEstimateFilterOptions?.animalSpecies
-        .map((element) => mapMersAnimalSpeciesForApi(element)) ?? [],
+      animalSpecies: uniq(mersEstimateFilterOptions?.animalSpecies
+        .map((element) => mapMersAnimalSpeciesForApi(element)) ?? []),
+      animalSpeciesV2: uniq(mersEstimateFilterOptions?.animalSpecies
+        .map((element) => mapMersAnimalSpeciesV2ForApi(element)) ?? []),
       animalImportedOrLocal: mersEstimateFilterOptions?.animalImportedOrLocal ?? [],
       sampleFrame: mersEstimateFilterOptions?.sampleFrame ?? [],
       exposureToCamels: mersEstimateFilterOptions?.exposureToCamels ?? [],
