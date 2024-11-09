@@ -581,7 +581,6 @@ export enum MersEventAnimalType {
 }
 
 export enum MersEventAnimalSpecies {
-  CAMEL = "CAMEL",
   BAT = "BAT",
   GOAT = "GOAT",
   CATTLE = "CATTLE",
@@ -589,6 +588,11 @@ export enum MersEventAnimalSpecies {
   DONKEY = "DONKEY",
   WATER_BUFFALO = "WATER_BUFFALO",
   BABOON = "BABOON",
+  DROMEDARY_CAMEL = "DROMEDARY_CAMEL",
+  BACTRIAN_CAMEL = "BACTRIAN_CAMEL",
+  HORSE = "HORSE",
+  MULE = "MULE",
+  BUFFALO = "BUFFALO",
 }
 
 export enum MersEventType {
