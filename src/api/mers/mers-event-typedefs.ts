@@ -108,6 +108,7 @@ export const mersEventTypedefs = `
     diagnosisSource: [MersDiagnosisSource!]!
     animalType: [MersEventAnimalType!]!
     animalSpecies: [MersEventAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpeciesV2!]!
   }
 
   type Query {

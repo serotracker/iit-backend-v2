@@ -167,6 +167,7 @@ export const generateMersEventResolvers = (input: GenerateMersEventResolversInpu
       diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
       animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
       animalSpecies: animalSpecies.map((element) => transformFaoMersEventAnimalSpeciesForApi(element)),
+      animalSpeciesV2: animalSpecies.map((element) => mersAnimalSpeciesV2MapForApi[element]),
     }
   }
 
