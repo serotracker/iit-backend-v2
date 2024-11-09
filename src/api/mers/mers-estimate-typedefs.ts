@@ -46,7 +46,6 @@ export const mersEstimateTypedefs = `
     animalPurpose: [String!]!
     animalImportedOrLocal: [String!]!
     animalSpecies: [MersAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpecies!]!
     sampleFrame: [String!]!
     exposureToCamels: [String!]!
     antigen: [String!]!
@@ -253,7 +252,6 @@ export const mersEstimateTypedefs = `
     positivePrevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
     animalSpecies: [MersAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpecies!]!
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
@@ -395,7 +393,6 @@ export const mersEstimateTypedefs = `
     seroprevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
     animalSpecies: [MersAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpecies!]!
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
@@ -506,7 +503,6 @@ export const mersEstimateTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     animalSpecies: [MersAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpecies!]!
   }
 
   type MersSexSubEstimate implements MersSubEstimateInterface {

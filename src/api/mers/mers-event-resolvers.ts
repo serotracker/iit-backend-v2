@@ -31,7 +31,7 @@ interface GenerateMersEventResolversOutput {
   mersEventResolvers: { Query: QueryResolvers }
 }
 
-export const mersAnimalSpeciesV2MapForApi = {
+export const mersAnimalSpeciesMapForApi = {
   [MersEventAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
   [MersEventAnimalSpecies.GOAT]: MersAnimalSpeciesForApi.Goat,
   [MersEventAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesForApi.DromedaryCamel,
@@ -98,8 +98,7 @@ const transformFaoMersEventDocumentForApi = (document: FaoMersEventDocument): Me
       ...transformFaoMersEventDocumentBaseForApi(document),
       __typename: "AnimalMersEvent",
       type: MersEventTypeForApi.Animal,
-      animalSpecies: mersAnimalSpeciesV2MapForApi[document.animalSpecies],
-      animalSpeciesV2: mersAnimalSpeciesV2MapForApi[document.animalSpecies],
+      animalSpecies: mersAnimalSpeciesMapForApi[document.animalSpecies],
       animalType: transformFaoMersEventAnimalTypeForApi(document.animalType),
     }
   }
@@ -141,8 +140,7 @@ export const generateMersEventResolvers = (input: GenerateMersEventResolversInpu
     return {
       diagnosisSource: diagnosisSource.map((element) => transformFaoMersEventDiagnosisSourceForApi(element)),
       animalType: animalType.map((element) => transformFaoMersEventAnimalTypeForApi(element)),
-      animalSpecies: animalSpecies.map((element) => mersAnimalSpeciesV2MapForApi[element]),
-      animalSpeciesV2: animalSpecies.map((element) => mersAnimalSpeciesV2MapForApi[element]),
+      animalSpecies: animalSpecies.map((element) => mersAnimalSpeciesMapForApi[element]),
     }
   }
 

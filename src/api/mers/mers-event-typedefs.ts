@@ -69,7 +69,6 @@ export const mersEventTypedefs = `
 
     animalType: MersEventAnimalType!
     animalSpecies: MersAnimalSpecies!
-    animalSpeciesV2: MersAnimalSpecies!
   }
 
   type HumanMersEvent implements MersEventInterface {
@@ -108,7 +107,6 @@ export const mersEventTypedefs = `
     diagnosisSource: [MersDiagnosisSource!]!
     animalType: [MersEventAnimalType!]!
     animalSpecies: [MersAnimalSpecies!]!
-    animalSpeciesV2: [MersAnimalSpecies!]!
   }
 
   type Query {
