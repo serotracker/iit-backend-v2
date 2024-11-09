@@ -28,7 +28,7 @@ import {
 import { mapUnRegionForApi, mapWhoRegionForApi } from "../shared/shared-mappers.js";
 import uniq from "lodash/uniq.js";
 
-export const mersAnimalSpeciesV2MapForApi = {
+export const mersAnimalSpeciesMapForApi = {
   [MersAnimalSpecies.BAT]: MersAnimalSpeciesForApi.Bat,
   [MersAnimalSpecies.GOAT]: MersAnimalSpeciesForApi.Goat,
   [MersAnimalSpecies.DROMEDARY_CAMEL]: MersAnimalSpeciesForApi.DromedaryCamel,
@@ -42,7 +42,7 @@ export const mersAnimalSpeciesV2MapForApi = {
   [MersAnimalSpecies.WATER_BUFFALO]: MersAnimalSpeciesForApi.WaterBuffalo,
   [MersAnimalSpecies.BABOON]: MersAnimalSpeciesForApi.Baboon
 }
-export const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesV2MapForApi[animalSpecies];
+export const mapMersAnimalSpeciesForApi = (animalSpecies: MersAnimalSpecies): MersAnimalSpeciesForApi => mersAnimalSpeciesMapForApi[animalSpecies];
 
 const mersAnimalTypeMapForApi = {
   [MersAnimalType.WILD]: MersAnimalTypeForApi.Wild,
@@ -157,7 +157,6 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       seroprevalenceCalculated95CIUpper: document.seroprevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.AnimalSeroprevalence,
       animalSpecies: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
-      animalSpeciesV2: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
       animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
       animalDetectionSettings: document.animalDetectionSettings,
       animalPurpose: document.animalPurpose,
@@ -203,7 +202,6 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
       positivePrevalenceCalculated95CIUpper: document.positivePrevalenceCalculated95CIUpper,
       type: MersEstimateTypeForApi.AnimalViral,
       animalSpecies: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
-      animalSpeciesV2: document.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
       animalType: document.animalType.map((animalType) => (mapMersAnimalTypeForApi(animalType))),
       animalDetectionSettings: document.animalDetectionSettings,
       animalPurpose: document.animalPurpose,
@@ -305,7 +303,6 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
         ...mapMersSubEstimateBaseForApi(subestimate),
         __typename: 'MersAnimalSpeciesSubEstimate' as const,
         animalSpecies: subestimate.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
-        animalSpeciesV2: subestimate.animalSpecies.map((animalSpecies) => mapMersAnimalSpeciesForApi(animalSpecies)),
       })),
       sexSubestimates: primaryEstimate.sexSubestimates.map((subestimate) => ({
         ...mapMersSubEstimateBaseForApi(subestimate),
@@ -390,8 +387,6 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
       animalDetectionSettings: mersEstimateFilterOptions?.animalDetectionSettings ?? [],
       animalPurpose: mersEstimateFilterOptions?.animalPurpose ?? [],
       animalSpecies: uniq(mersEstimateFilterOptions?.animalSpecies
-        .map((element) => mapMersAnimalSpeciesForApi(element)) ?? []),
-      animalSpeciesV2: uniq(mersEstimateFilterOptions?.animalSpecies
         .map((element) => mapMersAnimalSpeciesForApi(element)) ?? []),
       animalImportedOrLocal: mersEstimateFilterOptions?.animalImportedOrLocal ?? [],
       sampleFrame: mersEstimateFilterOptions?.sampleFrame ?? [],
