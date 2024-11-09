@@ -69,6 +69,7 @@ export const mersEventTypedefs = `
 
     animalType: MersEventAnimalType!
     animalSpecies: MersEventAnimalSpecies!
+    animalSpeciesV2: MersAnimalSpeciesV2!
   }
 
   type HumanMersEvent implements MersEventInterface {

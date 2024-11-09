@@ -86,6 +86,7 @@ export type AnimalMersEstimate = MersEstimateInterface & {
 export type AnimalMersEvent = MersEventInterface & {
   __typename?: 'AnimalMersEvent';
   animalSpecies: MersEventAnimalSpecies;
+  animalSpeciesV2: MersAnimalSpeciesV2;
   animalType: MersEventAnimalType;
   city: Scalars['String']['output'];
   country: CountryIdentifiers;
@@ -1764,6 +1765,7 @@ export type AnimalMersEstimateResolvers<ContextType = any, ParentType extends Re
 
 export type AnimalMersEventResolvers<ContextType = any, ParentType extends ResolversParentTypes['AnimalMersEvent'] = ResolversParentTypes['AnimalMersEvent']> = {
   animalSpecies?: Resolver<ResolversTypes['MersEventAnimalSpecies'], ParentType, ContextType>;
+  animalSpeciesV2?: Resolver<ResolversTypes['MersAnimalSpeciesV2'], ParentType, ContextType>;
   animalType?: Resolver<ResolversTypes['MersEventAnimalType'], ParentType, ContextType>;
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   country?: Resolver<ResolversTypes['CountryIdentifiers'], ParentType, ContextType>;

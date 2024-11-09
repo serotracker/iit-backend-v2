@@ -43,7 +43,7 @@ const animalTypeCleaningMap: { [key in RawFaoMersEventAnimalType ]: MersEventAni
 }
 
 const animalSpeciesCleaningMap: { [key in RawFaoMersEventAnimalSpecies ]: MersEventAnimalSpecies } = {
-  [RawFaoMersEventAnimalSpecies["Camelidae (Unidentified)"]]: MersEventAnimalSpecies.CAMEL,
+  [RawFaoMersEventAnimalSpecies["Camelidae (Unidentified)"]]: MersEventAnimalSpecies.DROMEDARY_CAMEL,
   [RawFaoMersEventAnimalSpecies.Bat]: MersEventAnimalSpecies.BAT,
 }
 
