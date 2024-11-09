@@ -104,7 +104,21 @@ export const sortSubestimatesStep = (input: SortSubestimatesStepInput): SortSube
       testUsedSubestimates: groupedEstimate.testUsedSubestimates
         .sort((subestimateA, subestimateB) => subestimateA.assay.join(',') > subestimateB.assay.join(',') ? 1 : -1),
       animalSpeciesSubestimates: groupedEstimate.animalSpeciesSubestimates
-        .sort((subestimateA, subestimateB) => subestimateA.animalSpecies > subestimateB.animalSpecies ? 1 : -1),
+        .sort((subestimateA, subestimateB) => {
+          let index = 0;
+
+          while(index < subestimateA.animalSpecies.length && index < subestimateB.animalSpecies.length) {
+            const subestimateASpecies = subestimateA.animalSpecies[index];
+            const subestimateBSpecies = subestimateB.animalSpecies[index];
+
+            if(subestimateASpecies !== subestimateBSpecies) {
+              return subestimateASpecies > subestimateBSpecies ? 1 : -1;
+            }
+            index++;
+          }
+
+          return subestimateA.animalCountriesOfImport.length - subestimateB.animalCountriesOfImport.length
+        }),
       sexSubestimates: groupedEstimate.sexSubestimates
         .sort((subestimateA, subestimateB) => subestimateA.sex > subestimateB.sex ? 1 : -1),
       timeFrameSubestimates: groupedEstimate.timeFrameSubestimates

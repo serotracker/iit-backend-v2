@@ -107,7 +107,7 @@ export const generateMersEstimateFilterOptionsStep = (input: GenerateMersEstimat
         .map((estimate) => estimate.animalPurpose)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       animalSpecies: uniq(input.allEstimates
-        .map((estimate) => estimate.animalSpecies)
+        .flatMap((estimate) => estimate.animalSpecies)
         .filter((element): element is NonNullable<typeof element> => !!element)),
       animalImportedOrLocal: uniq(input.allEstimates
         .map((estimate) => estimate.animalImportedOrLocal)

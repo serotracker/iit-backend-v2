@@ -42,7 +42,7 @@ export type EstimateFieldsAfterCleaningEstimatesStep = {
   countryId: string | undefined;
   studyId: string | undefined;
   animalType: MersAnimalType[];
-  animalSpecies: MersAnimalSpecies | undefined;
+  animalSpecies: MersAnimalSpecies[];
   sensitivity: number | undefined;
   sensitivity95CILower: number | undefined;
   sensitivity95CIUpper: number | undefined;
@@ -148,48 +148,71 @@ const deriveSubgroupingVariableFromEstimate = (estimate: Pick<EstimateFieldsAfte
   return undefined;
 }
 
-const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterCleaningStudiesStep, 'Species'>): MersAnimalSpecies | undefined => {
+const deriveAnimalSpeciesFromEstimate = (estimate: Pick<EstimateFieldsAfterCleaningStudiesStep, 'Species'>): MersAnimalSpecies[] => {
   const speciesString = estimate['Species'];
 
+  const animalSpecies: MersAnimalSpecies[] = [];
+
   if(!speciesString) {
-    return undefined;
+    return animalSpecies;
   }
 
   const speciesStringNoCapitalization = speciesString.toLowerCase();
 
-  if(speciesStringNoCapitalization?.includes('camel')) {
-    return MersAnimalSpecies.CAMEL;
+  if(
+    speciesStringNoCapitalization?.includes('camel') ||
+    speciesStringNoCapitalization?.includes('dromedary')
+  ) {
+    animalSpecies.push(MersAnimalSpecies.DROMEDARY_CAMEL);
+  }
+
+  if(
+    speciesStringNoCapitalization?.includes('bactrian')
+  ) {
+    animalSpecies.push(MersAnimalSpecies.BACTRIAN_CAMEL);
   }
 
   if(speciesStringNoCapitalization?.includes('bat')) {
-    return MersAnimalSpecies.BAT;
+    animalSpecies.push(MersAnimalSpecies.BAT);
   }
 
   if(speciesStringNoCapitalization?.includes('goat')) {
-    return MersAnimalSpecies.GOAT;
+    animalSpecies.push(MersAnimalSpecies.GOAT);
+  }
+
+  if(speciesStringNoCapitalization?.includes('horse')) {
+    animalSpecies.push(MersAnimalSpecies.HORSE);
   }
 
   if(speciesStringNoCapitalization?.includes('cattle') || speciesStringNoCapitalization?.includes('cow')) {
-    return MersAnimalSpecies.CATTLE;
+    animalSpecies.push(MersAnimalSpecies.CATTLE);
   }
 
   if(speciesStringNoCapitalization?.includes('sheep')) {
-    return MersAnimalSpecies.SHEEP;
+    animalSpecies.push(MersAnimalSpecies.SHEEP);
   }
 
   if(speciesStringNoCapitalization?.includes('donkey')) {
-    return MersAnimalSpecies.DONKEY;
+    animalSpecies.push(MersAnimalSpecies.DONKEY);
   }
 
   if(speciesStringNoCapitalization?.includes('water buffalo')) {
-    return MersAnimalSpecies.WATER_BUFFALO;
+    animalSpecies.push(MersAnimalSpecies.WATER_BUFFALO);
+  }
+
+  if(speciesStringNoCapitalization?.includes('buffalo')) {
+    animalSpecies.push(MersAnimalSpecies.BUFFALO);
+  }
+
+  if(speciesStringNoCapitalization?.includes('mule')) {
+    animalSpecies.push(MersAnimalSpecies.MULE);
   }
 
   if(speciesStringNoCapitalization?.includes('baboon')) {
-    return MersAnimalSpecies.BABOON;
+    animalSpecies.push(MersAnimalSpecies.BABOON);
   }
 
-  return undefined;
+  return animalSpecies;
 }
 
 const textCladeToEnumCladeMap: Record<string, Clade | undefined> = {

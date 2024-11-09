@@ -87,7 +87,7 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   positivePrevalenceCalculated95CIUpper: undefined;
   ageGroup: never[];
   animalType: MersAnimalType[];
-  animalSpecies: MersAnimalSpecies;
+  animalSpecies: MersAnimalSpecies[];
   sampleFrame: undefined;
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
@@ -114,7 +114,7 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalenceCalculated95CIUpper: number;
   ageGroup: never[];
   animalType: MersAnimalType[];
-  animalSpecies: MersAnimalSpecies;
+  animalSpecies: MersAnimalSpecies[];
   sampleFrame: undefined;
   animalDetectionSettings: string[];
   animalPurpose: string | undefined;
@@ -215,7 +215,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
     const animalType = estimate.animalType;
     const animalSpecies = estimate.animalSpecies;
 
-    if(!animalSpecies || !animalType) {
+    if((animalSpecies.length < 1) || !animalType) {
       return undefined;
     }
 
@@ -246,7 +246,7 @@ export const applyTypedEstimateConstraintToEstimate = (estimate: ApplyTypedEstim
     const animalType = estimate.animalType;
     const animalSpecies = estimate.animalSpecies;
 
-    if(!animalSpecies || !animalType) {
+    if((animalSpecies.length < 1) || !animalType) {
       return undefined;
     }
 

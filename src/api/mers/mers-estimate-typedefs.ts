@@ -15,6 +15,21 @@ export const mersEstimateTypedefs = `
     BABOON
   }
 
+  enum MersAnimalSpeciesV2 {
+    BAT
+    GOAT
+    SHEEP
+    CATTLE
+    MULE
+    DONKEY
+    BUFFALO
+    WATER_BUFFALO
+    BABOON
+    DROMEDARY_CAMEL
+    BACTRIAN_CAMEL
+    HORSE
+  }
+
   enum Clade {
     A
     B
@@ -42,6 +57,7 @@ export const mersEstimateTypedefs = `
     animalPurpose: [String!]!
     animalImportedOrLocal: [String!]!
     animalSpecies: [MersAnimalSpecies!]!
+    animalSpeciesV2: [MersAnimalSpeciesV2!]!
     sampleFrame: [String!]!
     exposureToCamels: [String!]!
     antigen: [String!]!
@@ -248,6 +264,7 @@ export const mersEstimateTypedefs = `
     positivePrevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
+    animalSpeciesV2: [MersAnimalSpeciesV2!]!
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
@@ -389,6 +406,7 @@ export const mersEstimateTypedefs = `
     seroprevalenceCalculated95CIUpper: Float!
     animalType: [MersAnimalType!]!
     animalSpecies: MersAnimalSpecies!
+    animalSpeciesV2: [MersAnimalSpeciesV2!]!
     animalDetectionSettings: [String!]!
     animalPurpose: String
     animalImportedOrLocal: String
@@ -499,6 +517,7 @@ export const mersEstimateTypedefs = `
     ####### END INTERFACE FIELDS #######
 
     animalSpecies: MersAnimalSpecies!
+    animalSpeciesV2: [MersAnimalSpeciesV2!]!
   }
 
   type MersSexSubEstimate implements MersSubEstimateInterface {

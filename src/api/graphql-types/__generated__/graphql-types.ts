@@ -497,10 +497,26 @@ export enum MersAnimalSpecies {
 export type MersAnimalSpeciesSubEstimate = MersSubEstimateInterface & {
   __typename?: 'MersAnimalSpeciesSubEstimate';
   animalSpecies: MersAnimalSpecies;
+  animalSpeciesV2: Array<MersAnimalSpeciesV2>;
   estimateId: Scalars['String']['output'];
   estimateInfo: MersSubEstimateInformation;
   id: Scalars['String']['output'];
 };
+
+export enum MersAnimalSpeciesV2 {
+  Baboon = 'BABOON',
+  BactrianCamel = 'BACTRIAN_CAMEL',
+  Bat = 'BAT',
+  Buffalo = 'BUFFALO',
+  Cattle = 'CATTLE',
+  Donkey = 'DONKEY',
+  DromedaryCamel = 'DROMEDARY_CAMEL',
+  Goat = 'GOAT',
+  Horse = 'HORSE',
+  Mule = 'MULE',
+  Sheep = 'SHEEP',
+  WaterBuffalo = 'WATER_BUFFALO'
+}
 
 export enum MersAnimalType {
   Domestic = 'DOMESTIC',
@@ -560,6 +576,7 @@ export type MersEstimateFilterOptions = {
   animalImportedOrLocal: Array<Scalars['String']['output']>;
   animalPurpose: Array<Scalars['String']['output']>;
   animalSpecies: Array<MersAnimalSpecies>;
+  animalSpeciesV2: Array<MersAnimalSpeciesV2>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
   clade: Array<Clade>;
@@ -919,6 +936,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
   animalPurpose?: Maybe<Scalars['String']['output']>;
   animalSpecies: MersAnimalSpecies;
+  animalSpeciesV2: Array<MersAnimalSpeciesV2>;
   animalType: Array<MersAnimalType>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
@@ -989,6 +1007,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   animalImportedOrLocal?: Maybe<Scalars['String']['output']>;
   animalPurpose?: Maybe<Scalars['String']['output']>;
   animalSpecies: MersAnimalSpecies;
+  animalSpeciesV2: Array<MersAnimalSpeciesV2>;
   animalType: Array<MersAnimalType>;
   antigen: Array<Scalars['String']['output']>;
   assay: Array<Scalars['String']['output']>;
@@ -1539,6 +1558,7 @@ export type ResolversTypes = {
   MersAnimalSourceLocationSubEstimate: ResolverTypeWrapper<Omit<MersAnimalSourceLocationSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersAnimalSpecies: MersAnimalSpecies;
   MersAnimalSpeciesSubEstimate: ResolverTypeWrapper<Omit<MersAnimalSpeciesSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
+  MersAnimalSpeciesV2: MersAnimalSpeciesV2;
   MersAnimalType: MersAnimalType;
   MersCamelExposureLevelSubEstimate: ResolverTypeWrapper<Omit<MersCamelExposureLevelSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   MersDiagnosisSource: MersDiagnosisSource;
@@ -2074,6 +2094,7 @@ export type MersAnimalSourceLocationSubEstimateResolvers<ContextType = any, Pare
 
 export type MersAnimalSpeciesSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['MersAnimalSpeciesSubEstimate'] = ResolversParentTypes['MersAnimalSpeciesSubEstimate']> = {
   animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
+  animalSpeciesV2?: Resolver<Array<ResolversTypes['MersAnimalSpeciesV2']>, ParentType, ContextType>;
   estimateId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateInfo?: Resolver<ResolversTypes['MersSubEstimateInformation'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2118,6 +2139,7 @@ export type MersEstimateFilterOptionsResolvers<ContextType = any, ParentType ext
   animalImportedOrLocal?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalPurpose?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   animalSpecies?: Resolver<Array<ResolversTypes['MersAnimalSpecies']>, ParentType, ContextType>;
+  animalSpeciesV2?: Resolver<Array<ResolversTypes['MersAnimalSpeciesV2']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   clade?: Resolver<Array<ResolversTypes['Clade']>, ParentType, ContextType>;
@@ -2417,6 +2439,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animalPurpose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
+  animalSpeciesV2?: Resolver<Array<ResolversTypes['MersAnimalSpeciesV2']>, ParentType, ContextType>;
   animalType?: Resolver<Array<ResolversTypes['MersAnimalType']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2487,6 +2510,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   animalImportedOrLocal?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animalPurpose?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   animalSpecies?: Resolver<ResolversTypes['MersAnimalSpecies'], ParentType, ContextType>;
+  animalSpeciesV2?: Resolver<Array<ResolversTypes['MersAnimalSpeciesV2']>, ParentType, ContextType>;
   animalType?: Resolver<Array<ResolversTypes['MersAnimalType']>, ParentType, ContextType>;
   antigen?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
