@@ -42,7 +42,7 @@ const countryAlphaTwoCodeToWhoRegionsMap: Partial<Record<TwoLetterIsoCountryCode
   VG: undefined,
   BN: WHORegion.WPR,
   BG: WHORegion.EUR,
-  BF: WHORegion.AMR,
+  BF: WHORegion.AFR,
   BI: WHORegion.AFR,
   CV: WHORegion.AFR,
   KH: WHORegion.WPR,
