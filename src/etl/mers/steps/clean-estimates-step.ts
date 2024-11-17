@@ -318,7 +318,9 @@ export const cleanEstimatesStep = (input: CleanEstimatesStepInput): CleanEstimat
         ...estimate,
         type: deriveTypeFromCleanedEstimate(estimate)
       }))
-      .filter((estimate): estimate is Omit<typeof estimate, 'type'> & {type: NonNullable<typeof estimate['type']>} => !!estimate.type),
+      .filter((estimate): estimate is Omit<typeof estimate, 'type'> & {type: NonNullable<typeof estimate['type']>} => !!estimate.type)
+      // Problem with "Multiple populations". Massive pain TODO: Fix up the sample frames on this one and then remove this.
+      .filter((estimate) => estimate.estimateId !== '220810_Diyala_UniversityofDiyala_Humans'),
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
