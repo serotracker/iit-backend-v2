@@ -366,6 +366,16 @@ const transformMacroSampleFrameForDatabase = (input: TransformMacroSampleFrameFo
   }, {
     macroSampleFrame: MersMacroSampleFrame.UNCATEGORIZED,
     sampleFrames: uncategorizedSampleFrames,
+  }, {
+    macroSampleFrame: MersMacroSampleFrame.HIGH_RISK_HEALTHCARE_WORKERS,
+    sampleFrames: ['Healthcare workers'],
+  }, {
+    macroSampleFrame: MersMacroSampleFrame.HIGH_RISK_CLINICAL_MONITORING,
+    sampleFrames: ['Suspected cases', 'Close contacts of cases'],
+  }, {
+    macroSampleFrame: MersMacroSampleFrame.HIGH_RISK_OTHER,
+    sampleFrames: sampleFramesForHighRiskNonOccupationallyExposed
+      .filter((sampleFrame) => !['Suspected cases', 'Close contacts of cases', 'Healthcare workers'].includes(sampleFrame))
   }].map((element) => ({
     _id: new ObjectId(),
     macroSampleFrame: element.macroSampleFrame,
