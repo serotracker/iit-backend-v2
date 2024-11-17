@@ -23,6 +23,12 @@ const MacroSampleFrameForApiMap = {
     MersMacroSampleFrameForApi.HighRiskNotOccupationallyExposedToDromedaryCamels,
   [MersMacroSampleFrame.HIGH_RISK_OCCUPATIONALLY_EXPOSED_TO_DROMEDARY_CAMELS]:
     MersMacroSampleFrameForApi.HighRiskOccupationallyExposedToDromedaryCamels,
+  [MersMacroSampleFrame.HIGH_RISK_OTHER]:
+    MersMacroSampleFrameForApi.HighRiskOther,
+  [MersMacroSampleFrame.HIGH_RISK_HEALTHCARE_WORKERS]:
+    MersMacroSampleFrameForApi.HighRiskHealthcareWorkers,
+  [MersMacroSampleFrame.HIGH_RISK_CLINICAL_MONITORING]:
+    MersMacroSampleFrameForApi.HighRiskClinicalMonitoring,
   [MersMacroSampleFrame.UNCATEGORIZED]:
     MersMacroSampleFrameForApi.Uncategorized,
 }
