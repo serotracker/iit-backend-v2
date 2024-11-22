@@ -227,40 +227,40 @@ export const generateLegacyMersResolvers = (input: GenerateLegacyMersResolversIn
 
   const mersFilterOptions = async () => {
     const estimateCollection = mongoClient.db(databaseName).collection<MersEstimateDocument>('mersEstimates');
-    const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
+    //const faoMersEventsCollection = mongoClient.db(databaseName).collection<FaoMersEventDocument>('mersFaoEventData');
 
     const [
       countryIdentifiersFromEstimates,
-      countryIdentifiersFromFaoMersEvents,
+      //countryIdentifiersFromFaoMersEvents,
       whoRegionsFromEstimates,
-      whoRegionsFromFaoMersEvents,
+      //whoRegionsFromFaoMersEvents,
       unRegionsFromEstimates,
-      unRegionsFromFaoMersEvents
+      //unRegionsFromFaoMersEvents
     ] = await Promise.all([
       runCountryIdentifierAggregation({ collection: estimateCollection }),
-      runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
+      //runCountryIdentifierAggregation({ collection: faoMersEventsCollection }),
       estimateCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      faoMersEventsCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      //faoMersEventsCollection.distinct('whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
       estimateCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
-      faoMersEventsCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      //faoMersEventsCollection.distinct('unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
     ])
 
     // Lodash's uniqBy function keeps the first occurrence of the key so if there is a different country name
     // between the estimates and the fao mers events, the country name in the estimates will be used.
-    const countryIdentifiers = uniqBy(
-      [...countryIdentifiersFromEstimates, ...countryIdentifiersFromFaoMersEvents],
-      (countryIdentifiers: CountryIdentifiers) => countryIdentifiers.alphaTwoCode
-    )
+    // const countryIdentifiers = uniqBy(
+    //   [...countryIdentifiersFromEstimates, ...countryIdentifiersFromFaoMersEvents],
+    //   (countryIdentifiers: CountryIdentifiers) => countryIdentifiers.alphaTwoCode
+    // )
 
     return {
-      countryIdentifiers,
+      countryIdentifiers: countryIdentifiersFromEstimates,
       whoRegion: uniq([
         ...whoRegionsFromEstimates,
-        ...whoRegionsFromFaoMersEvents
+        //...whoRegionsFromFaoMersEvents
       ]).map((whoRegion) => mapWhoRegionForApi(whoRegion)),
       unRegion: uniq([
         ...unRegionsFromEstimates,
-        ...unRegionsFromFaoMersEvents
+        //...unRegionsFromFaoMersEvents
       ]).map((unRegion) => mapUnRegionForApi(unRegion))
     }
   }

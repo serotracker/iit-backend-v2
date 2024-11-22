@@ -261,7 +261,10 @@ export const generateMersEstimateResolvers = (input: GenerateMersEstimateResolve
 
   const mersPrimaryEstimates = async () => {
     const mersPrimaryEstimatesCollection = mongoClient.db(databaseName).collection<MersPrimaryEstimateDocument>('mersPrimaryEstimates');
-    const mersPrimaryEstimates = await mersPrimaryEstimatesCollection.find({}).toArray();
+    const mersPrimaryEstimates = await mersPrimaryEstimatesCollection
+      .find({})
+      .sort({ country: 1 })
+      .toArray();
 
     return mersPrimaryEstimates.map((primaryEstimate) => ({
       id: primaryEstimate._id.toHexString(),

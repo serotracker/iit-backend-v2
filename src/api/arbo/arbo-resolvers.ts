@@ -110,6 +110,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       .db(databaseName)
       .collection<ArbovirusEstimateDocument>('arbovirusEstimates')
       .find({})
+      .sort({ country: 1 })
       .toArray();
 
     return databaseEstimates.map((estimate) => transformArbovirusEstimateDocumentForApi(estimate));
