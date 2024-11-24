@@ -54,9 +54,7 @@ export const filterOutInvalidEstimatesStep = (
   return {
     allEstimates: input.allEstimates
       // Western Sahara
-      .filter((estimate) => estimate.countryAlphaTwoCode !== 'EH')
-      // China
-      .filter((estimate) => estimate.countryAlphaTwoCode !== 'CN'),
+      .filter((estimate) => estimate.countryAlphaTwoCode !== 'EH'),
     allSources: input.allSources,
     allStudies: input.allStudies,
     allCountries: input.allCountries,
