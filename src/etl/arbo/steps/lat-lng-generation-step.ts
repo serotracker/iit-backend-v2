@@ -8,6 +8,7 @@ import {
   AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep,
   AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep,
+  GroupedEstimatesAfterMergingEstimatesAndSourcesStep,
 } from "./merge-estimates-and-sources-step.js";
 
 export type AirtableEstimateFieldsAfterLatLngGenerationStep =
@@ -21,12 +22,15 @@ export type AirtableCountryFieldsAfterLatLngGenerationStep =
   AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep;
+export type GroupedEstimatesAfterLatLngGenerationStep =
+  GroupedEstimatesAfterMergingEstimatesAndSourcesStep;
 
 interface LatLngGenerationStepInput {
   allEstimates: AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep[];
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
   allCountries: AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep[];
+  groupedEstimates: GroupedEstimatesAfterMergingEstimatesAndSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -35,6 +39,7 @@ interface LatLngGenerationStepOutput {
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
   allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep[];
+  groupedEstimates: GroupedEstimatesAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -85,6 +90,7 @@ export const latLngGenerationStep = async(
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

@@ -3,9 +3,10 @@ import {
   AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep,
   AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep,
   AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep,
+  GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep
 } from "./transform-not-reported-values-to-undefined-step.js";
-import { Arbovirus, isArbovirus } from "../../../storage/types.js";
+import { Arbovirus, ArbovirusGroupingVariable, isArbovirus } from "../../../storage/types.js";
 
 export type AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep =
   Omit<
@@ -22,12 +23,15 @@ export type AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep =
   AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep;
+export type GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep =
+  GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep;
 
 interface AssertMandatoryFieldsArePresentStepInput {
   allEstimates: AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep[];
+  groupedEstimates: GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
@@ -36,6 +40,7 @@ interface AssertMandatoryFieldsAreStepOutput {
   allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep[];
+  groupedEstimates: GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep[];
   mongoClient: MongoClient;
 }
 
@@ -76,6 +81,7 @@ export const assertMandatoryFieldsArePresentStep = (
       !Number.isNaN(dataPoint.dengue2050Data.medianValue) &&
       !Number.isNaN(dataPoint.dengue2050Data.ninetyPercentOfValuesAreBelowThisValue)
     ),
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

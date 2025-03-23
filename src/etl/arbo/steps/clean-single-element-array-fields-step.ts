@@ -4,6 +4,7 @@ import {
   AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
+  GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
 } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep = Omit<
@@ -24,12 +25,15 @@ export type AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep =
 
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
+export type GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep =
+  GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
 
 interface CleanSingleElementArrayFieldsStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  groupedEstimates: GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -38,6 +42,7 @@ interface CleanSingleElementArrayFieldsStepOutput {
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep[];
+  groupedEstimates: GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -61,6 +66,7 @@ export const cleanSingleElementArrayFieldsStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

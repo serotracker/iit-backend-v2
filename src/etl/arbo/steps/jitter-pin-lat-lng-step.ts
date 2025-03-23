@@ -3,7 +3,8 @@ import {
   AirtableCountryFieldsAfterLatLngGenerationStep,
   AirtableEstimateFieldsAfterLatLngGenerationStep,
   AirtableSourceFieldsAfterLatLngGenerationStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep,
+  GroupedEstimatesAfterLatLngGenerationStep
 } from "./lat-lng-generation-step.js";
 
 export type AirtableEstimateFieldsAfterJitteringPinLatLngStep =
@@ -14,6 +15,8 @@ export type AirtableCountryFieldsAfterJitteringPinLatLngStep =
   AirtableCountryFieldsAfterLatLngGenerationStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep;
+export type GroupedEstimatesAfterJitteringPinLatLngStep =
+  GroupedEstimatesAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -34,6 +37,7 @@ interface JitterPinLatLngStepInput {
   allSources: AirtableSourceFieldsAfterLatLngGenerationStep[];
   allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep[];
+  groupedEstimates: GroupedEstimatesAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -42,6 +46,7 @@ interface JitterPinLatLngStepOutput {
   allSources: AirtableSourceFieldsAfterJitteringPinLatLngStep[];
   allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep[];
+  groupedEstimates: GroupedEstimatesAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -62,6 +67,7 @@ export const jitterPinLatLngStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

@@ -19,6 +19,8 @@ import { fetchEnvironmentalSuitabilityStatsByCountryStep } from "./steps/fetch-e
 import { writeEstimatesToMongoDbStep } from "./steps/write-estimates-to-mongodb-step.js";
 import { writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep } from "./steps/write-enviromental-suitability-stats-by-country-to-mongodb-step.js";
 import { assignEstimateTypesStep } from "./steps/assign-estimate-types-step.js";
+import { groupEstimatesUnderPrimaryEstimateStep } from "./steps/group-estimates-under-primary-estimate-step.js";
+import { writeGroupedEstimatesToMongoDbStep } from "./steps/write-grouped-estimates-to-mongodb-step.js";
 
 const runEtlMain = async () => {
   console.log("Running arbo ETL");
@@ -74,6 +76,7 @@ const runEtlMain = async () => {
         allSources: allSourcesUnformatted,
         allCountries: allCountries,
         environmentalSuitabilityStatsByCountry: [],
+        groupedEstimates: [],
         mongoClient
       },
       etlStep(validateFieldSetFromAirtableStep),
@@ -90,9 +93,11 @@ const runEtlMain = async () => {
       etlStep(mergeEstimatesAndSourcesStep),
       asyncEtlStep(latLngGenerationStep),
       etlStep(jitterPinLatLngStep),
+      etlStep(groupEstimatesUnderPrimaryEstimateStep),
       etlStep(transformIntoFormatForDatabaseStep),
       asyncEtlStep(writeEstimatesToMongoDbStep),
-      asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep)
+      asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep),
+      asyncEtlStep(writeGroupedEstimatesToMongoDbStep)
     )
   );
 

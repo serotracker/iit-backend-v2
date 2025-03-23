@@ -5,6 +5,7 @@ import {
   ArbovirusEnvironmentalSuitabilityStatsEntryDocument,
   ArbovirusEstimateDocument,
   ArbovirusEstimateType,
+  ArbovirusGroupedEstimateDocument,
   ArbovirusStudyPopulation
 } from '../../storage/types.js';
 import {
@@ -56,7 +57,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     ageMinimum: document.ageMinimum,
     antibodies: document.antibodies ?? [],
     antigen: document.antigen,
-    assay: document.assay,
+    assay: Array.isArray(document.assay) ? document.assay.at(0) : document.assay,
     assayOther: document.assayOther,
     city: document.city,
     state: document.state,
@@ -246,16 +247,79 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       countryCount
     }
   }
+  
+  const transformArbovirusSubEstimateDocumentForApi = (subEstimate: 
+    | ArbovirusGroupedEstimateDocument['shownEstimates'][number]
+    | ArbovirusGroupedEstimateDocument['hiddenEstimates'][number]
+  ) => ({
+    estimateType: arbovirusEstimateTypeMap[subEstimate.estimateType],
+    ageGroup: subEstimate.ageGroup,
+    ageMaximum: subEstimate.ageMaximum,
+    ageMinimum: subEstimate.ageMinimum,
+    antibodies: subEstimate.antibodies ?? [],
+    antigen: subEstimate.antigen,
+    assay: subEstimate.assay,
+    assayOther: subEstimate.assayOther,
+    city: subEstimate.city,
+    state: subEstimate.state,
+    country: subEstimate.country,
+    countryAlphaTwoCode: subEstimate.countryAlphaTwoCode,
+    countryAlphaThreeCode: subEstimate.countryAlphaThreeCode,
+    createdAt: subEstimate.createdAt.toISOString(),
+    estimateId: subEstimate.estimateId,
+    id: subEstimate.id.toHexString(),
+    inclusionCriteria: subEstimate.inclusionCriteria,
+    latitude: subEstimate.latitude,
+    longitude: subEstimate.longitude,
+    pathogen: mapArbovirusForApi(subEstimate.pathogen),
+    pediatricAgeGroup: subEstimate.pediatricAgeGroup,
+    producer: subEstimate.producer,
+    producerOther: subEstimate.producerOther,
+    sameFrameTargetGroup: subEstimate.sameFrameTargetGroup,
+    sampleEndDate: subEstimate.sampleEndDate?.toISOString(),
+    sampleFrame: subEstimate.sampleFrame,
+    sampleNumerator: subEstimate.sampleNumerator,
+    sampleSize: subEstimate.sampleSize,
+    sampleStartDate: subEstimate.sampleStartDate?.toISOString(),
+    seroprevalence: subEstimate.seroprevalence,
+    seroprevalenceStudy95CILower: subEstimate.seroprevalenceStudy95CILower,
+    seroprevalenceStudy95CIUpper: subEstimate.seroprevalenceStudy95CIUpper,
+    seroprevalenceCalculated95CILower: subEstimate.seroprevalenceCalculated95CILower,
+    seroprevalenceCalculated95CIUpper: subEstimate.seroprevalenceCalculated95CIUpper,
+    serotype: subEstimate.serotype,
+    sex: subEstimate.sex,
+    sourceSheetId: subEstimate.sourceSheetId,
+    sourceSheetName: subEstimate.sourceSheetName,
+    studyPopulation: arbovirusStudyPopulationMap[subEstimate.studyPopulation],
+    studySpecies: subEstimate.studySpecies,
+    unRegion: subEstimate.unRegion ? mapUnRegionForApi(subEstimate.unRegion) : undefined,
+    url: subEstimate.url,
+    whoRegion: subEstimate.whoRegion
+  });
 
+  const groupedArbovirusEstimates = async () => {
+    const databaseEstimates = await mongoClient
+      .db(databaseName)
+      .collection<ArbovirusGroupedEstimateDocument>('groupedArbovirusEstimates')
+      .find({})
+      .toArray();
+
+    return databaseEstimates.map((estimate) => ({
+      id: estimate._id.toHexString(),
+      shownEstimates: estimate.shownEstimates.map((subEstimate) => transformArbovirusSubEstimateDocumentForApi(subEstimate)),
+      hiddenEstimates: estimate.hiddenEstimates.map((subEstimate) => transformArbovirusSubEstimateDocumentForApi(subEstimate)),
+    }));
+  }
   
   return {
     arboResolvers: {
       Query: {
         arbovirusEstimates,
+        groupedArbovirusEstimates,
         arbovirusEnviromentalSuitabilityData,
         arbovirusFilterOptions,
         arbovirusDataStatistics
-      }
+      } as any
     }
   }
 }

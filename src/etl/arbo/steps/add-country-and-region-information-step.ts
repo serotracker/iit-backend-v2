@@ -4,6 +4,7 @@ import {
   AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
+  GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step.js";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
@@ -24,12 +25,15 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegi
     countryName: string;
     countryAlphaTwoCode: TwoLetterIsoCountryCode;
   };
+export type GroupedEstimatesAfterAddingCountryAndRegionInformationStep =
+  GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allSources: AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allCountries: AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  groupedEstimates: GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   mongoClient: MongoClient;
 }
 
@@ -38,6 +42,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allCountries: AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep[];
+  groupedEstimates: GroupedEstimatesAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -96,6 +101,7 @@ export const addCountryAndRegionInformationStep = (
         }
       })
       .filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

@@ -3,7 +3,8 @@ import {
   AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep,
   AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep,
   AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep,
+  GroupedEstimatesAfterValidatingFieldSetFromAirtableStep
 } from "./validate-field-set-from-airtable-step";
 import { readFileSync } from "fs";
 
@@ -37,12 +38,15 @@ export interface EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnviron
   MEDIAN_dengue2050: number;
   PCT90_dengue2050: number;
 }
+export type GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep =
+  GroupedEstimatesAfterValidatingFieldSetFromAirtableStep;
 
 interface FetchEnvironmentalSuitabilityStatsByCountryStepInput {
   allEstimates: AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
   allSources: AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep[];
+  groupedEstimates: GroupedEstimatesAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -51,6 +55,7 @@ interface FetchEnvironmentalSuitabilityStatsByCountryStepOutput {
   allSources: AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  groupedEstimates: GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   mongoClient: MongoClient;
 }
 
@@ -71,6 +76,7 @@ export const fetchEnvironmentalSuitabilityStatsByCountryStep = (
       allSources: input.allSources,
       allCountries: input.allCountries,
       environmentalSuitabilityStatsByCountry: [],
+      groupedEstimates: input.groupedEstimates,
       mongoClient: input.mongoClient
     };
   }
@@ -113,6 +119,7 @@ export const fetchEnvironmentalSuitabilityStatsByCountryStep = (
         PCT90_dengue2050: parseFloat(uncleanedDataObject['PCT90_dengue2050']),
       }
     }),
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 }

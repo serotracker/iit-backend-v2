@@ -3,7 +3,8 @@ import {
   AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep,
   AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep,
   AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep,
+  GroupedEstimatesAfterTransformingIntoFormatForDatabaseStep
 } from "./transform-into-format-for-database-step";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 
@@ -15,12 +16,15 @@ export type AirtableCountryFieldsAfterWritingEstimatesToMongoDbStep =
   AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterWritingEstimatesToMongoDbStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep;
+export type GroupedEstimatesAfterWritingEstimatesToMongoDbStep =
+  GroupedEstimatesAfterTransformingIntoFormatForDatabaseStep;
 
 interface WriteEstimatesToMongoDbStepInput {
   allEstimates: AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep[];
   allSources: AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep[];
   allCountries: AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep[];
+  groupedEstimates: GroupedEstimatesAfterTransformingIntoFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -29,6 +33,7 @@ interface WriteEstimatesToMongoDbStepOutput {
   allSources: AirtableSourceFieldsAfterWritingEstimatesToMongoDbStep[];
   allCountries: AirtableCountryFieldsAfterWritingEstimatesToMongoDbStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterWritingEstimatesToMongoDbStep[];
+  groupedEstimates: GroupedEstimatesAfterWritingEstimatesToMongoDbStep[];
   mongoClient: MongoClient;
 }
 
@@ -51,6 +56,7 @@ export const writeEstimatesToMongoDbStep = async(
     allSources: input.allSources,
     allCountries: input.allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   }
 }

@@ -19,7 +19,7 @@ export type AirtableEstimateFields = {
   "Pediatric age group": string | undefined;
   Producer: string | undefined;
   "Producer - Other": string | undefined;
-  "Assay Type": string | undefined;
+  "Assay Type": Array<string | undefined> | undefined | null;
   "Assay - Other": string | undefined;
   "Sample Start Date": `${number}-${number}-${number}` | undefined;
   "Sample End Date": `${number}-${number}-${number}` | undefined;
@@ -44,6 +44,7 @@ export type AirtableEstimateFields = {
   "WHO Region": string[] | undefined;
   "Study Population (OROV only)": string | undefined;
   "Study Species (OROV only)": string | undefined;
+  'Grouping Variable': string | undefined;
 } & Record<string, never>;
 
 export type AirtableSourceFields = {

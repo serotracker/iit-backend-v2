@@ -270,6 +270,53 @@ export enum ArbovirusStudyPopulation {
   NonHumanAnimal = 'NON_HUMAN_ANIMAL'
 }
 
+export type ArbovirusSubEstimate = {
+  __typename?: 'ArbovirusSubEstimate';
+  ageGroup: Array<Scalars['String']['output']>;
+  ageMaximum?: Maybe<Scalars['Int']['output']>;
+  ageMinimum?: Maybe<Scalars['Int']['output']>;
+  antibodies: Array<Scalars['String']['output']>;
+  antigen?: Maybe<Scalars['String']['output']>;
+  assay: Array<Scalars['String']['output']>;
+  assayOther?: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
+  estimateId?: Maybe<Scalars['String']['output']>;
+  estimateType: ArbovirusEstimateType;
+  id: Scalars['String']['output'];
+  inclusionCriteria?: Maybe<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  pathogen: Arbovirus;
+  pediatricAgeGroup?: Maybe<Scalars['String']['output']>;
+  producer?: Maybe<Scalars['String']['output']>;
+  producerOther?: Maybe<Scalars['String']['output']>;
+  sameFrameTargetGroup?: Maybe<Scalars['String']['output']>;
+  sampleEndDate?: Maybe<Scalars['String']['output']>;
+  sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  sampleSize: Scalars['Int']['output'];
+  sampleStartDate?: Maybe<Scalars['String']['output']>;
+  seroprevalence: Scalars['Float']['output'];
+  seroprevalenceCalculated95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CIUpper?: Maybe<Scalars['Float']['output']>;
+  serotype: Array<Scalars['String']['output']>;
+  sex: Array<Scalars['String']['output']>;
+  sourceSheetId?: Maybe<Scalars['String']['output']>;
+  sourceSheetName?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyPopulation: ArbovirusStudyPopulation;
+  studySpecies: Scalars['String']['output'];
+  unRegion?: Maybe<UnRegion>;
+  url?: Maybe<Scalars['String']['output']>;
+  whoRegion?: Maybe<Scalars['String']['output']>;
+};
+
 export enum Clade {
   A = 'A',
   B = 'B',
@@ -331,6 +378,13 @@ export enum GenomeSequenced {
   PartialNGene = 'PARTIAL_N_GENE',
   PartialSGene = 'PARTIAL_S_GENE'
 }
+
+export type GroupedArbovirusEstimate = {
+  __typename?: 'GroupedArbovirusEstimate';
+  hiddenEstimates: Array<ArbovirusSubEstimate>;
+  id: Scalars['String']['output'];
+  shownEstimates: Array<ArbovirusSubEstimate>;
+};
 
 export type HumanMersAgeGroupSubEstimate = MersSubEstimateInterface & {
   __typename?: 'HumanMersAgeGroupSubEstimate';
@@ -1260,6 +1314,7 @@ export type Query = {
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
   faoMersEventFilterOptions: FaoMersEventFilterOptions;
+  groupedArbovirusEstimates: Array<GroupedArbovirusEstimate>;
   groupedTeamMembers: Array<TeamMemberGroup>;
   mersEstimates: Array<MersEstimate>;
   mersEstimatesFilterOptions: MersEstimateFilterOptions;
@@ -1528,6 +1583,7 @@ export type ResolversTypes = {
   ArbovirusEstimateType: ArbovirusEstimateType;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   ArbovirusStudyPopulation: ArbovirusStudyPopulation;
+  ArbovirusSubEstimate: ResolverTypeWrapper<ArbovirusSubEstimate>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Clade: Clade;
   CountryIdentifiers: ResolverTypeWrapper<CountryIdentifiers>;
@@ -1536,6 +1592,7 @@ export type ResolversTypes = {
   GBDSubRegion: GbdSubRegion;
   GBDSuperRegion: GbdSuperRegion;
   GenomeSequenced: GenomeSequenced;
+  GroupedArbovirusEstimate: ResolverTypeWrapper<GroupedArbovirusEstimate>;
   HumanMersAgeGroupSubEstimate: ResolverTypeWrapper<Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversTypes['MersSubEstimateInformation'] }>;
   HumanMersEstimate: ResolverTypeWrapper<HumanMersEstimate>;
   HumanMersEvent: ResolverTypeWrapper<HumanMersEvent>;
@@ -1620,10 +1677,12 @@ export type ResolversParentTypes = {
   ArbovirusEnvironmentalSuitabilityDataSubEntry: ArbovirusEnvironmentalSuitabilityDataSubEntry;
   ArbovirusEstimate: ArbovirusEstimate;
   ArbovirusFilterOptions: ArbovirusFilterOptions;
+  ArbovirusSubEstimate: ArbovirusSubEstimate;
   Boolean: Scalars['Boolean']['output'];
   CountryIdentifiers: CountryIdentifiers;
   FaoMersEventFilterOptions: FaoMersEventFilterOptions;
   Float: Scalars['Float']['output'];
+  GroupedArbovirusEstimate: GroupedArbovirusEstimate;
   HumanMersAgeGroupSubEstimate: Omit<HumanMersAgeGroupSubEstimate, 'estimateInfo'> & { estimateInfo: ResolversParentTypes['MersSubEstimateInformation'] };
   HumanMersEstimate: HumanMersEstimate;
   HumanMersEvent: HumanMersEvent;
@@ -1915,6 +1974,53 @@ export type ArbovirusFilterOptionsResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ArbovirusSubEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['ArbovirusSubEstimate'] = ResolversParentTypes['ArbovirusSubEstimate']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  ageMaximum?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  ageMinimum?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  antibodies?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  antigen?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  assayOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  pathogen?: Resolver<ResolversTypes['Arbovirus'], ParentType, ContextType>;
+  pediatricAgeGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  producer?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  producerOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sameFrameTargetGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  sampleStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyPopulation?: Resolver<ResolversTypes['ArbovirusStudyPopulation'], ParentType, ContextType>;
+  studySpecies?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CountryIdentifiersResolvers<ContextType = any, ParentType extends ResolversParentTypes['CountryIdentifiers'] = ResolversParentTypes['CountryIdentifiers']> = {
   alphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   alphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1926,6 +2032,13 @@ export type FaoMersEventFilterOptionsResolvers<ContextType = any, ParentType ext
   animalSpecies?: Resolver<Array<ResolversTypes['MersAnimalSpecies']>, ParentType, ContextType>;
   animalType?: Resolver<Array<ResolversTypes['MersEventAnimalType']>, ParentType, ContextType>;
   diagnosisSource?: Resolver<Array<ResolversTypes['MersDiagnosisSource']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type GroupedArbovirusEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['GroupedArbovirusEstimate'] = ResolversParentTypes['GroupedArbovirusEstimate']> = {
+  hiddenEstimates?: Resolver<Array<ResolversTypes['ArbovirusSubEstimate']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  shownEstimates?: Resolver<Array<ResolversTypes['ArbovirusSubEstimate']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -2761,6 +2874,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
   faoMersEventFilterOptions?: Resolver<ResolversTypes['FaoMersEventFilterOptions'], ParentType, ContextType>;
+  groupedArbovirusEstimates?: Resolver<Array<ResolversTypes['GroupedArbovirusEstimate']>, ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
   mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;
   mersEstimatesFilterOptions?: Resolver<ResolversTypes['MersEstimateFilterOptions'], ParentType, ContextType>;
@@ -2877,8 +2991,10 @@ export type Resolvers<ContextType = any> = {
   ArbovirusEnvironmentalSuitabilityDataSubEntry?: ArbovirusEnvironmentalSuitabilityDataSubEntryResolvers<ContextType>;
   ArbovirusEstimate?: ArbovirusEstimateResolvers<ContextType>;
   ArbovirusFilterOptions?: ArbovirusFilterOptionsResolvers<ContextType>;
+  ArbovirusSubEstimate?: ArbovirusSubEstimateResolvers<ContextType>;
   CountryIdentifiers?: CountryIdentifiersResolvers<ContextType>;
   FaoMersEventFilterOptions?: FaoMersEventFilterOptionsResolvers<ContextType>;
+  GroupedArbovirusEstimate?: GroupedArbovirusEstimateResolvers<ContextType>;
   HumanMersAgeGroupSubEstimate?: HumanMersAgeGroupSubEstimateResolvers<ContextType>;
   HumanMersEstimate?: HumanMersEstimateResolvers<ContextType>;
   HumanMersEvent?: HumanMersEventResolvers<ContextType>;
