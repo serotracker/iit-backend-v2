@@ -6,10 +6,12 @@ import {
   ArbovirusEstimateDocument,
   ArbovirusEstimateType,
   ArbovirusGroupedEstimateDocument,
+  ArbovirusGroupingVariable,
   ArbovirusStudyPopulation
 } from '../../storage/types.js';
 import {
   Arbovirus as ArbovirusForApi,
+  ArbovirusGroupingVariable as ArbovirusGroupingVariableForApi,
   ArbovirusEstimateType as ArbovirusEstimateTypeForApi,
   ArbovirusStudyPopulation as ArbovirusStudyPopulationForApi
 } from "../graphql-types/__generated__/graphql-types.js";
@@ -24,6 +26,19 @@ const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.WNV]: ArbovirusForApi.Wnv,
   [Arbovirus.MAYV]: ArbovirusForApi.Mayv,
   [Arbovirus.OROV]: ArbovirusForApi.Orov
+}
+
+const groupingVariableMap: {[key in ArbovirusGroupingVariable]: ArbovirusGroupingVariableForApi} = {
+  [ArbovirusGroupingVariable.TIMEFRAME]: ArbovirusGroupingVariableForApi.Timeframe,
+  [ArbovirusGroupingVariable.AGE]: ArbovirusGroupingVariableForApi.Age,
+  [ArbovirusGroupingVariable.GENDER]: ArbovirusGroupingVariableForApi.Gender,
+  [ArbovirusGroupingVariable.GEOGRAPHY]: ArbovirusGroupingVariableForApi.Geography,
+  [ArbovirusGroupingVariable.TEST_TYPE]: ArbovirusGroupingVariableForApi.TestType,
+  [ArbovirusGroupingVariable.OVERALL]: ArbovirusGroupingVariableForApi.Overall,
+  [ArbovirusGroupingVariable.DENV_SEROTYPE]: ArbovirusGroupingVariableForApi.DenvSerotype,
+  [ArbovirusGroupingVariable.SPECIES]: ArbovirusGroupingVariableForApi.Species,
+  [ArbovirusGroupingVariable.RACE]: ArbovirusGroupingVariableForApi.Race,
+  [ArbovirusGroupingVariable.EDUCATION]: ArbovirusGroupingVariableForApi.Education,
 }
 
 const arbovirusEstimateTypeMap: {[key in ArbovirusEstimateType]: ArbovirusEstimateTypeForApi } = {
@@ -294,7 +309,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     studySpecies: subEstimate.studySpecies,
     unRegion: subEstimate.unRegion ? mapUnRegionForApi(subEstimate.unRegion) : undefined,
     url: subEstimate.url,
-    groupingVariable: subEstimate.groupingVariable,
+    groupingVariable: subEstimate.groupingVariable ? groupingVariableMap[subEstimate.groupingVariable] : undefined,
     whoRegion: subEstimate.whoRegion
   });
 
