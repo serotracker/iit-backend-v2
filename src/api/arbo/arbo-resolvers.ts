@@ -319,7 +319,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
         arbovirusEnviromentalSuitabilityData,
         arbovirusFilterOptions,
         arbovirusDataStatistics
-      } as any
+      }
     }
   }
 }
