@@ -1,6 +1,5 @@
 import { pipe } from "fp-ts/lib/function.js";
 import { asyncEtlStep, etlStep, getEnvironmentVariableOrThrow, getMongoClient } from "../helpers.js";
-import { ObjectId } from "mongodb";
 import Airtable, { FieldSet } from "airtable";
 import { validateFieldSetFromAirtableStep } from "./steps/validate-field-set-from-airtable-step.js";
 import { transformIntoFormatForDatabaseStep } from "./steps/transform-into-format-for-database-step.js";

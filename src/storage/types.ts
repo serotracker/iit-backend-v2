@@ -48,6 +48,23 @@ export enum ArbovirusStudyPopulation {
   NON_HUMAN_ANIMAL = 'NON_HUMAN_ANIMAL'
 }
 
+export const isArbovirusGroupingVariable = (groupingVariable: string): groupingVariable is ArbovirusGroupingVariable => (
+  Object.values(ArbovirusGroupingVariable).some((element) => element === groupingVariable)
+);
+
+export enum ArbovirusGroupingVariable {
+  TIMEFRAME = 'TIMEFRAME',
+  AGE = 'AGE',
+  GENDER = 'GENDER',
+  GEOGRAPHY = 'GEOGRAPHY',
+  TEST_TYPE = 'TEST_TYPE',
+  OVERALL = 'OVERALL',
+  DENV_SEROTYPE = 'DENV_SEROTYPE',
+  SPECIES = 'SPECIES',
+  RACE = 'RACE',
+  EDUCATION = 'EDUCATION',
+}
+
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
   estimateType: ArbovirusEstimateType;
@@ -81,7 +98,7 @@ export interface ArbovirusEstimateDocument {
   longitude: number;
   sampleStartDate: Date | undefined;
   sampleEndDate: Date | undefined;
-  assay: string | undefined;
+  assay: string[] | string | undefined;
   unRegion: UNRegion | undefined;
   url: string | undefined;
   sourceSheetId: string | undefined;
@@ -91,6 +108,7 @@ export interface ArbovirusEstimateDocument {
   estimateId: string | undefined;
   studyPopulation: ArbovirusStudyPopulation;
   studySpecies: string;
+  groupingVariable: ArbovirusGroupingVariable | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -124,6 +142,24 @@ export interface ArbovirusEnvironmentalSuitabilityStatsEntryDocument {
     medianValue: number;
     ninetyPercentOfValuesAreBelowThisValue: number;
   },
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ArbovirusGroupedEstimateDocument {
+  _id: ObjectId;
+  shownEstimates: Array<Omit<ArbovirusEstimateDocument, 'sex'|'ageGroup'|'_id'|'assay'> & {
+    id: ArbovirusEstimateDocument['_id'];
+    sex: Array<NonNullable<ArbovirusEstimateDocument['sex']>>;
+    ageGroup: Array<NonNullable<ArbovirusEstimateDocument['ageGroup']>>;
+    assay: string[];
+  }>;
+  hiddenEstimates: Array<Omit<ArbovirusEstimateDocument, 'sex'|'ageGroup'|'_id'|'assay'> & {
+    id: ArbovirusEstimateDocument['_id'];
+    sex: Array<NonNullable<ArbovirusEstimateDocument['sex']>>;
+    ageGroup: Array<NonNullable<ArbovirusEstimateDocument['ageGroup']>>;
+    assay: string[];
+  }>;
   createdAt: Date;
   updatedAt: Date;
 }

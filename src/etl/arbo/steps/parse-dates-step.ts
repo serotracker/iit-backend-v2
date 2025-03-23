@@ -4,7 +4,8 @@ import {
   AirtableCountryFieldsAfterAssigningEstimateTypesStep,
   AirtableEstimateFieldsAfterAssigningEstimateTypesStep,
   AirtableSourceFieldsAfterAssigningEstimateTypesStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep,
+  GroupedEstimatesAfterAssigningEstimateTypesStep
 } from "./assign-estimate-types-step.js";
 
 export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
@@ -20,12 +21,15 @@ export type AirtableCountryFieldsAfterParsingDatesStep =
   AirtableCountryFieldsAfterAssigningEstimateTypesStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterParsingDatesStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep;
+export type GroupedEstimatesAfterParsingDatesStep =
+  GroupedEstimatesAfterAssigningEstimateTypesStep;
 
 interface ParseDatesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAssigningEstimateTypesStep[];
   allSources: AirtableSourceFieldsAfterAssigningEstimateTypesStep[];
   allCountries: AirtableCountryFieldsAfterAssigningEstimateTypesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep[];
+  groupedEstimates: GroupedEstimatesAfterAssigningEstimateTypesStep[];
   mongoClient: MongoClient;
 }
 
@@ -34,6 +38,7 @@ interface ParseDatesStepOutput {
   allSources: AirtableSourceFieldsAfterParsingDatesStep[];
   allCountries: AirtableCountryFieldsAfterParsingDatesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterParsingDatesStep[];
+  groupedEstimates: GroupedEstimatesAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -55,6 +60,7 @@ export const parseDatesStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

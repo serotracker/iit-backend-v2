@@ -4,8 +4,10 @@ import {
   AirtableCountryFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
   AirtableEstimateFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
   AirtableSourceFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
+  GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep
 } from "./fetch-environmental-suitability-stats-by-country-step.js";
+import { ArbovirusGroupingVariable } from "../../../storage/types.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
   estimateType: string | undefined;
@@ -19,7 +21,7 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   pediatricAgeGroup: string | undefined;
   antibodies: string[] | undefined;
   antigen: string | undefined;
-  assay: string | undefined;
+  assay: string[];
   assayOther: string | undefined;
   sampleSize: number | undefined;
   serotype: string[] | undefined;
@@ -44,6 +46,7 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   countryId: string[] | undefined;
   studyPopulation: string | undefined;
   studySpecies: string | undefined;
+  groupingVariable: ArbovirusGroupingVariable | undefined;
 }
 
 export interface AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
@@ -74,11 +77,15 @@ export interface EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNa
   dengue2050Data: EnviromnentalSuitabilityDataCollection;
 }
 
+export type GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep =
+  GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep;
+
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: AirtableEstimateFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   allSources: AirtableSourceFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   allCountries: AirtableCountryFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  groupedEstimates: GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   mongoClient: MongoClient;
 }
 
@@ -87,7 +94,21 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allSources: AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  groupedEstimates: GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
+}
+
+const airtableGroupingVariableToGroupingVariableEnumMap: Record<string, ArbovirusGroupingVariable | undefined> = {
+  ['Timeframe']: ArbovirusGroupingVariable.TIMEFRAME,
+  ['Age']: ArbovirusGroupingVariable.AGE,
+  ['Gender']: ArbovirusGroupingVariable.GENDER,
+  ['Geography']: ArbovirusGroupingVariable.GEOGRAPHY,
+  ['Test type']: ArbovirusGroupingVariable.TEST_TYPE,
+  ['Overall']: ArbovirusGroupingVariable.OVERALL,
+  ['DENV Serotype']: ArbovirusGroupingVariable.DENV_SEROTYPE,
+  ['Species']: ArbovirusGroupingVariable.SPECIES,
+  ['Race']: ArbovirusGroupingVariable.RACE,
+  ['Education']: ArbovirusGroupingVariable.EDUCATION,
 }
 
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
@@ -111,7 +132,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       pediatricAgeGroup: estimate["Pediatric age group"],
       antibodies: estimate["Assay Target"],
       antigen: estimate["Antigen"],
-      assay: estimate["Assay Type"],
+      assay: estimate["Assay Type"] ? estimate["Assay Type"].filter((assay): assay is NonNullable<typeof assay> => !!assay) : [],
       assayOther: estimate["Assay - Other"],
       sampleSize: estimate["Sample Size (Denominator)"],
       sampleNumerator: estimate["Sample Numerator"],
@@ -134,7 +155,10 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       includeInEtl: estimate["ETL Included"],
       countryId: estimate["Country"],
       studyPopulation: estimate["Study Population (OROV only)"],
-      studySpecies: estimate["Study Species (OROV only)"]
+      studySpecies: estimate["Study Species (OROV only)"],
+      groupingVariable: !!estimate["Grouping Variable"]
+        ? airtableGroupingVariableToGroupingVariableEnumMap[estimate["Grouping Variable"]]
+        : undefined,
     })),
     allSources: allSources.map((source) => ({
       id: source["id"],
@@ -173,6 +197,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
         ninetyPercentOfValuesAreBelowThisValue: dataPoint['PCT90_dengue2050']
       }
     })),
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

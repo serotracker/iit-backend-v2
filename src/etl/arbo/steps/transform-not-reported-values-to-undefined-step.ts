@@ -5,6 +5,7 @@ import {
   AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep,
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep,
+  GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep,
 } from "./clean-single-element-array-fields-step.js";
 
 export type AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep =
@@ -15,12 +16,15 @@ export type AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedSt
   AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep;
+export type GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep =
+  GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep;
 
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allSources: AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep[];
   allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep[];
+  groupedEstimates: GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -29,6 +33,7 @@ interface TransformNotReportedValuesToUndefinedStepOutput {
   allSources: AirtableSourceFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep[];
+  groupedEstimates: GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
@@ -74,6 +79,7 @@ export const transformNotReportedValuesToUndefinedStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

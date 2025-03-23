@@ -7,12 +7,14 @@ export type AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep = Airt
 export type AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep = AirtableSourceFields;
 export type AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep = AirtableCountryFields;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep = never;
+export type GroupedEstimatesAfterValidatingFieldSetFromAirtableStep = never;
 
 interface ValidateFieldSetFromAirtableStepInput {
   allEstimates: AirtableEstimateFields[];
   allSources: AirtableSourceFields[];
   allCountries: Array<FieldSet & {id: string}>;
   environmentalSuitabilityStatsByCountry: never[];
+  groupedEstimates: never[];
   mongoClient: MongoClient;
 }
 
@@ -21,6 +23,7 @@ interface ValidateFieldSetFromAirtableStepOutput {
   allSources: AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep[];
   allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep[];
+  groupedEstimates: GroupedEstimatesAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -43,6 +46,7 @@ export const validateFieldSetFromAirtableStep = (
     allSources: input.allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

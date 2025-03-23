@@ -66,6 +66,19 @@ export const arboTypedefs = `
     NON_HUMAN_ANIMAL
   }
 
+  enum ArbovirusGroupingVariable {
+    TIMEFRAME
+    AGE
+    GENDER
+    GEOGRAPHY
+    TEST_TYPE
+    OVERALL
+    DENV_SEROTYPE
+    SPECIES
+    RACE
+    EDUCATION
+  }
+
   type ArbovirusFilterOptions {
     ageGroup: [String!]!
     antibody: [String!]!
@@ -110,8 +123,62 @@ export const arboTypedefs = `
     dengue2050Data: ArbovirusEnvironmentalSuitabilityDataSubEntry!
   }
 
+  type ArbovirusSubEstimate {
+    estimateType: ArbovirusEstimateType!
+    groupingVariable: ArbovirusGroupingVariable
+    ageGroup: [String!]!
+    ageMaximum: Int
+    ageMinimum: Int
+    antibodies: [String!]!
+    antigen: String
+    assay: [String!]!
+    assayOther: String
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    createdAt: String!
+    estimateId: String
+    id: String!
+    inclusionCriteria: String
+    latitude: Float!
+    longitude: Float!
+    pathogen: Arbovirus!
+    pediatricAgeGroup: String
+    producer: String
+    producerOther: String
+    sameFrameTargetGroup: String
+    sampleEndDate: String
+    sampleFrame: String
+    sampleNumerator: Int
+    sampleSize: Int!
+    sampleStartDate: String
+    seroprevalence: Float!
+    studyPopulation: ArbovirusStudyPopulation!
+    studySpecies: String!
+    seroprevalenceStudy95CILower: Float
+    seroprevalenceStudy95CIUpper: Float
+    seroprevalenceCalculated95CILower: Float
+    seroprevalenceCalculated95CIUpper: Float
+    serotype: [String!]!
+    sex: [String!]!
+    sourceSheetId: String
+    sourceSheetName: String
+    unRegion: UNRegion
+    url: String
+    whoRegion: String
+  }
+
+  type GroupedArbovirusEstimate {
+    id: String!
+    shownEstimates: [ArbovirusSubEstimate!]!
+    hiddenEstimates: [ArbovirusSubEstimate!]!
+  }
+
   type Query {
     arbovirusEstimates: [ArbovirusEstimate!]!
+    groupedArbovirusEstimates: [GroupedArbovirusEstimate!]!
     arbovirusEnviromentalSuitabilityData: [ArbovirusEnvironmentalSuitabilityDataEntry!]!
     arbovirusFilterOptions: ArbovirusFilterOptions!
     arbovirusDataStatistics: ArbovirusDataStatistics!

@@ -3,7 +3,8 @@ import {
   AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep,
   AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep,
   AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep,
+  GroupedEstimatesAfterAddingCountryAndRegionInformationStep
 } from "./add-country-and-region-information-step.js";
 
 export type AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep =
@@ -16,12 +17,15 @@ export type AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep =
   AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep;
+export type GroupedEstimatesAfterMergingEstimatesAndSourcesStep =
+  GroupedEstimatesAfterAddingCountryAndRegionInformationStep;
 
 interface MergeEstimatesAndSourcesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
   allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
   allCountries: AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep[];
+  groupedEstimates: GroupedEstimatesAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -30,6 +34,7 @@ interface MergeEstimatesAndSourcesStepOutput {
   allSources: AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep[];
   allCountries: AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep[];
+  groupedEstimates: GroupedEstimatesAfterMergingEstimatesAndSourcesStep[];
   mongoClient: MongoClient;
 }
 
@@ -54,6 +59,7 @@ export const mergeEstimatesAndSourcesStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

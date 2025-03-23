@@ -3,7 +3,8 @@ import {
   AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep,
   AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
   AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep
+  EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep,
+  GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep
 } from "./assert-mandatory-fields-are-present-step.js";
 import { ArbovirusEstimateType } from "../../../storage/types.js";
 
@@ -19,12 +20,15 @@ export type AirtableCountryFieldsAfterAssigningEstimateTypesStep =
   AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep;
+export type GroupedEstimatesAfterAssigningEstimateTypesStep =
+  GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep;
 
 interface AssignEstimateTypesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allSources: AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep[];
+  groupedEstimates: GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep[];
   mongoClient: MongoClient;
 }
 
@@ -33,6 +37,7 @@ interface AssignEstimateTypesStepOutput {
   allSources: AirtableSourceFieldsAfterAssigningEstimateTypesStep[];
   allCountries: AirtableCountryFieldsAfterAssigningEstimateTypesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep[];
+  groupedEstimates: GroupedEstimatesAfterAssigningEstimateTypesStep[];
   mongoClient: MongoClient;
 }
 
@@ -67,6 +72,7 @@ export const assignEstimateTypesStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };

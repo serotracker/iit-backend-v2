@@ -4,6 +4,7 @@ import {
   AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep,
   AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingEstimatesWithLowSampleSizeStep,
+  GroupedEstimatesAfterRemovingEstimatesWithLowSampleSizeStep,
 } from "./remove-estimates-with-low-sample-size-step.js";
 
 export type AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep =
@@ -16,12 +17,15 @@ export type AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep
   AirtableCountryFieldsAfterRemovingEstimatesWithLowSampleSizeStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingEstimatesWithLowSampleSizeStep;
+export type GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep =
+  GroupedEstimatesAfterRemovingEstimatesWithLowSampleSizeStep;
 
 interface RemoveRecordsThatAreFlaggedToNotSaveStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   allSources: AirtableSourceFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   allCountries: AirtableCountryFieldsAfterRemovingEstimatesWithLowSampleSizeStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingEstimatesWithLowSampleSizeStep[];
+  groupedEstimates: GroupedEstimatesAfterRemovingEstimatesWithLowSampleSizeStep[];
   mongoClient: MongoClient;
 }
 
@@ -30,6 +34,7 @@ interface RemoveRecordsThatAreFlaggedToNotSaveStepOutput {
   allSources: AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   allCountries: AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  groupedEstimates: GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   mongoClient: MongoClient;
 }
 
@@ -47,6 +52,7 @@ export const removeRecordsThatAreFlaggedToNotSaveStep = (
     allSources: allSources,
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
+    groupedEstimates: input.groupedEstimates,
     mongoClient: input.mongoClient
   };
 };
