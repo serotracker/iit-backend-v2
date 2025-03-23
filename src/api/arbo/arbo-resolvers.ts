@@ -294,6 +294,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     studySpecies: subEstimate.studySpecies,
     unRegion: subEstimate.unRegion ? mapUnRegionForApi(subEstimate.unRegion) : undefined,
     url: subEstimate.url,
+    groupingVariable: subEstimate.groupingVariable,
     whoRegion: subEstimate.whoRegion
   });
 

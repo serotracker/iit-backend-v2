@@ -264,6 +264,19 @@ export type ArbovirusFilterOptions = {
   whoRegion: Array<Scalars['String']['output']>;
 };
 
+export enum ArbovirusGroupingVariable {
+  Age = 'AGE',
+  DenvSerotype = 'DENV_SEROTYPE',
+  Education = 'EDUCATION',
+  Gender = 'GENDER',
+  Geography = 'GEOGRAPHY',
+  Overall = 'OVERALL',
+  Race = 'RACE',
+  Species = 'SPECIES',
+  TestType = 'TEST_TYPE',
+  Timeframe = 'TIMEFRAME'
+}
+
 export enum ArbovirusStudyPopulation {
   Human = 'HUMAN',
   Insect = 'INSECT',
@@ -286,6 +299,7 @@ export type ArbovirusSubEstimate = {
   createdAt: Scalars['String']['output'];
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
+  groupingVariable?: Maybe<ArbovirusGroupingVariable>;
   id: Scalars['String']['output'];
   inclusionCriteria?: Maybe<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
@@ -1582,6 +1596,7 @@ export type ResolversTypes = {
   ArbovirusEstimate: ResolverTypeWrapper<ArbovirusEstimate>;
   ArbovirusEstimateType: ArbovirusEstimateType;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
+  ArbovirusGroupingVariable: ArbovirusGroupingVariable;
   ArbovirusStudyPopulation: ArbovirusStudyPopulation;
   ArbovirusSubEstimate: ResolverTypeWrapper<ArbovirusSubEstimate>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -1989,6 +2004,7 @@ export type ArbovirusSubEstimateResolvers<ContextType = any, ParentType extends 
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
+  groupingVariable?: Resolver<Maybe<ResolversTypes['ArbovirusGroupingVariable']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;

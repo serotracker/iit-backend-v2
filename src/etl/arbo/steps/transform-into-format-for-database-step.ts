@@ -123,6 +123,7 @@ const transformArbovirusEstimateForDatabase = (
     sampleStartDate: estimate.sampleStartDate,
     sampleEndDate: estimate.sampleEndDate,
     assay: estimate.assay,
+    groupingVariable: estimate.groupingVariable,
     unRegion: estimate.unRegion,
     url: estimate.url,
     sourceSheetId: estimate.sourceSheetId,

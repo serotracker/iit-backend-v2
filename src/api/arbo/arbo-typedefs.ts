@@ -66,6 +66,19 @@ export const arboTypedefs = `
     NON_HUMAN_ANIMAL
   }
 
+  enum ArbovirusGroupingVariable {
+    TIMEFRAME
+    AGE
+    GENDER
+    GEOGRAPHY
+    TEST_TYPE
+    OVERALL
+    DENV_SEROTYPE
+    SPECIES
+    RACE
+    EDUCATION
+  }
+
   type ArbovirusFilterOptions {
     ageGroup: [String!]!
     antibody: [String!]!
@@ -112,6 +125,7 @@ export const arboTypedefs = `
 
   type ArbovirusSubEstimate {
     estimateType: ArbovirusEstimateType!
+    groupingVariable: ArbovirusGroupingVariable
     ageGroup: [String!]!
     ageMaximum: Int
     ageMinimum: Int

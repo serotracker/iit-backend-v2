@@ -108,6 +108,7 @@ export interface ArbovirusEstimateDocument {
   estimateId: string | undefined;
   studyPopulation: ArbovirusStudyPopulation;
   studySpecies: string;
+  groupingVariable: ArbovirusGroupingVariable | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
