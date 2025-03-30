@@ -326,12 +326,46 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
       hiddenEstimates: estimate.hiddenEstimates.map((subEstimate) => transformArbovirusSubEstimateDocumentForApi(subEstimate)),
     }));
   }
+
+  const partitionedGroupedArbovirusEstimates: QueryResolvers['partitionedGroupedArbovirusEstimates'] = async (_, variables) => {
+    const databaseEstimates = await mongoClient
+      .db(databaseName)
+      .collection<ArbovirusGroupedEstimateDocument>('groupedArbovirusEstimates')
+      .find({ partitionKey: variables.input.partitionKey })
+      .toArray();
+
+    const arboEstimates = databaseEstimates.map((estimate) => ({
+      id: estimate._id.toHexString(),
+      shownEstimates: estimate.shownEstimates.map((subEstimate) => transformArbovirusSubEstimateDocumentForApi(subEstimate)),
+      hiddenEstimates: estimate.hiddenEstimates.map((subEstimate) => transformArbovirusSubEstimateDocumentForApi(subEstimate)),
+    }));
+
+    return {
+      partitionKey: variables.input.partitionKey,
+      arboEstimates,
+    }
+  }
+
+  const allGroupedArbovirusEstimatePartitionKeys = async () => {
+    const [
+      partitionKeys
+    ] = await Promise.all([
+      mongoClient
+        .db(databaseName)
+        .collection<ArbovirusGroupedEstimateDocument>('groupedArbovirusEstimates')
+        .distinct('partitionKey')
+    ])
+
+    return partitionKeys;
+  }
   
   return {
     arboResolvers: {
       Query: {
         arbovirusEstimates,
         groupedArbovirusEstimates,
+        partitionedGroupedArbovirusEstimates,
+        allGroupedArbovirusEstimatePartitionKeys,
         arbovirusEnviromentalSuitabilityData,
         arbovirusFilterOptions,
         arbovirusDataStatistics

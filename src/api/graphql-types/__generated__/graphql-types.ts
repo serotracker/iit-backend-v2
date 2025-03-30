@@ -955,6 +955,16 @@ export type PartitionedFeoMersEventsOutput = {
   partitionKey: Scalars['Int']['output'];
 };
 
+export type PartitionedGroupedArbovirusEstimatesInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type PartitionedGroupedArbovirusEstimatesOutput = {
+  __typename?: 'PartitionedGroupedArbovirusEstimatesOutput';
+  arboEstimates: Array<GroupedArbovirusEstimate>;
+  partitionKey: Scalars['Int']['output'];
+};
+
 export type PartitionedMonthlySarsCov2CountryInformationInput = {
   partitionKey: Scalars['Int']['input'];
 };
@@ -1321,6 +1331,7 @@ export type PrimaryMersEstimateInformationInterface = {
 export type Query = {
   __typename?: 'Query';
   allFaoMersEventPartitionKeys: Array<Scalars['Int']['output']>;
+  allGroupedArbovirusEstimatePartitionKeys: Array<Scalars['Int']['output']>;
   allMonthlySarsCov2CountryInformationPartitionKeys: Array<Scalars['Int']['output']>;
   allSarsCov2EstimatePartitionKeys: Array<Scalars['Int']['output']>;
   arbovirusDataStatistics: ArbovirusDataStatistics;
@@ -1340,6 +1351,7 @@ export type Query = {
   mersWhoCaseDataPartitionKeys: Array<Scalars['Int']['output']>;
   monthlySarsCov2CountryInformation: Array<MonthlySarsCov2CountryInformationEntry>;
   partitionedFaoMersEvents: PartitionedFeoMersEventsOutput;
+  partitionedGroupedArbovirusEstimates: PartitionedGroupedArbovirusEstimatesOutput;
   partitionedMonthlySarsCov2CountryInformation: PartitionedMonthlySarsCov2CountryInformationOutput;
   partitionedSarsCov2Estimates: PartitionedSarsCov2EstimatesOutput;
   partitionedYearlyFaoCamelPopulationData: PartitionedYearlyFaoCamelPopulationDataOutput;
@@ -1356,6 +1368,11 @@ export type QueryMersWhoCaseDataArgs = {
 
 export type QueryPartitionedFaoMersEventsArgs = {
   input: PartitionedFaoMersEventsInput;
+};
+
+
+export type QueryPartitionedGroupedArbovirusEstimatesArgs = {
+  input: PartitionedGroupedArbovirusEstimatesInput;
 };
 
 
@@ -1656,6 +1673,8 @@ export type ResolversTypes = {
   MonthlySarsCov2CountryInformationEntry: ResolverTypeWrapper<MonthlySarsCov2CountryInformationEntry>;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: ResolverTypeWrapper<Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversTypes['MersEvent']> }>;
+  PartitionedGroupedArbovirusEstimatesInput: PartitionedGroupedArbovirusEstimatesInput;
+  PartitionedGroupedArbovirusEstimatesOutput: ResolverTypeWrapper<PartitionedGroupedArbovirusEstimatesOutput>;
   PartitionedMonthlySarsCov2CountryInformationInput: PartitionedMonthlySarsCov2CountryInformationInput;
   PartitionedMonthlySarsCov2CountryInformationOutput: ResolverTypeWrapper<PartitionedMonthlySarsCov2CountryInformationOutput>;
   PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
@@ -1736,6 +1755,8 @@ export type ResolversParentTypes = {
   MonthlySarsCov2CountryInformationEntry: MonthlySarsCov2CountryInformationEntry;
   PartitionedFaoMersEventsInput: PartitionedFaoMersEventsInput;
   PartitionedFeoMersEventsOutput: Omit<PartitionedFeoMersEventsOutput, 'mersEvents'> & { mersEvents: Array<ResolversParentTypes['MersEvent']> };
+  PartitionedGroupedArbovirusEstimatesInput: PartitionedGroupedArbovirusEstimatesInput;
+  PartitionedGroupedArbovirusEstimatesOutput: PartitionedGroupedArbovirusEstimatesOutput;
   PartitionedMonthlySarsCov2CountryInformationInput: PartitionedMonthlySarsCov2CountryInformationInput;
   PartitionedMonthlySarsCov2CountryInformationOutput: PartitionedMonthlySarsCov2CountryInformationOutput;
   PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
@@ -2527,6 +2548,12 @@ export type PartitionedFeoMersEventsOutputResolvers<ContextType = any, ParentTyp
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PartitionedGroupedArbovirusEstimatesOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedGroupedArbovirusEstimatesOutput'] = ResolversParentTypes['PartitionedGroupedArbovirusEstimatesOutput']> = {
+  arboEstimates?: Resolver<Array<ResolversTypes['GroupedArbovirusEstimate']>, ParentType, ContextType>;
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedMonthlySarsCov2CountryInformationOutput'] = ResolversParentTypes['PartitionedMonthlySarsCov2CountryInformationOutput']> = {
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -2883,6 +2910,7 @@ export type PrimaryMersEstimateInformationInterfaceResolvers<ContextType = any, 
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   allFaoMersEventPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  allGroupedArbovirusEstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allMonthlySarsCov2CountryInformationPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allSarsCov2EstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
@@ -2902,6 +2930,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   mersWhoCaseDataPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   monthlySarsCov2CountryInformation?: Resolver<Array<ResolversTypes['MonthlySarsCov2CountryInformationEntry']>, ParentType, ContextType>;
   partitionedFaoMersEvents?: Resolver<ResolversTypes['PartitionedFeoMersEventsOutput'], ParentType, ContextType, RequireFields<QueryPartitionedFaoMersEventsArgs, 'input'>>;
+  partitionedGroupedArbovirusEstimates?: Resolver<ResolversTypes['PartitionedGroupedArbovirusEstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedGroupedArbovirusEstimatesArgs, 'input'>>;
   partitionedMonthlySarsCov2CountryInformation?: Resolver<ResolversTypes['PartitionedMonthlySarsCov2CountryInformationOutput'], ParentType, ContextType, RequireFields<QueryPartitionedMonthlySarsCov2CountryInformationArgs, 'input'>>;
   partitionedSarsCov2Estimates?: Resolver<ResolversTypes['PartitionedSarsCov2EstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedSarsCov2EstimatesArgs, 'input'>>;
   partitionedYearlyFaoCamelPopulationData?: Resolver<ResolversTypes['PartitionedYearlyFaoCamelPopulationDataOutput'], ParentType, ContextType, RequireFields<QueryPartitionedYearlyFaoCamelPopulationDataArgs, 'input'>>;
@@ -3046,6 +3075,7 @@ export type Resolvers<ContextType = any> = {
   MersWhoCaseDataOutput?: MersWhoCaseDataOutputResolvers<ContextType>;
   MonthlySarsCov2CountryInformationEntry?: MonthlySarsCov2CountryInformationEntryResolvers<ContextType>;
   PartitionedFeoMersEventsOutput?: PartitionedFeoMersEventsOutputResolvers<ContextType>;
+  PartitionedGroupedArbovirusEstimatesOutput?: PartitionedGroupedArbovirusEstimatesOutputResolvers<ContextType>;
   PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;
   PartitionedSarsCov2EstimatesOutput?: PartitionedSarsCov2EstimatesOutputResolvers<ContextType>;
   PartitionedYearlyFaoCamelPopulationDataOutput?: PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType>;
