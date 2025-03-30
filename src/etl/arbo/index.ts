@@ -70,7 +70,7 @@ const runEtlMain = async () => {
       )
     );
 
-  await(
+  const resultOfFirstHalfOfPipe = await
     pipe(
       {
         allEstimates: allEstimatesUnformatted,
@@ -91,16 +91,19 @@ const runEtlMain = async () => {
       etlStep(removeEstimatesWithLowSampleSizeStep),
       etlStep(removeRecordsThatAreFlaggedToNotSaveStep),
       etlStep(addCountryAndRegionInformationStep),
-      etlStep(mergeEstimatesAndSourcesStep),
-      asyncEtlStep(latLngGenerationStep),
-      etlStep(jitterPinLatLngStep),
-      etlStep(groupEstimatesUnderPrimaryEstimateStep),
-      etlStep(assignPartitionKeysToGroupedEstimatesStep),
-      etlStep(transformIntoFormatForDatabaseStep),
-      // asyncEtlStep(writeEstimatesToMongoDbStep),
-      // asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep),
-      asyncEtlStep(writeGroupedEstimatesToMongoDbStep)
-    )
+    );
+
+  await pipe(
+    resultOfFirstHalfOfPipe,
+    etlStep(mergeEstimatesAndSourcesStep),
+    asyncEtlStep(latLngGenerationStep),
+    etlStep(jitterPinLatLngStep),
+    etlStep(groupEstimatesUnderPrimaryEstimateStep),
+    etlStep(assignPartitionKeysToGroupedEstimatesStep),
+    etlStep(transformIntoFormatForDatabaseStep),
+    asyncEtlStep(writeEstimatesToMongoDbStep),
+    asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep),
+    asyncEtlStep(writeGroupedEstimatesToMongoDbStep)
   );
 
   console.log("Exiting")
