@@ -6,19 +6,19 @@ import {
   ArbovirusStudyPopulation,
 } from "../../../storage/types.js";
 import {
-  AirtableEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep,
-  AirtableCountryFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep,
-  AirtableSourceFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterGroupingEstimatesUnderPrimaryEstimateStep,
-  GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep,
-} from "./group-estimates-under-primary-estimate-step.js";
+  AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep,
+  AirtableEstimateFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep,
+  AirtableSourceFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToGroupedEstimatesStep,
+  GroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep
+} from "./assign-partition-keys-to-grouped-estimates-step.js";
 
 export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep =
   ArbovirusEstimateDocument;
 export type AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep =
-  AirtableSourceFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep;
+  AirtableSourceFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep;
 export type AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep =
-  AirtableCountryFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep;
+  AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep =
   ArbovirusEnvironmentalSuitabilityStatsEntryDocument;
 export type GroupedEstimatesAfterTransformingIntoFormatForDatabaseStep =
@@ -41,11 +41,11 @@ const transformStudyPopulationForDatabase = (studyPopulation: string | undefined
 }
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: AirtableEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep[];
-  allSources: AirtableSourceFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep[];
-  allCountries: AirtableCountryFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep[];
-  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterGroupingEstimatesUnderPrimaryEstimateStep[];
-  groupedEstimates: GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep[];
+  allEstimates: AirtableEstimateFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
+  allSources: AirtableSourceFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
+  allCountries: AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToGroupedEstimatesStep[];
+  groupedEstimates: GroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -215,6 +215,7 @@ const transformGroupedArbovirusEstimateForDatabase = (
 
   return {
     _id: new ObjectId(),
+    partitionKey: groupedEstimate.partitionKey,
     shownEstimates: groupedEstimate.shownEstimates.map((subEstimate) => transformGroupedArbovirusSubestimateForDatabase({
       subEstimate,
       createdAtForAllRecords,

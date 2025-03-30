@@ -148,6 +148,7 @@ export interface ArbovirusEnvironmentalSuitabilityStatsEntryDocument {
 
 export interface ArbovirusGroupedEstimateDocument {
   _id: ObjectId;
+  partitionKey: number;
   shownEstimates: Array<Omit<ArbovirusEstimateDocument, 'sex'|'ageGroup'|'_id'|'assay'> & {
     id: ArbovirusEstimateDocument['_id'];
     sex: Array<NonNullable<ArbovirusEstimateDocument['sex']>>;

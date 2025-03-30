@@ -176,9 +176,20 @@ export const arboTypedefs = `
     hiddenEstimates: [ArbovirusSubEstimate!]!
   }
 
+  input PartitionedGroupedArbovirusEstimatesInput {
+    partitionKey: Int!
+  }
+
+  type PartitionedGroupedArbovirusEstimatesOutput {
+    partitionKey: Int!
+    arboEstimates: [GroupedArbovirusEstimate!]!
+  }
+
   type Query {
     arbovirusEstimates: [ArbovirusEstimate!]!
     groupedArbovirusEstimates: [GroupedArbovirusEstimate!]!
+    partitionedGroupedArbovirusEstimates(input: PartitionedGroupedArbovirusEstimatesInput!): PartitionedGroupedArbovirusEstimatesOutput!
+    allGroupedArbovirusEstimatePartitionKeys: [Int!]!
     arbovirusEnviromentalSuitabilityData: [ArbovirusEnvironmentalSuitabilityDataEntry!]!
     arbovirusFilterOptions: ArbovirusFilterOptions!
     arbovirusDataStatistics: ArbovirusDataStatistics!

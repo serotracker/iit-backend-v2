@@ -21,6 +21,7 @@ import { writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep } from "./step
 import { assignEstimateTypesStep } from "./steps/assign-estimate-types-step.js";
 import { groupEstimatesUnderPrimaryEstimateStep } from "./steps/group-estimates-under-primary-estimate-step.js";
 import { writeGroupedEstimatesToMongoDbStep } from "./steps/write-grouped-estimates-to-mongodb-step.js";
+import { assignPartitionKeysToGroupedEstimatesStep } from "./steps/assign-partition-keys-to-grouped-estimates-step.js";
 
 const runEtlMain = async () => {
   console.log("Running arbo ETL");
@@ -94,9 +95,10 @@ const runEtlMain = async () => {
       asyncEtlStep(latLngGenerationStep),
       etlStep(jitterPinLatLngStep),
       etlStep(groupEstimatesUnderPrimaryEstimateStep),
+      etlStep(assignPartitionKeysToGroupedEstimatesStep),
       etlStep(transformIntoFormatForDatabaseStep),
-      asyncEtlStep(writeEstimatesToMongoDbStep),
-      asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep),
+      // asyncEtlStep(writeEstimatesToMongoDbStep),
+      // asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep),
       asyncEtlStep(writeGroupedEstimatesToMongoDbStep)
     )
   );
