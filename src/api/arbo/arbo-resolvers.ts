@@ -17,6 +17,7 @@ import {
 } from "../graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi } from "../shared/shared-mappers.js";
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
+import uniq from "lodash/uniq.js";
 
 const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.ZIKV]: ArbovirusForApi.Zikv,
@@ -358,6 +359,237 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
 
     return partitionKeys;
   }
+
+  const groupedArbovirusEstimateFilterOptions = async () => {
+    const estimateCollection = mongoClient.db(databaseName).collection<ArbovirusGroupedEstimateDocument>('groupedArbovirusEstimates');
+
+    const [
+      ageGroupForShownEstimates,
+      estimateTypeForShownEstimates,
+      antibodyForShownEstimates,
+      assayForShownEstimates,
+      countryForShownEstimates,
+      pathogenForShownEstimates,
+      pediatricAgeGroupForShownEstimates,
+      producerForShownEstimates,
+      sampleFrameForShownEstimates,
+      serotypeForShownEstimates,
+      sexForShownEstimates,
+      unRegionForShownEstimates,
+      whoRegionForShownEstimates,
+      studyPopulationForShownEstimates,
+      ageGroupForHiddenEstimates,
+      estimateTypeForHiddenEstimates,
+      antibodyForHiddenEstimates,
+      assayForHiddenEstimates,
+      countryForHiddenEstimates,
+      pathogenForHiddenEstimates,
+      pediatricAgeGroupForHiddenEstimates,
+      producerForHiddenEstimates,
+      sampleFrameForHiddenEstimates,
+      serotypeForHiddenEstimates,
+      sexForHiddenEstimates,
+      unRegionForHiddenEstimates,
+      whoRegionForHiddenEstimates,
+      studyPopulationForHiddenEstimates,
+      countryIdentifiersForShownEstimates,
+      countryIdentifiersForHiddenEstimates,
+    ] = await Promise.all([
+      estimateCollection.distinct('shownEstimates.ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.estimateType')
+        .then((estimateTypes: Array<ArbovirusEstimateDocument['estimateType']>) => filterUndefinedValuesFromArray(estimateTypes))
+        .then((estimateTypes) => estimateTypes.map((estimateType) => arbovirusEstimateTypeMap[estimateType])),
+      estimateCollection.distinct('shownEstimates.antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.assay').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.country').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.pathogen').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.pediatricAgeGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.producer').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.serotype').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('shownEstimates.studyPopulation')
+        .then((estimateTypes: Array<ArbovirusEstimateDocument['studyPopulation']>) => filterUndefinedValuesFromArray(estimateTypes))
+        .then((elements) => elements.map((element) => arbovirusStudyPopulationMap[element])),
+      estimateCollection.distinct('hiddenEstimates.ageGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.estimateType')
+        .then((estimateTypes: Array<ArbovirusEstimateDocument['estimateType']>) => filterUndefinedValuesFromArray(estimateTypes))
+        .then((estimateTypes) => estimateTypes.map((estimateType) => arbovirusEstimateTypeMap[estimateType])),
+      estimateCollection.distinct('hiddenEstimates.antibodies').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.assay').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.country').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.pathogen').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.pediatricAgeGroup').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.producer').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.sampleFrame').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.serotype').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.sex').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.unRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.whoRegion').then((elements) => filterUndefinedValuesFromArray(elements)),
+      estimateCollection.distinct('hiddenEstimates.studyPopulation')
+        .then((estimateTypes: Array<ArbovirusEstimateDocument['studyPopulation']>) => filterUndefinedValuesFromArray(estimateTypes))
+        .then((elements) => elements.map((element) => arbovirusStudyPopulationMap[element])),
+      estimateCollection.aggregate([
+        {
+          $project: {
+            _id: 0,
+            shownEstimates: 1
+          }
+        },
+        {
+          $unwind: "$shownEstimates"
+        },
+        {
+          $group: {
+            _id: {
+              alphaTwoCode: "$shownEstimates.countryAlphaTwoCode"
+            },
+            name: {
+              $first: "$shownEstimates.country"
+            },
+            alphaThreeCode: {
+              $first: "$shownEstimates.countryAlphaThreeCode"
+            }
+          }
+        },
+        {
+          $project: {
+            "_id": 0,
+            "alphaTwoCode": "$_id.alphaTwoCode",
+            "name": 1,
+            "alphaThreeCode": 1
+          }
+        },
+        {
+          $sort: {
+            name: 1,
+            alphaTwoCode: 1,
+            alphaThreeCode: 1,
+          }
+        }
+      ]).toArray(),
+      estimateCollection.aggregate([
+        {
+          $project: {
+            _id: 0,
+            shownEstimates: 1
+          }
+        },
+        {
+          $unwind: "$hiddenEstimates"
+        },
+        {
+          $group: {
+            _id: {
+              alphaTwoCode: "$hiddenEstimates.countryAlphaTwoCode"
+            },
+            name: {
+              $first: "$hiddenEstimates.country"
+            },
+            alphaThreeCode: {
+              $first: "$hiddenEstimates.countryAlphaThreeCode"
+            }
+          }
+        },
+        {
+          $project: {
+            "_id": 0,
+            "alphaTwoCode": "$_id.alphaTwoCode",
+            "name": 1,
+            "alphaThreeCode": 1
+          }
+        },
+        {
+          $sort: {
+            name: 1,
+            alphaTwoCode: 1,
+            alphaThreeCode: 1,
+          }
+        }
+      ]).toArray()
+    ])
+
+    const ageGroup = uniq([
+      ...ageGroupForShownEstimates,
+      ...ageGroupForHiddenEstimates,
+    ]);
+    const estimateType = uniq([
+      ...estimateTypeForShownEstimates,
+      ...estimateTypeForHiddenEstimates,
+    ]);
+    const antibody = uniq([
+      ...antibodyForShownEstimates,
+      ...antibodyForHiddenEstimates,
+    ]);
+    const assay = uniq([
+      ...assayForShownEstimates,
+      ...assayForHiddenEstimates,
+    ]);
+    const country = uniq([
+      ...countryForShownEstimates,
+      ...countryForHiddenEstimates,
+    ]);
+    const pathogen = uniq([
+      ...pathogenForShownEstimates,
+      ...pathogenForHiddenEstimates,
+    ]);
+    const pediatricAgeGroup = uniq([
+      ...pediatricAgeGroupForShownEstimates,
+      ...pediatricAgeGroupForHiddenEstimates,
+    ]);
+    const producer = uniq([
+      ...producerForShownEstimates,
+      ...producerForHiddenEstimates,
+    ]);
+    const sampleFrame = uniq([
+      ...sampleFrameForShownEstimates,
+      ...sampleFrameForHiddenEstimates,
+    ]);
+    const serotype = uniq([
+      ...serotypeForShownEstimates,
+      ...serotypeForHiddenEstimates,
+    ]);
+    const sex = uniq([
+      ...sexForShownEstimates,
+      ...sexForHiddenEstimates,
+    ]);
+    const unRegion = uniq([
+      ...unRegionForShownEstimates,
+      ...unRegionForHiddenEstimates,
+    ]);
+    const whoRegion = uniq([
+      ...whoRegionForShownEstimates,
+      ...whoRegionForHiddenEstimates,
+    ]);
+    const studyPopulation = uniq([
+      ...studyPopulationForShownEstimates,
+      ...studyPopulationForHiddenEstimates,
+    ]);
+    const countryIdentifiers = uniq([
+      ...countryIdentifiersForShownEstimates,
+      ...countryIdentifiersForHiddenEstimates,
+    ]);
+
+    return {
+      ageGroup,
+      estimateType,
+      antibody,
+      assay,
+      country,
+      pathogen,
+      pediatricAgeGroup,
+      producer,
+      sampleFrame,
+      serotype,
+      sex,
+      unRegion,
+      whoRegion,
+      countryIdentifiers: countryIdentifiers as CountryIdentifiers[],
+      studyPopulation
+    }
+  }
   
   return {
     arboResolvers: {
@@ -368,6 +600,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
         allGroupedArbovirusEstimatePartitionKeys,
         arbovirusEnviromentalSuitabilityData,
         arbovirusFilterOptions,
+        groupedArbovirusEstimateFilterOptions,
         arbovirusDataStatistics
       }
     }

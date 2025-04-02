@@ -1339,6 +1339,7 @@ export type Query = {
   arbovirusEstimates: Array<ArbovirusEstimate>;
   arbovirusFilterOptions: ArbovirusFilterOptions;
   faoMersEventFilterOptions: FaoMersEventFilterOptions;
+  groupedArbovirusEstimateFilterOptions: ArbovirusFilterOptions;
   groupedArbovirusEstimates: Array<GroupedArbovirusEstimate>;
   groupedTeamMembers: Array<TeamMemberGroup>;
   mersEstimates: Array<MersEstimate>;
@@ -2918,6 +2919,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
   arbovirusFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
   faoMersEventFilterOptions?: Resolver<ResolversTypes['FaoMersEventFilterOptions'], ParentType, ContextType>;
+  groupedArbovirusEstimateFilterOptions?: Resolver<ResolversTypes['ArbovirusFilterOptions'], ParentType, ContextType>;
   groupedArbovirusEstimates?: Resolver<Array<ResolversTypes['GroupedArbovirusEstimate']>, ParentType, ContextType>;
   groupedTeamMembers?: Resolver<Array<ResolversTypes['TeamMemberGroup']>, ParentType, ContextType>;
   mersEstimates?: Resolver<Array<ResolversTypes['MersEstimate']>, ParentType, ContextType>;

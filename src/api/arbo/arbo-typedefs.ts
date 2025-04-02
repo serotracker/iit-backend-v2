@@ -192,6 +192,7 @@ export const arboTypedefs = `
     allGroupedArbovirusEstimatePartitionKeys: [Int!]!
     arbovirusEnviromentalSuitabilityData: [ArbovirusEnvironmentalSuitabilityDataEntry!]!
     arbovirusFilterOptions: ArbovirusFilterOptions!
+    groupedArbovirusEstimateFilterOptions: ArbovirusFilterOptions!
     arbovirusDataStatistics: ArbovirusDataStatistics!
   }
 `
