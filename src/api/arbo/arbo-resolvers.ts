@@ -7,7 +7,8 @@ import {
   ArbovirusEstimateType,
   ArbovirusGroupedEstimateDocument,
   ArbovirusGroupingVariable,
-  ArbovirusStudyPopulation
+  ArbovirusStudyPopulation,
+  UnravelledArbovirusGroupedEstimateDocument
 } from '../../storage/types.js';
 import {
   Arbovirus as ArbovirusForApi,
@@ -347,6 +348,38 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     }
   }
 
+  const partitionedUnravelledGroupedArbovirusEstimates: QueryResolvers['partitionedUnravelledGroupedArbovirusEstimates'] = async (_, variables) => {
+    const databaseEstimates = await mongoClient
+      .db(databaseName)
+      .collection<UnravelledArbovirusGroupedEstimateDocument>('unravelledGroupedArbovirusEstimates')
+      .find({ partitionKey: variables.input.partitionKey })
+      .toArray();
+
+    const arboEstimates = databaseEstimates.map((estimate) => ({
+      ...transformArbovirusSubEstimateDocumentForApi(estimate),
+      groupId: estimate.groupId.toHexString(),
+      shown: estimate.shown,
+    }));
+
+    return {
+      partitionKey: variables.input.partitionKey,
+      arboEstimates,
+    }
+  }
+
+  const allUnravelledGroupedArbovirusEstimatePartitionKeys = async () => {
+    const [
+      partitionKeys
+    ] = await Promise.all([
+      mongoClient
+        .db(databaseName)
+        .collection<UnravelledArbovirusGroupedEstimateDocument>('unravelledGroupedArbovirusEstimates')
+        .distinct('partitionKey')
+    ])
+
+    return partitionKeys;
+  }
+
   const allGroupedArbovirusEstimatePartitionKeys = async () => {
     const [
       partitionKeys
@@ -601,7 +634,9 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
         arbovirusEnviromentalSuitabilityData,
         arbovirusFilterOptions,
         groupedArbovirusEstimateFilterOptions,
-        arbovirusDataStatistics
+        arbovirusDataStatistics,
+        partitionedUnravelledGroupedArbovirusEstimates,
+        allUnravelledGroupedArbovirusEstimatePartitionKeys,
       }
     }
   }

@@ -5,7 +5,8 @@ import {
   AirtableEstimateFieldsAfterAssigningEstimateTypesStep,
   AirtableSourceFieldsAfterAssigningEstimateTypesStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep,
-  GroupedEstimatesAfterAssigningEstimateTypesStep
+  GroupedEstimatesAfterAssigningEstimateTypesStep,
+  UnravelledGroupedEstimatesAfterAssigningEstimateTypesStep
 } from "./assign-estimate-types-step.js";
 
 export type AirtableEstimateFieldsAfterParsingDatesStep = Omit<
@@ -23,6 +24,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterParsingDatesStep =
   EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep;
 export type GroupedEstimatesAfterParsingDatesStep =
   GroupedEstimatesAfterAssigningEstimateTypesStep;
+export type UnravelledGroupedEstimatesAfterParsingDatesStep =
+  UnravelledGroupedEstimatesAfterAssigningEstimateTypesStep;
 
 interface ParseDatesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAssigningEstimateTypesStep[];
@@ -30,6 +33,7 @@ interface ParseDatesStepInput {
   allCountries: AirtableCountryFieldsAfterAssigningEstimateTypesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep[];
   groupedEstimates: GroupedEstimatesAfterAssigningEstimateTypesStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAssigningEstimateTypesStep[];
   mongoClient: MongoClient;
 }
 
@@ -39,6 +43,7 @@ interface ParseDatesStepOutput {
   allCountries: AirtableCountryFieldsAfterParsingDatesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterParsingDatesStep[];
   groupedEstimates: GroupedEstimatesAfterParsingDatesStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterParsingDatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -61,6 +66,7 @@ export const parseDatesStep = (
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };

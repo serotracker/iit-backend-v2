@@ -4,7 +4,8 @@ import {
   AirtableEstimateFieldsAfterLatLngGenerationStep,
   AirtableSourceFieldsAfterLatLngGenerationStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep,
-  GroupedEstimatesAfterLatLngGenerationStep
+  GroupedEstimatesAfterLatLngGenerationStep,
+  UnravelledGroupedEstimatesAfterLatLngGenerationStep
 } from "./lat-lng-generation-step.js";
 
 export type AirtableEstimateFieldsAfterJitteringPinLatLngStep =
@@ -17,6 +18,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngSt
   EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep;
 export type GroupedEstimatesAfterJitteringPinLatLngStep =
   GroupedEstimatesAfterLatLngGenerationStep;
+export type UnravelledGroupedEstimatesAfterJitteringPinLatLngStep =
+  UnravelledGroupedEstimatesAfterLatLngGenerationStep;
 
 interface JitterNumberValueByAmountInput {
   value: number;
@@ -38,6 +41,7 @@ interface JitterPinLatLngStepInput {
   allCountries: AirtableCountryFieldsAfterLatLngGenerationStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterLatLngGenerationStep[];
   groupedEstimates: GroupedEstimatesAfterLatLngGenerationStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterLatLngGenerationStep[];
   mongoClient: MongoClient;
 }
 
@@ -47,6 +51,7 @@ interface JitterPinLatLngStepOutput {
   allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep[];
   groupedEstimates: GroupedEstimatesAfterJitteringPinLatLngStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -68,6 +73,7 @@ export const jitterPinLatLngStep = (
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };

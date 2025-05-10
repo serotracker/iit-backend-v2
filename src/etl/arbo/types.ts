@@ -45,6 +45,7 @@ export type AirtableEstimateFields = {
   "Study Population (OROV only)": string | undefined;
   "Study Species (OROV only)": string | undefined;
   'Grouping Variable': string | undefined;
+  'Subsetting Variable': string | undefined;
 } & Record<string, never>;
 
 export type AirtableSourceFields = {

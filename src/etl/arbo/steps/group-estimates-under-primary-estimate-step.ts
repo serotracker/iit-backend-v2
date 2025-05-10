@@ -1,11 +1,13 @@
 import { MongoClient } from "mongodb";
 import { pipe } from "fp-ts/lib/function.js";
+import sum from "lodash/sum.js";
 import {
   AirtableCountryFieldsAfterJitteringPinLatLngStep,
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
   AirtableSourceFieldsAfterJitteringPinLatLngStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep,
-  GroupedEstimatesAfterJitteringPinLatLngStep
+  GroupedEstimatesAfterJitteringPinLatLngStep,
+  UnravelledGroupedEstimatesAfterJitteringPinLatLngStep
 } from "./jitter-pin-lat-lng-step.js";
 import { groupByArray } from "../../../lib/lib.js";
 import { ArbovirusGroupingVariable } from "../../../storage/types.js";
@@ -27,6 +29,8 @@ export interface GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep 
   shownEstimates: Array<EstimateForGroupedEstimates>;
   hiddenEstimates: Array<EstimateForGroupedEstimates>;
 }
+export type UnravelledGroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep =
+  UnravelledGroupedEstimatesAfterJitteringPinLatLngStep;
 
 interface GroupEstimatesUnderPrimaryEstimateStepInput {
   allEstimates: AirtableEstimateFieldsAfterJitteringPinLatLngStep[];
@@ -34,6 +38,7 @@ interface GroupEstimatesUnderPrimaryEstimateStepInput {
   allCountries: AirtableCountryFieldsAfterJitteringPinLatLngStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterJitteringPinLatLngStep[];
   groupedEstimates: GroupedEstimatesAfterJitteringPinLatLngStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterJitteringPinLatLngStep[];
   mongoClient: MongoClient;
 }
 
@@ -43,6 +48,7 @@ interface GroupEstimatesUnderPrimaryEstimateStepOutput {
   allCountries: AirtableCountryFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterGroupingEstimatesUnderPrimaryEstimateStep[];
   groupedEstimates: GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep[];
   mongoClient: MongoClient;
 }
 
@@ -120,6 +126,10 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
       const genderEstimates = data.filter((estimate) => estimate.groupingVariable === ArbovirusGroupingVariable.GENDER);
 
       if(genderEstimates.length === 2) {
+        const overallSampleSize = sum(genderEstimates.map((estimate) => estimate.sampleSize));
+        const overallSampleNumerator = sum(genderEstimates.map((estimate) => estimate.sampleNumerator));
+        const overallSeroprevalence = overallSampleNumerator / overallSampleSize;
+
         return {
           shownEstimates: [{
             ...genderEstimates[0],
@@ -127,27 +137,43 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
               .map((estimate) => estimate.sex)
               .filter((sex): sex is NonNullable<typeof sex> => !!sex),
             ageGroup: genderEstimates[0].ageGroup ? [ genderEstimates[0].ageGroup ] : [],
+            seroprevalence: overallSeroprevalence, 
+            seroprevalenceCalculated95CILower: undefined,
+            seroprevalenceCalculated95CIUpper: undefined,
+            seroprevalenceStudy95CILower: undefined,
+            seroprevalenceStudy95CIUpper: undefined,
+            sampleSize: overallSampleSize, 
+            sampleNumerator: overallSampleNumerator, 
           }],
-          hiddenEstimates: data
-            .filter((estimate) => estimate.groupingVariable !== ArbovirusGroupingVariable.GENDER)
-            .map((estimate) => ({
-              ...estimate,
-              sex: estimate.sex ? [ estimate.sex ] : [],
-              ageGroup: estimate.ageGroup ? [ estimate.ageGroup ] : [],
-            }))
+          hiddenEstimates: data.map((estimate) => ({
+            ...estimate,
+            sex: estimate.sex ? [ estimate.sex ] : [],
+            ageGroup: estimate.ageGroup ? [ estimate.ageGroup ] : [],
+          }))
         }
       }
 
       const ageEstimates = data.filter((estimate) => !!estimate && estimate.groupingVariable === ArbovirusGroupingVariable.AGE);
 
       if(ageEstimates.length > 1) {
+        const overallSampleSize = sum(ageEstimates.map((estimate) => estimate.sampleSize));
+        const overallSampleNumerator = sum(ageEstimates.map((estimate) => estimate.sampleNumerator));
+        const overallSeroprevalence = overallSampleNumerator / overallSampleSize;
+
         return {
           shownEstimates: [{
             ...ageEstimates[0],
-            sex: ageEstimates
-              .map((estimate) => estimate.sex)
-              .filter((sex): sex is NonNullable<typeof sex> => !!sex),
-            ageGroup: ageEstimates[0].ageGroup ? [ ageEstimates[0].ageGroup ] : [],
+            ageGroup: ageEstimates
+              .map((estimate) => estimate.ageGroup)
+              .filter((ageGroup): ageGroup is NonNullable<typeof ageGroup> => !!ageGroup),
+            sex: ageEstimates[0].sex ? [ ageEstimates[0].sex ] : [],
+            seroprevalence: overallSeroprevalence, 
+            seroprevalenceCalculated95CILower: undefined,
+            seroprevalenceCalculated95CIUpper: undefined,
+            seroprevalenceStudy95CILower: undefined,
+            seroprevalenceStudy95CIUpper: undefined,
+            sampleSize: overallSampleSize, 
+            sampleNumerator: overallSampleNumerator, 
           }],
           hiddenEstimates: data
             .filter((estimate) => estimate.groupingVariable !== ArbovirusGroupingVariable.GENDER)
@@ -176,6 +202,7 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
     allCountries: input.allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 }

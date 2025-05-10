@@ -65,6 +65,15 @@ export enum ArbovirusGroupingVariable {
   EDUCATION = 'EDUCATION',
 }
 
+export enum ArbovirusSubsettingVariable {
+  GEOGRAPHY = 'GEOGRAPHY',
+  DISTINCT_POPULATIONS = 'DISTINCT_POPULATIONS',
+  TIMEFRAME = 'TIMEFRAME',
+  NONE = 'NONE',
+  TEST_TYPE = 'TEST_TYPE',
+  NO = 'NO',
+}
+
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
   estimateType: ArbovirusEstimateType;
@@ -109,6 +118,7 @@ export interface ArbovirusEstimateDocument {
   studyPopulation: ArbovirusStudyPopulation;
   studySpecies: string;
   groupingVariable: ArbovirusGroupingVariable | undefined;
+  subsettingVariable: ArbovirusSubsettingVariable | undefined;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -146,24 +156,30 @@ export interface ArbovirusEnvironmentalSuitabilityStatsEntryDocument {
   updatedAt: Date;
 }
 
+type RecordUnderArbovirusGroupedEstimate = Omit<ArbovirusEstimateDocument, 'sex'|'ageGroup'|'_id'|'assay'> & {
+  id: ArbovirusEstimateDocument['_id'];
+  sex: Array<NonNullable<ArbovirusEstimateDocument['sex']>>;
+  ageGroup: Array<NonNullable<ArbovirusEstimateDocument['ageGroup']>>;
+  assay: string[];
+}
+
 export interface ArbovirusGroupedEstimateDocument {
   _id: ObjectId;
   partitionKey: number;
-  shownEstimates: Array<Omit<ArbovirusEstimateDocument, 'sex'|'ageGroup'|'_id'|'assay'> & {
-    id: ArbovirusEstimateDocument['_id'];
-    sex: Array<NonNullable<ArbovirusEstimateDocument['sex']>>;
-    ageGroup: Array<NonNullable<ArbovirusEstimateDocument['ageGroup']>>;
-    assay: string[];
-  }>;
-  hiddenEstimates: Array<Omit<ArbovirusEstimateDocument, 'sex'|'ageGroup'|'_id'|'assay'> & {
-    id: ArbovirusEstimateDocument['_id'];
-    sex: Array<NonNullable<ArbovirusEstimateDocument['sex']>>;
-    ageGroup: Array<NonNullable<ArbovirusEstimateDocument['ageGroup']>>;
-    assay: string[];
-  }>;
+  shownEstimates: Array<RecordUnderArbovirusGroupedEstimate>;
+  hiddenEstimates: Array<RecordUnderArbovirusGroupedEstimate>;
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type UnravelledArbovirusGroupedEstimateDocument = RecordUnderArbovirusGroupedEstimate & {
+  _id: ObjectId;
+  partitionKey: number;
+  groupId: ObjectId;
+  shown: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
 
 export interface TeamMemberDocument {
   _id: ObjectId;

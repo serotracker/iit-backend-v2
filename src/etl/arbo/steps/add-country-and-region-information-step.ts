@@ -5,6 +5,7 @@ import {
   AirtableSourceFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
   GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
+  UnravelledGroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep,
 } from "./remove-records-that-are-flagged-to-not-save-step.js";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes.js";
 import { UNRegion, getUNRegionFromAlphaTwoCode } from "../../../lib/un-regions.js";
@@ -27,6 +28,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegi
   };
 export type GroupedEstimatesAfterAddingCountryAndRegionInformationStep =
   GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
+export type UnravelledGroupedEstimatesAfterAddingCountryAndRegionInformationStep =
+  UnravelledGroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep;
 
 interface AddCountryAndRegionInformationStepInput {
   allEstimates: AirtableEstimateFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
@@ -34,6 +37,7 @@ interface AddCountryAndRegionInformationStepInput {
   allCountries: AirtableCountryFieldsAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   groupedEstimates: GroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterRemovingRecordsThatAreFlaggedToNotSaveStep[];
   mongoClient: MongoClient;
 }
 
@@ -43,6 +47,7 @@ interface AddCountryAndRegionInformationStepOutput {
   allCountries: AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep[];
   groupedEstimates: GroupedEstimatesAfterAddingCountryAndRegionInformationStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAddingCountryAndRegionInformationStep[];
   mongoClient: MongoClient;
 }
 
@@ -102,6 +107,7 @@ export const addCountryAndRegionInformationStep = (
       })
       .filter(<T>(estimate: T | undefined): estimate is T => !!estimate),
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };

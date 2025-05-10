@@ -985,6 +985,16 @@ export type PartitionedSarsCov2EstimatesOutput = {
   sarsCov2Estimates: Array<SarsCov2Estimate>;
 };
 
+export type PartitionedUnravelledGroupedArbovirusEstimatesInput = {
+  partitionKey: Scalars['Int']['input'];
+};
+
+export type PartitionedUnravelledGroupedArbovirusEstimatesOutput = {
+  __typename?: 'PartitionedUnravelledGroupedArbovirusEstimatesOutput';
+  arboEstimates: Array<UnravelledGroupedArbovirusEstimate>;
+  partitionKey: Scalars['Int']['output'];
+};
+
 export type PartitionedYearlyFaoCamelPopulationDataInput = {
   partitionKey: Scalars['Int']['input'];
 };
@@ -1334,6 +1344,7 @@ export type Query = {
   allGroupedArbovirusEstimatePartitionKeys: Array<Scalars['Int']['output']>;
   allMonthlySarsCov2CountryInformationPartitionKeys: Array<Scalars['Int']['output']>;
   allSarsCov2EstimatePartitionKeys: Array<Scalars['Int']['output']>;
+  allUnravelledGroupedArbovirusEstimatePartitionKeys: Array<Scalars['Int']['output']>;
   arbovirusDataStatistics: ArbovirusDataStatistics;
   arbovirusEnviromentalSuitabilityData: Array<ArbovirusEnvironmentalSuitabilityDataEntry>;
   arbovirusEstimates: Array<ArbovirusEstimate>;
@@ -1355,6 +1366,7 @@ export type Query = {
   partitionedGroupedArbovirusEstimates: PartitionedGroupedArbovirusEstimatesOutput;
   partitionedMonthlySarsCov2CountryInformation: PartitionedMonthlySarsCov2CountryInformationOutput;
   partitionedSarsCov2Estimates: PartitionedSarsCov2EstimatesOutput;
+  partitionedUnravelledGroupedArbovirusEstimates: PartitionedUnravelledGroupedArbovirusEstimatesOutput;
   partitionedYearlyFaoCamelPopulationData: PartitionedYearlyFaoCamelPopulationDataOutput;
   sarsCov2Estimates: Array<SarsCov2Estimate>;
   sarsCov2FilterOptions: SarsCov2FilterOptions;
@@ -1384,6 +1396,11 @@ export type QueryPartitionedMonthlySarsCov2CountryInformationArgs = {
 
 export type QueryPartitionedSarsCov2EstimatesArgs = {
   input: PartitionedSarsCov2EstimatesInput;
+};
+
+
+export type QueryPartitionedUnravelledGroupedArbovirusEstimatesArgs = {
+  input: PartitionedUnravelledGroupedArbovirusEstimatesInput;
 };
 
 
@@ -1492,6 +1509,56 @@ export enum UnRegion {
   WesternAsia = 'WESTERN_ASIA',
   WesternEurope = 'WESTERN_EUROPE'
 }
+
+export type UnravelledGroupedArbovirusEstimate = {
+  __typename?: 'UnravelledGroupedArbovirusEstimate';
+  ageGroup: Array<Scalars['String']['output']>;
+  ageMaximum?: Maybe<Scalars['Int']['output']>;
+  ageMinimum?: Maybe<Scalars['Int']['output']>;
+  antibodies: Array<Scalars['String']['output']>;
+  antigen?: Maybe<Scalars['String']['output']>;
+  assay: Array<Scalars['String']['output']>;
+  assayOther?: Maybe<Scalars['String']['output']>;
+  city?: Maybe<Scalars['String']['output']>;
+  country: Scalars['String']['output'];
+  countryAlphaThreeCode: Scalars['String']['output'];
+  countryAlphaTwoCode: Scalars['String']['output'];
+  createdAt: Scalars['String']['output'];
+  estimateId?: Maybe<Scalars['String']['output']>;
+  estimateType: ArbovirusEstimateType;
+  groupId: Scalars['String']['output'];
+  groupingVariable?: Maybe<ArbovirusGroupingVariable>;
+  id: Scalars['String']['output'];
+  inclusionCriteria?: Maybe<Scalars['String']['output']>;
+  latitude: Scalars['Float']['output'];
+  longitude: Scalars['Float']['output'];
+  pathogen: Arbovirus;
+  pediatricAgeGroup?: Maybe<Scalars['String']['output']>;
+  producer?: Maybe<Scalars['String']['output']>;
+  producerOther?: Maybe<Scalars['String']['output']>;
+  sameFrameTargetGroup?: Maybe<Scalars['String']['output']>;
+  sampleEndDate?: Maybe<Scalars['String']['output']>;
+  sampleFrame?: Maybe<Scalars['String']['output']>;
+  sampleNumerator?: Maybe<Scalars['Int']['output']>;
+  sampleSize: Scalars['Int']['output'];
+  sampleStartDate?: Maybe<Scalars['String']['output']>;
+  seroprevalence: Scalars['Float']['output'];
+  seroprevalenceCalculated95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceCalculated95CIUpper?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CILower?: Maybe<Scalars['Float']['output']>;
+  seroprevalenceStudy95CIUpper?: Maybe<Scalars['Float']['output']>;
+  serotype: Array<Scalars['String']['output']>;
+  sex: Array<Scalars['String']['output']>;
+  shown: Scalars['Boolean']['output'];
+  sourceSheetId?: Maybe<Scalars['String']['output']>;
+  sourceSheetName?: Maybe<Scalars['String']['output']>;
+  state?: Maybe<Scalars['String']['output']>;
+  studyPopulation: ArbovirusStudyPopulation;
+  studySpecies: Scalars['String']['output'];
+  unRegion?: Maybe<UnRegion>;
+  url?: Maybe<Scalars['String']['output']>;
+  whoRegion?: Maybe<Scalars['String']['output']>;
+};
 
 export enum WhoRegion {
   Afr = 'AFR',
@@ -1680,6 +1747,8 @@ export type ResolversTypes = {
   PartitionedMonthlySarsCov2CountryInformationOutput: ResolverTypeWrapper<PartitionedMonthlySarsCov2CountryInformationOutput>;
   PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
   PartitionedSarsCov2EstimatesOutput: ResolverTypeWrapper<PartitionedSarsCov2EstimatesOutput>;
+  PartitionedUnravelledGroupedArbovirusEstimatesInput: PartitionedUnravelledGroupedArbovirusEstimatesInput;
+  PartitionedUnravelledGroupedArbovirusEstimatesOutput: ResolverTypeWrapper<PartitionedUnravelledGroupedArbovirusEstimatesOutput>;
   PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
   PartitionedYearlyFaoCamelPopulationDataOutput: ResolverTypeWrapper<PartitionedYearlyFaoCamelPopulationDataOutput>;
   PrimaryAnimalMersSeroprevalenceEstimateInformation: ResolverTypeWrapper<PrimaryAnimalMersSeroprevalenceEstimateInformation>;
@@ -1696,6 +1765,7 @@ export type ResolversTypes = {
   TeamMemberGroup: ResolverTypeWrapper<TeamMemberGroup>;
   TeamMemberSymbol: TeamMemberSymbol;
   UNRegion: UnRegion;
+  UnravelledGroupedArbovirusEstimate: ResolverTypeWrapper<UnravelledGroupedArbovirusEstimate>;
   WHORegion: WhoRegion;
   YearlyFaoCamelPopulationDataEntry: ResolverTypeWrapper<YearlyFaoCamelPopulationDataEntry>;
 };
@@ -1762,6 +1832,8 @@ export type ResolversParentTypes = {
   PartitionedMonthlySarsCov2CountryInformationOutput: PartitionedMonthlySarsCov2CountryInformationOutput;
   PartitionedSarsCov2EstimatesInput: PartitionedSarsCov2EstimatesInput;
   PartitionedSarsCov2EstimatesOutput: PartitionedSarsCov2EstimatesOutput;
+  PartitionedUnravelledGroupedArbovirusEstimatesInput: PartitionedUnravelledGroupedArbovirusEstimatesInput;
+  PartitionedUnravelledGroupedArbovirusEstimatesOutput: PartitionedUnravelledGroupedArbovirusEstimatesOutput;
   PartitionedYearlyFaoCamelPopulationDataInput: PartitionedYearlyFaoCamelPopulationDataInput;
   PartitionedYearlyFaoCamelPopulationDataOutput: PartitionedYearlyFaoCamelPopulationDataOutput;
   PrimaryAnimalMersSeroprevalenceEstimateInformation: PrimaryAnimalMersSeroprevalenceEstimateInformation;
@@ -1776,6 +1848,7 @@ export type ResolversParentTypes = {
   String: Scalars['String']['output'];
   TeamMember: TeamMember;
   TeamMemberGroup: TeamMemberGroup;
+  UnravelledGroupedArbovirusEstimate: UnravelledGroupedArbovirusEstimate;
   YearlyFaoCamelPopulationDataEntry: YearlyFaoCamelPopulationDataEntry;
 };
 
@@ -2567,6 +2640,12 @@ export type PartitionedSarsCov2EstimatesOutputResolvers<ContextType = any, Paren
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PartitionedUnravelledGroupedArbovirusEstimatesOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedUnravelledGroupedArbovirusEstimatesOutput'] = ResolversParentTypes['PartitionedUnravelledGroupedArbovirusEstimatesOutput']> = {
+  arboEstimates?: Resolver<Array<ResolversTypes['UnravelledGroupedArbovirusEstimate']>, ParentType, ContextType>;
+  partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['PartitionedYearlyFaoCamelPopulationDataOutput'] = ResolversParentTypes['PartitionedYearlyFaoCamelPopulationDataOutput']> = {
   partitionKey?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   yearlyFaoCamelPopulationData?: Resolver<Array<ResolversTypes['YearlyFaoCamelPopulationDataEntry']>, ParentType, ContextType>;
@@ -2914,6 +2993,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   allGroupedArbovirusEstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allMonthlySarsCov2CountryInformationPartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   allSarsCov2EstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
+  allUnravelledGroupedArbovirusEstimatePartitionKeys?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>;
   arbovirusDataStatistics?: Resolver<ResolversTypes['ArbovirusDataStatistics'], ParentType, ContextType>;
   arbovirusEnviromentalSuitabilityData?: Resolver<Array<ResolversTypes['ArbovirusEnvironmentalSuitabilityDataEntry']>, ParentType, ContextType>;
   arbovirusEstimates?: Resolver<Array<ResolversTypes['ArbovirusEstimate']>, ParentType, ContextType>;
@@ -2935,6 +3015,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   partitionedGroupedArbovirusEstimates?: Resolver<ResolversTypes['PartitionedGroupedArbovirusEstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedGroupedArbovirusEstimatesArgs, 'input'>>;
   partitionedMonthlySarsCov2CountryInformation?: Resolver<ResolversTypes['PartitionedMonthlySarsCov2CountryInformationOutput'], ParentType, ContextType, RequireFields<QueryPartitionedMonthlySarsCov2CountryInformationArgs, 'input'>>;
   partitionedSarsCov2Estimates?: Resolver<ResolversTypes['PartitionedSarsCov2EstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedSarsCov2EstimatesArgs, 'input'>>;
+  partitionedUnravelledGroupedArbovirusEstimates?: Resolver<ResolversTypes['PartitionedUnravelledGroupedArbovirusEstimatesOutput'], ParentType, ContextType, RequireFields<QueryPartitionedUnravelledGroupedArbovirusEstimatesArgs, 'input'>>;
   partitionedYearlyFaoCamelPopulationData?: Resolver<ResolversTypes['PartitionedYearlyFaoCamelPopulationDataOutput'], ParentType, ContextType, RequireFields<QueryPartitionedYearlyFaoCamelPopulationDataArgs, 'input'>>;
   sarsCov2Estimates?: Resolver<Array<ResolversTypes['SarsCov2Estimate']>, ParentType, ContextType>;
   sarsCov2FilterOptions?: Resolver<ResolversTypes['SarsCov2FilterOptions'], ParentType, ContextType>;
@@ -3014,6 +3095,56 @@ export type TeamMemberGroupResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UnravelledGroupedArbovirusEstimateResolvers<ContextType = any, ParentType extends ResolversParentTypes['UnravelledGroupedArbovirusEstimate'] = ResolversParentTypes['UnravelledGroupedArbovirusEstimate']> = {
+  ageGroup?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  ageMaximum?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  ageMinimum?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  antibodies?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  antigen?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  assay?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  assayOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
+  groupId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  groupingVariable?: Resolver<Maybe<ResolversTypes['ArbovirusGroupingVariable']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  longitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  pathogen?: Resolver<ResolversTypes['Arbovirus'], ParentType, ContextType>;
+  pediatricAgeGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  producer?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  producerOther?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sameFrameTargetGroup?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleEndDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleFrame?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sampleNumerator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  sampleSize?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  sampleStartDate?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  seroprevalence?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  seroprevalenceCalculated95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceCalculated95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CILower?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  seroprevalenceStudy95CIUpper?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  serotype?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  sex?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  shown?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyPopulation?: Resolver<ResolversTypes['ArbovirusStudyPopulation'], ParentType, ContextType>;
+  studySpecies?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
+  url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  whoRegion?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type YearlyFaoCamelPopulationDataEntryResolvers<ContextType = any, ParentType extends ResolversParentTypes['YearlyFaoCamelPopulationDataEntry'] = ResolversParentTypes['YearlyFaoCamelPopulationDataEntry']> = {
   camelCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   camelCountPerCapita?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -3080,6 +3211,7 @@ export type Resolvers<ContextType = any> = {
   PartitionedGroupedArbovirusEstimatesOutput?: PartitionedGroupedArbovirusEstimatesOutputResolvers<ContextType>;
   PartitionedMonthlySarsCov2CountryInformationOutput?: PartitionedMonthlySarsCov2CountryInformationOutputResolvers<ContextType>;
   PartitionedSarsCov2EstimatesOutput?: PartitionedSarsCov2EstimatesOutputResolvers<ContextType>;
+  PartitionedUnravelledGroupedArbovirusEstimatesOutput?: PartitionedUnravelledGroupedArbovirusEstimatesOutputResolvers<ContextType>;
   PartitionedYearlyFaoCamelPopulationDataOutput?: PartitionedYearlyFaoCamelPopulationDataOutputResolvers<ContextType>;
   PrimaryAnimalMersSeroprevalenceEstimateInformation?: PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextType>;
   PrimaryAnimalMersViralEstimateInformation?: PrimaryAnimalMersViralEstimateInformationResolvers<ContextType>;
@@ -3092,6 +3224,7 @@ export type Resolvers<ContextType = any> = {
   SarsCov2FilterOptions?: SarsCov2FilterOptionsResolvers<ContextType>;
   TeamMember?: TeamMemberResolvers<ContextType>;
   TeamMemberGroup?: TeamMemberGroupResolvers<ContextType>;
+  UnravelledGroupedArbovirusEstimate?: UnravelledGroupedArbovirusEstimateResolvers<ContextType>;
   YearlyFaoCamelPopulationDataEntry?: YearlyFaoCamelPopulationDataEntryResolvers<ContextType>;
 };
 
