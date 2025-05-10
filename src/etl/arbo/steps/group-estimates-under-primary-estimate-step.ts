@@ -127,7 +127,7 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
 
       if(genderEstimates.length === 2) {
         const overallSampleSize = sum(genderEstimates.map((estimate) => estimate.sampleSize));
-        const overallSampleNumerator = sum(genderEstimates.map((estimate) => estimate.sampleNumerator));
+        const overallSampleNumerator = sum(genderEstimates.map((estimate) => estimate.sampleNumerator ?? 0));
         const overallSeroprevalence = overallSampleNumerator / overallSampleSize;
 
         return {
@@ -157,7 +157,7 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
 
       if(ageEstimates.length > 1) {
         const overallSampleSize = sum(ageEstimates.map((estimate) => estimate.sampleSize));
-        const overallSampleNumerator = sum(ageEstimates.map((estimate) => estimate.sampleNumerator));
+        const overallSampleNumerator = sum(ageEstimates.map((estimate) => estimate.sampleNumerator ?? 0));
         const overallSeroprevalence = overallSampleNumerator / overallSampleSize;
 
         return {
