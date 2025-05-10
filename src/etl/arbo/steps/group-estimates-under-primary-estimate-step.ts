@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import { pipe } from "fp-ts/lib/function.js";
 import sum from "lodash/sum.js";
+import uniq from "lodash/uniq.js";
 import {
   AirtableCountryFieldsAfterJitteringPinLatLngStep,
   AirtableEstimateFieldsAfterJitteringPinLatLngStep,
@@ -133,9 +134,9 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
         return {
           shownEstimates: [{
             ...genderEstimates[0],
-            sex: genderEstimates
+            sex: uniq(genderEstimates
               .map((estimate) => estimate.sex)
-              .filter((sex): sex is NonNullable<typeof sex> => !!sex),
+              .filter((sex): sex is NonNullable<typeof sex> => !!sex)),
             ageGroup: genderEstimates[0].ageGroup ? [ genderEstimates[0].ageGroup ] : [],
             seroprevalence: overallSeroprevalence, 
             seroprevalenceCalculated95CILower: undefined,
@@ -163,9 +164,9 @@ export const groupEstimatesUnderPrimaryEstimateStep = (
         return {
           shownEstimates: [{
             ...ageEstimates[0],
-            ageGroup: ageEstimates
+            ageGroup: uniq(ageEstimates
               .map((estimate) => estimate.ageGroup)
-              .filter((ageGroup): ageGroup is NonNullable<typeof ageGroup> => !!ageGroup),
+              .filter((ageGroup): ageGroup is NonNullable<typeof ageGroup> => !!ageGroup)),
             sex: ageEstimates[0].sex ? [ ageEstimates[0].sex ] : [],
             seroprevalence: overallSeroprevalence, 
             seroprevalenceCalculated95CILower: undefined,
