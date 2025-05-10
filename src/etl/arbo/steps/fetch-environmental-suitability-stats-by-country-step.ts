@@ -4,7 +4,8 @@ import {
   AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep,
   AirtableSourceFieldsAfterValidatingFieldSetFromAirtableStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep,
-  GroupedEstimatesAfterValidatingFieldSetFromAirtableStep
+  GroupedEstimatesAfterValidatingFieldSetFromAirtableStep,
+  UnravelledGroupedEstimatesAfterValidatingFieldSetFromAirtableStep
 } from "./validate-field-set-from-airtable-step";
 import { readFileSync } from "fs";
 
@@ -40,6 +41,8 @@ export interface EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnviron
 }
 export type GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep =
   GroupedEstimatesAfterValidatingFieldSetFromAirtableStep;
+export type UnravelledGroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep =
+  UnravelledGroupedEstimatesAfterValidatingFieldSetFromAirtableStep;
 
 interface FetchEnvironmentalSuitabilityStatsByCountryStepInput {
   allEstimates: AirtableEstimateFieldsAfterValidatingFieldSetFromAirtableStep[];
@@ -47,6 +50,7 @@ interface FetchEnvironmentalSuitabilityStatsByCountryStepInput {
   allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterValidatingFieldSetFromAirtableStep[];
   groupedEstimates: GroupedEstimatesAfterValidatingFieldSetFromAirtableStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterValidatingFieldSetFromAirtableStep[];
   mongoClient: MongoClient;
 }
 
@@ -56,6 +60,7 @@ interface FetchEnvironmentalSuitabilityStatsByCountryStepOutput {
   allCountries: AirtableCountryFieldsAfterValidatingFieldSetFromAirtableStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   groupedEstimates: GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   mongoClient: MongoClient;
 }
 
@@ -77,6 +82,7 @@ export const fetchEnvironmentalSuitabilityStatsByCountryStep = (
       allCountries: input.allCountries,
       environmentalSuitabilityStatsByCountry: [],
       groupedEstimates: input.groupedEstimates,
+      unravelledGroupedEstimates: input.unravelledGroupedEstimates,
       mongoClient: input.mongoClient
     };
   }
@@ -120,6 +126,7 @@ export const fetchEnvironmentalSuitabilityStatsByCountryStep = (
       }
     }),
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 }

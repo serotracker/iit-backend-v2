@@ -4,25 +4,22 @@ import {
   ArbovirusEstimateDocument,
   ArbovirusGroupedEstimateDocument,
   ArbovirusStudyPopulation,
+  UnravelledArbovirusGroupedEstimateDocument,
 } from "../../../storage/types.js";
-import {
-  AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep,
-  AirtableEstimateFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep,
-  AirtableSourceFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToGroupedEstimatesStep,
-  GroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep
-} from "./assign-partition-keys-to-grouped-estimates-step.js";
+import { AirtableCountryFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep, AirtableEstimateFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep, AirtableSourceFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep, EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep, GroupedEstimatesAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep, UnravelledGroupedEstimatesAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep } from "./assign-partition-keys-to-unravelled-grouped-estimates-step.js";
 
 export type AirtableEstimateFieldsAfterTransformingIntoFormatForDatabaseStep =
   ArbovirusEstimateDocument;
 export type AirtableSourceFieldsAfterTransformingIntoFormatForDatabaseStep =
-  AirtableSourceFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep;
+  AirtableSourceFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep;
 export type AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep =
-  AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep;
+  AirtableCountryFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep =
   ArbovirusEnvironmentalSuitabilityStatsEntryDocument;
 export type GroupedEstimatesAfterTransformingIntoFormatForDatabaseStep =
   ArbovirusGroupedEstimateDocument;
+export type UnravelledGroupedEstimatesAfterTransformingIntoFormatForDatabaseStep =
+  UnravelledArbovirusGroupedEstimateDocument;
 
 const transformStudyPopulationForDatabase = (studyPopulation: string | undefined): ArbovirusStudyPopulation => {
   if(!studyPopulation) {
@@ -41,11 +38,12 @@ const transformStudyPopulationForDatabase = (studyPopulation: string | undefined
 }
 
 interface TransformIntoFormatForDatabaseStepInput {
-  allEstimates: AirtableEstimateFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
-  allSources: AirtableSourceFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
-  allCountries: AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
-  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToGroupedEstimatesStep[];
-  groupedEstimates: GroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep[];
+  allEstimates: AirtableEstimateFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep[];
+  allSources: AirtableSourceFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep[];
+  allCountries: AirtableCountryFieldsAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep[];
+  groupedEstimates: GroupedEstimatesAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAssigningPartitionKeysToUnravelledGroupedEstimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -55,6 +53,7 @@ interface TransformIntoFormatForDatabaseStepOutput {
   allCountries: AirtableCountryFieldsAfterTransformingIntoFormatForDatabaseStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingIntoFormatForDatabaseStep[];
   groupedEstimates: GroupedEstimatesAfterTransformingIntoFormatForDatabaseStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterTransformingIntoFormatForDatabaseStep[];
   mongoClient: MongoClient;
 }
 
@@ -80,6 +79,12 @@ interface TransformGroupedArbovirusSubestimateForDatabaseInput {
 
 interface TransformGroupedArbovirusEstimateForDatabaseInput {
   groupedEstimate: TransformIntoFormatForDatabaseStepInput['groupedEstimates'][number];
+  createdAtForAllRecords: Date;
+  updatedAtForAllRecords: Date;
+}
+
+interface TransformUnravelledGroupedArbovirusEstimateForDatabaseInput {
+  unravelledGroupedEstimate: TransformIntoFormatForDatabaseStepInput['unravelledGroupedEstimates'][number];
   createdAtForAllRecords: Date;
   updatedAtForAllRecords: Date;
 }
@@ -124,6 +129,7 @@ const transformArbovirusEstimateForDatabase = (
     sampleEndDate: estimate.sampleEndDate,
     assay: estimate.assay,
     groupingVariable: estimate.groupingVariable,
+    subsettingVariable: estimate.subsettingVariable,
     unRegion: estimate.unRegion,
     url: estimate.url,
     sourceSheetId: estimate.sourceSheetId,
@@ -231,12 +237,32 @@ const transformGroupedArbovirusEstimateForDatabase = (
   }
 }
 
+const transformUnravelledGroupedArbovirusEstimateForDatabase = (
+  input: TransformUnravelledGroupedArbovirusEstimateForDatabaseInput
+): TransformIntoFormatForDatabaseStepOutput['unravelledGroupedEstimates'][number] => {
+  const { unravelledGroupedEstimate, createdAtForAllRecords, updatedAtForAllRecords } = input;
+
+  return {
+    _id: new ObjectId(),
+    partitionKey: unravelledGroupedEstimate.partitionKey,
+    groupId: unravelledGroupedEstimate.groupId,
+    shown: unravelledGroupedEstimate.shown,
+    ...transformGroupedArbovirusSubestimateForDatabase({
+      subEstimate: unravelledGroupedEstimate,
+      createdAtForAllRecords,
+      updatedAtForAllRecords
+    }),
+    createdAt: createdAtForAllRecords,
+    updatedAt: updatedAtForAllRecords
+  }
+}
+
 export const transformIntoFormatForDatabaseStep = (
   input: TransformIntoFormatForDatabaseStepInput
 ): TransformIntoFormatForDatabaseStepOutput => {
   console.log(`Running step: transformIntoFormatForDatabaseStep. Remaining estimates: ${input.allEstimates.length}`);
 
-  const { allEstimates, allSources, allCountries, groupedEstimates } = input;
+  const { allEstimates, allSources, allCountries, groupedEstimates, unravelledGroupedEstimates } = input;
 
   const createdAtForAllRecords = new Date();
   const updatedAtForAllRecords = createdAtForAllRecords;
@@ -256,6 +282,11 @@ export const transformIntoFormatForDatabaseStep = (
     })),
     groupedEstimates: groupedEstimates.map((groupedEstimate) => transformGroupedArbovirusEstimateForDatabase({
       groupedEstimate,
+      createdAtForAllRecords,
+      updatedAtForAllRecords,
+    })),
+    unravelledGroupedEstimates: unravelledGroupedEstimates.map((unravelledGroupedEstimate) => transformUnravelledGroupedArbovirusEstimateForDatabase({
+      unravelledGroupedEstimate,
       createdAtForAllRecords,
       updatedAtForAllRecords,
     })),

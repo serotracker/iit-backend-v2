@@ -5,6 +5,7 @@ import {
   AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
   GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
+  UnravelledGroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep,
 } from "./clean-field-names-and-remove-unused-fields-step.js";
 
 export type AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep = Omit<
@@ -27,6 +28,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElemen
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
 export type GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep =
   GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
+export type UnravelledGroupedEstimatesAfterCleaningSingleElementArrayFieldsStep =
+  UnravelledGroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep;
 
 interface CleanSingleElementArrayFieldsStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
@@ -34,6 +37,7 @@ interface CleanSingleElementArrayFieldsStepInput {
   allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   groupedEstimates: GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -43,6 +47,7 @@ interface CleanSingleElementArrayFieldsStepOutput {
   allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep[];
   groupedEstimates: GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -67,6 +72,7 @@ export const cleanSingleElementArrayFieldsStep = (
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };

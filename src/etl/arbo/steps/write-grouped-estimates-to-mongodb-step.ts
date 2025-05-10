@@ -4,7 +4,8 @@ import {
   AirtableEstimateFieldsAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep,
   AirtableSourceFieldsAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep,
-  GroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep
+  GroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep,
+  UnravelledGroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep
 } from "./write-enviromental-suitability-stats-by-country-to-mongodb-step";
 import { getEnvironmentVariableOrThrow, writeDataToMongoEtlStep } from "../../helpers.js";
 
@@ -18,6 +19,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterWritingGroupedEstima
   EnvironmentalSuitabilityStatsByCountryEntryAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep;
 export type GroupedEstimatesAfterWritingGroupedEstimatesToMongoDbStep =
   GroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep;
+export type UnravelledGroupedEstimatesAfterWritingGroupedEstimatesToMongoDbStep =
+  UnravelledGroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep;
 
 interface WriteGroupedEstimatesToMongoDbStepInput {
   allEstimates: AirtableEstimateFieldsAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep[];
@@ -25,6 +28,7 @@ interface WriteGroupedEstimatesToMongoDbStepInput {
   allCountries: AirtableCountryFieldsAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep[];
   groupedEstimates: GroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterWritingEnvironmentalSuitabilityStatsByCountryToMongoDbStep[];
   mongoClient: MongoClient;
 }
 
@@ -34,6 +38,7 @@ interface WriteGroupedEstimatesToMongoDbStepOutput {
   allCountries: AirtableCountryFieldsAfterWritingGroupedEstimatesToMongoDbStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterWritingGroupedEstimatesToMongoDbStep[];
   groupedEstimates: GroupedEstimatesAfterWritingGroupedEstimatesToMongoDbStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterWritingGroupedEstimatesToMongoDbStep[];
   mongoClient: MongoClient;
 }
 
@@ -57,6 +62,7 @@ export const writeGroupedEstimatesToMongoDbStep = async(
     allCountries: input.allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   }
 }

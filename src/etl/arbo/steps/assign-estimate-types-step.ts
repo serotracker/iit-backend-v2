@@ -4,7 +4,8 @@ import {
   AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep,
   AirtableSourceFieldsAfterAssertingMandatoryFieldsArePresentStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep,
-  GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep
+  GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep,
+  UnravelledGroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep
 } from "./assert-mandatory-fields-are-present-step.js";
 import { ArbovirusEstimateType } from "../../../storage/types.js";
 
@@ -22,6 +23,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTyp
   EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep;
 export type GroupedEstimatesAfterAssigningEstimateTypesStep =
   GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep;
+export type UnravelledGroupedEstimatesAfterAssigningEstimateTypesStep =
+  UnravelledGroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep;
 
 interface AssignEstimateTypesStepInput {
   allEstimates: AirtableEstimateFieldsAfterAssertingMandatoryFieldsArePresentStep[];
@@ -29,6 +32,7 @@ interface AssignEstimateTypesStepInput {
   allCountries: AirtableCountryFieldsAfterAssertingMandatoryFieldsArePresentStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssertingMandatoryFieldsArePresentStep[];
   groupedEstimates: GroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAssertingMandatoryFieldsArePresentStep[];
   mongoClient: MongoClient;
 }
 
@@ -38,6 +42,7 @@ interface AssignEstimateTypesStepOutput {
   allCountries: AirtableCountryFieldsAfterAssigningEstimateTypesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningEstimateTypesStep[];
   groupedEstimates: GroupedEstimatesAfterAssigningEstimateTypesStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAssigningEstimateTypesStep[];
   mongoClient: MongoClient;
 }
 
@@ -73,6 +78,7 @@ export const assignEstimateTypesStep = (
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };

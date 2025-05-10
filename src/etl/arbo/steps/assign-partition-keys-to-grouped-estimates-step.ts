@@ -4,7 +4,8 @@ import {
   AirtableEstimateFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep,
   AirtableSourceFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterGroupingEstimatesUnderPrimaryEstimateStep, 
-  GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep
+  GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep,
+  UnravelledGroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep
 } from "./group-estimates-under-primary-estimate-step";
 
 export type AirtableEstimateFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep =
@@ -18,6 +19,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKe
 export type GroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep = GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep & {
   partitionKey: number;
 };
+export type UnravelledGroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep = 
+  UnravelledGroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep;
 
 
 interface AssignPartitionKeysToGroupedEstimatesStepInput {
@@ -26,6 +29,7 @@ interface AssignPartitionKeysToGroupedEstimatesStepInput {
   allCountries: AirtableCountryFieldsAfterGroupingEstimatesUnderPrimaryEstimateStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterGroupingEstimatesUnderPrimaryEstimateStep[];
   groupedEstimates: GroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterGroupingEstimatesUnderPrimaryEstimateStep[];
   mongoClient: MongoClient;
 }
 
@@ -35,6 +39,7 @@ interface AssignPartitionKeysToGroupedEstimatesStepOutput {
   allCountries: AirtableCountryFieldsAfterAssigningPartitionKeysToGroupedEstimatesStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAssigningPartitionKeysToGroupedEstimatesStep[];
   groupedEstimates: GroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAssigningPartitionKeysToGroupedEstimatesStep[];
   mongoClient: MongoClient;
 }
 
@@ -52,6 +57,7 @@ export const assignPartitionKeysToGroupedEstimatesStep = (
       ...groupedEstimate,
       partitionKey: Math.floor(index / 200)
     })),
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 }

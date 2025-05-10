@@ -5,9 +5,10 @@ import {
   AirtableEstimateFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
   AirtableSourceFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
-  GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep
+  GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep,
+  UnravelledGroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep
 } from "./fetch-environmental-suitability-stats-by-country-step.js";
-import { ArbovirusGroupingVariable } from "../../../storage/types.js";
+import { ArbovirusGroupingVariable, ArbovirusSubsettingVariable } from "../../../storage/types.js";
 
 export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
   estimateType: string | undefined;
@@ -47,6 +48,7 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   studyPopulation: string | undefined;
   studySpecies: string | undefined;
   groupingVariable: ArbovirusGroupingVariable | undefined;
+  subsettingVariable: ArbovirusSubsettingVariable | undefined;
 }
 
 export interface AirtableSourceFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep {
@@ -79,6 +81,8 @@ export interface EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNa
 
 export type GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep =
   GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep;
+export type UnravelledGroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep =
+  UnravelledGroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep;
 
 interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allEstimates: AirtableEstimateFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
@@ -86,6 +90,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepInput {
   allCountries: AirtableCountryFieldsAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   groupedEstimates: GroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterFetchingEnvironmentalSuitabilityStatsByCountryStep[];
   mongoClient: MongoClient;
 }
 
@@ -95,6 +100,7 @@ interface CleanFieldNamesAndRemoveUnusedFieldsStepOutput {
   allCountries: AirtableCountryFieldsAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   groupedEstimates: GroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterCleaningFieldNamesAndRemoveUnusedFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -109,6 +115,15 @@ const airtableGroupingVariableToGroupingVariableEnumMap: Record<string, Arboviru
   ['Species']: ArbovirusGroupingVariable.SPECIES,
   ['Race']: ArbovirusGroupingVariable.RACE,
   ['Education']: ArbovirusGroupingVariable.EDUCATION,
+}
+
+const airtableSubsettingVariableToSubsettingVariableEnumMap: Record<string, ArbovirusSubsettingVariable | undefined> = {
+  ['Geography']: ArbovirusSubsettingVariable.GEOGRAPHY,
+  ['Distinct Populations']: ArbovirusSubsettingVariable.DISTINCT_POPULATIONS,
+  ['Timeframe']: ArbovirusSubsettingVariable.TIMEFRAME,
+  ['None']: ArbovirusSubsettingVariable.NONE,
+  ['Test type']: ArbovirusSubsettingVariable.TEST_TYPE,
+  ['No']: ArbovirusSubsettingVariable.NO,
 }
 
 export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
@@ -159,6 +174,9 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       groupingVariable: !!estimate["Grouping Variable"]
         ? airtableGroupingVariableToGroupingVariableEnumMap[estimate["Grouping Variable"]]
         : undefined,
+      subsettingVariable: !!estimate["Subsetting Variable"]
+        ? airtableSubsettingVariableToSubsettingVariableEnumMap[estimate["Subsetting Variable"]]
+        : undefined,
     })),
     allSources: allSources.map((source) => ({
       id: source["id"],
@@ -198,6 +216,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       }
     })),
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };

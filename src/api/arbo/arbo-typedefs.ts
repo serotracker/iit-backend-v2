@@ -170,6 +170,58 @@ export const arboTypedefs = `
     whoRegion: String
   }
 
+  type UnravelledGroupedArbovirusEstimate {
+    shown: Boolean!
+    groupId: String!
+    
+    ####### START FIELDS FROM ARBOVIRUSSUBESTIMATE FIELDS #######
+    estimateType: ArbovirusEstimateType!
+    groupingVariable: ArbovirusGroupingVariable
+    ageGroup: [String!]!
+    ageMaximum: Int
+    ageMinimum: Int
+    antibodies: [String!]!
+    antigen: String
+    assay: [String!]!
+    assayOther: String
+    city: String
+    state: String
+    country: String!
+    countryAlphaTwoCode: String!
+    countryAlphaThreeCode: String!
+    createdAt: String!
+    estimateId: String
+    id: String!
+    inclusionCriteria: String
+    latitude: Float!
+    longitude: Float!
+    pathogen: Arbovirus!
+    pediatricAgeGroup: String
+    producer: String
+    producerOther: String
+    sameFrameTargetGroup: String
+    sampleEndDate: String
+    sampleFrame: String
+    sampleNumerator: Int
+    sampleSize: Int!
+    sampleStartDate: String
+    seroprevalence: Float!
+    studyPopulation: ArbovirusStudyPopulation!
+    studySpecies: String!
+    seroprevalenceStudy95CILower: Float
+    seroprevalenceStudy95CIUpper: Float
+    seroprevalenceCalculated95CILower: Float
+    seroprevalenceCalculated95CIUpper: Float
+    serotype: [String!]!
+    sex: [String!]!
+    sourceSheetId: String
+    sourceSheetName: String
+    unRegion: UNRegion
+    url: String
+    whoRegion: String
+    ####### END FIELDS FROM ARBOVIRUSSUBESTIMATE FIELDS #######
+  }
+
   type GroupedArbovirusEstimate {
     id: String!
     shownEstimates: [ArbovirusSubEstimate!]!
@@ -185,11 +237,22 @@ export const arboTypedefs = `
     arboEstimates: [GroupedArbovirusEstimate!]!
   }
 
+  input PartitionedUnravelledGroupedArbovirusEstimatesInput {
+    partitionKey: Int!
+  }
+
+  type PartitionedUnravelledGroupedArbovirusEstimatesOutput {
+    partitionKey: Int!
+    arboEstimates: [UnravelledGroupedArbovirusEstimate!]!
+  }
+
   type Query {
     arbovirusEstimates: [ArbovirusEstimate!]!
     groupedArbovirusEstimates: [GroupedArbovirusEstimate!]!
     partitionedGroupedArbovirusEstimates(input: PartitionedGroupedArbovirusEstimatesInput!): PartitionedGroupedArbovirusEstimatesOutput!
     allGroupedArbovirusEstimatePartitionKeys: [Int!]!
+    partitionedUnravelledGroupedArbovirusEstimates(input: PartitionedUnravelledGroupedArbovirusEstimatesInput!): PartitionedUnravelledGroupedArbovirusEstimatesOutput!
+    allUnravelledGroupedArbovirusEstimatePartitionKeys: [Int!]!
     arbovirusEnviromentalSuitabilityData: [ArbovirusEnvironmentalSuitabilityDataEntry!]!
     arbovirusFilterOptions: ArbovirusFilterOptions!
     groupedArbovirusEstimateFilterOptions: ArbovirusFilterOptions!

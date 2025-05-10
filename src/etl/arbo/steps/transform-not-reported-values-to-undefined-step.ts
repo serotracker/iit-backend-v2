@@ -6,6 +6,7 @@ import {
   AirtableSourceFieldsAfterCleaningSingleElementArrayFieldsStep,
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep,
   GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep,
+  UnravelledGroupedEstimatesAfterCleaningSingleElementArrayFieldsStep,
 } from "./clean-single-element-array-fields-step.js";
 
 export type AirtableEstimateFieldsAfterTransformingNotReportedValuesToUndefinedStep =
@@ -18,6 +19,8 @@ export type EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotRepor
   EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep;
 export type GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep =
   GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep;
+export type UnravelledGroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep =
+  UnravelledGroupedEstimatesAfterCleaningSingleElementArrayFieldsStep;
 
 interface TransformNotReportedValuesToUndefinedStepInput {
   allEstimates: AirtableEstimateFieldsAfterCleaningSingleElementArrayFieldsStep[];
@@ -25,6 +28,7 @@ interface TransformNotReportedValuesToUndefinedStepInput {
   allCountries: AirtableCountryFieldsAfterCleaningSingleElementArrayFieldsStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterCleaningSingleElementArrayFieldsStep[];
   groupedEstimates: GroupedEstimatesAfterCleaningSingleElementArrayFieldsStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterCleaningSingleElementArrayFieldsStep[];
   mongoClient: MongoClient;
 }
 
@@ -34,6 +38,7 @@ interface TransformNotReportedValuesToUndefinedStepOutput {
   allCountries: AirtableCountryFieldsAfterTransformingNotReportedValuesToUndefinedStep[];
   environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterTransformingNotReportedValuesToUndefinedStep[];
   groupedEstimates: GroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterTransformingNotReportedValuesToUndefinedStep[];
   mongoClient: MongoClient;
 }
 
@@ -80,6 +85,7 @@ export const transformNotReportedValuesToUndefinedStep = (
     allCountries: allCountries,
     environmentalSuitabilityStatsByCountry: input.environmentalSuitabilityStatsByCountry,
     groupedEstimates: input.groupedEstimates,
+    unravelledGroupedEstimates: input.unravelledGroupedEstimates,
     mongoClient: input.mongoClient
   };
 };
