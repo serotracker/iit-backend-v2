@@ -34,6 +34,7 @@ export interface AirtableEstimateFieldsAfterCleaningFieldNamesAndRemoveUnusedFie
   seroprevalenceStudy95CIUpper: number | undefined;
   seroprevalenceCalculated95CILower: number | undefined;
   seroprevalenceCalculated95CIUpper: number | undefined;
+  district: string | undefined;
   state: string | undefined;
   city: string | undefined;
   url: string[] | undefined;
@@ -158,6 +159,7 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       seroprevalenceStudy95CIUpper: estimate["Prevalence 95% CI Upper"],
       seroprevalenceCalculated95CILower: estimate["Prevalence 95% CI Lower (formula)"],
       seroprevalenceCalculated95CIUpper: estimate["Prevalence 95% CI Upper (formula)"],
+      district: estimate["District"],
       state: estimate["State/Province"],
       city: estimate["City"],
       url: estimate["URL"],

@@ -18,6 +18,7 @@ export const sarsCov2Typedefs = `
     gbdSuperRegion: GBDSuperRegion
     gbdSubRegion: GBDSubRegion
     state: String
+    county: String
     scope: String
     city: String
     id: String!

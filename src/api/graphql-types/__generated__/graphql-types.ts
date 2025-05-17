@@ -207,6 +207,7 @@ export type ArbovirusEstimate = {
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
   id: Scalars['String']['output'];
@@ -297,6 +298,7 @@ export type ArbovirusSubEstimate = {
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
   groupingVariable?: Maybe<ArbovirusGroupingVariable>;
@@ -1419,6 +1421,7 @@ export type SarsCov2Estimate = {
   countryPeopleFullyVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   countryPeopleVaccinatedPerHundred?: Maybe<Scalars['Float']['output']>;
   countryPositiveCasesPerMillionPeople?: Maybe<Scalars['Float']['output']>;
+  county?: Maybe<Scalars['String']['output']>;
   denominatorValue?: Maybe<Scalars['Int']['output']>;
   estimateName?: Maybe<Scalars['String']['output']>;
   gbdSubRegion?: Maybe<GbdSubRegion>;
@@ -1524,6 +1527,7 @@ export type UnravelledGroupedArbovirusEstimate = {
   countryAlphaThreeCode: Scalars['String']['output'];
   countryAlphaTwoCode: Scalars['String']['output'];
   createdAt: Scalars['String']['output'];
+  district?: Maybe<Scalars['String']['output']>;
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
   groupId: Scalars['String']['output'];
@@ -2031,6 +2035,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -2097,6 +2102,7 @@ export type ArbovirusSubEstimateResolvers<ContextType = any, ParentType extends 
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
   groupingVariable?: Resolver<Maybe<ResolversTypes['ArbovirusGroupingVariable']>, ParentType, ContextType>;
@@ -3032,6 +3038,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   countryPeopleFullyVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   countryPeopleVaccinatedPerHundred?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   countryPositiveCasesPerMillionPeople?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  county?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   denominatorValue?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   estimateName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   gbdSubRegion?: Resolver<Maybe<ResolversTypes['GBDSubRegion']>, ParentType, ContextType>;
@@ -3108,6 +3115,7 @@ export type UnravelledGroupedArbovirusEstimateResolvers<ContextType = any, Paren
   countryAlphaThreeCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   countryAlphaTwoCode?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
   groupId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

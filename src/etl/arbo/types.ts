@@ -38,6 +38,7 @@ export type AirtableEstimateFields = {
   "Age group": string | undefined;
   City: string | undefined;
   "State/Province": string | undefined;
+  "District": string | undefined;
   "ETL Included": 0 | 1 | undefined;
   "Publication Date": unknown[] | undefined;
   "First Author Last Name": unknown[] | undefined;
