@@ -10,6 +10,7 @@ export const arboTypedefs = `
     assayOther: String
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -135,6 +136,7 @@ export const arboTypedefs = `
     assayOther: String
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!
@@ -186,6 +188,7 @@ export const arboTypedefs = `
     assayOther: String
     city: String
     state: String
+    district: String
     country: String!
     countryAlphaTwoCode: String!
     countryAlphaThreeCode: String!

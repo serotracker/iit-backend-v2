@@ -100,6 +100,7 @@ export interface ArbovirusEstimateDocument {
   country: string;
   countryAlphaTwoCode: string;
   countryAlphaThreeCode: string;
+  district: string | undefined;
   state: string | undefined;
   city: string | undefined;
   antibodies: string[] | undefined;
