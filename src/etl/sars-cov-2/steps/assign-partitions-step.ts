@@ -44,8 +44,8 @@ interface AssignPartitionsStepOutput {
 }
 
 export const assignPartitionsStep = (input: AssignPartitionsStepInput): AssignPartitionsStepOutput => {
-  const estimatePartitionSize = 1000;
-  const consolidatedCountryDataPartitionSize = 5000;
+  const estimatePartitionSize = 500;
+  const consolidatedCountryDataPartitionSize = 2000;
   console.log(`Running step: assignPartitionsStep. Remaining estimates: ${input.allEstimates.length}. estimatePartitionSize: ${estimatePartitionSize}. consolidatedCountryDataPartitionSize: ${consolidatedCountryDataPartitionSize}`);
 
   return {
