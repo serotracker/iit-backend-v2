@@ -1,8 +1,8 @@
 import { TeamMemberFieldsAfterValidatingFieldSetFromAirtableStep, TeamSortOrderEntryFieldsAfterValidatingFieldSetFromAirtableStep } from "./validate-field-set-from-airtable-step.js";
 
 export interface TeamMemberFieldsAfterCleaningFieldNamesStep {
-  firstName: string;
-  lastName: string;
+  firstName: string | undefined;
+  lastName: string | undefined;
   teams: string[];
   active: boolean;
   hidden: boolean;

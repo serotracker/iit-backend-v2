@@ -42,6 +42,7 @@ import { validateWhoCaseDataStep } from "./steps/validate-who-case-data-step.js"
 import { cleanWhoCaseDataStep } from "./steps/clean-who-case-data-step.js";
 import { writeMersWhoCaseDataToMongoDbStep } from "./steps/write-mers-who-case-data-to-mongodb-step.js";
 import { filterOutInvalidEstimatesStep } from "./steps/filter-out-invalid-estimates-step.js";
+import { filterEstimatesWithoutRequiredFields } from "./steps/filter-estimates-without-required-fields-step.js";
 
 const runEtlMain = async () => {
   console.log("Running MERS ETL");
@@ -122,6 +123,7 @@ const runEtlMain = async () => {
     etlStep(cleanSourcesStep),
     etlStep(cleanStudiesStep),
     etlStep(cleanEstimatesStep),
+    etlStep(filterEstimatesWithoutRequiredFields),
     etlStep(cleanCountriesStep),
     etlStep(cleanMacroSampleFramesStep),
     etlStep(fetchFaoMersEventsStep),
@@ -136,11 +138,11 @@ const runEtlMain = async () => {
     etlStep(fetchCountryPopulationDataStep),
     etlStep(generateCamelDataPerCapitaStep),
     etlStep(parseDatesStep),
-    etlStep(deriveSampleDenominatorAndNumeratorStep),
   );
 
   const outputFromSecondPipeThird = await pipe(
     outputFromFirstPipeThird,
+    etlStep(deriveSampleDenominatorAndNumeratorStep),
     etlStep(combineStudiesWithSourcesStep),
     etlStep(combineEstimatesWithStudiesStep),
     etlStep(addCountryAndRegionInformationStep),
@@ -159,11 +161,11 @@ const runEtlMain = async () => {
     asyncEtlStep(writeGroupedEstimateDataToMongodbStep),
     asyncEtlStep(writeFaoMersEventDataToMongoDbStep),
     asyncEtlStep(writeFaoYearlyCamelPopulationDataToMongoDbStep),
-    asyncEtlStep(writeMersEstimateFilterOptionsToMongoDbStep),
   );
 
   await pipe(
     outputFromSecondPipeThird,
+    asyncEtlStep(writeMersEstimateFilterOptionsToMongoDbStep),
     asyncEtlStep(writeMersMacroSampleFramesToMongoDbStep),
     asyncEtlStep(writeMersWhoCaseDataToMongoDbStep),
     asyncEtlStep(addDatabaseIndexesStep)

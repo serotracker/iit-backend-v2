@@ -8,7 +8,10 @@ import {
   StudyFieldsAfterRemovingNonPrimaryEstimatesStep
 } from "./remove-non-primary-estimates-step.js";
 
-export type EstimateFieldsAfterCombiningEstimatesAndStudiesStep = EstimateFieldsAfterRemovingNonPrimaryEstimatesStep & {studyName: string | undefined};
+export type EstimateFieldsAfterCombiningEstimatesAndStudiesStep = EstimateFieldsAfterRemovingNonPrimaryEstimatesStep & {
+  studyName: string | undefined,
+  studyType: string | undefined,
+};
 export type StudyFieldsAfterCombiningEstimatesAndStudiesStep = StudyFieldsAfterRemovingNonPrimaryEstimatesStep;
 export type CountryFieldsAfterCombiningEstimatesAndStudiesStep =
   CountryFieldsAfterRemovingNonPrimaryEstimatesStep;
@@ -53,13 +56,15 @@ export const combineEstimatesAndStudies = (
       if(!associatedStudy) {
         return {
           ...estimate,
-          studyName: undefined
+          studyName: undefined,
+          studyType: undefined,
         }
       }
 
       return {
         ...estimate,
-        studyName: associatedStudy.studyName
+        studyName: associatedStudy.studyName,
+        studyType: associatedStudy.studyType
       }
     }),
     allStudies: input.allStudies,

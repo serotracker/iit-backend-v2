@@ -167,6 +167,7 @@ const transformMersEstimateBaseForDatabase = (input: TransformMersEstimateBaseFo
   insitutution: input.estimate.study.source.insitutution,
   studyInclusionCriteria: input.estimate.study.inclusionCriteria,
   studyExclusionCriteria: input.estimate.study.exclusionCriteria,
+  studyDesign: input.estimate.study.studyDesign,
   sensitivity: input.estimate.sensitivity,
   sensitivity95CILower: input.estimate.sensitivity95CILower,
   sensitivity95CIUpper: input.estimate.sensitivity95CIUpper,

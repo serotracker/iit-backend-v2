@@ -234,6 +234,7 @@ export type ArbovirusEstimate = {
   sourceSheetId?: Maybe<Scalars['String']['output']>;
   sourceSheetName?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyPopulation: ArbovirusStudyPopulation;
   studySpecies: Scalars['String']['output'];
   unRegion?: Maybe<UnRegion>;
@@ -326,6 +327,7 @@ export type ArbovirusSubEstimate = {
   sourceSheetId?: Maybe<Scalars['String']['output']>;
   sourceSheetName?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyPopulation: ArbovirusStudyPopulation;
   studySpecies: Scalars['String']['output'];
   unRegion?: Maybe<UnRegion>;
@@ -1064,6 +1066,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformation = PrimaryMersEsti
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
   specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   symptomDefinition?: Maybe<Scalars['String']['output']>;
@@ -1134,6 +1137,7 @@ export type PrimaryAnimalMersViralEstimateInformation = PrimaryMersEstimateInfor
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
   specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   symptomDefinition?: Maybe<Scalars['String']['output']>;
@@ -1201,6 +1205,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformation = PrimaryMersEstim
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
   specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   symptomDefinition?: Maybe<Scalars['String']['output']>;
@@ -1268,6 +1273,7 @@ export type PrimaryHumanMersViralEstimateInformation = PrimaryMersEstimateInform
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
   specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   symptomDefinition?: Maybe<Scalars['String']['output']>;
@@ -1327,6 +1333,7 @@ export type PrimaryMersEstimateInformationInterface = {
   specificityDenominator?: Maybe<Scalars['Int']['output']>;
   specimenType: Array<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyExclusionCriteria?: Maybe<Scalars['String']['output']>;
   studyInclusionCriteria?: Maybe<Scalars['String']['output']>;
   symptomDefinition?: Maybe<Scalars['String']['output']>;
@@ -1444,6 +1451,7 @@ export type SarsCov2Estimate = {
   sourceType?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
   studyName: Scalars['String']['output'];
+  studyType?: Maybe<Scalars['String']['output']>;
   testType: Array<Scalars['String']['output']>;
   unRegion?: Maybe<UnRegion>;
   url?: Maybe<Scalars['String']['output']>;
@@ -1557,6 +1565,7 @@ export type UnravelledGroupedArbovirusEstimate = {
   sourceSheetId?: Maybe<Scalars['String']['output']>;
   sourceSheetName?: Maybe<Scalars['String']['output']>;
   state?: Maybe<Scalars['String']['output']>;
+  studyDesign?: Maybe<Scalars['String']['output']>;
   studyPopulation: ArbovirusStudyPopulation;
   studySpecies: Scalars['String']['output'];
   unRegion?: Maybe<UnRegion>;
@@ -2110,6 +2119,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyPopulation?: Resolver<ResolversTypes['ArbovirusStudyPopulation'], ParentType, ContextType>;
   studySpecies?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
@@ -2176,6 +2186,7 @@ export type ArbovirusSubEstimateResolvers<ContextType = any, ParentType extends 
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyPopulation?: Resolver<ResolversTypes['ArbovirusStudyPopulation'], ParentType, ContextType>;
   studySpecies?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
@@ -2684,6 +2695,7 @@ export type PrimaryAnimalMersSeroprevalenceEstimateInformationResolvers<ContextT
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   symptomDefinition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2754,6 +2766,7 @@ export type PrimaryAnimalMersViralEstimateInformationResolvers<ContextType = any
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   symptomDefinition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2821,6 +2834,7 @@ export type PrimaryHumanMersSeroprevalenceEstimateInformationResolvers<ContextTy
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   symptomDefinition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2888,6 +2902,7 @@ export type PrimaryHumanMersViralEstimateInformationResolvers<ContextType = any,
   specificityDenominator?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   specimenType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyExclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyInclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   symptomDefinition?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -2977,6 +2992,7 @@ export type SarsCov2EstimateResolvers<ContextType = any, ParentType extends Reso
   sourceType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  studyType?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   testType?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3057,6 +3073,7 @@ export type UnravelledGroupedArbovirusEstimateResolvers<ContextType = any, Paren
   sourceSheetId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   sourceSheetName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  studyDesign?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   studyPopulation?: Resolver<ResolversTypes['ArbovirusStudyPopulation'], ParentType, ContextType>;
   studySpecies?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   unRegion?: Resolver<Maybe<ResolversTypes['UNRegion']>, ParentType, ContextType>;

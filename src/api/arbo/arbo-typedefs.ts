@@ -18,6 +18,7 @@ export const arboTypedefs = `
     estimateId: String
     id: String!
     inclusionCriteria: String
+    studyDesign: String
     latitude: Float!
     longitude: Float!
     pathogen: Arbovirus!
@@ -144,6 +145,7 @@ export const arboTypedefs = `
     estimateId: String
     id: String!
     inclusionCriteria: String
+    studyDesign: String
     latitude: Float!
     longitude: Float!
     pathogen: Arbovirus!
@@ -196,6 +198,7 @@ export const arboTypedefs = `
     estimateId: String
     id: String!
     inclusionCriteria: String
+    studyDesign: String
     latitude: Float!
     longitude: Float!
     pathogen: Arbovirus!

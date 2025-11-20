@@ -21,11 +21,11 @@ export const validateFieldSetFromAirtableStep = (input: ValidateFieldSetFromAirt
   );
 
   const zodAirtableTeamMemberFieldsObject = z.object({
-    "First Name": z.string(),
-    "Last Name": z.string(),
+    "First Name": z.string().or(z.undefined()),
+    "Last Name": z.string().or(z.undefined()),
     "Team": z.string().array().or(z.undefined()),
     "Active? (Y/N)": z.boolean().or(z.undefined()),
-    "Shown in about page? (Y/N)": z.boolean(),
+    "Shown in about page? (Y/N)": z.boolean().or(z.undefined()),
     "Email": z.string().or(z.undefined()),
     "Twitter URL": z.string().or(z.undefined()),
     "Linkedin URL": z.string().or(z.undefined()),

@@ -35,6 +35,7 @@ export interface EstimateFieldsAfterCleaningFieldNamesStep {
 export interface StudyFieldsAfterCleaningFieldNamesStep {
   id: string;
   studyName: string | undefined;
+  studyType: string | undefined;
 }
 export interface CountryFieldsAfterCleaningFieldNamesStep {
   id: string;
@@ -216,7 +217,8 @@ export const cleanFieldNamesAndRemoveUnusedFieldsStep = (
       studyName: cleanArrayFieldToSingleValue({
         key: "Source Name (from Rapid Review: Source)",
         object: study,
-      }).value
+      }).value,
+      studyType: study['Study Type'] ?? undefined,
     })),
     allCountries: input.allCountries.map((country) => ({
       id: country.id,

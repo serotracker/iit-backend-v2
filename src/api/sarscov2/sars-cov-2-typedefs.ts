@@ -7,6 +7,7 @@ export const sarsCov2Typedefs = `
     sourceType: String
     riskOfBias: String
     studyName: String!
+    studyType: String
     populationGroup: String
     sex: String
     ageGroup: String

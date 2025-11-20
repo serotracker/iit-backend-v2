@@ -78,6 +78,7 @@ export interface ArbovirusEstimateDocument {
   _id: ObjectId;
   estimateType: ArbovirusEstimateType;
   sex: string | undefined;
+  studyDesign: string | undefined;
   ageMinimum: number | undefined;
   ageMaximum: number | undefined;
   ageGroup: string | undefined;
@@ -211,6 +212,7 @@ export interface SarsCov2EstimateDocument {
   ageGroup: string | undefined;
   sex: string | undefined;
   studyName: string;
+  studyType: string | undefined;
   sourceType: string | undefined;
   populationGroup: string | undefined;
   latitude: number;
@@ -336,6 +338,7 @@ export interface MersEstimateDocumentBase {
   insitutution: string | undefined;
   studyInclusionCriteria: string | undefined;
   studyExclusionCriteria: string | undefined;
+  studyDesign: string | undefined;
   sensitivity: number | undefined;
   sensitivity95CILower: number | undefined;
   sensitivity95CIUpper: number | undefined;
