@@ -88,6 +88,7 @@ const getPrimaryMersEstimateInformationForDocument = (document: MersPrimaryEstim
     insitutution: document.insitutution,
     studyInclusionCriteria: document.studyInclusionCriteria,
     studyExclusionCriteria: document.studyExclusionCriteria,
+    studyDesign: document.studyDesign,
     sensitivity: document.sensitivity,
     sensitivity95CILower: document.sensitivity95CILower,
     sensitivity95CIUpper: document.sensitivity95CIUpper,

@@ -107,7 +107,7 @@ const runEtlMain = async () => {
     etlStep(unravelGroupedEstimatesStep),
     etlStep(assignPartitionKeysToUnravelledGroupedEstimatesStep),
     etlStep(transformIntoFormatForDatabaseStep),
-    //asyncEtlStep(writeEstimatesToMongoDbStep),
+    asyncEtlStep(writeEstimatesToMongoDbStep),
     asyncEtlStep(writeEnvironmentalSuitabilityStatsByCountryToMongoDbStep),
     asyncEtlStep(writeGroupedEstimatesToMongoDbStep),
     asyncEtlStep(writeUnravelledGroupedEstimatesToMongoDbStepOutput)

@@ -98,6 +98,7 @@ const transformArbovirusEstimateForDatabase = (
     _id: new ObjectId(),
     estimateType: estimate.estimateType,
     sex: estimate.sex,
+    studyDesign: estimate.studyDesign,
     antibodies: estimate.antibodies,
     ageMinimum: estimate.ageMinimum,
     ageMaximum: estimate.ageMaximum,

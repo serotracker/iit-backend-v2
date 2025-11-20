@@ -1,6 +1,6 @@
 export type AirtableTeamMemberFields = {
-  "First Name": string;
-  "Last Name": string;
+  "First Name": string | undefined;
+  "Last Name": string | undefined;
   "Team"?: string[] | undefined;
   "Active? (Y/N)"?: boolean | undefined;
   "Shown in about page? (Y/N)"?: boolean | undefined;

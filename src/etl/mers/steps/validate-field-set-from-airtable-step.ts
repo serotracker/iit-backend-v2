@@ -43,11 +43,14 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
   const zodMersEstimateFieldsObject = z.object({
     id: z.string(),
     'Prevalence Estimate Name': z
-      .string(),
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Population Type': z
-      .string(),
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Estimate Type': z
-      .string(),
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Age Group (Human)': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
@@ -67,7 +70,8 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
     'Sub-grouping variable': z
-      .string(),
+      .optional(z.string().nullable())
+      .transform((value => value ?? null)),
     'Sub-group specific category': z
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
@@ -87,7 +91,8 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.string().nullable())
       .transform((value => value ?? null)),
     'Prevalence': z
-      .number(),
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
     'Denominator': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
@@ -98,12 +103,14 @@ const parseEstimate = (estimate: FieldSet): AirtableMersEstimateFields | undefin
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
     'Prevalence 95% CI Lower (calculated)': z
-      .number(),
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
     'Prevalence 95% CI Upper': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
     'Prevalence 95% CI Upper (calculated)': z
-      .number(),
+      .optional(z.number().nullable())
+      .transform((value => value ?? null)),
     'Sensitivity': z
       .optional(z.number().nullable())
       .transform((value => value ?? null)),
@@ -241,12 +248,16 @@ const parseSource = (source: FieldSet): AirtableSourceFields | undefined => {
   const zodMersSourceFieldsObject = z.object({
     id: z.string(),
     "First author name": z.optional(z.string().nullable()).transform((value => value ?? null)),
-    "DOI/url": z.string(),
-    "Source type": z.string(),
+    "DOI": z.optional(z.string().nullable()).transform((value => value ?? null)),
+    "Source type": z.optional(z.string().nullable()).transform((value => value ?? null)),
     "Source title": z.string(),
     "Institution": z.optional(z.string().nullable()).transform((value => value ?? null)),
-    "Country": z.string().array(),
-    "Population type": z.string().array(),
+    "Country": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
+    "Population type": z
+      .optional(z.string().nullable().array())
+      .transform((field) => field ?? []),
     "Publication year": z.optional(z.number().nullable()).transform((value => value ?? null)),
   });
 
@@ -276,6 +287,7 @@ const parseStudy = (study: FieldSet): AirtableStudyFields => {
     'Source Sheet': z
       .optional(z.string().nullable().array())
       .transform((field) => field ?? []),
+    'Study Design': z.optional(z.string().nullable()).transform((value => value ?? null)),
   })
 
   return zodMersStudyFieldsObject.parse(study);

@@ -44,6 +44,7 @@ export interface AirtableSarsCov2EstimateFields {
 export interface AirtableSarsCov2StudyFields {
   id: string;
   "Source Name (from Rapid Review: Source)": Array<string | null | AirtableError>;
+  "Study Type": string | null;
 }
 
 export interface AirtableSarsCov2CountryFields {

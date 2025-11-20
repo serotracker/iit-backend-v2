@@ -15,8 +15,8 @@ export type EstimateFieldsAfterCleaningSourcesStep = EstimateFieldsAfterValidati
 export type SourceFieldsAfterCleaningSourcesStep = {
   id: string;
   firstAuthorFullName: string;
-  url: string;
-  type: string;
+  url: string | undefined;
+  type: string | undefined;
   title: string;
   insitutution: string | undefined;
   country: string[];
@@ -63,12 +63,12 @@ export const cleanSourcesStep = (input: CleanSourcesStepInput): CleanSourcesStep
     allSources: input.allSources.map((source) => ({
       id: source['id'],
       firstAuthorFullName: source['First author name'],
-      url: source['DOI/url'],
-      type: source['Source type'],
+      url: source['DOI'] !== null ? source['DOI'] : undefined,
+      type: source['Source type'] !== null ? source['Source type'] : undefined,
       title: source['Source title'],
       insitutution: source['Institution'] ?? undefined,
-      country: source['Country'],
-      populationType: source['Population type'],
+      country: source['Country'].filter((country): country is NonNullable<typeof country> => !!country),
+      populationType: source['Population type'].filter((populationType): populationType is NonNullable<typeof populationType> => !!populationType),
       publicationYear: source['Publication year']
     })),
     allStudies: input.allStudies,

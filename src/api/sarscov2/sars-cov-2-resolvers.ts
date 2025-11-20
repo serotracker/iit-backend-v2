@@ -46,6 +46,7 @@ const transformSarsCov2EstimateDocumentForApi = (document: SarsCov2EstimateDocum
     county: document.county,
     scope: document.scope,
     studyName: document.studyName,
+    studyType: document.studyType,
     city: document.city,
     populationGroup: document.populationGroup,
     riskOfBias: document.riskOfBias,

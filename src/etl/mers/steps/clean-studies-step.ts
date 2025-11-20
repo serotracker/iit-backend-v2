@@ -18,6 +18,7 @@ export interface StudyFieldsAfterCleaningStudiesStep {
   inclusionCriteria: string | undefined;
   exclusionCriteria: string | undefined;
   sourceId: string | undefined;
+  studyDesign: string | undefined;
 }
 export type CountryFieldsAfterCleaningStudiesStep = CountryFieldsAfterCleaningSourcesStep;
 export type MacroSampleFrameFieldsAfterCleaningStudiesStep = MacroSampleFrameFieldsAfterCleaningSourcesStep;
@@ -62,7 +63,8 @@ export const cleanStudiesStep = (input: CleanStudiesStepInput): CleanStudiesStep
       exclusionCriteria: study['Exclusion Criteria'] ?? undefined,
       sourceId: study['Source Sheet']
         .filter((sourceSheetId): sourceSheetId is NonNullable<typeof sourceSheetId> => !!sourceSheetId)
-        .at(0)
+        .at(0),
+      studyDesign: study['Study Design'] ?? undefined,
     })),
     allCountries: input.allCountries,
     allMacroSampleFrames: input.allMacroSampleFrames,

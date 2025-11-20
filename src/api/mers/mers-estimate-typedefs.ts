@@ -83,6 +83,7 @@ export const mersEstimateTypedefs = `
     insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    studyDesign: String
     sensitivity: Float
     sensitivity95CILower: Float
     sensitivity95CIUpper: Float
@@ -141,6 +142,7 @@ export const mersEstimateTypedefs = `
     insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    studyDesign: String
     sensitivity: Float
     sensitivity95CILower: Float
     sensitivity95CIUpper: Float
@@ -210,6 +212,7 @@ export const mersEstimateTypedefs = `
     insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    studyDesign: String
     sensitivity: Float
     sensitivity95CILower: Float
     sensitivity95CIUpper: Float
@@ -282,6 +285,7 @@ export const mersEstimateTypedefs = `
     insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    studyDesign: String
     sensitivity: Float
     sensitivity95CILower: Float
     sensitivity95CIUpper: Float
@@ -351,6 +355,7 @@ export const mersEstimateTypedefs = `
     insitutution: String
     studyInclusionCriteria: String
     studyExclusionCriteria: String
+    studyDesign: String
     sensitivity: Float
     sensitivity95CILower: Float
     sensitivity95CIUpper: Float

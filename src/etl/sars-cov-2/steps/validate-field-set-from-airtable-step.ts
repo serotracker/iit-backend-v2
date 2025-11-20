@@ -161,6 +161,9 @@ export const validateFieldSetFromAirtableStep = (
         ]).array()
       )
       .transform((field) => field ?? []),
+    "Study Type": z
+      .optional(z.string())
+      .transform((field) => field ?? null),
   })
 
   const zodSarsCov2CountryFieldsObject = z.object({

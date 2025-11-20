@@ -1,12 +1,12 @@
 export interface AirtableSourceFields {
   id: string,
   "First author name": string,
-  "DOI/url": string,
-  "Source type": string,
+  "DOI": string | null,
+  "Source type": string | null,
   "Source title": string,
   "Institution": string | null,
-  "Country": string[],
-  "Population type": string[],
+  "Country": Array<string | null>,
+  "Population type": Array<string | null>,
   "Publication year": number,
   "seropositive (1/0)": string | null,
   "PCR positive (1/0)": string | null
@@ -17,6 +17,7 @@ export interface AirtableStudyFields {
   'Inclusion Criteria': string | null;
   'Exclusion Criteria': string | null;
   'Source Sheet': Array<string | null>;
+  'Study Design': string | null;
 }
 
 export interface AirtableCountryFields {
@@ -28,14 +29,14 @@ export interface AirtableCountryFields {
 
 export interface AirtableMersEstimateFields {
   id: string;
-  'Sub-grouping variable': string;
+  'Sub-grouping variable': string | null;
   'Sub-group specific category': string | null;
   'Sex': string | null;
   'Socioeconomic status': string | null;
   'Exposure to camels': string | null;
-  'Prevalence Estimate Name': string;
-  'Population Type': string;
-  'Estimate Type': string;
+  'Prevalence Estimate Name': string | null;
+  'Population Type': string | null;
+  'Estimate Type': string | null;
   'Age Group (Human)': Array<string | null>;
   'Age Group (Animal)': Array<string | null>;
   'State/Province': string | null;
@@ -43,13 +44,13 @@ export interface AirtableMersEstimateFields {
   'City': string | null;
   'Country': Array<string | null>;
   'Study': Array<string | null>;
-  'Prevalence': number;
+  'Prevalence': number | null;
   'Denominator': number | null;
   'Numerator': number | null;
   'Prevalence 95% CI Lower': number | null;
-  'Prevalence 95% CI Lower (calculated)': number;
+  'Prevalence 95% CI Lower (calculated)': number | null;
   'Prevalence 95% CI Upper': number | null;
-  'Prevalence 95% CI Upper (calculated)': number;
+  'Prevalence 95% CI Upper (calculated)': number | null;
   'Sensitivity': number | null;
   'Sensitivity, 95% CI Lower': number | null;
   'Sensitivity, 95% CI Upper': number | null;

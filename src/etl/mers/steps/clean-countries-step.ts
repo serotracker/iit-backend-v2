@@ -1,42 +1,42 @@
 import { MongoClient } from "mongodb";
-import {
-  CountryFieldsAfterCleaningEstimatesStep,
-  CountryPopulationDataAfterCleaningEstimatesStep,
-  EstimateFieldsAfterCleaningEstimatesStep,
-  FaoMersEventAfterCleaningEstimatesStep,
-  MacroSampleFrameFieldsAfterCleaningEstimatesStep,
-  SourceFieldsAfterCleaningEstimatesStep,
-  StudyFieldsAfterCleaningEstimatesStep,
-  WhoCaseDataAfterCleaningEstimatesStep,
-  YearlyCamelPopulationDataAfterCleaningEstimatesStep
-} from "./clean-estimates-step";
 import { ThreeLetterIsoCountryCode, TwoLetterIsoCountryCode } from "../../../lib/geocoding-api/country-codes";
+import {
+  CountryFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  CountryPopulationDataAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  EstimateFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  FaoMersEventAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  MacroSampleFrameFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  SourceFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  StudyFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  WhoCaseDataAfterFilteringEstimatesWithoutRequiredFieldsStep,
+  YearlyCamelPopulationDataAfterFilteringEstimatesWithoutRequiredFieldsStep
+} from "./filter-estimates-without-required-fields-step";
 
-export type EstimateFieldsAfterCleaningCountriesStep = EstimateFieldsAfterCleaningEstimatesStep;
-export type SourceFieldsAfterCleaningCountriesStep = SourceFieldsAfterCleaningEstimatesStep;
-export type StudyFieldsAfterCleaningCountriesStep = StudyFieldsAfterCleaningEstimatesStep;
+export type EstimateFieldsAfterCleaningCountriesStep = EstimateFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep;
+export type SourceFieldsAfterCleaningCountriesStep = SourceFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep;
+export type StudyFieldsAfterCleaningCountriesStep = StudyFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep;
 export interface CountryFieldsAfterCleaningCountriesStep {
   id: string;
   countryName: string;
   countryAlphaThreeCode: ThreeLetterIsoCountryCode;
   countryAlphaTwoCode: TwoLetterIsoCountryCode;
 };
-export type MacroSampleFrameFieldsAfterCleaningCountriesStep = MacroSampleFrameFieldsAfterCleaningEstimatesStep;
-export type FaoMersEventAfterCleaningCountriesStep = FaoMersEventAfterCleaningEstimatesStep;
-export type YearlyCamelPopulationDataAfterCleaningCountriesStep = YearlyCamelPopulationDataAfterCleaningEstimatesStep;
-export type CountryPopulationDataAfterCleaningCountriesStep = CountryPopulationDataAfterCleaningEstimatesStep;
-export type WhoCaseDataAfterCleaningCountriesStep = WhoCaseDataAfterCleaningEstimatesStep;
+export type MacroSampleFrameFieldsAfterCleaningCountriesStep = MacroSampleFrameFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep;
+export type FaoMersEventAfterCleaningCountriesStep = FaoMersEventAfterFilteringEstimatesWithoutRequiredFieldsStep;
+export type YearlyCamelPopulationDataAfterCleaningCountriesStep = YearlyCamelPopulationDataAfterFilteringEstimatesWithoutRequiredFieldsStep;
+export type CountryPopulationDataAfterCleaningCountriesStep = CountryPopulationDataAfterFilteringEstimatesWithoutRequiredFieldsStep;
+export type WhoCaseDataAfterCleaningCountriesStep = WhoCaseDataAfterFilteringEstimatesWithoutRequiredFieldsStep;
 
 interface CleanCountriesStepInput {
-  allEstimates: EstimateFieldsAfterCleaningEstimatesStep[];
-  allSources: SourceFieldsAfterCleaningEstimatesStep[];
-  allStudies: StudyFieldsAfterCleaningEstimatesStep[];
-  allCountries: CountryFieldsAfterCleaningEstimatesStep[];
-  allMacroSampleFrames: MacroSampleFrameFieldsAfterCleaningEstimatesStep[];
-  allFaoMersEvents: FaoMersEventAfterCleaningEstimatesStep[];
-  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterCleaningEstimatesStep[];
-  countryPopulationData: CountryPopulationDataAfterCleaningEstimatesStep[];
-  whoCaseData: WhoCaseDataAfterCleaningEstimatesStep[];
+  allEstimates: EstimateFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  allSources: SourceFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  allStudies: StudyFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  allCountries: CountryFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  allMacroSampleFrames: MacroSampleFrameFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  allFaoMersEvents: FaoMersEventAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  yearlyCamelPopulationByCountryData: YearlyCamelPopulationDataAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  countryPopulationData: CountryPopulationDataAfterFilteringEstimatesWithoutRequiredFieldsStep[];
+  whoCaseData: WhoCaseDataAfterFilteringEstimatesWithoutRequiredFieldsStep[];
   mongoClient: MongoClient;
 }
 

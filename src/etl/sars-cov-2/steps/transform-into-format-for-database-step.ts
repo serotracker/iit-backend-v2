@@ -74,6 +74,7 @@ export const transformIntoFormatForDatabaseStep = (
       ageGroup: estimate.ageGroup,
       sex: estimate.sex,
       studyName: estimate.studyName,
+      studyType: estimate.studyType,
       sourceType: estimate.sourceType,
       populationGroup: estimate.populationGroup,
       latitude: estimate.latitude,
