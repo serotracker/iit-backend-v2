@@ -1,35 +1,35 @@
 import { MongoClient } from "mongodb";
 import {
-  AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep,
-  AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep,
-  AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep,
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep,
-  GroupedEstimatesAfterAddingCountryAndRegionInformationStep,
-  UnravelledGroupedEstimatesAfterAddingCountryAndRegionInformationStep
-} from "./add-country-and-region-information-step.js";
+  AirtableCountryFieldsAfterGeneratingGeographicScopeFieldStep,
+  AirtableEstimateFieldsAfterGeneratingGeographicScopeFieldStep,
+  AirtableSourceFieldsAfterGeneratingGeographicScopeFieldStep,
+  EnvironmentalSuitabilityStatsByCountryEntryAfterGeneratingGeographicScopeFieldStep,
+  GroupedEstimatesAfterGeneratingGeographicScopeFieldStep,
+  UnravelledGroupedEstimatesAfterGeneratingGeographicScopeFieldStep
+} from "./generate-geographic-scope-field-step.js";
 
 export type AirtableEstimateFieldsAfterMergingEstimatesAndSourcesStep =
-  AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep & {
+  AirtableEstimateFieldsAfterGeneratingGeographicScopeFieldStep & {
     sourceSheetName: string | undefined;
   };
 export type AirtableSourceFieldsAfterMergingEstimatesAndSourcesStep =
-  AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep;
+  AirtableSourceFieldsAfterGeneratingGeographicScopeFieldStep;
 export type AirtableCountryFieldsAfterMergingEstimatesAndSourcesStep =
-  AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep;
+  AirtableCountryFieldsAfterGeneratingGeographicScopeFieldStep;
 export type EnvironmentalSuitabilityStatsByCountryEntryAfterMergingEstimatesAndSourcesStep =
-  EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep;
+  EnvironmentalSuitabilityStatsByCountryEntryAfterGeneratingGeographicScopeFieldStep;
 export type GroupedEstimatesAfterMergingEstimatesAndSourcesStep =
-  GroupedEstimatesAfterAddingCountryAndRegionInformationStep;
+  GroupedEstimatesAfterGeneratingGeographicScopeFieldStep;
 export type UnravelledGroupedEstimatesAfterMergingEstimatesAndSourcesStep =
-  UnravelledGroupedEstimatesAfterAddingCountryAndRegionInformationStep;
+  UnravelledGroupedEstimatesAfterGeneratingGeographicScopeFieldStep;
 
 interface MergeEstimatesAndSourcesStepInput {
-  allEstimates: AirtableEstimateFieldsAfterAddingCountryAndRegionInformationStep[];
-  allSources: AirtableSourceFieldsAfterAddingCountryAndRegionInformationStep[];
-  allCountries: AirtableCountryFieldsAfterAddingCountryAndRegionInformationStep[];
-  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterAddingCountryAndRegionInformationStep[];
-  groupedEstimates: GroupedEstimatesAfterAddingCountryAndRegionInformationStep[];
-  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterAddingCountryAndRegionInformationStep[];
+  allEstimates: AirtableEstimateFieldsAfterGeneratingGeographicScopeFieldStep[];
+  allSources: AirtableSourceFieldsAfterGeneratingGeographicScopeFieldStep[];
+  allCountries: AirtableCountryFieldsAfterGeneratingGeographicScopeFieldStep[];
+  environmentalSuitabilityStatsByCountry: EnvironmentalSuitabilityStatsByCountryEntryAfterGeneratingGeographicScopeFieldStep[];
+  groupedEstimates: GroupedEstimatesAfterGeneratingGeographicScopeFieldStep[];
+  unravelledGroupedEstimates: UnravelledGroupedEstimatesAfterGeneratingGeographicScopeFieldStep[];
   mongoClient: MongoClient;
 }
 

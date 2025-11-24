@@ -74,6 +74,12 @@ export enum ArbovirusSubsettingVariable {
   NO = 'NO',
 }
 
+export enum ArbovirusStudyGeographicScope {
+  LOCAL = 'LOCAL',
+  REGIONAL = 'REGIONAL',
+  NATIONAL = 'NATIONAL',
+}
+
 export interface ArbovirusEstimateDocument {
   _id: ObjectId;
   estimateType: ArbovirusEstimateType;
@@ -104,6 +110,7 @@ export interface ArbovirusEstimateDocument {
   district: string | undefined;
   state: string | undefined;
   city: string | undefined;
+  geographicScope: ArbovirusStudyGeographicScope;
   antibodies: string[] | undefined;
   latitude: number;
   longitude: number;

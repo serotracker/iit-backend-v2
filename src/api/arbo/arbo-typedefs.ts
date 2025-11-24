@@ -8,6 +8,7 @@ export const arboTypedefs = `
     antigen: String
     assay: String
     assayOther: String
+    geographicScope: ArbovirusStudyGeographicScope!
     city: String
     state: String
     district: String
@@ -81,6 +82,12 @@ export const arboTypedefs = `
     EDUCATION
   }
 
+  enum ArbovirusStudyGeographicScope {
+    LOCAL
+    REGIONAL
+    NATIONAL
+  }
+
   type ArbovirusFilterOptions {
     ageGroup: [String!]!
     antibody: [String!]!
@@ -135,6 +142,7 @@ export const arboTypedefs = `
     antigen: String
     assay: [String!]!
     assayOther: String
+    geographicScope: ArbovirusStudyGeographicScope!
     city: String
     state: String
     district: String
@@ -188,6 +196,7 @@ export const arboTypedefs = `
     antigen: String
     assay: [String!]!
     assayOther: String
+    geographicScope: ArbovirusStudyGeographicScope!
     city: String
     state: String
     district: String
