@@ -25,6 +25,7 @@ import { assignPartitionKeysToGroupedEstimatesStep } from "./steps/assign-partit
 import { unravelGroupedEstimatesStep } from "./steps/unravel-grouped-estimates-step.js";
 import { assignPartitionKeysToUnravelledGroupedEstimatesStep } from "./steps/assign-partition-keys-to-unravelled-grouped-estimates-step.js";
 import { writeUnravelledGroupedEstimatesToMongoDbStepOutput } from "./steps/write-unravelled-grouped-estimates-to-mongodb-step.js";
+import { generateGeographicScopeFieldStep } from "./steps/generate-geographic-scope-field-step.js";
 
 const runEtlMain = async () => {
   console.log("Running arbo ETL");
@@ -95,6 +96,7 @@ const runEtlMain = async () => {
       etlStep(removeEstimatesWithLowSampleSizeStep),
       etlStep(removeRecordsThatAreFlaggedToNotSaveStep),
       etlStep(addCountryAndRegionInformationStep),
+      etlStep(generateGeographicScopeFieldStep)
     );
 
   await pipe(

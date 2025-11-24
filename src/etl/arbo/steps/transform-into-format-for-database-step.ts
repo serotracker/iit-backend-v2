@@ -125,6 +125,7 @@ const transformArbovirusEstimateForDatabase = (
     district: estimate.district,
     state: estimate.state,
     city: estimate.city,
+    geographicScope: estimate.geographicScope,
     latitude: estimate.latitude,
     longitude: estimate.longitude,
     sampleStartDate: estimate.sampleStartDate,

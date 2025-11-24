@@ -210,6 +210,7 @@ export type ArbovirusEstimate = {
   district?: Maybe<Scalars['String']['output']>;
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
+  geographicScope: ArbovirusStudyGeographicScope;
   id: Scalars['String']['output'];
   inclusionCriteria?: Maybe<Scalars['String']['output']>;
   latitude: Scalars['Float']['output'];
@@ -279,6 +280,12 @@ export enum ArbovirusGroupingVariable {
   Timeframe = 'TIMEFRAME'
 }
 
+export enum ArbovirusStudyGeographicScope {
+  Local = 'LOCAL',
+  National = 'NATIONAL',
+  Regional = 'REGIONAL'
+}
+
 export enum ArbovirusStudyPopulation {
   Human = 'HUMAN',
   Insect = 'INSECT',
@@ -302,6 +309,7 @@ export type ArbovirusSubEstimate = {
   district?: Maybe<Scalars['String']['output']>;
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
+  geographicScope: ArbovirusStudyGeographicScope;
   groupingVariable?: Maybe<ArbovirusGroupingVariable>;
   id: Scalars['String']['output'];
   inclusionCriteria?: Maybe<Scalars['String']['output']>;
@@ -1538,6 +1546,7 @@ export type UnravelledGroupedArbovirusEstimate = {
   district?: Maybe<Scalars['String']['output']>;
   estimateId?: Maybe<Scalars['String']['output']>;
   estimateType: ArbovirusEstimateType;
+  geographicScope: ArbovirusStudyGeographicScope;
   groupId: Scalars['String']['output'];
   groupingVariable?: Maybe<ArbovirusGroupingVariable>;
   id: Scalars['String']['output'];
@@ -1747,6 +1756,7 @@ export type ResolversTypes = {
   ArbovirusEstimateType: ArbovirusEstimateType;
   ArbovirusFilterOptions: ResolverTypeWrapper<ArbovirusFilterOptions>;
   ArbovirusGroupingVariable: ArbovirusGroupingVariable;
+  ArbovirusStudyGeographicScope: ArbovirusStudyGeographicScope;
   ArbovirusStudyPopulation: ArbovirusStudyPopulation;
   ArbovirusSubEstimate: ResolverTypeWrapper<ArbovirusSubEstimate>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
@@ -2095,6 +2105,7 @@ export type ArbovirusEstimateResolvers<ContextType = any, ParentType extends Res
   district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
+  geographicScope?: Resolver<ResolversTypes['ArbovirusStudyGeographicScope'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -2161,6 +2172,7 @@ export type ArbovirusSubEstimateResolvers<ContextType = any, ParentType extends 
   district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
+  geographicScope?: Resolver<ResolversTypes['ArbovirusStudyGeographicScope'], ParentType, ContextType>;
   groupingVariable?: Resolver<Maybe<ResolversTypes['ArbovirusGroupingVariable']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   inclusionCriteria?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -3046,6 +3058,7 @@ export type UnravelledGroupedArbovirusEstimateResolvers<ContextType = any, Paren
   district?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   estimateType?: Resolver<ResolversTypes['ArbovirusEstimateType'], ParentType, ContextType>;
+  geographicScope?: Resolver<ResolversTypes['ArbovirusStudyGeographicScope'], ParentType, ContextType>;
   groupId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   groupingVariable?: Resolver<Maybe<ResolversTypes['ArbovirusGroupingVariable']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

@@ -7,6 +7,7 @@ import {
   ArbovirusEstimateType,
   ArbovirusGroupedEstimateDocument,
   ArbovirusGroupingVariable,
+  ArbovirusStudyGeographicScope,
   ArbovirusStudyPopulation,
   UnravelledArbovirusGroupedEstimateDocument
 } from '../../storage/types.js';
@@ -14,11 +15,18 @@ import {
   Arbovirus as ArbovirusForApi,
   ArbovirusGroupingVariable as ArbovirusGroupingVariableForApi,
   ArbovirusEstimateType as ArbovirusEstimateTypeForApi,
-  ArbovirusStudyPopulation as ArbovirusStudyPopulationForApi
+  ArbovirusStudyPopulation as ArbovirusStudyPopulationForApi,
+  ArbovirusStudyGeographicScope as ArbovirusStudyGeographicScopeForApi
 } from "../graphql-types/__generated__/graphql-types.js";
 import { mapUnRegionForApi } from "../shared/shared-mappers.js";
 import { runCountryIdentifierAggregation } from "../aggregations/country-identifier-aggregation.js";
 import uniq from "lodash/uniq.js";
+
+const geographicScopeMap: {[key in ArbovirusStudyGeographicScope]: ArbovirusStudyGeographicScopeForApi} = {
+  [ArbovirusStudyGeographicScope.LOCAL]: ArbovirusStudyGeographicScopeForApi.Local,
+  [ArbovirusStudyGeographicScope.REGIONAL]: ArbovirusStudyGeographicScopeForApi.Regional,
+  [ArbovirusStudyGeographicScope.NATIONAL]: ArbovirusStudyGeographicScopeForApi.National,
+}
 
 const arbovirusMap: {[key in Arbovirus]: ArbovirusForApi} = {
   [Arbovirus.ZIKV]: ArbovirusForApi.Zikv,
@@ -77,6 +85,7 @@ const transformArbovirusEstimateDocumentForApi = (document: ArbovirusEstimateDoc
     assay: Array.isArray(document.assay) ? document.assay.at(0) : document.assay,
     assayOther: document.assayOther,
     city: document.city,
+    geographicScope: geographicScopeMap[document.geographicScope],
     state: document.state,
     district: document.district,
     country: document.country,
@@ -279,6 +288,7 @@ export const generateArboResolvers = (input: GenerateArboResolversInput): Genera
     antigen: subEstimate.antigen,
     assay: subEstimate.assay,
     assayOther: subEstimate.assayOther,
+    geographicScope: geographicScopeMap[subEstimate.geographicScope],
     city: subEstimate.city,
     state: subEstimate.state,
     district: subEstimate.district,
