@@ -54,7 +54,7 @@ export const fetchCamelPopulationByCountryDataStep = (
   console.log(`Running step: fetchCamelPopulationByCountryDataStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const rawFileData = readFileSync('./data/mers/fao/yearly-camel-population-by-country-data.csv').toString();
-  const rowsInFile = rawFileData.split('\n');
+  const rowsInFile = rawFileData.replaceAll('\r\n', '\n').split('\n');
 
   const rawFileDataHeaders = rowsInFile.slice(0,1).at(0);
   const rawFileDataRows = rowsInFile.slice(1);

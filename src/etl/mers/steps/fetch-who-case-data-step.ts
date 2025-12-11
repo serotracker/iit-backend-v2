@@ -54,7 +54,7 @@ export const fetchWhoCaseDataStep = (
   console.log(`Running step: fetchWhoCaseData. Remaining estimates: ${input.allEstimates.length}`);
 
   const rawFileData = readFileSync('./data/mers/who/mers-case-data.csv').toString();
-  const rowsInFile = rawFileData.split('\n');
+  const rowsInFile = rawFileData.replaceAll('\r\n', '\n').split('\n');
 
   const rawFileDataHeaders = rowsInFile.slice(0,1).at(0);
   const rawFileDataRows = rowsInFile.slice(1);

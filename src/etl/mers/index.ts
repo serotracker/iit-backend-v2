@@ -70,7 +70,9 @@ const runEtlMain = async () => {
       .select()
       .all()
       .then((estimateSheet) =>
-        estimateSheet.map((record) => ({ ...record.fields, id: record.id }))
+        estimateSheet
+          .map((record) => ({ ...record.fields, id: record.id }))
+          .filter((record) => !('DC: Estimate Field Null' in record && !!record['DC: Estimate Field Null']))
       );
 
   const allSourcesUnformatted: (FieldSet & { id: string })[] =

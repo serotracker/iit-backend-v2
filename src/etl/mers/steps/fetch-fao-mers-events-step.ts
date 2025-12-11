@@ -52,7 +52,7 @@ export const fetchFaoMersEventsStep = (input: FetchFaoMersEventsStepInput): Fetc
   console.log(`Running step: fetchFaoMersEventsStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const rawFileData = readFileSync('./data/mers/fao/mers-events.csv').toString();
-  const rowsInFile = rawFileData.split('\n');
+  const rowsInFile = rawFileData.replaceAll('\r\n', '\n').split('\n');
 
   const rawFileDataMetadata = rowsInFile.slice(0,10);
   const rawFileDataHeaders = rowsInFile.slice(10,11).at(0);

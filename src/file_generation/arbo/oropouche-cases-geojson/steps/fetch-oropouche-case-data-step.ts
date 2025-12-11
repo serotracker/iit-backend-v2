@@ -82,7 +82,7 @@ export const fetchOropoucheCaseData = (input: FetchOropoucheCaseDataInput): Fetc
   console.log('Running step: fetchOropoucheCaseData.');
 
   const rawFileData = readFileSync('./data/arbo/oropouche-cases-jan-2024-to-july-2024.csv').toString();
-  const rowsInFile = rawFileData.split('\n');
+  const rowsInFile = rawFileData.replaceAll('\r\n', '\n').split('\n');
 
   const rawFileDataHeaders = rowsInFile.at(0);
   const rawFileDataRows = rowsInFile.slice(1);
