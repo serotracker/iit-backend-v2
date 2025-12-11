@@ -56,7 +56,7 @@ export const fetchCountryPopulationDataStep = (
   console.log(`Running step: fetchCountryPopulationDataStep. Remaining estimates: ${input.allEstimates.length}.`);
 
   const rawFileData = readFileSync('./data/population.csv').toString();
-  const rowsInFile = rawFileData.split('\n')
+  const rowsInFile = rawFileData.replaceAll('\r\n', '\n').split('\n');
 
   if(rowsInFile.length === 0) {
     return {

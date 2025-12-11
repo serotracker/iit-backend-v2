@@ -70,7 +70,7 @@ export const fetchEnvironmentalSuitabilityStatsByCountryStep = (
   console.log(`Running step: fetchEnvironmentalSuitabilityStatsByCountryStep. Remaining estimates: ${input.allEstimates.length}`);
 
   const rawFileData = readFileSync('./data/arbo/environmental-suitability-by-country.csv').toString();
-  const rowsInFile = rawFileData.split('\n');
+  const rowsInFile = rawFileData.replaceAll('\r\n', '\n').split('\n');
 
   const rawFileDataHeaders = rowsInFile.slice(0,1).at(0);
   const rawFileDataRows = rowsInFile.slice(1);
