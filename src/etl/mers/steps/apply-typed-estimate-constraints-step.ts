@@ -24,8 +24,8 @@ type HumanSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep 
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
-  seroprevalenceCalculated95CILower: number;
-  seroprevalenceCalculated95CIUpper: number;
+  seroprevalenceCalculated95CILower: number | undefined;
+  seroprevalenceCalculated95CIUpper: number | undefined;
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
@@ -56,8 +56,8 @@ type HumanViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  positivePrevalenceCalculated95CILower: number;
-  positivePrevalenceCalculated95CIUpper: number;
+  positivePrevalenceCalculated95CILower: number | undefined;
+  positivePrevalenceCalculated95CIUpper: number | undefined;
   ageGroup: string[];
   animalType: undefined;
   animalSpecies: undefined;
@@ -78,8 +78,8 @@ type AnimalSeroprevalenceEstimateFieldsAfterApplyingTypedEstimateConstraintsStep
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
-  seroprevalenceCalculated95CILower: number;
-  seroprevalenceCalculated95CIUpper: number;
+  seroprevalenceCalculated95CILower: number | undefined;
+  seroprevalenceCalculated95CIUpper: number | undefined;
   positivePrevalence: undefined;
   positivePrevalence95CILower: undefined;
   positivePrevalence95CIUpper: undefined;
@@ -110,8 +110,8 @@ type AnimalViralEstimateFieldsAfterApplyingTypedEstimateConstraintsStep = Omit<
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  positivePrevalenceCalculated95CILower: number;
-  positivePrevalenceCalculated95CIUpper: number;
+  positivePrevalenceCalculated95CILower: number | undefined;
+  positivePrevalenceCalculated95CIUpper: number | undefined;
   ageGroup: never[];
   animalType: MersAnimalType[];
   animalSpecies: MersAnimalSpecies[];

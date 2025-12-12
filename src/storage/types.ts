@@ -388,8 +388,8 @@ export type HumanMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase &
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
-  seroprevalenceCalculated95CILower: number;
-  seroprevalenceCalculated95CIUpper: number;
+  seroprevalenceCalculated95CILower: number | undefined;
+  seroprevalenceCalculated95CIUpper: number | undefined;
   ageGroup: string[];
   sampleFrames: string[];
   humanCountriesOfTravel: Array<{
@@ -404,8 +404,8 @@ export type HumanMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  positivePrevalenceCalculated95CILower: number;
-  positivePrevalenceCalculated95CIUpper: number;
+  positivePrevalenceCalculated95CILower: number | undefined;
+  positivePrevalenceCalculated95CIUpper: number | undefined;
   ageGroup: string[];
   sampleFrames: string[];
   humanCountriesOfTravel: Array<{
@@ -420,8 +420,8 @@ export type AnimalMersSeroprevalenceEstimateDocument = MersEstimateDocumentBase 
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
-  seroprevalenceCalculated95CILower: number;
-  seroprevalenceCalculated95CIUpper: number;
+  seroprevalenceCalculated95CILower: number | undefined;
+  seroprevalenceCalculated95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies[];
   animalType: MersAnimalType[];
   animalDetectionSettings: string[];
@@ -440,8 +440,8 @@ export type AnimalMersViralEstimateDocument = MersEstimateDocumentBase & {
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  positivePrevalenceCalculated95CILower: number;
-  positivePrevalenceCalculated95CIUpper: number;
+  positivePrevalenceCalculated95CILower: number | undefined;
+  positivePrevalenceCalculated95CIUpper: number | undefined;
   animalSpecies: MersAnimalSpecies[];
   animalType: MersAnimalType[];
   animalDetectionSettings: string[];
@@ -481,8 +481,8 @@ type MersSeroprevalenceSubEstimateInformation = MersSubEstimateInformationBase &
   seroprevalence: number;
   seroprevalence95CILower: number | undefined;
   seroprevalence95CIUpper: number | undefined;
-  seroprevalenceCalculated95CILower: number;
-  seroprevalenceCalculated95CIUpper: number;
+  seroprevalenceCalculated95CILower: number | undefined;
+  seroprevalenceCalculated95CIUpper: number | undefined;
 }
 
 
@@ -490,8 +490,8 @@ type MersViralSubEstimateInformation = MersSubEstimateInformationBase & {
   positivePrevalence: number;
   positivePrevalence95CILower: number | undefined;
   positivePrevalence95CIUpper: number | undefined;
-  positivePrevalenceCalculated95CILower: number;
-  positivePrevalenceCalculated95CIUpper: number;
+  positivePrevalenceCalculated95CILower: number | undefined;
+  positivePrevalenceCalculated95CIUpper: number | undefined;
 }
 
 type MersSubEstimateInformation = 
