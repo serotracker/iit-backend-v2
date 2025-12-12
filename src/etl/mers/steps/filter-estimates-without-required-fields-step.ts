@@ -12,11 +12,9 @@ import {
 } from "./clean-estimates-step";
 
 export type EstimateFieldsAfterFilteringEstimatesWithoutRequiredFieldsStep = Omit<EstimateFieldsAfterCleaningEstimatesStep,
-  'positivePrevalence'|'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'|'populationType'
+  'positivePrevalence'|'populationType'|'estimateId'
 > & {
   positivePrevalence: NonNullable<EstimateFieldsAfterCleaningEstimatesStep['positivePrevalence']>;
-  positivePrevalenceCalculated95CILower: NonNullable<EstimateFieldsAfterCleaningEstimatesStep['positivePrevalenceCalculated95CILower']>;
-  positivePrevalenceCalculated95CIUpper: NonNullable<EstimateFieldsAfterCleaningEstimatesStep['positivePrevalenceCalculated95CIUpper']>;
   populationType: NonNullable<EstimateFieldsAfterCleaningEstimatesStep['populationType']>;
   estimateId: NonNullable<EstimateFieldsAfterCleaningEstimatesStep['estimateId']>;
 };
@@ -65,16 +63,12 @@ export const filterEstimatesWithoutRequiredFields = (
 ): FilterEstimatesWithoutRequiredFieldsOutput => {
   return {
     allEstimates: input.allEstimates
-      .filter((estimate): estimate is Omit<typeof estimate, 'positivePrevalence'|'positivePrevalenceCalculated95CILower'|'positivePrevalenceCalculated95CIUpper'|'populationType'> & {
+      .filter((estimate): estimate is Omit<typeof estimate, 'positivePrevalence'|'populationType'|'estimateId'> & {
         positivePrevalence: NonNullable<typeof estimate['positivePrevalence']>;
-        positivePrevalenceCalculated95CILower: NonNullable<typeof estimate['positivePrevalenceCalculated95CILower']>;
-        positivePrevalenceCalculated95CIUpper: NonNullable<typeof estimate['positivePrevalenceCalculated95CIUpper']>;
         populationType: NonNullable<typeof estimate['populationType']>;
         estimateId: NonNullable<typeof estimate['estimateId']>;
       } => (
         (estimate.positivePrevalence !== null && estimate.positivePrevalence !== undefined) &&
-        (estimate.positivePrevalenceCalculated95CILower !== null && estimate.positivePrevalenceCalculated95CILower !== undefined) &&
-        (estimate.positivePrevalenceCalculated95CIUpper !== null && estimate.positivePrevalenceCalculated95CIUpper !== undefined) &&
         (estimate.populationType !== null && estimate.populationType !== undefined) &&
         (estimate.estimateId !== null && estimate.estimateId !== undefined)
       )),
