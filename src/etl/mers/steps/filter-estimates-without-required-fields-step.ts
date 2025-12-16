@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 import {
-    CountryFieldsAfterCleaningEstimatesStep,
+  CountryFieldsAfterCleaningEstimatesStep,
   CountryPopulationDataAfterCleaningEstimatesStep,
   EstimateFieldsAfterCleaningEstimatesStep,
   FaoMersEventAfterCleaningEstimatesStep,
