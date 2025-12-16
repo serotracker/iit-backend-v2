@@ -79,7 +79,6 @@ export const filterEstimatesWithoutRequiredFields = (
       (source.url !== null && source.url !== undefined) &&
       (source.type !== null && source.type !== undefined)
     )).filter((source) => (
-      (source.country.length > 0) &&
       (source.populationType.length > 0)
     )),
     allStudies: input.allStudies,
