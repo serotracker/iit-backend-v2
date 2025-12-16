@@ -100,7 +100,13 @@ export const deriveTypeFromCleanedEstimate = (estimate: Pick<EstimateFieldsAfter
   if(estimate.populationType === 'Human' && estimate.estimateType === 'Viral testing') {
     return MersEstimateType.HUMAN_VIRAL;
   }
+  if(estimate.populationType === 'Human' && estimate.estimateType === 'Molecular testing') {
+    return MersEstimateType.HUMAN_VIRAL;
+  }
   if(estimate.populationType === 'Animal' && estimate.estimateType === 'Viral testing') {
+    return MersEstimateType.ANIMAL_VIRAL;
+  }
+  if(estimate.populationType === 'Animal' && estimate.estimateType === 'Molecular testing') {
     return MersEstimateType.ANIMAL_VIRAL;
   }
   if(estimate.populationType === 'Animal' && estimate.estimateType === 'Serological testing') {
