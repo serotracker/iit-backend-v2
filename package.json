@@ -41,7 +41,7 @@
     "micro-cors": "^0.1.1",
     "mongodb": "^7.0.0",
     "undici": "^7.16.0",
-    "zod": "4.2.1"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "6.1.0",
